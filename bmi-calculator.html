@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Free BMI calculator with metric (kg/cm) and imperial (lbs/feet/inches) units. Check your Body Mass Index and find out if you're underweight, normal, overweight, or obese.">
+  <meta name="keywords" content="BMI calculator, body mass index, healthy weight calculator, imperial BMI, metric BMI, obesity check">
+
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .unit-toggle {
+      display: flex;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .unit-toggle button {
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: 1px solid var(--card-border);
+      background: var(--glass-bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .unit-toggle button.active {
+      background: var(--accent-gradient);
+      color: white;
+      box-shadow: var(--glow);
+    }
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--glass-bg);
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Ad 1: Top Banner -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 / Responsive Banner</div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>⚖️ BMI Calculator</h1>
+    <p>Calculate your Body Mass Index using metric (kg/cm) or imperial (lbs/ft/in). Instantly see if you're underweight, normal, overweight, or obese with health tips.</p>
+  </section>
+
+  <!-- Calculator -->
+  <section class="container">
+    <div class="card">
+      <h2>Enter Your Details</h2>
+
+      <!-- Unit Toggle -->
+      <div class="unit-toggle">
+        <button id="btnImperial" class="active" onclick="setUnit('imperial')">Imperial (lbs, ft+in)</button>
+        <button id="btnMetric" onclick="setUnit('metric')">Metric (kg, cm)</button>
+      </div>
+
+      <div id="metric-fields" style="display:none;">
+        <label>Weight (kg):</label>
+        <input type="number" id="weightMetric" class="input-field" placeholder="e.g., 70">
+
+        <label>Height (cm):</label>
+        <input type="number" id="heightMetric" class="input-field" placeholder="e.g., 170">
+      </div>
+
+      <div id="imperial-fields">
+        <label>Weight (lbs):</label>
+        <input type="number" id="weightImperial" class="input-field" placeholder="e.g., 154">
+
+        <label>Height:</label>
+        <div style="display:flex; gap:10px;">
+          <input type="number" id="heightFeet" class="input-field" placeholder="Feet (e.g., 5)">
+          <input type="number" id="heightInches" class="input-field" placeholder="Inches (e.g., 8)">
+        </div>
+      </div>
+
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <div id="result" class="result"></div>
+    </div>
+  </section>
+
+  <!-- Ad 2: After Results -->
+  <div class="ad-container">
+    <div class="ad-placeholder">300x250 / 336x280 Result Ad</div>
+  </div>
+
+  <!-- SEO Content -->
+  <section class="seo-content">
+    <h2>About BMI</h2>
+    <p>BMI (Body Mass Index) is a measure of body fat based on weight and height. While not a perfect measure of health, it is widely used to screen for weight categories that may lead to health problems.</p>
+    <ul>
+      <li><b>Underweight:</b> BMI below 18.5</li>
+      <li><b>Normal:</b> BMI between 18.5 – 24.9</li>
+      <li><b>Overweight:</b> BMI between 25 – 29.9</li>
+      <li><b>Obese:</b> BMI 30 or higher</li>
+    </ul>
+  </section>
+
+  <!-- Ad 3: Footer Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">Responsive Footer Ad</div>
+  </div>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All rights reserved.</p>
+    <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms</a></p>
+  </footer>
+
+  <script>
+    let currentUnit = "imperial"; // default
+
+    function setUnit(unit) {
+      currentUnit = unit;
+      if (unit === "imperial") {
+        document.getElementById("imperial-fields").style.display = "block";
+        document.getElementById("metric-fields").style.display = "none";
+        document.getElementById("btnImperial").classList.add("active");
+        document.getElementById("btnMetric").classList.remove("active");
+      } else {
+        document.getElementById("imperial-fields").style.display = "none";
+        document.getElementById("metric-fields").style.display = "block";
+        document.getElementById("btnMetric").classList.add("active");
+        document.getElementById("btnImperial").classList.remove("active");
+      }
+    }
+
+    function calculateBMI() {
+      let bmi;
+
+      if (currentUnit === "metric") {
+        const weight = parseFloat(document.getElementById("weightMetric").value);
+        const height = parseFloat(document.getElementById("heightMetric").value) / 100;
+        if (!weight || !height) {
+          document.getElementById("result").innerHTML = "<p>Please enter valid values.</p>";
+          return;
+        }
+        bmi = weight / (height * height);
+
+      } else {
+        const weight = parseFloat(document.getElementById("weightImperial").value);
+        const feet = parseFloat(document.getElementById("heightFeet").value) || 0;
+        const inches = parseFloat(document.getElementById("heightInches").value) || 0;
+        if (!weight || (feet === 0 && inches === 0)) {
+          document.getElementById("result").innerHTML = "<p>Please enter valid values.</p>";
+          return;
+        }
+        const totalInches = (feet * 12) + inches;
+        bmi = (703 * weight) / (totalInches * totalInches);
+      }
+
+      bmi = bmi.toFixed(1);
+
+      let category, advice;
+      if (bmi < 18.5) {
+        category = "Underweight";
+        advice = "You may need to gain weight. Eat nutrient-dense foods and consult a healthcare provider.";
+      } else if (bmi >= 18.5 && bmi < 25) {
+        category = "Normal";
+        advice = "Great! Your BMI is in the healthy range. Maintain a balanced diet and stay active.";
+      } else if (bmi >= 25 && bmi < 30) {
+        category = "Overweight";
+        advice = "Consider adopting a balanced diet and increasing activity. Even a 5-10% weight loss can help.";
+      } else {
+        category = "Obese";
+        advice = "Your BMI is in the obese range. Seek professional advice to develop a personalized health plan.";
+      }
+
+      // Fun Facts
+      const funFacts = [
+        "🌎 Did you know? The global average BMI is around 24.5.",
+        "🍟 In the US, about 36% of adults have a BMI over 30 (obese).",
+        "🏃 Regular exercise can reduce your BMI by up to 10% in just 3 months.",
+        "🍏 A Mediterranean diet is linked with lower BMI and better heart health."
+      ];
+      const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+
+      document.getElementById("result").innerHTML = `
+        <h3>📊 Your BMI Results</h3>
+        <p><b>BMI:</b> ${bmi}</p>
+        <p><b>Category:</b> ${category}</p>
+        <p><b>Health Tip:</b> ${advice}</p>
+        <hr>
+        <p><b>Fun Fact:</b> ${randomFact}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

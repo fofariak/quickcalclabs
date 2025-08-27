@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calorie Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Free calorie calculator to estimate your daily calorie needs (TDEE & BMR). Supports lbs/kg and ft+in/cm. Get maintenance, weight-loss, and weight-gain targets."/>
+  <meta name="keywords" content="calorie calculator,tdee calculator,bmr calculator,daily calories,weight loss calories,weight gain calories,fitness calculator,quickcalclabs"/>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+
+  <!-- GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  <style>
+    :root{
+      --bg:#0f172a;--panel:rgba(255,255,255,.06);--panel2:rgba(255,255,255,.08);
+      --text:#fff;--muted:#b0c4de;--accent:#00d4ff;--accent2:#00f2fe;
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,Segoe UI,Inter,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    header{background:rgba(0,0,0,.5);padding:16px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+    header a{color:var(--accent);text-decoration:none;font-weight:800;font-size:24px}
+    .container{max-width:860px;margin:32px auto;padding:0 20px}
+    h1,h2,h3{color:var(--accent)}
+    .box{background:var(--panel);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:22px;margin:18px 0}
+    label{display:block;margin:.35rem 0 .25rem}
+    input,select{width:100%;padding:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:var(--text);border-radius:8px}
+    input::placeholder{color:#9bb0c9}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+    button.primary{background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%);border:0;color:#042; color:#001b24; color:#001b24;background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%);color:#00222a}
+    button{cursor:pointer;padding:12px 16px;border-radius:8px;font-weight:700}
+    .units{display:flex;gap:10px;margin-bottom:12px}
+    .units button{flex:1;background:#26324d;color:#fff;border:1px solid rgba(255,255,255,.2)}
+    .units button.active{background:var(--accent);color:#00222a}
+    .ad{background:var(--panel2);border:1px dashed rgba(255,255,255,.2);border-radius:10px;padding:16px;text-align:center;margin:18px 0}
+    .muted{color:var(--muted)}
+    .fun-fact{margin-top:10px;color:#ffb347;font-style:italic}
+    @media (max-width:720px){.row,.row-3{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header><a href="index.html">QuickCalcLabs</a></header>
+
+  <main class="container">
+    <h1>Calorie Calculator</h1>
+    <p class="muted">Estimate your daily calories (TDEE) using the Mifflin-St Jeor equation. Get targets for maintenance, weight loss, and weight gain. Supports <strong>lbs/kg</strong> and <strong>ft+in/cm</strong>.</p>
+
+    <!-- Ad 1 -->
+    <div class="ad">
+      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1234567890"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      <div class="muted">Advertisement</div>
+    </div>
+
+    <section class="box">
+      <h2>Enter Your Details</h2>
+
+      <div class="units">
+        <button type="button" id="btnImperial" class="active">Imperial (lbs, ft/in)</button>
+        <button type="button" id="btnMetric">Metric (kg, cm)</button>
+      </div>
+
+      <form id="form">
+        <div class="row">
+          <div>
+            <label for="age">Age</label>
+            <input id="age" type="number" min="1" inputmode="numeric" placeholder="e.g., 32" required />
+          </div>
+          <div>
+            <label for="gender">Gender</label>
+            <select id="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Imperial fields -->
+        <div id="imperial">
+          <div class="row">
+            <div>
+              <label for="lbs">Weight (lbs)</label>
+              <input id="lbs" type="number" min="1" step="0.1" inputmode="decimal" placeholder="e.g., 154" />
+            </div>
+            <div>
+              <label for="activity">Activity Level</label>
+              <select id="activity">
+                <option value="1.2">Sedentary (little/no exercise)</option>
+                <option value="1.375">Light (1–3 days/week)</option>
+                <option value="1.55">Moderate (3–5 days/week)</option>
+                <option value="1.725">Active (6–7 days/week)</option>
+                <option value="1.9">Very Active (intense or physical job)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row-3">
+            <div>
+              <label for="ft">Height (ft)</label>
+              <input id="ft" type="number" min="0" inputmode="numeric" placeholder="e.g., 5" />
+            </div>
+            <div>
+              <label for="inch">Height (in)</label>
+              <input id="inch" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g., 7" />
+            </div>
+            <div style="align-self:end">
+              <button class="primary" type="submit">Calculate</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric fields -->
+        <div id="metric" style="display:none">
+          <div class="row">
+            <div>
+              <label for="kg">Weight (kg)</label>
+              <input id="kg" type="number" min="1" step="0.1" inputmode="decimal" placeholder="e.g., 70" />
+            </div>
+            <div>
+              <label for="activityM">Activity Level</label>
+              <select id="activityM">
+                <option value="1.2">Sedentary (little/no exercise)</option>
+                <option value="1.375">Light (1–3 days/week)</option>
+                <option value="1.55">Moderate (3–5 days/week)</option>
+                <option value="1.725">Active (6–7 days/week)</option>
+                <option value="1.9">Very Active (intense or physical job)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="cm">Height (cm)</label>
+              <input id="cm" type="number" min="50" step="0.1" inputmode="decimal" placeholder="e.g., 170" />
+            </div>
+            <div style="align-self:end">
+              <button class="primary" type="submit">Calculate</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Ad 2 -->
+    <div class="ad">
+      <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px"
+           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="0987654321"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      <div class="muted">Advertisement</div>
+    </div>
+
+    <section id="result" class="box" aria-live="polite"></section>
+
+    <!-- SEO / Helpful text -->
+    <section class="box">
+      <h2>How We Calculate Your Calories</h2>
+      <p>We estimate your <strong>BMR</strong> (Basal Metabolic Rate) with the Mifflin-St Jeor equation and multiply it by your activity factor to get <strong>TDEE</strong> (Total Daily Energy Expenditure). That’s your maintenance calories. From there we show safe targets for weight change (~500 kcal/day deficit or surplus ≈ ~0.45 kg / 1 lb per week).</p>
+      <h3>Tips</h3>
+      <ul>
+        <li>Recalculate when weight or activity changes.</li>
+        <li>Pair calorie tracking with protein, fiber, sleep, and strength training for best results.</li>
+        <li>Small, consistent changes (5–10% adjustment) are sustainable 💪.</li>
+      </ul>
+    </section>
+
+    <!-- Ad 3 -->
+    <div class="ad">
+      <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
+           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1122334455"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      <div class="muted">Advertisement</div>
+    </div>
+  </main>
+
+  <footer class="container" style="text-align:center;color:var(--muted);padding-bottom:40px">
+    © 2025 QuickCalcLabs • <a href="privacy-policy.html" style="color:var(--accent)">Privacy</a> • <a href="terms-of-service.html" style="color:var(--accent)">Terms</a>
+  </footer>
+
+  <script>
+    // Track current unit explicitly to avoid display-style bugs
+    let currentUnit = 'imperial';
+
+    const btnI = document.getElementById('btnImperial');
+    const btnM = document.getElementById('btnMetric');
+    const wrapI = document.getElementById('imperial');
+    const wrapM = document.getElementById('metric');
+
+    btnI.addEventListener('click', () => {
+      currentUnit = 'imperial';
+      btnI.classList.add('active'); btnM.classList.remove('active');
+      wrapI.style.display = 'block'; wrapM.style.display = 'none';
+    });
+    btnM.addEventListener('click', () => {
+      currentUnit = 'metric';
+      btnM.classList.add('active'); btnI.classList.remove('active');
+      wrapM.style.display = 'block'; wrapI.style.display = 'none';
+    });
+
+    const form = document.getElementById('form');
+    const resultEl = document.getElementById('result');
+
+    function format(n){ return Math.round(n).toLocaleString(); }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const age = parseInt(document.getElementById('age').value, 10);
+      const gender = document.getElementById('gender').value;
+
+      let weightKg = 0, heightCm = 0, activity = 1.2;
+
+      if (currentUnit === 'imperial') {
+        const lbs = parseFloat(document.getElementById('lbs').value);
+        const ft  = parseFloat(document.getElementById('ft').value)   || 0;
+        const inch= parseFloat(document.getElementById('inch').value) || 0;
+        activity  = parseFloat(document.getElementById('activity').value) || 1.2;
+
+        if (!lbs || (!ft && !inch)) {
+          resultEl.innerHTML = `<p style="color:#ff6b6b">⚠️ Please fill all fields correctly (weight in lbs and height in ft/in).</p>`;
+          return;
+        }
+
+        weightKg = lbs * 0.45359237;
+        heightCm = ft * 30.48 + inch * 2.54;
+
+      } else {
+        const kg = parseFloat(document.getElementById('kg').value);
+        const cm = parseFloat(document.getElementById('cm').value);
+        activity = parseFloat(document.getElementById('activityM').value) || 1.2;
+
+        if (!kg || !cm) {
+          resultEl.innerHTML = `<p style="color:#ff6b6b">⚠️ Please fill all fields correctly (weight in kg and height in cm).</p>`;
+          return;
+        }
+
+        weightKg = kg;
+        heightCm = cm;
+      }
+
+      if (!age || age <= 0) {
+        resultEl.innerHTML = `<p style="color:#ff6b6b">⚠️ Please enter a valid age.</p>`;
+        return;
+      }
+
+      // BMR (Mifflin–St Jeor)
+      const bmr = (gender === 'male')
+        ? 10*weightKg + 6.25*heightCm - 5*age + 5
+        : 10*weightKg + 6.25*heightCm - 5*age - 161;
+
+      const tdee = bmr * activity;
+      const loss = tdee - 500;
+      const gain = tdee + 500;
+
+      // Random fun fact
+      const facts = [
+        "🔥 Running for 10 minutes burns ~100 calories.",
+        "🍎 A medium apple has ~95 calories.",
+        "🚴 30 minutes of cycling burns ~250 calories.",
+        "🍔 A Big Mac is about 550 calories.",
+        "🧘 Yoga (1 hour) burns ~180 calories."
+      ];
+      const fact = facts[Math.floor(Math.random()*facts.length)];
+
+      resultEl.innerHTML = `
+        <h2>Your Daily Calorie Needs</h2>
+        <p><strong>Maintain Weight:</strong> ${format(tdee)} calories/day</p>
+        <p><strong>Weight Loss (~1 lb/week):</strong> ${format(loss)} calories/day</p>
+        <p><strong>Weight Gain (~1 lb/week):</strong> ${format(gain)} calories/day</p>
+        <p class="muted">These are estimates. Consult professionals for personalized guidance.</p>
+        <p class="fun-fact">💡 Fun Fact: ${fact}</p>
+      `;
+    });
+  </script>
+</body>
+</html>

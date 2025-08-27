@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregnancy Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Free online pregnancy calculator. Estimate your due date, track pregnancy weeks, and follow milestones based on your last period date.">
+  <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy weeks, pregnancy milestones, women's health, pregnancy tracker">
+
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--glass-bg);
+      border-radius: var(--radius);
+    }
+    .calendar-btn {
+      display: inline-block;
+      margin: 10px 10px 0 0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: var(--accent-gradient);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+    }
+    .calendar-btn:hover {
+      transform: scale(1.05);
+      box-shadow: var(--glow);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Ad 1: Top Banner -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 / Responsive Banner</div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>🤰 Pregnancy Calculator</h1>
+    <p>Estimate your pregnancy due date, track how many weeks along you are, and discover key milestones in your journey.</p>
+  </section>
+
+  <!-- Calculator -->
+  <section class="container">
+    <div class="card">
+      <h2>Enter Your Pregnancy Details</h2>
+
+      <label for="lmp">First Day of Your Last Period:</label>
+      <input type="date" id="lmp" class="input-field">
+
+      <button onclick="calculatePregnancy()">Calculate Due Date</button>
+      <div id="result" class="result"></div>
+    </div>
+  </section>
+
+  <!-- Ad 2: After Results -->
+  <div class="ad-container">
+    <div class="ad-placeholder">300x250 / 336x280 Result Ad</div>
+  </div>
+
+  <!-- SEO Content -->
+  <section class="seo-content">
+    <h2>How Our Pregnancy Calculator Works</h2>
+    <p>Pregnancy calculators use the <b>Naegele’s rule</b> to estimate your due date. It adds 280 days (40 weeks) to the first day of your last menstrual period (LMP). While this is the standard method, remember that only about 5% of babies are born on their exact due date.</p>
+
+    <h3>What You’ll Learn</h3>
+    <ul>
+      <li><b>Estimated Due Date (EDD):</b> The likely date your baby will be born</li>
+      <li><b>Current Pregnancy Week:</b> Track your progress</li>
+      <li><b>Trimester Information:</b> Know which stage of pregnancy you’re in</li>
+      <li><b>Milestones:</b> Understand fetal development by week</li>
+    </ul>
+
+    <h3>Why Use QuickCalcLabs?</h3>
+    <p>Our calculator provides accurate results instantly and is 100% free. Pair it with our <a href="period-tracker.html">Period Calculator</a> for complete women’s health tracking.</p>
+  </section>
+
+  <!-- Ad 3: Footer Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">Responsive Footer Ad</div>
+  </div>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All rights reserved.</p>
+    <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms</a></p>
+  </footer>
+
+  <script>
+    let dueDate;
+
+    function calculatePregnancy() {
+      const lmp = document.getElementById("lmp").value;
+      if (!lmp) {
+        document.getElementById("result").innerHTML = "<p>Please enter the date of your last period.</p>";
+        return;
+      }
+
+      const lmpDate = new Date(lmp);
+      dueDate = new Date(lmpDate);
+      dueDate.setDate(dueDate.getDate() + 280); // 40 weeks
+
+      const today = new Date();
+      const weeksPregnant = Math.floor((today - lmpDate) / (1000 * 60 * 60 * 24 * 7));
+      const trimester = weeksPregnant <= 13 ? "First Trimester" : (weeksPregnant <= 27 ? "Second Trimester" : "Third Trimester");
+
+      // Fun Facts
+      const funFacts = [
+        "💡 Only about 5% of babies are born on their actual due date.",
+        "🍼 The average newborn weighs about 7.5 pounds (3.4 kg).",
+        "👶 By week 12, most of the baby's critical systems are formed.",
+        "💓 At around week 6, your baby's heartbeat can often be detected."
+      ];
+      const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+
+      document.getElementById("result").innerHTML = `
+        <h3>📅 Pregnancy Details</h3>
+        <p><b>Estimated Due Date:</b> ${dueDate.toDateString()}</p>
+        <p><b>Weeks Pregnant:</b> ${weeksPregnant} weeks</p>
+        <p><b>Current Trimester:</b> ${trimester}</p>
+        <hr>
+        <p><b>Fun Fact:</b> ${randomFact}</p>
+        <a href="#" class="calendar-btn" onclick="downloadICS('Estimated Due Date', dueDate)">📅 Add Due Date</a>
+      `;
+    }
+
+    function downloadICS(eventTitle, eventDate) {
+      const start = eventDate.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+      const endDate = new Date(eventDate);
+      endDate.setHours(endDate.getHours() + 1);
+      const end = endDate.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+
+      const icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${eventTitle}
+DTSTART:${start}
+DTEND:${end}
+DESCRIPTION:Added from QuickCalcLabs Pregnancy Calculator
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsContent], { type: "text/calendar" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = eventTitle.replace(/\s+/g, "_") + ".ics";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  </script>
+</body>
+</html>

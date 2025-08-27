@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Period & Ovulation Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Free Period & Ovulation Calculator. Track your menstrual cycle, predict your next period, fertile window, and ovulation day with accuracy.">
+  <meta name="keywords" content="period calculator, ovulation calculator, menstrual cycle calculator, fertility tracker, women's health, ovulation calendar, fertile days calculator">
+
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--glass-bg);
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Ad 1: Top Banner -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 / Responsive Banner</div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>🌸 Period & Ovulation Calculator</h1>
+    <p>Track your menstrual cycle, predict your next period, fertile days, and ovulation day. Simple, accurate, and private.</p>
+  </section>
+
+  <!-- Calculator -->
+  <section class="container">
+    <div class="card">
+      <h2>Enter Your Cycle Details</h2>
+
+      <label for="lastPeriod">Last Period Start Date:</label>
+      <input type="date" id="lastPeriod" class="input-field">
+
+      <label for="cycleLength">Average Cycle Length (days):</label>
+      <input type="number" id="cycleLength" class="input-field" value="28" min="20" max="40">
+
+      <button onclick="calculatePeriod()">Calculate Cycle</button>
+      <div id="result" class="result"></div>
+    </div>
+  </section>
+
+  <!-- Ad 2: After Results -->
+  <div class="ad-container">
+    <div class="ad-placeholder">300x250 / 336x280 Result Ad</div>
+  </div>
+
+  <!-- SEO Content -->
+  <section class="seo-content">
+    <h2>Why Use a Period & Ovulation Calculator?</h2>
+    <p>The menstrual cycle usually ranges from 21 to 35 days. Knowing your cycle helps you plan, track fertility, and understand your health better. Our calculator predicts your next period, ovulation day, and fertile window.</p>
+
+    <h3>What You’ll Learn</h3>
+    <ul>
+      <li>📅 <b>Next Period:</b> The likely start date of your next cycle</li>
+      <li>🌸 <b>Ovulation Day:</b> Usually occurs 14 days before your next period</li>
+      <li>💝 <b>Fertile Window:</b> A 6-day range when you’re most likely to conceive</li>
+      <li>🔍 <b>Cycle Tracking:</b> Monitor changes in your cycle length over time</li>
+    </ul>
+  </section>
+
+  <!-- Ovulation Calculator SEO Block -->
+  <section class="seo-content" id="ovulation">
+    <h2>Ovulation Calculator – Find Your Fertile Days</h2>
+    <p>Our Period Calculator also doubles as a powerful <b>Ovulation Calculator</b>. By analyzing your last period date and average cycle length, it predicts:</p>
+    <ul>
+      <li>✔️ Your exact ovulation day</li>
+      <li>✔️ Your most fertile days (fertile window)</li>
+      <li>✔️ Best days for natural family planning</li>
+    </ul>
+    <p>Ovulation happens about 14 days before your next period. Planning around this helps improve chances of conception or avoid pregnancy naturally.</p>
+  </section>
+
+  <!-- Ad 3: Footer Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">Responsive Footer Ad</div>
+  </div>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All rights reserved.</p>
+    <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms</a></p>
+  </footer>
+
+  <script>
+    function calculatePeriod() {
+      const lastPeriodDate = document.getElementById("lastPeriod").value;
+      const cycleLength = parseInt(document.getElementById("cycleLength").value);
+
+      if (!lastPeriodDate || !cycleLength) {
+        document.getElementById("result").innerHTML = "<p>Please enter valid details.</p>";
+        return;
+      }
+
+      const lastDate = new Date(lastPeriodDate);
+      const nextPeriod = new Date(lastDate);
+      nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
+
+      const ovulationDay = new Date(nextPeriod);
+      ovulationDay.setDate(ovulationDay.getDate() - 14);
+
+      const fertileStart = new Date(ovulationDay);
+      fertileStart.setDate(fertileStart.getDate() - 5);
+
+      const fertileEnd = new Date(ovulationDay);
+      fertileEnd.setDate(fertileEnd.getDate() + 1);
+
+      // Fun Facts
+      const funFacts = [
+        "💡 The average cycle is 28 days, but healthy cycles vary from 21–35 days.",
+        "📊 Ovulation usually occurs about 14 days before your period starts.",
+        "🌎 Fertility tracking helps millions of women worldwide plan pregnancies naturally.",
+        "🥑 Eating nutrient-rich foods can support hormonal balance during ovulation."
+      ];
+      const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+
+      document.getElementById("result").innerHTML = `
+        <h3>📅 Your Cycle Prediction</h3>
+        <p><b>Next Period:</b> ${nextPeriod.toDateString()}</p>
+        <p><b>Ovulation Day:</b> ${ovulationDay.toDateString()}</p>
+        <p><b>Fertile Window:</b> ${fertileStart.toDateString()} – ${fertileEnd.toDateString()}</p>
+        <hr>
+        <p><b>Fun Fact:</b> ${randomFact}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

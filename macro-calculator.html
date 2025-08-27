@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Macro Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Free macro calculator with adjustable protein, carbs, and fat ratios. Calculate daily calorie needs, macros, and grams for weight loss, maintenance, or muscle gain.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Top Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 Ad Placeholder</div>
+  </div>
+
+  <section class="container">
+    <h1 class="section-title">Macro Calculator</h1>
+    <p>Customize your macronutrient split to match your goals. Adjust calories with the goal slider and fine-tune your protein, carbs, and fat ratios.</p>
+
+    <!-- Unit Toggle -->
+    <div class="toggle-group">
+      <button id="unitImperial" class="active">Imperial (lbs, ft/in)</button>
+      <button id="unitMetric">Metric (kg, cm)</button>
+    </div>
+
+    <form id="macroForm">
+      <label>Age: <input type="number" id="age" required></label>
+      <label>Gender:
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </label>
+
+      <!-- Imperial Fields -->
+      <div id="imperialFields">
+        <label>Weight (lbs): <input type="number" id="weightLbs"></label>
+        <label>Height: 
+          <input type="number" id="heightFt" placeholder="ft" style="width:60px;"> 
+          <input type="number" id="heightIn" placeholder="in" style="width:60px;">
+        </label>
+      </div>
+
+      <!-- Metric Fields -->
+      <div id="metricFields" style="display:none;">
+        <label>Weight (kg): <input type="number" id="weightKg"></label>
+        <label>Height (cm): <input type="number" id="heightCm"></label>
+      </div>
+
+      <label>Activity Level:
+        <select id="activity">
+          <option value="1.2">Sedentary</option>
+          <option value="1.375">Lightly active</option>
+          <option value="1.55">Moderately active</option>
+          <option value="1.725">Very active</option>
+          <option value="1.9">Extra active</option>
+        </select>
+      </label>
+
+      <!-- Goal Slider -->
+      <label>Goal Intensity: <span id="goalVal">0%</span></label>
+      <input type="range" id="goalSlider" min="-30" max="30" value="0">
+
+      <!-- Macro Sliders -->
+      <h3>Macro Split</h3>
+      <label>Protein: <span id="proteinVal">30%</span></label>
+      <input type="range" id="proteinSlider" min="10" max="70" value="30">
+
+      <label>Carbs: <span id="carbVal">40%</span></label>
+      <input type="range" id="carbSlider" min="10" max="70" value="40">
+
+      <label>Fat: <span id="fatVal">30%</span></label>
+      <input type="range" id="fatSlider" min="10" max="70" value="30">
+
+      <button type="button" id="calcBtn">Calculate Macros</button>
+    </form>
+
+    <!-- Mid Ad -->
+    <div class="ad-container">
+      <div class="ad-placeholder">300x250 Ad Placeholder</div>
+    </div>
+
+    <div id="result" class="card" style="display:none;"></div>
+    <canvas id="macroChart" width="400" height="400" style="max-width:400px; margin:20px auto; display:none;"></canvas>
+  </section>
+
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">336x280 Ad Placeholder</div>
+  </div>
+
+  <!-- SEO Section -->
+  <section class="container seo-content">
+    <h2>Why Use a Macro Calculator?</h2>
+    <p>Macros — protein, carbs, and fats — are the building blocks of your diet. Balancing them correctly helps optimize fat loss, muscle gain, and overall energy levels.</p>
+    <h3>Fun Fact</h3>
+    <p>Did you know your metabolism can burn an extra 80–100 calories per day just by eating more protein? That's called the thermic effect of food!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 QuickCalcLabs</p>
+  </footer>
+
+  <script>
+    const el = id => document.getElementById(id);
+    let currentUnit = 'imperial';
+    let chartInstance = null;
+
+    // Unit toggle
+    el('unitImperial').addEventListener('click', ()=> {
+      currentUnit = 'imperial';
+      el('imperialFields').style.display = 'block';
+      el('metricFields').style.display = 'none';
+      el('unitImperial').classList.add('active');
+      el('unitMetric').classList.remove('active');
+    });
+    el('unitMetric').addEventListener('click', ()=> {
+      currentUnit = 'metric';
+      el('imperialFields').style.display = 'none';
+      el('metricFields').style.display = 'block';
+      el('unitMetric').classList.add('active');
+      el('unitImperial').classList.remove('active');
+    });
+
+    // Goal slider
+    el('goalSlider').addEventListener('input', e=>{
+      el('goalVal').textContent = e.target.value + '%';
+    });
+
+    // Macro sliders with proportional live update
+    function adjustSliders(changed) {
+      let protein = parseInt(el('proteinSlider').value);
+      let carbs   = parseInt(el('carbSlider').value);
+      let fat     = parseInt(el('fatSlider').value);
+
+      let total = protein + carbs + fat;
+      if(total !== 100){
+        let remain = 100 - protein;
+        if(changed === 'carb'){
+          remain = 100 - carbs;
+          let fatShare = fat/(fat+protein);
+          protein = Math.round(remain*(1-fatShare));
+          fat = 100 - carbs - protein;
+        }
+        else if(changed === 'fat'){
+          remain = 100 - fat;
+          let carbShare = carbs/(carbs+protein);
+          protein = Math.round(remain*(1-carbShare));
+          carbs = 100 - fat - protein;
+        }
+        else { // protein changed
+          let share = carbs/(carbs+fat);
+          carbs = Math.round(remain*share);
+          fat = 100 - protein - carbs;
+        }
+      }
+
+      [protein, carbs, fat] = [protein, carbs, fat].map(v => Math.min(70, Math.max(10,v)));
+
+      el('proteinSlider').value = protein;
+      el('carbSlider').value = carbs;
+      el('fatSlider').value = fat;
+
+      el('proteinVal').textContent = protein + '%';
+      el('carbVal').textContent = carbs + '%';
+      el('fatVal').textContent = fat + '%';
+
+      updateChart(protein, carbs, fat);
+    }
+
+    ['protein','carb','fat'].forEach(name=>{
+      el(name+'Slider').addEventListener('input', ()=>adjustSliders(name));
+    });
+    adjustSliders('protein');
+
+    // Chart with tooltips
+    function updateChart(protein, carbs, fat, goalCals=0) {
+      const ctx = el('macroChart').getContext('2d');
+      el('macroChart').style.display = 'block';
+      if(chartInstance) chartInstance.destroy();
+
+      const proteinGr = goalCals ? (goalCals*(protein/100)/4).toFixed(0) : '-';
+      const carbGr    = goalCals ? (goalCals*(carbs/100)/4).toFixed(0)   : '-';
+      const fatGr     = goalCals ? (goalCals*(fat/100)/9).toFixed(0)     : '-';
+
+      chartInstance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Protein', 'Carbs', 'Fat'],
+          datasets: [{
+            data: [protein, carbs, fat],
+            backgroundColor: ['#4facfe', '#00f2fe', '#ff6b6b']
+          }]
+        },
+        options: {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label;
+                  const value = context.raw;
+                  let grams = '-';
+                  if(label === 'Protein') grams = proteinGr + ' g';
+                  if(label === 'Carbs') grams = carbGr + ' g';
+                  if(label === 'Fat') grams = fatGr + ' g';
+                  return `${label}: ${value}% (${grams})`;
+                }
+              }
+            },
+            legend: {
+              position: 'bottom',
+              labels: { color: '#fff' }
+            }
+          }
+        }
+      });
+    }
+
+    // Calculation
+    el('calcBtn').addEventListener('click', ()=>{
+      const age = parseInt(el('age').value);
+      const gender = el('gender').value;
+      const activity = parseFloat(el('activity').value);
+      const goalAdj = parseInt(el('goalSlider').value);
+
+      let weightKg, heightCm;
+      if(currentUnit === 'imperial'){
+        const lbs = parseFloat(el('weightLbs').value);
+        const ft = parseFloat(el('heightFt').value)||0;
+        const inch = parseFloat(el('heightIn').value)||0;
+        if(!lbs || (ft+inch)<=0 || !age){ alert("Fill all fields correctly"); return; }
+        weightKg = lbs*0.45359237;
+        heightCm = (ft*30.48)+(inch*2.54);
+      } else {
+        const kg = parseFloat(el('weightKg').value);
+        const cm = parseFloat(el('heightCm').value);
+        if(!kg || !cm || !age){ alert("Fill all fields correctly"); return; }
+        weightKg = kg;
+        heightCm = cm;
+      }
+
+      // Mifflin-St Jeor
+      let bmr = (10*weightKg) + (6.25*heightCm) - (5*age);
+      if(gender==='male') bmr += 5; else bmr -= 161;
+      let tdee = bmr*activity;
+      let goalCals = tdee * (1 + goalAdj/100);
+
+      const proteinPct = parseInt(el('proteinSlider').value);
+      const carbPct = parseInt(el('carbSlider').value);
+      const fatPct = parseInt(el('fatSlider').value);
+
+      const proteinCals = goalCals*(proteinPct/100);
+      const carbCals    = goalCals*(carbPct/100);
+      const fatCals     = goalCals*(fatPct/100);
+
+      const resultHTML = `
+        <h2>Your Macro Breakdown</h2>
+        <p><strong>TDEE:</strong> ${tdee.toFixed(0)} kcal/day</p>
+        <p><strong>Adjusted Calories:</strong> ${goalCals.toFixed(0)} kcal/day</p>
+        <ul>
+          <li>Protein: ${proteinPct}% → ${(proteinCals/4).toFixed(0)} g</li>
+          <li>Carbs: ${carbPct}% → ${(carbCals/4).toFixed(0)} g</li>
+          <li>Fat: ${fatPct}% → ${(fatCals/9).toFixed(0)} g</li>
+        </ul>
+      `;
+      el('result').innerHTML = resultHTML;
+      el('result').style.display='block';
+
+      updateChart(proteinPct, carbPct, fatPct, goalCals);
+    });
+  </script>
+</body>
+</html>
