@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Body Fat Percentage Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Estimate your body fat percentage using the US Navy method. Works with imperial (feet/inches, lbs) or metric (cm, kg). Get categories, advice and fun facts." />
+  <meta name="keywords" content="body fat calculator, body fat percentage, navy body fat, body composition calculator, body fat estimator, QuickCalcLabs" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Analytics placeholder -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','GA_MEASUREMENT_ID');</script>
+
+  <!-- AdSense placeholder -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  <style>
+    .units { display:flex; gap:10px; margin-bottom:14px; }
+    .units button { padding:10px 16px; border-radius:24px; border:1px solid rgba(255,255,255,0.08); background:var(--glass-bg); color:var(--text-muted); cursor:pointer; font-weight:600; }
+    .units button.active { background:var(--accent-gradient); color:#fff; box-shadow:var(--glow); transform:translateY(-2px); }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .hint { color:var(--text-muted); font-size:0.95rem; margin-top:8px; }
+    #result { margin-top:16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Top Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">
+      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1234567890"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      <p>Advertisement</p>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>📏 Body Fat Percentage Calculator</h1>
+    <p>Estimate your body fat percentage using the US Navy method. Enter height and circumference measurements — hip is required for females.</p>
+  </section>
+
+  <!-- Calculator -->
+  <section class="container">
+    <div class="card">
+      <div class="units">
+        <button id="btnImperial" class="active">Imperial (ft, in)</button>
+        <button id="btnMetric">Metric (cm)</button>
+      </div>
+
+      <form id="bfForm" novalidate>
+        <div class="row">
+          <div>
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label for="age">Age (years)</label>
+            <input id="age" type="number" min="10" placeholder="e.g., 30" />
+          </div>
+        </div>
+
+        <!-- Imperial (default) -->
+        <div id="imperial-fields">
+          <div class="row" style="margin-top:10px;">
+            <div>
+              <label for="heightFt">Height (feet)</label>
+              <input id="heightFt" type="number" placeholder="e.g., 5" />
+            </div>
+            <div>
+              <label for="heightIn">Height (inches)</label>
+              <input id="heightIn" type="number" placeholder="e.g., 8" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <div>
+              <label for="neckIn">Neck circumference (inches)</label>
+              <input id="neckIn" type="number" step="0.1" placeholder="e.g., 15" />
+            </div>
+            <div>
+              <label for="waistIn">Waist circumference (inches)</label>
+              <input id="waistIn" type="number" step="0.1" placeholder="e.g., 34" />
+            </div>
+          </div>
+
+          <div id="hipWrap" style="margin-top:10px; display:none;">
+            <label for="hipIn">Hip circumference (inches) — required for females</label>
+            <input id="hipIn" type="number" step="0.1" placeholder="e.g., 38" />
+          </div>
+        </div>
+
+        <!-- Metric -->
+        <div id="metric-fields" style="display:none">
+          <div class="row" style="margin-top:10px;">
+            <div>
+              <label for="heightCm">Height (cm)</label>
+              <input id="heightCm" type="number" step="0.1" placeholder="e.g., 173" />
+            </div>
+            <div>
+              <label for="neckCm">Neck circumference (cm)</label>
+              <input id="neckCm" type="number" step="0.1" placeholder="e.g., 38" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <div>
+              <label for="waistCm">Waist circumference (cm)</label>
+              <input id="waistCm" type="number" step="0.1" placeholder="e.g., 86" />
+            </div>
+            <div id="hipWrapM" style="display:none;">
+              <label for="hipCm">Hip circumference (cm) — required for females</label>
+              <input id="hipCm" type="number" step="0.1" placeholder="e.g., 96" />
+            </div>
+          </div>
+        </div>
+
+        <div class="hint">
+          <small>Tip: Measure waist at the level of your navel and neck just below the Adam's apple. Women: include hip measurement at the widest point.</small>
+        </div>
+
+        <div style="margin-top:14px;">
+          <button type="submit" class="hero-cta">Calculate Body Fat %</button>
+        </div>
+      </form>
+
+      <div id="result"></div>
+    </div>
+  </section>
+
+  <!-- Mid Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">
+      <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
+           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1122334455"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      <p>Advertisement</p>
+    </div>
+  </div>
+
+  <!-- SEO Section -->
+  <section class="container">
+    <div class="seo-content">
+      <h2>Why Estimate Body Fat Percentage?</h2>
+      <p>Unlike BMI, body fat percentage reveals your body composition — how much of your weight is fat vs. muscle. This provides better insight into fitness and health.</p>
+      <h3>Healthy Body Fat Ranges</h3>
+      <ul>
+        <li>Men: Essential 2–5% | Athletes 6–13% | Fitness 14–17% | Acceptable 18–24% | Obese 25%+</li>
+        <li>Women: Essential 10–13% | Athletes 14–20% | Fitness 21–24% | Acceptable 25–31% | Obese 32%+</li>
+      </ul>
+      <h3>Fun Fact</h3>
+      <p>💡 Muscle tissue burns more calories than fat even at rest — meaning a leaner body composition boosts metabolism.</p>
+    </div>
+  </section>
+
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">
+      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="9988776655"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      <p>Advertisement</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All rights reserved.</p>
+    <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms</a></p>
+  </footer>
+
+  <script>
+    let currentUnit = 'imperial';
+
+    const btnI = document.getElementById('btnImperial');
+    const btnM = document.getElementById('btnMetric');
+    const impWrap = document.getElementById('imperial-fields');
+    const metWrap = document.getElementById('metric-fields');
+    const hipWrap = document.getElementById('hipWrap');
+    const hipWrapM = document.getElementById('hipWrapM');
+    const genderEl = document.getElementById('gender');
+    const resultEl = document.getElementById('result');
+
+    function setUnit(u){
+      currentUnit = u;
+      if(u === 'imperial'){
+        impWrap.style.display = 'block';
+        metWrap.style.display = 'none';
+        btnI.classList.add('active');
+        btnM.classList.remove('active');
+      } else {
+        impWrap.style.display = 'none';
+        metWrap.style.display = 'block';
+        btnM.classList.add('active');
+        btnI.classList.remove('active');
+      }
+      updateHipVisibility();
+      resultEl.innerHTML = '';
+    }
+
+    btnI.addEventListener('click', ()=> setUnit('imperial'));
+    btnM.addEventListener('click', ()=> setUnit('metric'));
+
+    function updateHipVisibility(){
+      const g = genderEl.value;
+      if(g === 'female'){
+        hipWrap.style.display = (currentUnit==='imperial')?'block':'none';
+        hipWrapM.style.display = (currentUnit==='metric')?'block':'none';
+      } else {
+        hipWrap.style.display = 'none';
+        hipWrapM.style.display = 'none';
+      }
+    }
+    genderEl.addEventListener('change', updateHipVisibility);
+
+    setUnit('imperial');
+
+    function log10(x){ return Math.log(x)/Math.LN10; }
+
+    document.getElementById('bfForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      resultEl.innerHTML='';
+
+      const gender = genderEl.value;
+      let heightIn, neckIn, waistIn, hipIn;
+
+      if(currentUnit==='imperial'){
+        const ft = parseFloat(document.getElementById('heightFt').value)||0;
+        const inch = parseFloat(document.getElementById('heightIn').value)||0;
+        heightIn = ft*12 + inch;
+        neckIn = parseFloat(document.getElementById('neckIn').value);
+        waistIn = parseFloat(document.getElementById('waistIn').value);
+        hipIn = gender==='female'?parseFloat(document.getElementById('hipIn').value):null;
+      } else {
+        const heightCm = parseFloat(document.getElementById('heightCm').value);
+        const neckCm = parseFloat(document.getElementById('neckCm').value);
+        const waistCm = parseFloat(document.getElementById('waistCm').value);
+        const hipCm = gender==='female'?parseFloat(document.getElementById('hipCm').value):null;
+        heightIn = heightCm/2.54;
+        neckIn = neckCm/2.54;
+        waistIn = waistCm/2.54;
+        hipIn = gender==='female'?hipCm/2.54:null;
+      }
+
+      if(!heightIn||!neckIn||!waistIn||(gender==='female'&&!hipIn)){
+        resultEl.innerHTML='<p style="color:#ff6b6b">⚠️ Please fill all required fields.</p>';
+        return;
+      }
+
+      let bodyFat;
+      if(gender==='male'){
+        bodyFat=86.010*log10(waistIn-neckIn)-70.041*log10(heightIn)+36.76;
+      } else {
+        bodyFat=163.205*log10(waistIn+hipIn-neckIn)-97.684*log10(heightIn)-78.387;
+      }
+
+      bodyFat=Math.max(0,Math.min(100,bodyFat));
+      const bfRounded=bodyFat.toFixed(1);
+
+      let category, advice;
+      if(gender==='male'){
+        if(bodyFat<6) {category='Essential Fat'; advice='Very low — ensure adequate intake & consult pro.';}
+        else if(bodyFat<14) {category='Athlete'; advice='Excellent athletic range.';}
+        else if(bodyFat<18) {category='Fitness'; advice='Healthy and fit — keep up the routine.';}
+        else if(bodyFat<25) {category='Acceptable'; advice='Within normal range.';}
+        else {category='Obese Range'; advice='Higher than recommended — consider diet/exercise changes.';}
+      } else {
+        if(bodyFat<14) {category='Essential Fat'; advice='Very low for women — watch health markers.';}
+        else if(bodyFat<21) {category='Athlete'; advice='Excellent athletic range.';}
+        else if(bodyFat<25) {category='Fitness'; advice='Healthy and fit — keep balanced routine.';}
+        else if(bodyFat<32) {category='Acceptable'; advice='Within normal range.';}
+        else {category='Obese Range'; advice='Above recommended — consider health interventions.';}
+      }
+
+      const facts=[
+        "💡 Muscle burns more calories than fat, even at rest!",
+        "📊 Body fat % is more insightful than BMI alone.",
+        "🏋️ Strength training preserves muscle while reducing fat."
+      ];
+      const fact=facts[Math.floor(Math.random()*facts.length)];
+
+      resultEl.innerHTML=`
+        <h3>📊 Body Fat Result</h3>
+        <p><strong>Estimated Body Fat:</strong> ${bfRounded}%</p>
+        <p><strong>Category:</strong> ${category}</p>
+        <p><strong>Advice:</strong> ${advice}</p>
+        <p class="fun-fact">${fact}</p>
+      `;
+    });
+  </script>
+</body>
+</html>
