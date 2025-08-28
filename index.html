@@ -3,256 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuickCalcLabs | Free Online Calculators - Age, BMI, Period, Water Intake, Body Fat, Macros & More</title>
-  <meta name="description" content="Free online calculators for health, fitness & lifestyle. Calculate age, BMI, period tracking, ovulation, pregnancy, water intake, body fat, macros, and daily calories. Fast, accurate, and easy to use!">
-  <meta name="keywords" content="free online calculators, age calculator, BMI calculator, period tracker, ovulation calculator, pregnancy calculator, calorie calculator, water intake calculator, body fat calculator, macro calculator, macronutrient calculator, health tools, fitness calculators, women's health, fertility tracking, weight loss calculator, hydration calculator">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="QuickCalcLabs">
-  <link rel="canonical" href="https://quickcalclabs.com">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="QuickCalcLabs | Free Online Health & Fitness Calculators">
-  <meta property="og:description" content="Calculate your age, BMI, track periods, ovulation, pregnancy, water intake, body fat, macros, and daily calorie needs. Free, accurate, and instant results!">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://quickcalclabs.com">
-  <meta property="og:image" content="https://quickcalclabs.com/images/og-image.png">
-  <meta property="og:site_name" content="QuickCalcLabs">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free Online Health & Fitness Calculators">
-  <meta name="twitter:description" content="Calculate age, BMI, period, ovulation, pregnancy, water intake, body fat, macros, and calories. Free tools for better health!">
-  <meta name="twitter:image" content="https://quickcalclabs.com/images/twitter-card.png">
-
+  <title>QuickCalcLabs | Free Online Health & Fitness Calculators</title>
+  <meta name="description" content="Free health & fitness calculators: Age, BMI, Period & Ovulation, Pregnancy, Calorie, Water Intake, Body Fat & Macro Calculators. Fast, accurate & easy to use.">
+  <link rel="stylesheet" href="style.css">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID');
-  </script>
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
+      <a href="#calculators">Calculators</a>
       <a href="blog.html">Blog</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
-  <!-- Ad 1: Top Banner -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner Ad</div>
-  </div>
-
   <!-- Hero -->
   <section class="hero">
-    <h1>Welcome to QuickCalcLabs</h1>
-    <p>Your ultimate destination for free, accurate, and beautiful health & lifestyle calculators. From tracking your fitness to planning life's important milestones, our comprehensive tools are designed to give you instant, reliable results for optimal health and wellness.</p>
-    <a href="#calculators" class="hero-cta">Start Calculating</a>
+    <h1>Free Health & Fitness Calculators</h1>
+    <p>Track your health, fitness, and lifestyle with our free online calculators. Instant, accurate, and beautifully designed for your wellness journey.</p>
+    <a href="#calculators" class="cta-btn">⚡ Start Calculating</a>
   </section>
 
-  <!-- Stats Section -->
-  <section class="container">
-    <div class="stats-section">
-      <h2 style="color: var(--text); margin-bottom: 10px;">Trusted by Thousands</h2>
-      <p style="color: var(--text-muted);">Join our growing community of health-conscious users</p>
-      <div class="stats-grid">
-        <div class="stat-item"><span class="stat-number">75K+</span><span class="stat-label">Calculations Made</span></div>
-        <div class="stat-item"><span class="stat-number">9</span><span class="stat-label">Free Tools</span></div>
-        <div class="stat-item"><span class="stat-number">99%</span><span class="stat-label">Accuracy Rate</span></div>
-        <div class="stat-item"><span class="stat-number">24/7</span><span class="stat-label">Available</span></div>
-      </div>
-    </div>
+  <!-- Ad 1 -->
+  <div class="ad-container">728x90 Banner Ad Placeholder</div>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stat"><h2>75K+</h2><p>Happy Users</p></div>
+    <div class="stat"><h2>100%</h2><p>Free Forever</p></div>
+    <div class="stat"><h2>99.9%</h2><p>Accuracy Rate</p></div>
+    <div class="stat"><h2>24/7</h2><p>Always Available</p></div>
   </section>
 
-  <!-- Calculators Section -->
-  <section class="container" id="calculators">
+  <!-- Calculators -->
+  <section id="calculators" class="calculator-section">
     <h2 class="section-title">Our Popular Calculators</h2>
     <div class="calculator-grid">
+
       <div class="calculator-card">
-        <span class="calculator-icon">📅</span>
-        <h3><a href="age-calculator.html">Age Calculator</a></h3>
-        <p>Calculate your exact age in years, months, days, and even hours. Perfect for planning birthdays and milestones.</p>
-        <span class="calculator-tag">Most Popular</span>
+        <span class="badge">Featured</span>
+        <h3>📅 Age Calculator</h3>
+        <p>Find your exact age in years, months, days, and more.</p>
+        <a href="age-calculator.html" class="card-btn">Use Calculator</a>
       </div>
+
       <div class="calculator-card">
-        <span class="calculator-icon">⚖️</span>
-        <h3><a href="bmi-calculator.html">BMI Calculator</a></h3>
-        <p>Calculate your Body Mass Index and discover your healthy weight range with personalized recommendations.</p>
-        <span class="calculator-tag">Health</span>
+        <span class="badge">Most Popular</span>
+        <h3>⚖️ BMI Calculator</h3>
+        <p>Calculate your Body Mass Index and discover your healthy weight range.</p>
+        <a href="bmi-calculator.html" class="card-btn">Use Calculator</a>
       </div>
+
       <div class="calculator-card">
-        <span class="calculator-icon">🌸</span>
-        <h3><a href="period-tracker.html">Period Calculator</a></h3>
-        <p>Track your menstrual cycle, predict your next period, and monitor your reproductive health easily.</p>
-        <span class="calculator-tag">Women's Health</span>
+        <span class="badge">Trending</span>
+        <h3>🌸 Period & Ovulation Calculator</h3>
+        <p>Track cycles, predict periods, and find fertile days easily.</p>
+        <a href="period-tracker.html" class="card-btn">Use Calculator</a>
       </div>
+
       <div class="calculator-card">
-        <span class="calculator-icon">🤱</span>
-        <h3><a href="pregnancy-calculator.html">Pregnancy Calculator</a></h3>
-        <p>Estimate your due date, track pregnancy weeks, and follow important milestones throughout your journey.</p>
-        <span class="calculator-tag">Pregnancy</span>
+        <h3>🤰 Pregnancy Calculator</h3>
+        <p>Estimate due date and track pregnancy milestones week by week.</p>
+        <a href="pregnancy-calculator.html" class="card-btn">Use Calculator</a>
       </div>
+
       <div class="calculator-card">
-        <span class="calculator-icon">💎</span>
-        <h3><a href="period-tracker.html#ovulation">Ovulation Calculator</a></h3>
-        <p>Find your fertile window, optimize conception timing, and understand your ovulation cycle better – included in our Period Calculator.</p>
-        <span class="calculator-tag">Fertility</span>
+        <h3>🔥 Calorie Calculator</h3>
+        <p>Discover daily calorie needs for weight loss, gain, or maintenance.</p>
+        <a href="calorie-calculator.html" class="card-btn">Use Calculator</a>
       </div>
+
       <div class="calculator-card">
-        <span class="calculator-icon">🔥</span>
-        <h3><a href="calorie-calculator.html">Calorie Calculator</a></h3>
-        <p>Calculate your daily calorie needs for weight loss, gain, or maintenance with precision and ease.</p>
-        <span class="calculator-tag">Fitness</span>
+        <h3>💧 Water Intake Calculator</h3>
+        <p>Calculate your daily hydration needs based on weight and activity.</p>
+        <a href="water-intake-calculator.html" class="card-btn">Use Calculator</a>
       </div>
+
       <div class="calculator-card">
-        <span class="calculator-icon">💧</span>
-        <h3><a href="water-intake-calculator.html">Water Intake Calculator</a></h3>
-        <p>Calculate your daily water intake needs based on weight, activity level, and climate for optimal hydration.</p>
-        <span class="calculator-tag">New</span>
+        <h3>📊 Body Fat Calculator</h3>
+        <p>Estimate body fat percentage with multiple methods.</p>
+        <a href="body-fat-calculator.html" class="card-btn">Use Calculator</a>
       </div>
+
       <div class="calculator-card">
-        <span class="calculator-icon">📊</span>
-        <h3><a href="body-fat-calculator.html">Body Fat Calculator</a></h3>
-        <p>Estimate your body fat percentage using various methods including measurements and bioelectrical impedance.</p>
-        <span class="calculator-tag">New</span>
-      </div>
-      <div class="calculator-card">
-        <span class="calculator-icon">🥗</span>
-        <h3><a href="macro-calculator.html">Macro Calculator</a></h3>
-        <p>Calculate your ideal macronutrient breakdown (protein, carbs, fats) based on your goals and body composition.</p>
-        <span class="calculator-tag">New</span>
+        <h3>🥗 Macro Calculator</h3>
+        <p>Find your ideal protein, carb & fat intake for your goals.</p>
+        <a href="macro-calculator.html" class="card-btn">Use Calculator</a>
       </div>
     </div>
   </section>
 
-  <!-- Ad 2: Mid-Content -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 / Responsive Mid-Content Ad</div>
-  </div>
+  <!-- Ad 2 -->
+  <div class="ad-container">300x250 Mid Content Ad Placeholder</div>
 
-  <!-- SEO Content Section -->
-  <section class="container">
-    <div class="seo-content">
-      <h2>Free Online Calculators for Health, Fitness & Lifestyle</h2>
-      <p>QuickCalcLabs is your trusted destination for accurate, fast, and completely free online calculators. Whether you're tracking your health metrics, planning for pregnancy, optimizing your nutrition, or managing your fitness goals, our comprehensive suite of 9 calculators provides instant, reliable results you can trust.</p>
-      
-      <h3>Why Choose QuickCalcLabs?</h3>
-      <p>Our calculators are designed with precision and user experience in mind. Each tool is backed by medically accurate formulas, scientific research, and provides detailed explanations to help you understand your results better. From basic health metrics to advanced nutrition planning, we cover all aspects of your wellness journey.</p>
+  <!-- SEO Content -->
+  <section class="seo-content">
+    <h2>Learn More About Our Calculators</h2>
+    <p>At QuickCalcLabs, we provide tools that blend science with simplicity. Explore detailed guides, FAQs, and benefits of each calculator below.</p>
 
-      <div class="seo-grid">
-        <div class="seo-card"><h3>🎯 Accurate Results</h3><p>All our calculators use clinically proven formulas and are regularly updated to ensure maximum accuracy based on latest research.</p></div>
-        <div class="seo-card"><h3>⚡ Instant Calculations</h3><p>Get immediate results without waiting. Our optimized calculators process your data in real-time with detailed breakdowns.</p></div>
-        <div class="seo-card"><h3>🔒 Privacy Protected</h3><p>Your personal data stays private. We don't store your calculation data, ensuring complete privacy and security.</p></div>
-        <div class="seo-card"><h3>📱 Mobile Friendly</h3><p>Access all our calculators from any device. Our responsive design works perfectly on phones, tablets, and desktops.</p></div>
-      </div>
-    </div>
+    <!-- Age Calculator -->
+    <h3>📅 Age Calculator</h3>
+    <p>Our Age Calculator instantly computes your exact age in years, months, days, hours, and minutes. Whether you’re planning a milestone, checking eligibility, or just curious, this tool handles leap years and time zones accurately.</p>
+    <p>Perfect for legal forms, birthdays, and fun facts like heartbeats lived, it’s precise and user-friendly.</p>
+    <details><summary>FAQ: Can it calculate future or past dates?</summary><p>Yes, you can check your age on any given date.</p></details>
+
+    <!-- BMI Calculator -->
+    <h3>⚖️ BMI Calculator</h3>
+    <p>The BMI Calculator uses your height and weight to assess body mass index, a simple measure for health categories: underweight, normal, overweight, or obese.</p>
+    <p>It’s widely used as a screening tool and works best when combined with body fat analysis.</p>
+    <details><summary>FAQ: Is BMI reliable for athletes?</summary><p>Athletes may get misleading results due to high muscle mass, so pair it with the Body Fat Calculator.</p></details>
+
+    <!-- Period + Ovulation -->
+    <h3>🌸 Period & Ovulation Calculator</h3>
+    <p>Track menstrual cycles, predict periods, and estimate fertile days with our combined calculator. It’s designed for women’s health, family planning, and cycle management.</p>
+    <p>The tool calculates average cycle length, next period dates, and ovulation windows — essential for both conception and avoiding pregnancy.</p>
+    <details><summary>FAQ: Can it work for irregular cycles?</summary><p>It works best with regular cycles. For irregular cycles, results are estimates, and medical consultation is recommended.</p></details>
+
+    <!-- Pregnancy -->
+    <h3>🤰 Pregnancy Calculator</h3>
+    <p>The Pregnancy Calculator estimates your due date based on last menstrual period or conception date. It also shows pregnancy week-by-week progress.</p>
+    <p>It’s a handy guide for expecting mothers to track trimester milestones and prepare confidently.</p>
+    <details><summary>FAQ: Is it as accurate as ultrasound?</summary><p>No, this is an estimate. Ultrasound scans provide more precise results.</p></details>
+
+    <!-- Calorie -->
+    <h3>🔥 Calorie Calculator</h3>
+    <p>Our Calorie Calculator helps you determine daily caloric needs based on basal metabolic rate (BMR) and activity level.</p>
+    <p>It’s useful for weight loss, gain, or maintenance, providing personalized results tailored to your lifestyle.</p>
+    <details><summary>FAQ: Does it support keto or special diets?</summary><p>Yes, pair it with our Macro Calculator for detailed diet planning.</p></details>
+
+    <!-- Water Intake -->
+    <h3>💧 Water Intake Calculator</h3>
+    <p>Staying hydrated is key to wellness. This calculator estimates daily water needs based on body weight, activity, and climate.</p>
+    <p>It’s ideal for athletes, fitness enthusiasts, or anyone wanting to improve hydration habits.</p>
+    <details><summary>FAQ: Does it adjust for workouts?</summary><p>Yes, it adds extra water intake for exercise intensity and duration.</p></details>
+
+    <!-- Body Fat -->
+    <h3>📊 Body Fat Calculator</h3>
+    <p>Our Body Fat Calculator estimates fat percentage using formulas like US Navy method or caliper measurements.</p>
+    <p>It provides better insights than BMI alone, helping you monitor fitness and health progress.</p>
+    <details><summary>FAQ: Which is better, BMI or body fat %?</summary><p>Body fat % is more accurate for health and body composition tracking.</p></details>
+
+    <!-- Macro -->
+    <h3>🥗 Macro Calculator</h3>
+    <p>Macros (protein, carbs, fat) are essential for fitness goals. This calculator sets optimal daily macros based on your activity, goals, and body composition.</p>
+    <p>It’s great for weight loss, bodybuilding, or balanced nutrition planning.</p>
+    <details><summary>FAQ: Can it handle bulking or cutting?</summary><p>Yes, you can select goals for fat loss, muscle gain, or maintenance.</p></details>
   </section>
 
-  <!-- New Calculators Highlight -->
-  <section class="container">
-    <div class="seo-content">
-      <h2>🆕 New Advanced Health & Fitness Calculators</h2>
-      <p>We've expanded our suite with three powerful new calculators to help you achieve optimal health and fitness results. These advanced tools provide comprehensive insights into hydration, body composition, and nutrition planning.</p>
+  <!-- Ad 3 -->
+  <div class="ad-container">Responsive Footer Ad Placeholder</div>
 
-      <h3>💧 Water Intake Calculator</h3>
-      <p>Proper hydration is crucial for optimal health, athletic performance, and weight management. Our Water Intake Calculator considers your body weight, activity level, climate conditions, and individual factors to recommend your personalized daily water intake. Whether you're an athlete, office worker, or fitness enthusiast, staying properly hydrated improves energy levels, skin health, cognitive function, and overall wellbeing.</p>
-
-      <h3>📊 Body Fat Calculator</h3>
-      <p>Understanding your body composition goes beyond just weight. Our Body Fat Calculator uses multiple methods including body measurements, bioelectrical impedance estimates, and various formulas to provide accurate body fat percentage estimates. This tool helps you track real progress in your fitness journey, set realistic goals, and understand your metabolic health better than BMI alone.</p>
-
-      <h3>🥗 Macro Calculator (Macronutrient Calculator)</h3>
-      <p>Achieve your fitness goals with precision nutrition planning. Our Macro Calculator determines your optimal daily intake of protein, carbohydrates, and fats based on your body composition, activity level, and specific goals (weight loss, muscle gain, or maintenance). Perfect for bodybuilders, athletes, and anyone following flexible dieting or IIFYM (If It Fits Your Macros) approaches.</p>
-    </div>
-  </section>
-
-  <!-- Ad 3: Mid-Content 2 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Mid-Content Ad</div>
-  </div>
-
-  <!-- SEO Calculator Details -->
-  <section class="container">
-    <div class="seo-content">
-      <h2>Complete Health & Fitness Calculator Suite</h2>
-
-      <h3>🌸 Period & Ovulation Calculator</h3>
-      <p>Track your menstrual cycle with precision, predict your next period, and calculate ovulation and fertile days. Our combined Period & Ovulation Calculator is designed to give you accurate insights into your reproductive health, helping with family planning, cycle irregularities, and overall women's health monitoring.</p>
-
-      <h3>⚖️ BMI Calculator</h3>
-      <p>Calculate your Body Mass Index (BMI) and find out if you're underweight, normal weight, overweight, or obese with personalized health recommendations. While BMI has limitations, it's a useful screening tool that, combined with other metrics like body fat percentage, provides valuable health insights.</p>
-
-      <h3>📅 Age Calculator</h3>
-      <p>Find your exact age in years, months, days, hours, minutes, and even heartbeats. Great for fun facts, planning important milestones, calculating eligibility requirements, and tracking time-sensitive goals. Our age calculator is precise and handles leap years correctly.</p>
-
-      <h3>🤱 Pregnancy Calculator</h3>
-      <p>Estimate your due date accurately, track pregnancy weeks and trimesters, and follow the important milestones of your pregnancy journey. Our calculator provides week-by-week development insights and helps you prepare for each stage of pregnancy with confidence.</p>
-
-      <h3>🔥 Calorie Calculator</h3>
-      <p>Discover how many calories you need daily to maintain, lose, or gain weight using advanced metabolic calculations. Perfect for diet and fitness planning, our calculator considers your basal metabolic rate, activity level, and specific goals to provide precise caloric recommendations for successful weight management.</p>
-    </div>
-  </section>
-
-  <!-- Benefits Section -->
-  <section class="container">
-    <div class="seo-content">
-      <h2>Transform Your Health Journey with Science-Based Tools</h2>
-      <p>Our comprehensive calculator suite empowers you to make informed decisions about your health and fitness. Whether you're just starting your wellness journey or you're an experienced athlete, our tools provide the data-driven insights you need to succeed.</p>
-
-      <div class="seo-grid">
-        <div class="seo-card"><h3>🏃‍♀️ Fitness Optimization</h3><p>Track body fat, calculate macros, monitor hydration, and manage calories for peak physical performance and body composition goals.</p></div>
-        <div class="seo-card"><h3>🩺 Health Monitoring</h3><p>Monitor BMI, track reproductive health, stay hydrated, and maintain optimal nutrition for long-term wellness and disease prevention.</p></div>
-        <div class="seo-card"><h3>🎯 Goal Achievement</h3><p>Set realistic targets using accurate body composition data, personalized nutrition plans, and precise tracking metrics.</p></div>
-        <div class="seo-card"><h3>📈 Progress Tracking</h3><p>Use multiple calculators together to get a complete picture of your health journey and make data-driven improvements.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ad 4: Footer Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
-
+  <!-- Footer -->
   <footer>
-    <p>© 2025 QuickCalcLabs. All rights reserved.</p>
-    <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms</a></p>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy.html">Privacy Policy</a> | 
+    <a href="terms.html">Terms of Service</a>
   </footer>
 
-  <!-- JSON-LD Schema for SEO -->
+  <!-- Floating CTA -->
+  <a href="#calculators" class="floating-cta">⚡ Start Calculating</a>
+
+  <!-- Dark Mode Script -->
+  <script>
+    const toggle = document.getElementById("darkModeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+
+  <!-- JSON-LD Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "QuickCalcLabs",
-    "description": "Free online health and fitness calculators including age, BMI, period tracking, pregnancy, water intake, body fat, and macro calculators",
     "url": "https://quickcalclabs.com",
     "applicationCategory": "HealthApplication",
-    "operatingSystem": "Any",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+    "operatingSystem": "All",
+    "description": "Free health calculators: Age, BMI, Period & Ovulation, Pregnancy, Calorie, Water, Body Fat & Macro.",
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalcLabs"
     },
-    "featureList": [
-      "Age Calculator",
-      "BMI Calculator", 
-      "Period & Ovulation Calculator",
-      "Pregnancy Calculator",
-      "Calorie Calculator",
-      "Water Intake Calculator",
-      "Body Fat Calculator",
-      "Macro Calculator"
+    "offers": {"@type": "Offer","price":"0","priceCurrency":"USD"},
+    "featureList": ["Age Calculator","BMI Calculator","Period & Ovulation Calculator","Pregnancy Calculator","Calorie Calculator","Water Intake Calculator","Body Fat Calculator","Macro Calculator"]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Can the Age Calculator calculate future dates?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can check your age on any specific date."}},
+      {"@type":"Question","name":"Is BMI reliable for athletes?","acceptedAnswer":{"@type":"Answer","text":"BMI may misclassify athletes; use Body Fat Calculator too."}},
+      {"@type":"Question","name":"Can the Period & Ovulation Calculator work for irregular cycles?","acceptedAnswer":{"@type":"Answer","text":"It works best with regular cycles; irregular ones give estimates only."}},
+      {"@type":"Question","name":"Is Pregnancy Calculator as accurate as ultrasound?","acceptedAnswer":{"@type":"Answer","text":"No, it’s an estimate. Ultrasound is more precise."}},
+      {"@type":"Question","name":"Does the Calorie Calculator support keto diets?","acceptedAnswer":{"@type":"Answer","text":"Yes, use with Macro Calculator for diet planning."}},
+      {"@type":"Question","name":"Does Water Intake Calculator adjust for workouts?","acceptedAnswer":{"@type":"Answer","text":"Yes, it increases intake for workouts."}},
+      {"@type":"Question","name":"Is body fat % better than BMI?","acceptedAnswer":{"@type":"Answer","text":"Yes, body fat % gives a more accurate health picture."}},
+      {"@type":"Question","name":"Does Macro Calculator handle bulking/cutting?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can set weight loss, gain, or maintenance goals."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"QuickCalcLabs","item":"https://quickcalclabs.com"},
+      {"@type":"ListItem","position":2,"name":"Calculators","item":"https://quickcalclabs.com/#calculators"}
     ]
   }
   </script>
