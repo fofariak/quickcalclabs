@@ -122,6 +122,14 @@
       }
       const dob = new Date(dobInput);
       const today = new Date();
+      const totalMonths = (years * 12) + months;
+      const totalHours = totalDays * 24;
+      const totalMinutes = totalHours * 60;
+      const heartbeats = totalMinutes * 72; // avg HR 72 bpm
+      const sleepDays = Math.floor(totalDays / 3); // ~1/3 of life asleep
+      const heartbeats = totalMinutes * 72;
+      const sleepDays = Math.floor(totalDays / 3);
+      const dayOfWeek = birthDate.toLocaleDateString("en-US", { weekday: "long" });
 
       let ageYears = today.getFullYear() - dob.getFullYear();
       let ageMonths = today.getMonth() - dob.getMonth();
@@ -132,6 +140,25 @@
 
       const secondsOld = Math.floor((today - dob) / 1000);
 
+      const facts = [
+        "🎂 Did you know? The world's oldest person lived to be 122 years old!",
+        "🌎 On your birthday in history, amazing world events happened.",
+        "🧠 Your brain has created billions of new connections since birth.",
+        "💤 You’ve spent about 1/3 of your life sleeping!"
+        "🎂 The oldest verified person lived to 122 years!"
+        ];
+      const randomFact = facts[Math.floor(Math.random() * facts.length)];
+
+      <h3>📊 Detailed Age Statistics</h3>
+        <p><b>Total Minutes:</b> ${totalMinutes.toLocaleString()}</p>
+        <p><b>Approx. Heartbeats:</b> ${heartbeats.toLocaleString()}</p>
+        <p><b>You Were Born On:</b> ${dayOfWeek}</p>
+        <p><b>Days You've Slept:</b> ${sleepDays.toLocaleString()}</p>
+        <p><b>Days Slept:</b> ${sleepDays.toLocaleString()}</p>
+        <hr>
+        <p><b>Fun Fact:</b> ${randomFact}</p>
+
+        
       document.getElementById('result').innerHTML = `
         <h3>Your Age:</h3>
         <p><b>${ageYears}</b> years, <b>${ageMonths}</b> months, <b>${ageDays}</b> days</p>
