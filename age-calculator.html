@@ -74,6 +74,24 @@
     body {
         padding-top: 80px; /* Adjust body padding to avoid content being hidden by fixed header */
     }
+
+     @media (max-width: 480px) {
+      .header {
+        padding: 1rem; /* Reduce padding on small screens */
+      }
+      .header .logo {
+        font-size: 1.2rem; /* Make logo text smaller */
+      }
+      .header nav {
+        gap: 0.75rem; /* Reduce space between nav items */
+      }
+      .header nav a {
+        font-size: 0.875rem; /* Make nav links smaller */
+      }
+      #darkModeToggle {
+        font-size: 1.2rem; /* Make dark mode icon smaller */
+      }
+    }
   </style>
 </head>
 <body>
