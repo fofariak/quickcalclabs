@@ -4,96 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Age Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free Age Calculator - Calculate your exact age in years, months, days, hours, and even heartbeats. Discover fun age facts instantly.">
-  <meta name="keywords" content="age calculator, exact age calculator, birthday calculator, how old am I, fun age facts, calculate age online">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Free Age Calculator - Find your exact age in years, months, days, hours, and even heartbeats. Quick, accurate, fun, and completely free.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <a href="index.html" class="logo">QuickCalcLabs</a>
-    <nav>
-      <a href="index.html#calculators">Calculators</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-      <button id="modeToggle" class="mode-toggle">🌙</button>
-    </nav>
+  <!-- Hero -->
+  <header class="hero">
+    <h1>📅 Age Calculator</h1>
+    <p class="subtitle">Find your exact age in years, months, days, hours, and even heartbeats. Quick, accurate, fun & free!</p>
   </header>
 
-  <!-- Ad 1 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
-
-  <!-- Hero -->
-  <section class="hero">
-    <h1 class="gradient-title">📅 Age Calculator</h1>
-    <p>Find out your exact age in years, months, days, hours, and even heartbeats. Quick, fun, and free!</p>
-  </section>
+  <!-- Ad 1: Top Banner -->
+  <div class="ad-box">728×90 Ad Placeholder</div>
 
   <!-- Calculator -->
-  <section class="container">
-    <div class="card">
-      <h2>Enter Your Birthdate</h2>
-      <input type="date" id="dob" class="input-field">
-      <button onclick="calculateAge()" class="calc-btn">Calculate Age</button>
-      <div id="result" class="result"></div>
-    </div>
+  <section class="calc-wrapper">
+    <h2>Enter Your Birthdate</h2>
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Calculate Age</button>
+    <div id="result" class="result-box"></div>
   </section>
 
-  <!-- Ad 2 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Result Ad</div>
-  </div>
+  <!-- Ad 2: Mid-Content -->
+  <div class="ad-box">300×250 Ad Placeholder</div>
 
   <!-- SEO Content -->
   <section class="seo-content">
-    <h2>Why Use Our Age Calculator?</h2>
-    <p>Our Age Calculator gives you more than just years and months. It provides detailed stats such as days lived, heartbeats, and even how many days you’ve spent sleeping! Perfect for birthdays, milestones, and fun trivia.</p>
-
-    <h3>✨ Features:</h3>
-    <ul>
-      <li>Accurate age calculation including leap years.</li>
-      <li>Fun insights like heartbeats and total days slept.</li>
-      <li>Instant results in a modern, easy-to-use interface.</li>
-      <li>No data stored — your privacy is protected.</li>
-    </ul>
-
-    <h3>📌 Related Calculators</h3>
-    <ul>
-      <li><a href="bmi-calculator.html">⚖️ BMI Calculator</a></li>
-      <li><a href="pregnancy-calculator.html">🤰 Pregnancy Calculator</a></li>
-      <li><a href="period-tracker.html">🌸 Period & Ovulation Calculator</a></li>
-      <li><a href="calorie-calculator.html">🔥 Calorie Calculator</a></li>
-    </ul>
-
-    <h3>📖 Recommended Reads</h3>
-    <ul>
-      <li><a href="blog/how-to-calculate-age.html">How to Calculate Age Precisely</a></li>
-      <li><a href="blog/fun-age-facts.html">10 Fun Facts About Age & Time</a></li>
-    </ul>
+    <h2>✨ Why Use Our Age Calculator?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">🎯 <b>Precise</b>: Get your exact age in years, months, days.</div>
+      <div class="feature-card">⚡ <b>Fast</b>: Instant results in one click.</div>
+      <div class="feature-card">📊 <b>Useful</b>: Perfect for forms, events & health tracking.</div>
+      <div class="feature-card">💡 <b>Fun</b>: Discover milestones & fun age facts!</div>
+    </div>
   </section>
 
-  <!-- FAQ Section -->
+  <!-- Related Internal Links -->
+  <section class="related-links">
+    <h3>🔗 Explore More Tools & Blogs</h3>
+    <a href="bmi-calculator.html">⚖️ BMI Calculator</a>
+    <a href="pregnancy-calculator.html">🤰 Pregnancy Calculator</a>
+    <a href="period-calculator.html">🌸 Period & Ovulation Calculator</a>
+    <a href="calorie-calculator.html">🔥 Calorie Calculator</a>
+    <a href="blog-age-precise.html">📖 How to Calculate Age Precisely</a>
+    <a href="blog-fun-age-facts.html">🎉 10 Fun Facts About Age & Time</a>
+  </section>
+
+  <!-- FAQ -->
   <section class="faq-section">
-    <h2>Frequently Asked Questions</h2>
-
-    <div class="faq">
-      <button class="faq-toggle">Can I calculate age for a future date?</button>
-      <div class="faq-content"><p>✅ Yes, you can select a future date and check how old you will be on that day.</p></div>
-    </div>
-
-    <div class="faq">
-      <button class="faq-toggle">Does it handle leap years?</button>
-      <div class="faq-content"><p>✔️ Absolutely. Our calculator adjusts for leap years automatically.</p></div>
-    </div>
+    <h2>❓ Frequently Asked Questions</h2>
+    <details>
+      <summary>Can I calculate age for a future date?</summary>
+      <p>✅ Yes! Select a future date and see your age on that day.</p>
+    </details>
+    <details>
+      <summary>Does this calculator account for leap years?</summary>
+      <p>✔️ Absolutely! It automatically adjusts for leap years.</p>
+    </details>
+    <details>
+      <summary>Can I share my results?</summary>
+      <p>📤 Yes, you can copy and share your results with friends and family.</p>
+    </details>
   </section>
 
-  <!-- Ad 3 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
+  <!-- Ad 3: Bottom -->
+  <div class="ad-box">728×90 Ad Placeholder</div>
+
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
 
   <!-- Footer -->
   <footer>
@@ -103,84 +82,7 @@
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
 
-  <!-- Floating CTA -->
-  <a href="index.html#calculators" class="floating-cta">Explore More Calculators</a>
-
-  <!-- Scripts -->
-  <script>
-    function calculateAge() {
-      const dob = document.getElementById("dob").value;
-      if (!dob) {
-        document.getElementById("result").innerHTML = "<p>Please select your date of birth.</p>";
-        return;
-      }
-
-      const birthDate = new Date(dob);
-      const today = new Date();
-
-      let years = today.getFullYear() - birthDate.getFullYear();
-      let months = today.getMonth() - birthDate.getMonth();
-      let days = today.getDate() - birthDate.getDate();
-
-      if (days < 0) {
-        months--;
-        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-      }
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
-
-      const diff = today - birthDate;
-      const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const totalWeeks = Math.floor(totalDays / 7);
-      const totalMonths = (years * 12) + months;
-      const totalHours = totalDays * 24;
-      const totalMinutes = totalHours * 60;
-      const heartbeats = totalMinutes * 72;
-      const sleepDays = Math.floor(totalDays / 3);
-      const dayOfWeek = birthDate.toLocaleDateString("en-US", { weekday: "long" });
-
-      const facts = [
-        "🎂 The oldest verified person lived to 122 years!",
-        "🧠 Your brain has created billions of connections since birth.",
-        "💤 You’ve spent about 1/3 of your life asleep!",
-        "🌎 Amazing world events happened on your birthday!"
-      ];
-      const randomFact = facts[Math.floor(Math.random() * facts.length)];
-
-      document.getElementById("result").innerHTML = `
-        <h3>📊 Detailed Age Statistics</h3>
-        <p><b>Age:</b> ${years} years, ${months} months, ${days} days</p>
-        <p><b>Total Days Lived:</b> ${totalDays.toLocaleString()}</p>
-        <p><b>Total Weeks:</b> ${totalWeeks.toLocaleString()}</p>
-        <p><b>Total Months:</b> ${totalMonths.toLocaleString()}</p>
-        <p><b>Total Hours:</b> ${totalHours.toLocaleString()}</p>
-        <p><b>Total Minutes:</b> ${totalMinutes.toLocaleString()}</p>
-        <p><b>Approx. Heartbeats:</b> ${heartbeats.toLocaleString()}</p>
-        <p><b>You Were Born On:</b> ${dayOfWeek}</p>
-        <p><b>Days Slept:</b> ${sleepDays.toLocaleString()}</p>
-        <hr>
-        <p><b>Fun Fact:</b> ${randomFact}</p>
-      `;
-    }
-
-    // Dark mode toggle
-    document.getElementById("modeToggle").addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-    });
-
-    // FAQ toggle
-    document.querySelectorAll(".faq-toggle").forEach(btn => {
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("active");
-        const content = btn.nextElementSibling;
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      });
-    });
-  </script>
-
-  <!-- JSON-LD Schema -->
+  <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -188,13 +90,53 @@
     "mainEntity": [{
       "@type": "Question",
       "name": "Can I calculate age for a future date?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can select a future date and check how old you will be." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, you can select a future date and check your age on that day."
+      }
     },{
       "@type": "Question",
-      "name": "Does it handle leap years?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes, the calculator adjusts automatically for leap years." }
+      "name": "Does this calculator account for leap years?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, the calculator automatically adjusts for leap years."
+      }
+    },{
+      "@type": "Question",
+      "name": "Can I share my results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, you can copy and share your age results easily with friends and family."
+      }
     }]
   }
+  </script>
+
+  <!-- Script -->
+  <script>
+    function calculateAge() {
+      const dobInput = document.getElementById('dob').value;
+      if (!dobInput) {
+        document.getElementById('result').innerHTML = "⚠️ Please select a valid date!";
+        return;
+      }
+      const dob = new Date(dobInput);
+      const today = new Date();
+
+      let ageYears = today.getFullYear() - dob.getFullYear();
+      let ageMonths = today.getMonth() - dob.getMonth();
+      let ageDays = today.getDate() - dob.getDate();
+
+      if (ageDays < 0) { ageMonths--; ageDays += 30; }
+      if (ageMonths < 0) { ageYears--; ageMonths += 12; }
+
+      const secondsOld = Math.floor((today - dob) / 1000);
+
+      document.getElementById('result').innerHTML = `
+        <h3>Your Age:</h3>
+        <p><b>${ageYears}</b> years, <b>${ageMonths}</b> months, <b>${ageDays}</b> days</p>
+        <p>That’s about <b>${secondsOld.toLocaleString()}</b> seconds old 🎉</p>`;
+    }
   </script>
 
 </body>
