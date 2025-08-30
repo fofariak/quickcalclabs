@@ -4,18 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Age Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free Age Calculator - Find your exact age in years, months, days, hours, and minutes. Get fun stats like heartbeats, days slept, and birth day of the week.">
-  <meta name="keywords" content="age calculator, exact age calculator, birthday calculator, how old am I, fun age facts">
-
+  <meta name="description" content="Free Age Calculator - Calculate your exact age in years, months, days, hours, and even heartbeats. Discover fun age facts instantly.">
+  <meta name="keywords" content="age calculator, exact age calculator, birthday calculator, how old am I, fun age facts, calculate age online">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header>
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
+      <a href="index.html#calculators">Calculators</a>
       <a href="blog.html">Blog</a>
-      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <button id="modeToggle" class="mode-toggle">🌙</button>
     </nav>
   </header>
 
@@ -26,8 +28,8 @@
 
   <!-- Hero -->
   <section class="hero">
-    <h1>📅 Age Calculator</h1>
-    <p>Discover your exact age with detailed stats like total days lived, hours, heartbeats, and even how many days you've spent sleeping!</p>
+    <h1 class="gradient-title">📅 Age Calculator</h1>
+    <p>Find out your exact age in years, months, days, hours, and even heartbeats. Quick, fun, and free!</p>
   </section>
 
   <!-- Calculator -->
@@ -35,7 +37,7 @@
     <div class="card">
       <h2>Enter Your Birthdate</h2>
       <input type="date" id="dob" class="input-field">
-      <button onclick="calculateAge()">Calculate Age</button>
+      <button onclick="calculateAge()" class="calc-btn">Calculate Age</button>
       <div id="result" class="result"></div>
     </div>
   </section>
@@ -47,8 +49,45 @@
 
   <!-- SEO Content -->
   <section class="seo-content">
-    <h2>Fun Age Facts</h2>
-    <p>Your age isn’t just about years – it's also about experiences, milestones, and fun numbers! Our age calculator gives you insights beyond just years and months.</p>
+    <h2>Why Use Our Age Calculator?</h2>
+    <p>Our Age Calculator gives you more than just years and months. It provides detailed stats such as days lived, heartbeats, and even how many days you’ve spent sleeping! Perfect for birthdays, milestones, and fun trivia.</p>
+
+    <h3>✨ Features:</h3>
+    <ul>
+      <li>Accurate age calculation including leap years.</li>
+      <li>Fun insights like heartbeats and total days slept.</li>
+      <li>Instant results in a modern, easy-to-use interface.</li>
+      <li>No data stored — your privacy is protected.</li>
+    </ul>
+
+    <h3>📌 Related Calculators</h3>
+    <ul>
+      <li><a href="bmi-calculator.html">⚖️ BMI Calculator</a></li>
+      <li><a href="pregnancy-calculator.html">🤰 Pregnancy Calculator</a></li>
+      <li><a href="period-tracker.html">🌸 Period & Ovulation Calculator</a></li>
+      <li><a href="calorie-calculator.html">🔥 Calorie Calculator</a></li>
+    </ul>
+
+    <h3>📖 Recommended Reads</h3>
+    <ul>
+      <li><a href="blog/how-to-calculate-age.html">How to Calculate Age Precisely</a></li>
+      <li><a href="blog/fun-age-facts.html">10 Fun Facts About Age & Time</a></li>
+    </ul>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq">
+      <button class="faq-toggle">Can I calculate age for a future date?</button>
+      <div class="faq-content"><p>✅ Yes, you can select a future date and check how old you will be on that day.</p></div>
+    </div>
+
+    <div class="faq">
+      <button class="faq-toggle">Does it handle leap years?</button>
+      <div class="faq-content"><p>✔️ Absolutely. Our calculator adjusts for leap years automatically.</p></div>
+    </div>
   </section>
 
   <!-- Ad 3 -->
@@ -56,13 +95,18 @@
     <div class="ad-placeholder">Responsive Footer Ad</div>
   </div>
 
-<footer>
+  <!-- Footer -->
+  <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy.html">Privacy Policy</a> | 
     <a href="terms.html">Terms of Service</a> |
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-</footer>
+  </footer>
 
+  <!-- Floating CTA -->
+  <a href="index.html#calculators" class="floating-cta">Explore More Calculators</a>
+
+  <!-- Scripts -->
   <script>
     function calculateAge() {
       const dob = document.getElementById("dob").value;
@@ -93,16 +137,15 @@
       const totalMonths = (years * 12) + months;
       const totalHours = totalDays * 24;
       const totalMinutes = totalHours * 60;
-      const heartbeats = totalMinutes * 72; // avg HR 72 bpm
-      const sleepDays = Math.floor(totalDays / 3); // ~1/3 of life asleep
+      const heartbeats = totalMinutes * 72;
+      const sleepDays = Math.floor(totalDays / 3);
       const dayOfWeek = birthDate.toLocaleDateString("en-US", { weekday: "long" });
 
-      // Fun facts
       const facts = [
-        "🎂 Did you know? The world's oldest person lived to be 122 years old!",
-        "🌎 On your birthday in history, amazing world events happened.",
-        "🧠 Your brain has created billions of new connections since birth.",
-        "💤 You’ve spent about 1/3 of your life sleeping!"
+        "🎂 The oldest verified person lived to 122 years!",
+        "🧠 Your brain has created billions of connections since birth.",
+        "💤 You’ve spent about 1/3 of your life asleep!",
+        "🌎 Amazing world events happened on your birthday!"
       ];
       const randomFact = facts[Math.floor(Math.random() * facts.length)];
 
@@ -116,11 +159,43 @@
         <p><b>Total Minutes:</b> ${totalMinutes.toLocaleString()}</p>
         <p><b>Approx. Heartbeats:</b> ${heartbeats.toLocaleString()}</p>
         <p><b>You Were Born On:</b> ${dayOfWeek}</p>
-        <p><b>Days You've Slept:</b> ${sleepDays.toLocaleString()}</p>
+        <p><b>Days Slept:</b> ${sleepDays.toLocaleString()}</p>
         <hr>
         <p><b>Fun Fact:</b> ${randomFact}</p>
       `;
     }
+
+    // Dark mode toggle
+    document.getElementById("modeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    // FAQ toggle
+    document.querySelectorAll(".faq-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const content = btn.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
   </script>
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Can I calculate age for a future date?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can select a future date and check how old you will be." }
+    },{
+      "@type": "Question",
+      "name": "Does it handle leap years?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, the calculator adjusts automatically for leap years." }
+    }]
+  }
+  </script>
+
 </body>
 </html>
