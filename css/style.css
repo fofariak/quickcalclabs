@@ -136,15 +136,21 @@ section, .ad-container { width: min(92vw, var(--container)); margin-inline: auto
   margin: 0 0 .8rem 0;
   font-size: clamp(2.1rem, 4.5vw, 3.4rem);
   line-height: 1.1;
-  background: conic-gradient(from 180deg at 50% 50%, #ff8f70, #ff3d77, #6a82fb, #43e97b, #ff8f70);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  background: linear-gradient(90deg, #6a82fb, #ff7eb3, #43e97b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
+
 .hero p {
   color: var(--text-weak-light);
   font-size: clamp(1rem, 1.6vw, 1.15rem);
-  max-width: 820px; margin: 0 auto 1.5rem;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.7;
 }
 .dark-mode .hero p { color: var(--text-weak-dark); }
+
 
 .cta-btn {
   display: inline-block;
@@ -201,18 +207,16 @@ section, .ad-container { width: min(92vw, var(--container)); margin-inline: auto
 
 .calculator-card {
   position: relative;
-  padding: 1.2rem 1.1rem 1.1rem;
+  padding: 1.4rem 1.2rem 1.2rem;
   border-radius: var(--radius-lg);
-  background: var(--surface-1-light);
+  background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(245,245,255,0.8));
   box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: transform var(--slow) var(--ease), box-shadow var(--slow) var(--ease), background var(--slow) var(--ease);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border: 1px solid #ffffff80;
+  transition: transform var(--slow) var(--ease), box-shadow var(--slow) var(--ease);
+  border: 1px solid #e6e6f0;
 }
 .dark-mode .calculator-card {
-  background: var(--surface-1-dark);
-  border-color: #ffffff12;
+  background: linear-gradient(145deg, rgba(22,22,26,0.95), rgba(40,40,46,0.85));
+  border-color: #2d2d35;
 }
 .calculator-card::after {
   content: "";
@@ -308,6 +312,26 @@ footer {
 }
 footer a { font-weight: 700; text-decoration: underline dotted transparent; }
 footer a:hover { text-decoration-color: currentColor; }
+
+/* ---------- Affiliate Disclosure ---------- */
+footer .affiliate-disclosure {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: var(--surface-2-light);
+  border: 1px solid #ffffff70;
+  color: var(--text-weak-light);
+}
+.dark-mode footer .affiliate-disclosure {
+  background: var(--surface-2-dark);
+  border-color: #ffffff20;
+  color: var(--text-weak-dark);
+}
 
 /* ------------- Floating CTA ------------- */
 .floating-cta {
