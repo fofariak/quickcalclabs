@@ -511,3 +511,25 @@ footer .affiliate-disclosure {
 }
 .dark-mode .faq-section details p { color: var(--text-weak-dark); }
 
+.unit-toggle button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid var(--accent-color, #6b46c1);
+  background: #fff; /* white background for readability */
+  color: #333; /* dark text */
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.unit-toggle button:hover {
+  background: linear-gradient(135deg, #7f5af0, #2cb67d);
+  color: #fff;
+}
+
+.unit-toggle button.active {
+  background: linear-gradient(135deg, #7f5af0, #2cb67d);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
