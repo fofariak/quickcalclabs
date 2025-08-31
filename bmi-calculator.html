@@ -4,11 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BMI Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free BMI calculator with metric (kg/cm) and imperial (lbs/feet/inches) units. Check your Body Mass Index and find out if you're underweight, normal, overweight, or obese.">
-  <meta name="keywords" content="BMI calculator, body mass index, healthy weight calculator, imperial BMI, metric BMI, obesity check">
-
+  <meta name="description" content="Free BMI Calculator - Calculate your Body Mass Index using metric or imperial units. Instantly see if you're underweight, healthy, overweight, or obese with tips and health advice.">
   <link rel="stylesheet" href="css/style.css">
+
   <style>
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #1a202c;
+      color: #e2e8f0;
+    }
+    .dark-mode .calc-wrapper, .dark-mode .seo-content, .dark-mode .related-links, .dark-mode .faq-section, .dark-mode footer {
+      background-color: #2d3748;
+      border-color: #4a5568;
+    }
+    .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode a {
+      color: #ffffff;
+    }
+    .dark-mode p, .dark-mode summary {
+      color: #a0aec0;
+    }
+    .dark-mode input, .dark-mode select {
+      background-color: #4a5568;
+      color: #fff;
+      border-color: #718096;
+    }
+    .dark-mode button, .dark-mode .floating-cta {
+      background-color: #4a5568;
+      color: #fff;
+    }
+    .dark-mode button:hover, .dark-mode .floating-cta:hover {
+      background-color: #718096;
+    }
+
     .unit-toggle {
       display: flex;
       gap: 10px;
@@ -19,124 +46,163 @@
       border-radius: 25px;
       border: 1px solid var(--card-border);
       background: var(--glass-bg);
-      color: var(--text);
       cursor: pointer;
-      transition: all 0.3s ease;
     }
     .unit-toggle button.active {
       background: var(--accent-gradient);
       color: white;
-      box-shadow: var(--glow);
     }
-    .result {
+    .result-box {
       margin-top: 20px;
-      padding: 20px;
+      padding: 15px;
       background: var(--glass-bg);
       border-radius: var(--radius);
     }
   </style>
 </head>
 <body>
-  <header>
+
+  <!-- Header -->
+  <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
       <a href="blog.html">Blog</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
   <!-- Ad 1: Top Banner -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner</div>
-  </div>
+  <div class="ad-box">728×90 Ad Placeholder</div>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="calc-wrapper">
     <h1>⚖️ BMI Calculator</h1>
-    <p>Calculate your Body Mass Index using metric (kg/cm) or imperial (lbs/ft/in). Instantly see if you're underweight, normal, overweight, or obese with health tips.</p>
-  </section>
-
-  <!-- Calculator -->
-  <section class="container">
-    <div class="card">
-      <h2>Enter Your Details</h2>
-
-      <!-- Unit Toggle -->
-      <div class="unit-toggle">
-        <button id="btnImperial" class="active" onclick="setUnit('imperial')">Imperial (lbs, ft+in)</button>
-        <button id="btnMetric" onclick="setUnit('metric')">Metric (kg, cm)</button>
-      </div>
-
-      <div id="metric-fields" style="display:none;">
-        <label>Weight (kg):</label>
-        <input type="number" id="weightMetric" class="input-field" placeholder="e.g., 70">
-
-        <label>Height (cm):</label>
-        <input type="number" id="heightMetric" class="input-field" placeholder="e.g., 170">
-      </div>
-
-      <div id="imperial-fields">
-        <label>Weight (lbs):</label>
-        <input type="number" id="weightImperial" class="input-field" placeholder="e.g., 154">
-
-        <label>Height:</label>
-        <div style="display:flex; gap:10px;">
-          <input type="number" id="heightFeet" class="input-field" placeholder="Feet (e.g., 5)">
-          <input type="number" id="heightInches" class="input-field" placeholder="Inches (e.g., 8)">
-        </div>
-      </div>
-
-      <button onclick="calculateBMI()">Calculate BMI</button>
-      <div id="result" class="result"></div>
+    <p class="subtitle">Calculate your Body Mass Index using metric (kg/cm) or imperial (lbs/ft/in). Instantly know if you're underweight, healthy, overweight, or obese.</p>
+    
+    <!-- Unit Toggle -->
+    <div class="unit-toggle">
+      <button id="btnImperial" class="active" onclick="setUnit('imperial')">Imperial (lbs, ft+in)</button>
+      <button id="btnMetric" onclick="setUnit('metric')">Metric (kg, cm)</button>
     </div>
+
+    <!-- Metric -->
+    <div id="metric-fields" style="display:none;">
+      <label>Weight (kg):</label>
+      <input type="number" id="weightMetric" placeholder="70">
+      <label>Height (cm):</label>
+      <input type="number" id="heightMetric" placeholder="170">
+    </div>
+
+    <!-- Imperial -->
+    <div id="imperial-fields">
+      <label>Weight (lbs):</label>
+      <input type="number" id="weightImperial" placeholder="154">
+      <label>Height:</label>
+      <div style="display:flex; gap:10px;">
+        <input type="number" id="heightFeet" placeholder="Feet (e.g. 5)">
+        <input type="number" id="heightInches" placeholder="Inches (e.g. 8)">
+      </div>
+    </div>
+
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <div id="result" class="result-box"></div>
   </section>
 
-  <!-- Ad 2: After Results -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 / 336x280 Result Ad</div>
-  </div>
+  <!-- Ad 2 -->
+  <div class="ad-box">300×250 Ad Placeholder</div>
 
   <!-- SEO Content -->
   <section class="seo-content">
-    <h2>About BMI</h2>
-    <p>BMI (Body Mass Index) is a measure of body fat based on weight and height. While not a perfect measure of health, it is widely used to screen for weight categories that may lead to health problems.</p>
+    <h2>✨ Why Use Our BMI Calculator?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">🎯 <b>Accurate</b>: Get results using metric or imperial units.</div>
+      <div class="feature-card">⚡ <b>Instant</b>: See your BMI instantly in one click.</div>
+      <div class="feature-card">📊 <b>Health Insights</b>: Learn your weight category and get advice.</div>
+      <div class="feature-card">🍏 <b>Wellness</b>: Start your journey to better health today.</div>
+    </div>
+    <p>BMI is categorized as:</p>
     <ul>
-      <li><b>Underweight:</b> BMI below 18.5</li>
-      <li><b>Normal:</b> BMI between 18.5 – 24.9</li>
-      <li><b>Overweight:</b> BMI between 25 – 29.9</li>
-      <li><b>Obese:</b> BMI 30 or higher</li>
+      <li><b>Underweight:</b> below 18.5</li>
+      <li><b>Normal:</b> 18.5 – 24.9</li>
+      <li><b>Overweight:</b> 25 – 29.9</li>
+      <li><b>Obese:</b> 30 or above</li>
     </ul>
   </section>
 
-  <!-- Ad 3: Footer Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
+  <!-- Related Internal Links -->
+  <section class="related-links">
+    <h3>🔗 Explore More Tools & Blogs</h3>
+    <a href="age-calculator.html">📅 Age Calculator</a>
+    <a href="calorie-calculator.html">🔥 Calorie Calculator</a>
+    <a href="body-fat-calculator.html">📊 Body Fat Calculator</a>
+    <a href="macro-calculator.html">🥗 Macro Calculator</a>
+    <a href="blog-bmi-healthy.html">📖 How to Maintain a Healthy BMI</a>
+    <a href="blog-weight-loss-tips.html">💡 10 Tips to Reduce BMI Effectively</a>
+  </section>
 
-<footer>
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    <details>
+      <summary>What is a healthy BMI range?</summary>
+      <p>✔️ A BMI between 18.5 and 24.9 is considered healthy.</p>
+    </details>
+    <details>
+      <summary>Does BMI apply to athletes?</summary>
+      <p>🏋️ Not always — athletes may have high BMI due to muscle mass.</p>
+    </details>
+    <details>
+      <summary>Can children use this calculator?</summary>
+      <p>👶 No, BMI categories differ for children. Use a pediatric growth chart instead.</p>
+    </details>
+  </section>
+
+  <!-- Ad 3 -->
+  <div class="ad-box">728×90 Ad Placeholder</div>
+
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <!-- Footer -->
+  <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy.html">Privacy Policy</a> | 
     <a href="terms.html">Terms of Service</a> |
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-</footer>
+  </footer>
+
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is a healthy BMI range?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A BMI between 18.5 and 24.9 is considered healthy." }
+    },{
+      "@type": "Question",
+      "name": "Does BMI apply to athletes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not always — athletes may have high BMI due to muscle mass." }
+    },{
+      "@type": "Question",
+      "name": "Can children use this calculator?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No, BMI categories differ for children. Use a pediatric growth chart instead." }
+    }]
+  }
+  </script>
 
   <script>
-    let currentUnit = "imperial"; // default
+    let currentUnit = "imperial"; 
 
     function setUnit(unit) {
       currentUnit = unit;
-      if (unit === "imperial") {
-        document.getElementById("imperial-fields").style.display = "block";
-        document.getElementById("metric-fields").style.display = "none";
-        document.getElementById("btnImperial").classList.add("active");
-        document.getElementById("btnMetric").classList.remove("active");
-      } else {
-        document.getElementById("imperial-fields").style.display = "none";
-        document.getElementById("metric-fields").style.display = "block";
-        document.getElementById("btnMetric").classList.add("active");
-        document.getElementById("btnImperial").classList.remove("active");
-      }
+      document.getElementById("imperial-fields").style.display = (unit === "imperial") ? "block" : "none";
+      document.getElementById("metric-fields").style.display = (unit === "metric") ? "block" : "none";
+      document.getElementById("btnImperial").classList.toggle("active", unit === "imperial");
+      document.getElementById("btnMetric").classList.toggle("active", unit === "metric");
     }
 
     function calculateBMI() {
@@ -146,17 +212,16 @@
         const weight = parseFloat(document.getElementById("weightMetric").value);
         const height = parseFloat(document.getElementById("heightMetric").value) / 100;
         if (!weight || !height) {
-          document.getElementById("result").innerHTML = "<p>Please enter valid values.</p>";
+          document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Enter valid values</p>";
           return;
         }
         bmi = weight / (height * height);
-
       } else {
         const weight = parseFloat(document.getElementById("weightImperial").value);
         const feet = parseFloat(document.getElementById("heightFeet").value) || 0;
         const inches = parseFloat(document.getElementById("heightInches").value) || 0;
         if (!weight || (feet === 0 && inches === 0)) {
-          document.getElementById("result").innerHTML = "<p>Please enter valid values.</p>";
+          document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Enter valid values</p>";
           return;
         }
         const totalInches = (feet * 12) + inches;
@@ -169,35 +234,42 @@
       if (bmi < 18.5) {
         category = "Underweight";
         advice = "You may need to gain weight. Eat nutrient-dense foods and consult a healthcare provider.";
-      } else if (bmi >= 18.5 && bmi < 25) {
+      } else if (bmi < 25) {
         category = "Normal";
-        advice = "Great! Your BMI is in the healthy range. Maintain a balanced diet and stay active.";
-      } else if (bmi >= 25 && bmi < 30) {
+        advice = "Great! Your BMI is in the healthy range.";
+      } else if (bmi < 30) {
         category = "Overweight";
-        advice = "Consider adopting a balanced diet and increasing activity. Even a 5-10% weight loss can help.";
+        advice = "Consider diet & exercise. Even a 5-10% weight loss can help.";
       } else {
         category = "Obese";
-        advice = "Your BMI is in the obese range. Seek professional advice to develop a personalized health plan.";
+        advice = "Seek professional advice to create a personalized health plan.";
       }
 
-      // Fun Facts
-      const funFacts = [
-        "🌎 Did you know? The global average BMI is around 24.5.",
-        "🍟 In the US, about 36% of adults have a BMI over 30 (obese).",
-        "🏃 Regular exercise can reduce your BMI by up to 10% in just 3 months.",
-        "🍏 A Mediterranean diet is linked with lower BMI and better heart health."
+      const facts = [
+        "🌎 The global average BMI is ~24.5.",
+        "🍟 In the US, 36% of adults have BMI > 30 (obese).",
+        "🏃 Regular exercise can reduce BMI by up to 10% in 3 months.",
+        "🍏 A Mediterranean diet is linked with lower BMI and heart health."
       ];
-      const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+      const randomFact = facts[Math.floor(Math.random() * facts.length)];
 
       document.getElementById("result").innerHTML = `
         <h3>📊 Your BMI Results</h3>
         <p><b>BMI:</b> ${bmi}</p>
         <p><b>Category:</b> ${category}</p>
-        <p><b>Health Tip:</b> ${advice}</p>
+        <p><b>Tip:</b> ${advice}</p>
         <hr>
         <p><b>Fun Fact:</b> ${randomFact}</p>
       `;
     }
+
+    // Dark mode toggle
+    const toggle = document.getElementById("darkModeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    });
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
   </script>
 </body>
 </html>
