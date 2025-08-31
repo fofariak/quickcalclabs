@@ -514,10 +514,11 @@ footer .affiliate-disclosure {
 .unit-toggle button {
   padding: 10px 20px;
   border-radius: 25px;
-  border: 2px solid var(--accent-color, #6b46c1);
-  background: #fff; /* white background for readability */
-  color: #333; /* dark text */
+  border: 2px solid transparent;
+  background: #f9f9f9;
+  color: #333;
   font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -527,9 +528,10 @@ footer .affiliate-disclosure {
 }
 
 .unit-toggle button.active {
-  background: linear-gradient(135deg, #7f5af0, #2cb67d);
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #7f5af0, #2cb67d); /* colorful gradient */
+  color: white !important;  /* always readable */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
+
 
 
