@@ -253,15 +253,22 @@
       ];
       const randomFact = facts[Math.floor(Math.random() * facts.length)];
 
+      let idealMin = (18.5 * (height * height)).toFixed(1);
+      let idealMax = (24.9 * (height * height)).toFixed(1);
+
       document.getElementById("result").innerHTML = `
         <h3>📊 Your BMI Results</h3>
         <p><b>BMI:</b> ${bmi}</p>
         <p><b>Category:</b> ${category}</p>
         <p><b>Tip:</b> ${advice}</p>
+        <p><b>Ideal Weight Range:</b> ${idealMin}kg – ${idealMax}kg</p>
+        <p><b>Health Risks:</b> ${category === "Underweight" ? "⚠️ Higher risk of nutrient deficiency & weak immunity." 
+          : category === "Normal" ? "✅ Lowest risk of chronic diseases." 
+          : category === "Overweight" ? "⚠️ Increased risk of diabetes, high blood pressure." 
+          : "⚠️ High risk of heart disease, diabetes, stroke."}</p>
         <hr>
         <p><b>Fun Fact:</b> ${randomFact}</p>
       `;
-    }
 
     // Dark mode toggle
     const toggle = document.getElementById("darkModeToggle");
