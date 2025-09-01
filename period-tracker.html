@@ -4,17 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Period & Ovulation Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free Period & Ovulation Calculator. Track your menstrual cycle, predict your next period, fertile window, and ovulation day with accuracy.">
-  <meta name="keywords" content="period calculator, ovulation calculator, menstrual cycle calculator, fertility tracker, women's health, ovulation calendar, fertile days calculator">
-
+  <meta name="description" content="Free Period & Ovulation Calculator. Track your menstrual cycle, predict your next period, ovulation day, and fertile window.">
+  <meta name="keywords" content="period calculator, ovulation calculator, menstrual cycle tracker, fertility calendar, women's health, ovulation days, fertile window">
+  
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Schema for FAQs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is this period calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our calculator uses your last period date and average cycle length to estimate your next period, ovulation day, and fertile window. While accurate for many users, results can vary depending on cycle irregularities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this calculator for pregnancy planning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. By predicting ovulation and fertile days, this tool helps increase the chances of conception. It’s also useful for natural family planning."
+        }
+      }
+    ]
+  }
+  </script>
+
   <style>
-    .result {
+    /* Timeline Styles */
+    .cycle-timeline {
       margin-top: 20px;
-      padding: 20px;
-      background: var(--glass-bg);
-      border-radius: var(--radius);
+      background: #f1f3f5;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 30px;
+      display: flex;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
     }
+    .timeline-segment {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      line-height: 30px;
+    }
+    .timeline-period { background: linear-gradient(135deg, #ff6b81, #ff4757); }
+    .timeline-fertile { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+    .timeline-ovulation { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
   </style>
 </head>
 <body>
@@ -24,25 +66,25 @@
       <a href="blog.html">Blog</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
-
-  <!-- Ad 1: Top Banner -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner</div>
-  </div>
 
   <!-- Hero -->
   <section class="hero">
     <h1>🌸 Period & Ovulation Calculator</h1>
-    <p>Track your menstrual cycle, predict your next period, fertile days, and ovulation day. Simple, accurate, and private.</p>
+    <p>Track your menstrual cycle, predict your next period, fertile window, and ovulation day. Simple, accurate, and private.</p>
   </section>
+
+  <!-- Ad 1 -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 / Responsive Banner Ad</div>
+  </div>
 
   <!-- Calculator -->
   <section class="container">
     <div class="card">
       <h2>Enter Your Cycle Details</h2>
-
       <label for="lastPeriod">Last Period Start Date:</label>
       <input type="date" id="lastPeriod" class="input-field">
 
@@ -51,10 +93,11 @@
 
       <button onclick="calculatePeriod()">Calculate Cycle</button>
       <div id="result" class="result"></div>
+      <div id="timeline"></div>
     </div>
   </section>
 
-  <!-- Ad 2: After Results -->
+  <!-- Ad 2 -->
   <div class="ad-container">
     <div class="ad-placeholder">300x250 / 336x280 Result Ad</div>
   </div>
@@ -62,30 +105,39 @@
   <!-- SEO Content -->
   <section class="seo-content">
     <h2>Why Use a Period & Ovulation Calculator?</h2>
-    <p>The menstrual cycle usually ranges from 21 to 35 days. Knowing your cycle helps you plan, track fertility, and understand your health better. Our calculator predicts your next period, ovulation day, and fertile window.</p>
-
-    <h3>What You’ll Learn</h3>
+    <p>The menstrual cycle ranges from 21–35 days. Knowing your cycle helps you plan better, predict fertile windows, and understand your health. This tool estimates your next period, ovulation day, and fertility window.</p>
     <ul>
-      <li>📅 <b>Next Period:</b> The likely start date of your next cycle</li>
-      <li>🌸 <b>Ovulation Day:</b> Usually occurs 14 days before your next period</li>
-      <li>💝 <b>Fertile Window:</b> A 6-day range when you’re most likely to conceive</li>
-      <li>🔍 <b>Cycle Tracking:</b> Monitor changes in your cycle length over time</li>
+      <li>📅 <b>Next Period:</b> Likely start date of your next cycle</li>
+      <li>🌸 <b>Ovulation Day:</b> About 14 days before your next period</li>
+      <li>💝 <b>Fertile Window:</b> 6-day range when conception is most likely</li>
     </ul>
   </section>
 
-  <!-- Ovulation Calculator SEO Block -->
-  <section class="seo-content" id="ovulation">
-    <h2>Ovulation Calculator – Find Your Fertile Days</h2>
-    <p>Our Period Calculator also doubles as a powerful <b>Ovulation Calculator</b>. By analyzing your last period date and average cycle length, it predicts:</p>
-    <ul>
-      <li>✔️ Your exact ovulation day</li>
-      <li>✔️ Your most fertile days (fertile window)</li>
-      <li>✔️ Best days for natural family planning</li>
-    </ul>
-    <p>Ovulation happens about 14 days before your next period. Planning around this helps improve chances of conception or avoid pregnancy naturally.</p>
+  <!-- FAQs -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question">How accurate is this period calculator?</button>
+      <div class="faq-answer">Our calculator estimates based on cycle averages. Irregular cycles may affect accuracy.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Can I use this for birth control?</button>
+      <div class="faq-answer">This calculator is for educational purposes only and should not replace medical advice or contraception methods.</div>
+    </div>
   </section>
 
-  <!-- Ad 3: Footer Ad -->
+  <!-- Explore More Tools -->
+  <section class="seo-content">
+    <h2>📌 Explore More Tools & Blogs</h2>
+    <ul>
+      <li>⚖️ <a href="bmi-calculator.html">BMI Calculator</a></li>
+      <li>🤰 <a href="pregnancy-calculator.html">Pregnancy Calculator</a></li>
+      <li>🔥 <a href="calorie-calculator.html">Calorie Calculator</a></li>
+      <li>📖 <a href="blog.html">5 Tips to Manage Your Cycle</a></li>
+    </ul>
+  </section>
+
+  <!-- Ad 3 -->
   <div class="ad-container">
     <div class="ad-placeholder">Responsive Footer Ad</div>
   </div>
@@ -97,13 +149,16 @@
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
 
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">⬅️ See All Calculators</a>
+
   <script>
     function calculatePeriod() {
       const lastPeriodDate = document.getElementById("lastPeriod").value;
       const cycleLength = parseInt(document.getElementById("cycleLength").value);
 
       if (!lastPeriodDate || !cycleLength) {
-        document.getElementById("result").innerHTML = "<p>Please enter valid details.</p>";
+        document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter valid details.</p>";
         return;
       }
 
@@ -120,24 +175,35 @@
       const fertileEnd = new Date(ovulationDay);
       fertileEnd.setDate(fertileEnd.getDate() + 1);
 
-      // Fun Facts
-      const funFacts = [
-        "💡 The average cycle is 28 days, but healthy cycles vary from 21–35 days.",
-        "📊 Ovulation usually occurs about 14 days before your period starts.",
-        "🌎 Fertility tracking helps millions of women worldwide plan pregnancies naturally.",
-        "🥑 Eating nutrient-rich foods can support hormonal balance during ovulation."
-      ];
-      const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
-
       document.getElementById("result").innerHTML = `
-        <h3>📅 Your Cycle Prediction</h3>
-        <p><b>Next Period:</b> ${nextPeriod.toDateString()}</p>
-        <p><b>Ovulation Day:</b> ${ovulationDay.toDateString()}</p>
-        <p><b>Fertile Window:</b> ${fertileStart.toDateString()} – ${fertileEnd.toDateString()}</p>
-        <hr>
-        <p><b>Fun Fact:</b> ${randomFact}</p>
+        <h3>📅 Cycle Prediction</h3>
+        <p><span class="badge badge-period">🌸 Next Period:</span> ${nextPeriod.toDateString()}</p>
+        <p><span class="badge badge-ovulation">🌙 Ovulation Day:</span> ${ovulationDay.toDateString()}</p>
+        <p><span class="badge badge-fertile">💝 Fertile Window:</span> ${fertileStart.toDateString()} – ${fertileEnd.toDateString()}</p>
+      `;
+
+      document.getElementById("timeline").innerHTML = `
+        <div class="cycle-timeline">
+          <div class="timeline-segment timeline-period" style="flex:3">Period</div>
+          <div class="timeline-segment timeline-fertile" style="flex:6">Fertile</div>
+          <div class="timeline-segment timeline-ovulation" style="flex:2">Ovulation</div>
+        </div>
       `;
     }
+
+    // Dark Mode Toggle
+    document.getElementById("darkModeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    // FAQ Toggle
+    document.querySelectorAll(".faq-question").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const answer = btn.nextElementSibling;
+        answer.style.display = answer.style.display === "block" ? "none" : "block";
+      });
+    });
   </script>
 </body>
 </html>
