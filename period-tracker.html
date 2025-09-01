@@ -29,23 +29,78 @@
       position: relative;
       cursor: pointer;
     }
-    .day:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #333;
-      color: #fff;
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 5px;
-      white-space: nowrap;
+    .period { background: #ff6b81; color: #fff; }
+    .fertile { background: #2ecc71; color: #fff; }
+    .ovulation { background: #9b59b6; color:#fff; font-weight: bold; }
+    .legend {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      font-size: 14px;
     }
-    .period { background: linear-gradient(135deg,#ff6b81,#ff4757); color: #fff; }
-    .fertile { background: linear-gradient(135deg,#2ecc71,#27ae60); color: #fff; }
-    .ovulation { background: linear-gradient(135deg,#9b59b6,#8e44ad); color:#fff; font-weight: bold; }
-    .timeline-label { font-size: 14px; margin-top: 8px; text-align: center; }
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      color: #fff;
+    }
+    .badge.period { background:#ff6b81; }
+    .badge.fertile { background:#2ecc71; }
+    .badge.ovulation { background:#9b59b6; }
+
+    /* Explore more */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .card {
+      background: var(--card-bg, #fff);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-align: center;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .card a { text-decoration:none; font-weight:600; color: var(--text,#222);}
+    .card a:hover { color: var(--accent,#ff6b81); }
+
+    /* FAQ accordion */
+    .faq {
+      margin-bottom: 10px;
+      border-radius: 8px;
+      background: var(--card-bg,#fff);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .faq h3 {
+      margin: 0;
+      padding: 12px;
+      background: var(--accent,#ff6b81);
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .faq p {
+      margin: 0;
+      padding: 12px;
+      display: none;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .faq.active p { display: block; }
   </style>
 </head>
 <body>
@@ -69,7 +124,7 @@
   <!-- Hero Calculator -->
   <section class="calc-wrapper">
     <h1>🌸 Period & Ovulation Calculator</h1>
-    <p class="subtitle">Track your menstrual cycle, predict your next period, fertile days, and ovulation window.</p>
+    <p class="subtitle">Track your cycle, predict fertile days, and understand your ovulation window.</p>
 
     <label>📅 First Day of Last Period:</label>
     <input type="date" id="lastPeriod">
@@ -91,29 +146,29 @@
   <!-- SEO Content -->
   <section class="seo-content">
     <h2>Why Use Our Period & Ovulation Calculator?</h2>
-    <p>Our Period & Ovulation Calculator helps you understand your cycle better. By tracking your periods, fertile window, and ovulation day, you can plan ahead for family planning, fertility, or simply staying in tune with your health.</p>
+    <p>Our Period & Ovulation Calculator provides accurate predictions for your cycle, fertile window, and ovulation day. It’s a powerful tool for family planning, fertility awareness, and cycle tracking.</p>
 
-    <h3>✨ Benefits:</h3>
+    <h3>✨ Benefits</h3>
     <ul>
-      <li>🌸 Accurate prediction of your next period</li>
-      <li>💝 Identify fertile days for conception</li>
-      <li>🌙 Track ovulation and reproductive health</li>
-      <li>📱 Easy to use on any device</li>
+      <li>🌸 Predict your next period</li>
+      <li>💝 Identify fertile days</li>
+      <li>🌙 Track ovulation with ease</li>
+      <li>📱 Mobile-friendly, easy to use</li>
     </ul>
 
-    <h3>🔗 Explore More Tools:</h3>
-    <p>Try our other calculators:  
-      <a href="bmi-calculator.html">BMI Calculator</a>,  
-      <a href="pregnancy-calculator.html">Pregnancy Calculator</a>,  
-      <a href="calorie-calculator.html">Calorie Calculator</a>,  
-      <a href="macro-calculator.html">Macro Calculator</a>.
-    </p>
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="pregnancy-calculator.html">🤰 Pregnancy Calculator</a></div>
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
+    </div>
 
-    <h3>📝 Related Blogs:</h3>
-    <ul>
-      <li><a href="blog/understanding-menstrual-cycle.html">Understanding Your Menstrual Cycle</a></li>
-      <li><a href="blog/fertility-tips.html">Fertility Tips for Women</a></li>
-    </ul>
+    <h3>📝 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/understanding-menstrual-cycle.html">📖 Understanding Your Menstrual Cycle</a></div>
+      <div class="card"><a href="blog/fertility-tips.html">💡 Fertility Tips for Women</a></div>
+    </div>
   </section>
 
   <!-- FAQ Section -->
@@ -121,15 +176,15 @@
     <h2>❓ Frequently Asked Questions</h2>
     <div class="faq">
       <h3>How accurate is this calculator?</h3>
-      <p>It provides estimates based on your average cycle length. Irregular cycles may need medical advice.</p>
+      <p>It provides estimates based on your average cycle length. Irregular cycles may vary and should be confirmed with medical advice.</p>
     </div>
     <div class="faq">
-      <h3>Can this calculator help me get pregnant?</h3>
-      <p>Yes, it highlights your fertile window and ovulation day for conception planning.</p>
+      <h3>Can it help me conceive?</h3>
+      <p>Yes 💝, it highlights your fertile days and ovulation window to improve chances of conception.</p>
     </div>
     <div class="faq">
-      <h3>Can it be used as birth control?</h3>
-      <p>No ❌. It should not be relied upon as a contraceptive method.</p>
+      <h3>Can I use this as birth control?</h3>
+      <p>No ❌, this calculator should not be used as a reliable contraceptive method.</p>
     </div>
   </section>
 
@@ -160,23 +215,23 @@
         "name": "How accurate is this calculator?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It provides estimates based on your average cycle length. Irregular cycles may need medical advice."
+          "text": "It provides estimates based on your average cycle length. Irregular cycles may vary and should be confirmed with medical advice."
         }
       },
       {
         "@type": "Question",
-        "name": "Can this calculator help me get pregnant?",
+        "name": "Can it help me conceive?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, it highlights your fertile window and ovulation day for conception planning."
+          "text": "Yes, it highlights your fertile days and ovulation window to improve chances of conception."
         }
       },
       {
         "@type": "Question",
-        "name": "Can it be used as birth control?",
+        "name": "Can I use this as birth control?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. It should not be relied upon as a contraceptive method."
+          "text": "No, this calculator should not be used as a reliable contraceptive method."
         }
       }
     ]
@@ -206,9 +261,9 @@
 
       document.getElementById("result").innerHTML = `
         <h3>📊 Results</h3>
-        <p><b>Next Period:</b> ${nextPeriod.toDateString()}</p>
-        <p><b>Ovulation Day:</b> ${ovulation.toDateString()}</p>
-        <p><b>Fertile Window:</b> ${fertileStart.toDateString()} - ${fertileEnd.toDateString()}</p>
+        <p><span class="badge period">🌸 Period</span> Next Period: <b>${nextPeriod.toDateString()}</b></p>
+        <p><span class="badge fertile">💝 Fertile</span> Window: <b>${fertileStart.toDateString()} - ${fertileEnd.toDateString()}</b></p>
+        <p><span class="badge ovulation">🌙 Ovulation</span> Day: <b>${ovulation.toDateString()}</b></p>
       `;
 
       // Timeline
@@ -218,14 +273,18 @@
         currentDay.setDate(lastPeriod.getDate() + i);
 
         let cssClass = "day";
-        let tooltip = `Day ${i+1}`;
-        if (i < 5) { cssClass += " period"; tooltip += " - Period"; }
-        if (currentDay >= fertileStart && currentDay <= fertileEnd) { cssClass += " fertile"; tooltip += " - Fertile Window"; }
-        if (currentDay.toDateString() === ovulation.toDateString()) { cssClass = "day ovulation"; tooltip = "Ovulation Day"; }
+        if (i < 5) cssClass += " period";
+        if (currentDay >= fertileStart && currentDay <= fertileEnd) cssClass += " fertile";
+        if (currentDay.toDateString() === ovulation.toDateString()) cssClass = "day ovulation";
 
-        timelineHTML += `<div class="${cssClass}" data-tooltip="${tooltip}">${currentDay.getDate()}</div>`;
+        timelineHTML += `<div class="${cssClass}">${currentDay.getDate()}</div>`;
       }
-      timelineHTML += '</div><div class="timeline-label">🌸 Period | 💝 Fertile | 🌙 Ovulation</div>';
+      timelineHTML += '</div>';
+      timelineHTML += `<div class="legend">
+        <span><span class="badge period">🌸</span> Period</span>
+        <span><span class="badge fertile">💝</span> Fertile</span>
+        <span><span class="badge ovulation">🌙</span> Ovulation</span>
+      </div>`;
 
       document.getElementById("timelineContainer").innerHTML = timelineHTML;
     }
@@ -240,6 +299,13 @@
       if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-mode");
       }
+
+      // FAQ accordion
+      document.querySelectorAll(".faq h3").forEach(faqHeader => {
+        faqHeader.addEventListener("click", () => {
+          faqHeader.parentElement.classList.toggle("active");
+        });
+      });
     });
   </script>
 </body>
