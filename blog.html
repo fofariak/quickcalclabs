@@ -7,76 +7,804 @@
   <meta name="keywords" content="health blog, BMI guide, calorie tracking, pregnancy calculator, fitness blog, macro diet, water intake, ovulation tracking">
   <link rel="canonical" href="https://quickcalclabs.com/blog.html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
+  <style>
+    /* Blog-specific enhancements using existing CSS variables */
+    .blog-hero {
+      text-align: center;
+      padding: clamp(3rem, 7vw, 5rem) 1rem 3rem;
+      background: linear-gradient(135deg, rgba(106, 130, 251, 0.1), rgba(255, 126, 179, 0.1));
+      border-radius: var(--radius-lg);
+      margin: 2rem auto;
+      max-width: var(--container);
+      backdrop-filter: blur(10px);
+    }
+
+    .blog-hero h1 {
+      margin: 0 0 1rem 0;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink), var(--accent-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .blog-hero p {
+      color: var(--text-weak-light);
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .dark-mode .blog-hero p { color: var(--text-weak-dark); }
+
+    /* Search and Filter Section */
+    .search-filter-section {
+      max-width: var(--container);
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: var(--surface-1-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #ffffff70;
+    }
+    .dark-mode .search-filter-section {
+      background: var(--surface-1-dark);
+      border-color: #ffffff18;
+    }
+
+    .search-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 999px;
+      font-size: 1rem;
+      background: #ffffff;
+      color: var(--text-strong-light);
+      transition: all var(--fast) var(--ease);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(106, 130, 251, 0.25);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-weak-light);
+    }
+
+    .dark-mode .search-input {
+      background: var(--surface-2-dark);
+      border-color: #4a5568;
+      color: var(--text-strong-dark);
+    }
+
+    .dark-mode .search-input::placeholder {
+      color: var(--text-weak-dark);
+    }
+
+    .dark-mode .search-input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    /* Category Filter */
+    .category-filters {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-tag {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background: var(--surface-2-light);
+      color: var(--text-strong-light);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--fast) var(--ease);
+      user-select: none;
+    }
+
+    .filter-tag:hover {
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-tag.active {
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .dark-mode .filter-tag {
+      background: var(--surface-2-dark);
+      color: var(--text-strong-dark);
+    }
+
+    /* Blog Grid */
+    .blog-container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    /* Enhanced Post Cards */
+    .post-card {
+      background: var(--surface-1-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #ffffff70;
+      padding: 0;
+      overflow: hidden;
+      transition: all var(--slow) var(--ease);
+      position: relative;
+    }
+
+    .post-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue), var(--accent-green));
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 200% 0; }
+      50% { background-position: -200% 0; }
+    }
+
+    .post-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(106, 130, 251, 0.3);
+    }
+
+    .dark-mode .post-card {
+      background: var(--surface-1-dark);
+      border-color: #ffffff18;
+    }
+
+    .post-content {
+      padding: 1.8rem 1.5rem;
+    }
+
+    .post-category {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(238, 9, 121, 0.3);
+    }
+
+    .post-card h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .post-card h2 a {
+      color: var(--text-strong-light);
+      text-decoration: none;
+      transition: color var(--fast) var(--ease);
+    }
+
+    .post-card h2 a:hover {
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .dark-mode .post-card h2 a {
+      color: var(--text-strong-dark);
+    }
+
+    .post-excerpt {
+      color: var(--text-weak-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .dark-mode .post-excerpt {
+      color: var(--text-weak-dark);
+    }
+
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-weak-light);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .dark-mode .post-meta {
+      color: var(--text-weak-dark);
+    }
+
+    .post-date {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .read-time {
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* Featured Post */
+    .featured-post {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(106, 130, 251, 0.1), rgba(255, 126, 179, 0.1));
+      border: 2px solid var(--accent-blue);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+      color: #000;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 10;
+    }
+
+    /* Stats Section */
+    .blog-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem auto;
+      max-width: var(--container);
+      padding: 0 1rem;
+    }
+
+    .stat-card {
+      background: var(--surface-1-light);
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #ffffff70;
+      transition: transform var(--fast) var(--ease);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .dark-mode .stat-card {
+      background: var(--surface-1-dark);
+      border-color: #ffffff18;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-weak-light);
+      font-weight: 600;
+    }
+
+    .dark-mode .stat-label {
+      color: var(--text-weak-dark);
+    }
+
+    /* Newsletter CTA */
+    .newsletter-cta {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      margin: 3rem auto;
+      max-width: var(--container);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .newsletter-cta h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-cta p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      min-width: 250px;
+      max-width: 350px;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+    }
+
+    .newsletter-btn {
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--fast) var(--ease);
+    }
+
+    .newsletter-btn:hover {
+      background: white;
+      color: var(--accent-blue);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .blog-hero {
+        padding: 2rem 1rem;
+        margin: 1rem;
+      }
+
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        min-width: auto;
+        max-width: none;
+      }
+
+      .category-filters {
+        justify-content: center;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .featured-post {
+        grid-column: 1;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .newsletter-input,
+      .newsletter-btn {
+        min-width: auto;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .post-content {
+        padding: 1.2rem 1rem;
+      }
+
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+
+    /* Animation for filtered results */
+    .post-card.filtered-out {
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+    }
+
+    .post-card.filtered-in {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    /* Loading animation */
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-weak-light);
+    }
+
+    .dark-mode .loading {
+      color: var(--text-weak-dark);
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <a href="index.html" style="color:#00d4ff;font-weight:700;text-decoration:none">QuickCalcLabs</a>
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
-      <a href="about.html" style="color:#cfeeff;text-decoration:none;margin-right:12px">About</a>
-      <a href="contact.html" style="color:#cfeeff;text-decoration:none">Contact</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
-  <main class="container">
-    <h1>QuickCalcLabs Blog</h1>
-    <p style="color:#9fb9cc">Guides, tips, and insights to help you stay healthy, fit, and informed.</p>
+  <!-- Blog Hero Section -->
+  <section class="blog-hero">
+    <h1>📚 Health & Wellness Blog</h1>
+    <p>Expert guides, calculators, and insights to help you make informed decisions about your health and fitness journey.</p>
+  </section>
 
-    <!-- Blog Post List -->
-    <div class="post-card">
-      <h2><a href="blog/age-calculator-guide.html">How Old Am I Exactly? Use an Age Calculator to Find Years, Months & Days</a></h2>
-      <p>Calculate your exact age in years, months, days, hours and more. Learn how to compute age manually and use our free Age Calculator for instant results.</p>
-      <small>Published on August 26, 2025 • 3 min read</small>
+  <!-- Blog Stats -->
+  <section class="blog-stats">
+    <div class="stat-card">
+      <div class="stat-number">25+</div>
+      <div class="stat-label">Health Articles</div>
     </div>
-
-    <div class="post-card">
-      <h2><a href="blog/bmi-calculation-guide.html">How to Calculate BMI at Home (With Examples & Free Online Calculator)</a></h2>
-      <p>Learn how to calculate your Body Mass Index (BMI) at home with clear examples. Discover BMI categories and limitations, plus use our free calculator.</p>
-      <small>Published on August 26, 2025 • 4 min read</small>
+    <div class="stat-card">
+      <div class="stat-number">10K+</div>
+      <div class="stat-label">Monthly Readers</div>
     </div>
-
-    <div class="post-card">
-      <h2><a href="blog/period-ovulation-guide.html">Track Your Period & Fertile Window — Period & Ovulation Calculator Guide</a></h2>
-      <p>Learn how menstrual cycle tracking works, how to predict ovulation, and use our Period & Ovulation Calculator to estimate fertile windows and next periods.</p>
-      <small>Published on August 26, 2025 • 4 min read</small>
+    <div class="stat-card">
+      <div class="stat-number">15+</div>
+      <div class="stat-label">Free Calculators</div>
     </div>
-
-    <div class="post-card">
-      <h2><a href="blog/pregnancy-due-date-guide.html">How to Calculate Your Due Date & Pregnancy Weeks</a></h2>
-      <p>Understand how due dates are calculated, pregnancy week milestones, and how to use an online Pregnancy Calculator to track your progress.</p>
-      <small>Published on August 26, 2025 • 3 min read</small>
+    <div class="stat-card">
+      <div class="stat-number">4.9★</div>
+      <div class="stat-label">User Rating</div>
     </div>
+  </section>
 
-    <div class="post-card">
-      <h2><a href="blog/calorie-calculator-guide.html">How Many Calories Do You Need Per Day? TDEE & Calorie Calculator Guide</a></h2>
-      <p>Find out how many calories you need daily using BMR and TDEE formulas. Use our Calorie Calculator to plan weight loss, maintenance or muscle gain.</p>
-      <small>Published on August 26, 2025 • 4 min read</small>
+  <!-- Search and Filter Section -->
+  <section class="search-filter-section">
+    <div class="search-controls">
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search articles, calculators, health tips...">
+      </div>
+      <div class="category-filters">
+        <span class="filter-tag active" data-category="all">All Posts</span>
+        <span class="filter-tag" data-category="calculators">Calculators</span>
+        <span class="filter-tag" data-category="health">Health</span>
+        <span class="filter-tag" data-category="fitness">Fitness</span>
+        <span class="filter-tag" data-category="pregnancy">Pregnancy</span>
+        <span class="filter-tag" data-category="nutrition">Nutrition</span>
+      </div>
     </div>
+  </section>
 
-    <div class="post-card">
-      <h2><a href="blog/water-intake-guide.html">How Much Water Should You Drink Per Day? Hydration Guide & Calculator</a></h2>
-      <p>Hydration needs depend on weight, activity and climate. Use our Water Intake Calculator to get daily recommendations in liters, cups and ounces.</p>
-      <small>Published on August 26, 2025 • 3 min read</small>
-    </div>
+  <main class="blog-container">
+    <!-- Blog Grid -->
+    <div class="blog-grid" id="blogGrid">
+      
+      <!-- Featured Post -->
+      <article class="post-card featured-post" data-category="health">
+        <div class="featured-badge">⭐ Featured</div>
+        <div class="post-content">
+          <span class="post-category">Health Guide</span>
+          <h2><a href="blog/bmi-calculation-guide.html">Complete BMI Guide: Calculate, Understand & Improve Your Health</a></h2>
+          <p class="post-excerpt">Master Body Mass Index calculations with our comprehensive guide. Learn the formulas, understand limitations, and discover actionable steps to achieve your optimal health range.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">6 min read</span>
+          </div>
+        </div>
+      </article>
 
-    <div class="post-card">
-      <h2><a href="blog/body-fat-guide.html">Estimate Body Fat at Home — Body Fat Calculator Guide</a></h2>
-      <p>Learn simple methods to estimate body fat percentage, including the US Navy formula. Use our Body Fat Calculator to track progress over time.</p>
-      <small>Published on August 26, 2025 • 3 min read</small>
-    </div>
+      <!-- Regular Posts -->
+      <article class="post-card" data-category="calculators">
+        <div class="post-content">
+          <span class="post-category">Calculator Guide</span>
+          <h2><a href="blog/age-calculator-guide.html">How Old Am I Exactly? Ultimate Age Calculator Guide</a></h2>
+          <p class="post-excerpt">Calculate your exact age in years, months, days, and even hours. Learn manual calculation methods and discover interesting age-related facts.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">3 min read</span>
+          </div>
+        </div>
+      </article>
 
-    <div class="post-card">
-      <h2><a href="blog/macro-calculator-guide.html">Macros Made Simple — How to Calculate Protein, Carbs & Fat</a></h2>
-      <p>Understand macronutrients, set calorie goals, and use our interactive Macro Calculator with sliders and charts to plan protein, carbs and fat ratios.</p>
-      <small>Published on August 26, 2025 • 4 min read</small>
+      <article class="post-card" data-category="pregnancy">
+        <div class="post-content">
+          <span class="post-category">Pregnancy</span>
+          <h2><a href="blog/period-ovulation-guide.html">Track Your Cycle: Period & Ovulation Calculator Guide</a></h2>
+          <p class="post-excerpt">Master menstrual cycle tracking and fertility window prediction. Learn when you're most fertile and plan accordingly with our comprehensive guide.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">5 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="pregnancy">
+        <div class="post-content">
+          <span class="post-category">Pregnancy</span>
+          <h2><a href="blog/pregnancy-due-date-guide.html">Due Date Calculator: Track Your Pregnancy Week by Week</a></h2>
+          <p class="post-excerpt">Understand pregnancy timelines, calculate your due date accurately, and track important milestones throughout your pregnancy journey.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">4 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="nutrition">
+        <div class="post-content">
+          <span class="post-category">Nutrition</span>
+          <h2><a href="blog/calorie-calculator-guide.html">Daily Calorie Needs: TDEE Calculator & Weight Management</a></h2>
+          <p class="post-excerpt">Discover how many calories you need daily using BMR and TDEE formulas. Plan effective weight loss, maintenance, or muscle gain strategies.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">5 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="health">
+        <div class="post-content">
+          <span class="post-category">Hydration</span>
+          <h2><a href="blog/water-intake-guide.html">Daily Water Intake: How Much Should You Really Drink?</a></h2>
+          <p class="post-excerpt">Calculate your optimal daily water intake based on weight, activity level, and climate. Get personalized hydration recommendations.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">3 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="fitness">
+        <div class="post-content">
+          <span class="post-category">Body Composition</span>
+          <h2><a href="blog/body-fat-guide.html">Body Fat Calculator: Estimate Your Body Fat Percentage at Home</a></h2>
+          <p class="post-excerpt">Learn simple methods to estimate body fat percentage using the US Navy formula and other techniques. Track your fitness progress effectively.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">4 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="nutrition">
+        <div class="post-content">
+          <span class="post-category">Macros</span>
+          <h2><a href="blog/macro-calculator-guide.html">Macros Made Simple: Calculate Protein, Carbs & Fat Ratios</a></h2>
+          <p class="post-excerpt">Master macronutrient planning with our interactive calculator. Learn optimal protein, carbohydrate, and fat ratios for your goals.</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <span>📅 August 26, 2025</span>
+            </div>
+            <span class="read-time">6 min read</span>
+          </div>
+        </div>
+      </article>
     </div>
   </main>
 
-  <footer style="text-align:center;padding:18px;color:#9fb9cc">
-    © 2025 QuickCalcLabs • <a href="privacy-policy.html">Privacy Policy</a> • <a href="terms-of-service.html">Terms</a>
+  <!-- Newsletter CTA -->
+  <section class="newsletter-cta">
+    <h3>📧 Stay Updated</h3>
+    <p>Get the latest health tips, calculator guides, and wellness insights delivered to your inbox.</p>
+    <form class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+      <button type="submit" class="newsletter-btn">Subscribe Now</button>
+    </form>
+  </section>
+
+  <!-- Ad Placeholder -->
+  <div class="ad-container">
+    <p>📢 728×90 Advertisement Space</p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 QuickCalcLabs • <a href="privacy-policy.html">Privacy Policy</a> • <a href="terms-of-service.html">Terms</a></p>
+    
+    <div class="affiliate-disclosure">
+      <strong>Affiliate Disclosure:</strong> QuickCalcLabs may earn commissions from qualifying purchases made through our affiliate links. This helps support our free calculators and content creation at no extra cost to you.
+    </div>
   </footer>
+
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">
+    🧮 All Calculators
+  </a>
+
+  <script>
+    // Dark mode toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const body = document.body;
+
+      // Check for saved theme preference
+      if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️';
+      }
+
+      darkModeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        darkModeToggle.textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      // Search functionality
+      const searchInput = document.getElementById('searchInput');
+      const filterTags = document.querySelectorAll('.filter-tag');
+      const postCards = document.querySelectorAll('.post-card');
+
+      let currentCategory = 'all';
+      let currentSearch = '';
+
+      function filterPosts() {
+        postCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          const title = card.querySelector('h2 a').textContent.toLowerCase();
+          const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
+          
+          const matchesCategory = currentCategory === 'all' || category === currentCategory;
+          const matchesSearch = currentSearch === '' || 
+                               title.includes(currentSearch.toLowerCase()) || 
+                               excerpt.includes(currentSearch.toLowerCase());
+
+          if (matchesCategory && matchesSearch) {
+            card.classList.remove('filtered-out');
+            card.classList.add('filtered-in');
+            card.style.display = 'block';
+          } else {
+            card.classList.add('filtered-out');
+            card.classList.remove('filtered-in');
+            setTimeout(() => {
+              if (card.classList.contains('filtered-out')) {
+                card.style.display = 'none';
+              }
+            }, 300);
+          }
+        });
+      }
+
+      // Search input handler
+      searchInput.addEventListener('input', function() {
+        currentSearch = this.value;
+        filterPosts();
+      });
+
+      // Filter tag handlers
+      filterTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          // Remove active class from all tags
+          filterTags.forEach(t => t.classList.remove('active'));
+          
+          // Add active class to clicked tag
+          this.classList.add('active');
+          
+          // Update current category
+          currentCategory = this.getAttribute('data-category');
+          
+          // Filter posts
+          filterPosts();
+        });
+      });
+
+      // Newsletter form handler
+      const newsletterForm = document.querySelector('.newsletter-form');
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('.newsletter-input').value;
+        
+        // Simple validation
+        if (email && email.includes('@')) {
+          alert('Thank you for subscribing! 🎉');
+          this.querySelector('.newsletter-input').value = '';
+        } else {
+          alert('Please enter a valid email address.');
+        }
+      });
+
+      // Add smooth animations to post cards
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationDelay = Math.random() * 0.3 + 's';
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all post cards
+      postCards.forEach(card => {
+        observer.observe(card);
+      });
+    });
+  </script>
 </body>
 </html>
