@@ -4,63 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Period & Ovulation Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free Period & Ovulation Calculator. Track your menstrual cycle, predict your next period, ovulation day, and fertile window.">
-  <meta name="keywords" content="period calculator, ovulation calculator, menstrual cycle tracker, fertility calendar, women's health, ovulation days, fertile window">
-  
+  <meta name="description" content="Track your menstrual cycle, predict your next period, fertile window, and ovulation with our free Period & Ovulation Calculator.">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Schema for FAQs -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How accurate is this period calculator?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Our calculator uses your last period date and average cycle length to estimate your next period, ovulation day, and fertile window. While accurate for many users, results can vary depending on cycle irregularities."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use this calculator for pregnancy planning?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. By predicting ovulation and fertile days, this tool helps increase the chances of conception. It’s also useful for natural family planning."
-        }
-      }
-    ]
-  }
-  </script>
-
   <style>
-    /* Timeline Styles */
-    .cycle-timeline {
-      margin-top: 20px;
-      background: #f1f3f5;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 30px;
+    /* Timeline */
+    .timeline {
       display: flex;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+      justify-content: space-between;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      background: var(--card-bg, #f8f9fa);
+      overflow-x: auto;
     }
-    .timeline-segment {
-      flex-grow: 1;
+    .day {
+      flex: 1;
       text-align: center;
       font-size: 12px;
-      font-weight: bold;
-      color: #fff;
-      line-height: 30px;
+      padding: 6px;
+      border-radius: 6px;
+      margin: 0 2px;
+      background: #e9ecef;
+      position: relative;
+      cursor: pointer;
     }
-    .timeline-period { background: linear-gradient(135deg, #ff6b81, #ff4757); }
-    .timeline-fertile { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-    .timeline-ovulation { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+    .day:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+    .period { background: linear-gradient(135deg,#ff6b81,#ff4757); color: #fff; }
+    .fertile { background: linear-gradient(135deg,#2ecc71,#27ae60); color: #fff; }
+    .ovulation { background: linear-gradient(135deg,#9b59b6,#8e44ad); color:#fff; font-weight: bold; }
+    .timeline-label { font-size: 14px; margin-top: 8px; text-align: center; }
   </style>
 </head>
 <body>
-  <header>
+
+  <!-- Header -->
+  <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
       <a href="blog.html">Blog</a>
@@ -70,78 +61,87 @@
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1>🌸 Period & Ovulation Calculator</h1>
-    <p>Track your menstrual cycle, predict your next period, fertile window, and ovulation day. Simple, accurate, and private.</p>
-  </section>
-
-  <!-- Ad 1 -->
+  <!-- Top Ad -->
   <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner Ad</div>
+    <div class="ad-placeholder">728x90 Banner Ad</div>
   </div>
 
-  <!-- Calculator -->
-  <section class="container">
-    <div class="card">
-      <h2>Enter Your Cycle Details</h2>
-      <label for="lastPeriod">Last Period Start Date:</label>
-      <input type="date" id="lastPeriod" class="input-field">
+  <!-- Hero Calculator -->
+  <section class="calc-wrapper">
+    <h1>🌸 Period & Ovulation Calculator</h1>
+    <p class="subtitle">Track your menstrual cycle, predict your next period, fertile days, and ovulation window.</p>
 
-      <label for="cycleLength">Average Cycle Length (days):</label>
-      <input type="number" id="cycleLength" class="input-field" value="28" min="20" max="40">
+    <label>📅 First Day of Last Period:</label>
+    <input type="date" id="lastPeriod">
 
-      <button onclick="calculatePeriod()">Calculate Cycle</button>
-      <div id="result" class="result"></div>
-      <div id="timeline"></div>
-    </div>
+    <label>🔢 Average Cycle Length (days):</label>
+    <input type="number" id="cycleLength" placeholder="28">
+
+    <button onclick="calculatePeriod()">Calculate</button>
+
+    <div id="result" class="result-box"></div>
+    <div id="timelineContainer"></div>
   </section>
 
-  <!-- Ad 2 -->
+  <!-- Mid Ad -->
   <div class="ad-container">
-    <div class="ad-placeholder">300x250 / 336x280 Result Ad</div>
+    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
   </div>
 
   <!-- SEO Content -->
   <section class="seo-content">
-    <h2>Why Use a Period & Ovulation Calculator?</h2>
-    <p>The menstrual cycle ranges from 21–35 days. Knowing your cycle helps you plan better, predict fertile windows, and understand your health. This tool estimates your next period, ovulation day, and fertility window.</p>
+    <h2>Why Use Our Period & Ovulation Calculator?</h2>
+    <p>Our Period & Ovulation Calculator helps you understand your cycle better. By tracking your periods, fertile window, and ovulation day, you can plan ahead for family planning, fertility, or simply staying in tune with your health.</p>
+
+    <h3>✨ Benefits:</h3>
     <ul>
-      <li>📅 <b>Next Period:</b> Likely start date of your next cycle</li>
-      <li>🌸 <b>Ovulation Day:</b> About 14 days before your next period</li>
-      <li>💝 <b>Fertile Window:</b> 6-day range when conception is most likely</li>
+      <li>🌸 Accurate prediction of your next period</li>
+      <li>💝 Identify fertile days for conception</li>
+      <li>🌙 Track ovulation and reproductive health</li>
+      <li>📱 Easy to use on any device</li>
+    </ul>
+
+    <h3>🔗 Explore More Tools:</h3>
+    <p>Try our other calculators:  
+      <a href="bmi-calculator.html">BMI Calculator</a>,  
+      <a href="pregnancy-calculator.html">Pregnancy Calculator</a>,  
+      <a href="calorie-calculator.html">Calorie Calculator</a>,  
+      <a href="macro-calculator.html">Macro Calculator</a>.
+    </p>
+
+    <h3>📝 Related Blogs:</h3>
+    <ul>
+      <li><a href="blog/understanding-menstrual-cycle.html">Understanding Your Menstrual Cycle</a></li>
+      <li><a href="blog/fertility-tips.html">Fertility Tips for Women</a></li>
     </ul>
   </section>
 
-  <!-- FAQs -->
-  <section class="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-      <button class="faq-question">How accurate is this period calculator?</button>
-      <div class="faq-answer">Our calculator estimates based on cycle averages. Irregular cycles may affect accuracy.</div>
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="faq">
+      <h3>How accurate is this calculator?</h3>
+      <p>It provides estimates based on your average cycle length. Irregular cycles may need medical advice.</p>
     </div>
-    <div class="faq-item">
-      <button class="faq-question">Can I use this for birth control?</button>
-      <div class="faq-answer">This calculator is for educational purposes only and should not replace medical advice or contraception methods.</div>
+    <div class="faq">
+      <h3>Can this calculator help me get pregnant?</h3>
+      <p>Yes, it highlights your fertile window and ovulation day for conception planning.</p>
+    </div>
+    <div class="faq">
+      <h3>Can it be used as birth control?</h3>
+      <p>No ❌. It should not be relied upon as a contraceptive method.</p>
     </div>
   </section>
 
-  <!-- Explore More Tools -->
-  <section class="seo-content">
-    <h2>📌 Explore More Tools & Blogs</h2>
-    <ul>
-      <li>⚖️ <a href="bmi-calculator.html">BMI Calculator</a></li>
-      <li>🤰 <a href="pregnancy-calculator.html">Pregnancy Calculator</a></li>
-      <li>🔥 <a href="calorie-calculator.html">Calorie Calculator</a></li>
-      <li>📖 <a href="blog.html">5 Tips to Manage Your Cycle</a></li>
-    </ul>
-  </section>
-
-  <!-- Ad 3 -->
+  <!-- Bottom Ad -->
   <div class="ad-container">
     <div class="ad-placeholder">Responsive Footer Ad</div>
   </div>
 
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <!-- Footer -->
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy.html">Privacy Policy</a> | 
@@ -149,60 +149,97 @@
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
 
-  <!-- Floating CTA -->
-  <a href="index.html" class="floating-cta">⬅️ See All Calculators</a>
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is this calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It provides estimates based on your average cycle length. Irregular cycles may need medical advice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can this calculator help me get pregnant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it highlights your fertile window and ovulation day for conception planning."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can it be used as birth control?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It should not be relied upon as a contraceptive method."
+        }
+      }
+    ]
+  }
+  </script>
 
   <script>
     function calculatePeriod() {
-      const lastPeriodDate = document.getElementById("lastPeriod").value;
+      const lastPeriod = new Date(document.getElementById("lastPeriod").value);
       const cycleLength = parseInt(document.getElementById("cycleLength").value);
 
-      if (!lastPeriodDate || !cycleLength) {
-        document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter valid details.</p>";
+      if (!lastPeriod || isNaN(cycleLength) || cycleLength < 20 || cycleLength > 40) {
+        document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter a valid date and cycle length (20–40 days).</p>";
         return;
       }
 
-      const lastDate = new Date(lastPeriodDate);
-      const nextPeriod = new Date(lastDate);
-      nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
+      const nextPeriod = new Date(lastPeriod);
+      nextPeriod.setDate(lastPeriod.getDate() + cycleLength);
 
-      const ovulationDay = new Date(nextPeriod);
-      ovulationDay.setDate(ovulationDay.getDate() - 14);
+      const ovulation = new Date(lastPeriod);
+      ovulation.setDate(lastPeriod.getDate() + cycleLength - 14);
 
-      const fertileStart = new Date(ovulationDay);
-      fertileStart.setDate(fertileStart.getDate() - 5);
-
-      const fertileEnd = new Date(ovulationDay);
-      fertileEnd.setDate(fertileEnd.getDate() + 1);
+      const fertileStart = new Date(ovulation);
+      fertileStart.setDate(ovulation.getDate() - 2);
+      const fertileEnd = new Date(ovulation);
+      fertileEnd.setDate(ovulation.getDate() + 2);
 
       document.getElementById("result").innerHTML = `
-        <h3>📅 Cycle Prediction</h3>
-        <p><span class="badge badge-period">🌸 Next Period:</span> ${nextPeriod.toDateString()}</p>
-        <p><span class="badge badge-ovulation">🌙 Ovulation Day:</span> ${ovulationDay.toDateString()}</p>
-        <p><span class="badge badge-fertile">💝 Fertile Window:</span> ${fertileStart.toDateString()} – ${fertileEnd.toDateString()}</p>
+        <h3>📊 Results</h3>
+        <p><b>Next Period:</b> ${nextPeriod.toDateString()}</p>
+        <p><b>Ovulation Day:</b> ${ovulation.toDateString()}</p>
+        <p><b>Fertile Window:</b> ${fertileStart.toDateString()} - ${fertileEnd.toDateString()}</p>
       `;
 
-      document.getElementById("timeline").innerHTML = `
-        <div class="cycle-timeline">
-          <div class="timeline-segment timeline-period" style="flex:3">Period</div>
-          <div class="timeline-segment timeline-fertile" style="flex:6">Fertile</div>
-          <div class="timeline-segment timeline-ovulation" style="flex:2">Ovulation</div>
-        </div>
-      `;
+      // Timeline
+      let timelineHTML = '<div class="timeline">';
+      for (let i = 0; i < cycleLength; i++) {
+        const currentDay = new Date(lastPeriod);
+        currentDay.setDate(lastPeriod.getDate() + i);
+
+        let cssClass = "day";
+        let tooltip = `Day ${i+1}`;
+        if (i < 5) { cssClass += " period"; tooltip += " - Period"; }
+        if (currentDay >= fertileStart && currentDay <= fertileEnd) { cssClass += " fertile"; tooltip += " - Fertile Window"; }
+        if (currentDay.toDateString() === ovulation.toDateString()) { cssClass = "day ovulation"; tooltip = "Ovulation Day"; }
+
+        timelineHTML += `<div class="${cssClass}" data-tooltip="${tooltip}">${currentDay.getDate()}</div>`;
+      }
+      timelineHTML += '</div><div class="timeline-label">🌸 Period | 💝 Fertile | 🌙 Ovulation</div>';
+
+      document.getElementById("timelineContainer").innerHTML = timelineHTML;
     }
 
-    // Dark Mode Toggle
-    document.getElementById("darkModeToggle").addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-    });
-
-    // FAQ Toggle
-    document.querySelectorAll(".faq-question").forEach(btn => {
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("active");
-        const answer = btn.nextElementSibling;
-        answer.style.display = answer.style.display === "block" ? "none" : "block";
+    // Dark mode toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
       });
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
     });
   </script>
 </body>
