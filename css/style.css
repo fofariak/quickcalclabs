@@ -537,7 +537,7 @@ footer .affiliate-disclosure {
   margin-top: 10px;
   padding: 12px 24px;
   border-radius: 25px;
-  background: linear-gradient(135deg, #ff6b6b, #f06595);
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
   color: #fff; /* Ensure text stays white */
   font-weight: 600;
   text-decoration: none;
