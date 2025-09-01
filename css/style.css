@@ -556,6 +556,27 @@ footer .affiliate-disclosure {
   background: linear-gradient(135deg, #4dabf7, #228be6); /* Blue gradient for dark mode */
   color: #fff;
 }
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 6px;
+}
+
+.badge-period {
+  background: linear-gradient(135deg, #ff6b81, #ff4757);
+}
+
+.badge-ovulation {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.badge-fertile {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
 
 
 
