@@ -1,58 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About QuickCalcLabs</title>
-  <meta name="description" content="About QuickCalcLabs — our mission is to provide free, fast, and accurate online calculators for health, fitness and lifestyle.">
-  <meta name="keywords" content="about quickcalclabs, about us, online calculators, health tools">
-  <link rel="canonical" href="https://quickcalclabs.com/about.html">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="About QuickCalcLabs — our mission is to build fast, free, accurate calculators for health, fitness, and everyday life with privacy and accessibility in mind." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <style>
+    /* Dark Mode (parity with bmi-calculator.html) */
+    body.dark-mode { background-color:#1a202c; color:#e2e8f0; }
+    .dark-mode .header { background-color:#2d3748; }
+    .dark-mode .about-wrapper, .dark-mode .card, .dark-mode .grid-card, .dark-mode .values, .dark-mode .faq-section, .dark-mode .related-links, .dark-mode footer, .dark-mode details {
+      background-color:#2d3748; border-color:#4a5568;
+    }
+    .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode a { color:#ffffff; }
+    .dark-mode p, .dark-mode li, .dark-mode summary, .dark-mode .subtitle { color:#a0aec0; }
+    .dark-mode .floating-cta { background-color:#4a5568; color:#fff; }
+    .dark-mode .floating-cta:hover { background-color:#718096; }
 
+    /* About specific layout */
+    .about-wrapper { max-width:960px; margin: 24px auto; padding:24px; border:1px solid #e6eef5; border-radius:12px; background:#fff; }
+    .about-hero { text-align:center; margin-bottom: 24px; }
+    .subtitle { color:#5b7083; }
+
+    .feature-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin: 16px 0 8px; }
+    .grid-card { background:#f7fbff; border:1px solid #e6eef5; border-radius:12px; padding:16px; }
+
+    .values { margin-top: 24px; padding:16px; border:1px solid #e6eef5; border-radius:12px; background:#f9fbfd; }
+    .values ul { margin: 8px 0 0 18px; }
+
+    .about-meta { display:grid; grid-template-columns: 1fr; gap:16px; margin-top:24px; }
+    @media (min-width: 768px) { .about-meta { grid-template-columns: 1.2fr .8fr; } }
+
+    .contact-card { background:#f0f6ff; border:1px solid #e6eef5; border-radius:12px; padding:16px; }
+
+    .faq-section details { margin: 10px 0; padding: 12px; border:1px solid #e6eef5; border-radius:10px; background:#fff; }
+    .faq-section summary { cursor:pointer; font-weight:600; }
+
+    .ad-box { margin:16px auto; max-width:960px; height:90px; border:2px dashed #bcd0e0; display:flex; align-items:center; justify-content:center; border-radius:8px; color:#6b7f90; background:#f7fbff; }
+
+    .header nav a { margin-right: 12px; }
+  </style>
 </head>
 <body>
-  <header>
-    <a href="index.html" style="color:#00d4ff;font-weight:700;text-decoration:none">QuickCalcLabs</a>
+  <!-- Header (shared look & feel) -->
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
-      <a href="blog.html" style="color:#cfeeff;text-decoration:none;margin-right:12px">Blog</a>
-      <a href="contact.html" style="color:#cfeeff;text-decoration:none">Contact</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
     </nav>
   </header>
 
-  <main class="container">
-    <div class="card">
+  <!-- Ad Top -->
+  <div class="ad-box">728×90 Ad Placeholder</div>
+
+  <main class="about-wrapper">
+    <!-- Hero -->
+    <section class="about-hero">
       <h1>About QuickCalcLabs</h1>
-      <p class="muted">Fast, free, and friendly calculators for health, fitness and everyday life.</p>
+      <p class="subtitle">Fast, free, and friendly calculators for health, fitness, and everyday life.</p>
+    </section>
 
+    <!-- Mission & What we offer -->
+    <section>
       <h2>Our Mission</h2>
-      <p>QuickCalcLabs was created to provide reliable, easy-to-use calculators that help people make smarter daily decisions — from tracking calories and body metrics to planning important dates. We believe computing should be fast, beautiful, and accessible to everyone.</p>
+      <p>We build reliable, easy-to-use calculators that help you make smarter daily decisions — from tracking calories and body metrics to planning important dates. Tools should be quick, beautiful, and accessible to everyone.</p>
 
-      <h2>What We Offer</h2>
+      <div class="feature-grid" aria-label="What we offer">
+        <div class="grid-card">🎯 <strong>Health & Fitness</strong><br/>BMI, Body Fat, Calorie & Macro calculators.</div>
+        <div class="grid-card">👩‍🍼 <strong>Women's Health</strong><br/>Period, Pregnancy & Ovulation insights.</div>
+        <div class="grid-card">🧰 <strong>Lifestyle Tools</strong><br/>Age & Water Intake calculators, and more.</div>
+        <div class="grid-card">⚡ <strong>Fast & Accessible</strong><br/>Mobile-friendly with keyboard and screen reader support.</div>
+      </div>
+    </section>
+
+    <!-- Quality & Values -->
+    <section class="values">
+      <h2>Quality, Accuracy & Values</h2>
+      <p>We use trusted formulas (e.g., Mifflin–St Jeor, US Navy method). Results are estimates — for medical or nutritional advice, consult a professional.</p>
       <ul>
-        <li>Health & fitness calculators: BMI, Body Fat, Calorie & Macro calculators.</li>
-        <li>Women's health tools: Period & Pregnancy calculators with ovulation insights.</li>
-        <li>Handy lifestyle tools: Age calculator, Water intake calculator, and more.</li>
+        <li><strong>Accuracy</strong> — we keep our methods up to date.</li>
+        <li><strong>Privacy</strong> — we minimize data collection and avoid tracking where possible.</li>
+        <li><strong>Usability</strong> — fast, accessible tools that work great on phones.</li>
       </ul>
+    </section>
 
-      <h2>Quality & Accuracy</h2>
-      <p>We use widely recognized formulas (Mifflin–St Jeor, US Navy method, etc.). Results are estimates — always consult professionals for personalized medical or nutritional advice.</p>
+    <!-- Meta / Contact -->
+    <section class="about-meta">
+      <div class="card">
+        <h2>Who We Are</h2>
+        <p>QuickCalcLabs is a small team of designers, engineers, and science nerds who love turning complex equations into delightful tools. We obsess over clarity, performance, and tiny UX details.</p>
+      </div>
+      <aside class="contact-card" role="complementary">
+        <h3>Contact & Partnerships</h3>
+        <p>Want to collaborate, license a tool, or request a custom calculator?</p>
+        <p>Email us: <a href="mailto:partnerships@quickcalclabs.com">partnerships@quickcalclabs.com</a></p>
+      </aside>
+    </section>
 
-      <h2>Contact & Partnerships</h2>
-      <p>Want to collaborate, ask about licensing, or need a custom tool? Reach out at <a href="mailto:quickcalclab@gmail.com">partnerships@quickcalclabs.com</a></p>
-
-      <h2>Our Values</h2>
-      <ul>
-        <li>Accuracy — we use trusted formulas and keep them updated.</li>
-        <li>Privacy — we minimize data collection and respect user privacy.</li>
-        <li>Usability — tools that are fast, accessible, and mobile-friendly.</li>
-      </ul>
-    </div>
+    <!-- FAQ (keeps parity with calculator pages + adds schema below) -->
+    <section class="faq-section" aria-label="Frequently Asked Questions">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>Are your calculators medically reviewed?</summary>
+        <p>They use widely accepted formulas and public guidelines. We aim for accuracy, but they are not a substitute for professional medical advice.</p>
+      </details>
+      <details>
+        <summary>Do you store personal data?</summary>
+        <p>Most tools run entirely in your browser. If we collect anonymized usage data to improve features, we state it clearly in our <a href="privacy.html">Privacy Policy</a>.</p>
+      </details>
+      <details>
+        <summary>Can I request a new calculator?</summary>
+        <p>Yes! Send requests to <a href="mailto:partnerships@quickcalclabs.com">partnerships@quickcalclabs.com</a> — we love building useful tools.</p>
+      </details>
+    </section>
   </main>
 
-  <footer style="text-align:center;padding:18px;color:#9fb9cc">
-    © 2025 QuickCalcLabs • <a href="privacy-policy.html">Privacy Policy</a> • <a href="terms-of-service.html">Terms</a>
+  <!-- Related Internal Links -->
+  <section class="related-links">
+    <h3>🔗 Explore More</h3>
+    <a href="index.html">🔢 All Calculators</a>
+    <a href="bmi-calculator.html">⚖️ BMI Calculator</a>
+    <a href="calorie-calculator.html">🔥 Calorie Calculator</a>
+    <a href="blog.html">📖 Our Blog</a>
+  </section>
+
+  <!-- Ad Bottom -->
+  <div class="ad-box">728×90 Ad Placeholder</div>
+
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta" aria-label="See all calculators">🔢 See All Calculators</a>
+
+  <!-- Footer (parity with bmi-calculator) -->
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Service</a> |
+    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
+
+  <!-- JSON-LD: AboutPage + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About QuickCalcLabs",
+    "description": "Fast, free, accurate calculators for health, fitness, and everyday life.",
+    "url": "https://quickcalclabs.com/about.html",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "QuickCalcLabs",
+      "url": "https://quickcalclabs.com/",
+      "logo": "https://quickcalclabs.com/images/logo.png",
+      "sameAs": []
+    }
+  }
+  </script>
+
+  <!-- Dark mode (shared behavior) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('darkModeToggle');
+      toggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      });
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+      }
+    });
+  </script>
 </body>
 </html>
