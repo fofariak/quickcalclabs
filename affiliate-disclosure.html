@@ -7,44 +7,625 @@
   <meta name="keywords" content="affiliate disclosure, quickcalclabs affiliates, disclosure">
   <link rel="canonical" href="https://quickcalclabs.com/affiliate-disclosure.html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  
+  <style>
+    /* Using your existing CSS variables and design system */
+    :root {
+      --bg-gradient-light: radial-gradient(1200px 600px at 10% -10%, #ffe6f6 0%, transparent 55%),
+                           radial-gradient(900px 500px at 110% 10%, #e6f0ff 0%, transparent 50%),
+                           linear-gradient(135deg, #a18cd1 0%, #fbc2eb 50%, #fdfbfb 100%);
+      --bg-gradient-dark: radial-gradient(1200px 600px at -10% -10%, rgba(255, 107, 160, .15) 0%, transparent 55%),
+                          radial-gradient(900px 500px at 110% -10%, rgba(106, 130, 251, .15) 0%, transparent 50%),
+                          linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      --surface-1-light: rgba(255, 255, 255, 0.78);
+      --surface-1-dark: rgba(22, 22, 26, 0.85);
+      --surface-2-light: rgba(255, 255, 255, 0.35);
+      --surface-2-dark: rgba(255, 255, 255, 0.06);
+      --text-strong-light: #181a20;
+      --text-weak-light: #51586a;
+      --text-strong-dark: #f3f6ff;
+      --text-weak-dark: #b7c0d1;
+      --accent-pink: #ff7eb3;
+      --accent-blue: #6a82fb;
+      --accent-green: #43e97b;
+      --accent-teal: #38f9d7;
+      --accent-orange: #ff8f70;
+      --accent-yellow: #ffd166;
+      --shadow-sm: 0 6px 16px rgba(0,0,0,0.08);
+      --shadow-md: 0 12px 28px rgba(0,0,0,0.14);
+      --shadow-lg: 0 22px 50px rgba(0,0,0,0.22);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 9px;
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --fast: .18s;
+      --slow: .4s;
+    }
 
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Inter, Arial;
+      line-height: 1.6;
+      color: var(--text-strong-light);
+      background: var(--bg-gradient-light) fixed;
+      background-size: cover;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .dark-mode {
+      color: var(--text-strong-dark);
+      background: var(--bg-gradient-dark) fixed;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: var(--surface-2-light);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .dark-mode header {
+      background: var(--surface-2-dark);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    header a:first-child {
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: all var(--fast) var(--ease);
+    }
+
+    nav a:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .dark-mode nav a:hover {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Header Section */
+    .page-header {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: 20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 126, 179, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 15s ease-in-out infinite;
+    }
+
+    .page-header::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      right: 20%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(106, 130, 251, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 20s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .last-updated {
+      color: var(--text-weak-light);
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: var(--surface-2-light);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    .dark-mode .last-updated {
+      color: var(--text-weak-dark);
+      background: var(--surface-2-dark);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Content Sections */
+    .disclosure-content {
+      margin-top: 3rem;
+    }
+
+    .disclosure-section {
+      background: var(--surface-1-light);
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--slow) var(--ease);
+    }
+
+    .dark-mode .disclosure-section {
+      background: var(--surface-1-dark);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .disclosure-section::after {
+      content: "";
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(67, 233, 123, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .disclosure-section:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .disclosure-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .disclosure-section p {
+      color: var(--text-weak-light);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dark-mode .disclosure-section p {
+      color: var(--text-weak-dark);
+    }
+
+    .disclosure-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Special highlight sections */
+    .transparency-box {
+      background: linear-gradient(135deg, rgba(67, 233, 123, 0.1), rgba(56, 249, 215, 0.1));
+      border: 2px solid rgba(67, 233, 123, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-mode .transparency-box {
+      background: linear-gradient(135deg, rgba(67, 233, 123, 0.05), rgba(56, 249, 215, 0.05));
+      border-color: rgba(67, 233, 123, 0.2);
+    }
+
+    .transparency-box::before {
+      content: "💚";
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      opacity: 0.7;
+    }
+
+    .transparency-box h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+      color: var(--accent-green);
+    }
+
+    .transparency-box p {
+      color: var(--text-strong-light);
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .dark-mode .transparency-box p {
+      color: var(--text-strong-dark);
+    }
+
+    /* Contact section */
+    .contact-section {
+      background: var(--surface-1-light);
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      margin: 3rem 0;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-mode .contact-section {
+      background: var(--surface-1-dark);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-section::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg at 50% 50%, rgba(255, 212, 102, 0.1), rgba(255, 126, 179, 0.1), rgba(106, 130, 251, 0.1), rgba(255, 212, 102, 0.1));
+      animation: rotate 25s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .contact-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-section h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .contact-email {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-md);
+      transition: all var(--fast) var(--ease);
+    }
+
+    .contact-email:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      filter: saturate(1.2);
+    }
+
+    /* Thank you message */
+    .thank-you {
+      background: linear-gradient(135deg, rgba(255, 126, 179, 0.1), rgba(106, 130, 251, 0.1));
+      border: 2px solid rgba(255, 126, 179, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-mode .thank-you {
+      background: linear-gradient(135deg, rgba(255, 126, 179, 0.05), rgba(106, 130, 251, 0.05));
+      border-color: rgba(255, 126, 179, 0.2);
+    }
+
+    .thank-you::before {
+      content: "🙏";
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2.5rem;
+      opacity: 0.6;
+    }
+
+    .thank-you p {
+      color: var(--text-strong-light);
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .dark-mode .thank-you p {
+      color: var(--text-strong-dark);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-weak-light);
+      background: var(--surface-2-light);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .dark-mode footer {
+      color: var(--text-weak-dark);
+      background: var(--surface-2-dark);
+      border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Dark mode toggle button */
+    .dark-toggle {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+      border: none;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all var(--fast) var(--ease);
+    }
+
+    .dark-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      header {
+        padding: 1rem;
+      }
+      
+      .page-header {
+        padding: 2rem 0 1.5rem;
+      }
+      
+      .disclosure-section {
+        padding: 2rem 1.5rem;
+      }
+      
+      .contact-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .disclosure-section h2 {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+    }
+
+    /* Animation on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
   <header>
-    <a href="index.html" style="color:#00d4ff;font-weight:700;text-decoration:none">QuickCalcLabs</a>
+    <a href="index.html">QuickCalcLabs</a>
     <nav>
-      <a href="privacy-policy.html" style="color:#cfeeff;text-decoration:none;margin-right:12px">Privacy</a>
-      <a href="contact.html" style="color:#cfeeff;text-decoration:none">Contact</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+      <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
     </nav>
   </header>
 
   <main class="container">
-    <div class="card">
+    <!-- Page Header -->
+    <div class="page-header">
       <h1>Affiliate Disclosure</h1>
+      <div class="last-updated">Last updated: August 26, 2025</div>
+    </div>
 
-      <p class="muted">Last updated: August 26, 2025</p>
+    <!-- Transparency Box -->
+    <div class="transparency-box fade-in">
+      <h3>Our Commitment to Transparency</h3>
+      <p>We believe in complete honesty about how we fund our free tools and services. This disclosure explains our affiliate relationships and how they help us continue providing valuable calculators at no cost to you.</p>
+    </div>
 
-      <h2>What this means</h2>
-      <p>QuickCalcLabs participates in affiliate marketing programs and may earn commissions from purchases made through links on the Site. This does not affect the price you pay and helps support the free tools we provide.</p>
+    <!-- Main Content -->
+    <div class="disclosure-content">
+      <div class="disclosure-section fade-in">
+        <h2>
+          <div class="section-icon">💰</div>
+          What This Means
+        </h2>
+        <p>QuickCalcLabs participates in affiliate marketing programs and may earn commissions from purchases made through links on our site. This means when you click on certain links and make a purchase, we may receive a small commission at no additional cost to you.</p>
+        <p>These commissions help us maintain our servers, develop new calculators, and keep all our tools completely free for everyone to use.</p>
+      </div>
 
-      <h2>How we choose partners</h2>
-      <p>We choose partners and links based on usefulness to our users, reputation, and relevance. We do not promote products or services solely to earn affiliate revenue.</p>
+      <div class="disclosure-section fade-in">
+        <h2>
+          <div class="section-icon">🎯</div>
+          How We Choose Partners
+        </h2>
+        <p>We carefully select our affiliate partners based on three key criteria:</p>
+        <p><strong>Usefulness:</strong> Products and services that genuinely benefit our users' health, fitness, and lifestyle goals.</p>
+        <p><strong>Reputation:</strong> Companies with proven track records of quality and customer satisfaction.</p>
+        <p><strong>Relevance:</strong> Tools and resources that align with the calculators and information we provide.</p>
+        <p>We never promote products solely to earn affiliate revenue. Every recommendation is based on our honest assessment of value to our community.</p>
+      </div>
 
-      <h2>Ads & Sponsored content</h2>
-      <p>Some content on QuickCalcLabs may be sponsored or include paid placements. Sponsored content is clearly labeled.</p>
+      <div class="disclosure-section fade-in">
+        <h2>
+          <div class="section-icon">📢</div>
+          Ads & Sponsored Content
+        </h2>
+        <p>Some content on QuickCalcLabs may include sponsored posts or paid placements. We maintain editorial independence and clearly label all sponsored content.</p>
+        <p>Advertisements help us cover operational costs while keeping our calculators free. We strive to show relevant ads that may actually interest our users, but we understand they're not for everyone.</p>
+      </div>
 
-      <h2>Questions</h2>
-      <p>If you have questions about our affiliate relationships, contact <a href="mailto:quickcalclab@gmail.com">affiliate@quickcalclabs.com</a></p>
+      <div class="disclosure-section fade-in">
+        <h2>
+          <div class="section-icon">🛡️</div>
+          Your Trust Matters
+        </h2>
+        <p>Your trust is our most valuable asset. We never let affiliate relationships influence our content, recommendations, or calculator accuracy. Our primary goal remains providing the most helpful and accurate tools possible.</p>
+        <p>If we recommend a product or service, it's because we genuinely believe it can help you achieve your health and fitness goals.</p>
+      </div>
+    </div>
 
-      <p class="small">Thank you for supporting QuickCalcLabs. Your clicks and visits help us keep these tools free and improve the site.</p>
+    <!-- Contact Section -->
+    <div class="contact-section fade-in">
+      <div class="contact-content">
+        <h2>Questions About Our Affiliates?</h2>
+        <p style="margin-bottom: 2rem; font-size: 1.1rem;">We're always happy to discuss our affiliate relationships and answer any questions you might have.</p>
+        <a href="mailto:affiliate@quickcalclabs.com" class="contact-email">affiliate@quickcalclabs.com</a>
+      </div>
+    </div>
+
+    <!-- Thank You Message -->
+    <div class="thank-you fade-in">
+      <p>Thank you for supporting QuickCalcLabs! Your visits, clicks, and engagement help us continue improving our free tools and creating new calculators to serve our growing community better.</p>
     </div>
   </main>
 
-  <footer style="text-align:center;padding:18px;color:#9fb9cc">
+  <footer>
     © 2025 QuickCalcLabs • <a href="terms-of-service.html">Terms</a> • <a href="privacy-policy.html">Privacy</a>
   </footer>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+
+    // Intersection Observer for fade-in animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 150);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
 </body>
 </html>
