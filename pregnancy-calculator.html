@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pregnancy Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free online pregnancy calculator. Estimate your due date, track pregnancy weeks, and follow milestones based on your last period date.">
-  <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy weeks, pregnancy milestones, women's health, pregnancy tracker">
-
+  <meta name="description" content="Free online pregnancy calculator. Estimate your due date, track pregnancy weeks, milestones, and trimester details instantly.">
+  <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy weeks, pregnancy milestones, trimester tracker, women's health, pregnancy tool">
+  
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .result {
+    .result-box {
       margin-top: 20px;
       padding: 20px;
       background: var(--glass-bg);
@@ -17,7 +17,7 @@
     }
     .calendar-btn {
       display: inline-block;
-      margin: 10px 10px 0 0;
+      margin-top: 10px;
       padding: 10px 20px;
       border-radius: 25px;
       background: var(--accent-gradient);
@@ -33,99 +33,152 @@
   </style>
 </head>
 <body>
-  <header>
+  <!-- Header -->
+  <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
       <a href="blog.html">Blog</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
-  <!-- Ad 1: Top Banner -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner</div>
-  </div>
+  <!-- Ad 1 -->
+  <div class="ad-box">728×90 Ad Placeholder</div>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="calc-wrapper">
     <h1>🤰 Pregnancy Calculator</h1>
-    <p>Estimate your pregnancy due date, track how many weeks along you are, and discover key milestones in your journey.</p>
+    <p class="subtitle">Estimate your due date, track your weeks of pregnancy, and discover key milestones instantly.</p>
+
+    <label for="lmp">First Day of Your Last Period:</label>
+    <input type="date" id="lmp" class="input-field">
+
+    <button onclick="calculatePregnancy()">Calculate Due Date</button>
+    <div id="result" class="result-box"></div>
   </section>
 
-  <!-- Calculator -->
-  <section class="container">
-    <div class="card">
-      <h2>Enter Your Pregnancy Details</h2>
-
-      <label for="lmp">First Day of Your Last Period:</label>
-      <input type="date" id="lmp" class="input-field">
-
-      <button onclick="calculatePregnancy()">Calculate Due Date</button>
-      <div id="result" class="result"></div>
-    </div>
-  </section>
-
-  <!-- Ad 2: After Results -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 / 336x280 Result Ad</div>
-  </div>
+  <!-- Ad 2 -->
+  <div class="ad-box">300×250 Ad Placeholder</div>
 
   <!-- SEO Content -->
   <section class="seo-content">
-    <h2>How Our Pregnancy Calculator Works</h2>
-    <p>Pregnancy calculators use the <b>Naegele’s rule</b> to estimate your due date. It adds 280 days (40 weeks) to the first day of your last menstrual period (LMP). While this is the standard method, remember that only about 5% of babies are born on their exact due date.</p>
+    <h2>✨ How Our Pregnancy Calculator Works</h2>
+    <p>Our pregnancy calculator is based on <b>Naegele’s rule</b>, which estimates your due date by adding 280 days (40 weeks) to the first day of your last menstrual period (LMP). This provides an easy, reliable way to track your pregnancy progress and know what to expect at each stage.</p>
 
     <h3>What You’ll Learn</h3>
     <ul>
-      <li><b>Estimated Due Date (EDD):</b> The likely date your baby will be born</li>
-      <li><b>Current Pregnancy Week:</b> Track your progress</li>
+      <li><b>Estimated Due Date (EDD):</b> When your baby is most likely to be born</li>
+      <li><b>Weeks Pregnant:</b> Track your exact progress week by week</li>
       <li><b>Trimester Information:</b> Know which stage of pregnancy you’re in</li>
-      <li><b>Milestones:</b> Understand fetal development by week</li>
+      <li><b>Milestones:</b> Discover your baby’s development at your current week</li>
     </ul>
 
     <h3>Why Use QuickCalcLabs?</h3>
-    <p>Our calculator provides accurate results instantly and is 100% free. Pair it with our <a href="period-tracker.html">Period Calculator</a> for complete women’s health tracking.</p>
+    <p>Our calculators are designed with <b>accuracy</b> and <b>ease-of-use</b> in mind. Pair this with our <a href="period-tracker.html">Period & Ovulation Calculator</a> for complete women’s health tracking.</p>
   </section>
 
-  <!-- Ad 3: Footer Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
+  <!-- Related Internal Links -->
+  <section class="related-links">
+    <h3>🔗 Explore More Tools & Blogs</h3>
+    <a href="bmi-calculator.html">⚖️ BMI Calculator</a>
+    <a href="calorie-calculator.html">🔥 Calorie Calculator</a>
+    <a href="age-calculator.html">📅 Age Calculator</a>
+    <a href="water-intake-calculator.html">💧 Water Intake Calculator</a>
+    <a href="blog-pregnancy-diet.html">🥗 Best Foods for a Healthy Pregnancy</a>
+    <a href="blog-trimester-guide.html">📖 Trimester Guide for Expecting Mothers</a>
+  </section>
 
-<footer>
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is this pregnancy calculator?</summary>
+      <p>✔️ It provides a reliable estimate using Naegele’s rule. Your doctor may refine this with an ultrasound.</p>
+    </details>
+    <details>
+      <summary>Can my due date change?</summary>
+      <p>📅 Yes, due dates may be adjusted after ultrasounds if fetal growth suggests a different timeline.</p>
+    </details>
+    <details>
+      <summary>Do most babies arrive on their due date?</summary>
+      <p>👶 Only about 5% of babies are born exactly on their due date. Most arrive within two weeks before or after.</p>
+    </details>
+  </section>
+
+  <!-- Ad 3 -->
+  <div class="ad-box">728×90 Ad Placeholder</div>
+
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <!-- Footer -->
+  <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy.html">Privacy Policy</a> | 
     <a href="terms.html">Terms of Service</a> |
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-</footer>
+  </footer>
+
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How accurate is this pregnancy calculator?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It provides a reliable estimate using Naegele’s rule. Your doctor may refine this with an ultrasound." }
+    },{
+      "@type": "Question",
+      "name": "Can my due date change?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, due dates may be adjusted after ultrasounds if fetal growth suggests a different timeline." }
+    },{
+      "@type": "Question",
+      "name": "Do most babies arrive on their due date?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Only about 5% of babies are born exactly on their due date. Most arrive within two weeks before or after." }
+    }]
+  }
+  </script>
 
   <script>
     let dueDate;
 
+    const milestones = {
+      4: "🤍 Your baby is now the size of a poppy seed.",
+      6: "💓 Baby's heartbeat can sometimes be detected via ultrasound.",
+      8: "🧠 Brain and nervous system are developing rapidly.",
+      12: "👶 Baby has tiny fingernails and is moving inside your womb.",
+      16: "🍼 You may feel the first flutters of movement (quickening).",
+      20: "🦶 Baby's kicks can now be felt strongly — halfway there!",
+      24: "🎧 Baby’s ears are developing; they may respond to your voice.",
+      28: "👀 Baby can open their eyes and start blinking.",
+      32: "🌙 Baby is practicing breathing and gaining weight steadily.",
+      36: "📏 Baby is almost full size, getting ready for delivery.",
+      40: "🎉 Full term — your little one is ready to arrive any day now!"
+    };
+
     function calculatePregnancy() {
       const lmp = document.getElementById("lmp").value;
       if (!lmp) {
-        document.getElementById("result").innerHTML = "<p>Please enter the date of your last period.</p>";
+        document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter the date of your last period.</p>";
         return;
       }
 
       const lmpDate = new Date(lmp);
       dueDate = new Date(lmpDate);
-      dueDate.setDate(dueDate.getDate() + 280); // 40 weeks
+      dueDate.setDate(dueDate.getDate() + 280);
 
       const today = new Date();
       const weeksPregnant = Math.floor((today - lmpDate) / (1000 * 60 * 60 * 24 * 7));
       const trimester = weeksPregnant <= 13 ? "First Trimester" : (weeksPregnant <= 27 ? "Second Trimester" : "Third Trimester");
 
-      // Fun Facts
-      const funFacts = [
-        "💡 Only about 5% of babies are born on their actual due date.",
-        "🍼 The average newborn weighs about 7.5 pounds (3.4 kg).",
-        "👶 By week 12, most of the baby's critical systems are formed.",
-        "💓 At around week 6, your baby's heartbeat can often be detected."
-      ];
-      const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+      // Select milestone for closest week
+      let milestoneMessage = "🌸 Your pregnancy is progressing beautifully!";
+      for (const [week, message] of Object.entries(milestones)) {
+        if (weeksPregnant >= week) milestoneMessage = message;
+      }
 
       document.getElementById("result").innerHTML = `
         <h3>📅 Pregnancy Details</h3>
@@ -133,7 +186,7 @@
         <p><b>Weeks Pregnant:</b> ${weeksPregnant} weeks</p>
         <p><b>Current Trimester:</b> ${trimester}</p>
         <hr>
-        <p><b>Fun Fact:</b> ${randomFact}</p>
+        <p><b>Milestone:</b> ${milestoneMessage}</p>
         <a href="#" class="calendar-btn" onclick="downloadICS('Estimated Due Date', dueDate)">📅 Add Due Date</a>
       `;
     }
@@ -164,6 +217,14 @@ END:VCALENDAR`;
       a.click();
       document.body.removeChild(a);
     }
+
+    // Dark mode toggle
+    const toggle = document.getElementById("darkModeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    });
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
   </script>
 </body>
 </html>
