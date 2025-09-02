@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Calorie Calculator (TDEE) | QuickCalcLabs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Modern calorie calculator that estimates daily calories (TDEE) with the Mifflin–St Jeor equation. Switch between Imperial and Metric, get cutting/maintenance/bulking targets, and see your position on interactive progress bars." />
+  <meta name="description" content="Modern calorie calculator that estimates daily calories (TDEE) with the Mifflin–St Jeor equation. Switch between Imperial and Metric, get cutting/maintenance/bulking targets, and see your position on an interactive gauge." />
   <link rel="canonical" href="https://quickcalclabs.com/calorie-calculator.html" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="stylesheet" href="css/style.css" />
@@ -12,7 +12,7 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Calorie Calculator (TDEE) • QuickCalcLabs">
-  <meta property="og:description" content="Estimate daily calories for cutting, maintenance, or bulking. Imperial & Metric, instant targets, interactive progress bars, FAQs and more.">
+  <meta property="og:description" content="Estimate daily calories for cutting, maintenance, or bulking. Imperial & Metric, instant targets, interactive gauge, FAQs and more.">
   <meta property="og:url" content="https://quickcalclabs.com/calorie-calculator.html">
   <meta property="og:image" content="https://quickcalclabs.com/images/og-calorie-calculator.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,35 +22,38 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="navbar">
-    <a href="index.html" class="logo">QuickCalcLabs</a>
-    <nav>
+  <header class="site-header">
+    <div class="logo">QuickCalcLabs</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
-      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <button id="darkModeToggle">🌙</button>
+    <button id="dark-mode-toggle">🌙</button>
   </header>
-
-  <!-- Ad 1 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
 
   <!-- Hero -->
   <section class="hero">
-    <h1>Calorie Calculator (TDEE)</h1>
+    <h1><span class="highlight">Calorie Calculator</span> (TDEE)</h1>
     <p>Estimate your daily calories for weight maintenance, fat loss, and muscle gain using scientifically backed formulas. Supports both Metric and Imperial units.</p>
   </section>
 
-  <!-- Breadcrumbs -->
-  <nav class="breadcrumbs">
-    <a href="index.html">Home</a> › <span>Calorie Calculator</span>
-  </nav>
+  <!-- Ad Placement -->
+  <div class="ad ad-banner">728x90 Banner Ad</div>
 
-  <!-- Calculator -->
+  <!-- Breadcrumb -->
+  <div class="breadcrumbs">Home › Calorie Calculator</div>
+
+  <!-- Calculator Card -->
   <section class="calculator-card">
     <h2>Enter Your Details</h2>
+
+    <!-- Unit Toggle -->
+    <div class="unit-toggle">
+      <button class="unit-btn active" data-unit="imperial">Imperial (lbs, ft+in)</button>
+      <button class="unit-btn" data-unit="metric">Metric (kg, cm)</button>
+    </div>
+
     <form id="calorieForm">
       <label>Age: <input type="number" id="age" required></label>
       <label>Gender:
@@ -59,99 +62,106 @@
           <option value="female">Female</option>
         </select>
       </label>
-      <label>Weight (kg): <input type="number" id="weight" required></label>
-      <label>Height (cm): <input type="number" id="height" required></label>
+      <label id="weightLabel">Weight (lbs): <input type="number" id="weight" required></label>
+      <label id="heightLabel">Height (ft/in): 
+        <input type="number" id="feet" placeholder="ft"> 
+        <input type="number" id="inches" placeholder="in">
+      </label>
       <label>Activity Level:
         <select id="activity">
           <option value="1.2">Sedentary</option>
           <option value="1.375">Lightly Active</option>
           <option value="1.55">Moderately Active</option>
           <option value="1.725">Very Active</option>
-          <option value="1.9">Super Active</option>
+          <option value="1.9">Extra Active</option>
         </select>
       </label>
-      <button type="submit">Calculate</button>
+      <button type="submit" class="btn-primary">Calculate</button>
     </form>
   </section>
+
+  <!-- Mid Ad -->
+  <div class="ad ad-box">300x250 Ad</div>
 
   <!-- Results -->
   <section id="results" class="results-card hidden">
     <h2>Your Results</h2>
+    <p id="maintain"></p>
+    <p id="cutting"></p>
+    <p id="bulking"></p>
+
+    <!-- Progress Bars -->
     <div class="progress-container">
-      <p>Maintain Calories: <span id="maintainVal"></span> kcal</p>
-      <div class="progress-bar"><div id="maintainBar" class="bar green"></div></div>
-
-      <p>Cutting Calories: <span id="cutVal"></span> kcal</p>
-      <div class="progress-bar"><div id="cutBar" class="bar blue"></div></div>
-
-      <p>Bulking Calories: <span id="bulkVal"></span> kcal</p>
-      <div class="progress-bar"><div id="bulkBar" class="bar orange"></div></div>
+      <div class="progress-bar maintain"><span></span></div>
+      <div class="progress-bar cutting"><span></span></div>
+      <div class="progress-bar bulking"><span></span></div>
     </div>
-    <p id="funFact"></p>
   </section>
 
-  <!-- Ad 2 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
+  <!-- Bottom Ad -->
+  <div class="ad ad-box">300x250 Ad</div>
 
   <!-- SEO Content -->
-  <section class="seo-content">
-    <h2>About This Calorie Calculator</h2>
-    <p>This calculator uses the Mifflin–St Jeor equation to estimate your Total Daily Energy Expenditure (TDEE). It helps you understand how many calories you need to maintain, lose, or gain weight.</p>
-    <h3>Benefits</h3>
+  <section class="seo-section">
+    <h2>✨ Benefits of Using Our Calorie Calculator</h2>
     <ul>
-      <li>✔️ Supports Metric & Imperial units</li>
-      <li>✔️ Provides Cutting, Maintenance, and Bulking targets</li>
-      <li>✔️ Easy to use with instant results</li>
-      <li>✔️ Includes fun health facts</li>
+      <li>📊 Get precise daily calorie targets</li>
+      <li>🥗 Plan cutting, maintenance, or bulking easily</li>
+      <li>⚡ Switch between Imperial and Metric instantly</li>
+      <li>📱 Works perfectly on mobile & desktop</li>
+    </ul>
+
+    <h3>🔗 Explore More Tools</h3>
+    <div class="tool-links">
+      <a href="bmi-calculator.html" class="tool-card">⚖️ BMI Calculator</a>
+      <a href="macro-calculator.html" class="tool-card">🥩 Macro Calculator</a>
+      <a href="age-calculator.html" class="tool-card">📅 Age Calculator</a>
+      <a href="period-tracker.html" class="tool-card">🌸 Period Tracker</a>
+    </div>
+
+    <h3>📝 Related Blogs</h3>
+    <div class="blog-links">
+      <a href="blog-calories.html" class="blog-card">🔥 How Many Calories Do You Really Need?</a>
+      <a href="blog-tdee.html" class="blog-card">⚡ Understanding TDEE</a>
+    </div>
+
+    <h3>🎉 Fun Facts About Calories</h3>
+    <ul class="fun-facts">
+      <li>🔥 Running burns about 100 calories per mile.</li>
+      <li>🥑 Avocados are nutrient-dense but calorie-rich.</li>
+      <li>⚡ Your brain uses ~20% of your daily calories!</li>
     </ul>
   </section>
 
-  <!-- Explore More -->
-  <section class="related-links">
-    <h2>Explore More Tools & Blogs</h2>
-    <div class="link-grid">
-      <a href="bmi-calculator.html" class="link-card">⚖️ BMI Calculator</a>
-      <a href="macro-calculator.html" class="link-card">🥗 Macro Calculator</a>
-      <a href="blog.html" class="link-card">📝 Health & Fitness Blogs</a>
-    </div>
-  </section>
-
-  <!-- Ad 3 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Footer Ad</div>
-  </div>
-
   <!-- FAQ -->
   <section class="faq">
-    <h2>Frequently Asked Questions</h2>
+    <h2>❓ Frequently Asked Questions</h2>
     <div class="faq-item">
-      <button class="faq-question">What formula does this calculator use?</button>
-      <div class="faq-answer"><p>It uses the Mifflin–St Jeor equation, one of the most accurate formulas for estimating daily calorie needs.</p></div>
+      <button class="faq-question">How accurate is this calculator?</button>
+      <div class="faq-answer">It uses the Mifflin–St Jeor equation, one of the most reliable TDEE formulas.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Does it work for both men and women?</button>
+      <div class="faq-answer">Yes, just select your gender to get tailored results.</div>
     </div>
     <div class="faq-item">
       <button class="faq-question">Can I use it for weight loss?</button>
-      <div class="faq-answer"><p>Yes, select the Cutting Calories result to follow a calorie deficit diet for weight loss.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question">Does it work for athletes?</button>
-      <div class="faq-answer"><p>Yes, it includes activity multipliers suitable for all activity levels, from sedentary to professional athletes.</p></div>
+      <div class="faq-answer">Absolutely! Use the “cutting” value to create a calorie deficit.</div>
     </div>
   </section>
+
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
 
   <!-- Footer -->
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy.html">Privacy Policy</a> | 
-    <a href="terms.html">Terms of Service</a> |
+    <a href="terms.html">Terms of Service</a> | 
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
 
-  <!-- Floating CTA -->
-  <a href="index.html#calculators" class="floating-cta">See All Calculators</a>
-
-  <!-- JSON-LD Schema -->
+  <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -159,88 +169,81 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What formula does this calculator use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "It uses the Mifflin–St Jeor equation, one of the most accurate formulas for estimating daily calorie needs."
-        }
+        "name": "How accurate is this calculator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses the Mifflin–St Jeor equation, one of the most reliable TDEE formulas." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work for both men and women?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, just select your gender to get tailored results." }
       },
       {
         "@type": "Question",
         "name": "Can I use it for weight loss?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, select the Cutting Calories result to follow a calorie deficit diet for weight loss."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does it work for athletes?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, it includes activity multipliers suitable for all activity levels, from sedentary to professional athletes."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Absolutely! Use the “cutting” value to create a calorie deficit." }
       }
     ]
   }
   </script>
 
-  <!-- Script -->
+  <!-- JS Logic -->
   <script>
     const form = document.getElementById('calorieForm');
     const results = document.getElementById('results');
-    const maintainVal = document.getElementById('maintainVal');
-    const cutVal = document.getElementById('cutVal');
-    const bulkVal = document.getElementById('bulkVal');
-    const maintainBar = document.getElementById('maintainBar');
-    const cutBar = document.getElementById('cutBar');
-    const bulkBar = document.getElementById('bulkBar');
-    const funFact = document.getElementById('funFact');
+    const maintainEl = document.getElementById('maintain');
+    const cuttingEl = document.getElementById('cutting');
+    const bulkingEl = document.getElementById('bulking');
+    const unitBtns = document.querySelectorAll('.unit-btn');
+    let isMetric = false;
 
-    form.addEventListener('submit', function(e) {
+    unitBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        unitBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        isMetric = btn.dataset.unit === 'metric';
+        document.getElementById('weightLabel').innerHTML = isMetric ? 'Weight (kg): <input type="number" id="weight" required>' : 'Weight (lbs): <input type="number" id="weight" required>';
+        document.getElementById('heightLabel').innerHTML = isMetric ? 'Height (cm): <input type="number" id="cm" required>' : 'Height (ft/in): <input type="number" id="feet" placeholder="ft"> <input type="number" id="inches" placeholder="in">';
+      });
+    });
+
+    form.addEventListener('submit', e => {
       e.preventDefault();
-
-      const age = +document.getElementById('age').value;
+      const age = parseInt(document.getElementById('age').value);
       const gender = document.getElementById('gender').value;
-      const weight = +document.getElementById('weight').value;
-      const height = +document.getElementById('height').value;
-      const activity = +document.getElementById('activity').value;
+      const activity = parseFloat(document.getElementById('activity').value);
+      let weight, heightCm;
+
+      if (isMetric) {
+        weight = parseFloat(document.getElementById('weight').value);
+        heightCm = parseFloat(document.getElementById('cm').value);
+      } else {
+        weight = parseFloat(document.getElementById('weight').value) * 0.453592;
+        const feet = parseFloat(document.getElementById('feet').value) || 0;
+        const inches = parseFloat(document.getElementById('inches').value) || 0;
+        heightCm = ((feet * 12) + inches) * 2.54;
+      }
 
       let bmr;
       if (gender === 'male') {
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+        bmr = 10 * weight + 6.25 * heightCm - 5 * age + 5;
       } else {
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+        bmr = 10 * weight + 6.25 * heightCm - 5 * age - 161;
       }
-
       const maintain = Math.round(bmr * activity);
       const cutting = Math.round(maintain - 500);
       const bulking = Math.round(maintain + 500);
 
-      maintainVal.textContent = maintain;
-      cutVal.textContent = cutting;
-      bulkVal.textContent = bulking;
-
-      const maxVal = bulking;
-
-      maintainBar.style.width = (maintain / maxVal) * 100 + '%';
-      cutBar.style.width = (cutting / maxVal) * 100 + '%';
-      bulkBar.style.width = '100%';
+      maintainEl.textContent = `Maintain: ${maintain} calories/day`;
+      cuttingEl.textContent = `Cutting: ${cutting} calories/day`;
+      bulkingEl.textContent = `Bulking: ${bulking} calories/day`;
 
       results.classList.remove('hidden');
-      funFact.textContent = "Fun Fact: Did you know your metabolism accounts for up to 70% of your daily calorie burn?";
-    });
 
-    // Dark Mode
-    document.getElementById('darkModeToggle').addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-    });
-
-    // FAQ Toggle
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.nextElementSibling.classList.toggle('open');
-      });
+      // Progress Bars
+      const maxVal = bulking;
+      document.querySelector('.progress-bar.maintain span').style.width = (maintain / maxVal * 100) + '%';
+      document.querySelector('.progress-bar.cutting span').style.width = (cutting / maxVal * 100) + '%';
+      document.querySelector('.progress-bar.bulking span').style.width = (bulking / maxVal * 100) + '%';
     });
   </script>
 </body>
