@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Water Intake Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Water Intake Calculator – find how much water you need daily based on weight, activity and climate. Default units: lbs. Results shown in liters + oz + cups." />
+  <meta name="description" content="Water Intake Calculator — find how much water you need daily based on weight, activity and climate. Default units: lbs. Results shown in liters + oz + cups." />
   <meta name="keywords" content="water intake calculator, hydration calculator, how much water to drink, daily water needs" />
   <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 
@@ -18,21 +18,285 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /* small page-specific tweaks to match your theme */
-    .unit-toggle { display:flex; gap:10px; margin-bottom:16px; }
-    .unit-toggle button { padding:10px 18px; border-radius:28px; border:1px solid rgba(255,255,255,0.08); background:var(--glass-bg); color:var(--text-muted); cursor:pointer; font-weight:600; }
-    .unit-toggle button.active { background:var(--accent-gradient); color:#fff; box-shadow:var(--glow); transform:translateY(-2px); }
-    #result { margin-top:18px; }
+    /* Modern styling inspired by period tracker */
+    .calc-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: var(--card-bg, #fff);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .calc-wrapper h1 {
+      text-align: center;
+      color: var(--accent, #4fc3f7);
+      margin-bottom: 10px;
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text, #666);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Unit toggle */
+    .unit-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      justify-content: center;
+    }
+
+    .unit-btn {
+      padding: 10px 20px;
+      border: 2px solid var(--accent, #4fc3f7);
+      background: transparent;
+      color: var(--accent, #4fc3f7);
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .unit-btn.active {
+      background: var(--accent, #4fc3f7);
+      color: white;
+    }
+
+    .unit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+    }
+
+    /* Form styling */
+    #waterForm {
+      display: grid;
+      gap: 20px;
+    }
+
+    #waterForm label {
+      display: block;
+      font-weight: 600;
+      color: var(--text, #333);
+      margin-bottom: 8px;
+    }
+
+    #waterForm input, #waterForm select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      background: var(--input-bg, #fff);
+      color: var(--text, #333);
+    }
+
+    #waterForm input:focus, #waterForm select:focus {
+      outline: none;
+      border-color: var(--accent, #4fc3f7);
+      box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.1);
+    }
+
+    .hero-cta {
+      background: linear-gradient(135deg, var(--accent, #4fc3f7), #29b6f6);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(79, 195, 247, 0.3);
+    }
+
+    /* Results section */
+    .result-box {
+      margin-top: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+      border-radius: 15px;
+      color: white;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .water-visual {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .water-card {
+      background: rgba(255,255,255,0.2);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .water-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .water-number {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .water-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Water level indicator */
+    .water-level {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .water-glass {
+      width: 80px;
+      height: 120px;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-radius: 0 0 40px 40px;
+      margin: 0 auto 15px;
+      position: relative;
+      background: rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+
+    .water-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
+      border-radius: 0 0 37px 37px;
+      animation: fillWater 1.5s ease-out forwards;
+      transform-origin: bottom;
+    }
+
+    @keyframes fillWater {
+      from { height: 0; }
+      to { height: var(--fill-height, 80%); }
+    }
+
+    /* Hydration tips */
+    .hydration-tips {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+    }
+
+    .hydration-tips h3 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .tip-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    /* SEO content styling */
+    .seo-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: var(--card-bg, #fff);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .seo-content h2 {
+      color: var(--accent, #4fc3f7);
+      margin-bottom: 20px;
+    }
+
+    .seo-content h3 {
+      color: var(--text, #333);
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+
+    .seo-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .seo-content li {
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    .seo-content li:before {
+      content: "💧";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Error styling */
+    .error-message {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .calc-wrapper h1 {
+        font-size: 2rem;
+      }
+      
+      .water-visual {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
       <a href="blog.html">Blog</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
@@ -46,54 +310,79 @@
     </div>
   </div>
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- Hero Calculator -->
+  <section class="calc-wrapper">
     <h1>💧 Water Intake Calculator</h1>
-    <p>Default units: <strong>lbs</strong>. Enter your weight and choose activity & climate — we’ll show how many liters (and oz/cups) you should drink daily.</p>
-  </section>
+    <p class="subtitle">Default units: <strong>lbs</strong>. Enter your weight and choose activity & climate — we'll show how many liters (and oz/cups) you should drink daily.</p>
 
-  <!-- Calculator -->
-  <section class="container">
-    <div class="card">
-      <div class="unit-toggle" role="tablist" aria-label="Unit toggle">
-        <button id="btnImperial" class="active" aria-pressed="true">Imperial (lbs)</button>
-        <button id="btnMetric" aria-pressed="false">Metric (kg)</button>
+    <!-- Unit Toggle -->
+    <div class="unit-toggle" role="tablist" aria-label="Unit toggle">
+      <button id="btnImperial" class="unit-btn active" aria-pressed="true">Imperial (lbs)</button>
+      <button id="btnMetric" class="unit-btn" aria-pressed="false">Metric (kg)</button>
+    </div>
+
+    <form id="waterForm" novalidate>
+      <!-- Imperial (default) -->
+      <div id="imperial-fields" aria-hidden="false">
+        <label for="weightLbs">⚖️ Weight (lbs)</label>
+        <input id="weightLbs" type="number" inputmode="decimal" placeholder="e.g. 154" />
       </div>
 
-      <form id="waterForm" novalidate>
-        <!-- Imperial (default) -->
-        <div id="imperial-fields" aria-hidden="false">
-          <label for="weightLbs">Weight (lbs)</label>
-          <input id="weightLbs" type="number" inputmode="decimal" placeholder="e.g. 154" />
+      <!-- Metric -->
+      <div id="metric-fields" style="display:none;" aria-hidden="true">
+        <label for="weightKg">⚖️ Weight (kg)</label>
+        <input id="weightKg" type="number" inputmode="decimal" placeholder="e.g. 70" />
+      </div>
+
+      <label for="activity">🏃 Activity Level</label>
+      <select id="activity">
+        <option value="1">Low (sedentary)</option>
+        <option value="1.2">Moderate (exercise 2-3x/week)</option>
+        <option value="1.4">Active (exercise 4-5x/week)</option>
+        <option value="1.6">Very active (athlete/manual labor)</option>
+      </select>
+
+      <label for="climate">🌡️ Climate</label>
+      <select id="climate">
+        <option value="1">Cool / Normal</option>
+        <option value="1.1">Warm</option>
+        <option value="1.2">Hot / Humid</option>
+      </select>
+
+      <button type="submit" class="hero-cta">Calculate My Water Needs</button>
+    </form>
+
+    <div id="result" class="result-box" aria-live="polite">
+      <h3>💦 Your Daily Water Requirement</h3>
+      
+      <div class="water-visual">
+        <div class="water-card">
+          <div class="water-number" id="litersAmount">0</div>
+          <div class="water-label">Liters</div>
         </div>
-
-        <!-- Metric -->
-        <div id="metric-fields" style="display:none;" aria-hidden="true">
-          <label for="weightKg">Weight (kg)</label>
-          <input id="weightKg" type="number" inputmode="decimal" placeholder="e.g. 70" />
+        <div class="water-card">
+          <div class="water-number" id="ozAmount">0</div>
+          <div class="water-label">Ounces</div>
         </div>
-
-        <label for="activity">Activity Level</label>
-        <select id="activity">
-          <option value="1">Low (sedentary)</option>
-          <option value="1.2">Moderate (exercise 2-3x/week)</option>
-          <option value="1.4">Active (exercise 4-5x/week)</option>
-          <option value="1.6">Very active (athlete/manual labor)</option>
-        </select>
-
-        <label for="climate">Climate</label>
-        <select id="climate">
-          <option value="1">Cool / Normal</option>
-          <option value="1.1">Warm</option>
-          <option value="1.2">Hot / Humid</option>
-        </select>
-
-        <div style="margin-top:18px;">
-          <button type="submit" class="hero-cta">Calculate</button>
+        <div class="water-card">
+          <div class="water-number" id="cupsAmount">0</div>
+          <div class="water-label">Cups</div>
         </div>
-      </form>
+      </div>
 
-      <div id="result" aria-live="polite"></div>
+      <div class="water-level">
+        <div class="water-glass">
+          <div class="water-fill" id="waterFill"></div>
+        </div>
+        <p><strong>Stay Hydrated!</strong></p>
+      </div>
+
+      <div class="hydration-tips">
+        <h3>💡 Hydration Tips</h3>
+        <div class="tip-item">💧 Sip water consistently throughout the day — aim for a glass every 1-2 hours rather than a big gulp now and then.</div>
+        <div class="tip-item">🍽️ Drinking a glass of water before meals can help reduce calorie intake — another simple trick to support weight control.</div>
+        <div class="tip-item">🌅 Start your day with a glass of water to kickstart hydration after hours of sleep.</div>
+      </div>
     </div>
   </section>
 
@@ -108,19 +397,19 @@
   </div>
 
   <!-- SEO Content -->
-  <section class="container">
-    <div class="seo-content">
-      <h2>Personalized Daily Water Intake</h2>
-      <p>We start with a baseline of ~35 ml per kg of body weight, then adjust for activity and climate. This method gives a practical, easy-to-follow hydration recommendation.</p>
-      <h3>Why Hydration Matters</h3>
-      <ul>
-        <li>Supports energy, cognition & digestion</li>
-        <li>Improves exercise performance and recovery</li>
-        <li>Helps regulate body temperature and skin health</li>
-      </ul>
-      <h3>Fun Fact</h3>
-      <p>Drinking a glass of water before meals can help reduce calorie intake — another simple trick to support weight control.</p>
-    </div>
+  <section class="seo-content">
+    <h2>Personalized Daily Water Intake</h2>
+    <p>We start with a baseline of ~35 ml per kg of body weight, then adjust for activity and climate. This method gives a practical, easy-to-follow hydration recommendation.</p>
+    
+    <h3>Why Hydration Matters</h3>
+    <ul>
+      <li>Supports energy, cognition & digestion</li>
+      <li>Improves exercise performance and recovery</li>
+      <li>Helps regulate body temperature and skin health</li>
+    </ul>
+    
+    <h3>Fun Fact</h3>
+    <p>Drinking a glass of water before meals can help reduce calorie intake — another simple trick to support weight control.</p>
   </section>
 
   <!-- Bottom Ad -->
@@ -133,12 +422,16 @@
     </div>
   </div>
 
-<footer>
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">📢 See All Calculators</a>
+
+  <!-- Footer -->
+  <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy-policy.html">Privacy Policy</a> | 
     <a href="terms-of-service.html">Terms of Service</a> |
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-</footer>
+  </footer>
 
   <script>
     // Track current unit explicitly (fixes "must click Imperial first" bug)
@@ -173,7 +466,7 @@
         imperialFields.setAttribute('aria-hidden','true');
       }
       // Clear previous result when switching units
-      resultEl.innerHTML = '';
+      resultEl.classList.remove('show');
     }
 
     // wire buttons
@@ -185,21 +478,20 @@
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      resultEl.innerHTML = '';
-
+      
       // read inputs based on currentUnit (not on style)
       let weightKg = 0;
       if (currentUnit === 'imperial') {
         const lbs = parseFloat(document.getElementById('weightLbs').value);
         if (!Number.isFinite(lbs) || lbs <= 0) {
-          resultEl.innerHTML = '<p style="color:#ff6b6b">⚠️ Please enter a valid weight in pounds.</p>';
+          showError('⚠️ Please enter a valid weight in pounds.');
           return;
         }
         weightKg = lbs * 0.45359237;
       } else {
         const kg = parseFloat(document.getElementById('weightKg').value);
         if (!Number.isFinite(kg) || kg <= 0) {
-          resultEl.innerHTML = '<p style="color:#ff6b6b">⚠️ Please enter a valid weight in kilograms.</p>';
+          showError('⚠️ Please enter a valid weight in kilograms.');
           return;
         }
         weightKg = kg;
@@ -213,11 +505,46 @@
       const waterOz = waterLiters * 33.8140226;
       const cups = Math.round(waterOz / 8);
 
-      resultEl.innerHTML = `
-        <h3>📊 Your Daily Water Requirement</h3>
-        <p><strong>${waterLiters.toFixed(2)} liters</strong> (~${Math.round(waterOz)} oz / ${cups} cups)</p>
-        <p style="margin-top:10px;color:var(--text-muted);">💡 Tip: Sip water consistently throughout the day — aim for a glass every 1-2 hours rather than a big gulp now and then.</p>
-      `;
+      // Update result display
+      document.getElementById('litersAmount').textContent = waterLiters.toFixed(2);
+      document.getElementById('ozAmount').textContent = Math.round(waterOz);
+      document.getElementById('cupsAmount').textContent = cups;
+
+      // Animate water fill based on intake level (scale 1-4 liters)
+      const fillPercentage = Math.min((waterLiters / 4) * 100, 100);
+      document.getElementById('waterFill').style.setProperty('--fill-height', fillPercentage + '%');
+
+      // Show results with animation
+      resultEl.classList.add('show');
+      
+      // Scroll to results
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    function showError(message) {
+      const existingError = document.querySelector('.error-message');
+      if (existingError) existingError.remove();
+      
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.innerHTML = message;
+      form.appendChild(errorDiv);
+      
+      setTimeout(() => errorDiv.remove(), 5000);
+    }
+
+    // Dark mode toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+        });
+        if (localStorage.getItem("theme") === "dark") {
+          document.body.classList.add("dark-mode");
+        }
+      }
     });
   </script>
 </body>
