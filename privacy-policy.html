@@ -4,66 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy | QuickCalcLabs</title>
-  <meta name="description" content="QuickCalcLabs privacy policy. Learn how we handle your data, cookies, and third-party services.">
   <link rel="stylesheet" href="css/style.css">
+  <script src="script.js" defer></script>
+  <meta name="description" content="QuickCalcLabs Privacy Policy – learn how we handle your data, cookies, and user privacy with transparency and care.">
 </head>
 <body>
   <!-- Header -->
-  <header class="site-header">
-    <a href="index.html" class="logo">QuickCalcLabs</a>
+  <header>
+    <div class="logo">QuickCalc<span>Labs</span></div>
     <nav>
       <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
-      <button id="darkModeToggle">🌙</button>
     </nav>
+    <button id="dark-mode-toggle">🌙</button>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
-    <h1>Privacy Policy</h1>
-    <p>Your privacy is important to us. This page explains how we collect, use, and protect your information.</p>
+    <h1>🔒 Privacy Policy</h1>
+    <p>Your privacy matters. Learn how we collect, use, and protect your information.</p>
   </section>
 
-  <!-- Content Section -->
-  <section class="container">
-    <div class="content-card">
-      <h2>🔒 Information We Collect</h2>
-      <p>We collect minimal data necessary for analytics, ads, and providing a better user experience. This may include cookies, browser type, and usage statistics.</p>
-    </div>
-    <div class="content-card">
-      <h2>⚡ How We Use Your Data</h2>
-      <p>We use collected information to improve our tools, personalize ads, and analyze traffic trends. Your data is never sold to third parties.</p>
-    </div>
-    <div class="content-card">
-      <h2>📢 Third-Party Services</h2>
-      <p>We may use Google Analytics and AdSense. These services may set cookies and track limited user behavior for ad personalization and analytics.</p>
-    </div>
-    <div class="content-card">
-      <h2>✅ Your Rights</h2>
-      <p>You can manage cookies through your browser, opt out of personalized ads, or contact us to request data removal.</p>
-    </div>
-  </section>
+  <!-- Main Content -->
+  <main class="content">
+    <section>
+      <h2>1. Information We Collect</h2>
+      <p>We collect limited data necessary to improve user experience. This may include cookies, analytics, and usage trends. We never sell your personal information.</p>
+    </section>
 
-  <!-- FAQs Section -->
-  <section class="container faq-section">
+    <section>
+      <h2>2. How We Use Your Data</h2>
+      <p>Your data is used to personalize features, optimize performance, and serve relevant content. We ensure compliance with GDPR, CCPA, and other data protection laws.</p>
+    </section>
+
+    <section>
+      <h2>3. Cookies</h2>
+      <p>Cookies help us remember preferences and analyze traffic. You can disable cookies in your browser settings at any time.</p>
+    </section>
+
+    <section>
+      <h2>4. Third-Party Services</h2>
+      <p>We may use analytics and advertising partners like Google AdSense. These services may set their own cookies and collect data in line with their privacy policies.</p>
+    </section>
+
+    <section>
+      <h2>5. Contact Us</h2>
+      <p>If you have any privacy concerns, please reach us at <a href="mailto:support@quickcalclabs.com">support@quickcalclabs.com</a>.</p>
+    </section>
+  </main>
+
+  <!-- FAQ (modern clickable accordion style) -->
+  <section class="faq">
     <h2>❓ Frequently Asked Questions</h2>
     <div class="faq-item">
       <button class="faq-question">Do you sell my personal data?</button>
-      <div class="faq-answer"><p>No. We never sell your personal information to third parties.</p></div>
+      <div class="faq-answer"><p>No. We never sell or share your personal data with third parties.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-question">Can I opt out of cookies?</button>
-      <div class="faq-answer"><p>Yes. You can manage or disable cookies from your browser settings anytime.</p></div>
+      <div class="faq-answer"><p>Yes, you can disable cookies directly from your browser settings.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-question">How can I contact you about privacy?</button>
-      <div class="faq-answer"><p>You can reach us anytime at contact@quickcalclabs.com.</p></div>
+      <div class="faq-answer"><p>Email us at <a href="mailto:support@quickcalclabs.com">support@quickcalclabs.com</a>.</p></div>
     </div>
   </section>
-
-  <!-- Floating CTA -->
-  <a href="index.html#calculators" class="floating-cta">See All Calculators</a>
 
   <!-- Footer -->
   <footer>
@@ -73,24 +79,7 @@
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
 
-  <!-- FAQ Accordion Script -->
-  <script>
-    document.querySelectorAll(".faq-question").forEach(btn => {
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("active");
-        const answer = btn.nextElementSibling;
-        answer.style.display = answer.style.display === "block" ? "none" : "block";
-      });
-    });
-
-    // Dark mode toggle
-    const toggle = document.getElementById("darkModeToggle");
-    toggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-    });
-  </script>
-
-  <!-- JSON-LD FAQ Schema -->
+  <!-- FAQ JSON-LD Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -101,7 +90,7 @@
         "name": "Do you sell my personal data?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. We never sell your personal information to third parties."
+          "text": "No. We never sell or share your personal data with third parties."
         }
       },
       {
@@ -109,7 +98,7 @@
         "name": "Can I opt out of cookies?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. You can manage or disable cookies from your browser settings anytime."
+          "text": "Yes, you can disable cookies directly from your browser settings."
         }
       },
       {
@@ -117,7 +106,7 @@
         "name": "How can I contact you about privacy?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can reach us anytime at contact@quickcalclabs.com."
+          "text": "Email us at support@quickcalclabs.com."
         }
       }
     ]
