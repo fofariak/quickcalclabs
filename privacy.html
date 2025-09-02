@@ -1,804 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy | QuickCalcLabs</title>
-  <meta name="description" content="QuickCalcLabs privacy policy. Learn what data we collect, how we use it, and how we protect your privacy when using our free online calculators.">
-  <meta name="keywords" content="privacy policy, quickcalclabs privacy, data usage, cookies, analytics">
-  <link rel="canonical" href="https://quickcalclabs.com/privacy-policy.html">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
-  <!-- GA + AdSense placeholders -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','GA_MEASUREMENT_ID');</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
-
-  <style>
-    /* Using the same CSS variables and design system as contact.html */
-    :root {
-      --bg-gradient-light: radial-gradient(1200px 600px at 10% -10%, #ffe6f6 0%, transparent 55%),
-                           radial-gradient(900px 500px at 110% 10%, #e6f0ff 0%, transparent 50%),
-                           linear-gradient(135deg, #a18cd1 0%, #fbc2eb 50%, #fdfbfb 100%);
-      --bg-gradient-dark: radial-gradient(1200px 600px at -10% -10%, rgba(255, 107, 160, .15) 0%, transparent 55%),
-                          radial-gradient(900px 500px at 110% -10%, rgba(106, 130, 251, .15) 0%, transparent 50%),
-                          linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-      --surface-1-light: rgba(255, 255, 255, 0.78);
-      --surface-1-dark: rgba(22, 22, 26, 0.85);
-      --surface-2-light: rgba(255, 255, 255, 0.35);
-      --surface-2-dark: rgba(255, 255, 255, 0.06);
-      --text-strong-light: #181a20;
-      --text-weak-light: #51586a;
-      --text-strong-dark: #f3f6ff;
-      --text-weak-dark: #b7c0d1;
-      --accent-pink: #ff7eb3;
-      --accent-blue: #6a82fb;
-      --accent-green: #43e97b;
-      --accent-teal: #38f9d7;
-      --accent-orange: #ff8f70;
-      --accent-yellow: #ffd166;
-      --accent-red: #ee0979;
-      --accent-purple: #a855f7;
-      --shadow-sm: 0 6px 16px rgba(0,0,0,0.08);
-      --shadow-md: 0 12px 28px rgba(0,0,0,0.14);
-      --shadow-lg: 0 22px 50px rgba(0,0,0,0.22);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-sm: 9px;
-      --ease: cubic-bezier(.2,.8,.2,1);
-      --fast: .18s;
-      --slow: .4s;
-    }
-
-    * { box-sizing: border-box; }
-    
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Inter, Arial;
-      line-height: 1.7;
-      color: var(--text-strong-light);
-      background: var(--bg-gradient-light) fixed;
-      background-size: cover;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .dark-mode {
-      color: var(--text-strong-dark);
-      background: var(--bg-gradient-dark) fixed;
-    }
-
-    /* Header */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: var(--surface-2-light);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    }
-
-    .dark-mode header {
-      background: var(--surface-2-dark);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    header a:first-child {
-      font-weight: 800;
-      font-size: 1.3rem;
-      letter-spacing: 0.5px;
-      background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-decoration: none;
-    }
-
-    nav {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    nav a {
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      font-weight: 600;
-      color: inherit;
-      text-decoration: none;
-      opacity: 0.9;
-      transition: all var(--fast) var(--ease);
-    }
-
-    nav a:hover {
-      opacity: 1;
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-1px);
-    }
-
-    .dark-mode nav a:hover {
-      background: rgba(255, 255, 255, 0.07);
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    /* Page Header */
-    .page-header {
-      text-align: center;
-      padding: 3rem 0 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .page-header::before {
-      content: "";
-      position: absolute;
-      top: -120px;
-      left: -120px;
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float 25s ease-in-out infinite;
-    }
-
-    .page-header::after {
-      content: "";
-      position: absolute;
-      bottom: -100px;
-      right: -100px;
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, rgba(56, 249, 215, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float 20s ease-in-out infinite reverse;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-30px) rotate(10deg); }
-    }
-
-    .page-header h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      margin: 0 0 1rem;
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.02em;
-      position: relative;
-      z-index: 2;
-    }
-
-    .page-subtitle {
-      color: var(--text-weak-light);
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin: 0 0 2rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .dark-mode .page-subtitle {
-      color: var(--text-weak-dark);
-    }
-
-    .last-updated {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--surface-2-light);
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-weak-light);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      position: relative;
-      z-index: 2;
-    }
-
-    .dark-mode .last-updated {
-      background: var(--surface-2-dark);
-      color: var(--text-weak-dark);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    /* Content Card */
-    .privacy-content {
-      background: var(--surface-1-light);
-      padding: 3rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      position: relative;
-      overflow: hidden;
-      margin-top: 2rem;
-    }
-
-    .dark-mode .privacy-content {
-      background: var(--surface-1-dark);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .privacy-content::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: conic-gradient(from 0deg at 50% 50%, 
-        rgba(168, 85, 247, 0.05), 
-        rgba(255, 126, 179, 0.05), 
-        rgba(67, 233, 123, 0.05), 
-        rgba(168, 85, 247, 0.05));
-      animation: rotate 40s linear infinite;
-      opacity: 0.6;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .content-inner {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Typography */
-    .privacy-content h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin: 2.5rem 0 1rem;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .privacy-content h2:first-child {
-      margin-top: 0;
-    }
-
-    .privacy-content h2::before {
-      content: "";
-      width: 4px;
-      height: 24px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
-
-    .privacy-content p {
-      color: var(--text-strong-light);
-      margin: 0 0 1.5rem;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .dark-mode .privacy-content p {
-      color: var(--text-strong-dark);
-    }
-
-    /* Lists */
-    .privacy-content ul {
-      margin: 0 0 1.5rem;
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .privacy-content ul li {
-      position: relative;
-      padding: 0.8rem 0 0.8rem 2.5rem;
-      margin-bottom: 0.5rem;
-      background: var(--surface-2-light);
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all var(--fast) var(--ease);
-    }
-
-    .dark-mode .privacy-content ul li {
-      background: var(--surface-2-dark);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .privacy-content ul li:hover {
-      transform: translateX(5px);
-      border-color: var(--accent-blue);
-    }
-
-    .privacy-content ul li::before {
-      content: "🔒";
-      position: absolute;
-      left: 0.8rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.1rem;
-    }
-
-    .privacy-content ul li strong {
-      color: var(--accent-blue);
-      font-weight: 700;
-    }
-
-    /* Links */
-    .privacy-content a {
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 0.2rem 0.5rem;
-      border-radius: 5px;
-      transition: all var(--fast) var(--ease);
-    }
-
-    .privacy-content a:hover {
-      background: rgba(106, 130, 251, 0.1);
-      transform: translateY(-1px);
-    }
-
-    /* Highlight boxes */
-    .highlight-box {
-      background: linear-gradient(135deg, rgba(67, 233, 123, 0.1), rgba(56, 249, 215, 0.05));
-      border: 2px solid rgba(67, 233, 123, 0.2);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      margin: 2rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .highlight-box::before {
-      content: "ℹ️";
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      font-size: 1.2rem;
-    }
-
-    .highlight-box p {
-      margin: 0 0 0 2rem;
-      font-weight: 600;
-    }
-
-    /* Contact section */
-    .contact-section {
-      background: linear-gradient(135deg, rgba(255, 126, 179, 0.1), rgba(106, 130, 251, 0.05));
-      border: 2px solid rgba(255, 126, 179, 0.2);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      text-align: center;
-      margin: 2rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-section::before {
-      content: "";
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, rgba(255, 126, 179, 0.2) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .contact-section h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-    }
-
-    .contact-email {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
-      color: white;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: all var(--fast) var(--ease);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .contact-email:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      filter: saturate(1.2);
-    }
-
-    /* Ad Placeholder */
-    .ad-container {
-      background: var(--surface-2-light);
-      border: 2px dashed rgba(255, 255, 255, 0.3);
-      border-radius: var(--radius-md);
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-weak-light);
-      font-weight: 600;
-      margin: 2rem 0;
-    }
-
-    .dark-mode .ad-container {
-      background: var(--surface-2-dark);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: var(--text-weak-dark);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-weak-light);
-      background: var(--surface-2-light);
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      margin-top: 3rem;
-    }
-
-    .dark-mode footer {
-      color: var(--text-weak-dark);
-      background: var(--surface-2-dark);
-      border-top-color: rgba(255, 255, 255, 0.1);
-    }
-
-    footer a {
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Dark mode toggle button */
-    .dark-toggle {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
-      border: none;
-      color: white;
-      padding: 0.6rem 1rem;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: all var(--fast) var(--ease);
-    }
-
-    .dark-toggle:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .container {
-        padding: 1rem;
-      }
-      
-      header {
-        padding: 1rem;
-      }
-      
-      .page-header {
-        padding: 2rem 0 1.5rem;
-      }
-      
-      .privacy-content {
-        padding: 2rem 1.5rem;
-      }
-      
-      .privacy-content ul li {
-        padding-left: 2rem;
-      }
-    }
-
-    /* Animation classes */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Table of contents */
-    .toc {
-      background: var(--surface-2-light);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      margin: 2rem 0;
-      position: sticky;
-      top: 100px;
-      z-index: 10;
-    }
-
-    .dark-mode .toc {
-      background: var(--surface-2-dark);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .toc h3 {
-      margin: 0 0 1rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--accent-purple);
-    }
-
-    .toc ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .toc ul li {
-      background: none;
-      border: none;
-      padding: 0.3rem 0;
-      margin: 0;
-      transform: none;
-    }
-
-    .toc ul li::before {
-      content: "→";
-      color: var(--accent-blue);
-      margin-right: 0.5rem;
-    }
-
-    .toc a {
-      color: var(--text-strong-light);
-      font-weight: 500;
-      padding: 0;
-      font-size: 0.95rem;
-    }
-
-    .dark-mode .toc a {
-      color: var(--text-strong-dark);
-    }
-
-    .toc a:hover {
-      color: var(--accent-blue);
-      background: none;
-      transform: none;
-    }
-  </style>
+  <meta name="description" content="QuickCalcLabs privacy policy. Learn how we handle your data, cookies, and third-party services.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <a href="index.html">QuickCalcLabs</a>
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
-      <button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
-  <main class="container">
-    <!-- Page Header -->
-    <div class="page-header">
-      <h1>Privacy Policy</h1>
-      <p class="page-subtitle">Your privacy matters to us. This policy explains how we collect, use, and protect your information when you use QuickCalcLabs.</p>
-      <div class="last-updated">
-        <span>📅</span>
-        Last updated: August 26, 2025
-      </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Privacy Policy</h1>
+    <p>Your privacy is important to us. This page explains how we collect, use, and protect your information.</p>
+  </section>
+
+  <!-- Content Section -->
+  <section class="container">
+    <div class="content-card">
+      <h2>🔒 Information We Collect</h2>
+      <p>We collect minimal data necessary for analytics, ads, and providing a better user experience. This may include cookies, browser type, and usage statistics.</p>
     </div>
-
-    <!-- Ad Placeholder -->
-    <div class="ad-container fade-in">
-      <p>📢 Advertisement Space</p>
-      <p style="font-size: 0.9rem; margin: 0; opacity: 0.8;">Supporting our free calculators through relevant ads</p>
+    <div class="content-card">
+      <h2>⚡ How We Use Your Data</h2>
+      <p>We use collected information to improve our tools, personalize ads, and analyze traffic trends. Your data is never sold to third parties.</p>
     </div>
-
-    <!-- Table of Contents -->
-    <div class="toc fade-in">
-      <h3>📋 Quick Navigation</h3>
-      <ul>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#information-we-collect">Information we collect</a></li>
-        <li><a href="#how-we-use">How we use your information</a></li>
-        <li><a href="#advertising">Advertising & analytics</a></li>
-        <li><a href="#third-party">Third-party links</a></li>
-        <li><a href="#data-retention">Data retention</a></li>
-        <li><a href="#your-rights">Your rights</a></li>
-        <li><a href="#contact">Contact us</a></li>
-      </ul>
+    <div class="content-card">
+      <h2>📢 Third-Party Services</h2>
+      <p>We may use Google Analytics and AdSense. These services may set cookies and track limited user behavior for ad personalization and analytics.</p>
     </div>
-
-    <!-- Privacy Content -->
-    <div class="privacy-content fade-in">
-      <div class="content-inner">
-        <h2 id="introduction">Introduction</h2>
-        <p>QuickCalcLabs ("we", "our", or "us") respects your privacy and is committed to protecting your personal information. This privacy policy explains what information we collect, how we use it, and the choices you have when using our free online calculators and tools.</p>
-
-        <div class="highlight-box">
-          <p>We believe in transparency and want you to understand exactly how your data is handled when you visit our site.</p>
-        </div>
-
-        <h2 id="information-we-collect">Information we collect</h2>
-        <ul>
-          <li><strong>Automatically collected data:</strong> When you visit our site we collect technical data such as IP address, browser type, pages visited, device type, operating system, and timestamps via server logs and analytics tools.</li>
-          <li><strong>Cookies & similar technologies:</strong> We use cookies, local storage, and similar technologies to improve site functionality, remember your preferences (like dark mode), and for analytics and advertising purposes.</li>
-          <li><strong>Form submissions:</strong> If you contact us via our contact form, we receive the name, email address, subject, and message you submitted voluntarily.</li>
-          <li><strong>Calculator usage:</strong> We may collect anonymous data about which calculators are used most frequently to improve our services, but we don't store your actual calculations or results.</li>
-        </ul>
-
-        <h2 id="how-we-use">How we use your information</h2>
-        <ul>
-          <li><strong>Service operation:</strong> To operate, maintain, and improve our website, calculators, and user experience.</li>
-          <li><strong>Analytics:</strong> To analyze usage patterns and trends so we can understand how users interact with our tools and make improvements (primarily through Google Analytics).</li>
-          <li><strong>Monetization:</strong> To display contextually relevant advertisements and manage site monetization through services like Google AdSense.</li>
-          <li><strong>Communication:</strong> To respond to inquiries, feedback, or support requests you send via our contact forms or email.</li>
-          <li><strong>Technical improvements:</strong> To identify and fix bugs, optimize performance, and ensure our calculators work correctly across different devices and browsers.</li>
-        </ul>
-
-        <h2 id="advertising">Advertising & analytics</h2>
-        <p>We use third-party services to understand our audience and serve relevant advertisements:</p>
-        <ul>
-          <li><strong>Google Analytics:</strong> Helps us measure site traffic, user behavior, and popular content. This service may use cookies and collect anonymized usage data.</li>
-          <li><strong>Google AdSense:</strong> Displays contextually relevant advertisements on our site. This service may use cookies to show personalized ads based on your browsing history.</li>
-          <li><strong>Other ad networks:</strong> We may partner with other reputable advertising networks that follow similar privacy practices.</li>
-        </ul>
-        <p>These services have their own privacy policies and data handling practices. We encourage you to review Google's privacy policies and opt-out options if you prefer.</p>
-
-        <h2 id="third-party">Third-party links</h2>
-        <p>Our website may include links to third-party websites, external calculators, or additional resources. We are not responsible for the privacy practices of these external sites. Please review their privacy policies separately before providing any personal information.</p>
-
-        <h2 id="data-retention">Data retention</h2>
-        <p>We retain personal information only as long as necessary to provide our services and meet legal obligations. Server logs are typically retained for 30-90 days, while contact form submissions may be kept longer to maintain our support history. You can request deletion of your data at any time.</p>
-
-        <h2 id="your-rights">Your rights</h2>
-        <p>Depending on your jurisdiction (such as GDPR in Europe or CCPA in California), you may have rights including:</p>
-        <ul>
-          <li><strong>Access:</strong> Request a copy of the personal data we have about you.</li>
-          <li><strong>Correction:</strong> Ask us to correct inaccurate or incomplete information.</li>
-          <li><strong>Deletion:</strong> Request deletion of your personal data.</li>
-          <li><strong>Portability:</strong> Receive your data in a machine-readable format.</li>
-          <li><strong>Opt-out:</strong> Decline certain uses of your information, such as marketing communications.</li>
-        </ul>
-
-        <div class="contact-section">
-          <h2 id="contact">Questions? We're here to help</h2>
-          <p>If you have questions about this privacy policy, want to exercise your rights, or have privacy concerns, please don't hesitate to reach out:</p>
-          <a href="mailto:privacy@quickcalclabs.com" class="contact-email">
-            <span>📧</span>
-            privacy@quickcalclabs.com
-          </a>
-        </div>
-
-        <div class="highlight-box" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(255, 126, 179, 0.05)); border-color: rgba(168, 85, 247, 0.2);">
-          <p><strong>Agreement:</strong> By using QuickCalcLabs, you agree to this Privacy Policy. We may update this policy occasionally to reflect changes in our practices or legal requirements. Significant changes will be prominently posted on this page with an updated "last modified" date.</p>
-        </div>
-      </div>
+    <div class="content-card">
+      <h2>✅ Your Rights</h2>
+      <p>You can manage cookies through your browser, opt out of personalized ads, or contact us to request data removal.</p>
     </div>
-  </main>
+  </section>
 
+  <!-- FAQs Section -->
+  <section class="container faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question">Do you sell my personal data?</button>
+      <div class="faq-answer"><p>No. We never sell your personal information to third parties.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Can I opt out of cookies?</button>
+      <div class="faq-answer"><p>Yes. You can manage or disable cookies from your browser settings anytime.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How can I contact you about privacy?</button>
+      <div class="faq-answer"><p>You can reach us anytime at contact@quickcalclabs.com.</p></div>
+    </div>
+  </section>
+
+  <!-- Floating CTA -->
+  <a href="index.html#calculators" class="floating-cta">See All Calculators</a>
+
+  <!-- Footer -->
   <footer>
-    © 2025 QuickCalcLabs • <a href="terms-of-service.html">Terms</a> • <a href="affiliate-disclosure.html">Affiliate Disclosure</a> • <a href="contact.html">Contact</a>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy.html">Privacy Policy</a> | 
+    <a href="terms-of-service.html">Terms of Service</a> |
+    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
 
+  <!-- FAQ Accordion Script -->
   <script>
-    // Dark mode functionality
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    }
+    document.querySelectorAll(".faq-question").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const answer = btn.nextElementSibling;
+        answer.style.display = answer.style.display === "block" ? "none" : "block";
+      });
+    });
 
-    // Load saved theme
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('dark-mode');
-    }
+    // Dark mode toggle
+    const toggle = document.getElementById("darkModeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you sell my personal data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. We never sell your personal information to third parties."
         }
-      });
-    });
-
-    // Intersection Observer for animations
-    document.addEventListener('DOMContentLoaded', function() {
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, index * 200);
-          }
-        });
-      }, observerOptions);
-
-      // Observe all fade-in elements
-      document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
-      });
-    });
-
-    // Add active state to TOC links based on scroll position
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('h2[id]');
-      const tocLinks = document.querySelectorAll('.toc a');
-      
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= sectionTop - 200) {
-          current = section.getAttribute('id');
+      },
+      {
+        "@type": "Question",
+        "name": "Can I opt out of cookies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can manage or disable cookies from your browser settings anytime."
         }
-      });
-
-      tocLinks.forEach(link => {
-        link.style.color = '';
-        if (link.getAttribute('href') === `#${current}`) {
-          link.style.color = 'var(--accent-blue)';
-          link.style.fontWeight = '700';
+      },
+      {
+        "@type": "Question",
+        "name": "How can I contact you about privacy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can reach us anytime at contact@quickcalclabs.com."
         }
-      });
-    });
-
-    // Add copy-to-clipboard functionality for email addresses
-    document.querySelectorAll('.contact-email').forEach(emailLink => {
-      emailLink.addEventListener('click', function(e) {
-        const email = this.href.replace('mailto:', '');
-        navigator.clipboard.writeText(email).then(() => {
-          // Show temporary success message
-          const originalText = this.innerHTML;
-          this.innerHTML = '<span>✅</span> Email copied!';
-          setTimeout(() => {
-            this.innerHTML = originalText;
-          }, 2000);
-        });
-      });
-    });
-
-    // Add subtle parallax effect to floating elements
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const parallaxElements = document.querySelectorAll('.page-header::before, .page-header::after');
-      const speed = 0.5;
-      
-      // Apply parallax to header decorative elements
-      const header = document.querySelector('.page-header');
-      if (header) {
-        header.style.transform = `translateY(${scrolled * speed}px)`;
       }
-    });
+    ]
+  }
+  </script>
+</body>
+</html>
