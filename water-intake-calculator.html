@@ -297,6 +297,32 @@
       color: var(--accent, #4fc3f7);
     }
 
+     .faq-question {
+      width: 100%;
+      margin: 0;
+      padding: 12px;
+      background: var(--accent, #ff6b81);
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .faq-answer {
+      margin: 0;
+      padding: 12px;
+      display: none;
+      font-size: 14px;
+      line-height: 1.6;
+      background: var(--card-bg, #fff);
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .calc-wrapper h1 {
