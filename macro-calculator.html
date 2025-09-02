@@ -3,116 +3,486 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Macro Calculator | QuickCalcLabs</title>
+  <title>Macro Calculator - Protein, Carbs & Fat Calculator | QuickCalcLabs</title>
   <meta name="description" content="Free macro calculator with adjustable protein, carbs, and fat ratios. Calculate daily calorie needs, macros, and grams for weight loss, maintenance, or muscle gain.">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Modern Macro Calculator Styles */
+    .goal-slider-container {
+      background: var(--card-bg, #f8f9fa);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+    
+    .macro-sliders {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .slider-group {
+      background: var(--card-bg, #f8f9fa);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    
+    .slider-group label {
+      font-weight: 600;
+      color: var(--text, #333);
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .slider-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--accent, #4facfe);
+      margin-bottom: 8px;
+    }
+    
+    .slider-group input[type="range"] {
+      width: 100%;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #ddd;
+      outline: none;
+    }
+    
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent, #4facfe);
+      cursor: pointer;
+    }
+    
+    .toggle-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .toggle-group button {
+      padding: 10px 20px;
+      border: 2px solid var(--accent, #4facfe);
+      background: transparent;
+      color: var(--accent, #4facfe);
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .toggle-group button.active {
+      background: var(--accent, #4facfe);
+      color: white;
+    }
+    
+    .toggle-group button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(79, 172, 254, 0.3);
+    }
+    
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    
+    #macroChart {
+      max-width: 400px;
+      margin: 20px auto;
+      display: none;
+    }
+    
+    /* Card Grid Styles */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .card {
+      background: var(--card-bg, #fff);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border-color: var(--accent, #4facfe);
+    }
+    
+    .card a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text, #222);
+      font-size: 16px;
+    }
+    
+    .card a:hover {
+      color: var(--accent, #4facfe);
+    }
+    
+    /* FAQ Styles */
+    .faq {
+      margin-bottom: 15px;
+      border-radius: 12px;
+      background: var(--card-bg, #fff);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .faq:hover {
+      border-color: var(--accent, #4facfe);
+    }
+    
+    .faq h3 {
+      margin: 0;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, var(--accent, #4facfe), #00f2fe);
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .faq h3:hover {
+      background: linear-gradient(135deg, #3d8bfe, #4facfe);
+    }
+    
+    .faq p {
+      margin: 0;
+      padding: 18px 20px;
+      display: none;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text, #444);
+    }
+    
+    .faq.active p {
+      display: block;
+    }
+    
+    /* Benefits List */
+    .benefits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .benefit-item {
+      background: var(--card-bg, #f8f9fa);
+      padding: 15px;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent, #4facfe);
+      transition: transform 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+      transform: translateX(5px);
+    }
+    
+    /* Result styling */
+    .macro-result {
+      background: linear-gradient(135deg, var(--accent, #4facfe), #00f2fe);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 20px 0;
+    }
+    
+    .macro-result h2 {
+      margin-top: 0;
+      color: white;
+    }
+    
+    .macro-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .macro-item {
+      background: rgba(255,255,255,0.2);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <header>
+
+  <!-- Header -->
+  <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
-      <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
   <!-- Top Ad -->
   <div class="ad-container">
-    <div class="ad-placeholder">728x90 Ad Placeholder</div>
+    <div class="ad-placeholder">728x90 Banner Ad</div>
   </div>
 
-  <section class="container">
-    <h1 class="section-title">Macro Calculator</h1>
-    <p>Customize your macronutrient split to match your goals. Adjust calories with the goal slider and fine-tune your protein, carbs, and fat ratios.</p>
+  <!-- Hero Calculator -->
+  <section class="calc-wrapper">
+    <h1>🥗 Macro Calculator</h1>
+    <p class="subtitle">Calculate your perfect macronutrient split for optimal health, weight loss, or muscle gain.</p>
 
     <!-- Unit Toggle -->
     <div class="toggle-group">
-      <button id="unitImperial" class="active">Imperial (lbs, ft/in)</button>
-      <button id="unitMetric">Metric (kg, cm)</button>
+      <button id="unitImperial" class="active">🇺🇸 Imperial (lbs, ft/in)</button>
+      <button id="unitMetric">🌍 Metric (kg, cm)</button>
     </div>
 
     <form id="macroForm">
-      <label>Age: <input type="number" id="age" required></label>
-      <label>Gender:
-        <select id="gender">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </label>
+      <label>🎂 Age:</label>
+      <input type="number" id="age" placeholder="25" required>
+
+      <label>👤 Gender:</label>
+      <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
 
       <!-- Imperial Fields -->
       <div id="imperialFields">
-        <label>Weight (lbs): <input type="number" id="weightLbs"></label>
-        <label>Height: 
-          <input type="number" id="heightFt" placeholder="ft" style="width:60px;"> 
-          <input type="number" id="heightIn" placeholder="in" style="width:60px;">
-        </label>
+        <label>⚖️ Weight (lbs):</label>
+        <input type="number" id="weightLbs" placeholder="150">
+        
+        <label>📏 Height:</label>
+        <div class="height-inputs">
+          <input type="number" id="heightFt" placeholder="5 ft" style="width:100px;">
+          <input type="number" id="heightIn" placeholder="8 in" style="width:100px;">
+        </div>
       </div>
 
       <!-- Metric Fields -->
       <div id="metricFields" style="display:none;">
-        <label>Weight (kg): <input type="number" id="weightKg"></label>
-        <label>Height (cm): <input type="number" id="heightCm"></label>
+        <label>⚖️ Weight (kg):</label>
+        <input type="number" id="weightKg" placeholder="68">
+        
+        <label>📏 Height (cm):</label>
+        <input type="number" id="heightCm" placeholder="173">
       </div>
 
-      <label>Activity Level:
-        <select id="activity">
-          <option value="1.2">Sedentary</option>
-          <option value="1.375">Lightly active</option>
-          <option value="1.55">Moderately active</option>
-          <option value="1.725">Very active</option>
-          <option value="1.9">Extra active</option>
-        </select>
-      </label>
+      <label>🏃‍♂️ Activity Level:</label>
+      <select id="activity">
+        <option value="1.2">🛋️ Sedentary (desk job, no exercise)</option>
+        <option value="1.375">🚶 Lightly active (light exercise 1-3 days/week)</option>
+        <option value="1.55">🏃 Moderately active (moderate exercise 3-5 days/week)</option>
+        <option value="1.725">💪 Very active (hard exercise 6-7 days/week)</option>
+        <option value="1.9">🏋️ Extra active (very hard exercise, physical job)</option>
+      </select>
 
       <!-- Goal Slider -->
-      <label>Goal Intensity: <span id="goalVal">0%</span></label>
-      <input type="range" id="goalSlider" min="-30" max="30" value="0">
+      <div class="goal-slider-container">
+        <label>🎯 Goal Intensity: <span id="goalVal" class="slider-value">0% (Maintain Weight)</span></label>
+        <input type="range" id="goalSlider" min="-30" max="30" value="0">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-top: 5px;">
+          <span>📉 Weight Loss</span>
+          <span>⚖️ Maintenance</span>
+          <span>📈 Weight Gain</span>
+        </div>
+      </div>
 
       <!-- Macro Sliders -->
-      <h3>Macro Split</h3>
-      <label>Protein: <span id="proteinVal">30%</span></label>
-      <input type="range" id="proteinSlider" min="10" max="70" value="30">
+      <h3>🍽️ Customize Your Macro Split</h3>
+      <div class="macro-sliders">
+        <div class="slider-group">
+          <label>🥩 Protein</label>
+          <div id="proteinVal" class="slider-value">30%</div>
+          <input type="range" id="proteinSlider" min="10" max="70" value="30">
+        </div>
+        
+        <div class="slider-group">
+          <label>🍞 Carbs</label>
+          <div id="carbVal" class="slider-value">40%</div>
+          <input type="range" id="carbSlider" min="10" max="70" value="40">
+        </div>
+        
+        <div class="slider-group">
+          <label>🥑 Fat</label>
+          <div id="fatVal" class="slider-value">30%</div>
+          <input type="range" id="fatSlider" min="10" max="70" value="30">
+        </div>
+      </div>
 
-      <label>Carbs: <span id="carbVal">40%</span></label>
-      <input type="range" id="carbSlider" min="10" max="70" value="40">
-
-      <label>Fat: <span id="fatVal">30%</span></label>
-      <input type="range" id="fatSlider" min="10" max="70" value="30">
-
-      <button type="button" id="calcBtn">Calculate Macros</button>
+      <button type="button" id="calcBtn">Calculate My Macros</button>
     </form>
 
-    <!-- Mid Ad -->
-    <div class="ad-container">
-      <div class="ad-placeholder">300x250 Ad Placeholder</div>
+    <div id="result" class="macro-result" style="display:none;"></div>
+    
+    <div class="chart-container">
+      <canvas id="macroChart" width="400" height="400"></canvas>
+    </div>
+  </section>
+
+  <!-- Mid Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
+  </div>
+
+  <!-- SEO Content -->
+  <section class="seo-content">
+    <h2>Why Use Our Macro Calculator?</h2>
+    <p>Our advanced Macro Calculator helps you determine the perfect balance of protein, carbohydrates, and fats for your specific goals. Whether you're looking to lose weight, build muscle, or maintain your current physique, understanding your macronutrient needs is crucial for success.</p>
+
+    <h3>✨ Benefits</h3>
+    <div class="benefits-list">
+      <div class="benefit-item">
+        <strong>🎯 Precision Targeting</strong><br>
+        Get exact gram amounts for each macro based on your goals
+      </div>
+      <div class="benefit-item">
+        <strong>📊 Visual Breakdown</strong><br>
+        Interactive pie chart shows your macro distribution
+      </div>
+      <div class="benefit-item">
+        <strong>⚖️ Flexible Goals</strong><br>
+        Adjust calories from -30% to +30% for any objective
+      </div>
+      <div class="benefit-item">
+        <strong>🔄 Customizable Ratios</strong><br>
+        Fine-tune protein, carb, and fat percentages
+      </div>
+      <div class="benefit-item">
+        <strong>🌍 Dual Units</strong><br>
+        Switch between imperial and metric measurements
+      </div>
+      <div class="benefit-item">
+        <strong>📱 Mobile Friendly</strong><br>
+        Calculate macros anywhere, anytime
+      </div>
     </div>
 
-    <div id="result" class="card" style="display:none;"></div>
-    <canvas id="macroChart" width="400" height="400" style="max-width:400px; margin:20px auto; display:none;"></canvas>
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="body-fat-calculator.html">📐 Body Fat Calculator</a></div>
+      <div class="card"><a href="tdee-calculator.html">⚡ TDEE Calculator</a></div>
+      <div class="card"><a href="protein-calculator.html">🥩 Protein Calculator</a></div>
+      <div class="card"><a href="water-intake-calculator.html">💧 Water Intake Calculator</a></div>
+    </div>
+
+    <h3>📚 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/complete-guide-to-macros.html">📖 Complete Guide to Macronutrients</a></div>
+      <div class="card"><a href="blog/macro-counting-for-beginners.html">🎯 Macro Counting for Beginners</a></div>
+      <div class="card"><a href="blog/best-macro-ratios-for-weight-loss.html">📉 Best Macro Ratios for Weight Loss</a></div>
+      <div class="card"><a href="blog/flexible-dieting-iifym-guide.html">🔄 Flexible Dieting (IIFYM) Guide</a></div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    
+    <div class="faq">
+      <h3>What are macronutrients?</h3>
+      <p>Macronutrients (macros) are the three main nutrients your body needs in large amounts: protein (4 calories/gram), carbohydrates (4 calories/gram), and fats (9 calories/gram). Each plays a crucial role in your body's function and energy production.</p>
+    </div>
+    
+    <div class="faq">
+      <h3>How accurate is this macro calculator?</h3>
+      <p>Our calculator uses the scientifically-backed Mifflin-St Jeor equation to estimate your metabolic rate, then applies activity multipliers and goal adjustments. While highly accurate for most people, individual metabolism can vary by ±10-15%.</p>
+    </div>
+    
+    <div class="faq">
+      <h3>What's the best macro ratio for weight loss?</h3>
+      <p>For weight loss, a higher protein ratio (30-40%) helps preserve muscle mass and increase satiety. A common effective split is 35% protein, 35% carbs, and 30% fat, but individual needs may vary based on activity level and preferences.</p>
+    </div>
+    
+    <div class="faq">
+      <h3>Should I track macros or just calories?</h3>
+      <p>While calories determine weight change, tracking macros ensures better body composition, energy levels, and health outcomes. Macros help you eat adequate protein for muscle maintenance and choose nutrient-dense foods.</p>
+    </div>
+    
+    <div class="faq">
+      <h3>How often should I recalculate my macros?</h3>
+      <p>Recalculate your macros every 10-15 pounds of weight change, when your activity level significantly changes, or if you plateau for 2-3 weeks. Your metabolic needs change as your body composition evolves.</p>
+    </div>
+    
+    <div class="faq">
+      <h3>Can I use this for muscle building?</h3>
+      <p>Absolutely! 💪 Set the goal slider to +10% to +20% for muscle building, ensure protein is 25-35% of total calories, and maintain adequate carbs (35-45%) to fuel your workouts and recovery.</p>
+    </div>
   </section>
 
   <!-- Bottom Ad -->
   <div class="ad-container">
-    <div class="ad-placeholder">336x280 Ad Placeholder</div>
+    <div class="ad-placeholder">Responsive Footer Ad</div>
   </div>
 
-  <!-- SEO Section -->
-  <section class="container seo-content">
-    <h2>Why Use a Macro Calculator?</h2>
-    <p>Macros — protein, carbs, and fats — are the building blocks of your diet. Balancing them correctly helps optimize fat loss, muscle gain, and overall energy levels.</p>
-    <h3>Fun Fact</h3>
-    <p>Did you know your metabolism can burn an extra 80–100 calories per day just by eating more protein? That's called the thermic effect of food!</p>
-  </section>
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">🧮 See All Calculators</a>
 
-<footer>
+  <!-- Footer -->
+  <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy-policy.html">Privacy Policy</a> | 
     <a href="terms-of-service.html">Terms of Service</a> |
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-</footer>
+  </footer>
+
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are macronutrients?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Macronutrients (macros) are the three main nutrients your body needs in large amounts: protein (4 calories/gram), carbohydrates (4 calories/gram), and fats (9 calories/gram). Each plays a crucial role in your body's function and energy production."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is this macro calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our calculator uses the scientifically-backed Mifflin-St Jeor equation to estimate your metabolic rate, then applies activity multipliers and goal adjustments. While highly accurate for most people, individual metabolism can vary by ±10-15%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the best macro ratio for weight loss?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For weight loss, a higher protein ratio (30-40%) helps preserve muscle mass and increase satiety. A common effective split is 35% protein, 35% carbs, and 30% fat, but individual needs may vary based on activity level and preferences."
+        }
+      }
+    ]
+  }
+  </script>
 
   <script>
     const el = id => document.getElementById(id);
@@ -120,14 +490,15 @@
     let chartInstance = null;
 
     // Unit toggle
-    el('unitImperial').addEventListener('click', ()=> {
+    el('unitImperial').addEventListener('click', () => {
       currentUnit = 'imperial';
       el('imperialFields').style.display = 'block';
       el('metricFields').style.display = 'none';
       el('unitImperial').classList.add('active');
       el('unitMetric').classList.remove('active');
     });
-    el('unitMetric').addEventListener('click', ()=> {
+    
+    el('unitMetric').addEventListener('click', () => {
       currentUnit = 'metric';
       el('imperialFields').style.display = 'none';
       el('metricFields').style.display = 'block';
@@ -135,41 +506,53 @@
       el('unitImperial').classList.remove('active');
     });
 
-    // Goal slider
-    el('goalSlider').addEventListener('input', e=>{
-      el('goalVal').textContent = e.target.value + '%';
+    // Goal slider with descriptive text
+    el('goalSlider').addEventListener('input', e => {
+      const val = parseInt(e.target.value);
+      let description = '';
+      if (val < -20) description = '(Aggressive Cut)';
+      else if (val < -10) description = '(Moderate Cut)';
+      else if (val < -5) description = '(Mild Cut)';
+      else if (val <= 5) description = '(Maintain Weight)';
+      else if (val <= 10) description = '(Lean Bulk)';
+      else if (val <= 20) description = '(Moderate Bulk)';
+      else description = '(Aggressive Bulk)';
+      
+      el('goalVal').textContent = val + '% ' + description;
     });
 
-    // Macro sliders with proportional live update
+    // Macro sliders with auto-adjustment
     function adjustSliders(changed) {
       let protein = parseInt(el('proteinSlider').value);
-      let carbs   = parseInt(el('carbSlider').value);
-      let fat     = parseInt(el('fatSlider').value);
+      let carbs = parseInt(el('carbSlider').value);
+      let fat = parseInt(el('fatSlider').value);
 
       let total = protein + carbs + fat;
-      if(total !== 100){
-        let remain = 100 - protein;
-        if(changed === 'carb'){
-          remain = 100 - carbs;
-          let fatShare = fat/(fat+protein);
-          protein = Math.round(remain*(1-fatShare));
-          fat = 100 - carbs - protein;
-        }
-        else if(changed === 'fat'){
-          remain = 100 - fat;
-          let carbShare = carbs/(carbs+protein);
-          protein = Math.round(remain*(1-carbShare));
-          carbs = 100 - fat - protein;
-        }
-        else { // protein changed
-          let share = carbs/(carbs+fat);
-          carbs = Math.round(remain*share);
+      if (total !== 100) {
+        if (changed === 'protein') {
+          let remaining = 100 - protein;
+          let ratio = carbs / (carbs + fat);
+          carbs = Math.round(remaining * ratio);
           fat = 100 - protein - carbs;
+        } else if (changed === 'carb') {
+          let remaining = 100 - carbs;
+          let ratio = protein / (protein + fat);
+          protein = Math.round(remaining * ratio);
+          fat = 100 - carbs - protein;
+        } else {
+          let remaining = 100 - fat;
+          let ratio = protein / (protein + carbs);
+          protein = Math.round(remaining * ratio);
+          carbs = 100 - fat - protein;
         }
       }
 
-      [protein, carbs, fat] = [protein, carbs, fat].map(v => Math.min(70, Math.max(10,v)));
+      // Ensure values stay within bounds
+      protein = Math.max(10, Math.min(70, protein));
+      carbs = Math.max(10, Math.min(70, carbs));
+      fat = Math.max(10, Math.min(70, fat));
 
+      // Update sliders and displays
       el('proteinSlider').value = protein;
       el('carbSlider').value = carbs;
       el('fatSlider').value = fat;
@@ -181,105 +564,164 @@
       updateChart(protein, carbs, fat);
     }
 
-    ['protein','carb','fat'].forEach(name=>{
-      el(name+'Slider').addEventListener('input', ()=>adjustSliders(name));
+    ['protein', 'carb', 'fat'].forEach(name => {
+      el(name + 'Slider').addEventListener('input', () => adjustSliders(name));
     });
-    adjustSliders('protein');
 
-    // Chart with tooltips
-    function updateChart(protein, carbs, fat, goalCals=0) {
+    // Initialize chart
+    function updateChart(protein, carbs, fat, goalCals = 0) {
       const ctx = el('macroChart').getContext('2d');
       el('macroChart').style.display = 'block';
-      if(chartInstance) chartInstance.destroy();
+      
+      if (chartInstance) chartInstance.destroy();
 
-      const proteinGr = goalCals ? (goalCals*(protein/100)/4).toFixed(0) : '-';
-      const carbGr    = goalCals ? (goalCals*(carbs/100)/4).toFixed(0)   : '-';
-      const fatGr     = goalCals ? (goalCals*(fat/100)/9).toFixed(0)     : '-';
+      const proteinGr = goalCals ? Math.round(goalCals * (protein / 100) / 4) : 0;
+      const carbGr = goalCals ? Math.round(goalCals * (carbs / 100) / 4) : 0;
+      const fatGr = goalCals ? Math.round(goalCals * (fat / 100) / 9) : 0;
 
       chartInstance = new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
-          labels: ['Protein', 'Carbs', 'Fat'],
+          labels: ['🥩 Protein', '🍞 Carbs', '🥑 Fat'],
           datasets: [{
             data: [protein, carbs, fat],
-            backgroundColor: ['#4facfe', '#00f2fe', '#ff6b6b']
+            backgroundColor: ['#ff6b81', '#4facfe', '#00f2fe'],
+            borderWidth: 3,
+            borderColor: '#fff'
           }]
         },
         options: {
+          responsive: true,
           plugins: {
             tooltip: {
               callbacks: {
                 label: function(context) {
                   const label = context.label;
                   const value = context.raw;
-                  let grams = '-';
-                  if(label === 'Protein') grams = proteinGr + ' g';
-                  if(label === 'Carbs') grams = carbGr + ' g';
-                  if(label === 'Fat') grams = fatGr + ' g';
-                  return `${label}: ${value}% (${grams})`;
+                  let grams = '';
+                  if (goalCals > 0) {
+                    if (label.includes('Protein')) grams = ` (${proteinGr}g)`;
+                    if (label.includes('Carbs')) grams = ` (${carbGr}g)`;
+                    if (label.includes('Fat')) grams = ` (${fatGr}g)`;
+                  }
+                  return `${label}: ${value}%${grams}`;
                 }
               }
             },
             legend: {
               position: 'bottom',
-              labels: { color: '#fff' }
+              labels: {
+                padding: 20,
+                font: { size: 14 }
+              }
             }
           }
         }
       });
     }
 
-    // Calculation
-    el('calcBtn').addEventListener('click', ()=>{
+    // Main calculation
+    el('calcBtn').addEventListener('click', () => {
       const age = parseInt(el('age').value);
       const gender = el('gender').value;
       const activity = parseFloat(el('activity').value);
       const goalAdj = parseInt(el('goalSlider').value);
 
       let weightKg, heightCm;
-      if(currentUnit === 'imperial'){
+      
+      if (currentUnit === 'imperial') {
         const lbs = parseFloat(el('weightLbs').value);
-        const ft = parseFloat(el('heightFt').value)||0;
-        const inch = parseFloat(el('heightIn').value)||0;
-        if(!lbs || (ft+inch)<=0 || !age){ alert("Fill all fields correctly"); return; }
-        weightKg = lbs*0.45359237;
-        heightCm = (ft*30.48)+(inch*2.54);
+        const ft = parseFloat(el('heightFt').value) || 0;
+        const inch = parseFloat(el('heightIn').value) || 0;
+        
+        if (!lbs || (ft + inch) <= 0 || !age) {
+          alert("Please fill all fields correctly");
+          return;
+        }
+        
+        weightKg = lbs * 0.45359237;
+        heightCm = (ft * 30.48) + (inch * 2.54);
       } else {
         const kg = parseFloat(el('weightKg').value);
         const cm = parseFloat(el('heightCm').value);
-        if(!kg || !cm || !age){ alert("Fill all fields correctly"); return; }
+        
+        if (!kg || !cm || !age) {
+          alert("Please fill all fields correctly");
+          return;
+        }
+        
         weightKg = kg;
         heightCm = cm;
       }
 
-      // Mifflin-St Jeor
-      let bmr = (10*weightKg) + (6.25*heightCm) - (5*age);
-      if(gender==='male') bmr += 5; else bmr -= 161;
-      let tdee = bmr*activity;
-      let goalCals = tdee * (1 + goalAdj/100);
+      // Mifflin-St Jeor equation
+      let bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age);
+      if (gender === 'male') bmr += 5;
+      else bmr -= 161;
+      
+      let tdee = bmr * activity;
+      let goalCals = tdee * (1 + goalAdj / 100);
 
       const proteinPct = parseInt(el('proteinSlider').value);
       const carbPct = parseInt(el('carbSlider').value);
       const fatPct = parseInt(el('fatSlider').value);
 
-      const proteinCals = goalCals*(proteinPct/100);
-      const carbCals    = goalCals*(carbPct/100);
-      const fatCals     = goalCals*(fatPct/100);
+      const proteinGrams = Math.round(goalCals * (proteinPct / 100) / 4);
+      const carbGrams = Math.round(goalCals * (carbPct / 100) / 4);
+      const fatGrams = Math.round(goalCals * (fatPct / 100) / 9);
 
       const resultHTML = `
-        <h2>Your Macro Breakdown</h2>
-        <p><strong>TDEE:</strong> ${tdee.toFixed(0)} kcal/day</p>
-        <p><strong>Adjusted Calories:</strong> ${goalCals.toFixed(0)} kcal/day</p>
-        <ul>
-          <li>Protein: ${proteinPct}% → ${(proteinCals/4).toFixed(0)} g</li>
-          <li>Carbs: ${carbPct}% → ${(carbCals/4).toFixed(0)} g</li>
-          <li>Fat: ${fatPct}% → ${(fatCals/9).toFixed(0)} g</li>
-        </ul>
+        <h2>🎯 Your Personalized Macro Plan</h2>
+        <p><strong>BMR:</strong> ${Math.round(bmr)} calories/day</p>
+        <p><strong>TDEE:</strong> ${Math.round(tdee)} calories/day</p>
+        <p><strong>Target Calories:</strong> ${Math.round(goalCals)} calories/day</p>
+        
+        <div class="macro-breakdown">
+          <div class="macro-item">
+            <div style="font-size: 24px;">🥩</div>
+            <strong>Protein</strong><br>
+            ${proteinPct}% • ${proteinGrams}g
+          </div>
+          <div class="macro-item">
+            <div style="font-size: 24px;">🍞</div>
+            <strong>Carbs</strong><br>
+            ${carbPct}% • ${carbGrams}g
+          </div>
+          <div class="macro-item">
+            <div style="font-size: 24px;">🥑</div>
+            <strong>Fat</strong><br>
+            ${fatPct}% • ${fatGrams}g
+          </div>
+        </div>
       `;
+      
       el('result').innerHTML = resultHTML;
-      el('result').style.display='block';
+      el('result').style.display = 'block';
 
       updateChart(proteinPct, carbPct, fatPct, goalCals);
+    });
+
+    // Initialize sliders
+    adjustSliders('protein');
+
+    // Dark mode toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      });
+      
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+
+      // FAQ accordion
+      document.querySelectorAll(".faq h3").forEach(faqHeader => {
+        faqHeader.addEventListener("click", () => {
+          faqHeader.parentElement.classList.toggle("active");
+        });
+      });
     });
   </script>
 </body>
