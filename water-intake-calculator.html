@@ -327,12 +327,7 @@
     @media (max-width: 768px) {
       .calc-wrapper h1 {
         font-size: 2rem;
-    // FAQ accordion
-      document.querySelectorAll(".faq-question").forEach(faqButton => {
-        faqButton.addEventListener("click", () => {
-          faqButton.parentElement.parentElement.querySelector('.faq-item').classList.toggle("active");
-        });
-      });
+      }
       
       
       .water-visual {
@@ -672,5 +667,16 @@
       }
     });
   </script>
+  <script>
+  // FAQ Accordion Fix
+  document.querySelectorAll(".faq-question").forEach(button => {
+    button.addEventListener("click", () => {
+      const faqItem = button.parentElement;
+      faqItem.classList.toggle("active");
+    });
+  });
+</script>
+
+  
 </body>
 </html>
