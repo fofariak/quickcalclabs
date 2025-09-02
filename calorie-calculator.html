@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Calorie Calculator (TDEE) | QuickCalcLabs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Modern calorie calculator that estimates daily calories (TDEE) with the Mifflin–St Jeor equation. Switch between Imperial and Metric, get cutting/maintenance/bulking targets, and see your position on an interactive gauge." />
+  <meta name="description" content="Modern calorie calculator that estimates daily calories (TDEE) with the Mifflin–St Jeor equation. Switch between Imperial and Metric, get cutting/maintenance/bulking targets, and see your position on interactive progress bars." />
   <link rel="canonical" href="https://quickcalclabs.com/calorie-calculator.html" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="stylesheet" href="css/style.css" />
@@ -12,442 +12,234 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Calorie Calculator (TDEE) • QuickCalcLabs">
-  <meta property="og:description" content="Estimate daily calories for cutting, maintenance, or bulking. Imperial & Metric, instant targets, interactive gauge, FAQs and more.">
+  <meta property="og:description" content="Estimate daily calories for cutting, maintenance, or bulking. Imperial & Metric, instant targets, interactive progress bars, FAQs and more.">
   <meta property="og:url" content="https://quickcalclabs.com/calorie-calculator.html">
   <meta property="og:image" content="https://quickcalclabs.com/images/og-calorie-calculator.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Calorie Calculator (TDEE) • QuickCalcLabs">
   <meta name="twitter:description" content="Estimate daily calories for cutting, maintenance, or bulking with a clean, modern calculator.">
   <meta name="twitter:image" content="https://quickcalclabs.com/images/og-calorie-calculator.png">
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button id="darkModeToggle">🌙</button>
+  </header>
 
-  <!-- FAQ JSON-LD -->
+  <!-- Ad 1 -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 Banner Ad</div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Calorie Calculator (TDEE)</h1>
+    <p>Estimate your daily calories for weight maintenance, fat loss, and muscle gain using scientifically backed formulas. Supports both Metric and Imperial units.</p>
+  </section>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs">
+    <a href="index.html">Home</a> › <span>Calorie Calculator</span>
+  </nav>
+
+  <!-- Calculator -->
+  <section class="calculator-card">
+    <h2>Enter Your Details</h2>
+    <form id="calorieForm">
+      <label>Age: <input type="number" id="age" required></label>
+      <label>Gender:
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </label>
+      <label>Weight (kg): <input type="number" id="weight" required></label>
+      <label>Height (cm): <input type="number" id="height" required></label>
+      <label>Activity Level:
+        <select id="activity">
+          <option value="1.2">Sedentary</option>
+          <option value="1.375">Lightly Active</option>
+          <option value="1.55">Moderately Active</option>
+          <option value="1.725">Very Active</option>
+          <option value="1.9">Super Active</option>
+        </select>
+      </label>
+      <button type="submit">Calculate</button>
+    </form>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="results-card hidden">
+    <h2>Your Results</h2>
+    <div class="progress-container">
+      <p>Maintain Calories: <span id="maintainVal"></span> kcal</p>
+      <div class="progress-bar"><div id="maintainBar" class="bar green"></div></div>
+
+      <p>Cutting Calories: <span id="cutVal"></span> kcal</p>
+      <div class="progress-bar"><div id="cutBar" class="bar blue"></div></div>
+
+      <p>Bulking Calories: <span id="bulkVal"></span> kcal</p>
+      <div class="progress-bar"><div id="bulkBar" class="bar orange"></div></div>
+    </div>
+    <p id="funFact"></p>
+  </section>
+
+  <!-- Ad 2 -->
+  <div class="ad-container">
+    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
+  </div>
+
+  <!-- SEO Content -->
+  <section class="seo-content">
+    <h2>About This Calorie Calculator</h2>
+    <p>This calculator uses the Mifflin–St Jeor equation to estimate your Total Daily Energy Expenditure (TDEE). It helps you understand how many calories you need to maintain, lose, or gain weight.</p>
+    <h3>Benefits</h3>
+    <ul>
+      <li>✔️ Supports Metric & Imperial units</li>
+      <li>✔️ Provides Cutting, Maintenance, and Bulking targets</li>
+      <li>✔️ Easy to use with instant results</li>
+      <li>✔️ Includes fun health facts</li>
+    </ul>
+  </section>
+
+  <!-- Explore More -->
+  <section class="related-links">
+    <h2>Explore More Tools & Blogs</h2>
+    <div class="link-grid">
+      <a href="bmi-calculator.html" class="link-card">⚖️ BMI Calculator</a>
+      <a href="macro-calculator.html" class="link-card">🥗 Macro Calculator</a>
+      <a href="blog.html" class="link-card">📝 Health & Fitness Blogs</a>
+    </div>
+  </section>
+
+  <!-- Ad 3 -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 Footer Ad</div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question">What formula does this calculator use?</button>
+      <div class="faq-answer"><p>It uses the Mifflin–St Jeor equation, one of the most accurate formulas for estimating daily calorie needs.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Can I use it for weight loss?</button>
+      <div class="faq-answer"><p>Yes, select the Cutting Calories result to follow a calorie deficit diet for weight loss.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Does it work for athletes?</button>
+      <div class="faq-answer"><p>Yes, it includes activity multipliers suitable for all activity levels, from sedentary to professional athletes.</p></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy.html">Privacy Policy</a> | 
+    <a href="terms.html">Terms of Service</a> |
+    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+  </footer>
+
+  <!-- Floating CTA -->
+  <a href="index.html#calculators" class="floating-cta">See All Calculators</a>
+
+  <!-- JSON-LD Schema -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
       {
-        "@type":"Question",
-        "name":"How does this calorie calculator work?",
-        "acceptedAnswer":{"@type":"Answer","text":"We use the Mifflin–St Jeor equation to estimate your basal metabolic rate (BMR) and multiply by your activity factor to estimate total daily energy expenditure (TDEE)."}
+        "@type": "Question",
+        "name": "What formula does this calculator use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It uses the Mifflin–St Jeor equation, one of the most accurate formulas for estimating daily calorie needs."
+        }
       },
       {
-        "@type":"Question",
-        "name":"Which units does it support?",
-        "acceptedAnswer":{"@type":"Answer","text":"You can switch between Imperial (pounds, feet and inches) and Metric (kilograms and centimeters). The calculator converts values behind the scenes."}
+        "@type": "Question",
+        "name": "Can I use it for weight loss?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, select the Cutting Calories result to follow a calorie deficit diet for weight loss."
+        }
       },
       {
-        "@type":"Question",
-        "name":"Are these results medical advice?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. Results are estimates for general information only, not a substitute for professional medical or nutritional advice."}
+        "@type": "Question",
+        "name": "Does it work for athletes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it includes activity multipliers suitable for all activity levels, from sedentary to professional athletes."
+        }
       }
     ]
   }
   </script>
 
-  <!-- Breadcrumb + WebPage JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Calorie Calculator (TDEE)",
-    "url":"https://quickcalclabs.com/calorie-calculator.html",
-    "description":"Modern calorie calculator for cutting, maintenance, and bulking using Mifflin–St Jeor.",
-    "breadcrumb":{
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"Home","item":"https://quickcalclabs.com/"},
-        {"@type":"ListItem","position":2,"name":"Calculators","item":"https://quickcalclabs.com/#calculators"},
-        {"@type":"ListItem","position":3,"name":"Calorie Calculator","item":"https://quickcalclabs.com/calorie-calculator.html"}
-      ]
-    }
-  }
-  </script>
-
-  <style>
-    :root{
-      --container: 1100px;
-      --radius-xl: 24px; --radius-lg: 16px; --radius-md: 12px;
-      --shadow-sm: 0 6px 22px rgba(35,35,50,.10); --shadow-md: 0 10px 28px rgba(35,35,50,.12);
-      --accent-1:#6aa8ff; --accent-2:#ff7ad9; --accent-3:#47e6b6;
-      --ink:#0f172a; --ink-weak:#475569;
-      --surface:#fff;
-      --grad: linear-gradient(135deg, rgba(106,168,255,.25), rgba(255,122,217,.25), rgba(71,230,182,.25));
-      --pill: linear-gradient(135deg, #6aa8ff, #ff7ad9);
-    }
-    body{margin:0;background:linear-gradient(120deg,#f7ecff 0%,#f8fbff 30%,#fde8f6 100%);color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial;}
-    .dark-mode{background:#0b1020;color:#e5e7eb}
-    .dark-mode .card,.dark-mode .calc,.dark-mode .faq-item{background:#121831;border-color:#1e2439}
-    .container{max-width:var(--container);margin:0 auto;padding:0 16px}
-
-    /* Header */
-    .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.6);backdrop-filter: blur(10px);border-bottom:1px solid rgba(0,0,0,.05)}
-    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .logo{font-weight:800;font-size:1.35rem;background:linear-gradient(90deg,#6aa8ff,#ff7ad9,#47e6b6);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none}
-    .nav-links{display:flex;gap:18px;align-items:center}
-    .nav-links a{color:var(--ink);text-decoration:none;font-weight:600}
-    .moon{width:40px;height:40px;border:none;border-radius:14px;background:linear-gradient(135deg,#8aa3ff,#ff86c8);color:#fff;box-shadow:var(--shadow-sm);cursor:pointer;font-size:18px}
-
-    /* Hero */
-    .hero{padding:56px 0 18px}
-    .hero-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
-    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:var(--grad);font-weight:700;font-size:.9rem;margin-bottom:14px}
-    .title{font-size:clamp(2.1rem,4vw,3.2rem);line-height:1.1;margin:0 0 10px}
-    .lead{color:var(--ink-weak);max-width:56ch}
-    .ad-top{border:2px dashed rgba(0,0,0,.12);border-radius:16px;padding:18px;text-align:center;background:rgba(255,255,255,.6)}
-
-    /* Calculator */
-    .calc{background:var(--surface);border:1px solid #e9eef7;border-radius:24px;padding:22px;box-shadow:var(--shadow-sm)}
-    .unit-switch{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
-    .seg{border:1px solid #d7e2f4;background:#f5f8fe;padding:8px 12px;border-radius:999px;font-weight:700;cursor:pointer}
-    .seg.active{background:var(--pill);color:#fff;border-color:transparent}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .field label{font-weight:700;font-size:.95rem;margin-bottom:6px;display:block}
-    .field input,.field select{width:100%;padding:12px;border:1px solid #dbe4f3;border-radius:12px;background:#fff;font-size:1rem}
-    .action{margin-top:10px}
-    .btn-primary{background:var(--pill);border:none;color:#fff;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer;width:100%;box-shadow:var(--shadow-sm)}
-
-    /* Results + Gauge */
-    .results{margin-top:16px;display:grid;gap:12px}
-    .result-box{background:#f6fbff;border:1px solid #e6effa;border-radius:12px;padding:14px}
-    .gauge{margin-top:4px;padding:16px;border-radius:14px;background:#fff;border:1px solid #e9eef7}
-    .bar{position:relative;height:18px;border-radius:999px;background:#edf2f7;overflow:hidden}
-    .seg-cut{position:absolute;left:0;top:0;bottom:0;background:#ffd166}
-    .seg-maint{position:absolute;top:0;bottom:0;background:#4ade80}
-    .seg-bulk{position:absolute;top:0;bottom:0;background:#fb7185}
-    .marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:#111;border:2px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,.1)}
-    .labels{display:flex;justify-content:space-between;font-size:.85rem;color:var(--ink-weak);margin-top:8px}
-    .fun{margin:.35rem 0 0;color:#6b7280;font-style:italic}
-
-    /* Explore, Related, FAQ, Ads, Footer */
-    .section{padding:40px 0}
-    .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .card{background:var(--surface);border:1px solid #e9eef7;border-radius:16px;padding:16px;box-shadow:var(--shadow-sm)}
-    .card a{text-decoration:none;font-weight:800}
-    .ad-mid,.ad-bot{border:2px dashed rgba(0,0,0,.12);border-radius:14px;padding:24px;text-align:center;background:rgba(255,255,255,.6)}
-    .faq{margin-top:10px}
-    .faq-item{border:1px solid #e9eef7;border-radius:14px;background:#fff;overflow:hidden}
-    .faq-q{width:100%;text-align:left;background:transparent;border:none;padding:14px 16px;font-weight:800;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-    .faq-a{display:none;padding:0 16px 16px;color:var(--ink-weak)}
-    .faq-item.open .faq-a{display:block}
-    footer{padding:40px 0 56px;text-align:center;color:var(--ink-weak)}
-    .floating{position:fixed;right:18px;bottom:18px;background:var(--pill);color:#fff;border:none;border-radius:999px;padding:12px 16px;font-weight:800;box-shadow:var(--shadow-md);text-decoration:none}
-  </style>
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="nav container">
-      <a class="logo" href="index.html">QuickCalcLabs</a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <button id="darkToggle" class="moon" aria-label="Toggle dark mode">🌙</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <div>
-        <div class="badge">🔥 Fast & friendly nutrition math</div>
-        <h1 class="title">Calorie Calculator (TDEE)</h1>
-        <p class="lead">Estimate your daily calorie needs for <strong>cutting</strong>, <strong>maintenance</strong>, or <strong>bulking</strong>. Switch units, get instant targets, and see where you land on the gauge.</p>
-      </div>
-      <div class="ad-top">Ad Placeholder (Top Banner)</div>
-    </div>
-  </section>
-
-  <!-- Calculator -->
-  <section class="container">
-    <div class="calc" aria-label="Calorie calculator">
-      <div class="unit-switch" role="tablist" aria-label="Units">
-        <button id="btnImperial" class="seg active" role="tab" aria-selected="true">Imperial (lb, ft/in)</button>
-        <button id="btnMetric" class="seg" role="tab" aria-selected="false">Metric (kg, cm)</button>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="age">Age</label>
-          <input id="age" type="number" placeholder="e.g., 28" min="10" max="90" />
-        </div>
-        <div class="field">
-          <label for="gender">Gender</label>
-          <select id="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Imperial -->
-      <div id="rowImperial">
-        <div class="row">
-          <div class="field">
-            <label for="weightLb">Weight (lb)</label>
-            <input id="weightLb" type="number" placeholder="e.g., 165" min="60" max="600" />
-          </div>
-          <div class="field">
-            <label>Height (ft / in)</label>
-            <div class="row" style="grid-template-columns:1fr 1fr">
-              <input id="heightFt" type="number" placeholder="ft" min="3" max="8" />
-              <input id="heightIn" type="number" placeholder="in" min="0" max="11" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Metric -->
-      <div id="rowMetric" style="display:none">
-        <div class="row">
-          <div class="field">
-            <label for="weightKg">Weight (kg)</label>
-            <input id="weightKg" type="number" placeholder="e.g., 75" min="30" max="300" />
-          </div>
-          <div class="field">
-            <label for="heightCm">Height (cm)</label>
-            <input id="heightCm" type="number" placeholder="e.g., 178" min="120" max="230" />
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="activity">Activity level</label>
-          <select id="activity">
-            <option value="1.2">Sedentary (little or no exercise)</option>
-            <option value="1.375">Light (1–3 days/week)</option>
-            <option value="1.55" selected>Moderate (3–5 days/week)</option>
-            <option value="1.725">Very active (6–7 days/week)</option>
-            <option value="1.9">Super active (2× per day)</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>&nbsp;</label>
-          <button class="btn-primary action" id="calcBtn">Calculate</button>
-        </div>
-      </div>
-
-      <div class="results" id="results" style="display:none">
-        <div class="result-box" id="resultText"></div>
-
-        <!-- Segmented Gauge -->
-        <div class="gauge" aria-label="Calorie target gauge">
-          <div class="bar" id="bar">
-            <div class="seg-cut"   id="segCut"   style="width:33%"></div>
-            <div class="seg-maint" id="segMaint" style="left:33%;width:34%"></div>
-            <div class="seg-bulk"  id="segBulk"  style="right:0;width:33%"></div>
-            <div class="marker"    id="marker"   style="left:50%" title="Your maintenance (TDEE)"></div>
-          </div>
-          <div class="labels" aria-hidden="true">
-            <span>Cut (~−500)</span>
-            <span>Maintain</span>
-            <span>Bulk (~+500)</span>
-          </div>
-          <div class="fun" id="funFact"></div>
-        </div>
-
-        <div class="ad-mid">Ad Placeholder (Mid-Content)</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Explore -->
-  <section class="container section">
-    <h2>Explore more nutrition tools</h2>
-    <p class="ink-weak">Quick links to other calculators you might like.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>BMI & Body Fat</h3>
-        <p class="ink-weak">Check your BMI and estimate body fat percentage.</p>
-        <a href="bmi-calculator.html">Open BMI Calculator →</a>
-      </div>
-      <div class="card">
-        <h3>Macro Split</h3>
-        <p class="ink-weak">Turn your calorie goal into protein, carb, and fat grams.</p>
-        <a href="macro-calculator.html">Open Macro Calculator →</a>
-      </div>
-      <div class="card">
-        <h3>Water Intake</h3>
-        <p class="ink-weak">Daily hydration target based on weight and activity.</p>
-        <a href="water-intake-calculator.html">Open Water Calculator →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Related Blog Posts (static placeholders) -->
-  <section class="container section">
-    <h2>Related blog posts</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>How Many Calories Should I Eat?</h3>
-        <p class="ink-weak">A simple guide to setting fat loss, maintenance, and muscle gain targets.</p>
-        <a href="blog/how-many-calories-should-i-eat.html">Read article →</a>
-      </article>
-      <article class="card">
-        <h3>Protein: How Much Do You Need?</h3>
-        <p class="ink-weak">Evidence-based ranges and easy meal ideas to hit your target.</p>
-        <a href="blog/how-much-protein-per-day.html">Read article →</a>
-      </article>
-      <article class="card">
-        <h3>NEAT: Burn More Without the Gym</h3>
-        <p class="ink-weak">Walking, fidgeting, and other small moves that add up.</p>
-        <a href="blog/neat-calorie-burn.html">Read article →</a>
-      </article>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="container section">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq grid">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How accurate is this?</button>
-        <div class="faq-a">All equations are estimates. For medical or nutritional advice, consult a professional. We use Mifflin–St Jeor, which performs well in validations.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Which formula do you use?</button>
-        <div class="faq-a">Mifflin–St Jeor for BMR, multiplied by an activity factor to estimate TDEE.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Can I switch units?</button>
-        <div class="faq-a">Yes! Tap Metric or Imperial. Imperial uses pounds and feet/inches; Metric uses kilograms and centimeters.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container section">
-    <div class="ad-bot">Ad Placeholder (Bottom)</div>
-  </section>
-
-  <footer>
-    © 2025 QuickCalcLabs •
-    <a href="privacy-policy.html">Privacy</a> •
-    <a href="terms-of-service.html">Terms</a> •
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-  </footer>
-
-  <a href="index.html" class="floating">🔢 See All Calculators</a>
-
+  <!-- Script -->
   <script>
-    // Dark mode
-    const darkToggle = document.getElementById('darkToggle');
-    if (localStorage.getItem('qcl-theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-      darkToggle.textContent = '☀️';
-    }
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      localStorage.setItem('qcl-theme', isDark ? 'dark' : 'light');
-      darkToggle.textContent = isDark ? '☀️' : '🌙';
-    });
-
-    // Units
-    const btnImp = document.getElementById('btnImperial');
-    const btnMet = document.getElementById('btnMetric');
-    const rowImp = document.getElementById('rowImperial');
-    const rowMet = document.getElementById('rowMetric');
-    let usingMetric = false;
-
-    function setUnits(metric){
-      usingMetric = metric;
-      btnImp.classList.toggle('active', !metric);
-      btnMet.classList.toggle('active', metric);
-      rowImp.style.display = metric ? 'none' : 'block';
-      rowMet.style.display = metric ? 'block' : 'none';
-    }
-    btnImp.addEventListener('click', () => setUnits(false));
-    btnMet.addEventListener('click', () => setUnits(true));
-
-    // Calculator
-    const calcBtn = document.getElementById('calcBtn');
-    const resultWrap = document.getElementById('results');
-    const resultText = document.getElementById('resultText');
-    const segCut = document.getElementById('segCut');
-    const segMaint = document.getElementById('segMaint');
-    const segBulk = document.getElementById('segBulk');
-    const marker = document.getElementById('marker');
+    const form = document.getElementById('calorieForm');
+    const results = document.getElementById('results');
+    const maintainVal = document.getElementById('maintainVal');
+    const cutVal = document.getElementById('cutVal');
+    const bulkVal = document.getElementById('bulkVal');
+    const maintainBar = document.getElementById('maintainBar');
+    const cutBar = document.getElementById('cutBar');
+    const bulkBar = document.getElementById('bulkBar');
     const funFact = document.getElementById('funFact');
 
-    const FACTS = [
-      "🔥 Thermic effect: digesting food burns ~10% of daily calories.",
-      "🚶 10,000 steps burns ~400–500 kcal depending on body weight.",
-      "💤 Poor sleep lowers NEAT and can reduce daily burn.",
-      "🥦 Protein costs more energy to digest than carbs or fat.",
-      "🏋️ Muscle burns more calories at rest than fat."
-    ];
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-    function mifflinStJeor(weightKg, heightCm, age, gender){
-      return (gender === 'male')
-        ? 10*weightKg + 6.25*heightCm - 5*age + 5
-        : 10*weightKg + 6.25*heightCm - 5*age - 161;
-    }
-
-    function calc(){
       const age = +document.getElementById('age').value;
       const gender = document.getElementById('gender').value;
+      const weight = +document.getElementById('weight').value;
+      const height = +document.getElementById('height').value;
       const activity = +document.getElementById('activity').value;
 
-      let weightKg, heightCm;
-
-      if (usingMetric){
-        weightKg = +document.getElementById('weightKg').value;
-        heightCm = +document.getElementById('heightCm').value;
+      let bmr;
+      if (gender === 'male') {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
       } else {
-        const lb = +document.getElementById('weightLb').value;
-        const ft = +document.getElementById('heightFt').value;
-        const inch = +document.getElementById('heightIn').value;
-        heightCm = (ft*12 + inch) * 2.54;
-        weightKg = lb * 0.453592;
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
       }
 
-      if (!age || !weightKg || !heightCm || age < 10){
-        alert('Please enter valid values for all fields.');
-        return;
-      }
+      const maintain = Math.round(bmr * activity);
+      const cutting = Math.round(maintain - 500);
+      const bulking = Math.round(maintain + 500);
 
-      const bmr = mifflinStJeor(weightKg, heightCm, age, gender);
-      const tdee = Math.round(bmr * activity);
-      const cut = Math.max(1000, tdee - 500);
-      const bulk = Math.min(5000, tdee + 500);
+      maintainVal.textContent = maintain;
+      cutVal.textContent = cutting;
+      bulkVal.textContent = bulking;
 
-      resultText.innerHTML = `
-        <p><strong>Maintenance (TDEE):</strong> ${tdee.toLocaleString()} kcal/day</p>
-        <p>Cut (~−1 lb/week): <strong>${cut.toLocaleString()}</strong> kcal/day</p>
-        <p>Bulk (~+1 lb/week): <strong>${bulk.toLocaleString()}</strong> kcal/day</p>
-      `;
+      const maxVal = bulking;
 
-      // Gauge centered around TDEE ± 700 with maintain as ±150
-      const min = tdee - 700, max = tdee + 700;
-      const clamp = v => Math.max(min, Math.min(max, v));
+      maintainBar.style.width = (maintain / maxVal) * 100 + '%';
+      cutBar.style.width = (cutting / maxVal) * 100 + '%';
+      bulkBar.style.width = '100%';
 
-      const pCut = ((clamp(cut) - min) / (max - min)) * 100;
-      const pMaintL = ((clamp(tdee - 150) - min) / (max - min)) * 100;
-      const pMaintR = ((clamp(tdee + 150) - min) / (max - min)) * 100;
-      const pMarker = ((clamp(tdee) - min) / (max - min)) * 100;
+      results.classList.remove('hidden');
+      funFact.textContent = "Fun Fact: Did you know your metabolism accounts for up to 70% of your daily calorie burn?";
+    });
 
-      segCut.style.left = '0%';
-      segCut.style.width = Math.max(8, pCut).toFixed(2) + '%';
-      segMaint.style.left = Math.min(pCut, pMaintL).toFixed(2) + '%';
-      segMaint.style.width = Math.max(10, (pMaintR - Math.min(pCut, pMaintL))).toFixed(2) + '%';
-      segBulk.style.left = pMaintR.toFixed(2) + '%';
-      segBulk.style.width = Math.max(8, (100 - pMaintR)).toFixed(2) + '%';
-      marker.style.left = pMarker.toFixed(2) + '%';
+    // Dark Mode
+    document.getElementById('darkModeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
 
-      funFact.textContent = FACTS[Math.floor(Math.random()*FACTS.length)];
-      resultWrap.style.display = 'grid';
-    }
-    calcBtn.addEventListener('click', calc);
-
-    // FAQ toggles
-    document.querySelectorAll('.faq-q').forEach(btn => {
+    // FAQ Toggle
+    document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const open = item.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.nextElementSibling.classList.toggle('open');
       });
     });
   </script>
