@@ -1,260 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Calorie Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free calorie calculator to estimate your daily calorie needs (TDEE & BMR). Supports lbs/kg and ft+in/cm. Get maintenance, weight-loss, and weight-gain targets."/>
-  <meta name="keywords" content="calorie calculator,tdee calculator,bmr calculator,daily calories,weight loss calories,weight gain calories,fitness calculator,quickcalclabs"/>
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+  <meta name="description" content="Free Calorie Calculator to estimate daily calorie needs for weight loss, maintenance, or muscle gain. Based on Mifflin-St Jeor equation.">
+  <link rel="canonical" href="https://quickcalclabs.com/calorie-calculator.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
-  <!-- GA -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID');
-  </script>
+  <style>
+    .hero-section { text-align:center; padding:clamp(3rem,7vw,5rem) 1rem 2rem; margin:2rem auto; max-width:var(--container); }
+    .hero-section h1 { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; margin-bottom:1rem; background:linear-gradient(90deg,var(--accent-blue),var(--accent-pink),var(--accent-green)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero-section p { color:var(--text-weak-light); font-size:1.2rem; max-width:700px; margin:0 auto; line-height:1.6; }
+    .dark-mode .hero-section p { color:var(--text-weak-dark); }
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
+    .calc-wrapper { max-width:700px; margin:2rem auto; background:var(--surface-1-light); border:1px solid #e6eef5; border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm); }
+    .calc-wrapper label { display:block; font-weight:600; margin:1rem 0 0.5rem; }
+    .calc-wrapper input, .calc-wrapper select { width:100%; padding:0.6rem; border:1px solid #ccc; border-radius:8px; }
+    .calc-wrapper button { margin-top:1.5rem; padding:0.8rem 1.2rem; font-size:1.1rem; border:none; border-radius:8px; background:var(--accent-blue); color:#fff; cursor:pointer; }
+    .calc-wrapper button:hover { background:var(--accent-pink); }
+    .result-box { margin-top:1.5rem; padding:1rem; background:#f7fbff; border:1px solid #e6eef5; border-radius:8px; font-weight:600; }
 
+    .seo-section { max-width:var(--container); margin:3rem auto; padding:0 1rem; }
+    .seo-section h2 { margin-bottom:1rem; font-size:1.6rem; }
+    .seo-section p { line-height:1.7; margin-bottom:1rem; color:var(--text-weak-light); }
+
+    .explore-more { margin-top:2rem; display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+    .explore-card { background:var(--surface-1-light); padding:1rem; border-radius:10px; border:1px solid #e6eef5; text-align:center; }
+    .explore-card a { font-weight:600; text-decoration:none; color:var(--accent-blue); }
+    .dark-mode .explore-card { background:var(--surface-1-dark); }
+
+    .faq { max-width:var(--container); margin:3rem auto; padding:0 1rem; }
+    .faq h2 { text-align:center; margin-bottom:1.5rem; }
+    .faq-item { border:1px solid #e6eef5; border-radius:10px; margin-bottom:12px; background:#fff; overflow:hidden; box-shadow:var(--shadow-sm); }
+    .faq-question { width:100%; padding:1rem 1.2rem; font-weight:600; text-align:left; border:none; background:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:1.1rem; }
+    .faq-answer { display:none; padding:0 1.2rem 1rem; color:#444; }
+    .faq-item.active .faq-answer { display:block; }
+
+    .floating-cta { position:fixed; bottom:20px; right:20px; background:var(--accent-blue); color:#fff; padding:0.8rem 1.2rem; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.2); text-decoration:none; font-weight:600; }
+    .floating-cta:hover { background:var(--accent-pink); }
+
+    footer { margin-top:3rem; text-align:center; padding:2rem 1rem; font-size:0.9rem; color:var(--text-weak-light); }
+    footer a { color:var(--accent-blue); text-decoration:none; }
+  </style>
 </head>
 <body>
-  <header><a href="index.html">QuickCalcLabs</a></header>
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
 
-  <main class="container">
-    <h1>Calorie Calculator</h1>
-    <p class="muted">Estimate your daily calories (TDEE) using the Mifflin-St Jeor equation. Get targets for maintenance, weight loss, and weight gain. Supports <strong>lbs/kg</strong> and <strong>ft+in/cm</strong>.</p>
+  <!-- Top Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 Banner Ad</div>
+  </div>
 
-    <!-- Ad 1 -->
-    <div class="ad">
-      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
-           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1234567890"></ins>
-      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-      <div class="muted">Advertisement</div>
+  <!-- Hero -->
+  <section class="hero-section">
+    <h1>🔥 Calorie Calculator</h1>
+    <p>Estimate your daily calorie needs for weight loss, maintenance, or muscle gain — using the Mifflin-St Jeor formula.</p>
+  </section>
+
+  <!-- Calculator -->
+  <section class="calc-wrapper">
+    <label for="age">Age</label>
+    <input type="number" id="age" placeholder="Enter age" />
+
+    <label for="gender">Gender</label>
+    <select id="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="weight">Weight (kg)</label>
+    <input type="number" id="weight" placeholder="Enter weight" />
+
+    <label for="height">Height (cm)</label>
+    <input type="number" id="height" placeholder="Enter height" />
+
+    <label for="activity">Activity Level</label>
+    <select id="activity">
+      <option value="1.2">Sedentary (little or no exercise)</option>
+      <option value="1.375">Lightly active (1-3 days/week)</option>
+      <option value="1.55">Moderately active (3-5 days/week)</option>
+      <option value="1.725">Very active (6-7 days/week)</option>
+      <option value="1.9">Super active (twice/day training)</option>
+    </select>
+
+    <button onclick="calculateCalories()">Calculate</button>
+
+    <div class="result-box" id="result"></div>
+  </section>
+
+  <!-- Mid Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
+  </div>
+
+  <!-- SEO Content -->
+  <section class="seo-section">
+    <h2>About the Calorie Calculator</h2>
+    <p>This calculator uses the Mifflin–St Jeor equation to estimate your Basal Metabolic Rate (BMR), then applies your activity level to estimate Total Daily Energy Expenditure (TDEE).</p>
+    <p>Use it to set goals: eat fewer calories than TDEE for weight loss, or more for muscle gain.</p>
+
+    <div class="explore-more">
+      <div class="explore-card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="explore-card"><a href="body-fat-calculator.html">📏 Body Fat Calculator</a></div>
+      <div class="explore-card"><a href="period-tracker.html">🩸 Period Tracker</a></div>
+      <div class="explore-card"><a href="age-calculator.html">🎂 Age Calculator</a></div>
     </div>
+  </section>
 
-    <section class="box">
-      <h2>Enter Your Details</h2>
-
-      <div class="units">
-        <button type="button" id="btnImperial" class="active">Imperial (lbs, ft/in)</button>
-        <button type="button" id="btnMetric">Metric (kg, cm)</button>
-      </div>
-
-      <form id="form">
-        <div class="row">
-          <div>
-            <label for="age">Age</label>
-            <input id="age" type="number" min="1" inputmode="numeric" placeholder="e.g., 32" required />
-          </div>
-          <div>
-            <label for="gender">Gender</label>
-            <select id="gender">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Imperial fields -->
-        <div id="imperial">
-          <div class="row">
-            <div>
-              <label for="lbs">Weight (lbs)</label>
-              <input id="lbs" type="number" min="1" step="0.1" inputmode="decimal" placeholder="e.g., 154" />
-            </div>
-            <div>
-              <label for="activity">Activity Level</label>
-              <select id="activity">
-                <option value="1.2">Sedentary (little/no exercise)</option>
-                <option value="1.375">Light (1–3 days/week)</option>
-                <option value="1.55">Moderate (3–5 days/week)</option>
-                <option value="1.725">Active (6–7 days/week)</option>
-                <option value="1.9">Very Active (intense or physical job)</option>
-              </select>
-            </div>
-          </div>
-          <div class="row-3">
-            <div>
-              <label for="ft">Height (ft)</label>
-              <input id="ft" type="number" min="0" inputmode="numeric" placeholder="e.g., 5" />
-            </div>
-            <div>
-              <label for="inch">Height (in)</label>
-              <input id="inch" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g., 7" />
-            </div>
-            <div style="align-self:end">
-              <button class="primary" type="submit">Calculate</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Metric fields -->
-        <div id="metric" style="display:none">
-          <div class="row">
-            <div>
-              <label for="kg">Weight (kg)</label>
-              <input id="kg" type="number" min="1" step="0.1" inputmode="decimal" placeholder="e.g., 70" />
-            </div>
-            <div>
-              <label for="activityM">Activity Level</label>
-              <select id="activityM">
-                <option value="1.2">Sedentary (little/no exercise)</option>
-                <option value="1.375">Light (1–3 days/week)</option>
-                <option value="1.55">Moderate (3–5 days/week)</option>
-                <option value="1.725">Active (6–7 days/week)</option>
-                <option value="1.9">Very Active (intense or physical job)</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div>
-              <label for="cm">Height (cm)</label>
-              <input id="cm" type="number" min="50" step="0.1" inputmode="decimal" placeholder="e.g., 170" />
-            </div>
-            <div style="align-self:end">
-              <button class="primary" type="submit">Calculate</button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
-
-    <!-- Ad 2 -->
-    <div class="ad">
-      <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px"
-           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="0987654321"></ins>
-      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-      <div class="muted">Advertisement</div>
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question">How accurate is this calculator?</button>
+      <div class="faq-answer"><p>It uses the Mifflin–St Jeor formula, one of the most reliable methods. Still, it provides estimates, not exact values.</p></div>
     </div>
-
-    <section id="result" class="box" aria-live="polite"></section>
-
-    <!-- SEO / Helpful text -->
-    <section class="box">
-      <h2>How We Calculate Your Calories</h2>
-      <p>We estimate your <strong>BMR</strong> (Basal Metabolic Rate) with the Mifflin-St Jeor equation and multiply it by your activity factor to get <strong>TDEE</strong> (Total Daily Energy Expenditure). That’s your maintenance calories. From there we show safe targets for weight change (~500 kcal/day deficit or surplus ≈ ~0.45 kg / 1 lb per week).</p>
-      <h3>Tips</h3>
-      <ul>
-        <li>Recalculate when weight or activity changes.</li>
-        <li>Pair calorie tracking with protein, fiber, sleep, and strength training for best results.</li>
-        <li>Small, consistent changes (5–10% adjustment) are sustainable 💪.</li>
-      </ul>
-    </section>
-
-    <!-- Ad 3 -->
-    <div class="ad">
-      <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
-           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1122334455"></ins>
-      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-      <div class="muted">Advertisement</div>
+    <div class="faq-item">
+      <button class="faq-question">Should I eat exactly the number shown?</button>
+      <div class="faq-answer"><p>No — use it as a guide. Adjust based on progress, energy levels, and health professional advice.</p></div>
     </div>
-  </main>
+    <div class="faq-item">
+      <button class="faq-question">Does it account for muscle vs fat?</button>
+      <div class="faq-answer"><p>Not directly. For more precision, combine it with a Body Fat Calculator.</p></div>
+    </div>
+  </section>
 
-<footer>
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-</footer>
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <div class="ad-placeholder">Responsive Footer Ad</div>
+  </div>
+
+  <!-- Floating CTA -->
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 QuickCalcLabs • <a href="privacy-policy.html">Privacy Policy</a> • <a href="terms-of-service.html">Terms</a> • <a href="affiliate-disclosure.html">Affiliate Disclosure</a></p>
+  </footer>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is this calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It uses the Mifflin–St Jeor formula, one of the most reliable methods. Still, it provides estimates, not exact values."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I eat exactly the number shown?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No — use it as a guide. Adjust based on progress, energy levels, and health professional advice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it account for muscle vs fat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not directly. For more precision, combine it with a Body Fat Calculator."
+        }
+      }
+    ]
+  }
+  </script>
 
   <script>
-    // Track current unit explicitly to avoid display-style bugs
-    let currentUnit = 'imperial';
-
-    const btnI = document.getElementById('btnImperial');
-    const btnM = document.getElementById('btnMetric');
-    const wrapI = document.getElementById('imperial');
-    const wrapM = document.getElementById('metric');
-
-    btnI.addEventListener('click', () => {
-      currentUnit = 'imperial';
-      btnI.classList.add('active'); btnM.classList.remove('active');
-      wrapI.style.display = 'block'; wrapM.style.display = 'none';
-    });
-    btnM.addEventListener('click', () => {
-      currentUnit = 'metric';
-      btnM.classList.add('active'); btnI.classList.remove('active');
-      wrapM.style.display = 'block'; wrapI.style.display = 'none';
-    });
-
-    const form = document.getElementById('form');
-    const resultEl = document.getElementById('result');
-
-    function format(n){ return Math.round(n).toLocaleString(); }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const age = parseInt(document.getElementById('age').value, 10);
+    function calculateCalories() {
+      const age = parseInt(document.getElementById('age').value);
       const gender = document.getElementById('gender').value;
-
-      let weightKg = 0, heightCm = 0, activity = 1.2;
-
-      if (currentUnit === 'imperial') {
-        const lbs = parseFloat(document.getElementById('lbs').value);
-        const ft  = parseFloat(document.getElementById('ft').value)   || 0;
-        const inch= parseFloat(document.getElementById('inch').value) || 0;
-        activity  = parseFloat(document.getElementById('activity').value) || 1.2;
-
-        if (!lbs || (!ft && !inch)) {
-          resultEl.innerHTML = `<p style="color:#ff6b6b">⚠️ Please fill all fields correctly (weight in lbs and height in ft/in).</p>`;
-          return;
-        }
-
-        weightKg = lbs * 0.45359237;
-        heightCm = ft * 30.48 + inch * 2.54;
-
-      } else {
-        const kg = parseFloat(document.getElementById('kg').value);
-        const cm = parseFloat(document.getElementById('cm').value);
-        activity = parseFloat(document.getElementById('activityM').value) || 1.2;
-
-        if (!kg || !cm) {
-          resultEl.innerHTML = `<p style="color:#ff6b6b">⚠️ Please fill all fields correctly (weight in kg and height in cm).</p>`;
-          return;
-        }
-
-        weightKg = kg;
-        heightCm = cm;
-      }
-
-      if (!age || age <= 0) {
-        resultEl.innerHTML = `<p style="color:#ff6b6b">⚠️ Please enter a valid age.</p>`;
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const activity = parseFloat(document.getElementById('activity').value);
+      if (!age || !weight || !height) {
+        document.getElementById('result').textContent = 'Please fill all fields.';
         return;
       }
+      let bmr;
+      if (gender === 'male') {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+      const tdee = Math.round(bmr * activity);
+      document.getElementById('result').textContent = `Estimated Calories per day: ${tdee} kcal`;
+    }
 
-      // BMR (Mifflin–St Jeor)
-      const bmr = (gender === 'male')
-        ? 10*weightKg + 6.25*heightCm - 5*age + 5
-        : 10*weightKg + 6.25*heightCm - 5*age - 161;
+    // Dark mode + FAQ toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('darkModeToggle');
+      const body = document.body;
 
-      const tdee = bmr * activity;
-      const loss = tdee - 500;
-      const gain = tdee + 500;
+      if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        toggle.textContent = '☀️';
+      }
 
-      // Random fun fact
-      const facts = [
-        "🔥 Running for 10 minutes burns ~100 calories.",
-        "🍎 A medium apple has ~95 calories.",
-        "🚴 30 minutes of cycling burns ~250 calories.",
-        "🍔 A Big Mac is about 550 calories.",
-        "🧘 Yoga (1 hour) burns ~180 calories."
-      ];
-      const fact = facts[Math.floor(Math.random()*facts.length)];
+      toggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        toggle.textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
 
-      resultEl.innerHTML = `
-        <h2>Your Daily Calorie Needs</h2>
-        <p><strong>Maintain Weight:</strong> ${format(tdee)} calories/day</p>
-        <p><strong>Weight Loss (~1 lb/week):</strong> ${format(loss)} calories/day</p>
-        <p><strong>Weight Gain (~1 lb/week):</strong> ${format(gain)} calories/day</p>
-        <p class="muted">These are estimates. Consult professionals for personalized guidance.</p>
-        <p class="fun-fact">💡 Fun Fact: ${fact}</p>
-      `;
+      document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.parentElement;
+          item.classList.toggle('active');
+        });
+      });
     });
   </script>
 </body>
