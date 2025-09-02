@@ -327,12 +327,13 @@
     @media (max-width: 768px) {
       .calc-wrapper h1 {
         font-size: 2rem;
-      // FAQ accordion
+    // FAQ accordion
       document.querySelectorAll(".faq-question").forEach(faqButton => {
         faqButton.addEventListener("click", () => {
           faqButton.parentElement.parentElement.querySelector('.faq-item').classList.toggle("active");
         });
       });
+      
       
       .water-visual {
         grid-template-columns: 1fr;
@@ -531,6 +532,31 @@
     <a href="terms-of-service.html">Terms of Service</a> |
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
+
+   <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is this water calculator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Our calculator uses the scientifically-backed baseline of 35ml per kg body weight, adjusted for activity and climate factors for personalized hydration needs." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does climate really affect water needs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes! Hot and humid climates increase water loss through sweating, requiring 10-20% more fluid intake to maintain proper hydration." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I drink all this water at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No! Spread your water intake throughout the day. Aim for a glass every 1-2 hours for optimal hydration and better absorption." }
+      }
+    ]
+  }
+  </script>
 
   <script>
     // Track current unit explicitly (fixes "must click Imperial first" bug)
