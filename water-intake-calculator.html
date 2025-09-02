@@ -265,20 +265,48 @@
       left: 0;
     }
 
-    /* Error styling */
-    .error-message {
-      color: #ff6b6b;
-      background: rgba(255, 107, 107, 0.1);
-      padding: 10px;
-      border-radius: 8px;
-      margin-top: 15px;
+    /* Card grid for tools */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--card-bg, #fff);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text, #222);
+    }
+
+    .card a:hover {
+      color: var(--accent, #4fc3f7);
     }
 
     /* Responsive */
     @media (max-width: 768px) {
       .calc-wrapper h1 {
         font-size: 2rem;
-      }
+      // FAQ accordion
+      document.querySelectorAll(".faq-question").forEach(faqButton => {
+        faqButton.addEventListener("click", () => {
+          faqButton.parentElement.parentElement.querySelector('.faq-item').classList.toggle("active");
+        });
+      });
       
       .water-visual {
         grid-template-columns: 1fr;
@@ -398,6 +426,28 @@
 
   <!-- SEO Content -->
   <section class="seo-content">
+    <h2>✨ Benefits of Using Our Water Intake Calculator</h2>
+    <ul>
+      <li>💧 Get precise daily hydration targets</li>
+      <li>🏃 Adjusts for your activity level and climate</li>
+      <li>⚡ Switch between Imperial and Metric instantly</li>
+      <li>📱 Works perfectly on mobile & desktop</li>
+    </ul>
+
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">🥩 Macro Calculator</a></div>
+      <div class="card"><a href="period-tracker.html">🌸 Period Tracker</a></div>
+    </div>
+
+    <h3>📝 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog-hydration.html">💧 Ultimate Guide to Daily Hydration</a></div>
+      <div class="card"><a href="blog-water-benefits.html">🌊 Health Benefits of Proper Hydration</a></div>
+    </div>
+
     <h2>Personalized Daily Water Intake</h2>
     <p>We start with a baseline of ~35 ml per kg of body weight, then adjust for activity and climate. This method gives a practical, easy-to-follow hydration recommendation.</p>
     
@@ -410,6 +460,29 @@
     
     <h3>Fun Fact</h3>
     <p>Drinking a glass of water before meals can help reduce calorie intake — another simple trick to support weight control.</p>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-question">How accurate is this water calculator?</button>
+        <div class="faq-answer">Our calculator uses the scientifically-backed baseline of 35ml per kg body weight, adjusted for activity and climate factors for personalized hydration needs.</div>
+      </div>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-question">Does climate really affect water needs?</button>
+        <div class="faq-answer">Yes! Hot and humid climates increase water loss through sweating, requiring 10-20% more fluid intake to maintain proper hydration.</div>
+      </div>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-question">Should I drink all this water at once?</button>
+        <div class="faq-answer">No! Spread your water intake throughout the day. Aim for a glass every 1-2 hours for optimal hydration and better absorption.</div>
+      </div>
+    </div>
   </section>
 
   <!-- Bottom Ad -->
