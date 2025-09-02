@@ -2,59 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy | QuickCalcLabs</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="script.js" defer></script>
   <meta name="description" content="QuickCalcLabs Privacy Policy – learn how we handle your data, cookies, and user privacy with transparency and care.">
+  <link rel="canonical" href="https://quickcalclabs.com/privacy-policy.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    /* Reuse About.html modern layout */
+    .hero-section {
+      text-align: center;
+      padding: clamp(3rem, 7vw, 5rem) 1rem 2rem;
+      margin: 2rem auto;
+      max-width: var(--container);
+    }
+
+    .hero-section h1 {
+      margin: 0 0 1rem 0;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink), var(--accent-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: center;
+    }
+
+    .hero-section p {
+      color: var(--text-weak-light);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    .dark-mode .hero-section p { color: var(--text-weak-dark); }
+
+    .content-wrapper {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .content-section {
+      background: var(--surface-1-light);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #ffffff70;
+    }
+    .content-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+    }
+    .content-section p { line-height:1.7; margin-bottom:1rem; font-size:1.1rem; color:var(--text-weak-light); }
+    .dark-mode .content-section { background: var(--surface-1-dark); border-color:#ffffff18; }
+    .dark-mode .content-section p { color: var(--text-weak-dark); }
+
+    /* Modern FAQ Accordion */
+    .faq {
+      max-width: var(--container);
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .faq h2 { text-align:center; margin-bottom:1.5rem; }
+    .faq-item { border:1px solid #e6eef5; border-radius:10px; margin-bottom:12px; background:#fff; overflow:hidden; box-shadow:var(--shadow-sm); }
+    .faq-question { width:100%; padding:1rem 1.2rem; font-weight:600; text-align:left; border:none; background:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:1.1rem; }
+    .faq-answer { display:none; padding:0 1.2rem 1rem; color:#444; }
+    .faq-item.active .faq-answer { display:block; }
+
+    footer { margin-top:3rem; text-align:center; padding:2rem 1rem; font-size:0.9rem; color:var(--text-weak-light); }
+    footer a { color:var(--accent-blue); text-decoration:none; }
+  </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <div class="logo">QuickCalc<span>Labs</span></div>
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
       <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
     </nav>
-    <button id="dark-mode-toggle">🌙</button>
   </header>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero-section">
     <h1>🔒 Privacy Policy</h1>
     <p>Your privacy matters. Learn how we collect, use, and protect your information.</p>
   </section>
 
   <!-- Main Content -->
-  <main class="content">
-    <section>
+  <main class="content-wrapper">
+    <section class="content-section">
       <h2>1. Information We Collect</h2>
       <p>We collect limited data necessary to improve user experience. This may include cookies, analytics, and usage trends. We never sell your personal information.</p>
     </section>
 
-    <section>
+    <section class="content-section">
       <h2>2. How We Use Your Data</h2>
       <p>Your data is used to personalize features, optimize performance, and serve relevant content. We ensure compliance with GDPR, CCPA, and other data protection laws.</p>
     </section>
 
-    <section>
+    <section class="content-section">
       <h2>3. Cookies</h2>
       <p>Cookies help us remember preferences and analyze traffic. You can disable cookies in your browser settings at any time.</p>
     </section>
 
-    <section>
+    <section class="content-section">
       <h2>4. Third-Party Services</h2>
       <p>We may use analytics and advertising partners like Google AdSense. These services may set their own cookies and collect data in line with their privacy policies.</p>
     </section>
 
-    <section>
+    <section class="content-section">
       <h2>5. Contact Us</h2>
       <p>If you have any privacy concerns, please reach us at <a href="mailto:support@quickcalclabs.com">support@quickcalclabs.com</a>.</p>
     </section>
   </main>
 
-  <!-- FAQ (modern clickable accordion style) -->
+  <!-- FAQ -->
   <section class="faq">
     <h2>❓ Frequently Asked Questions</h2>
     <div class="faq-item">
@@ -73,12 +145,10 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <p>© 2025 QuickCalcLabs • <a href="privacy-policy.html">Privacy Policy</a> • <a href="terms-of-service.html">Terms</a> • <a href="affiliate-disclosure.html">Affiliate Disclosure</a></p>
   </footer>
 
-  <!-- FAQ JSON-LD Schema -->
+  <!-- FAQ JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -110,6 +180,33 @@
       }
     ]
   }
+  </script>
+
+  <script>
+    // Dark mode toggle + FAQ accordion
+    document.addEventListener('DOMContentLoaded', function() {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const body = document.body;
+
+      if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️';
+      }
+
+      darkModeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        darkModeToggle.textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.parentElement;
+          item.classList.toggle('active');
+        });
+      });
+    });
   </script>
 </body>
 </html>
