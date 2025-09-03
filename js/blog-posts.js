@@ -1,14 +1,5 @@
 const blogPosts = [
 
-  {
-    title: "Sleep Your Way Slim: The Undeniable Link Between Quality Sleep and Effective Weight Loss",
-    href: "blog/sleep-weight-loss-importance.html",
-    excerpt: "Often overlooked, sleep is a powerful, non-negotiable component of any successful weight loss journey. Learn how prioritizing rest can revolutionize your body's ability to shed pounds.",
-    category: "Health",
-    publishDate: "2025-09-03",
-    readTime: "7 min read",
-    featured: false
-  },
   // This array holds all the blog post data.
   // To add a new post, just add a new object to this list.
   // The blog.html page will update automatically.
