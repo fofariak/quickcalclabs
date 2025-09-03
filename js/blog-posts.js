@@ -202,5 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
-];
+,
+{
+    title: "Sleep for Weight Loss: The Unsung Hero of Your Diet Plan",
+    href: "blog/sleep-for-weight-loss-importance.html",
+    excerpt: "Beyond diet and exercise, sleep plays a critical, often overlooked, role in weight management. Learn how proper rest can be your most powerful ally in shedding pounds and maintaining a healthy lifestyle.",
+    category: "HEALTH",
+    publishDate: "2025-09-03",
+    readTime: "7 min read",
+    featured: false
+  }];
 
