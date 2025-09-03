@@ -210,5 +210,14 @@ const blogPosts = [
     date: "September 4, 2025",
     readTime: "9 min read",
     featured: false
+  },
+{
+    title: "Sleep Your Way to Success: Why Quality Rest is Crucial for Weight Loss",
+    href: "blog/sleep-weight-loss-importance.html",
+    excerpt: "Beyond diet and exercise, adequate sleep is a fundamental pillar of sustainable weight loss. Uncover the science behind why quality rest is essential for hormone balance, metabolic health, and mindful eating.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "8 min read",
+    featured: false
   }];
 
