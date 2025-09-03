@@ -201,5 +201,14 @@ const blogPosts = [
     date: "August 18, 2025",
     readTime: "6 min read",
     featured: false
+  },
+{
+    title: "The Missing Link: How Sleep Supercharges Your Weight Loss Journey",
+    href: "blog/sleep-weight-loss-importance.html",
+    excerpt: "Struggling with weight loss despite diet and exercise? Sleep might be the missing piece. Discover how adequate rest profoundly influences your body's ability to shed pounds and maintain a healthy weight.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "10 min read",
+    featured: false
   }];
 
