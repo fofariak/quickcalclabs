@@ -787,6 +787,169 @@ body.dark .progress-bar {
   display: block;
 }
 
+/* ===========================
+   Blog Layout
+=========================== */
+.blog-post {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.blog-post h1, 
+.blog-post h2, 
+.blog-post h3 {
+  margin-top: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.blog-post h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  background: linear-gradient(45deg, #ff4081, #7c4dff, #00bcd4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blog-post h2 {
+  font-size: 1.6rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.3rem;
+}
+
+/* ===========================
+   Comparison Table
+=========================== */
+.comparison-table {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table th, 
+.comparison-table td {
+  padding: 0.9rem;
+  border: 1px solid var(--border-color, #ddd);
+  text-align: left;
+}
+
+.comparison-table th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: bold;
+}
+
+.comparison-table tr:nth-child(even) {
+  background: var(--card-bg);
+}
+
+/* ===========================
+   Affiliate Cards
+=========================== */
+.affiliate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.affiliate-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.affiliate-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.affiliate-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.buy-btn {
+  display: inline-block;
+  background: linear-gradient(45deg, var(--primary), #ff9800);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===========================
+   Explore More & Blogs
+=========================== */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.explore-card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--text);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.explore-card:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ===========================
+   FAQs
+=========================== */
+.faq {
+  margin: 2rem 0;
+}
+
+.faq-item {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.faq-question {
+  font-weight: bold;
+}
+
+.faq-answer {
+  display: none;
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+
 
 
 
