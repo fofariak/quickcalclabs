@@ -104,7 +104,7 @@ const blogPosts = [
   },
   {
     title: "A Complete Guide to Macronutrients: Protein, Carbs, and Fats Explained",
-    href: "blog/complete-guide-to-macron-utrients.html",
+    href: "blog/complete-guide-to-macro-nutrients.html",
     excerpt: "A simple guide to understanding the three macronutrients. Learn what they are, why your body needs them, and find healthy food sources.",
     category: "nutrition",
     date: "August 27, 2025",
