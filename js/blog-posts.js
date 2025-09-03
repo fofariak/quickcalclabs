@@ -131,7 +131,7 @@ const blogPosts = [
   },
   {
     title: "Understanding Body Mass Index (BMI): A Comprehensive Guide",
-    href: "blog/bmi-calculator-guide.html",
+    href: "blog/bmi-calculation-guide.html",
     excerpt: "Learn what BMI is, how to calculate it, what the ranges mean for your health, and its limitations. Use our free BMI calculator for an instant result.",
     category: "health",
     date: "August 25, 2025",
