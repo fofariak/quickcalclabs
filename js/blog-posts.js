@@ -211,5 +211,14 @@ const blogPosts = [
     publishDate: "2025-09-03",
     readTime: "7 min read",
     featured: false
+  },
+{
+    title: "Unlock Weight Loss Potential: The Critical Role of Sleep in Your Journey",
+    href: "blog/sleep-importance-weight-loss.html",
+    excerpt: "Often overlooked, sleep plays a pivotal role in your weight loss journey. This article dives into the science of how adequate rest influences metabolism, hormones, and food cravings, offering actionable strategies to optimize your sleep for better weight management and overall well-being.",
+    category: "HEALTH",
+    publishDate: "2025-09-03",
+    readTime: "18 min read",
+    featured: false
   }];
 
