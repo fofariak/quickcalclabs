@@ -201,5 +201,14 @@ const blogPosts = [
     date: "August 18, 2025",
     readTime: "6 min read",
     featured: false
+  },
+{
+    title: "The Critical Role of Sleep in Weight Loss: Unlocking Your Body's Potential",
+    href: "blog/sleep-weight-loss-importance.html",
+    excerpt: "Uncover the often-overlooked connection between adequate sleep and successful weight management. Learn how vital sleep is for your body's ability to shed pounds effectively.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "9 min read",
+    featured: false
   }];
 
