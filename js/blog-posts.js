@@ -201,5 +201,15 @@ const blogPosts = [
     date: "August 18, 2025",
     readTime: "6 min read",
     featured: false
+  },
+{
+    title: "Unlock Your Weight Loss Potential: The Critical Role of Sleep in Shedding Pounds",
+    href: "blog/sleep-weight-loss-guide.html",
+    excerpt: "Explore the powerful connection between sleep and weight loss, and how prioritizing rest can significantly impact your journey to a healthier, leaner you.",
+    category: "HEALTH",
+    publishDate: "2025-09-03",
+    displayDate: "September 3, 2025",
+    readTime: "16 min read",
+    featured: false
   }];
 
