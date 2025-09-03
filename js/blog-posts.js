@@ -14,7 +14,7 @@ const blogPosts = [
   },
   {
     title: "10 Effective Tips to Reduce Your BMI",
-    href: "blog/10-tips-to-reduce-bmi-effectively.html",
+    href: "blog/10-tips-to-reduce-bmi.html",
     excerpt: "Discover 10 simple and effective tips to help you reduce your BMI through smart diet choices, sustainable exercise habits, and healthy lifestyle changes.",
     category: "fitness",
     date: "September 2, 2025",
@@ -104,7 +104,7 @@ const blogPosts = [
   },
   {
     title: "A Complete Guide to Macronutrients: Protein, Carbs, and Fats Explained",
-    href: "blog/complete-guide-to-macronutrients.html",
+    href: "blog/complete-guide-to-macron-utrients.html",
     excerpt: "A simple guide to understanding the three macronutrients. Learn what they are, why your body needs them, and find healthy food sources.",
     category: "nutrition",
     date: "August 27, 2025",
