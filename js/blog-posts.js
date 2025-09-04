@@ -202,4 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
+,
+{
+    title: "Unlock Weight Loss: The Critical Role of Sleep in Your Health Journey",
+    href: "blog/sleep-for-weight-loss.html",
+    excerpt: "Sleep is often overlooked in weight loss, but it's a game-changer. Learn how getting enough rest impacts hormones, metabolism, and your journey to a healthier weight.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "10 min read",
+    featured: false
+  }
 ]
