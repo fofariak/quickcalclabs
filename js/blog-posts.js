@@ -202,4 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
+,
+{
+    title: "Sleep for Weight Loss: The Secret Weapon You're Overlooking",
+    href: "blog/sleep-weight-loss-guide.html",
+    excerpt: "Often underestimated, sleep is a powerful ally in your weight loss journey. Learn how proper rest influences hormones, metabolism, and even your exercise performance.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "9 min read",
+    featured: false
+  }
 ]
