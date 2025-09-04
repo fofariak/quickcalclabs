@@ -202,14 +202,4 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
-,
-{
-    title: "Sleep for Weight Loss: Your Ultimate Guide to Better Rest & Results",
-    href: "blog/sleep-for-weight-loss.html",
-    excerpt: "Often overlooked, sleep plays a pivotal role in your weight loss journey. Learn how consistent, quality sleep can transform your metabolism, hormones, and overall progress.",
-    category: "HEALTH",
-    date: "September 4, 2025",
-    readTime: "10 min read",
-    featured: false
-  }
 ]
