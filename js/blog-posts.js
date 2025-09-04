@@ -202,24 +202,4 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
-,
-{
-    title: "Sleep for Weight Loss: How Rest Impacts Your Health & Body Goals",
-    href: "blog/sleep-weight-loss.html",
-    excerpt: "Often overlooked, quality sleep is a powerful ally in your weight loss journey. Learn how proper rest influences hormones, cravings, and metabolism, and discover practical strategies for better sleep and better health.",
-    category: "HEALTH",
-    date: "September 4, 2025",
-    readTime: "9 min read",
-    featured: false
-  }
-,
-{
-    title: "10,000 Steps vs. Japanese Walking: Which Path to Better Health?",
-    href: "blog/10000-steps-vs-japanese-walking.html",
-    excerpt: "Is reaching 10,000 steps the ultimate fitness goal, or does the mindful Japanese walking technique offer a deeper path to well-being? We compare these popular walking philosophies to help you find your ideal stride.",
-    category: "FITNESS",
-    date: "September 4, 2025",
-    readTime: "8 min read",
-    featured: false
-  }
 ]
