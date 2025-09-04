@@ -202,4 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
+,
+{
+    title: "Sleep for Weight Loss: How Rest Impacts Your Health & Body Goals",
+    href: "blog/sleep-weight-loss.html",
+    excerpt: "Often overlooked, quality sleep is a powerful ally in your weight loss journey. Learn how proper rest influences hormones, cravings, and metabolism, and discover practical strategies for better sleep and better health.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "9 min read",
+    featured: false
+  }
 ]
