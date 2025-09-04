@@ -202,24 +202,4 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
-,
-{
-    title: "Unlock Weight Loss: The Critical Role of Sleep in Your Journey",
-    href: "blog/sleep-for-weight-loss.html",
-    excerpt: "Sleep isn't just rest; it's a powerful ally in your weight loss efforts. Learn how it affects your body, influences your hunger, and what you can do to optimize it.",
-    category: "HEALTH",
-    date: "September 4, 2025",
-    readTime: "8 min read",
-    featured: false
-  }
-,
-{
-    title: "10,000 Steps vs. Japanese Walk: Which is Better for Your Health?",
-    href: "blog/10000-steps-vs-japanese-walk.html",
-    excerpt: "Should you chase the 10,000 steps goal or embrace the mindful Japanese walking technique? We break down the benefits, techniques, and help you decide which path leads to better health and fitness.",
-    category: "FITNESS",
-    date: "September 4, 2025",
-    readTime: "9 min read",
-    featured: false
-  }
 ]
