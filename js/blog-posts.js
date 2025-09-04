@@ -202,4 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
+,
+{
+    title: "Unlock Your Weight Loss: The Critical Role of Sleep in Your Journey",
+    href: "blog/sleep-weight-loss-guide.html",
+    excerpt: "Often overshadowed by diet and exercise, sleep is the third, equally vital pillar of sustainable weight loss. Learn how adequate rest influences your hormones, metabolism, and ability to make healthy choices, transforming your weight loss efforts.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "9 min read",
+    featured: false
+  }
 ]
