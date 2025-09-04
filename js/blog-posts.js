@@ -202,4 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
+,
+{
+    title: "Sleep for Weight Loss: The Unsung Hero of Your Diet Plan",
+    href: "blog/sleep-for-weight-loss.html",
+    excerpt: "Often overlooked, sleep is a powerful, yet underestimated, pillar of effective weight loss. Learn how optimizing your sleep can naturally regulate hormones, boost metabolism, and improve your food choices.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "10 min read",
+    featured: false
+  }
 ]
