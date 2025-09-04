@@ -201,23 +201,5 @@ const blogPosts = [
     date: "August 18, 2025",
     readTime: "6 min read",
     featured: false
-  },
-{
-    title: "The Critical Role of Sleep in Weight Loss: Unlocking Your Body's Potential",
-    href: "blog/sleep-weight-loss-importance.html",
-    excerpt: "Uncover the often-overlooked connection between adequate sleep and successful weight management. Learn how vital sleep is for your body's ability to shed pounds effectively.",
-    category: "HEALTH",
-    date: "September 4, 2025",
-    readTime: "9 min read",
-    featured: false
-  },
-{
-    title: "Sleep Your Way to Success: Why Quality Rest is Crucial for Weight Loss",
-    href: "blog/sleep-weight-loss-importance.html",
-    excerpt: "Beyond diet and exercise, adequate sleep is a fundamental pillar of sustainable weight loss. Uncover the science behind why quality rest is essential for hormone balance, metabolic health, and mindful eating.",
-    category: "HEALTH",
-    date: "September 4, 2025",
-    readTime: "8 min read",
-    featured: false
   }];
 
