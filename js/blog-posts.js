@@ -202,4 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
+,
+{
+    title: "Unlock Weight Loss: The Critical Role of Sleep in Your Journey",
+    href: "blog/sleep-for-weight-loss.html",
+    excerpt: "Sleep isn't just rest; it's a powerful ally in your weight loss efforts. Learn how it affects your body, influences your hunger, and what you can do to optimize it.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "8 min read",
+    featured: false
+  }
 ]
