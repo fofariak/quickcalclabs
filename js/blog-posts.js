@@ -212,4 +212,14 @@ const blogPosts = [
     readTime: "9 min read",
     featured: false
   }
+,
+{
+    title: "10,000 Steps vs. Mindful Walking: Which Path Leads to Better Health?",
+    href: "blog/10000-steps-vs-mindful-walking.html",
+    excerpt: "Exploring the popular 10,000-step goal against mindful walking techniques, this guide helps you decide which approach better suits your fitness journey.",
+    category: "FITNESS",
+    date: "September 4, 2025",
+    readTime: "8 min read",
+    featured: false
+  }
 ]
