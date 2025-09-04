@@ -201,14 +201,4 @@ const blogPosts = [
     date: "August 18, 2025",
     readTime: "6 min read",
     featured: false
-  },
-  {
-  title: "Unlocking Weight Loss: The Surprising Power of Sleep",
-  href: "blog/unlocking-weight-loss-power-of-sleep.html",
-  excerpt: "Explore the vital connection between quality sleep and successful weight loss, understanding why getting enough rest is just as important as diet and exercise.",
-  category: "HEALTH",
-  date: "September 4, 2025",
-  readTime: "7 min read",
-  featured: false
-}
-]
+  }]
