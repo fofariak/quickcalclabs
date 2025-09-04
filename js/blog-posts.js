@@ -202,14 +202,4 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
-,
-{
-    title: "Sleep & Weight Loss: The Unseen Connection You Can't Ignore",
-    href: "blog/sleep-weight-loss-connection.html",
-    excerpt: "Often overlooked, sleep is a powerful, yet silent, partner in your weight loss journey. Discover how getting enough quality rest can unlock your body's potential for effective fat burning and healthier habits.",
-    category: "HEALTH",
-    date: "September 4, 2025",
-    readTime: "9 min read",
-    featured: false
-  }
 ]
