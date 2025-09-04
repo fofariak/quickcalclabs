@@ -207,7 +207,7 @@ const blogPosts = [
     title: "Unlock Your Weight Loss: The Critical Role of Sleep in Your Journey",
     href: "blog/sleep-weight-loss-guide.html",
     excerpt: "Often overshadowed by diet and exercise, sleep is the third, equally vital pillar of sustainable weight loss. Learn how adequate rest influences your hormones, metabolism, and ability to make healthy choices, transforming your weight loss efforts.",
-    category: "HEALTH",
+    category: "health",
     date: "September 4, 2025",
     readTime: "9 min read",
     featured: false
@@ -217,7 +217,7 @@ const blogPosts = [
     title: "10,000 Steps vs. Mindful Walking: Which Path Leads to Better Health?",
     href: "blog/10000-steps-vs-mindful-walking.html",
     excerpt: "Exploring the popular 10,000-step goal against mindful walking techniques, this guide helps you decide which approach better suits your fitness journey.",
-    category: "FITNESS",
+    category: "fitness",
     date: "September 4, 2025",
     readTime: "8 min read",
     featured: false
