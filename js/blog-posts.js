@@ -201,4 +201,5 @@ const blogPosts = [
     date: "August 18, 2025",
     readTime: "6 min read",
     featured: false
-  }]
+  }
+]
