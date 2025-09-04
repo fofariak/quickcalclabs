@@ -202,4 +202,14 @@ const blogPosts = [
     readTime: "6 min read",
     featured: false
   }
+,
+{
+    title: "Sleep and Weight Loss: Why Quality Rest is Your Secret Weapon",
+    href: "blog/sleep-weight-loss-secret-weapon.html",
+    excerpt: "Uncover the crucial link between sleep and weight loss. Learn how adequate rest can optimize your hormones, boost metabolism, and improve your diet choices, making it a non-negotiable part of your health journey.",
+    category: "HEALTH",
+    date: "September 4, 2025",
+    readTime: "9 min read",
+    featured: false
+  }
 ]
