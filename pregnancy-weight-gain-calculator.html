@@ -100,6 +100,9 @@
     .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
     .faq summary { margin: 0; padding: 12px; background: var(--accent-pink); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
     .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
+    .info-table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; }
+    .info-table th, .info-table td { padding: 10px; text-align: left; border-bottom: 1px solid #ecf0f1; }
+    .dark-mode .info-table th, .dark-mode .info-table td { border-bottom-color: #34495e; }
   </style>
 </head>
 <body>
@@ -187,14 +190,63 @@
   <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
 
   <section class="seo-content">
-    <h2>Understanding Pregnancy Weight Gain</h2>
-    <p>Gaining a healthy amount of weight during pregnancy is crucial for your baby's development. This calculator uses the guidelines from the Institute of Medicine (IOM) to provide a recommended weight gain range based on your pre-pregnancy Body Mass Index (BMI). Your BMI category (underweight, normal weight, overweight, or obese) determines your personalized recommendation.</p>
+    <h2>Understanding Your Pregnancy Weight Gain Journey</h2>
+    <p>Gaining a healthy amount of weight during pregnancy is a crucial part of supporting your baby's development. This calculator uses the official guidelines from the Institute of Medicine (IOM) to provide a recommended weight gain range based on your pre-pregnancy Body Mass Index (BMI). Your BMI category (underweight, normal weight, overweight, or obese) determines your personalized recommendation for a healthy pregnancy.</p>
     
-    <h3>Why is Healthy Weight Gain Important?</h3>
-    <p>Gaining the right amount of weight supports the growth of the placenta, amniotic fluid, maternal blood volume, and, of course, your baby. Gaining too little weight can increase the risk of having a baby who is too small (low birth weight). Gaining too much weight can increase the risk of gestational diabetes, high blood pressure, and having a larger baby, which can complicate delivery.</p>
-    
-    <h3>It's a Marathon, Not a Sprint</h3>
-    <p>Weight gain is not linear. Most women gain the least amount of weight during the first trimester (1-4.5 pounds total) and then gain more steadily during the second and third trimesters (about 1-2 pounds per week for normal weight). This tool helps you visualize if your current gain falls within the healthy range for your specific week of pregnancy.</p>
+    <h3>Where Does the Weight Go?</h3>
+    <p>It's common to wonder how the numbers on the scale add up. The weight you gain is distributed throughout your body to create the perfect environment for your baby to grow. Here is a typical breakdown for a 30-pound (13.6 kg) total weight gain:</p>
+    <table class="info-table">
+        <tr>
+            <td>Baby</td>
+            <td>~7.5 lbs (3.4 kg)</td>
+        </tr>
+        <tr>
+            <td>Placenta</td>
+            <td>~1.5 lbs (0.7 kg)</td>
+        </tr>
+        <tr>
+            <td>Amniotic Fluid</td>
+            <td>~2.0 lbs (0.9 kg)</td>
+        </tr>
+        <tr>
+            <td>Increased Uterus Size</td>
+            <td>~2.0 lbs (0.9 kg)</td>
+        </tr>
+        <tr>
+            <td>Increased Breast Tissue</td>
+            <td>~2.0 lbs (0.9 kg)</td>
+        </tr>
+        <tr>
+            <td>Increased Blood Volume</td>
+            <td>~4.0 lbs (1.8 kg)</td>
+        </tr>
+        <tr>
+            <td>Increased Fluid Volume</td>
+            <td>~4.0 lbs (1.8 kg)</td>
+        </tr>
+        <tr>
+            <td>Maternal Fat Stores</td>
+            <td>~7.0 lbs (3.2 kg)</td>
+        </tr>
+    </table>
+
+    <h3>A Trimester-by-Trimester Guide to Weight Gain</h3>
+    <p>Weight gain is not linear; it happens in stages. Understanding this pattern can help reduce anxiety about the number on the scale.</p>
+    <ul>
+        <li><strong>First Trimester (Weeks 1-13):</strong> This is when you'll gain the least amount of weight. A total gain of 1 to 4.5 pounds is typical. Some women may even lose a little weight due to morning sickness.</li>
+        <li><strong>Second Trimester (Weeks 14-27):</strong> Your baby begins to grow more rapidly. For women with a normal pre-pregnancy BMI, a steady gain of about 1 to 2 pounds per week is recommended.</li>
+        <li><strong>Third Trimester (Weeks 28-40):</strong> Weight gain continues at a similar pace to the second trimester. The baby will do most of their growing during this final stage.</li>
+    </ul>
+
+    <h3>Tips for Healthy Pregnancy Weight Gain</h3>
+    <p>Focus on the quality of your diet, not just the quantity. The goal is to eat nutrient-dense foods that benefit both you and your baby.</p>
+    <ul>
+      <li><strong>Eat Small, Frequent Meals:</strong> This can help manage nausea in the first trimester and prevent heartburn in the third. It also keeps your blood sugar stable.</li>
+      <li><strong>Focus on "Superfoods":</strong> Incorporate foods rich in folate, iron, calcium, and protein, such as leafy greens, lentils, lean meats, and dairy or fortified alternatives.</li>
+      <li><strong>Stay Hydrated:</strong> Drinking plenty of water is essential for supporting increased blood volume and amniotic fluid.</li>
+      <li><strong>Listen to Your Body:</strong> Eat when you're hungry and stop when you're full. Pregnancy is not a time for restrictive dieting.</li>
+      <li><strong>Stay Active:</strong> Unless advised otherwise by your doctor, aim for 30 minutes of moderate exercise (like walking or swimming) most days of the week.</li>
+    </ul>
 
     <h3>🔗 Explore More Tools</h3>
     <div class="card-grid">
@@ -328,38 +380,42 @@
         gainRangeLbs = [gainRangeKg[0] * 2.20462, gainRangeKg[1] * 2.20462];
 
         // Calculate recommended gain for the current week
-        let weeklyGainKg = (bmi < 25) ? [0.4, 0.5] : [0.2, 0.3]; // Simplified average weekly gain for 2nd/3rd trimester
-        if (isTwins) { weeklyGainKg = (bmi < 25) ? [0.6, 0.7] : [0.5, 0.6];}
+        let weeklyGainLbs = (bmi < 18.5) ? 1.1 : (bmi < 25) ? 1.0 : (bmi < 30) ? 0.6 : 0.5;
+        if(isTwins) weeklyGainLbs = (bmi < 25) ? 1.5 : (bmi < 30) ? 1.3 : 1.1;
 
-        let firstTrimesterGain = isTwins ? [0.9, 1.8] : [0.5, 2];
-        let recMinKg, recMaxKg;
+        let firstTrimesterGainLbs = isTwins ? 4 : 2;
+        let recMinLbs, recMaxLbs;
 
         if (weeks <= 13) {
-            recMinKg = firstTrimesterGain[0];
-            recMaxKg = firstTrimesterGain[1];
+            recMinLbs = 1.1;
+            recMaxLbs = 4.4;
         } else {
-            recMinKg = firstTrimesterGain[1] + (weeks - 13) * weeklyGainKg[0];
-            recMaxKg = firstTrimesterGain[1] + (weeks - 13) * weeklyGainKg[1];
+            // A more detailed weekly calculation
+            let baseGain = 4.4; // Upper end of first trimester
+            recMaxLbs = baseGain + (weeks - 13) * (weeklyGainLbs + 0.2); // Upper range
+            recMinLbs = baseGain + (weeks - 13) * (weeklyGainLbs - 0.2); // Lower range
         }
+
 
         const yourGainKg = currentWeightKg - preWeightKg;
         const yourGainLbs = yourGainKg * 2.20462;
         
-        const recMinLbs = recMinKg * 2.20462;
-        const recMaxLbs = recMaxKg * 2.20462;
+        const recMinKg = recMinLbs / 2.20462;
+        const recMaxKg = recMaxLbs / 2.20462;
 
         const displayTotalGain = (unit === 'imperial') ? `${gainRangeLbs[0].toFixed(1)} - ${gainRangeLbs[1].toFixed(1)} lbs` : `${gainRangeKg[0].toFixed(1)} - ${gainRangeKg[1].toFixed(1)} kg`;
         const displayYourGain = (unit === 'imperial') ? `${yourGainLbs.toFixed(1)} lbs` : `${yourGainKg.toFixed(1)} kg`;
         const displayRecGain = (unit === 'imperial') ? `${recMinLbs.toFixed(1)} - ${recMaxLbs.toFixed(1)} lbs` : `${recMinKg.toFixed(1)} - ${recMaxKg.toFixed(1)} kg`;
 
         // Chart logic
-        const overallMin = gainRangeLbs[0] * 0.8;
-        const overallMax = gainRangeLbs[1] * 1.2;
+        const overallMin = gainRangeLbs[0] * 0.5;
+        const overallMax = gainRangeLbs[1] * 1.1;
         const chartRange = overallMax - overallMin;
         
-        const rangeStartPercent = ((recMinLbs - overallMin) / chartRange) * 100;
-        const rangeWidthPercent = ((recMaxLbs - recMinLbs) / chartRange) * 100;
-        const yourGainPercent = ((yourGainLbs - overallMin) / chartRange) * 100;
+        const rangeStartPercent = Math.max(0, ((recMinLbs - overallMin) / chartRange) * 100);
+        const rangeWidthPercent = Math.min(100 - rangeStartPercent, ((recMaxLbs - recMinLbs) / chartRange) * 100);
+        const yourGainPercent = Math.max(0, Math.min(100, ((yourGainLbs - overallMin) / chartRange) * 100));
+
 
         resultDiv.innerHTML = `
             <div class="result-container">
@@ -418,3 +474,4 @@
 
 </body>
 </html>
+
