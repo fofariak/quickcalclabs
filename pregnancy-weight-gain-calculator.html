@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregnancy Weight Gain Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Track your pregnancy weight gain with our free, interactive calculator. Get personalized recommendations based on your pre-pregnancy BMI for a healthy pregnancy.">
+  <link rel="stylesheet" href="css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --accent-pink: #e84393;
+      --accent-blue: #3498db;
+      --card-bg: #ffffff;
+      --text-color: #333;
+    }
+    .dark-mode {
+      --card-bg: #2c3e50;
+      --text-color: #ecf0f1;
+    }
+    .calc-wrapper { max-width: 600px; }
+    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    
+    .segmented-control {
+      display: flex;
+      border-radius: 10px;
+      border: 1px solid #bdc3c7;
+      overflow: hidden;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    .segmented-control input[type="radio"] { display: none; }
+    .segmented-control label {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      background: var(--card-bg);
+      color: var(--text-color);
+      transition: background 0.3s;
+    }
+    .segmented-control input[type="radio"]:checked + label {
+      background: var(--accent-pink);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Result styles */
+    .result-container {
+        margin-top: 25px;
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .result-container h3 { margin-top: 0; color: var(--accent-pink); }
+    .bmi-result { text-align: center; margin-bottom: 15px; }
+    .progress-bar-container { margin: 15px 0; }
+    .progress-bar {
+        height: 30px;
+        background-color: #ecf0f1;
+        border-radius: 15px;
+        position: relative;
+    }
+    .recommended-range {
+        position: absolute;
+        height: 100%;
+        background-color: #2ecc71;
+        border-radius: 15px;
+        opacity: 0.5;
+    }
+    .your-gain {
+        position: absolute;
+        height: 100%;
+        width: 4px;
+        background-color: var(--accent-pink);
+        border-radius: 2px;
+        transform: translateX(-2px);
+    }
+    .your-gain::after {
+        content: '▲ You are here';
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: var(--accent-pink);
+        white-space: nowrap;
+    }
+    .range-labels { display: flex; justify-content: space-between; font-size: 12px; margin-top: 5px; }
+
+    /* Other styles */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 15px; margin-top: 20px; }
+    .card { background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .card a { text-decoration:none; font-weight:600; color: var(--text-color);}
+    .card a:hover { color: var(--accent-pink); }
+    .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
+    .faq summary { margin: 0; padding: 12px; background: var(--accent-pink); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
+    .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+
+  <section class="calc-wrapper">
+    <h1>🤰 Pregnancy Weight Gain Calculator</h1>
+    <p class="subtitle">Track your weight gain through pregnancy and see if you're on a healthy track based on IOM guidelines.</p>
+    
+    <label>🔄 Unit System:</label>
+    <div class="segmented-control">
+        <input type="radio" id="imperial" name="unit" value="imperial" checked>
+        <label for="imperial">Imperial</label>
+        <input type="radio" id="metric" name="unit" value="metric">
+        <label for="metric">Metric</label>
+    </div>
+
+    <!-- Imperial Inputs -->
+    <div id="imperialInputs">
+        <label>📏 Your Height (ft/in):</label>
+        <div class="input-group">
+             <input type="number" id="height_ft" placeholder="ft">
+             <input type="number" id="height_in" placeholder="in">
+        </div>
+        <div class="input-group">
+            <div>
+                <label>⚖️ Pre-Pregnancy Weight (lbs):</label>
+                <input type="number" id="pre_weight_lbs" placeholder="e.g., 140">
+            </div>
+            <div>
+                <label>⚖️ Current Weight (lbs):</label>
+                <input type="number" id="current_weight_lbs" placeholder="e.g., 150">
+            </div>
+        </div>
+    </div>
+
+    <!-- Metric Inputs -->
+    <div id="metricInputs" style="display: none;">
+        <label>📏 Your Height (cm):</label>
+        <input type="number" id="height_cm" placeholder="e.g., 165">
+        <div class="input-group">
+            <div>
+                <label>⚖️ Pre-Pregnancy Weight (kg):</label>
+                <input type="number" id="pre_weight_kg" placeholder="e.g., 63.5">
+            </div>
+            <div>
+                <label>⚖️ Current Weight (kg):</label>
+                <input type="number" id="current_weight_kg" placeholder="e.g., 68">
+            </div>
+        </div>
+    </div>
+    
+    <div class="input-group">
+        <div>
+            <label for="weeks">🗓️ Current Week of Pregnancy:</label>
+            <input type="number" id="weeks" placeholder="e.g., 25">
+        </div>
+        <div>
+            <label>👶 Twins?</label>
+             <div class="segmented-control" style="margin-top:0;">
+                <input type="radio" id="no" name="twins" value="no" checked>
+                <label for="no">No</label>
+                <input type="radio" id="yes" name="twins" value="yes">
+                <label for="yes">Yes</label>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="calculateGain()">Calculate Weight Gain</button>
+
+    <div id="result" class="result-box"></div>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
+
+  <section class="seo-content">
+    <h2>Understanding Pregnancy Weight Gain</h2>
+    <p>Gaining a healthy amount of weight during pregnancy is crucial for your baby's development. This calculator uses the guidelines from the Institute of Medicine (IOM) to provide a recommended weight gain range based on your pre-pregnancy Body Mass Index (BMI). Your BMI category (underweight, normal weight, overweight, or obese) determines your personalized recommendation.</p>
+    
+    <h3>Why is Healthy Weight Gain Important?</h3>
+    <p>Gaining the right amount of weight supports the growth of the placenta, amniotic fluid, maternal blood volume, and, of course, your baby. Gaining too little weight can increase the risk of having a baby who is too small (low birth weight). Gaining too much weight can increase the risk of gestational diabetes, high blood pressure, and having a larger baby, which can complicate delivery.</p>
+    
+    <h3>It's a Marathon, Not a Sprint</h3>
+    <p>Weight gain is not linear. Most women gain the least amount of weight during the first trimester (1-4.5 pounds total) and then gain more steadily during the second and third trimesters (about 1-2 pounds per week for normal weight). This tool helps you visualize if your current gain falls within the healthy range for your specific week of pregnancy.</p>
+
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="pregnancy-due-date-calculator.html">🤰 Pregnancy Due Date Calculator</a></div>
+      <div class="card"><a href="baby-growth-percentile-calculator.html">📊 Baby Growth Percentile Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="rmr-calculator.html">🔥 Resting Metabolic Rate Calculator</a></div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions about Pregnancy Weight Gain</h2>
+    <details class="faq">
+      <summary>What is my pre-pregnancy BMI category?</summary>
+      <p>Your pre-pregnancy BMI is calculated from your height and pre-pregnancy weight. The categories are: Underweight (BMI < 18.5), Normal Weight (18.5 - 24.9), Overweight (25.0 - 29.9), and Obese (BMI ≥ 30.0). This calculator determines your category automatically.</p>
+    </details>
+    <details class="faq">
+      <summary>What are the recommendations for twins?</summary>
+      <p>Weight gain recommendations are higher for twin pregnancies. For example, a woman with a normal BMI is recommended to gain 37-54 pounds for twins, compared to 25-35 pounds for a single baby. This calculator adjusts the recommendations if you select "Yes" for twins.</p>
+    </details>
+    <details class="faq">
+      <summary>What if I'm not within the recommended range?</summary>
+      <p>Don't panic. This calculator is a guide, not a diagnosis. Many healthy pregnancies fall slightly outside these ranges. The most important step is to discuss your weight gain, nutrition, and activity level with your healthcare provider at your regular prenatal appointments.</p>
+    </details>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
+
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is my pre-pregnancy BMI category?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your pre-pregnancy BMI is calculated from your height and pre-pregnancy weight. The categories are: Underweight (BMI < 18.5), Normal Weight (18.5 - 24.9), Overweight (25.0 - 29.9), and Obese (BMI ≥ 30.0). This calculator determines your category automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the recommendations for twins?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weight gain recommendations are higher for twin pregnancies. For example, a woman with a normal BMI is recommended to gain 37-54 pounds for twins, compared to 25-35 pounds for a single baby. This calculator adjusts the recommendations if you select 'Yes' for twins."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I'm not within the recommended range?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Don't panic. This calculator is a guide, not a diagnosis. Many healthy pregnancies fall slightly outside these ranges. The most important step is to discuss your weight gain, nutrition, and activity level with your healthcare provider at your regular prenatal appointments."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    function calculateGain() {
+        const unit = document.querySelector('input[name="unit"]:checked').value;
+        const resultDiv = document.getElementById('result');
+        const weeks = parseInt(document.getElementById('weeks').value);
+        const isTwins = document.querySelector('input[name="twins"]:checked').value === 'yes';
+
+        let heightCm, preWeightKg, currentWeightKg;
+        let hasErrors = false;
+
+        if (unit === 'imperial') {
+            const heightFt = parseFloat(document.getElementById('height_ft').value) || 0;
+            const heightIn = parseFloat(document.getElementById('height_in').value) || 0;
+            const preWeightLbs = parseFloat(document.getElementById('pre_weight_lbs').value);
+            const currentWeightLbs = parseFloat(document.getElementById('current_weight_lbs').value);
+
+            if (isNaN(heightFt) || isNaN(heightIn) || isNaN(preWeightLbs) || isNaN(currentWeightLbs) || (heightFt <= 0 && heightIn <= 0) || preWeightLbs <= 0 || currentWeightLbs <=0) {
+                hasErrors = true;
+            } else {
+                heightCm = ((heightFt * 12) + heightIn) * 2.54;
+                preWeightKg = preWeightLbs * 0.453592;
+                currentWeightKg = currentWeightLbs * 0.453592;
+            }
+        } else { // Metric
+            heightCm = parseFloat(document.getElementById('height_cm').value);
+            preWeightKg = parseFloat(document.getElementById('pre_weight_kg').value);
+            currentWeightKg = parseFloat(document.getElementById('current_weight_kg').value);
+            if (isNaN(heightCm) || isNaN(preWeightKg) || isNaN(currentWeightKg) || heightCm <= 0 || preWeightKg <= 0 || currentWeightKg <=0) {
+                hasErrors = true;
+            }
+        }
+
+        if (isNaN(weeks) || weeks < 1 || weeks > 42) {
+            hasErrors = true;
+        }
+        
+        if (hasErrors) {
+            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields with valid, positive numbers (weeks 1-42).</p>";
+            return;
+        }
+
+        if (currentWeightKg < preWeightKg) {
+             resultDiv.innerHTML = "<p style='color:orange;'>Your current weight should be higher than your pre-pregnancy weight.</p>";
+            return;
+        }
+
+        const heightM = heightCm / 100;
+        const bmi = preWeightKg / (heightM * heightM);
+        let bmiCategory, gainRangeKg, gainRangeLbs;
+
+        if (isTwins) {
+            if (bmi < 18.5) { bmiCategory = "Underweight"; gainRangeKg = [22.7, 28.1]; }
+            else if (bmi < 25) { bmiCategory = "Normal weight"; gainRangeKg = [16.8, 24.5]; }
+            else if (bmi < 30) { bmiCategory = "Overweight"; gainRangeKg = [14.1, 22.7]; }
+            else { bmiCategory = "Obese"; gainRangeKg = [11.3, 19.1]; }
+        } else { // Singleton
+            if (bmi < 18.5) { bmiCategory = "Underweight"; gainRangeKg = [12.5, 18]; }
+            else if (bmi < 25) { bmiCategory = "Normal weight"; gainRangeKg = [11.5, 16]; }
+            else if (bmi < 30) { bmiCategory = "Overweight"; gainRangeKg = [7, 11.5]; }
+            else { bmiCategory = "Obese"; gainRangeKg = [5, 9]; }
+        }
+        
+        gainRangeLbs = [gainRangeKg[0] * 2.20462, gainRangeKg[1] * 2.20462];
+
+        // Calculate recommended gain for the current week
+        let weeklyGainKg = (bmi < 25) ? [0.4, 0.5] : [0.2, 0.3]; // Simplified average weekly gain for 2nd/3rd trimester
+        if (isTwins) { weeklyGainKg = (bmi < 25) ? [0.6, 0.7] : [0.5, 0.6];}
+
+        let firstTrimesterGain = isTwins ? [0.9, 1.8] : [0.5, 2];
+        let recMinKg, recMaxKg;
+
+        if (weeks <= 13) {
+            recMinKg = firstTrimesterGain[0];
+            recMaxKg = firstTrimesterGain[1];
+        } else {
+            recMinKg = firstTrimesterGain[1] + (weeks - 13) * weeklyGainKg[0];
+            recMaxKg = firstTrimesterGain[1] + (weeks - 13) * weeklyGainKg[1];
+        }
+
+        const yourGainKg = currentWeightKg - preWeightKg;
+        const yourGainLbs = yourGainKg * 2.20462;
+        
+        const recMinLbs = recMinKg * 2.20462;
+        const recMaxLbs = recMaxKg * 2.20462;
+
+        const displayTotalGain = (unit === 'imperial') ? `${gainRangeLbs[0].toFixed(1)} - ${gainRangeLbs[1].toFixed(1)} lbs` : `${gainRangeKg[0].toFixed(1)} - ${gainRangeKg[1].toFixed(1)} kg`;
+        const displayYourGain = (unit === 'imperial') ? `${yourGainLbs.toFixed(1)} lbs` : `${yourGainKg.toFixed(1)} kg`;
+        const displayRecGain = (unit === 'imperial') ? `${recMinLbs.toFixed(1)} - ${recMaxLbs.toFixed(1)} lbs` : `${recMinKg.toFixed(1)} - ${recMaxKg.toFixed(1)} kg`;
+
+        // Chart logic
+        const overallMin = gainRangeLbs[0] * 0.8;
+        const overallMax = gainRangeLbs[1] * 1.2;
+        const chartRange = overallMax - overallMin;
+        
+        const rangeStartPercent = ((recMinLbs - overallMin) / chartRange) * 100;
+        const rangeWidthPercent = ((recMaxLbs - recMinLbs) / chartRange) * 100;
+        const yourGainPercent = ((yourGainLbs - overallMin) / chartRange) * 100;
+
+        resultDiv.innerHTML = `
+            <div class="result-container">
+                <h3>Your Pregnancy Weight Gain Tracker</h3>
+                <div class="bmi-result">
+                    <p>Based on your pre-pregnancy BMI of <strong>${bmi.toFixed(1)}</strong>, you are in the <strong>${bmiCategory}</strong> category.</p>
+                    <p>Your total recommended gain is <strong>${displayTotalGain}</strong>.</p>
+                </div>
+                <h4>Your Progress at Week ${weeks}</h4>
+                <p>You have gained: <strong>${displayYourGain}</strong><br>
+                Recommended gain for this week: <strong>${displayRecGain}</strong></p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="recommended-range" style="left: ${rangeStartPercent}%; width: ${rangeWidthPercent}%;"></div>
+                        <div class="your-gain" style="left: ${yourGainPercent}%;"></div>
+                    </div>
+                    <div class="range-labels">
+                        <span>${(unit === 'imperial' ? recMinLbs.toFixed(1) : recMinKg.toFixed(1))}</span>
+                        <span>${(unit === 'imperial' ? recMaxLbs.toFixed(1) : recMaxKg.toFixed(1))}</span>
+                    </div>
+                </div>
+                 <p style="font-size:12px; text-align:center; margin-top:15px;"><strong>Disclaimer:</strong> This is a guide based on IOM recommendations. Consult your healthcare provider for personalized advice.</p>
+            </div>
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      });
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+
+      const imperialRadio = document.getElementById('imperial');
+      const metricRadio = document.getElementById('metric');
+      const imperialInputs = document.getElementById('imperialInputs');
+      const metricInputs = document.getElementById('metricInputs');
+
+      imperialRadio.addEventListener('change', () => {
+          if (imperialRadio.checked) {
+              imperialInputs.style.display = 'block';
+              metricInputs.style.display = 'none';
+          }
+      });
+      metricRadio.addEventListener('change', () => {
+          if (metricRadio.checked) {
+              imperialInputs.style.display = 'none';
+              metricInputs.style.display = 'block';
+          }
+      });
+    });
+  </script>
+
+</body>
+</html>
