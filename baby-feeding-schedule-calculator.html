@@ -71,7 +71,7 @@
       color: #fff;
       font-weight: 600;
     }
-
+    .blog-image { width: 100%; max-width: 500px; height: auto; border-radius: 10px; margin: 1.5rem auto; display: block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     /* Result styles */
     .schedule-container {
         margin-top: 25px;
@@ -145,7 +145,7 @@
   <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
 
   <section class="calc-wrapper">
-    <h1>🍼 Baby Feeding Schedule Calculator</h1>
+    <h1>🍼 Baby Feeding Schedule & Amount Calculator</h1>
     <p class="subtitle">Get a sample feeding schedule and daily milk intake estimate for your little one.</p>
 
     <div class="input-group">
@@ -182,7 +182,7 @@
         <label for="breastmilk">Breastmilk</label>
     </div>
 
-    <button onclick="calculateSchedule()">Generate Schedule</button>
+    <button onclick="calculateSchedule()">Generate Sample Schedule</button>
 
     <div id="result" class="result-box"></div>
   </section>
@@ -190,14 +190,23 @@
   <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
 
   <section class="seo-content">
-    <h2>How to Use the Baby Feeding Schedule Calculator</h2>
-    <p>Understanding your baby's nutritional needs is a key part of parenting. This calculator provides a sample feeding schedule based on general guidelines for a baby's age and weight. Simply enter your baby's details to see an estimate of their daily milk intake, how often they might feed, and how much they might drink at each feeding.</p>
-    <p><strong>Important considerations:</strong></p>
+    <h2>Creating Your Newborn Feeding Chart: A Guide</h2>
+    <p>Understanding your baby's nutritional needs is a key part of parenting. This calculator provides a sample infant feeding guide based on general guidelines for a baby's age and weight. Simply enter your baby's details to see an estimate of their daily milk intake, how often they might feed, and the recommended bottle feeding amounts for each session.</p>
+    
+    <h3>Important: Follow Your Baby's Cues, Not the Clock</h3>
+    <p>While this tool creates a helpful sample schedule, it's crucial to remember that every baby is different. You should always practice responsive feeding, which means following your baby's hunger cues rather than sticking rigidly to a clock.</p>
+
+    <h3>Recognizing Your Baby's Hunger Cues</h3>
+    <p>Learning your baby's early hunger signs can prevent distress and make feedings calmer. Look for these cues before your baby starts crying:</p>
     <ul>
-      <li><strong>This is an estimate.</strong> Every baby is different. Always follow your baby's hunger cues (like rooting, sucking on fists, and crying) rather than sticking rigidly to a clock.</li>
-      <li><strong>Breastfed babies</strong> may eat more frequently and in varying amounts compared to formula-fed babies. "On-demand" feeding is the standard for breastfeeding.</li>
-      <li><strong>Growth spurts</strong> will temporarily increase your baby's appetite. Be prepared for more frequent or larger feedings during these periods.</li>
+        <li><strong>Rooting:</strong> Turning their head and opening their mouth when you stroke their cheek.</li>
+        <li><strong>Sucking Motions:</strong> Making sucking motions with their lips or sucking on their hands and fingers.</li>
+        <li><strong>Restlessness:</strong> Wriggling, squirming, and moving their head from side to side.</li>
     </ul>
+    <img src="https://placehold.co/600x400/EBF8FF/3498DB?text=Infographic:%20Baby%20Hunger%20Cues" alt="An infographic showing a baby's early, active, and late hunger cues like rooting, squirming, and crying." class="blog-image">
+
+    <h3>Breastfeeding vs. Formula Feeding Schedules</h3>
+    <p><strong>Breastfed babies</strong> typically eat more frequently than formula-fed babies—often every 1.5 to 3 hours. This is because breast milk is digested more quickly. "On-demand" feeding is the gold standard for breastfeeding. <strong>Formula-fed babies</strong> may go longer between feedings, typically every 3 to 4 hours. Also, be aware that growth spurts will temporarily increase your baby's appetite. Be prepared for more frequent or larger feedings during these periods (often around 2-3 weeks, 6 weeks, 3 months, and 6 months).</p>
 
     <h3>🔗 Explore More Tools</h3>
     <div class="card-grid">
@@ -215,14 +224,14 @@
   </section>
 
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
+    <h2>❓ Frequently Asked Questions about Infant Feeding</h2>
     <details class="faq">
-      <summary>How much milk does my baby need?</summary>
-      <p>A general guideline is that babies need about 2.5 ounces of formula or breastmilk per pound (or 150-200 mL per kg) of body weight per day. This calculator uses this principle to create its estimate.</p>
+      <summary>How much milk does my newborn need?</summary>
+      <p>A general guideline is that babies need about 2.5 ounces of formula or breastmilk per pound (or 150-200 mL per kg) of body weight per day. For example, a 10 lb baby needs approximately 25 oz of milk in 24 hours. This calculator uses this principle to create its estimate.</p>
     </details>
     <details class="faq">
       <summary>How do I know if my baby is getting enough milk?</summary>
-      <p>Look for reliable signs: consistent weight gain along their growth curve, 6-8 wet diapers per day, and seeming content and satisfied after feedings. If you have any concerns, always consult your pediatrician.</p>
+      <p>Look for reliable signs: consistent weight gain along their growth curve, 6-8 wet diapers per day, and seeming content and satisfied after feedings. If you have any concerns about their intake or weight gain, always consult your pediatrician.</p>
     </details>
     <details class="faq">
       <summary>Can I overfeed my baby?</summary>
@@ -246,10 +255,10 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How much milk does my baby need?",
+        "name": "How much milk does my newborn need?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A general guideline is that babies need about 2.5 ounces of formula or breastmilk per pound (or 150-200 mL per kg) of body weight per day. This calculator uses this principle to create its estimate."
+          "text": "A general guideline is that babies need about 2.5 ounces of formula or breastmilk per pound (or 150-200 mL per kg) of body weight per day. For example, a 10 lb baby needs approximately 25 oz of milk in 24 hours. This calculator uses this principle to create its estimate."
         }
       },
       {
@@ -257,7 +266,7 @@
         "name": "How do I know if my baby is getting enough milk?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Look for reliable signs: consistent weight gain along their growth curve, 6-8 wet diapers per day, and seeming content and satisfied after feedings. If you have any concerns, always consult your pediatrician."
+          "text": "Look for reliable signs: consistent weight gain along their growth curve, 6-8 wet diapers per day, and seeming content and satisfied after feedings. If you have any concerns about their intake or weight gain, always consult your pediatrician."
         }
       },
       {
@@ -407,5 +416,4 @@
 
 </body>
 </html>
-
 
