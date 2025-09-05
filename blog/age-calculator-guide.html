@@ -9,30 +9,34 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link {
-      color: var(--accent-blue);
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-    }
-    .dark-mode .affiliate-link {
-      color: #8ab4f8;
-    }
-    .blog-image {
-        width: 100%;
-        max-width: 600px;
-        height: auto;
-        border-radius: var(--radius-lg);
-        margin: 1.5rem auto;
-        display: block;
-        box-shadow: var(--shadow-md);
-    }
+    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: center; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .faq-section details { background: var(--surface-1-light); border: 1px solid #e1e5e9; border-radius: var(--radius-md); margin-bottom: 0.5rem; padding: 1rem; }
+    .dark-mode .faq-section details { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .faq-section summary { font-weight: 600; cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <a href="../index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -43,141 +47,221 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
 
-  <!-- Main Blog Content -->
   <section class="seo-content">
     <h1>Beyond the Birthday Candle: A Deep Dive into Your Age</h1>
-    <p class="muted">Published on: September 3, 2025</p>
-    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1770&auto=format&fit=crop" alt="Colorful birthday decorations and confetti" class="blog-image">
-    <p>How old are you? It seems like a simple question, but the answer can be surprisingly complex and fascinating. Beyond just a number, your age represents your journey through time—a collection of experiences, memories, and growth. In this guide, we'll explore the concept of age, how it's calculated with precision, and why understanding it matters. For a quick and accurate answer, you can always use our powerful tool.</p>
+    <p class="muted">Published on: September 5, 2025 | 11 min read</p>
     
-    <div style="text-align:center; margin: 2rem 0;">
-      <a href="../age-calculator.html" class="cta-btn">➡️ Calculate Your Exact Age Now!</a>
+    <div class="toc">
+      <h3>📋 Table of Contents</h3>
+      <ul>
+        <li><a href="#what-is-age">What is Chronological Age?</a></li>
+        <li><a href="#how-it-works">How an Age Calculator Works</a></li>
+        <li><a href="#age-milestones">Age Milestones Around the World</a></li>
+        <li><a href="#biological-age">Biological vs. Chronological Age</a></li>
+        <li><a href="#action-today">Take Action Today: Explore Your Timeline</a></li>
+        <li><a href="#tools-resources">Tools to Celebrate Life's Milestones</a></li>
+        <li><a href="#faq">Frequently Asked Questions</a></li>
+      </ul>
     </div>
 
-    <h2>What is Chronological Age?</h2>
-    <p>Chronological age is the most common way we measure age. It's simply the amount of time that has elapsed from your birth to the present date. This is typically measured in years, but for greater precision, it can be broken down into months, weeks, days, hours, and even seconds. Our brains do a quick subtraction of years, but a true calculation accounts for leap years and the specific number of days in each month, which can be tricky to do manually.</p>
+    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1770&auto=format&fit=crop" alt="Colorful birthday decorations and confetti" class="blog-image">
     
-    <h3>Why Precision Matters</h3>
-    <p>For most social situations, knowing your age in years is enough. However, in many official contexts, precision is key:</p>
-    <ul>
-      <li><strong>Legal Milestones:</strong> Eligibility for driving, voting, or retirement benefits often depends on the exact day you reach a certain age.</li>
-      <li><strong>Medical Assessments:</strong> Doctors use your precise age to assess growth charts for children and to calculate health risks for adults.</li>
-      <li><strong>Astrology and Numerology:</strong> These fields rely heavily on the exact date and even time of birth to create charts and readings.</li>
-    </ul>
+    <p>How old are you? It’s likely the first personal question we learn to answer, yet the number of candles on a cake tells only part of the story. Beyond a simple integer, your age is a measure of your unique journey through time—a rich tapestry of experiences, memories, growth, and learning. It dictates legal rights, influences health assessments, and shapes societal perceptions. But how is it *really* calculated, and what other ways are there to think about our age?</p>
+    <p>In this guide, we'll explore the fascinating precision behind age calculation, the difference between the age on your driver's license and the age of your cells, and how this knowledge can offer a richer perspective on your own life. For a quick and precise answer to that fundamental question, start with our powerful tool.</p>
 
-    <h2>How an Age Calculator Works</h2>
-    <p>An online age calculator automates the complex process of measuring time. When you input your date of birth, the tool performs a series of calculations:</p>
-    <ol>
-      <li>It takes the current date and your birth date as two distinct points in time.</li>
-      <li>It calculates the total number of full years that have passed between these two dates.</li>
-      <li>It then calculates the "leftover" time, determining the number of months and days by accounting for the varying lengths of months and the inclusion of leap years.</li>
-      <li>The result is a comprehensive breakdown of your age, often including fun metrics like your age in total days or the day of the week you were born.</li>
-    </ol>
-    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=1768&auto=format&fit=crop" alt="A wall calendar with dates being marked off to represent the passage of time" class="blog-image">
+    <div style="text-align:center; margin: 2rem 0;"><a href="../age-calculator.html" class="cta-btn">➡️ Calculate Your Exact Age Now!</a></div>
 
-    <h2>Affiliate Corner: Products to Celebrate Milestones</h2>
-    <p>Marking the passage of time is a human tradition. If you're looking for the perfect gift or a way to invest in your well-being as you age, consider these great options from Amazon. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
-    <ul>
-      <li><strong>Personalized Star Maps:</strong> Commemorate a special birthday with a beautiful map of the night sky from that exact date. <a href="[Your Amazon Affiliate Link for Star Maps]" target="_blank" rel="sponsored" class="affiliate-link">Find them here.</a></li>
-      <li><strong>Advanced Anti-Aging Skincare:</strong> Invest in your skin's future with clinically proven serums and creams. <a href="[Your Amazon Affiliate Link for Skincare]" target="_blank" rel="sponsored" class="affiliate-link">Explore top-rated products.</a></li>
-      <li><strong>Books on Longevity and Healthy Aging:</strong> Learn the science behind living a longer, healthier life from leading experts. <a href="[Your Amazon Affiliate Link for Books]" target="_blank" rel="sponsored" class="affiliate-link">Check out these bestsellers.</a></li>
-    </ul>
+    <h2 id="what-is-age">What is Chronological Age?</h2>
+    <p>Chronological age is the universal standard for measuring age. It is the literal amount of time that has elapsed from the moment you were born to the present date. While we typically express this in years, a precise calculation can break it down into months, weeks, days, hours, and even seconds. When someone asks our age, our brain performs a quick subtraction of birth year from the current year. However, a truly accurate calculation is far more complex, as it must account for the variable number of days in each month and the periodic occurrence of leap years. This is why a simple mental calculation can sometimes be off by a day or two.</p>
 
-    <h2>Age is More Than a Number: Biological vs. Chronological Age</h2>
-    <p>While our calculator measures your chronological age, it's worth noting the concept of <strong>biological age</strong>. This refers to how old your body seems based on various health markers, or biomarkers. Factors like diet, exercise, stress, and genetics can make your biological age higher or lower than your chronological age. While you can't change your birth date, you have significant control over the lifestyle factors that influence how well you age.</p>
+    <h2 id="how-it-works">How an Age Calculator Works</h2>
+    <p>An online age calculator removes the complexity and potential for human error by automating the process. When you input your date of birth and the "age at" date (usually today), the algorithm performs a sophisticated calculation. It doesn't just subtract years; it calculates the total number of days between the two dates, meticulously accounting for every leap day. It then converts this total number of days back into the familiar format of years, months, and days. This method ensures pinpoint accuracy. The result is a comprehensive and often surprising breakdown of your age, revealing metrics like the total months you've lived or the exact day of the week you were born.</p>
+    <div class="info-box">
+      <p><strong>💡 Pro Tip:</strong> An age calculator isn't just for looking back. Use it for forward planning! You can calculate your exact age on a future date, such as a graduation, a wedding anniversary, or your planned retirement date. This can be a powerful motivational tool for long-term goals.</p>
+    </div>
+
+    <h2 id="age-milestones">Age Milestones Around the World</h2>
+    <p>For most social situations, knowing your age in years is enough. However, in many official and legal contexts, precision down to the exact day is crucial. Eligibility for driving, voting, purchasing alcohol, or receiving retirement benefits are all tied to the day you officially reach a certain chronological age. These milestones vary significantly across cultures and countries, highlighting how age is not just a biological fact but a societal construct.</p>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>United States</th>
+            <th>United Kingdom</th>
+            <th>Japan</th>
+            <th>India</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Driving Age</td>
+            <td>16-18 (Varies by state)</td>
+            <td>17</td>
+            <td>18</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td>Voting Age</td>
+            <td>18</td>
+            <td>18</td>
+            <td>18 (Lowered from 20)</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td>Legal Drinking Age</td>
+            <td>21</td>
+            <td>18</td>
+            <td>20</td>
+            <td>18-25 (Varies by state)</td>
+          </tr>
+           <tr>
+            <td>Age of Majority</td>
+            <td>18</td>
+            <td>18</td>
+            <td>18 (Lowered from 20)</td>
+            <td>18</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="biological-age">Biological vs. Chronological Age</h2>
+    <p>While our calculator is an expert at measuring your chronological age, science offers another fascinating concept: <strong>biological age</strong>. This refers to how old your body *seems* based on various health indicators, known as biomarkers. Think of it as the "wear and tear" on your body. Two people can be 40 years old chronologically, but one might have the biological age of a 32-year-old, while the other has the biological age of a 50-year-old.</p>
+    <div class="highlight-box">
+      <h4>🧬 What Influences Biological Age?</h4>
+      <p>Your biological age is dynamic and can be influenced by a host of factors. While you can't change your birth date, you have significant control over the lifestyle choices that impact your biological age:</p>
+      <ul>
+        <li><strong>Genetics:</strong> Your inherited genes provide a baseline.</li>
+        <li><strong>Lifestyle:</strong> This is the big one! Diet, exercise, sleep quality, and stress management play a huge role.</li>
+        <li><strong>Environment:</strong> Factors like pollution and exposure to toxins can accelerate biological aging.</li>
+        <li><strong>Biomarkers:</strong> Scientists measure things like telomere length (the protective caps on our DNA), DNA methylation (epigenetic clocks), and levels of inflammation to estimate biological age.</li>
+      </ul>
+      <p>The exciting part is that by adopting healthier habits, you can potentially lower your biological age, effectively slowing down the aging process at a cellular level.</p>
+    </div>
+
+    <div class="highlight-box">
+      <h3 id="action-today">🚀 Take Action Today: Explore Your Timeline</h3>
+      <p>Knowledge becomes wisdom when applied. Use our age calculator not just as a tool, but as a gateway to discovery. Try one of these fun actions today:</p>
+      <ul>
+        <li><strong>Discover Your "Age in Days":</strong> Calculate your age in total days. Seeing your life as a large number of days instead of a smaller number of years can be a powerful perspective shift.</li>
+        <li><strong>Find Your Birth Day-of-the-Week:</strong> Were you born on a Monday? A Saturday? Our calculator can tell you, adding a fun detail to your life story.</li>
+        <li><strong>Plan for a Milestone:</strong> Pick a future date—maybe your 10,000th day of being alive, or the date you'll turn 500 months old—and plan a small celebration. It's a great way to appreciate the journey!</li>
+      </ul>
+    </div>
+
+    <h2 id="tools-resources">Tools to Celebrate Life's Milestones</h2>
+    <p>Marking the passage of time is a deeply human tradition. If you're looking for the perfect gift or a way to invest in your well-being as you age, consider these great options. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    
+    <div class="method-grid">
+      <div class="method-card">
+        <h4>🌌 Personalized Star Maps</h4>
+        <p>Commemorate a special birthday, anniversary, or milestone with a beautiful map of the night sky as it appeared on that exact date from that specific location.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 View Custom Star Maps</a>
+      </div>
+      <div class="method-card">
+        <h4>🌿 Books on Healthy Aging</h4>
+        <p>Invest in your future by learning from the experts. Explore bestselling books on longevity, nutrition, and the science of living a longer, healthier life.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore Books on Longevity</a>
+      </div>
+      <div class="method-card">
+        <h4> skincare-logo Advanced Skincare</h4>
+        <p>Investing in your skin's health is a key part of healthy aging. Explore clinically proven serums and creams to protect and nourish your skin for the years to come.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find Top-Rated Skincare</a>
+      </div>
+    </div>
+
+    <h2 id="faq">❓ Frequently Asked Questions</h2>
+    <section class="faq-section">
+      <details>
+        <summary>Does an age calculator account for leap years?</summary>
+        <p>Yes, a precise age calculator automatically includes the extra day in leap years (like 2020 and 2024) in its total calculation. This is essential for ensuring the number of days, and therefore your age, is completely accurate.</p>
+      </details>
+      <details>
+        <summary>Can I calculate the age of a historical figure or for a future date?</summary>
+        <p>Absolutely. A flexible calculator works with any two valid dates. You can use it to find the age of someone from the past at their time of death or to calculate exactly how old you'll be on a specific future date, like New Year's Day 2050.</p>
+      </details>
+      <details>
+        <summary>What's the difference between Eastern and Western age counting?</summary>
+        <p>In many East Asian cultures (like Korea, traditionally), a baby is considered one year old at birth, acknowledging the time in the womb. Everyone then gains another year on the Lunar New Year. This is known as East Asian age reckoning. Western cultures count a person as zero years old at birth and celebrate their first birthday after a full year has passed.</p>
+      </details>
+       <details>
+        <summary>Is my data safe when using an online age calculator?</summary>
+        <p>Reputable calculators like ours perform all calculations directly in your browser. Your birth date information is never sent to or stored on our servers, ensuring your privacy is completely protected.</p>
+      </details>
+    </section>
+
+    <h2>Conclusion: Your Age, Your Story</h2>
+    <p>Your age is far more than just a number; it's a dynamic measure of your life's unique timeline. While chronological age provides a standard benchmark, concepts like biological age remind us that we have agency in our own aging process. By understanding how age is calculated and appreciating its different facets, we can gain a deeper perspective on our past, present, and future. Use this knowledge not just to count the years, but to make the years count.</p>
 
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
-
-  <!-- FAQ Section -->
-  <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <details>
-      <summary>Does an age calculator account for leap years?</summary>
-      <p>Yes, a good age calculator automatically includes leap years (like 2020 and 2024) in its calculations to ensure the total number of days, and therefore your age, is completely accurate.</p>
-    </details>
-    <details>
-      <summary>Can I calculate the age of a historical figure or a future date?</summary>
-      <p>Absolutely. Our calculator works with any two valid dates. You can use it to find the age of someone from the past at their time of death or to calculate how old you'll be on a specific future date.</p>
-    </details>
-    <details>
-      <summary>What's the difference between Eastern and Western age counting?</summary>
-      <p>In many East Asian cultures (like Korea), a baby is considered one year old at birth and everyone gains a year on New Year's Day. This is known as East Asian age reckoning. Western cultures, by contrast, count a person as zero years old at birth and celebrate their first birthday after a full year has passed.</p>
-    </details>
-  </section>
-
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
-
-  <!-- Floating CTA -->
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
   <a href="../index.html" class="floating-cta">🔢 See All Calculators</a>
-
-  <!-- Footer -->
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="../privacy-policy.html">Privacy Policy</a> | 
     <a href="../terms-of-service.html">Terms of Service</a> |
     <a href="../affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
-
-  <!-- JSON-LD FAQ Schema -->
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Does an age calculator account for leap years?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, a good age calculator automatically includes leap years (like 2020 and 2024) in its calculations to ensure the total number of days, and therefore your age, is completely accurate."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I calculate the age of a historical figure or a future date?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Absolutely. Our calculator works with any two valid dates. You can use it to find the age of someone from the past at their time of death or to calculate how old you'll be on a specific future date."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What's the difference between Eastern and Western age counting?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "In many East Asian cultures (like Korea), a baby is considered one year old at birth and everyone gains a year on New Year's Day. This is known as East Asian age reckoning. Western cultures, by contrast, count a person as zero years old at birth and celebrate their first birthday after a full year has passed."
-        }
-      }
+      {"@type": "Question","name": "Does an age calculator account for leap years?","acceptedAnswer": {"@type": "Answer","text": "Yes, a precise age calculator automatically includes the extra day in leap years (like 2020 and 2024) in its total calculation. This is essential for ensuring the number of days, and therefore your age, is completely accurate."}},
+      {"@type": "Question","name": "Can I calculate the age of a historical figure or for a future date?","acceptedAnswer": {"@type": "Answer","text": "Absolutely. A flexible calculator works with any two valid dates. You can use it to find the age of someone from the past at their time of death or to calculate exactly how old you'll be on a specific future date, like New Year's Day 2050."}},
+      {"@type": "Question","name": "What's the difference between Eastern and Western age counting?","acceptedAnswer": {"@type": "Answer","text": "In many East Asian cultures (like Korea, traditionally), a baby is considered one year old at birth, acknowledging the time in the womb. Everyone then gains another year on the Lunar New Year. This is known as East Asian age reckoning. Western cultures count a person as zero years old at birth and celebrate their first birthday after a full year has passed."}},
+      {"@type": "Question","name": "Is my data safe when using an online age calculator?","acceptedAnswer": {"@type": "Answer","text": "Reputable calculators like ours perform all calculations directly in your browser. Your birth date information is never sent to or stored on our servers, ensuring your privacy is completely protected."}}
     ]
   }
   </script>
-
   <script>
-    // Dark mode toggle
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
-      if (toggle) {
-        toggle.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      if (toggle) { 
+        toggle.addEventListener("click", () => { 
+          document.body.classList.toggle("dark-mode"); 
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); 
+        }); 
+      }
+      if (localStorage.getItem("theme") === "dark") { 
+        document.body.classList.add("dark-mode"); 
+      }
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
-      }
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+      });
+      const progressBar = document.createElement('div');
+      progressBar.style.cssText = `position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); z-index: 9999; transition: width 0.1s ease;`;
+      document.body.appendChild(progressBar);
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+      });
+      document.querySelectorAll('h2[id], h3[id]').forEach(heading => {
+        heading.style.cursor = 'pointer';
+        heading.title = 'Click to copy link';
+        heading.addEventListener('click', () => {
+          const url = window.location.origin + window.location.pathname + '#' + heading.id;
+          navigator.clipboard.writeText(url).then(() => {
+            const originalText = heading.textContent;
+            heading.textContent = '🔗 Link copied!';
+            setTimeout(() => { heading.textContent = originalText; }, 1500);
+          });
+        });
+      });
     });
   </script>
 </body>
