@@ -23,6 +23,31 @@
     .calc-wrapper { max-width: 600px; }
     .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     
+    .age-input-group {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #bdc3c7;
+      background: var(--card-bg);
+      color: var(--text-color);
+      font-size: 16px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px top 50%;
+      background-size: .65em auto;
+    }
+    .dark-mode select {
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    }
+
     .segmented-control {
       display: flex;
       border-radius: 10px;
@@ -125,8 +150,15 @@
 
     <div class="input-group">
       <div>
-        <label for="age">👶 Baby's Age (months):</label>
-        <input type="number" id="age" placeholder="e.g., 3">
+        <label for="age">👶 Baby's Age:</label>
+        <div class="age-input-group">
+            <input type="number" id="age" placeholder="e.g., 3">
+            <select id="ageUnit">
+                <option value="months">Months</option>
+                <option value="weeks">Weeks</option>
+                <option value="days">Days</option>
+            </select>
+        </div>
       </div>
       <div>
         <label for="weight">⚖️ Baby's Weight:</label>
@@ -242,7 +274,8 @@
 
   <script>
     function calculateSchedule() {
-        const age = parseInt(document.getElementById('age').value);
+        let age = parseInt(document.getElementById('age').value);
+        const ageUnit = document.getElementById('ageUnit').value;
         let weight = parseFloat(document.getElementById('weight').value);
         const unit = document.querySelector('input[name="unit"]:checked').value;
         const feedingType = document.querySelector('input[name="feedingType"]:checked').value;
@@ -253,23 +286,37 @@
             return;
         }
 
+        // Convert age to a consistent unit (months) for calculation logic
+        let ageInMonths;
+        let ageDisplay;
+        if (ageUnit === 'days') {
+            ageInMonths = age / 30.44; // Average days in a month
+            ageDisplay = `${age} days`;
+        } else if (ageUnit === 'weeks') {
+            ageInMonths = age / 4.345; // Average weeks in a month
+            ageDisplay = `${age} weeks`;
+        } else {
+            ageInMonths = age;
+            ageDisplay = `${age} months`;
+        }
+
         // Convert weight to kg for a standard calculation base
         const weightInKg = (unit === 'imperial') ? weight * 0.453592 : weight;
 
         // Determine daily intake, frequency, and amount per feeding based on clearer age ranges
         let dailyIntakeMl, feedingsPerDay;
         
-        if (age < 1) { // Newborn (0 months)
+        if (ageInMonths < 1) { // Newborn (less than 1 month)
             feedingsPerDay = 9;
-        } else if (age >= 1 && age <= 2) { // 1-2 months
+        } else if (ageInMonths >= 1 && ageInMonths < 3) { // 1-2 months
             feedingsPerDay = 8;
-        } else if (age >= 3 && age <= 4) { // 3-4 months
+        } else if (ageInMonths >= 3 && ageInMonths < 5) { // 3-4 months
             feedingsPerDay = 7;
-        } else if (age >= 5 && age <= 6) { // 5-6 months
+        } else if (ageInMonths >= 5 && ageInMonths < 7) { // 5-6 months
             feedingsPerDay = 6;
-        } else if (age >= 7 && age <= 9) { // 7-9 months
+        } else if (ageInMonths >= 7 && ageInMonths < 10) { // 7-9 months
             feedingsPerDay = 5;
-        } else if (age >= 10 && age <= 12) { // 10-12 months
+        } else if (ageInMonths >= 10 && ageInMonths <= 12) { // 10-12 months
             feedingsPerDay = 4;
         } else {
             resultDiv.innerHTML = "<p style='color:orange;'>This calculator is designed for babies up to 12 months.</p>";
@@ -294,7 +341,7 @@
 
         // Generate sample schedule timeline
         let scheduleHtml = '<h4>🗓️ Sample Daily Schedule</h4><ul class="timeline">';
-        const interval = Math.floor(24 / feedingsPerDay);
+        const interval = Math.round(24 / feedingsPerDay);
         let hour = 7; // Start the day at 7 AM
         for (let i = 0; i < feedingsPerDay; i++) {
             const displayHour = (hour % 12 === 0) ? 12 : hour % 12;
@@ -307,7 +354,7 @@
 
         resultDiv.innerHTML = `
             <div class="schedule-container">
-                <h3>📋 Feeding Estimate for a ${age}-month-old</h3>
+                <h3>📋 Feeding Estimate for a baby of ${ageDisplay}</h3>
                 <div class="schedule-summary">
                     <div class="summary-item">
                         <h4>Total Daily Goal</h4>
@@ -360,4 +407,5 @@
 
 </body>
 </html>
+
 
