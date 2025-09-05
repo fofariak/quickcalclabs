@@ -256,17 +256,21 @@
         // Convert weight to kg for a standard calculation base
         const weightInKg = (unit === 'imperial') ? weight * 0.453592 : weight;
 
-        // Determine daily intake, frequency, and amount per feeding based on age
+        // Determine daily intake, frequency, and amount per feeding based on clearer age ranges
         let dailyIntakeMl, feedingsPerDay;
         
-        if (age <= 1) { // 0-1 month
+        if (age < 1) { // Newborn (0 months)
+            feedingsPerDay = 9;
+        } else if (age >= 1 && age <= 2) { // 1-2 months
             feedingsPerDay = 8;
-        } else if (age <= 3) { // 2-3 months
+        } else if (age >= 3 && age <= 4) { // 3-4 months
             feedingsPerDay = 7;
-        } else if (age <= 6) { // 4-6 months
+        } else if (age >= 5 && age <= 6) { // 5-6 months
             feedingsPerDay = 6;
-        } else if (age <= 12) { // 7-12 months
+        } else if (age >= 7 && age <= 9) { // 7-9 months
             feedingsPerDay = 5;
+        } else if (age >= 10 && age <= 12) { // 10-12 months
+            feedingsPerDay = 4;
         } else {
             resultDiv.innerHTML = "<p style='color:orange;'>This calculator is designed for babies up to 12 months.</p>";
             return;
@@ -311,7 +315,7 @@
                     </div>
                     <div class="summary-item">
                         <h4>Feeding Frequency</h4>
-                        <p>Every ${interval} hours</p>
+                        <p>Every ~${interval} hours</p>
                     </div>
                     <div class="summary-item">
                         <h4>Amount Per Feeding</h4>
@@ -356,3 +360,4 @@
 
 </body>
 </html>
+
