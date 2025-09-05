@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resting Metabolic Rate (RMR) Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Calculate your Resting Metabolic Rate (RMR) with our free, interactive calculator. Understand the calories you burn at rest to better manage your weight and health goals.">
+  <link rel="stylesheet" href="css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --accent-blue: #3498db;
+      --accent-green: #2ecc71;
+      --accent-purple: #9b59b6;
+      --card-bg: #ffffff;
+      --text-color: #333;
+    }
+    .dark-mode {
+      --card-bg: #2c3e50;
+      --text-color: #ecf0f1;
+    }
+    .calc-wrapper { max-width: 600px; }
+    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    
+    .segmented-control {
+      display: flex;
+      border-radius: 10px;
+      border: 1px solid #bdc3c7;
+      overflow: hidden;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    .segmented-control input[type="radio"] { display: none; }
+    .segmented-control label {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      background: var(--card-bg);
+      color: var(--text-color);
+      transition: background 0.3s;
+    }
+    .segmented-control input[type="radio"]:checked + label {
+      background: var(--accent-blue);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Result styles */
+    .rmr-result-container {
+        margin-top: 25px;
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .rmr-result-container h3 {
+        margin-top: 0;
+        color: var(--accent-blue);
+    }
+    .rmr-value {
+        font-size: 48px;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    .rmr-value span {
+        font-size: 20px;
+        font-weight: normal;
+        color: #7f8c8d;
+    }
+    .dark-mode .rmr-value span { color: #bdc3c7; }
+    .tdee-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        text-align: left;
+    }
+    .tdee-table th, .tdee-table td {
+        padding: 8px;
+        border-bottom: 1px solid #ecf0f1;
+    }
+    .dark-mode .tdee-table th, .dark-mode .tdee-table td {
+        border-bottom: 1px solid #34495e;
+    }
+    .tdee-table td:last-child {
+        font-weight: bold;
+        text-align: right;
+    }
+
+    /* Other styles */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 15px; margin-top: 20px; }
+    .card { background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .card a { text-decoration:none; font-weight:600; color: var(--text-color);}
+    .card a:hover { color: var(--accent-blue); }
+    .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
+    .faq summary { margin: 0; padding: 12px; background: var(--accent-blue); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
+    .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+
+  <section class="calc-wrapper">
+    <h1>🔥 Resting Metabolic Rate (RMR) Calculator</h1>
+    <p class="subtitle">Discover the number of calories your body burns at rest to tailor your nutrition and fitness goals.</p>
+
+    <div class="input-group">
+        <div>
+            <label for="age">🎂 Age (years):</label>
+            <input type="number" id="age" placeholder="e.g., 30">
+        </div>
+        <div>
+            <label>🚻 Sex:</label>
+            <div class="segmented-control" style="margin-top:0;">
+                <input type="radio" id="male" name="sex" value="male" checked>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="sex" value="female">
+                <label for="female">Female</label>
+            </div>
+        </div>
+    </div>
+
+    <label>🔄 Unit System:</label>
+    <div class="segmented-control">
+        <input type="radio" id="imperial" name="unit" value="imperial" checked>
+        <label for="imperial">Imperial</label>
+        <input type="radio" id="metric" name="unit" value="metric">
+        <label for="metric">Metric</label>
+    </div>
+
+    <!-- Imperial Inputs -->
+    <div id="imperialInputs">
+        <div class="input-group">
+            <div>
+                <label for="weight_lbs">⚖️ Weight (lbs):</label>
+                <input type="number" id="weight_lbs" placeholder="e.g., 150">
+            </div>
+            <div>
+                <label>📏 Height (ft/in):</label>
+                <div class="input-group" style="gap: 5px;">
+                     <input type="number" id="height_ft" placeholder="ft">
+                     <input type="number" id="height_in" placeholder="in">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metric Inputs -->
+    <div id="metricInputs" style="display: none;">
+        <div class="input-group">
+            <div>
+                <label for="weight_kg">⚖️ Weight (kg):</label>
+                <input type="number" id="weight_kg" placeholder="e.g., 68">
+            </div>
+            <div>
+                <label for="height_cm">📏 Height (cm):</label>
+                <input type="number" id="height_cm" placeholder="e.g., 175">
+            </div>
+        </div>
+    </div>
+
+    <button onclick="calculateRMR()">Calculate RMR</button>
+
+    <div id="result" class="result-box"></div>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
+
+  <section class="seo-content">
+    <h2>What is Resting Metabolic Rate (RMR)?</h2>
+    <p>Your Resting Metabolic Rate (RMR) is an estimate of how many calories your body burns while in a state of complete rest. It represents the minimum amount of energy needed to keep your body functioning, including breathing, circulating blood, and basic brain functions. Knowing your RMR is the first and most important step in determining your total daily calorie needs, whether your goal is weight loss, gain, or maintenance.</p>
+    
+    <h3>RMR vs. BMR: What's the Difference?</h3>
+    <p>You may also hear the term Basal Metabolic Rate (BMR). RMR and BMR are very similar but have a slight difference. BMR is a more restrictive measurement taken in a lab setting after an overnight fast and a full night of sleep. RMR is a more practical estimate of your resting energy expenditure and is typically about 10% higher than BMR. For most practical purposes, RMR is the more useful number for creating a diet and exercise plan.</p>
+    
+    <h3>How to Use Your RMR Result</h3>
+    <p>Your RMR is your baseline. To find your Total Daily Energy Expenditure (TDEE), you multiply your RMR by an activity factor. This gives you the total number of calories you burn in a day. The calculator provides these estimates for you, making it easy to set a calorie target for your goals.</p>
+
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator (TDEE)</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="body-fat-calculator.html">💪 Body Fat Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions about RMR</h2>
+    <details class="faq">
+      <summary>Which formula does this calculator use?</summary>
+      <p>This calculator uses the Mifflin-St Jeor equation, which is widely considered one of the most accurate methods for estimating Resting Metabolic Rate. It has been shown to be more reliable than the older Harris-Benedict equation.</p>
+    </details>
+    <details class="faq">
+      <summary>How can I increase my metabolism?</summary>
+      <p>While factors like age and genetics are fixed, you can boost your metabolism. The most effective way is through strength training to build more muscle mass. Muscle is more metabolically active than fat, meaning it burns more calories at rest. Eating enough protein and staying hydrated also support a healthy metabolism.</p>
+    </details>
+    <details class="faq">
+      <summary>Is this RMR calculation 100% accurate?</summary>
+      <p>No formula can be 100% accurate for every individual. This calculator provides a very strong scientific estimate. The most precise way to measure RMR is through a clinical test called indirect calorimetry, but this is expensive and not easily accessible. For practical purposes, this formula is an excellent starting point.</p>
+    </details>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
+
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which formula does this calculator use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This calculator uses the Mifflin-St Jeor equation, which is widely considered one of the most accurate methods for estimating Resting Metabolic Rate. It has been shown to be more reliable than the older Harris-Benedict equation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I increase my metabolism?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While factors like age and genetics are fixed, you can boost your metabolism. The most effective way is through strength training to build more muscle mass. Muscle is more metabolically active than fat, meaning it burns more calories at rest. Eating enough protein and staying hydrated also support a healthy metabolism."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this RMR calculation 100% accurate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No formula can be 100% accurate for every individual. This calculator provides a very strong scientific estimate. The most precise way to measure RMR is through a clinical test called indirect calorimetry, but this is expensive and not easily accessible. For practical purposes, this formula is an excellent starting point."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    function calculateRMR() {
+        const age = parseInt(document.getElementById('age').value);
+        const sex = document.querySelector('input[name="sex"]:checked').value;
+        const unit = document.querySelector('input[name="unit"]:checked').value;
+        const resultDiv = document.getElementById('result');
+        
+        let weightInKg, heightInCm;
+        let hasErrors = false;
+
+        if (unit === 'imperial') {
+            const weightLbs = parseFloat(document.getElementById('weight_lbs').value);
+            const heightFt = parseFloat(document.getElementById('height_ft').value) || 0;
+            const heightIn = parseFloat(document.getElementById('height_in').value) || 0;
+
+            if (isNaN(weightLbs) || isNaN(heightFt) || isNaN(heightIn) || weightLbs <= 0 || (heightFt <= 0 && heightIn <= 0)) {
+                hasErrors = true;
+            } else {
+                weightInKg = weightLbs * 0.453592;
+                heightInCm = ((heightFt * 12) + heightIn) * 2.54;
+            }
+        } else { // Metric
+            const weightKg = parseFloat(document.getElementById('weight_kg').value);
+            const heightCm = parseFloat(document.getElementById('height_cm').value);
+
+            if (isNaN(weightKg) || isNaN(heightCm) || weightKg <= 0 || heightCm <= 0) {
+                hasErrors = true;
+            } else {
+                weightInKg = weightKg;
+                heightInCm = heightCm;
+            }
+        }
+
+        if (isNaN(age) || age <= 0) {
+            hasErrors = true;
+        }
+        
+        if (hasErrors) {
+            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields with valid, positive numbers.</p>";
+            return;
+        }
+
+        // Mifflin-St Jeor Equation
+        // RMR = 10 * weight (kg) + 6.25 * height (cm) - 5 * age (years) + s
+        // s = +5 for males, -161 for females
+        const sexConstant = (sex === 'male') ? 5 : -161;
+        const rmr = Math.round((10 * weightInKg) + (6.25 * heightInCm) - (5 * age) + sexConstant);
+
+        const activityLevels = {
+            "Sedentary (little or no exercise)": 1.2,
+            "Lightly active (light exercise/sports 1-3 days/week)": 1.375,
+            "Moderately active (moderate exercise/sports 3-5 days/week)": 1.55,
+            "Very active (hard exercise/sports 6-7 days a week)": 1.725,
+            "Extra active (very hard exercise/sports & physical job)": 1.9
+        };
+        
+        let tdeeHtml = `<h4>Daily Calorie Needs (TDEE)</h4><table class="tdee-table">`;
+        for (const [level, factor] of Object.entries(activityLevels)) {
+            const tdee = Math.round(rmr * factor);
+            tdeeHtml += `<tr><td>${level}</td><td>${tdee} Calories/day</td></tr>`;
+        }
+        tdeeHtml += `</table>`;
+
+        resultDiv.innerHTML = `
+            <div class="rmr-result-container">
+                <h3>Your Resting Metabolic Rate is:</h3>
+                <div class="rmr-value">${rmr} <span>Calories/day</span></div>
+                <p>This is the energy your body needs to function at rest.</p>
+                ${tdeeHtml}
+            </div>
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      });
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+
+      // Unit switcher logic
+      const imperialRadio = document.getElementById('imperial');
+      const metricRadio = document.getElementById('metric');
+      const imperialInputs = document.getElementById('imperialInputs');
+      const metricInputs = document.getElementById('metricInputs');
+
+      imperialRadio.addEventListener('change', () => {
+          if (imperialRadio.checked) {
+              imperialInputs.style.display = 'block';
+              metricInputs.style.display = 'none';
+          }
+      });
+      metricRadio.addEventListener('change', () => {
+          if (metricRadio.checked) {
+              imperialInputs.style.display = 'none';
+              metricInputs.style.display = 'block';
+          }
+      });
+    });
+  </script>
+
+</body>
+</html>
