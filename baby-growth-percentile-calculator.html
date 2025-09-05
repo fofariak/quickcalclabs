@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Growth Percentile Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Track your baby's growth with our free, interactive Baby Growth Percentile Calculator. Understand weight, height, and head circumference percentiles based on WHO standards.">
+  <link rel="stylesheet" href="css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --accent-blue: #3498db;
+      --accent-green: #2ecc71;
+      --accent-purple: #9b59b6;
+      --card-bg: #ffffff;
+      --text-color: #333;
+    }
+    .dark-mode {
+      --card-bg: #2c3e50;
+      --text-color: #ecf0f1;
+    }
+    .calc-wrapper { max-width: 600px; }
+    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    
+    /* Segmented Control for Sex */
+    .segmented-control {
+      display: flex;
+      border-radius: 10px;
+      border: 1px solid #bdc3c7;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .segmented-control input[type="radio"] { display: none; }
+    .segmented-control label {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      background: var(--card-bg);
+      color: var(--text-color);
+      transition: background 0.3s;
+    }
+    .segmented-control input[type="radio"]:checked + label {
+      background: var(--accent-blue);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Chart styles */
+    .chart-container { margin-top: 25px; }
+    .chart-item { margin-bottom: 20px; }
+    .chart-item h4 { margin-bottom: 8px; font-size: 16px; }
+    .bar-background {
+      width: 100%;
+      height: 25px;
+      background: #ecf0f1;
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 15px;
+      transition: width 1s ease-out;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .low { background: linear-gradient(90deg, #f39c12, #e67e22); }
+    .average { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+    .high { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+    .percentile-label {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 12px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    }
+     .legend {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .legend span { display: flex; align-items: center; gap: 5px; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; color: #fff; }
+    .badge.low { background:#f39c12; }
+    .badge.average { background:#2ecc71; }
+    .badge.high { background:#e74c3c; }
+
+
+    /* Other styles from reference */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 15px; margin-top: 20px; }
+    .card { background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .card a { text-decoration:none; font-weight:600; color: var(--text-color);}
+    .card a:hover { color: var(--accent-blue); }
+    .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
+    .faq summary { margin: 0; padding: 12px; background: var(--accent-blue); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
+    .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+
+  <section class="calc-wrapper">
+    <h1>📊 Baby Growth Percentile Calculator</h1>
+    <p class="subtitle">Track your baby's development and understand their growth curve with our easy-to-use percentile calculator.</p>
+
+    <div class="input-group">
+        <div>
+            <label for="birthDate">🎂 Date of Birth:</label>
+            <input type="date" id="birthDate">
+        </div>
+        <div>
+            <label for="measurementDate">🗓️ Date of Measurement:</label>
+            <input type="date" id="measurementDate">
+        </div>
+    </div>
+
+    <label>🚻 Sex:</label>
+    <div class="segmented-control">
+        <input type="radio" id="boy" name="sex" value="boy" checked>
+        <label for="boy">Boy</label>
+        <input type="radio" id="girl" name="sex" value="girl">
+        <label for="girl">Girl</label>
+    </div>
+
+    <div class="input-group">
+        <div>
+            <label for="weight">⚖️ Weight (kg):</label>
+            <input type="number" id="weight" placeholder="e.g., 5.5">
+        </div>
+        <div>
+            <label for="height">📏 Height/Length (cm):</label>
+            <input type="number" id="height" placeholder="e.g., 58.5">
+        </div>
+    </div>
+    <label for="head">🧠 Head Circumference (cm):</label>
+    <input type="number" id="head" placeholder="e.g., 39.0">
+
+    <button onclick="calculatePercentiles()">Calculate Growth</button>
+
+    <div id="result" class="result-box"></div>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
+
+  <section class="seo-content">
+    <h2>Understanding Baby Growth Percentiles</h2>
+    <p>A baby growth percentile chart is a standard tool used by pediatricians to track a child's growth over time. When your baby is in the <strong>40th percentile for weight</strong>, it means that 40% of babies of the same age and sex weigh less than your baby, and 60% weigh more. It's a comparison tool, not a grade!</p>
+    <p><strong>Key points to remember:</strong></p>
+    <ul>
+      <li><strong>A single measurement is just a snapshot.</strong> What's most important is that your baby follows a consistent growth curve over time.</li>
+      <li><strong>There is a wide range of "normal."</strong> A baby in the 5th percentile can be just as healthy as a baby in the 95th percentile, as long as they are growing consistently.</li>
+      <li><strong>Genetics play a big role.</strong> Parents who are taller or shorter will likely have children who follow a similar pattern.</li>
+    </ul>
+
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="pregnancy-calculator.html">🤰 Pregnancy Due Date Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator (for adults)</a></div>
+      <div class="card"><a href="ovulation-calculator.html">🌸 Ovulation Calculator</a></div>
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator (for adults)</a></div>
+    </div>
+
+    <h3>📝 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/understanding-baby-milestones.html">📖 A Guide to Baby's First Year Milestones</a></div>
+      <div class="card"><a href="blog/starting-solid-foods.html">💡 Tips for Introducing Solid Foods</a></div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    <details class="faq">
+      <summary>What do the percentiles mean?</summary>
+      <p>A percentile shows how your child's growth compares to other children of the same age and sex. For example, the 50th percentile is the average. A lower or higher percentile doesn't mean your child is unhealthy; the consistency of the growth curve is what matters most.</p>
+    </details>
+    <details class="faq">
+      <summary>Should I be worried if my baby is in a low percentile?</summary>
+      <p>Not necessarily. A low percentile can be perfectly normal, especially if the baby is consistently following their own growth curve. If your pediatrician observes a sudden drop across two or more percentile lines, they may investigate further, but a steady curve at a lower percentile is usually not a cause for concern.</p>
+    </details>
+    <details class="faq">
+      <summary>How often should I check my baby's growth percentiles?</summary>
+      <p>Your pediatrician will measure your baby at regular well-child visits. It's best to follow their schedule. Checking too frequently at home can cause unnecessary anxiety, as growth happens in spurts. This tool is best used to understand the measurements taken at official doctor's visits.</p>
+    </details>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
+
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What do the percentiles mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A percentile shows how your child's growth compares to other children of the same age and sex. For example, the 50th percentile is the average. A lower or higher percentile doesn't mean your child is unhealthy; the consistency of the growth curve is what matters most."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I be worried if my baby is in a low percentile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not necessarily. A low percentile can be perfectly normal, especially if the baby is consistently following their own growth curve. If your pediatrician observes a sudden drop across two or more percentile lines, they may investigate further, but a steady curve at a lower percentile is usually not a cause for concern."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often should I check my baby's growth percentiles?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your pediatrician will measure your baby at regular well-child visits. It's best to follow their schedule. Checking too frequently at home can cause unnecessary anxiety, as growth happens in spurts. This tool is best used to understand the measurements taken at official doctor's visits."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    // Simplified WHO growth data for boys and girls (0-12 months)
+    // In a real application, this would be a much larger dataset.
+    const growthData = {
+        boy: [
+            { age: 0, w: [2.5, 3.3, 4.4], h: [46.1, 49.9, 53.7], hc: [32.1, 34.5, 36.9] },
+            { age: 2, w: [4.4, 5.6, 7.1], h: [54.7, 58.4, 62.2], hc: [36.9, 39.1, 41.2] },
+            { age: 4, w: [5.6, 7.0, 8.7], h: [59.9, 63.9, 67.8], hc: [39.7, 41.8, 43.8] },
+            { age: 6, w: [6.4, 8.0, 9.8], h: [63.6, 67.6, 71.6], hc: [41.5, 43.5, 45.4] },
+            { age: 8, w: [7.0, 8.8, 10.8],h: [66.5, 70.6, 74.7], hc: [42.8, 44.8, 46.6] },
+            { age: 10, w: [7.5, 9.4, 11.5],h: [69.0, 73.3, 77.5], hc: [43.8, 45.8, 47.6] },
+            { age: 12, w: [7.8, 9.9, 12.2],h: [71.3, 75.7, 80.1], hc: [44.6, 46.6, 48.4] }
+        ],
+        girl: [
+            { age: 0, w: [2.4, 3.2, 4.2], h: [45.4, 49.1, 52.9], hc: [31.7, 33.9, 36.1] },
+            { age: 2, w: [4.0, 5.1, 6.5], h: [53.0, 57.1, 61.1], hc: [36.2, 38.3, 40.3] },
+            { age: 4, w: [5.1, 6.4, 8.1], h: [58.4, 62.1, 65.9], hc: [38.8, 40.9, 42.9] },
+            { age: 6, w: [5.8, 7.3, 9.1], h: [62.1, 65.7, 69.4], hc: [40.5, 42.4, 44.3] },
+            { age: 8, w: [6.3, 8.1, 10.0],h: [65.0, 68.7, 72.4], hc: [41.7, 43.6, 45.4] },
+            { age: 10, w: [6.8, 8.7, 10.8],h: [67.6, 71.5, 75.3], hc: [42.7, 44.6, 46.4] },
+            { age: 12, w: [7.1, 9.2, 11.5],h: [69.9, 74.0, 78.1], hc: [43.5, 45.4, 47.2] }
+        ]
+    }; // Data points for 3rd, 50th, 97th percentiles
+
+    function getPercentile(value, dataPoints) {
+        if (value < dataPoints[0]) return 2;
+        if (value >= dataPoints[0] && value < dataPoints[1]) return Math.round(3 + 47 * (value - dataPoints[0]) / (dataPoints[1] - dataPoints[0]));
+        if (value >= dataPoints[1] && value <= dataPoints[2]) return Math.round(50 + 47 * (value - dataPoints[1]) / (dataPoints[2] - dataPoints[1]));
+        if (value > dataPoints[2]) return 98;
+        return 50; // Default
+    }
+
+    function calculatePercentiles() {
+        const birthDate = new Date(document.getElementById('birthDate').value);
+        const measurementDate = new Date(document.getElementById('measurementDate').value);
+        const sex = document.querySelector('input[name="sex"]:checked').value;
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const head = parseFloat(document.getElementById('head').value);
+        const resultDiv = document.getElementById('result');
+
+        if (isNaN(birthDate) || isNaN(measurementDate) || isNaN(weight) || isNaN(height) || isNaN(head) || weight <= 0 || height <= 0 || head <= 0) {
+            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields with valid dates and positive numbers.</p>";
+            return;
+        }
+
+        if (measurementDate < birthDate) {
+            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Measurement date cannot be before birth date.</p>";
+            return;
+        }
+
+        const ageInMonths = (measurementDate.getFullYear() - birthDate.getFullYear()) * 12 + (measurementDate.getMonth() - birthDate.getMonth());
+
+        if (ageInMonths > 12) {
+             resultDiv.innerHTML = "<p style='color:orange;'>⚠️ This calculator provides data for babies up to 12 months old.</p>";
+            return;
+        }
+        
+        const ageData = growthData[sex].find(d => d.age === Math.floor(ageInMonths / 2) * 2); // Find closest data point
+        
+        if (!ageData) {
+            resultDiv.innerHTML = "<p style='color:red;'>Could not find growth data for this age.</p>";
+            return;
+        }
+
+        const weightPercentile = getPercentile(weight, ageData.w);
+        const heightPercentile = getPercentile(height, ageData.h);
+        const headPercentile = getPercentile(head, ageData.hc);
+        
+        function getBarClass(p) {
+            if (p < 15) return 'low';
+            if (p > 85) return 'high';
+            return 'average';
+        }
+
+        resultDiv.innerHTML = `
+            <h3>📊 Growth Results for a ${ageInMonths}-month-old ${sex}</h3>
+            <div class="chart-container">
+                <div class="chart-item">
+                    <h4>⚖️ Weight: ${weight} kg</h4>
+                    <div class="bar-background">
+                        <div class="bar-fill ${getBarClass(weightPercentile)}" style="width:${weightPercentile}%;">
+                            <span class="percentile-label">${weightPercentile}th Percentile</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-item">
+                    <h4>📏 Height: ${height} cm</h4>
+                    <div class="bar-background">
+                        <div class="bar-fill ${getBarClass(heightPercentile)}" style="width:${heightPercentile}%;">
+                            <span class="percentile-label">${heightPercentile}th Percentile</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-item">
+                    <h4>🧠 Head Circumference: ${head} cm</h4>
+                    <div class="bar-background">
+                        <div class="bar-fill ${getBarClass(headPercentile)}" style="width:${headPercentile}%;">
+                            <span class="percentile-label">${headPercentile}th Percentile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend">
+                <span><span class="badge low"></span> Lower Range</span>
+                <span><span class="badge average"></span> Average Range</span>
+                <span><span class="badge high"></span> Higher Range</span>
+            </div>
+            <p style="font-size:12px; text-align:center; margin-top:15px;"><strong>Disclaimer:</strong> This tool is for informational purposes only. Always consult a pediatrician for medical advice regarding your child's health and growth.</p>
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      });
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
+
+</body>
+</html>
