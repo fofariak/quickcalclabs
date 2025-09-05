@@ -12,8 +12,24 @@
     .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
     .dark-mode .affiliate-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
-    .img-placeholder { width: 100%; max-width: 600px; height: 350px; border-radius: var(--radius-lg); margin: 1.5rem auto; display: flex; align-items: center; justify-content: center; background-color: #f0f2f5; color: var(--text-weak-light); font-style: italic; box-shadow: var(--shadow-sm); }
-    .dark-mode .img-placeholder { background-color: var(--surface-2-dark); color: var(--text-weak-dark); }
+    .info-box { background: linear-gradient(135deg, #f3e5f5, #e3f2fd); border-left: 4px solid var(--accent-pink); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(255,126,179,0.1), rgba(106,130,251,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
   </style>
 </head>
 <body>
@@ -31,62 +47,161 @@
   <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
 
   <section class="seo-content">
-    <h1>Eating for Two: The Best Nutrient-Dense Foods for a Healthy Pregnancy</h1>
-    <p class="muted">Published on: September 3, 2025</p>
+    <h1>Eating for Two: A Guide to the Best Foods for a Healthy Pregnancy</h1>
+    <p class="muted">Published on: September 5, 2025 | 12 min read</p>
     
-    <p>Congratulations, you're expecting! This is an incredible time when your body is doing the amazing work of growing a new life. What you eat during pregnancy is more important than ever, as it provides the essential building blocks for your baby's development and supports your own health and well-being. But a "pregnancy diet" doesn't have to be complicated. It's all about focusing on whole, nutrient-dense foods. This guide highlights the best foods to eat during pregnancy. And to help you plan, find out your estimated due date with our calculator!</p>
+    <div class="toc">
+      <h3>📋 Table of Contents</h3>
+      <ul>
+        <li><a href="#key-nutrients">Key Nutrients for a Healthy Pregnancy</a></li>
+        <li><a href="#superfoods">Top 5 Pregnancy Superfoods</a></li>
+        <li><a href="#meal-plan">Sample One-Day Pregnancy Meal Plan</a></li>
+        <li><a href="#foods-to-avoid">Foods to Limit or Avoid</a></li>
+        <li><a href="#action-today">Take Action Today</a></li>
+        <li><a href="#tools-resources">Recommended Tools for a Healthy Pregnancy</a></li>
+      </ul>
+    </div>
+
+        
+    <p>Congratulations on your pregnancy! This incredible journey is a time of profound change and growth, not just for your baby, but for you as well. One of the most powerful ways you can support this process is through nutrition. The concept of "eating for two" isn't about eating twice as much, but about eating twice as smart. The foods you choose provide the essential building blocks for your baby's brain, bones, and organs, while also supporting your own health, energy, and well-being.</p>
+    <p>Navigating pregnancy nutrition doesn't have to be complicated or stressful. The focus should be on incorporating a variety of whole, nutrient-dense foods into your diet. This guide will walk you through the most important nutrients, the superfoods that pack a punch, and what to be mindful of to ensure a healthy and happy nine months. To help you with your planning, start by finding out your estimated due date with our calculator!</p>
 
     <div style="text-align:center; margin: 2rem 0;"><a href="../pregnancy-calculator.html" class="cta-btn">🤰 Calculate Your Pregnancy Due Date</a></div>
 
-    <h2>Key Nutrients for Pregnancy and Where to Find Them</h2>
-    <p>During pregnancy, your need for certain nutrients increases significantly. Here are some of the most important ones and the best food sources:</p>
+    <h2 id="key-nutrients">Key Nutrients for a Healthy Pregnancy</h2>
+    <p>During pregnancy, your requirements for certain micronutrients increase significantly to support the rapid growth of your baby and changes in your own body. While a balanced diet is the best source, a high-quality prenatal vitamin is essential to fill any gaps. Here are the powerhouse nutrients to prioritize:</p>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Nutrient</th>
+            <th>Why It's Crucial</th>
+            <th>Daily Needs</th>
+            <th>Top Food Sources</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Folate (Folic Acid)</strong></td>
+            <td>Essential for preventing neural tube defects (serious abnormalities of the brain and spine) in the early weeks of pregnancy.</td>
+            <td>600 mcg</td>
+            <td>Lentils, beans, asparagus, spinach, kale, avocado, fortified cereals.</td>
+          </tr>
+          <tr>
+            <td><strong>Iron</strong></td>
+            <td>Needed to make extra blood (hemoglobin) to supply oxygen to the baby. Prevents anemia, which can cause fatigue and complications.</td>
+            <td>27 mg</td>
+            <td>Lean red meat, poultry, fish, lentils, spinach, tofu, iron-fortified cereals.</td>
+          </tr>
+          <tr>
+            <td><strong>Calcium</strong></td>
+            <td>Builds your baby’s bones and teeth. If intake is insufficient, the baby will draw calcium from your own bones.</td>
+            <td>1,000 mg</td>
+            <td>Yogurt, milk, cheese, sardines, fortified plant milks, tofu, kale.</td>
+          </tr>
+           <tr>
+            <td><strong>Protein</strong></td>
+            <td>A critical building block for your baby’s cells, tissues, and organs, including the brain. Supports breast and uterine tissue growth.</td>
+            <td>~70-100 g</td>
+            <td>Lean meat, poultry, fish, eggs, dairy, beans, nuts, seeds, tofu.</td>
+          </tr>
+           <tr>
+            <td><strong>DHA (Omega-3)</strong></td>
+            <td>A primary structural fat in the baby's brain and retina. Crucial for cognitive and visual development.</td>
+            <td>200-300 mg</td>
+            <td>Low-mercury fatty fish like salmon, sardines, anchovies; algae-based supplements.</td>
+          </tr>
+           <tr>
+            <td><strong>Choline</strong></td>
+            <td>Plays a vital role in brain and spinal cord development and may help prevent neural tube defects.</td>
+            <td>450 mg</td>
+            <td>Eggs (especially the yolk!), lean beef, salmon, chicken, soybeans, broccoli.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+     <div class="info-box">
+      <p><strong>💡 Pro Tip: Boost Your Iron Absorption!</strong> To get the most out of plant-based iron sources (non-heme iron), pair them with a food rich in Vitamin C. For example, squeeze lemon juice over your spinach salad, have a side of bell peppers with your lentils, or drink a small glass of orange juice with your fortified cereal.</p>
+    </div>
 
-    <h3>1. Folate (Folic Acid)</h3>
-    <p><strong>Why it's important:</strong> Crucial for preventing neural tube defects, which are serious abnormalities of the brain and spinal cord.
-    <strong>Best food sources:</strong> Lentils, beans, asparagus, leafy green vegetables (like spinach and kale), and fortified cereals.</p>
-
-    <h3>2. Iron</h3>
-    <p><strong>Why it's important:</strong> Your body uses iron to make extra blood (hemoglobin) for you and your baby. It also helps move oxygen from your lungs to the rest of your body—and to your baby's.
-    <strong>Best food sources:</strong> Lean red meat, poultry, fish, beans, and iron-fortified cereals. To improve absorption, pair iron-rich foods with a source of vitamin C, like oranges or bell peppers.</p>
-
-    <h3>3. Calcium</h3>
-    <p><strong>Why it's important:</strong> Calcium helps build your baby's bones and teeth. If you don't get enough, your body will take it from your own bones.
-    <strong>Best food sources:</strong> Dairy products (milk, yogurt, cheese), fortified plant-based milks, sardines, and dark leafy greens.</p>
+    <h2 id="superfoods">Top 5 Pregnancy Superfoods</h2>
+    <p>While a varied diet is key, some foods are particularly packed with the nutrients you and your baby need most. Try to incorporate these powerhouses into your weekly routine:</p>
     
-
-    <h3>4. Protein</h3>
-    <p><strong>Why it's important:</strong> Protein is a critical building block for your baby's cells, tissues, and organs.
-    <strong>Best food sources:</strong> Lean meat, poultry, fish, eggs, beans, nuts, and tofu.</p>
-
-    <h3>5. DHA (an Omega-3 Fatty Acid)</h3>
-    <p><strong>Why it's important:</strong> Essential for your baby's brain and eye development.
-    <strong>Best food sources:</strong> Low-mercury fatty fish like salmon, sardines, and anchovies. If you don't eat fish, consider a prenatal vitamin with DHA.</p>
-
-    <h2>Top 5 Superfoods for Pregnancy</h2>
-    <ol>
-      <li><strong>Eggs:</strong> They are a fantastic source of high-quality protein and choline, which is vital for brain development.</li>
-      <li><strong>Salmon:</strong> Packed with protein and DHA omega-3s. Just be sure to stick to 2-3 servings of low-mercury fish per week.</li>
-      <li><strong>Sweet Potatoes:</strong> Rich in beta-carotene, which your body converts to Vitamin A, essential for your baby's development. They are also a great source of fiber.</li>
-      <li><strong>Greek Yogurt:</strong> A calcium and protein powerhouse. It also contains probiotics, which are beneficial for gut health.</li>
-      <li><strong>Legumes (Lentils, Beans, Chickpeas):</strong> An excellent plant-based source of protein, fiber, iron, and folate.</li>
-    </ol>
+    <h3>1. Eggs</h3>
+    <p>Eggs are nutritional gold. A single large egg provides about 6 grams of high-quality protein and is one of the best food sources of choline, a superstar nutrient for your baby's brain development. They are quick to prepare, versatile, and affordable, making them an easy addition to any meal.</p>
     
-    <h2>Foods and Drinks to Limit or Avoid</h2>
-    <p>It's also important to know what to avoid. Steer clear of high-mercury fish, raw or undercooked meat and eggs, unpasteurized dairy products, deli meats, and alcohol.</p>
+    <h3>2. Salmon</h3>
+    <p>Fatty fish like salmon are loaded with two of the most important nutrients for pregnancy: high-quality protein and DHA omega-3 fatty acids. DHA is critical for your baby's brain and eye development. Aim for 2-3 servings (about 8-12 ounces) of low-mercury fish per week. Canned light tuna, sardines, and anchovies are also great choices.</p>
+    
+    <h3>3. Legumes (Lentils, Beans, Chickpeas)</h3>
+    <p>This group of plants is an incredible source of fiber, protein, iron, and folate. Fiber can help combat the common pregnancy issue of constipation, while iron and folate are essential for blood and cell production. They are a fantastic, budget-friendly way to bulk up soups, salads, and stews.</p>
+    
+    <h3>4. Greek Yogurt</h3>
+    <p>Plain Greek yogurt typically contains twice the protein of regular yogurt and is an excellent source of calcium. Calcium is vital for keeping your own bones strong while helping your baby build a healthy skeleton. It also provides probiotics, beneficial bacteria that support gut health for both you and your baby.</p>
+    
+    <h3>5. Sweet Potatoes</h3>
+    <p>These vibrant tubers are rich in beta-carotene, a plant compound that your body converts into Vitamin A. Vitamin A is essential for the development of your baby's eyes, bones, and skin. Sweet potatoes are also a great source of fiber, which aids digestion and helps stabilize blood sugar.</p>
 
-    <h2>Affiliate Corner: Must-Haves for a Healthy Pregnancy</h2>
-    <p>Support your pregnancy nutrition with these essential products from Amazon. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <h2 id="meal-plan">Sample One-Day Pregnancy Meal Plan</h2>
+    <p>Here’s what a day of nutrient-dense eating could look like. Remember to drink plenty of water throughout the day!</p>
+    <div class="info-box">
+      <ul>
+        <li><strong>Breakfast:</strong> Scrambled eggs (2) with spinach and a side of whole-wheat toast with avocado.</li>
+        <li><strong>Morning Snack:</strong> A bowl of Greek yogurt with a handful of berries and a sprinkle of chia seeds.</li>
+        <li><strong>Lunch:</strong> A large salad with grilled salmon, mixed greens, chickpeas, cucumber, tomatoes, and a lemon-tahini dressing.</li>
+        <li><strong>Afternoon Snack:</strong> An apple with a tablespoon of almond butter.</li>
+        <li><strong>Dinner:</strong> A bowl of lentil soup with a side of roasted sweet potatoes and broccoli.</li>
+      </ul>
+    </div>
+
+    <h2 id="foods-to-avoid">Foods to Limit or Avoid</h2>
+    <p>Equally important to knowing what to eat is knowing what to avoid to keep your baby safe. Certain foods carry a higher risk of containing harmful bacteria like Listeria and Salmonella, or high levels of toxins like mercury.</p>
     <ul>
-      <li><strong>A High-Quality Prenatal Vitamin:</strong> This is non-negotiable. A good prenatal ensures you're covering all your nutritional bases, especially for folic acid and iron. <a href="#" target="_blank" rel="sponsored" class="affiliate-link">Explore top-rated prenatal vitamins here.</a></li>
-      <li><strong>Pregnancy Cookbooks:</strong> Get inspired with recipes designed specifically for the nutritional needs of expectant mothers. <a href="#" target="_blank" rel="sponsored" class="affiliate-link">Find delicious pregnancy cookbooks.</a></li>
-      <li><strong>Healthy Pregnancy Snacks:</strong> Keep hunger at bay with nutritious snacks delivered to your door. <a href="#" target="_blank" rel="sponsored" class="affiliate-link">Check out these healthy snack options.</a></li>
+      <li><strong>High-Mercury Fish:</strong> Avoid shark, swordfish, king mackerel, and tilefish.</li>
+      <li><strong>Raw or Undercooked Foods:</strong> This includes raw fish (sushi), undercooked meat, poultry, and eggs (runny yolks). Cook all animal products thoroughly.</li>
+      <li><strong>Unpasteurized Dairy and Juices:</strong> Avoid soft cheeses like feta, brie, and queso fresco unless the label clearly states they are made with pasteurized milk.</li>
+      <li><strong>Deli Meats and Hot Dogs:</strong> These can be a source of Listeria. If you eat them, ensure they are heated until steaming hot.</li>
+      <li><strong>Alcohol:</strong> No amount of alcohol is considered safe during pregnancy. It's best to avoid it completely.</li>
+      <li><strong>Excessive Caffeine:</strong> Limit caffeine intake to less than 200 mg per day (about one 12-ounce cup of coffee).</li>
     </ul>
+
+    <div class="highlight-box">
+      <h3 id="action-today">🚀 Take Action Today</h3>
+      <p>Building healthy habits starts with one small step. Don't try to overhaul your entire diet overnight. Instead, pick ONE simple action to take today:</p>
+      <ul>
+        <li><strong>Add a Superfood:</strong> Choose one of the superfoods from the list above and add it to your grocery list or your next meal.</li>
+        <li><strong>Hydrate Smart:</strong> Go fill up a large reusable water bottle and keep it with you for the rest of the day.</li>
+        <li><strong>Read a Label:</strong> The next time you're at the store, check the label on a yogurt or cereal box to see if it's fortified with key nutrients.</li>
+      </ul>
+    </div>
+
+    <h2 id="tools-resources">Recommended Tools for a Healthy Pregnancy</h2>
+    <p>Support your pregnancy nutrition and well-being with these essential products. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h4>💊 High-Quality Prenatal Vitamin</h4>
+        <p>This is your daily nutritional insurance policy. A good prenatal ensures you're covering your bases for critical nutrients like folic acid, iron, and DHA.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore Top-Rated Prenatal Vitamins</a>
+      </div>
+      <div class="method-card">
+        <h4>📚 Pregnancy Cookbooks</h4>
+        <p>Get inspired with delicious, easy-to-make recipes designed specifically for the nutritional needs and common cravings of expectant mothers.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find Delicious Pregnancy Cookbooks</a>
+      </div>
+      <div class="method-card">
+        <h4>🥜 Healthy Pregnancy Snacks</h4>
+        <p>Keep hunger and nausea at bay with nutritious, pre-portioned snacks. Having healthy options on hand makes it easier to avoid less-healthy choices.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check Out These Healthy Snack Options</a>
+      </div>
+    </div>
+
+    <h2>Conclusion: Nourishing a New Beginning</h2>
+    <p>Your body is performing a miracle, and providing it with high-quality fuel is an act of love for both yourself and your growing baby. Focus on adding a variety of colorful, whole foods to your plate, stay hydrated, and be gentle with yourself. Every healthy choice you make is a building block for a new life. Listen to your body, enjoy your food, and embrace this special time of nourishment and growth.</p>
+
   </section>
 
   <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
-
   <a href="../index.html" class="floating-cta">🔢 See All Calculators</a>
-
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="../privacy-policy.html">Privacy Policy</a> | 
@@ -97,9 +212,46 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
-      if (toggle) { toggle.addEventListener("click", () => { document.body.classList.toggle("dark-mode"); localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); }); }
-      if (localStorage.getItem("theme") === "dark") { document.body.classList.add("dark-mode"); }
-      document.querySelectorAll('img.blog-image').forEach(img => { img.onerror = function() { const placeholder = document.createElement('div'); placeholder.className = 'img-placeholder'; placeholder.textContent = 'Image not available'; this.parentNode.replaceChild(placeholder, this); }; });
+      if (toggle) { 
+        toggle.addEventListener("click", () => { 
+          document.body.classList.toggle("dark-mode"); 
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); 
+        }); 
+      }
+      if (localStorage.getItem("theme") === "dark") { 
+        document.body.classList.add("dark-mode"); 
+      }
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+      const progressBar = document.createElement('div');
+      progressBar.style.cssText = `position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); z-index: 9999; transition: width 0.1s ease;`;
+      document.body.appendChild(progressBar);
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+      });
+      document.querySelectorAll('h2[id], h3[id]').forEach(heading => {
+        heading.style.cursor = 'pointer';
+        heading.title = 'Click to copy link';
+        heading.addEventListener('click', () => {
+          const url = window.location.origin + window.location.pathname + '#' + heading.id;
+          navigator.clipboard.writeText(url).then(() => {
+            const originalText = heading.textContent;
+            heading.textContent = '🔗 Link copied!';
+            setTimeout(() => { heading.textContent = originalText; }, 1500);
+          });
+        });
+      });
     });
   </script>
 </body>
