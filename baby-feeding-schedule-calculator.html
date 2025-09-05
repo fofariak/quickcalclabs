@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Feeding Schedule Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Create a sample feeding schedule for your baby. Our free, interactive calculator provides estimates for breastmilk or formula intake based on age and weight.">
+  <link rel="stylesheet" href="css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --accent-blue: #3498db;
+      --accent-green: #2ecc71;
+      --accent-purple: #9b59b6;
+      --card-bg: #ffffff;
+      --text-color: #333;
+    }
+    .dark-mode {
+      --card-bg: #2c3e50;
+      --text-color: #ecf0f1;
+    }
+    .calc-wrapper { max-width: 600px; }
+    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    
+    .segmented-control {
+      display: flex;
+      border-radius: 10px;
+      border: 1px solid #bdc3c7;
+      overflow: hidden;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    .segmented-control input[type="radio"] { display: none; }
+    .segmented-control label {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      background: var(--card-bg);
+      color: var(--text-color);
+      transition: background 0.3s;
+    }
+    .segmented-control input[type="radio"]:checked + label {
+      background: var(--accent-blue);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Result styles */
+    .schedule-container {
+        margin-top: 25px;
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .schedule-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .summary-item h4 {
+        margin: 0 0 5px 0;
+        font-size: 14px;
+        color: var(--accent-blue);
+    }
+    .summary-item p {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .timeline {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+        position: relative;
+        border-left: 2px solid var(--accent-blue);
+        margin-left: 20px;
+    }
+    .timeline li {
+        padding: 10px 20px;
+        position: relative;
+    }
+    .timeline li::before {
+        content: '🍼';
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+    }
+    .timeline span { font-weight: 600; }
+
+    /* Other styles */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 15px; margin-top: 20px; }
+    .card { background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .card a { text-decoration:none; font-weight:600; color: var(--text-color);}
+    .card a:hover { color: var(--accent-blue); }
+    .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
+    .faq summary { margin: 0; padding: 12px; background: var(--accent-blue); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
+    .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+
+  <section class="calc-wrapper">
+    <h1>🍼 Baby Feeding Schedule Calculator</h1>
+    <p class="subtitle">Get a sample feeding schedule and daily milk intake estimate for your little one.</p>
+
+    <div class="input-group">
+      <div>
+        <label for="age">👶 Baby's Age (months):</label>
+        <input type="number" id="age" placeholder="e.g., 3">
+      </div>
+      <div>
+        <label for="weight">⚖️ Baby's Weight:</label>
+        <input type="number" id="weight" placeholder="e.g., 12.5">
+      </div>
+    </div>
+
+    <label>🔄 Unit System:</label>
+    <div class="segmented-control">
+        <input type="radio" id="imperial" name="unit" value="imperial" checked>
+        <label for="imperial">Imperial (lbs)</label>
+        <input type="radio" id="metric" name="unit" value="metric">
+        <label for="metric">Metric (kg)</label>
+    </div>
+
+    <label>🥛 Feeding Type:</label>
+    <div class="segmented-control">
+        <input type="radio" id="formula" name="feedingType" value="formula" checked>
+        <label for="formula">Formula</label>
+        <input type="radio" id="breastmilk" name="feedingType" value="breastmilk">
+        <label for="breastmilk">Breastmilk</label>
+    </div>
+
+    <button onclick="calculateSchedule()">Generate Schedule</button>
+
+    <div id="result" class="result-box"></div>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
+
+  <section class="seo-content">
+    <h2>How to Use the Baby Feeding Schedule Calculator</h2>
+    <p>Understanding your baby's nutritional needs is a key part of parenting. This calculator provides a sample feeding schedule based on general guidelines for a baby's age and weight. Simply enter your baby's details to see an estimate of their daily milk intake, how often they might feed, and how much they might drink at each feeding.</p>
+    <p><strong>Important considerations:</strong></p>
+    <ul>
+      <li><strong>This is an estimate.</strong> Every baby is different. Always follow your baby's hunger cues (like rooting, sucking on fists, and crying) rather than sticking rigidly to a clock.</li>
+      <li><strong>Breastfed babies</strong> may eat more frequently and in varying amounts compared to formula-fed babies. "On-demand" feeding is the standard for breastfeeding.</li>
+      <li><strong>Growth spurts</strong> will temporarily increase your baby's appetite. Be prepared for more frequent or larger feedings during these periods.</li>
+    </ul>
+
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="baby-growth-percentile-calculator.html">📊 Baby Growth Percentile Calculator</a></div>
+      <div class="card"><a href="pregnancy-calculator.html">🤰 Pregnancy Due Date Calculator</a></div>
+      <div class="card"><a href="ovulation-calculator.html">🌸 Ovulation Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator (for adults)</a></div>
+    </div>
+
+    <h3>📝 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/understanding-hunger-cues.html">📖 Reading Your Baby's Hunger Cues</a></div>
+      <div class="card"><a href="blog/starting-solid-foods.html">💡 A Guide to Introducing Solid Foods</a></div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>❓ Frequently Asked Questions</h2>
+    <details class="faq">
+      <summary>How much milk does my baby need?</summary>
+      <p>A general guideline is that babies need about 2.5 ounces of formula or breastmilk per pound (or 150-200 mL per kg) of body weight per day. This calculator uses this principle to create its estimate.</p>
+    </details>
+    <details class="faq">
+      <summary>How do I know if my baby is getting enough milk?</summary>
+      <p>Look for reliable signs: consistent weight gain along their growth curve, 6-8 wet diapers per day, and seeming content and satisfied after feedings. If you have any concerns, always consult your pediatrician.</p>
+    </details>
+    <details class="faq">
+      <summary>Can I overfeed my baby?</summary>
+      <p>It is difficult to overfeed a breastfed baby, as they are very good at self-regulating. It is possible to overfeed a bottle-fed baby. To avoid this, practice "paced bottle feeding," where you hold the bottle horizontally and allow the baby to take breaks, mimicking the flow of breastfeeding.</p>
+    </details>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
+
+  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much milk does my baby need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A general guideline is that babies need about 2.5 ounces of formula or breastmilk per pound (or 150-200 mL per kg) of body weight per day. This calculator uses this principle to create its estimate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know if my baby is getting enough milk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look for reliable signs: consistent weight gain along their growth curve, 6-8 wet diapers per day, and seeming content and satisfied after feedings. If you have any concerns, always consult your pediatrician."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I overfeed my baby?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is difficult to overfeed a breastfed baby, as they are very good at self-regulating. It is possible to overfeed a bottle-fed baby. To avoid this, practice \"paced bottle feeding,\" where you hold the bottle horizontally and allow the baby to take breaks, mimicking the flow of breastfeeding."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    function calculateSchedule() {
+        const age = parseInt(document.getElementById('age').value);
+        let weight = parseFloat(document.getElementById('weight').value);
+        const unit = document.querySelector('input[name="unit"]:checked').value;
+        const feedingType = document.querySelector('input[name="feedingType"]:checked').value;
+        const resultDiv = document.getElementById('result');
+
+        if (isNaN(age) || isNaN(weight) || age < 0 || weight <= 0) {
+            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please enter a valid age and positive weight.</p>";
+            return;
+        }
+
+        // Convert weight to kg for a standard calculation base
+        const weightInKg = (unit === 'imperial') ? weight * 0.453592 : weight;
+
+        // Determine daily intake, frequency, and amount per feeding based on age
+        let dailyIntakeMl, feedingsPerDay;
+        
+        if (age <= 1) { // 0-1 month
+            feedingsPerDay = 8;
+        } else if (age <= 3) { // 2-3 months
+            feedingsPerDay = 7;
+        } else if (age <= 6) { // 4-6 months
+            feedingsPerDay = 6;
+        } else if (age <= 12) { // 7-12 months
+            feedingsPerDay = 5;
+        } else {
+            resultDiv.innerHTML = "<p style='color:orange;'>This calculator is designed for babies up to 12 months.</p>";
+            return;
+        }
+
+        // Breastfed babies often eat slightly more frequently
+        if (feedingType === 'breastmilk') {
+            feedingsPerDay += 1;
+        }
+
+        // Calculate total daily intake (approx 150-160ml per kg)
+        dailyIntakeMl = Math.round(weightInKg * 155);
+        const amountPerFeedingMl = Math.round(dailyIntakeMl / feedingsPerDay);
+
+        // Convert to imperial if needed for display
+        const dailyIntakeOz = (dailyIntakeMl / 29.574).toFixed(1);
+        const amountPerFeedingOz = (amountPerFeedingMl / 29.574).toFixed(1);
+
+        const dailyDisplay = (unit === 'imperial') ? `${dailyIntakeOz} oz` : `${dailyIntakeMl} mL`;
+        const perFeedDisplay = (unit === 'imperial') ? `${amountPerFeedingOz} oz` : `${amountPerFeedingMl} mL`;
+
+        // Generate sample schedule timeline
+        let scheduleHtml = '<h4>🗓️ Sample Daily Schedule</h4><ul class="timeline">';
+        const interval = Math.floor(24 / feedingsPerDay);
+        let hour = 7; // Start the day at 7 AM
+        for (let i = 0; i < feedingsPerDay; i++) {
+            const displayHour = (hour % 12 === 0) ? 12 : hour % 12;
+            const ampm = (hour >= 12 && hour < 24) ? 'PM' : 'AM';
+            scheduleHtml += `<li><span>${displayHour}:00 ${ampm}</span> - Approx. ${perFeedDisplay}</li>`;
+            hour += interval;
+            if(hour >= 24) hour -= 24;
+        }
+        scheduleHtml += '</ul>';
+
+        resultDiv.innerHTML = `
+            <div class="schedule-container">
+                <h3>📋 Feeding Estimate for a ${age}-month-old</h3>
+                <div class="schedule-summary">
+                    <div class="summary-item">
+                        <h4>Total Daily Goal</h4>
+                        <p>${dailyDisplay}</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Feeding Frequency</h4>
+                        <p>Every ${interval} hours</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Amount Per Feeding</h4>
+                        <p>~ ${perFeedDisplay}</p>
+                    </div>
+                </div>
+                ${scheduleHtml}
+                 <p style="font-size:12px; text-align:center; margin-top:15px;"><strong>Disclaimer:</strong> This is a sample schedule. Always feed your baby on demand based on their hunger cues.</p>
+            </div>
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      });
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+
+       // Update weight label based on unit system
+      const weightLabel = document.querySelector('label[for="weight"]');
+      const unitRadios = document.querySelectorAll('input[name="unit"]');
+      const weightInput = document.getElementById('weight');
+      
+      function updateWeightLabel() {
+        if(document.getElementById('imperial').checked) {
+            weightLabel.innerHTML = '⚖️ Baby\'s Weight (lbs):';
+            weightInput.placeholder = 'e.g., 12.5';
+        } else {
+            weightLabel.innerHTML = '⚖️ Baby\'s Weight (kg):';
+            weightInput.placeholder = 'e.g., 5.7';
+        }
+      }
+
+      unitRadios.forEach(radio => radio.addEventListener('change', updateWeightLabel));
+      updateWeightLabel(); // Initial call
+    });
+  </script>
+
+</body>
+</html>
