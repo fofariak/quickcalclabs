@@ -23,13 +23,14 @@
     .calc-wrapper { max-width: 600px; }
     .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     
-    /* Segmented Control for Sex */
+    /* Segmented Control for Sex & Units */
     .segmented-control {
       display: flex;
       border-radius: 10px;
       border: 1px solid #bdc3c7;
       overflow: hidden;
       margin-top: 5px;
+      margin-bottom: 15px;
     }
     .segmented-control input[type="radio"] { display: none; }
     .segmented-control label {
@@ -142,18 +143,48 @@
         <label for="girl">Girl</label>
     </div>
 
-    <div class="input-group">
-        <div>
-            <label for="weight">⚖️ Weight (kg):</label>
-            <input type="number" id="weight" placeholder="e.g., 5.5">
-        </div>
-        <div>
-            <label for="height">📏 Height/Length (cm):</label>
-            <input type="number" id="height" placeholder="e.g., 58.5">
-        </div>
+    <label>🔄 Unit System:</label>
+    <div class="segmented-control">
+        <input type="radio" id="imperial" name="unit" value="imperial" checked>
+        <label for="imperial">Imperial</label>
+        <input type="radio" id="metric" name="unit" value="metric">
+        <label for="metric">Metric</label>
     </div>
-    <label for="head">🧠 Head Circumference (cm):</label>
-    <input type="number" id="head" placeholder="e.g., 39.0">
+
+    <!-- Imperial Inputs -->
+    <div id="imperialInputs">
+        <div class="input-group">
+            <div>
+                <label for="weight_lbs">⚖️ Weight (lbs):</label>
+                <input type="number" id="weight_lbs" placeholder="e.g., 12.1">
+            </div>
+            <div>
+                <label>📏 Height (ft/in):</label>
+                <div class="input-group" style="gap: 5px;">
+                     <input type="number" id="height_ft" placeholder="ft">
+                     <input type="number" id="height_in" placeholder="in">
+                </div>
+            </div>
+        </div>
+        <label for="head_in">🧠 Head Circumference (in):</label>
+        <input type="number" id="head_in" placeholder="e.g., 15.4">
+    </div>
+
+    <!-- Metric Inputs -->
+    <div id="metricInputs" style="display: none;">
+        <div class="input-group">
+            <div>
+                <label for="weight_kg">⚖️ Weight (kg):</label>
+                <input type="number" id="weight_kg" placeholder="e.g., 5.5">
+            </div>
+            <div>
+                <label for="height_cm">📏 Height/Length (cm):</label>
+                <input type="number" id="height_cm" placeholder="e.g., 58.5">
+            </div>
+        </div>
+        <label for="head_cm">🧠 Head Circumference (cm):</label>
+        <input type="number" id="head_cm" placeholder="e.g., 39.0">
+    </div>
 
     <button onclick="calculatePercentiles()">Calculate Growth</button>
 
@@ -281,12 +312,51 @@
         const birthDate = new Date(document.getElementById('birthDate').value);
         const measurementDate = new Date(document.getElementById('measurementDate').value);
         const sex = document.querySelector('input[name="sex"]:checked').value;
-        const weight = parseFloat(document.getElementById('weight').value);
-        const height = parseFloat(document.getElementById('height').value);
-        const head = parseFloat(document.getElementById('head').value);
+        const unit = document.querySelector('input[name="unit"]:checked').value;
         const resultDiv = document.getElementById('result');
+        
+        let weightInKg, heightInCm, headInCm;
+        let weightDisplay, heightDisplay, headDisplay;
+        let hasErrors = false;
 
-        if (isNaN(birthDate) || isNaN(measurementDate) || isNaN(weight) || isNaN(height) || isNaN(head) || weight <= 0 || height <= 0 || head <= 0) {
+        if (unit === 'imperial') {
+            const weightLbs = parseFloat(document.getElementById('weight_lbs').value);
+            const heightFt = parseFloat(document.getElementById('height_ft').value) || 0;
+            const heightIn = parseFloat(document.getElementById('height_in').value) || 0;
+            const headIn = parseFloat(document.getElementById('head_in').value);
+
+            if (isNaN(weightLbs) || isNaN(heightFt) || isNaN(heightIn) || isNaN(headIn) || weightLbs <= 0 || (heightFt <= 0 && heightIn <= 0) || headIn <= 0) {
+                hasErrors = true;
+            } else {
+                weightInKg = weightLbs * 0.453592;
+                heightInCm = ((heightFt * 12) + heightIn) * 2.54;
+                headInCm = headIn * 2.54;
+                weightDisplay = `${weightLbs} lbs`;
+                heightDisplay = `${heightFt} ft ${heightIn} in`;
+                headDisplay = `${headIn} in`;
+            }
+        } else { // Metric
+            const weightKg = parseFloat(document.getElementById('weight_kg').value);
+            const heightCm = parseFloat(document.getElementById('height_cm').value);
+            const headCm = parseFloat(document.getElementById('head_cm').value);
+
+            if (isNaN(weightKg) || isNaN(heightCm) || isNaN(headCm) || weightKg <= 0 || heightCm <= 0 || headCm <= 0) {
+                hasErrors = true;
+            } else {
+                weightInKg = weightKg;
+                heightInCm = heightCm;
+                headInCm = headCm;
+                weightDisplay = `${weightKg} kg`;
+                heightDisplay = `${heightCm} cm`;
+                headDisplay = `${headCm} cm`;
+            }
+        }
+
+        if (isNaN(birthDate.getTime()) || isNaN(measurementDate.getTime())) {
+            hasErrors = true;
+        }
+        
+        if (hasErrors) {
             resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields with valid dates and positive numbers.</p>";
             return;
         }
@@ -303,16 +373,16 @@
             return;
         }
         
-        const ageData = growthData[sex].find(d => d.age === Math.floor(ageInMonths / 2) * 2); // Find closest data point
+        const ageData = growthData[sex].find(d => d.age === Math.floor(ageInMonths / 2) * 2);
         
         if (!ageData) {
             resultDiv.innerHTML = "<p style='color:red;'>Could not find growth data for this age.</p>";
             return;
         }
 
-        const weightPercentile = getPercentile(weight, ageData.w);
-        const heightPercentile = getPercentile(height, ageData.h);
-        const headPercentile = getPercentile(head, ageData.hc);
+        const weightPercentile = getPercentile(weightInKg, ageData.w);
+        const heightPercentile = getPercentile(heightInCm, ageData.h);
+        const headPercentile = getPercentile(headInCm, ageData.hc);
         
         function getBarClass(p) {
             if (p < 15) return 'low';
@@ -324,7 +394,7 @@
             <h3>📊 Growth Results for a ${ageInMonths}-month-old ${sex}</h3>
             <div class="chart-container">
                 <div class="chart-item">
-                    <h4>⚖️ Weight: ${weight} kg</h4>
+                    <h4>⚖️ Weight: ${weightDisplay}</h4>
                     <div class="bar-background">
                         <div class="bar-fill ${getBarClass(weightPercentile)}" style="width:${weightPercentile}%;">
                             <span class="percentile-label">${weightPercentile}th Percentile</span>
@@ -332,7 +402,7 @@
                     </div>
                 </div>
                 <div class="chart-item">
-                    <h4>📏 Height: ${height} cm</h4>
+                    <h4>📏 Height: ${heightDisplay}</h4>
                     <div class="bar-background">
                         <div class="bar-fill ${getBarClass(heightPercentile)}" style="width:${heightPercentile}%;">
                             <span class="percentile-label">${heightPercentile}th Percentile</span>
@@ -340,7 +410,7 @@
                     </div>
                 </div>
                 <div class="chart-item">
-                    <h4>🧠 Head Circumference: ${head} cm</h4>
+                    <h4>🧠 Head Circumference: ${headDisplay}</h4>
                     <div class="bar-background">
                         <div class="bar-fill ${getBarClass(headPercentile)}" style="width:${headPercentile}%;">
                             <span class="percentile-label">${headPercentile}th Percentile</span>
@@ -366,8 +436,28 @@
       if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-mode");
       }
+
+      // Unit switcher logic
+      const imperialRadio = document.getElementById('imperial');
+      const metricRadio = document.getElementById('metric');
+      const imperialInputs = document.getElementById('imperialInputs');
+      const metricInputs = document.getElementById('metricInputs');
+
+      imperialRadio.addEventListener('change', () => {
+          if (imperialRadio.checked) {
+              imperialInputs.style.display = 'block';
+              metricInputs.style.display = 'none';
+          }
+      });
+      metricRadio.addEventListener('change', () => {
+          if (metricRadio.checked) {
+              imperialInputs.style.display = 'none';
+              metricInputs.style.display = 'block';
+          }
+      });
     });
   </script>
 
 </body>
 </html>
+
