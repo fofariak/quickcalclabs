@@ -9,30 +9,32 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link {
-      color: var(--accent-blue);
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-    }
-    .dark-mode .affiliate-link {
-      color: #8ab4f8;
-    }
-    .blog-image {
-        width: 100%;
-        max-width: 600px;
-        height: auto;
-        border-radius: var(--radius-lg);
-        margin: 1.5rem auto;
-        display: block;
-        box-shadow: var(--shadow-md);
-    }
+    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; text-align: left; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .method-card h4 { margin-top: 0; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <a href="../index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -43,23 +45,32 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
 
-  <!-- Main Blog Content -->
   <section class="seo-content">
     <h1>Your Pregnancy Timeline: A Guide to Calculating Your Due Date</h1>
-    <p class="muted">Published on: September 3, 2025</p>
-    <p>Finding out you're pregnant is a momentous occasion, and one of the first questions that comes to mind is, "When is the baby due?" Your Estimated Due Date (EDD) is more than just a date; it's a vital piece of information that helps you and your healthcare provider track your baby's development and plan for their arrival. This guide explains how due dates are calculated and what they mean for your pregnancy journey. Let's start by finding yours.</p>
+    <p class="muted">Published on: September 6, 2025 | 10 min read</p>
     
+    <div class="toc">
+      <h3>📋 Table of Contents</h3>
+      <ul>
+        <li><a href="#how-calculated">How is a Due Date Calculated?</a></li>
+        <li><a href="#not-guarantee">Is the Due Date a Guarantee?</a></li>
+        <li><a href="#why-matters">Why Your Due Date Matters</a></li>
+        <li><a href="#ultrasound">The Role of the Ultrasound</a></li>
+        <li><a href="#tools-resources">Must-Haves for Your Pregnancy Journey</a></li>
+        <li><a href="#conclusion">Conclusion: Embracing the Journey</a></li>
+      </ul>
+    </div>
+    
+    <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=1770&auto=format&fit=crop" alt="A pregnant woman holding her belly and looking at a calendar." class="blog-image">
+    <p>Finding out you're pregnant is a momentous occasion, and one of the first questions that comes to mind is, "When is the baby due?" Your Estimated Due Date (EDD) is more than just a date to circle on the calendar; it's a vital piece of information that helps you and your healthcare provider track your baby's development, schedule important tests, and plan for their arrival. This guide explains how due dates are calculated and what they mean for your pregnancy journey. Let's start by finding yours.</p>
     <div style="text-align:center; margin: 2rem 0;">
       <a href="../pregnancy-calculator.html" class="cta-btn">🤰 Find Your Estimated Due Date!</a>
     </div>
 
-    <h2>How is a Due Date Calculated? The Methods Explained</h2>
-    <p>A full-term pregnancy typically lasts about 40 weeks (280 days) from the first day of your last menstrual period (LMP). Even though conception usually happens about two weeks after your LMP, this date is used as the starting point because it's a date most women know for sure.</p>
+    <h2 id="how-calculated">How is a Due Date Calculated? The Methods Explained</h2>
+    <p>A full-term pregnancy typically lasts about 40 weeks (280 days). The starting point for this countdown is the first day of your last menstrual period (LMP). Even though conception usually happens about two weeks after your LMP, this date is used because it's a date most women know for sure.</p>
     <h3>Naegele's Rule</h3>
     <p>The most common method used by our calculator and healthcare professionals is Naegele's rule. The calculation is simple:</p>
     <ol>
@@ -69,106 +80,88 @@
       <li>Add one year.</li>
     </ol>
     <p>For example, if your LMP was April 1, 2025, your EDD would be January 8, 2026. This rule assumes a regular 28-day menstrual cycle.</p>
-    
 
-    <h2>Is the Due Date a Guarantee?</h2>
-    <p>It's important to remember that the EDD is an *estimate*. In fact, only about 5% of babies are born on their actual due date! A normal, full-term delivery can happen anytime between 38 and 42 weeks. The due date is best seen as a midpoint of a "due window" when your baby is likely to arrive. Your first ultrasound is often used to confirm or adjust the due date calculated from your LMP, as it can measure the baby's size to determine a more accurate gestational age.</p>
+    <h2 id="not-guarantee">Is the Due Date a Guarantee?</h2>
+    <p>It's important to remember that the EDD is an *estimate*. In fact, only about 5% of babies are born on their actual due date! A normal, full-term delivery can happen anytime between 38 and 42 weeks. The due date is best seen as a midpoint of a "due window" when your baby is likely to arrive. Think of it less as a deadline and more as a guideline.</p>
 
-    <h2>Affiliate Corner: Must-Haves for Your Pregnancy Journey</h2>
-    <p>As you prepare for your baby's arrival, having the right products can make a world of difference. Here are some essentials from Amazon that expectant parents love. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="info-box">
+      <p><strong>💡 Pro Tip:</strong> If you were tracking ovulation and know your conception date, you can get a slightly more accurate due date by adding 266 days (38 weeks) to that date. Our calculator offers both options!</p>
+    </div>
+
+    <h2 id="why-matters">Why Your Due Date Matters</h2>
+    <p>Your EDD is crucial for several reasons:</p>
     <ul>
-      <li><strong>A Great Pregnancy Book:</strong> Knowledge is power! A book like <a href="[Your Amazon Affiliate Link]" target="_blank" rel="sponsored" class="affiliate-link">"What to Expect When You're Expecting"</a> is a classic for a reason, guiding you through every week of your pregnancy.</li>
-      <li><strong>Comfortable Pregnancy Pillow:</strong> Getting good sleep becomes more challenging as your belly grows. A <a href="[Your Amazon Affiliate Link]" target="_blank" rel="sponsored" class="affiliate-link">U-shaped body pillow</a> provides essential support for your back and hips.</li>
-      <li><strong>High-Quality Prenatal Vitamins:</strong> It's crucial to support your health and your baby's development. We recommend the <a href="[Your Amazon Affiliate Link]" target="_blank" rel="sponsored" class="affiliate-link">Garden of Life mykind Organics Prenatal Vitamins</a>, made from whole foods.</li>
+      <li><strong>Monitoring Growth:</strong> It allows your doctor to track your baby's growth and development against typical milestones.</li>
+      <li><strong>Scheduling Tests:</strong> Many important prenatal tests and screenings are timed to specific weeks of gestation.</li>
+      <li><strong>Planning for Arrival:</strong> It gives you a timeline for preparing your home, taking parental leave, and getting ready for the big day.</li>
     </ul>
 
+    <h2 id="ultrasound">The Role of the Ultrasound</h2>
+    <p>An ultrasound, especially one performed in the first trimester (between 8 and 13 weeks), is the most accurate way to date a pregnancy. The sonographer will measure the baby from crown to rump (CRL), which provides a very precise gestational age. If the ultrasound date differs significantly from your LMP-calculated date (usually by more than a week), your doctor will likely use the ultrasound date as your official EDD.</p>
+
+    <h2 id="tools-resources">Must-Haves for Your Pregnancy Journey</h2>
+    <p>As you prepare for your baby's arrival, having the right products can make a world of difference. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h4>📚 A Great Pregnancy Book</h4>
+        <p>Knowledge is power! A book like "What to Expect When You're Expecting" is a classic for a reason, guiding you through every week of your pregnancy.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find top-rated pregnancy books.</a>
+      </div>
+      <div class="method-card">
+        <h4>🌙 Comfortable Pregnancy Pillow</h4>
+        <p>Getting good sleep becomes more challenging as your belly grows. A U-shaped body pillow provides essential support for your back, hips, and growing bump.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore best-selling body pillows.</a>
+      </div>
+      <div class="method-card">
+        <h4>💊 High-Quality Prenatal Vitamins</h4>
+        <p>It's crucial to support your health and your baby's development with a good prenatal vitamin that includes folic acid, iron, and DHA.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out top-rated prenatal vitamins.</a>
+      </div>
+    </div>
+
+    <h2 id="conclusion">Conclusion: Embracing the Journey</h2>
+    <p>Your estimated due date is a helpful guidepost on your pregnancy journey, but it's not set in stone. It provides a framework for you and your healthcare team to ensure a healthy pregnancy. Embrace the journey, listen to your body, and get ready for the wonderful arrival of your little one, whenever they decide to make their grand entrance.</p>
+
+    <div class="highlight-box">
+      <h3>🚀 Take Action Today</h3>
+      <ul>
+        <li><strong>Calculate Your Due Date:</strong> Use our <a href="../pregnancy-calculator.html" class="affiliate-link">Pregnancy Calculator</a> to get your estimated due date and see how many weeks along you are.</li>
+        <li><strong>Schedule Your First Prenatal Visit:</strong> If you haven't already, make an appointment with your doctor or midwife to confirm your pregnancy and establish your care.</li>
+        <li><strong>Start a Pregnancy Journal:</strong> Document this special time! Write down your thoughts, feelings, and the changes you're experiencing each week.</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
-
-  <!-- FAQ Section -->
-  <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <details>
-      <summary>How accurate are online due date calculators?</summary>
-      <p>They are very accurate at applying Naegele's rule. If you have a regular 28-day cycle and know the first day of your last period, the calculation will be the same one your doctor initially uses.</p>
-    </details>
-    <details>
-      <summary>What if I have an irregular cycle or don't know my LMP?</summary>
-      <p>If your cycles are irregular or you're unsure of your LMP, a due date calculator will be less accurate. In this case, your healthcare provider will rely on an early ultrasound to measure the baby and determine your due date, which is the most accurate method in this scenario.</p>
-    </details>
-    <details>
-      <summary>Can an ultrasound change my due date?</summary>
-      <p>Yes, and this is very common. An ultrasound performed in the first trimester (especially between 8 and 13 weeks) is the most accurate way to date a pregnancy. If the ultrasound date differs significantly from your LMP-calculated date, your doctor will likely use the ultrasound date as your official EDD.</p>
-    </details>
-  </section>
-
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
-
-  <!-- Floating CTA -->
-  <a href="../index.html" class="floating-cta">🔢 See All Calculators</a>
-
-  <!-- Footer -->
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="../privacy-policy.html">Privacy Policy</a> | 
     <a href="../terms-of-service.html">Terms of Service</a> |
     <a href="../affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
-
-  <!-- JSON-LD FAQ Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How accurate are online due date calculators?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "They are very accurate at applying Naegele's rule. If you have a regular 28-day cycle and know the first day of your last period, the calculation will be the same one your doctor initially uses."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What if I have an irregular cycle or don't know my LMP?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "If your cycles are irregular or you're unsure of your LMP, a due date calculator will be less accurate. In this case, your healthcare provider will rely on an early ultrasound to measure the baby and determine your due date, which is the most accurate method in this scenario."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can an ultrasound change my due date?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, and this is very common. An ultrasound performed in the first trimester (especially between 8 and 13 weeks) is the most accurate way to date a pregnancy. If the ultrasound date differs significantly from your LMP-calculated date, your doctor will likely use the ultrasound date as your official EDD."
-        }
-      }
-    ]
-  }
-  </script>
-
+  
   <script>
-    // Dark mode toggle
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
-      if (toggle) {
-        toggle.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      if (toggle) { 
+        toggle.addEventListener("click", () => { 
+          document.body.classList.toggle("dark-mode"); 
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); 
+        }); 
+      }
+      if (localStorage.getItem("theme") === "dark") { 
+        document.body.classList.add("dark-mode"); 
+      }
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
-      }
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+      });
     });
   </script>
 </body>
