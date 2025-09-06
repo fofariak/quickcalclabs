@@ -252,4 +252,14 @@ const blogPosts = [
     readTime: "8 min read",
     featured: false
   }
+,
+{
+    title: "Introducing Solids to Baby: A Comprehensive Guide for New Parents",
+    href: "blog/introducing-solids-baby-guide.html",
+    excerpt: "Starting solids is a big milestone! This guide covers everything new parents need to know, from readiness signs to first foods and feeding approaches.",
+    category: "Health",
+    date: "September 6, 2025",
+    readTime: "8 min read",
+    featured: false
+  }
 ]
