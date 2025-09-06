@@ -262,4 +262,14 @@ const blogPosts = [
     readTime: "8 min read",
     featured: false
   }
+,
+{
+    title: "Safe Exercise During Pregnancy: A Trimester-by-Trimester Guide",
+    href: "blog/safe-exercise-pregnancy-trimester.html",
+    excerpt: "Staying active during pregnancy offers immense benefits for both mother and baby. Our comprehensive guide breaks down safe exercise practices for the first, second, and third trimesters, helping you maintain a healthy and energized pregnancy.",
+    category: "Health",
+    date: "September 6, 2025",
+    readTime: "9 min read",
+    featured: false
+  }
 ]
