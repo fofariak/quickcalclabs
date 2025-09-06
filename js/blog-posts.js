@@ -272,4 +272,14 @@ const blogPosts = [
     readTime: "9 min read",
     featured: false
   }
+,
+{
+    title: "Decoding Your Baby's Hunger Cues: A Parent's Guide to Responsive Feeding",
+    href: "blog/decoding-baby-hunger-cues.html",
+    excerpt: "Unravel the mystery of your baby's hunger signals. This guide helps parents understand early, mid, and late hunger cues for stress-free, responsive feeding.",
+    category: "Health",
+    date: "September 6, 2025",
+    readTime: "8 min read",
+    featured: false
+  }
 ]
