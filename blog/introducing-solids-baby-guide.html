@@ -8,76 +8,215 @@
   <link rel="stylesheet" href="../css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770" crossorigin="anonymous"></script>
   <style>
-    .affiliate-link{color:var(--accent-blue);font-weight:600;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px} .dark-mode .affiliate-link{color:#8ab4f8} .blog-image{width:100%;max-width:600px;height:auto;border-radius:var(--radius-lg);margin:1.5rem auto;display:block;box-shadow:var(--shadow-md)} .seo-content h1{margin-bottom:0.25em;} .seo-content h2{margin-top:2em;margin-bottom:0.5em} .seo-content p{margin-bottom:1em;line-height:1.7;} .seo-content ul, .seo-content ol{margin-bottom:1em;padding-left:1.5em; list-style-type: disc;} .seo-content ol{list-style-type: decimal;} .toc{background:var(--surface-2-light);padding:1.5rem;border-radius:var(--radius-lg);margin-bottom:2rem;} .dark-mode .toc{background:var(--surface-2-dark);} .toc ul{list-style:none;padding-left:0;} .toc li{margin:0.5rem 0;} .toc a{color:var(--accent-blue);font-weight:600;} .info-box{background:linear-gradient(135deg,#e3f2fd,#f3e5f5);border-left:4px solid var(--accent-blue);padding:1.5rem;margin:2rem 0;border-radius:var(--radius-md);} .dark-mode .info-box{background:linear-gradient(135deg,rgba(106,130,251,0.1),rgba(255,126,179,0.1));} .highlight-box{background:linear-gradient(135deg,#fff3e0,#fce4ec);border:2px solid var(--accent-orange);padding:1.5rem;border-radius:var(--radius-lg);margin:2rem 0;} .dark-mode .highlight-box{background:linear-gradient(135deg,rgba(255,143,112,0.1),rgba(238,9,121,0.1));} .comparison-table{margin:2rem 0;overflow-x:auto;} .comparison-table table{width:100%;border-collapse:collapse;box-shadow:var(--shadow-md);border-radius:var(--radius-md);overflow:hidden;} .comparison-table th{background:linear-gradient(90deg,var(--accent-blue),var(--accent-pink));color:white;padding:1rem;font-weight:700;} .comparison-table td{padding:0.8rem;border-bottom:1px solid #e1e5e9;} .dark-mode .comparison-table td{border-bottom-color:#2d2d35;} .method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:2rem 0;} .method-card{background:var(--surface-1-light);padding:1.5rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid #e1e5e9;} .dark-mode .method-card{background:var(--surface-1-dark);border-color:#2d2d35;}
+    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; text-align: left; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .method-card h4 { margin-top: 0; }
   </style>
 </head>
 <body>
-  <header class="header"><a href="../index.html" class="logo">QuickCalcLabs</a><nav><a href="../blog.html">Blog</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><button id="darkModeToggle">🌙</button></nav></header>
-  <section class="seo-content"><h1>Introducing Solids to Baby: A Comprehensive Guide for New Parents</h1><p class="muted">Published on: September 6, 2025 | 8 min read</p><div class="toc"><h3>📋 Table of Contents</h3><ul><li><a href="#when-is-your-baby-ready-for-solids">When is Your Baby Ready for Solids?</a></li><li><a href="#first-foods-where-to-begin">First Foods: Where to Begin</a></li><li><a href="#feeding-approaches-spoon-vs-baby-led-weaning">Feeding Approaches: Spoon vs. Baby-Led Weaning</a></li><li><a href="#introducing-common-allergens">Introducing Common Allergens</a></li><li><a href="#the-progression-of-textures">The Progression of Textures</a></li><li><a href="#homemade-vs-store-bought-baby-food">Homemade vs. Store-Bought Baby Food</a></li><li><a href="#foods-to-avoid-for-babies">Foods to Avoid for Babies</a></li><li><a href="#hydration-for-your-little-one-and-you">Hydration for Your Little One (and You!)</a></li><li><a href="#monitoring-growth-and-health">Monitoring Growth and Health</a></li><li><a href="#troubleshooting-common-solid-food-challenges">Troubleshooting Common Solid Food Challenges</a></li><li><a href="#recommended-tools-for-starting-solids">Recommended Tools for Starting Solids</a></li><li><a href="#conclusion">Conclusion</a></li></ul></div><p>The journey of parenthood is a remarkable one, filled with countless milestones – and introducing solid foods is undoubtedly one of the most exciting! From those first tiny spoonfuls of puree to the joy of watching your baby explore new textures and tastes, this phase marks a significant step in their development. It's a time of discovery, both for your little one and for you as a parent.</p><div style="text-align:center; margin: 2rem 0;"><a href="../baby-growth-percentile-calculator.html" class="cta-btn">📊 Calculate Baby Growth Percentile!</a></div>
-<p>However, it's also a phase that can come with many questions. When is the right time? What foods should you start with? How do you prevent allergies? This comprehensive guide is designed to empower you with the knowledge and confidence to navigate the world of solid foods, making the experience enjoyable and nutritious for your baby.</p>
-<h2 id="when-is-your-baby-ready-for-solids">When is Your Baby Ready for Solids?</h2>
-<p>One of the most common questions parents have is, "When should I start feeding my baby solids?" While the general recommendation is around 6 months of age, readiness is more about developmental milestones than a strict timeline. Every baby is different, and observing these key signs is crucial. You can use an <a href="../age-calculator.html" class="affiliate-link">age calculator</a> to confirm your baby's exact age, but always prioritize their developmental cues over a date on the calendar.</p>
-### Signs of Readiness
-*   **Good Head and Neck Control:** Your baby should be able to hold their head steady and sit upright with support.
-*   **Sitting Up Independently:** This indicates core strength needed for safe eating.
-*   **Loss of Tongue-Thrust Reflex:** This reflex helps babies push foreign objects out of their mouths. When it diminishes, they can keep food in their mouth and swallow.
-*   **Showing Interest in Food:** Your baby might watch you eat, lean forward, or even try to grab food from your plate.
-*   **Opening Mouth When Food Approaches:** An clear sign they're ready to receive food.
-*   **Ability to Move Food from Front to Back of Mouth:** Essential for swallowing.
-<div class="highlight-box"><p>Starting solids too early (before 4 months) can increase the risk of choking and may not provide additional nutritional benefits. Waiting too long (past 6-7 months) can lead to nutritional deficiencies (especially iron) and may make it harder for babies to accept new textures.</p></div>
-<h2 id="first-foods-where-to-begin">First Foods: Where to Begin</h2>
-<p>Once your baby shows signs of readiness, the fun begins! The goal is to introduce single-ingredient foods, one at a time, to identify any potential sensitivities or allergies.</p>
-### Iron-Fortified Baby Cereal
-Traditionally, iron-fortified rice cereal mixed with breast milk or formula has been a popular first food. It's bland, easily digestible, and provides essential iron. However, you're not limited to rice cereal. Other single-grain cereals like oat or barley are also excellent choices.
-### Single-Ingredient Purees
-Beyond cereal, start with pureed vegetables or fruits. Introduce one new food every 3-5 days. This allows you to monitor for allergic reactions or digestive issues.
-*   **Vegetables:** Sweet potato, butternut squash, green beans, peas, carrots.
-*   **Fruits:** Banana, avocado, apple, pear, peach.
-<div class="info-box"><h4>💡 Pro Tip</h4><p>When starting with purees, aim for a very smooth consistency, gradually thickening it as your baby gets used to swallowing. Don't add sugar or salt to baby food.</p></div>
-<h2 id="feeding-approaches-spoon-vs-baby-led-weaning">Feeding Approaches: Spoon vs. Baby-Led Weaning</h2>
-<p>There are generally two popular approaches to introducing solids, and many parents find a happy medium between the two.</p>
-<div class="comparison-table"><table><thead><tr><th>Metric</th><th>Spoon-Feeding</th><th>Baby-Led Weaning (BLW)</th></tr></thead><tbody><tr><td><strong>Primary Method</strong></td><td>Parent feeds pureed/mashed foods with a spoon</td><td>Baby self-feeds soft, finger-sized pieces of food</td></tr><tr><td><strong>Control</strong></td><td>Parent-led</td><td>Baby-led; baby controls what and how much they eat</td></tr><tr><td><strong>Food Texture</strong></td><td>Pureed, mashed, gradually lumpier</td><td>Soft, chewable pieces, often in sticks or large chunks</td></tr><tr><td><strong>Development</strong></td><td>Focus on swallowing, taste</td><td>Focus on fine motor skills, hand-eye coordination, chewing</td></tr><tr><td><strong>Mess Factor</strong></td><td>Generally less messy, especially at first</td><td>Can be quite messy, encourages exploration</td></tr><tr><td><strong>Pros</strong></td><td>Easy to monitor intake, less messy</td><td>Promotes independence, develops oral motor skills earlier</td></tr><tr><td><strong>Cons</strong></td><td>Can lead to overfeeding, less self-regulation</td><td>Higher initial mess, parents may worry about choking</td></tr></tbody></table></div>
-<p>Many parents choose a "combination approach," starting with some purees and then gradually introducing appropriate finger foods as their baby gains confidence.</p>
-<h2 id="introducing-common-allergens">Introducing Common Allergens</h2>
-<p>Gone are the days of strictly avoiding common allergens. Current guidance from pediatric organizations suggests introducing common allergens early and regularly can actually <em>reduce</em> the risk of developing allergies.</p>
-<ul><li>  <strong>Peanut Butter:</strong> Thinned with water or breast milk/formula, or mixed into cereal.</li><li>  <strong>Eggs:</strong> Scrambled or hard-boiled and mashed.</li><li>  <strong>Dairy:</strong> Yogurt (plain, whole milk) or cheese. Avoid cow's milk as a primary drink until age one.</li><li>  <strong>Fish:</strong> Cooked, flaked fish (e.g., salmon).</li><li>  <strong>Soy:</strong> Tofu or soy yogurt.</li><li>  <strong>Wheat:</strong> Wheat toast fingers, pasta.</li></ul>
-<div class="info-box"><p>Always be prepared for an allergic reaction when introducing new foods, especially allergens. Know the signs (hives, swelling, difficulty breathing) and how to respond. Consult your pediatrician with any concerns.</p></div>
-<h2 id="the-progression-of-textures">The Progression of Textures</h2>
-<ol><li><strong>Smooth Purees (4-6 months):</strong> Thin, single-ingredient purees.</li><li><strong>Thicker Purees/Mashed (6-8 months):</strong> Slightly thicker purees, mashed foods like avocado or banana.</li><li><strong>Lumpy/Soft Chunks (8-10 months):</strong> Soft, pea-sized pieces of well-cooked vegetables, soft fruits, small pieces of pasta.</li><li><strong>Finger Foods (9-12 months):</strong> Larger, soft pieces that babies can pick up and self-feed. Examples include cheerios, small pieces of cooked chicken, soft cheese.</li><li><strong>Family Foods (12+ months):</strong> By their first birthday, most babies can eat a modified version of what the family eats, cut into small, safe pieces.</li></ol>
-<p><img src="https://placehold.co/600x400/EEE/31343C?text=Replace+Image" alt="Baby eating solids from a spoon" class="blog-image"></p>
-<h2 id="homemade-vs-store-bought-baby-food">Homemade vs. Store-Bought Baby Food</h2>
-<ul><li>  <strong>Homemade:</strong> Offers control over ingredients, no added preservatives, often more cost-effective. Requires time for preparation.</li><li>  <strong>Store-Bought:</strong> Convenient, tested for safety and nutrient content, offers variety. Can be more expensive.</li></ul>
-<div class="info-box"><h4>💡 Pro Tip</h4><p>If making your own baby food, cook foods thoroughly and puree to the appropriate consistency. You can make large batches and freeze portions in ice cube trays for easy thawing and serving.</p></div>
-<h2 id="foods-to-avoid-for-babies">Foods to Avoid for Babies</h2>
-<ul><li>  <strong>Honey (under 1 year):</strong> Risk of infant botulism.</li><li>  <strong>Cow's Milk (as a primary drink under 1 year):</strong> Can be introduced in small amounts in food (e.g., yogurt, cheese), but not as a main beverage.</li><li>  <strong>Choking Hazards:</strong> Whole grapes, hot dogs, nuts, popcorn, hard candies, large chunks of meat, sticky foods like large dollops of peanut butter.</li><li>  <strong>Added Sugar and Salt:</strong> Babies' kidneys are not equipped to handle excess salt, and sugar offers no nutritional value.</li><li>  <strong>Raw or Undercooked Meat, Poultry, Fish, Eggs:</strong> Risk of foodborne illness.</li></ul>
-<h2 id="hydration-for-your-little-one-and-you">Hydration for Your Little One (and You!)</h2>
-<p>When babies start solids, breast milk or formula remains their primary source of nutrition and hydration until they are one year old. However, offering small sips of water with meals can be beneficial. Babies don't need juice.</p>
-<p>Remember that your own hydration is key, especially if you are breastfeeding. Use a <a href="../water-intake-calculator.html" class="affiliate-link">water intake calculator</a> to ensure you're drinking enough fluids throughout the day to support your milk supply and overall well-being. For mothers who are still breastfeeding, tracking your cycle with a <a href="../period-tracker.html" class="affiliate-link">period tracker</a> can also offer insights into your body's recovery and fertility post-partum.</p>
-<h2 id="monitoring-growth-and-health">Monitoring Growth and Health</h2>
-<p>Regular check-ups with your pediatrician are essential to monitor your baby's growth and development during this exciting phase. While a <a href="../bmi-calculator.html" class="affiliate-link">BMI calculator</a> is typically used for adults to assess weight categories, pediatricians use specific growth charts to track your baby's weight and length, ensuring they are growing appropriately. As your baby transitions to a wider variety of solids, you'll naturally be thinking about balanced nutrition. For your own diet, especially if you're a new mom, a <a href="../macro-calculator.html" class="affiliate-link">macro calculator</a> can help ensure you're meeting your personal nutritional needs for protein, fats, and carbohydrates.</p>
-<h2 id="troubleshooting-common-solid-food-challenges">Troubleshooting Common Solid Food Challenges</h2>
-<ul><li>  <strong>Food Refusal:</strong> It's common for babies to refuse new foods. Don't force it. Try again another day, offering the food multiple times (up to 10-15 exposures) before giving up.</li><li>  <strong>Gagging vs. Choking:</strong> Gagging is a natural reflex that pushes food forward to prevent choking; it sounds like coughing. Choking is silent and requires immediate intervention. Learn infant CPR.</li><li>  <strong>Constipation:</strong> Common when starting solids. Offer water, pureed prunes, pears, or peaches. Ensure adequate breast milk or formula intake.</li></ul>
-<h2 id="recommended-tools-for-starting-solids">Recommended Tools for Starting Solids</h2>
 
-<div class="method-grid">
-<div class="method-card"><h4>Baby Brezza Food Maker</h4><p>Steams and blends fruits, vegetables, and meats into purees in one easy step. Makes homemade baby food simple.</p><p><strong>Best for:</strong> Busy parents wanting homemade baby food</p><p><strong>Accuracy:</strong> Excellent</p><a href="https://www.babybrezza.com/products/one-step-baby-food-maker" target="_blank" rel="sponsored" class="affiliate-link">🛒 Baby Brezza Food Maker</a></div>
-<div class="method-card"><h4>Stokke Tripp Trapp High Chair</h4><p>An adjustable high chair designed to grow with your child, ensuring ergonomic seating from birth into adulthood. Durable and easy to clean.</p><p><strong>Best for:</strong> Long-term investment, ergonomic support</p><p><strong>Accuracy:</strong> Excellent</p><a href="https://www.stokke.com/USA/en-us/highchairs/tripp-trapp/TT01.html" target="_blank" rel="sponsored" class="affiliate-link">🛒 Stokke Tripp Trapp Chair</a></div>
-<div class="method-card"><h4>Solid Starts App</h4><p>A comprehensive app with a vast database of foods, how to safely prepare them for babies, and a tracker for introduced foods and potential reactions.</p><p><strong>Best for:</strong> Baby-Led Weaning & Allergy Tracking</p><p><strong>Accuracy:</strong> Excellent</p><a href="https://solidstarts.com/app/" target="_blank" rel="sponsored" class="affiliate-link">🛒 Solid Starts App</a></div>
-</div>
+  <header class="header">
+    <a href="../index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="../blog.html">Blog</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
 
-<h2 id="conclusion">Conclusion</h2>
-<p>Introducing solid foods to your baby is a momentous occasion, full of exploration, sensory development, and, yes, a bit of mess! By understanding the signs of readiness, choosing appropriate first foods, and being mindful of safe feeding practices, you can make this transition smooth and enjoyable for both of you. Remember, this is a journey, not a race. Embrace the curiosity, celebrate the small victories, and most importantly, enjoy watching your little one discover the wonderful world of taste and texture.</p>
-<div class="info-box"><h4>💡 Pro Tip</h4><p>Relax and trust your instincts! Your baby will guide you through this process. Focus on creating a positive, stress-free mealtime environment, and remember that every new food is an adventure.</p></div>
-<p>[TAKE_ACTION]Start your baby's solid food journey with confidence today. Observe their readiness cues, consult your pediatrician, and enjoy the exciting process of introducing them to a world of new flavors and textures<img src="https://placehold.co/600x400/EEE/31343C?text=Replace+Image" alt="/TAKE_ACTION" class="blog-image"></p></section>
-  <footer><p>© 2025 QuickCalcLabs. All Rights Reserved.</p><a href="../privacy-policy.html">Privacy Policy</a>|<a href="../terms-of-service.html">Terms of Service</a>|<a href="../affiliate-disclosure.html">Affiliate Disclosure</a></footer>
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+
+  <section class="seo-content">
+    <h1>Introducing Solids to Baby: A Comprehensive Guide for New Parents</h1>
+    <p class="muted">Published on: September 6, 2025 | 13 min read</p>
+    
+    <div class="toc">
+      <h3>📋 Table of Contents</h3>
+      <ul>
+        <li><a href="#when-to-start">When is Your Baby Ready for Solids?</a></li>
+        <li><a href="#first-foods">First Foods: Where to Begin</a></li>
+        <li><a href="#feeding-approaches">Feeding Approaches: Spoon vs. Baby-Led Weaning</a></li>
+        <li><a href="#introducing-allergens">Introducing Common Allergens</a></li>
+        <li><a href="#texture-progression">The Progression of Textures</a></li>
+        <li><a href="#foods-to-avoid">Foods to Avoid for Babies</a></li>
+        <li><a href="#tools-resources">Recommended Tools for Starting Solids</a></li>
+        <li><a href="#conclusion">Conclusion: An Adventure in Taste</a></li>
+      </ul>
+    </div>
+    
+        <p>The journey of parenthood is a remarkable one, filled with countless milestones – and introducing solid foods is undoubtedly one of the most exciting! From those first tiny spoonfuls of puree to the joy of watching your baby explore new textures and tastes, this phase marks a significant step in their development. It's a time of discovery, both for your little one and for you as a parent. However, it's also a phase that can come with many questions. When is the right time? What foods should you start with? How do you prevent allergies? This comprehensive guide is designed to empower you with the knowledge and confidence to navigate the world of solid foods, making the experience enjoyable and nutritious for your baby.</p>
+    <div style="text-align:center; margin: 2rem 0;"><a href="../baby-growth-percentile-calculator.html" class="cta-btn">📊 Track Your Baby's Growth Percentile</a></div>
+
+    <h2 id="when-to-start">When is Your Baby Ready for Solids?</h2>
+    <p>One of the most common questions parents have is, "When should I start feeding my baby solids?" While the general recommendation from the American Academy of Pediatrics is to start around 6 months of age, readiness is more about developmental milestones than a strict timeline. Every baby is different, and observing these key signs is crucial.</p>
+    <h3>Signs of Readiness:</h3>
+    <ul>
+      <li><strong>Good Head and Neck Control:</strong> Your baby should be able to hold their head steady and sit upright with support.</li>
+      <li><strong>Sitting Up Independently:</strong> This indicates the core strength needed for safe eating.</li>
+      <li><strong>Loss of Tongue-Thrust Reflex:</strong> This reflex helps babies push foreign objects out of their mouths. When it diminishes, they can keep food in their mouth and swallow.</li>
+      <li><strong>Showing Interest in Food:</strong> Your baby might watch you eat, lean forward, or even try to grab food from your plate.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>Starting solids too early (before 4 months) can increase the risk of choking and may not provide additional nutritional benefits. Waiting too long (past 6-7 months) can lead to nutritional deficiencies (especially iron) and may make it harder for babies to accept new textures.</p>
+    </div>
+
+    <h2 id="first-foods">First Foods: Where to Begin</h2>
+    <p>Once your baby shows signs of readiness, the fun begins! The goal is to introduce single-ingredient foods, one at a time, to identify any potential sensitivities or allergies. Introduce one new food every 3-5 days.</p>
+    <h3>Iron-Fortified Baby Cereal</h3>
+    <p>Traditionally, iron-fortified rice cereal mixed with breast milk or formula has been a popular first food. It's bland, easily digestible, and provides essential iron. However, you're not limited to rice cereal. Other single-grain cereals like oat or barley are also excellent choices.</p>
+    <h3>Single-Ingredient Purees</h3>
+    <ul>
+      <li><strong>Vegetables:</strong> Sweet potato, butternut squash, green beans, peas, carrots.</li>
+      <li><strong>Fruits:</strong> Banana, avocado, apple, pear, peach.</li>
+    </ul>
+
+    <h2 id="feeding-approaches">Feeding Approaches: Spoon vs. Baby-Led Weaning</h2>
+    <p>There are generally two popular approaches to introducing solids, and many parents find a happy medium between the two.</p>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Spoon-Feeding (Purees)</th>
+            <th>Baby-Led Weaning (BLW)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Primary Method</strong></td>
+            <td>Parent feeds pureed/mashed foods with a spoon.</td>
+            <td>Baby self-feeds soft, finger-sized pieces of food.</td>
+          </tr>
+          <tr>
+            <td><strong>Pros</strong></td>
+            <td>Easy to monitor intake, less initial mess.</td>
+            <td>Promotes independence and develops oral motor skills.</td>
+          </tr>
+          <tr>
+            <td><strong>Cons</strong></td>
+            <td>Can lead to overfeeding, baby is less in control.</td>
+            <td>Can be messy, some parents worry about choking.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+        <div class="info-box">
+      <p><strong>💡 Pro Tip:</strong> Many parents choose a "combination approach," starting with some purees and then gradually introducing appropriate finger foods as their baby gains confidence and fine motor skills.</p>
+    </div>
+
+    <h2 id="introducing-allergens">Introducing Common Allergens</h2>
+    <p>Current guidance from pediatric organizations suggests that introducing common allergens early and regularly can actually <em>reduce</em> the risk of developing allergies. The top allergens include:</p>
+    <ul>
+      <li>Peanut Butter (thinned with water or breastmilk)</li>
+      <li>Eggs (scrambled or hard-boiled and mashed)</li>
+      <li>Dairy (plain, whole milk yogurt or cheese)</li>
+      <li>Fish (cooked, flaked salmon)</li>
+      <li>Soy (tofu or soy yogurt)</li>
+      <li>Wheat (toast strips or pasta)</li>
+    </ul>
+    <p>Introduce one new allergen at a time and wait 3-5 days before introducing another to monitor for any reaction (hives, swelling, vomiting, difficulty breathing).</p>
+
+    <h2 id="texture-progression">The Progression of Textures</h2>
+    <ol>
+      <li><strong>Smooth Purees (around 6 months):</strong> Thin, single-ingredient purees.</li>
+      <li><strong>Thicker Purees/Mashed (6-8 months):</strong> Slightly thicker purees, mashed foods like avocado or banana.</li>
+      <li><strong>Lumpy/Soft Chunks (8-10 months):</strong> Soft, pea-sized pieces of well-cooked vegetables, soft fruits, small pieces of pasta.</li>
+      <li><strong>Finger Foods (9-12 months):</strong> Larger, soft pieces that babies can pick up and self-feed.</li>
+    </ol>
+
+    <h2 id="foods-to-avoid">Foods to Avoid for Babies</h2>
+    <ul>
+      <li><strong>Honey (under 1 year):</strong> Risk of infant botulism.</li>
+      <li><strong>Cow's Milk (as a primary drink under 1 year):</strong> Can be introduced in small amounts in food (e.g., yogurt), but not as a main beverage.</li>
+      <li><strong>Choking Hazards:</strong> Whole grapes, hot dogs, nuts, popcorn, hard candies.</li>
+      <li><strong>Added Sugar and Salt:</strong> Babies' kidneys are not equipped to handle excess salt, and sugar offers no nutritional value.</li>
+    </ul>
+
+    <h2 id="tools-resources">Recommended Tools for Starting Solids</h2>
+    <p>Having the right gear can make the transition to solids easier and more enjoyable. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h4>🥣 High-Quality High Chair</h4>
+        <p>A safe, comfortable, and easy-to-clean high chair is essential. Look for one with a good footrest to promote a proper eating posture, like the Stokke Tripp Trapp.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Shop for high chairs.</a>
+      </div>
+      <div class="method-card">
+        <h4>🥄 Soft-Tip Baby Spoons</h4>
+        <p>Silicone, soft-tip spoons are gentle on your baby's sensitive gums. Their shallow shape makes it easy for your baby to get food off the spoon.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore baby spoons.</a>
+      </div>
+      <div class="method-card">
+        <h4>👶 Silicone Bibs with Pockets</h4>
+        <p>Starting solids is messy! A silicone bib with a large pocket can catch a lot of the food that doesn't make it into your baby's mouth, making cleanup much easier.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find the best silicone bibs.</a>
+      </div>
+    </div>
+
+    <h2 id="conclusion">Conclusion: An Adventure in Taste</h2>
+    <p>Introducing solid foods to your baby is a momentous occasion, full of exploration, sensory development, and, yes, a bit of mess! By understanding the signs of readiness, choosing appropriate first foods, and being mindful of safe feeding practices, you can make this transition smooth and enjoyable for both of you. Remember, this is a journey, not a race. Embrace the curiosity, celebrate the small victories, and most importantly, enjoy watching your little one discover the wonderful world of taste and texture.</p>
+
+    <div class="highlight-box">
+      <h3>🚀 Take Action Today</h3>
+      <ul>
+        <li><strong>Assess Readiness:</strong> Observe your baby for the signs of readiness discussed in this guide.</li>
+        <li><strong>Plan the First Meal:</strong> Decide on a simple, single-ingredient puree, like avocado or sweet potato, for your baby's first taste of solid food.</li>
+        <li><strong>Create a Positive Environment:</strong> Make sure your baby is well-rested and happy, and make the first feeding experience a fun and low-pressure event.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="../privacy-policy.html">Privacy Policy</a> | 
+    <a href="../terms-of-service.html">Terms of Service</a> |
+    <a href="../affiliate-disclosure.html">Affiliate Disclosure</a>
+  </footer>
+  
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const t = document.getElementById("darkModeToggle");
-      if (t) t.addEventListener("click", () => {document.body.classList.toggle("dark-mode");localStorage.setItem("theme",document.body.classList.contains("dark-mode")?"dark":"light");});
-      if (localStorage.getItem("theme")==="dark") document.body.classList.add("dark-mode");
-      document.querySelectorAll(".toc a").forEach(l => {l.addEventListener("click",e=>{e.preventDefault();document.getElementById(l.getAttribute("href").substring(1)).scrollIntoView({behavior:"smooth"});});});
-      const pb=document.createElement("div");pb.style.cssText="position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-pink));z-index:9999;transition:width 0.1s ease;";document.body.appendChild(pb);
-      window.addEventListener("scroll",()=>{const sc=(document.documentElement.scrollTop)/(document.documentElement.scrollHeight-document.documentElement.clientHeight)*100;pb.style.width=sc+"%";});
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      if (toggle) { 
+        toggle.addEventListener("click", () => { 
+          document.body.classList.toggle("dark-mode"); 
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); 
+        }); 
+      }
+      if (localStorage.getItem("theme") === "dark") { 
+        document.body.classList.add("dark-mode"); 
+      }
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
     });
   </script>
 </body>
