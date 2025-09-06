@@ -232,4 +232,14 @@ const blogPosts = [
     readTime: "7 min read",
     featured: false
   }
+,
+{
+    title: "Understanding Energy Balance for Sustainable Weight Loss",
+    href: "blog/energy-balance-weight-loss.html",
+    excerpt: "Discover the fundamental principle of energy balance and how it drives weight loss. Understand the science behind calories, metabolism, and practical tips for success.",
+    category: "Fitness",
+    date: "September 6, 2025",
+    readTime: "8 min read",
+    featured: false
+  }
 ]
