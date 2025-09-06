@@ -222,4 +222,14 @@ const blogPosts = [
     readTime: "8 min read",
     featured: false
   }
+,
+{
+    title: "How to Boost Your Metabolism: A Science-Backed Guide to Burning More Calories",
+    href: "blog/how-to-boost-metabolism.html",
+    excerpt: "Discover how to naturally boost your metabolism with science-backed strategies, from diet and exercise to sleep and stress management. Burn more calories, feel more energized, and reach your health goals.",
+    category: "Fitness",
+    date: "September 6, 2025",
+    readTime: "7 min read",
+    featured: false
+  }
 ]
