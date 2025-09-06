@@ -12,8 +12,25 @@
     .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
     .dark-mode .affiliate-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
-    .img-placeholder { width: 100%; max-width: 600px; height: 350px; border-radius: var(--radius-lg); margin: 1.5rem auto; display: flex; align-items: center; justify-content: center; background-color: #f0f2f5; color: var(--text-weak-light); font-style: italic; box-shadow: var(--shadow-sm); }
-    .dark-mode .img-placeholder { background-color: var(--surface-2-dark); color: var(--text-weak-dark); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; text-align: left; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .method-card h4 { margin-top: 0; }
   </style>
 </head>
 <body>
@@ -31,48 +48,99 @@
   <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
 
   <section class="seo-content">
-    <h1>Your Pregnancy Journey: A Simple Guide to the Three Trimesters</h1>
-    <p class="muted">Published on: September 3, 2025</p>
-    [Image showing the silhouette of a pregnant woman at three stages, representing the trimesters]
+    <h1>Your Pregnancy Journey: A Guide to the Three Trimesters</h1>
+    <p class="muted">Published on: September 6, 2025 | 12 min read</p>
+    
+    <div class="toc">
+      <h3>📋 Table of Contents</h3>
+      <ul>
+        <li><a href="#first-trimester">The First Trimester (Weeks 1-13)</a></li>
+        <li><a href="#second-trimester">The Second Trimester (Weeks 14-27)</a></li>
+        <li><a href="#third-trimester">The Third Trimester (Weeks 28-40)</a></li>
+        <li><a href="#tools-resources">Pregnancy Essentials for Every Trimester</a></li>
+        <li><a href="#conclusion">Conclusion: A Journey of a Lifetime</a></li>
+      </ul>
+    </div>
+    
+    <img src="https://images.unsplash.com/photo-1581594589349-43a7a972c3b8?q=80&w=1770&auto=format&fit=crop" alt="A silhouette of a pregnant woman at three stages, representing the trimesters." class="blog-image">
     <p>Pregnancy is a remarkable 40-week journey that is typically divided into three stages, or trimesters. Each trimester brings its own unique set of changes, milestones, and challenges for both you and your growing baby. Understanding what to expect during each phase can help you feel more prepared, confident, and in tune with your body. This guide provides a simple overview of the three trimesters. Start your journey by finding out your estimated due date!</p>
-
     <div style="text-align:center; margin: 2rem 0;"><a href="../pregnancy-calculator.html" class="cta-btn">🤰 Find Out Your Estimated Due Date</a></div>
 
-    <h2>The First Trimester (Weeks 1-13)</h2>
-    <p>This is a time of rapid development, even though you may not "look" pregnant yet. Your body is working incredibly hard to build the foundation for your baby.</p>
+    <h2 id="first-trimester">The First Trimester (Weeks 1-13)</h2>
+    <p>This is a time of rapid and fundamental development, even though you may not "look" pregnant yet. Your body is working incredibly hard to build the foundation for your baby.</p>
     <h3>What's Happening with Your Baby?</h3>
-    <p>By the end of the first trimester, all of your baby's major organs and body systems have been formed. Their heart is beating, and they are starting to develop tiny fingers and toes. They are about the size of a lemon.</p>
+    <p>From a single fertilized cell, your baby grows into a fully-formed fetus. By the end of the first trimester, all of your baby's major organs and body systems have been formed. Their heart is beating, and they are starting to develop tiny fingers, toes, and facial features. They are about the size of a lemon.</p>
     <h3>Common Symptoms for Mom:</h3>
-    <p>This trimester is famous for its challenging symptoms as your hormones surge. You might experience fatigue, morning sickness (which can happen any time of day), tender breasts, and frequent urination.</p>
-
-    <h2>The Second Trimester (Weeks 14-27)</h2>
-    <p>Often called the "honeymoon" phase of pregnancy, the second trimester is when many women start to feel their best. The early discomforts often fade, and your energy levels may return.</p>
-    <h3>What's Happening with Your Baby?</h3>
-    <p>Your baby continues to grow and mature. You will likely start to feel their first little movements, known as "quickening." They can now hear sounds from outside the womb. By the end of this trimester, your baby is about the size of a head of cauliflower.</p>
-    <h3>Common Symptoms for Mom:</h3>
-    <p>You'll notice your baby bump growing more noticeably. You might experience backaches as your center of gravity shifts, and your skin may change (some women get a dark line on their abdomen called the linea nigra).</p>
-    
-
-    <h2>The Third Trimester (Weeks 28-40)</h2>
-    <p>You're on the home stretch! Your baby is now focused on gaining weight and getting ready for birth.</p>
-    <h3>What's Happening with Your Baby?</h3>
-    <p>Your baby's lungs are maturing, and they are practicing breathing movements. They will typically settle into a head-down position to prepare for delivery. They are growing rapidly and will be about the size of a small pumpkin by your due date.</p>
-    <h3>Common Symptoms for Mom:</h3>
-    <p>Discomfort is common as your baby gets bigger. You might experience shortness of breath, heartburn, swelling in your feet and ankles, and difficulty sleeping. You'll also likely feel Braxton Hicks contractions, which are "practice" contractions that are not a sign of labor.</p>
-
-    <h2>Affiliate Corner: Pregnancy Essentials for Every Trimester</h2>
-    <p>Navigating pregnancy is easier with a few comfort-boosting items. Here are some must-haves from Amazon for expecting mothers. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <p>This trimester is famous for its challenging symptoms as your hormones, particularly hCG and progesterone, surge. You might experience:</p>
     <ul>
-      <li><strong>Pregnancy Pillow:</strong> A full-body pillow can be a game-changer for getting comfortable sleep, especially in the second and third trimesters. <a href="#" target="_blank" rel="sponsored" class="affiliate-link">Find top-rated pregnancy pillows here.</a></li>
-      <li><strong>Comfortable Maternity Clothes:</strong> Invest in a few key pieces like stretchy leggings, supportive bras, and comfortable tops. <a href="#" target="_blank" rel="sponsored" class="affiliate-link">Explore stylish and comfy maternity wear.</a></li>
-      <li><strong>Stretch Mark Cream or Oil:</strong> Keep your growing belly moisturized to help soothe itchy skin and potentially reduce the appearance of stretch marks. <a href="#" target="_blank" rel="sponsored" class="affiliate-link">Check out popular belly butters and oils.</a></li>
+      <li><strong>Fatigue:</strong> Your body is using a tremendous amount of energy to build the placenta and support the baby's growth.</li>
+      <li><strong>Morning Sickness:</strong> Nausea and vomiting can happen any time of day and are very common.</li>
+      <li><strong>Tender Breasts:</strong> Your breasts may feel sore and swollen as they prepare for breastfeeding.</li>
+      <li><strong>Frequent Urination:</strong> Your growing uterus puts pressure on your bladder.</li>
     </ul>
+
+    <h2 id="second-trimester">The Second Trimester (Weeks 14-27)</h2>
+    <p>Often called the "honeymoon" phase of pregnancy, the second trimester is when many women start to feel their best. The early discomforts often fade, and your energy levels may return as the placenta takes over hormone production.</p>
+    <h3>What's Happening with Your Baby?</h3>
+    <p>Your baby continues to grow and mature rapidly. You will likely start to feel their first little movements, known as "quickening," which can feel like flutters. They can now hear sounds from outside the womb, and their sleep and wake cycles become more regular. By the end of this trimester, your baby is about the size of a head of cauliflower.</p>
+    <h3>Common Symptoms for Mom:</h3>
+    <ul>
+      <li><strong>Growing Bump:</strong> Your baby bump will become more noticeable.</li>
+      <li><strong>Backaches:</strong> As your center of gravity shifts, you might experience aches and pains.</li>
+      <li><strong>Skin Changes:</strong> Some women get a dark line on their abdomen called the linea nigra or patches of darker skin on their face.</li>
+    </ul>
+
+    <div class="info-box">
+      <p><strong>💡 Pro Tip:</strong> The second trimester is a great time to focus on gentle exercise like prenatal yoga or swimming. It's also a good time to start planning for the baby's arrival, as you'll likely have more energy than in the first or third trimesters.</p>
+    </div>
+
+    <h2 id="third-trimester">The Third Trimester (Weeks 28-40)</h2>
+    <p>You're on the home stretch! Your baby is now focused on gaining weight and getting ready for birth. This trimester is a time of anticipation and preparation.</p>
+    <h3>What's Happening with Your Baby?</h3>
+    <p>Your baby's lungs are maturing, and they are practicing breathing movements. They will typically settle into a head-down position to prepare for delivery. They are growing rapidly, gaining about half a pound a week, and will be about the size of a small pumpkin by your due date.</p>
+    <h3>Common Symptoms for Mom:</h3>
+    <p>Discomfort is common as your baby gets bigger and takes up more space.</p>
+    <ul>
+      <li><strong>Shortness of Breath:</strong> Your growing uterus can press up against your diaphragm.</li>
+      <li><strong>Heartburn:</strong> The uterus can also press on your stomach, causing acid reflux.</li>
+      - <strong>Swelling:</strong> You might notice swelling in your feet and ankles.
+      - <strong>Braxton Hicks Contractions:</strong> These are "practice" contractions that are irregular and not a sign of labor. They feel like a tightening of the abdomen.
+    </ul>
+
+    <h2 id="tools-resources">Pregnancy Essentials for Every Trimester</h2>
+    <p>Navigating pregnancy is easier with a few comfort-boosting items. Here are some must-haves for expecting mothers. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h4>🌙 Pregnancy Pillow</h4>
+        <p>A full-body pillow can be a game-changer for getting comfortable sleep, especially in the second and third trimesters. It provides support for your back, hips, and belly.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find top-rated pregnancy pillows here.</a>
+      </div>
+      <div class="method-card">
+        <h4>👚 Comfortable Maternity Clothes</h4>
+        <p>Invest in a few key pieces like stretchy leggings, supportive bras, and comfortable tops that will grow with you throughout your pregnancy.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore stylish and comfy maternity wear.</a>
+      </div>
+      <div class="method-card">
+        <h4>🧴 Stretch Mark Cream or Oil</h4>
+        <p>Keep your growing belly moisturized to help soothe itchy skin and potentially reduce the appearance of stretch marks. Look for products with shea butter or vitamin E.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out popular belly butters and oils.</a>
+      </div>
+    </div>
+
+    <h2 id="conclusion">Conclusion: A Journey of a Lifetime</h2>
+    <p>Each trimester of pregnancy is a unique and transformative experience. By understanding the changes happening in your body and with your baby, you can navigate your pregnancy with more confidence and excitement. Remember to communicate with your healthcare provider about any symptoms or concerns you have along the way. Enjoy this special time of preparation and anticipation as you get ready to meet your new baby.</p>
+
+    <div class="highlight-box">
+      <h3>🚀 Take Action Today</h3>
+      <ul>
+        <li><strong>Track Your Progress:</strong> Use our <a href="../pregnancy-calculator.html" class="affiliate-link">Pregnancy Calculator</a> to see what week you're in and what's happening with your baby right now.</li>
+        <li><strong>Start a Journal:</strong> Write down your symptoms, feelings, and milestones. It's a wonderful keepsake to look back on.</li>
+        <li><strong>Make a Doctor's Appointment:</strong> Regular prenatal care is the most important thing you can do for a healthy pregnancy.</li>
+      </ul>
+    </div>
   </section>
 
   <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
-
-  <a href="../index.html" class="floating-cta">🔢 See All Calculators</a>
-
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="../privacy-policy.html">Privacy Policy</a> | 
@@ -83,9 +151,25 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
-      if (toggle) { toggle.addEventListener("click", () => { document.body.classList.toggle("dark-mode"); localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); }); }
-      if (localStorage.getItem("theme") === "dark") { document.body.classList.add("dark-mode"); }
-      document.querySelectorAll('img.blog-image').forEach(img => { img.onerror = function() { const placeholder = document.createElement('div'); placeholder.className = 'img-placeholder'; placeholder.textContent = 'Image not available'; this.parentNode.replaceChild(placeholder, this); }; });
+      if (toggle) { 
+        toggle.addEventListener("click", () => { 
+          document.body.classList.toggle("dark-mode"); 
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); 
+        }); 
+      }
+      if (localStorage.getItem("theme") === "dark") { 
+        document.body.classList.add("dark-mode"); 
+      }
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
     });
   </script>
 </body>
