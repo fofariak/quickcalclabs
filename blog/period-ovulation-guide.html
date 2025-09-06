@@ -9,30 +9,32 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link {
-      color: var(--accent-blue);
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-    }
-    .dark-mode .affiliate-link {
-      color: #8ab4f8;
-    }
-    .blog-image {
-        width: 100%;
-        max-width: 600px;
-        height: auto;
-        border-radius: var(--radius-lg);
-        margin: 1.5rem auto;
-        display: block;
-        box-shadow: var(--shadow-md);
-    }
+    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; text-align: left; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .method-card h4 { margin-top: 0; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <a href="../index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -43,23 +45,30 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
 
-  <!-- Main Blog Content -->
   <section class="seo-content">
     <h1>Decoding Your Cycle: A Guide to Periods, Fertility, and Ovulation</h1>
-    <p class="muted">Published on: September 3, 2025</p>
+    <p class="muted">Published on: September 6, 2025 | 11 min read</p>
+    
+    <div class="toc">
+      <h3>📋 Table of Contents</h3>
+      <ul>
+        <li><a href="#four-phases">The Four Phases of the Menstrual Cycle</a></li>
+        <li><a href="#fertile-window">Identifying Your Fertile Window</a></li>
+        <li><a href="#tracking-methods">Beyond Calculators: Physical Signs of Ovulation</a></li>
+        <li><a href="#tools-resources">Tools for Fertility and Cycle Tracking</a></li>
+        <li><a href="#conclusion">Conclusion: Empowered by Knowledge</a></li>
+      </ul>
+    </div>
+    
     <img src="https://images.pexels.com/photos/5982312/pexels-photo-5982312.jpeg" alt="A calendar with certain days circled to represent tracking a menstrual cycle" class="blog-image">
     <p>The menstrual cycle is a vital sign of health and a complex, powerful process. Understanding its rhythm can empower you, whether you're trying to conceive, avoiding pregnancy, or simply want to be more in tune with your body. This guide will break down the phases of your cycle, explain how to identify your most fertile days, and show you how to predict ovulation with confidence. Let's start by mapping out your personal cycle.</p>
-
     <div style="text-align:center; margin: 2rem 0;">
-      <a href="period-tracker.html" class="cta-btn">🌸 Track Your Cycle & Predict Ovulation</a>
+      <a href="../period-tracker.html" class="cta-btn">🌸 Track Your Cycle & Predict Ovulation</a>
     </div>
 
-    <h2>The Four Phases of the Menstrual Cycle</h2>
+    <h2 id="four-phases">The Four Phases of the Menstrual Cycle</h2>
     <p>A typical menstrual cycle lasts between 21 and 35 days, with the average being 28 days. It is governed by hormonal fluctuations and can be divided into four main phases:</p>
     <ol>
       <li><strong>Menstrual Phase (The Period):</strong> This is day 1 of your cycle. The uterine lining (endometrium) is shed, resulting in bleeding that typically lasts 3 to 7 days.</li>
@@ -68,110 +77,90 @@
       <li><strong>Luteal Phase:</strong> After ovulation, the follicle that released the egg transforms into the corpus luteum, which produces progesterone. This hormone thickens the uterine lining to prepare for a potential pregnancy. If fertilization doesn't occur, hormone levels drop, and the cycle begins again with menstruation.</li>
     </ol>
     
-    <h2>Identifying Your Fertile Window</h2>
+    <h2 id="fertile-window">Identifying Your Fertile Window</h2>
     <p>Your "fertile window" is the time in your cycle when you are most likely to get pregnant. It includes the five days leading up to ovulation and the day of ovulation itself. Sperm can survive in the female reproductive tract for up to five days, so intercourse during this window gives the highest chance of conception.</p>
     <p>Our Period & Ovulation Calculator helps you estimate this window by using two key pieces of information:</p>
     <ul>
       <li><strong>The first day of your last period:</strong> This establishes the starting point of your current cycle.</li>
       <li><strong>Your average cycle length:</strong> This allows the calculator to predict the timeline of future cycles.</li>
     </ul>
-    <p>While calculators are a fantastic starting point, you can confirm your fertile window by tracking physical signs like changes in cervical mucus and using ovulation predictor kits.</p>
 
-    <h2>Affiliate Corner: Tools for Fertility and Cycle Tracking</h2>
-    <p>Take the guesswork out of tracking your cycle with these highly-rated products from Amazon. They can provide clarity and confidence on your fertility journey. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="info-box">
+      <p><strong>💡 Pro Tip:</strong> For most women, the luteal phase (the time from ovulation to the next period) is consistently about 14 days long. It's the follicular phase that varies in length. This is why our calculator subtracts 14 days from your total cycle length to estimate your ovulation day.</p>
+    </div>
+
+    <h2 id="tracking-methods">Beyond Calculators: Physical Signs of Ovulation</h2>
+    <p>While calculators are a fantastic starting point, you can confirm your fertile window by tracking physical signs:</p>
     <ul>
-      <li><strong>Ovulation Predictor Kits (OPKs):</strong> These test strips detect the LH surge in your urine, giving you a clear, positive result 24-36 hours before you ovulate. <a href="[Your Amazon Affiliate Link for OPKs]" target="_blank" rel="sponsored" class="affiliate-link">Find popular OPK brands here.</a></li>
-      <li><strong>Basal Body Temperature (BBT) Thermometers:</strong> Tracking your BBT daily can confirm that ovulation has occurred. A <a href="[Your Amazon Affiliate Link for BBT Thermometers]" target="_blank" rel="sponsored" class="affiliate-link">sensitive BBT thermometer</a> is essential for this method.</li>
-      <li><strong>Prenatal Vitamins:</strong> If you're trying to conceive, it's crucial to start taking prenatal vitamins with folic acid even before you're pregnant. <a href="[Your Amazon Affiliate Link for Prenatal Vitamins]" target="_blank" rel="sponsored" class="affiliate-link">Explore top-rated prenatal vitamins.</a></li>
+        <li><strong>Cervical Mucus:</strong> As you approach ovulation, your cervical mucus will change from being scant and sticky to clear, slippery, and stretchy, like raw egg whites. This is the most fertile type of mucus.</li>
+        <li><strong>Basal Body Temperature (BBT):</strong> Your resting body temperature will rise slightly (about 0.5°F or 0.3°C) after ovulation has occurred and will stay elevated until your next period.</li>
+        <li><strong>Ovulation Pain (Mittelschmerz):</strong> Some women feel a slight twinge or cramp on one side of their lower abdomen when the egg is released.</li>
     </ul>
+    
+    <h2 id="tools-resources">Tools for Fertility and Cycle Tracking</h2>
+    <p>Take the guesswork out of tracking your cycle with these highly-rated products. They can provide clarity and confidence on your fertility journey. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h4>🧪 Ovulation Predictor Kits (OPKs)</h4>
+        <p>These test strips detect the LH surge in your urine, giving you a clear, positive result 24-36 hours before you ovulate, pinpointing your most fertile days.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find popular OPK brands here.</a>
+      </div>
+      <div class="method-card">
+        <h4>🌡️ Basal Body Temperature (BBT) Thermometers</h4>
+        <p>Tracking your BBT daily can confirm that ovulation has occurred. A sensitive BBT thermometer is essential for this method, as the temperature change is very slight.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find a reliable BBT thermometer.</a>
+      </div>
+      <div class="method-card">
+        <h4>💊 Prenatal Vitamins</h4>
+        <p>If you're trying to conceive, it's crucial to start taking prenatal vitamins with folic acid even before you're pregnant to support a healthy pregnancy from the very beginning.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore top-rated prenatal vitamins.</a>
+      </div>
+    </div>
 
+    <h2 id="conclusion">Conclusion: Empowered by Knowledge</h2>
+    <p>Understanding your menstrual cycle is a powerful form of self-knowledge. It allows you to anticipate your body's changes, plan for or prevent pregnancy, and identify potential health issues early. By combining a reliable tool like our ovulation calculator with an awareness of your body's own physical signs, you can gain a deep and empowering understanding of your unique rhythm.</p>
+
+    <div class="highlight-box">
+      <h3>🚀 Take Action Today</h3>
+      <p>Start your journey to better cycle awareness now:</p>
+      <ul>
+        <li><strong>Map Your Cycle:</strong> Use our <a href="../period-tracker.html" class="affiliate-link">Period & Ovulation Calculator</a> to get an instant prediction for your next cycle.</li>
+        <li><strong>Start a Journal:</strong> For the next month, make a simple daily note about how you're feeling and any physical signs you notice. This builds powerful body literacy.</li>
+        <li><strong>Check Your Calendar:</strong> Look at your predicted fertile window. Does it coincide with any important events? This knowledge can be useful for planning.</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
-
-  <!-- FAQ Section -->
-  <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <details>
-      <summary>How accurate are ovulation calculators?</summary>
-      <p>They provide a reliable estimate, especially for women with regular cycles. However, they are predictions. Factors like stress, illness, or travel can alter your cycle length and ovulation day. For maximum accuracy, combine calculator predictions with physical tracking methods.</p>
-    </details>
-    <details>
-      <summary>Can I get pregnant right after my period?</summary>
-      <p>It's less likely, but possible, especially for women with shorter cycles. If you have a 21-day cycle, your fertile window could begin as early as day 6 or 7, which might overlap with the end of your period. This is why tracking is so important.</p>
-    </details>
-    <details>
-      <summary>Should this calculator be used for contraception?</summary>
-      <p>No. The fertility awareness method requires diligent tracking of multiple signs (BBT, cervical mucus, etc.) and has a higher failure rate than other forms of birth control. Our calculator should not be used as your sole method of contraception.</p>
-    </details>
-  </section>
-
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
-
-  <!-- Floating CTA -->
-  <a href="../index.html" class="floating-cta">🔢 See All Calculators</a>
-
-  <!-- Footer -->
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="../privacy-policy.html">Privacy Policy</a> | 
     <a href="../terms-of-service.html">Terms of Service</a> |
     <a href="../affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
-
-  <!-- JSON-LD FAQ Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How accurate are ovulation calculators?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "They provide a reliable estimate, especially for women with regular cycles. However, they are predictions. Factors like stress, illness, or travel can alter your cycle length and ovulation day. For maximum accuracy, combine calculator predictions with physical tracking methods."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I get pregnant right after my period?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "It's less likely, but possible, especially for women with shorter cycles. If you have a 21-day cycle, your fertile window could begin as early as day 6 or 7, which might overlap with the end of your period. This is why tracking is so important."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Should this calculator be used for contraception?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. The fertility awareness method requires diligent tracking of multiple signs (BBT, cervical mucus, etc.) and has a higher failure rate than other forms of birth control. Our calculator should not be used as your sole method of contraception."
-        }
-      }
-    ]
-  }
-  </script>
-
+  
   <script>
-    // Dark mode toggle
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
-      if (toggle) {
-        toggle.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      if (toggle) { 
+        toggle.addEventListener("click", () => { 
+          document.body.classList.toggle("dark-mode"); 
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); 
+        }); 
+      }
+      if (localStorage.getItem("theme") === "dark") { 
+        document.body.classList.add("dark-mode"); 
+      }
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
-      }
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+      });
     });
   </script>
 </body>
