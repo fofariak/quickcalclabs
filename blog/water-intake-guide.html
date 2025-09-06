@@ -9,30 +9,32 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link {
-      color: var(--accent-blue);
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-    }
-    .dark-mode .affiliate-link {
-      color: #8ab4f8;
-    }
-    .blog-image {
-        width: 100%;
-        max-width: 600px;
-        height: auto;
-        border-radius: var(--radius-lg);
-        margin: 1.5rem auto;
-        display: block;
-        box-shadow: var(--shadow-md);
-    }
+    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; text-align: left; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .method-card h4 { margin-top: 0; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <a href="../index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -43,23 +45,30 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
+  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
 
-  <!-- Main Blog Content -->
   <section class="seo-content">
     <h1>The Ultimate Hydration Guide: Calculating Your Daily Water Intake</h1>
-    <p class="muted">Published on: September 3, 2025</p>
-    <img src="https://unsplash.com/photos/person-holding-clear-drinking-glass-PCpoG06fcUI" alt="A person pouring a glass of fresh water" class="blog-image">
-    <p>We've all heard the "drink eight glasses a day" rule, but is it the right amount for you? The truth is, your ideal water intake is highly personal and depends on several factors. Proper hydration is one of the most important things you can do for your health, affecting everything from energy levels and brain function to skin health and physical performance. This guide will explore the science of hydration and help you determine your specific daily needs.</p>
+    <p class="muted">Published on: September 6, 2025 | 11 min read</p>
     
+    <div class="toc">
+      <h3>📋 Table of Contents</h3>
+      <ul>
+        <li><a href="#why-hydration-matters">Why is Hydration So Important?</a></li>
+        <li><a href="#how-much-water">How Much Water Do You Really Need?</a></li>
+        <li><a href="#signs-of-dehydration">Signs of Dehydration</a></li>
+        <li><a href="#tips-for-hydration">Simple Tips for Drinking More Water</a></li>
+        <li><a href="#tools-resources">Top Products to Help You Stay Hydrated</a></li>
+        <li><a href="#conclusion">Conclusion: A Simple Habit for a Healthier Life</a></li>
+      </ul>
+    </div>
+    
+        <p>We've all heard the "drink eight glasses a day" rule, but is it the right amount for you? The truth is, your ideal water intake is highly personal and depends on several factors. Proper hydration is one of the most important things you can do for your health, affecting everything from energy levels and brain function to skin health and physical performance. This guide will explore the science of hydration and help you determine your specific daily needs.</p>
     <div style="text-align:center; margin: 2rem 0;">
       <a href="../water-intake-calculator.html" class="cta-btn">💧 Calculate Your Daily Water Needs!</a>
     </div>
 
-    <h2>Why is Hydration So Important?</h2>
+    <h2 id="why-hydration-matters">Why is Hydration So Important?</h2>
     <p>Your body is about 60% water, and every single system depends on it. Water is essential for:</p>
     <ul>
       <li><strong>Transporting Nutrients:</strong> It carries nutrients and oxygen to your cells.</li>
@@ -70,7 +79,7 @@
     </ul>
     <p>Even mild dehydration can impair brain function, leading to issues with concentration, alertness, and short-term memory.</p>
 
-    <h2>How Much Water Do You Really Need?</h2>
+    <h2 id="how-much-water">How Much Water Do You Really Need?</h2>
     <p>The "8x8 rule" (eight 8-ounce glasses) is a reasonable goal, but it's not based on hard science. A more personalized recommendation considers factors like your age, weight, and activity level, which our calculator uses to give you a better estimate. Other factors that increase your water needs include:</p>
     <ul>
       <li><strong>Exercise:</strong> You need to replenish the fluids lost through sweat.</li>
@@ -78,103 +87,94 @@
       <li><strong>Overall Health:</strong> Fever, vomiting, or diarrhea cause your body to lose extra fluids.</li>
       <li><strong>Pregnancy and Breastfeeding:</strong> Women in these stages need additional water to stay hydrated.</li>
     </ul>
-    
-    
-    <h2>Affiliate Corner: Top Products to Help You Stay Hydrated</h2>
-    <p>Making hydration a habit is easier with the right tools. Check out these popular and effective products from Amazon. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+
+    <h2 id="signs-of-dehydration">Signs of Dehydration</h2>
+    <p>The easiest way to check your hydration status is the color of your urine. Pale yellow, like lemonade, is a good sign you're well-hydrated. If it's dark yellow or amber, it's time to drink up. Other signs of mild to moderate dehydration include:</p>
     <ul>
-      <li><strong>High-Quality Reusable Water Bottle:</strong> Carrying a water bottle is the best reminder to drink up. The <a href="[Your Amazon Affiliate Link]" target="_blank" rel="sponsored" class="affiliate-link">Hydro Flask Wide Mouth Bottle</a> keeps water cold for hours.</li>
-      <li><strong>Water Filter Pitcher:</strong> If you're concerned about tap water quality, a <a href="[Your Amazon Affiliate Link]" target="_blank" rel="sponsored" class="affiliate-link">Brita Water Pitcher</a> can improve the taste and remove impurities.</li>
-      <li><strong>Electrolyte Powder:</strong> Perfect for rehydrating after an intense workout. <a href="[Your Amazon Affiliate Link]" target="_blank" rel="sponsored" class="affiliate-link">Liquid I.V. Hydration Multiplier</a> helps your body absorb water and key nutrients more efficiently.</li>
+        <li>Thirst</li>
+        <li>Dry mouth</li>
+        <li>Fatigue and lethargy</li>
+        <li>Headache</li>
+        <li>Dizziness</li>
     </ul>
 
+    <div class="info-box">
+        <p><strong>💡 Pro Tip:</strong> Don't wait until you're thirsty to drink. Thirst is actually an early sign that your body is already slightly dehydrated.</p>
+    </div>
+    
+    <h2 id="tips-for-hydration">Simple Tips for Drinking More Water</h2>
+    <p>Knowing you need to drink more is one thing; actually doing it is another. Here are some easy ways to boost your hydration:</p>
+    <ol>
+      <li><strong>Carry a Reusable Water Bottle:</strong> Having water with you at all times is the best reminder. Keep one at your desk, in your car, and in your bag.</li>
+      <li><strong>Set Reminders:</strong> Use your phone or a smart watch to set reminders to drink water every hour.</li>
+      <li><strong>Add Some Flavor:</strong> If you find plain water boring, add a slice of lemon, lime, cucumber, or some fresh mint to make it more appealing.</li>
+      <li><strong>Eat Your Water:</strong> Many fruits and vegetables have high water content. Watermelon, cucumber, strawberries, and celery are all over 90% water and can contribute to your daily hydration goals.</li>
+      <li><strong>Drink a Glass Before Every Meal:</strong> This is an easy way to get a few extra glasses in each day, and it can also help you feel fuller and eat less.</li>
+    </ol>
+    
+    <h2 id="tools-resources">Top Products to Help You Stay Hydrated</h2>
+    <p>Making hydration a habit is easier with the right tools. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h4>💧 High-Quality Reusable Water Bottle</h4>
+        <p>Carrying a water bottle is the best reminder to drink up. Insulated bottles keep water cold for hours, making it more refreshing.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore top-rated water bottles.</a>
+      </div>
+      <div class="method-card">
+        <h4> pitcher-logo Water Filter Pitcher</h4>
+        <p>If you're concerned about the taste or quality of your tap water, a filter pitcher can improve the taste and remove impurities, encouraging you to drink more.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find a popular water filter pitcher.</a>
+      </div>
+      <div class="method-card">
+        <h4>⚡ Electrolyte Powder</h4>
+        <p>Perfect for rehydrating after an intense workout or on a hot day. Electrolyte powders help your body absorb water and key nutrients more efficiently.</p>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out electrolyte supplements.</a>
+      </div>
+    </div>
+
+    <h2 id="conclusion">Conclusion: A Simple Habit for a Healthier Life</h2>
+    <p>Proper hydration is one of the simplest yet most powerful habits you can adopt for your overall health. By understanding your personal needs and implementing a few easy strategies, you can ensure your body has the water it needs to function at its best. Listen to your body, drink consistently, and enjoy the benefits of better energy, clearer thinking, and improved well-being.</p>
+
+    <div class="highlight-box">
+      <h3>🚀 Take Action Today</h3>
+      <ul>
+        <li><strong>Find Your Number:</strong> Use our <a href="../water-intake-calculator.html" class="affiliate-link">Water Intake Calculator</a> to get a personalized daily hydration goal.</li>
+        <li><strong>Start Your Day with Water:</strong> Make it a habit to drink a full glass of water first thing in the morning to rehydrate after sleep.</li>
+        <li><strong>Prepare for Tomorrow:</strong> Fill up your water bottle tonight and leave it where you'll see it in the morning, ready to go.</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
-
-  <!-- FAQ Section -->
-  <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <details>
-      <summary>Do other drinks like coffee, tea, or juice count towards my water intake?</summary>
-      <p>Yes, they do. While water is the best source of hydration, all fluids contribute to your daily total. However, be mindful of the added sugars and caffeine in other beverages. Caffeinated drinks can have a mild diuretic effect, but the fluid they provide typically outweighs the amount lost.</p>
-    </details>
-    <details>
-      <summary>What are the signs of dehydration?</summary>
-      <p>Early signs include thirst, dark yellow urine, dry mouth, fatigue, and headache. The easiest way to monitor your hydration is by checking the color of your urine—pale yellow or clear usually means you're well-hydrated.</p>
-    </details>
-    <details>
-      <summary>Is it possible to drink too much water?</summary>
-      <p>While rare, it is possible. A condition called hyponatremia can occur when you drink an excessive amount of water in a short time, diluting the sodium levels in your blood. This is primarily a risk for endurance athletes. For the average person, it's very difficult to drink too much water.</p>
-    </details>
-  </section>
-
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
-
-  <!-- Floating CTA -->
-  <a href="../index.html" class="floating-cta">🔢 See All Calculators</a>
-
-  <!-- Footer -->
+  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
   <footer>
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="../privacy-policy.html">Privacy Policy</a> | 
     <a href="../terms-of-service.html">Terms of Service</a> |
     <a href="../affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
-
-  <!-- JSON-LD FAQ Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Do other drinks like coffee, tea, or juice count towards my water intake?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, they do. While water is the best source of hydration, all fluids contribute to your daily total. However, be mindful of the added sugars and caffeine in other beverages. Caffeinated drinks can have a mild diuretic effect, but the fluid they provide typically outweighs the amount lost."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What are the signs of dehydration?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Early signs include thirst, dark yellow urine, dry mouth, fatigue, and headache. The easiest way to monitor your hydration is by checking the color of your urine—pale yellow or clear usually means you're well-hydrated."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is it possible to drink too much water?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "While rare, it is possible. A condition called hyponatremia can occur when you drink an excessive amount of water in a short time, diluting the sodium levels in your blood. This is primarily a risk for endurance athletes. For the average person, it's very difficult to drink too much water."
-        }
-      }
-    ]
-  }
-  </script>
-
+  
   <script>
-    // Dark mode toggle
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
-      if (toggle) {
-        toggle.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      if (toggle) { 
+        toggle.addEventListener("click", () => { 
+          document.body.classList.toggle("dark-mode"); 
+          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light"); 
+        }); 
+      }
+      if (localStorage.getItem("theme") === "dark") { 
+        document.body.classList.add("dark-mode"); 
+      }
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
-      }
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+      });
     });
   </script>
 </body>
