@@ -8,170 +8,14 @@
   
   <link rel="canonical" href="https://quickcalclabs.com/">
 
-  <!-- Google Fonts for a cleaner look -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Re-linking your original stylesheet to restore colors -->
+  <link rel="stylesheet" href="css/style.css">
   
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
   <!-- AdSense Script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
-
-  <!-- === EMBEDDED CSS FOR STYLING === -->
-  <style>
-    :root {
-      --primary-color: #3B82F6; /* Blue 500 */
-      --primary-hover-color: #2563EB; /* Blue 600 */
-      --background-color: #F9FAFB; /* Gray 50 */
-      --text-color: #1F2937; /* Gray 800 */
-      --card-background: #FFFFFF;
-      --border-color: #E5E7EB; /* Gray 200 */
-      --section-title-color: #111827; /* Gray 900 */
-      --badge-bg: #DBEAFE;
-      --badge-text: #1E40AF;
-    }
-
-    .dark-mode {
-      --primary-color: #60A5FA; /* Blue 400 */
-      --primary-hover-color: #3B82F6; /* Blue 500 */
-      --background-color: #111827; /* Gray 900 */
-      --text-color: #D1D5DB; /* Gray 300 */
-      --card-background: #1F2937; /* Gray 800 */
-      --border-color: #374151; /* Gray 700 */
-      --section-title-color: #F9FAFB; /* Gray 50 */
-      --badge-bg: #1E3A8A;
-      --badge-text: #BFDBFE;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      margin: 0;
-      line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    main { padding-top: 80px; }
-    section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-      height: 70px;
-      background-color: var(--card-background);
-      border-bottom: 1px solid var(--border-color);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      transition: background-color 0.3s, border-color 0.3s;
-    }
-
-    .logo { font-weight: 700; font-size: 1.5rem; color: var(--section-title-color); text-decoration: none; }
-    nav a { margin: 0 15px; text-decoration: none; color: var(--text-color); font-weight: 600; }
-    nav a:hover { color: var(--primary-color); }
-    #darkModeToggle { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-
-    .hero { text-align: center; padding: 60px 20px; }
-    .hero h1 { font-size: 2.5rem; color: var(--section-title-color); margin-bottom: 1rem; }
-    .hero p { font-size: 1.125rem; max-width: 600px; margin: 0 auto 2rem; }
-    .cta-btn {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: background-color 0.2s;
-    }
-    .cta-btn:hover { background-color: var(--primary-hover-color); }
-
-    .section-title { text-align: center; font-size: 2rem; color: var(--section-title-color); margin-bottom: 2rem; }
-    
-    .features-grid, .calculator-grid, .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .why-choose-us h3 { color: var(--primary-color); }
-    .feature-item { background: var(--card-background); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; }
-    
-    .calculator-section h3 {
-      font-size: 1.5rem;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--primary-color);
-      display: inline-block;
-    }
-    .calculator-card, .blog-card {
-      background: var(--card-background);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 24px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-    }
-    .calculator-card:hover, .blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    .calculator-card h3, .blog-card h3 { margin-top: 0; font-size: 1.25rem; color: var(--section-title-color); }
-    .card-btn, .read-more {
-      display: inline-block;
-      margin-top: 1rem;
-      background: var(--primary-color);
-      color: white;
-      padding: 8px 16px;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: background-color 0.2s;
-    }
-    .card-btn:hover, .read-more:hover { background: var(--primary-hover-color); }
-    .badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background-color: var(--badge-bg);
-      color: var(--badge-text);
-      padding: 4px 8px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .blog-card a { text-decoration: none; color: inherit; }
-    .blog-card img { width: 100%; border-radius: 8px; margin-bottom: 1rem; }
-
-    .about-snippet, .faq-section { background-color: var(--card-background); border-radius: 12px; padding: 40px; }
-    
-    .faq-section details {
-      margin-bottom: 1rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 1rem;
-    }
-    .faq-section summary { font-weight: 600; cursor: pointer; color: var(--section-title-color); list-style: none; }
-    .faq-section summary::-webkit-details-marker { display: none; }
-    .faq-section summary::after { content: ' +'; float: right; }
-    .faq-section details[open] summary::after { content: ' -'; }
-
-    footer {
-      background-color: #1F2937; /* Darker for both modes */
-      color: #D1D5DB;
-      text-align: center;
-      padding: 40px 20px;
-      margin-top: 40px;
-    }
-    footer a { color: #9CA3AF; text-decoration: none; }
-    footer a:hover { color: var(--primary-color); }
-    .disclaimer { max-width: 800px; margin: 0 auto 2rem; font-size: 0.875rem; color: #9CA3AF; }
-    .footer-links { margin-bottom: 1rem; }
-  </style>
 
   <!-- === JSON-LD SCHEMA (Unchanged) === -->
   <script type="application/ld+json">
@@ -216,7 +60,6 @@
   </script>
 </head>
 <body>
-  <!-- Header remains similar but ensure it's sticky for better UX -->
   <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -229,7 +72,6 @@
   </header>
 
   <main>
-    <!-- Hero Section with a more benefit-oriented headline -->
     <section class="hero">
       <h1>Your Free Toolkit for Health & Wellness Calculations</h1>
       <p>Instant, accurate, and private online calculators to help you track your fitness, nutrition, and life milestones. Start your wellness journey with data you can trust.</p>
@@ -237,34 +79,31 @@
     </section>
 
     <!-- Ad Placeholder 1 -->
-    <div class="ad-container-top" style="text-align: center; margin: 20px 0;">
+    <div class="ad-container">
         <!-- 728x90 Banner Ad Placeholder -->
     </div>
 
-    <!-- NEW SECTION: Builds trust and demonstrates E-E-A-T (Expertise, Authoritativeness, Trustworthiness) -->
     <section class="why-choose-us">
         <h2 class="section-title">Why Trust QuickCalcLabs?</h2>
-        <div class="features-grid">
-            <div class="feature-item">
+        <div class="stats">
+            <div class="stat">
                 <h3>🔒 Privacy First</h3>
                 <p>We never save or share your personal health data. Your calculations are anonymous and secure.</p>
             </div>
-            <div class="feature-item">
+            <div class="stat">
                 <h3>✅ Scientifically Based</h3>
                 <p>Our tools use established formulas and guidelines to provide you with accurate estimations.</p>
             </div>
-            <div class="feature-item">
-                <h3>📱 Easy to Use on Any Device</h3>
+            <div class="stat">
+                <h3>📱 Easy to Use</h3>
                 <p>A clean, fast, and mobile-friendly design ensures you get your results without any hassle.</p>
             </div>
         </div>
     </section>
 
-    <!-- RESTRUCTURED SECTION: Calculators are now grouped by category for better UX and SEO -->
     <section id="calculators" class="calculator-section">
       <h2 class="section-title">Our Suite of Free Calculators</h2>
       
-      <h3>General Health & Fitness</h3>
       <div class="calculator-grid">
         <div class="calculator-card"><span class="badge">Most Popular</span><h3>⚖️ BMI Calculator</h3><p>Check your Body Mass Index to understand your weight category.</p><a href="bmi-calculator.html" class="card-btn">Calculate BMI</a></div>
         <div class="calculator-card"><h3>🔥 Calorie Calculator</h3><p>Estimate daily calorie needs for your weight goals (loss, maintenance, or gain).</p><a href="calorie-calculator.html" class="card-btn">Calculate Calories</a></div>
@@ -273,62 +112,50 @@
         <div class="calculator-card"><h3>🥗 Macro Calculator</h3><p>Determine your ideal daily intake of protein, carbs, and fats.</p><a href="macro-calculator.html" class="card-btn">Calculate Macros</a></div>
         <div class="calculator-card"><h3>📈 RMR Calculator</h3><p>Discover your Resting Metabolic Rate to understand your base calorie burn.</p><a href="resting-metabolic-rate-calculator.html" class="card-btn">Calculate RMR</a></div>
         <div class="calculator-card"><span class="badge">Featured</span><h3>📅 Age Calculator</h3><p>Calculate your precise age in years, months, days, and even minutes.</p><a href="age-calculator.html" class="card-btn">Calculate Age</a></div>
-      </div>
-
-      <h3>Women's Health & Pregnancy</h3>
-      <div class="calculator-grid">
         <div class="calculator-card"><span class="badge">Trending</span><h3>🌸 Period & Ovulation Calculator</h3><p>Track your menstrual cycle and predict your most fertile days.</p><a href="period-tracker.html" class="card-btn">Track Your Cycle</a></div>
         <div class="calculator-card"><h3>🤰 Pregnancy Due Date Calculator</h3><p>Estimate your baby's due date based on your last menstrual period.</p><a href="pregnancy-calculator.html" class="card-btn">Find Due Date</a></div>
         <div class="calculator-card"><h3>⚖️ Pregnancy Weight Gain Calculator</h3><p>Track if your weight gain is within the recommended range for a healthy pregnancy.</p><a href="pregnancy-weight-gain-calculator.html" class="card-btn">Track Weight Gain</a></div>
-      </div>
-
-      <h3>Baby & Toddler Health</h3>
-      <div class="calculator-grid">
         <div class="calculator-card"><h3>👶 Baby Growth Percentile Calculator</h3><p>Compare your baby's growth (weight, height) with WHO standards.</p><a href="baby-growth-percentile-calculator.html" class="card-btn">Track Growth</a></div>
         <div class="calculator-card"><h3>🍼 Baby Feeding Schedule Calculator</h3><p>Get a sample feeding schedule based on your baby's age and needs.</p><a href="baby-feeding-schedule-calculator.html" class="card-btn">View Schedule</a></div>
       </div>
     </section>
 
     <!-- Ad Placeholder 2 -->
-    <div class="ad-container-middle" style="text-align: center; margin: 20px 0;">
+    <div class="ad-container">
         <!-- 300x250 Mid Content Ad Placeholder -->
     </div>
 
-    <!-- NEW SECTION: Fights "thin content" and builds topical authority for SEO -->
+    <!-- Blog Section with real images -->
     <section class="blog-preview">
         <h2 class="section-title">Learn More From Our Blog</h2>
-        <p>Go beyond the numbers with our articles on health, wellness, and nutrition.</p>
-        <div class="blog-grid">
-            <!-- IMPORTANT: You must create these blog posts and add real images -->
-            <article class="blog-card">
+        <p style="text-align:center; max-width: 600px; margin: 0 auto 2rem;">Go beyond the numbers with our articles on health, wellness, and nutrition.</p>
+        <div class="calculator-grid">
+            <article class="calculator-card">
                 <a href="blog/understanding-bmi.html">
-                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Understanding+BMI" alt="A person standing on a weight scale.">
+                    <img src="https://images.unsplash.com/photo-1579034192612-2e6ac2f4f56f?q=80&w=1200&auto=format&fit=crop" alt="A person standing on a weight scale." style="width:100%; border-radius: 12px; margin-bottom: 1rem;">
                     <h3>Is BMI an Accurate Measure of Health?</h3>
                     <p>We dive into the pros and cons of the Body Mass Index and explore other metrics you should consider for a complete health picture.</p>
-                    <span class="read-more">Read More →</span>
                 </a>
             </article>
-            <article class="blog-card">
+            <article class="calculator-card">
                 <a href="blog/hydration-importance.html">
-                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Hydration+Benefits" alt="A glass of water with a lemon slice.">
+                    <img src="https://images.unsplash.com/photo-1563202506-456615b5e11a?q=80&w=1200&auto=format&fit=crop" alt="A glass of water with a lemon slice." style="width:100%; border-radius: 12px; margin-bottom: 1rem;">
                     <h3>5 Surprising Benefits of Staying Hydrated</h3>
                     <p>Proper hydration is about more than just quenching thirst. Learn how it impacts your energy levels, skin health, and cognitive function.</p>
-                    <span class="read-more">Read More →</span>
                 </a>
             </article>
-            <article class="blog-card">
+            <article class="calculator-card">
                 <a href="blog/macro-counting-guide.html">
-                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Counting+Macros" alt="A balanced meal with chicken, rice, and broccoli.">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1200&auto=format&fit=crop" alt="A balanced meal with chicken, rice, and broccoli." style="width:100%; border-radius: 12px; margin-bottom: 1rem;">
                     <h3>A Beginner's Guide to Counting Macros</h3>
                     <p>Confused by protein, carbs, and fats? Our simple guide breaks down how to use macronutrients to achieve your fitness goals.</p>
-                    <span class="read-more">Read More →</span>
                 </a>
             </article>
         </div>
     </section>
 
-    <!-- NEW VISIBLE FAQ SECTION -->
-    <section id="faq" class="faq-section">
+    <!-- Visible FAQ Section -->
+    <section id="faq" class="seo-content">
       <h2 class="section-title">Frequently Asked Questions</h2>
       <details>
         <summary>Are the calculators on QuickCalcLabs truly free?</summary>
@@ -348,16 +175,14 @@
       </details>
     </section>
 
-    <!-- NEW SECTION: Snippet to improve trust and link to your About page. -->
-    <section class="about-snippet">
+    <section class="about-snippet seo-content">
         <h2>About QuickCalcLabs</h2>
         <p>QuickCalcLabs was founded on the principle that understanding your health data should be simple and accessible. We create reliable, free, and privacy-focused online calculators to empower you on your wellness journey. Our tools are designed for everyone—from fitness enthusiasts to expecting parents—who need quick and accurate information. <a href="about.html">Learn more about our mission...</a></p>
     </section>
   </main>
 
-  <!-- IMPROVED Footer with critical disclaimer -->
   <footer>
-    <div class="disclaimer">
+    <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
     </div>
     <div class="footer-links">
@@ -370,8 +195,8 @@
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
   </footer>
 
-  <!-- Improved Dark Mode Script: Now saves user preference -->
   <script>
+    // Dark Mode Toggle Script
     const darkModeToggle = document.getElementById("darkModeToggle");
     const body = document.body;
 
