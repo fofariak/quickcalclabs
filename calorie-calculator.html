@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Calorie Calculator (TDEE) | QuickCalcLabs</title>
+  <title>Calorie Calculator: TDEE for Weight Loss & Gain | QuickCalcLabs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Modern calorie calculator that estimates daily calories (TDEE) with the Mifflin—St Jeor equation. Switch between Imperial and Metric, get cutting/maintenance/bulking targets, and see your position on an interactive gauge." />
+  <meta name="description" content="Our free Calorie Calculator estimates your daily calorie needs (TDEE) for weight loss, maintenance, or muscle gain using the Mifflin-St Jeor formula. Learn about calories, macros, and how to reach your fitness goals." />
+  <meta name="keywords" content="calorie calculator, tdee calculator, calories for weight loss, maintenance calories, calorie needs, daily calorie intake, mifflin st jeor, bulking calories, cutting calories">
   <link rel="canonical" href="https://quickcalclabs.com/calorie-calculator.html" />
-  <link rel="icon" href="images/favicon.ico" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/style.css" /> 
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Calorie Calculator (TDEE) • QuickCalcLabs">
+  <meta property="og:title" content="Calorie Calculator (TDEE) | QuickCalcLabs">
   <meta property="og:description" content="Estimate daily calories for cutting, maintenance, or bulking. Imperial & Metric, instant targets, interactive gauge, FAQs and more.">
   <meta property="og:url" content="https://quickcalclabs.com/calorie-calculator.html">
   <meta property="og:image" content="https://quickcalclabs.com/images/og-calorie-calculator.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Calorie Calculator (TDEE) • QuickCalcLabs">
+  <meta name="twitter:title" content="Calorie Calculator (TDEE) | QuickCalcLabs">
   <meta name="twitter:description" content="Estimate daily calories for cutting, maintenance, or bulking with a clean, modern calculator.">
   <meta name="twitter:image" content="https://quickcalclabs.com/images/og-calorie-calculator.png">
 
@@ -24,6 +25,7 @@
      crossorigin="anonymous"></script>
 
   <style>
+    /* NOTE: I am preserving your original styling as requested. */
     /* Modern styling inspired by period tracker */
     .calc-wrapper {
       max-width: 800px;
@@ -273,39 +275,70 @@
       color: var(--accent, #ff6b81);
     }
 
+    .seo-content {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+     .seo-content h2, .seo-content h3 {
+      color: var(--text, #333);
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .seo-content h3 {
+      font-size: 1.3rem;
+      color: var(--accent, #ff6b81);
+    }
+
+    .seo-content ul, .seo-content ol {
+      list-style-position: inside;
+      padding-left: 10px;
+    }
+
+    .seo-content ul li, .seo-content ol li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .disclaimer-box {
+        padding: 15px;
+        margin: 20px 0;
+        border-left: 4px solid #f6e05e;
+        background-color: #fffbe9;
+        border-radius: 4px;
+    }
+
     /* FAQ styling */
+    .faq-section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
     .faq {
       margin-bottom: 10px;
       border-radius: 8px;
       background: var(--card-bg, #fff);
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
     }
 
-    .faq-question {
-      width: 100%;
-      margin: 0;
-      padding: 12px;
-      background: var(--accent, #ff6b81);
-      color: #fff;
-      cursor: pointer;
-      font-size: 16px;
-      border: none;
-      text-align: left;
-      font-weight: 600;
+    details {
+        padding: 15px;
     }
 
-    .faq-answer {
-      margin: 0;
-      padding: 12px;
-      display: none;
-      font-size: 14px;
-      line-height: 1.6;
-      background: var(--card-bg, #fff);
-    }
-
-    .faq-item.active .faq-answer {
-      display: block;
+    summary {
+        font-weight: 600;
+        cursor: pointer;
+        outline: none;
     }
 
     /* Responsive */
@@ -347,7 +380,7 @@
   <!-- Hero Calculator -->
   <section class="calc-wrapper">
     <h1>🔥 Calorie Calculator (TDEE)</h1>
-    <p class="subtitle">Estimate your daily calories for weight maintenance, fat loss, and muscle gain using scientifically backed formulas. Supports both Metric and Imperial units.</p>
+    <p class="subtitle">Estimate your daily calories for weight maintenance, fat loss, and muscle gain using a scientifically backed formula. Supports both Metric and Imperial units.</p>
 
     <!-- Unit Toggle -->
     <div class="unit-toggle">
@@ -376,11 +409,11 @@
 
       <label>🏃 Activity Level:</label>
       <select id="activity">
-        <option value="1.2">Sedentary (desk job, no exercise)</option>
-        <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
-        <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
-        <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
-        <option value="1.9">Extra Active (very hard exercise, physical job)</option>
+        <option value="1.2">Sedentary (desk job, little to no exercise)</option>
+        <option value="1.375">Lightly Active (light exercise/sports 1-3 days/week)</option>
+        <option value="1.55">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+        <option value="1.725">Very Active (hard exercise/sports 6-7 days a week)</option>
+        <option value="1.9">Extra Active (very hard exercise/sports & a physical job)</option>
       </select>
 
       <button type="submit" class="btn-primary">Calculate My Calories</button>
@@ -435,9 +468,7 @@
 
       <div class="fun-facts">
         <h3>🎉 Fun Facts About Calories</h3>
-        <div class="fact-item">🔥 Running burns about 100 calories per mile.</div>
-        <div class="fact-item">🥑 Avocados are nutrient-dense but calorie-rich.</div>
-        <div class="fact-item">⚡ Your brain uses ~20% of your daily calories!</div>
+        <div id="fact-item" class="fact-item">⚡ Your brain uses ~20% of your daily calories!</div>
       </div>
     </div>
   </section>
@@ -447,17 +478,48 @@
     <div class="ad-placeholder">300x250 Mid-Content Ad</div>
   </div>
 
-  <!-- SEO Content -->
+  <!-- NEW AND IMPROVED SEO Content Section -->
   <section class="seo-content">
-    <h2>✨ Benefits of Using Our Calorie Calculator</h2>
-    <ul>
-      <li>📊 Get precise daily calorie targets</li>
-      <li>🥗 Plan cutting, maintenance, or bulking easily</li>
-      <li>⚡ Switch between Imperial and Metric instantly</li>
-      <li>📱 Works perfectly on mobile & desktop</li>
-    </ul>
+    <article>
+        <h2>How to Use the Calorie Calculator</h2>
+        <ol>
+            <li><strong>Select Units:</strong> Start by choosing 'Imperial' (lbs, ft, in) or 'Metric' (kg, cm).</li>
+            <li><strong>Enter Personal Details:</strong> Input your age, gender, weight, and height.</li>
+            <li><strong>Choose Activity Level:</strong> Select the option that best describes your weekly physical activity. Be honest for the most accurate results!</li>
+            <li><strong>Calculate:</strong> Click the "Calculate My Calories" button to see your results.</li>
+        </ol>
 
-    <h3>🔗 Explore More Tools</h3>
+        <h2>What are Calories and TDEE?</h2>
+        <p>A calorie is a unit of energy. In nutrition, calories refer to the energy people get from the food and drink they consume, as well as the energy they use in physical activity. Calories are essential for human health; the key is consuming the right amount.</p>
+        <p>Your <strong>Total Daily Energy Expenditure (TDEE)</strong> is the total number of calories your body burns in a 24-hour period. It's composed of three main components:</p>
+        <ul>
+            <li><strong>Basal Metabolic Rate (BMR):</strong> The energy your body uses at rest for basic functions like breathing, circulation, and cell production. This is the largest component of your TDEE.</li>
+            <li><strong>Thermic Effect of Food (TEF):</strong> The calories burned during the digestion and processing of food.</li>
+            <li><strong>Physical Activity:</strong> The energy used during exercise and daily movements (from walking to intense workouts).</li>
+        </ul>
+        
+        <h2>Understanding Your Calorie Goals</h2>
+        <p>Our calculator provides three main targets based on your TDEE:</p>
+        <ul>
+          <li><b>⚖️ Maintenance Calories:</b> This is your TDEE. Eating this number of calories per day will help you maintain your current weight.</li>
+          <li><b>🔥 Cutting (Weight Loss):</b> To lose weight, you need to be in a calorie deficit, meaning you consume fewer calories than your TDEE. Our calculator suggests a moderate deficit (typically 500 calories less than maintenance) for sustainable fat loss of about 1 lb per week.</li>
+          <li><b>💪 Bulking (Weight Gain):</b> To gain weight (ideally muscle), you need to be in a calorie surplus. Our calculator suggests a modest surplus (typically 500 calories more than maintenance) to promote lean muscle gain while minimizing fat gain.</li>
+        </ul>
+
+        <h2>The Science Behind the Calculation</h2>
+        <p>This calculator uses the <strong>Mifflin-St Jeor equation</strong> to estimate your Basal Metabolic Rate (BMR). Published in 1990, it is considered one of the most accurate BMR formulas. It is more reliable than the older Harris-Benedict equation. The formula is:</p>
+        <ul>
+            <li><strong>For Men:</strong> BMR = 10 * weight (kg) + 6.25 * height (cm) - 5 * age (y) + 5</li>
+            <li><strong>For Women:</strong> BMR = 10 * weight (kg) + 6.25 * height (cm) - 5 * age (y) - 161</li>
+        </ul>
+        <p>Your BMR is then multiplied by an activity factor to determine your TDEE (maintenance calories).</p>
+        
+        <div class="disclaimer-box">
+            <strong>Disclaimer:</strong> This tool provides an estimate of your calorie needs. Individual needs may vary. This information is not intended to be a substitute for professional medical advice. Always consult a healthcare provider or registered dietitian for personalized advice.
+        </div>
+    </article>
+
+    <h3>🔗 Explore More Health Tools</h3>
     <div class="card-grid">
       <div class="card"><a href="body-fat-calculator.html">💪 Body Fat Calculator</a></div>
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
@@ -468,7 +530,7 @@
     <h3>📝 Related Blogs</h3>
     <div class="card-grid">
       <div class="card"><a href="blog/how-many-calories-do-you-need.html">🔥 How Many Calories Do You Really Need?</a></div>
-      <div class="card"><a href="calorie-calculation-guide.html">⚡ Understanding TDEE</a></div>
+      <div class="card"><a href="calorie-calculation-guide.html">⚡ Understanding TDEE & Energy Balance</a></div>
     </div>
   </section>
 
@@ -476,22 +538,28 @@
   <section class="faq-section">
     <h2>❓ Frequently Asked Questions</h2>
     <div class="faq">
-      <div class="faq-item">
-        <button class="faq-question">How accurate is this calculator?</button>
-        <div class="faq-answer">It uses the Mifflin—St Jeor equation, one of the most reliable TDEE formulas.</div>
-      </div>
+        <details>
+            <summary>How accurate is this calorie calculator?</summary>
+            <p>Our calculator uses the Mifflin-St Jeor equation, which is widely considered by experts to be one of the most accurate methods for estimating Basal Metabolic Rate (BMR). However, it's still an estimate. Individual metabolism can vary, so it's best to use this as a starting point and adjust based on your results.</p>
+        </details>
     </div>
     <div class="faq">
-      <div class="faq-item">
-        <button class="faq-question">Does it work for both men and women?</button>
-        <div class="faq-answer">Yes, just select your gender to get tailored results.</div>
-      </div>
+        <details>
+            <summary>Why do I need to enter my activity level?</summary>
+            <p>Your activity level is a crucial factor in determining your Total Daily Energy Expenditure (TDEE). Your BMR is the calories you burn at rest, but any movement—from walking to intense exercise—burns additional calories. The activity multiplier helps to account for this, providing a more realistic daily calorie target.</p>
+        </details>
     </div>
     <div class="faq">
-      <div class="faq-item">
-        <button class="faq-question">Can I use it for weight loss?</button>
-        <div class="faq-answer">Absolutely! Use the "cutting" value to create a calorie deficit.</div>
-      </div>
+        <details>
+            <summary>How fast can I expect to lose weight on a cutting diet?</summary>
+            <p>A safe and sustainable rate of weight loss is generally considered to be 1-2 pounds (about 0.5-1 kg) per week. This typically requires a daily calorie deficit of 500-1000 calories. Losing weight faster than this often leads to muscle loss and is harder to maintain long-term.</p>
+        </details>
+    </div>
+    <div class="faq">
+        <details>
+            <summary>Should I eat the same number of calories on rest days?</summary>
+            <p>For simplicity and consistency, most people eat the same number of calories each day. However, some advanced individuals practice "calorie cycling," where they eat more calories on training days and fewer on rest days. For most people, maintaining a consistent daily average is effective and easier to manage.</p>
+        </details>
     </div>
   </section>
 
@@ -505,6 +573,10 @@
 
   <!-- Footer -->
   <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+    </div>
+    <div class="footer-links">
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy-policy.html">Privacy Policy</a> | 
     <a href="terms-of-service.html">Terms of Service</a> |
@@ -519,18 +591,23 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How accurate is this calculator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It uses the Mifflin—St Jeor equation, one of the most reliable TDEE formulas." }
+        "name": "How accurate is this calorie calculator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Our calculator uses the Mifflin-St Jeor equation, which is widely considered by experts to be one of the most accurate methods for estimating Basal Metabolic Rate (BMR). However, it's still an estimate. Individual metabolism can vary, so it's best to use this as a starting point and adjust based on your results." }
       },
       {
         "@type": "Question",
-        "name": "Does it work for both men and women?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, just select your gender to get tailored results." }
+        "name": "Why do I need to enter my activity level?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your activity level is a crucial factor in determining your Total Daily Energy Expenditure (TDEE). Your BMR is the calories you burn at rest, but any movement—from walking to intense exercise—burns additional calories. The activity multiplier helps to account for this, providing a more realistic daily calorie target." }
       },
       {
         "@type": "Question",
-        "name": "Can I use it for weight loss?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Absolutely! Use the \"cutting\" value to create a calorie deficit." }
+        "name": "How fast can I expect to lose weight on a cutting diet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A safe and sustainable rate of weight loss is generally considered to be 1-2 pounds (about 0.5-1 kg) per week. This typically requires a daily calorie deficit of 500-1000 calories. Losing weight faster than this often leads to muscle loss and is harder to maintain long-term." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I eat the same number of calories on rest days?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For simplicity and consistency, most people eat the same number of calories each day. However, some advanced individuals practice \"calorie cycling,\" where they eat more calories on training days and fewer on rest days. For most people, maintaining a consistent daily average is effective and easier to manage." }
       }
     ]
   }
@@ -576,6 +653,11 @@
       const activity = parseFloat(document.getElementById('activity').value);
       let weight, heightCm;
 
+      if (!age || age < 10) {
+        alert("Please enter a valid age.");
+        return;
+      }
+
       if (isMetric) {
         weight = parseFloat(document.getElementById('weight').value);
         heightCm = parseFloat(document.getElementById('cm').value);
@@ -584,6 +666,11 @@
         const feet = parseFloat(document.getElementById('feet').value) || 0;
         const inches = parseFloat(document.getElementById('inches').value) || 0;
         heightCm = ((feet * 12) + inches) * 2.54; // Convert to cm
+      }
+
+      if (!weight || !heightCm || weight <= 0 || heightCm <=0) {
+        alert("Please enter valid weight and height.");
+        return;
       }
 
       // Mifflin-St Jeor equation
@@ -608,10 +695,22 @@
       document.getElementById('bulkingCals').textContent = bulking + ' cals';
 
       // Update progress bars
-      const maxVal = bulking;
+      const maxVal = bulking + 100; // Add padding to max val
       document.getElementById('cuttingBar').style.width = (cutting / maxVal * 100) + '%';
       document.getElementById('maintainBar').style.width = (maintain / maxVal * 100) + '%';
-      document.getElementById('bulkingBar').style.width = '100%';
+      document.getElementById('bulkingBar').style.width = (bulking / maxVal * 100) + '%';
+
+      // Update fun fact dynamically
+      const facts = [
+        "🔥 Running a marathon burns about 2,600 calories.",
+        "🥑 Avocados are calorie-dense, with one containing over 200 calories.",
+        "🧠 Your brain is a calorie furnace, using about 20% of your daily intake!",
+        "💪 Gaining 1 lb of muscle requires a surplus of about 2,500-3,500 calories.",
+        "💧 Drinking cold water can slightly boost your metabolism as your body warms it up.",
+        "🌶️ Spicy foods containing capsaicin can temporarily increase calorie burning."
+      ];
+      const randomFact = facts[Math.floor(Math.random() * facts.length)];
+      document.getElementById('fact-item').textContent = randomFact;
 
       // Show results with animation
       results.classList.remove('hidden');
@@ -631,13 +730,6 @@
       if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-mode");
       }
-
-      // FAQ accordion
-      document.querySelectorAll(".faq-question").forEach(faqButton => {
-        faqButton.addEventListener("click", () => {
-          faqButton.parentElement.parentElement.querySelector('.faq-item').classList.toggle("active");
-        });
-      });
     });
   </script>
 </body>
