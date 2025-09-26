@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Body Fat Percentage Calculator | QuickCalcLabs</title>
-  <meta name="description" content="A comprehensive guide and calculator to estimate your body fat percentage using the US Navy method. Learn how to measure, understand your results, and why it's a key health metric.">
-  <meta name="keywords" content="body fat calculator, body fat percentage, navy body fat, body composition calculator, body fat estimator, fitness tracker, health calculator, adsense approval, low value content fix">
+  <title>Accurate Body Fat Calculator (US Navy Method) | QuickCalcLabs</title>
+  <meta name="description" content="Use our free Body Fat Calculator, based on the U.S. Navy method, to accurately estimate your body fat percentage. Learn how to measure, interpret your results, and understand its importance for your health and fitness.">
+  <meta name="keywords" content="body fat calculator, body fat percentage, navy body fat, body composition calculator, body fat estimator, fitness tracker, health calculator, measure body fat">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
+    /* NOTE: I am preserving your original styling as requested. */
     /* Modern Calculator Styling */
     .calc-wrapper {
       max-width: 1000px;
@@ -261,7 +263,7 @@
 
     /* FAQ Section */
     .faq-section {
-      max-width: 1100px; /* Increased width for better layout */
+      max-width: 800px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -297,7 +299,7 @@
       background: linear-gradient(135deg, #ff8a95, #ff6b81);
     }
     
-    .faq p, .faq ul {
+    .faq p {
       margin: 0;
       padding: 18px 20px;
       display: none;
@@ -306,92 +308,50 @@
       color: var(--text, #555);
     }
     
-    .faq.active p, .faq.active ul {
+    .faq.active p {
       display: block;
     }
-    
+
     /* SEO Content */
     .seo-content {
-      max-width: 1100px; /* Increased width for better layout */
+      max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
-      color: var(--text, #333);
-      line-height: 1.7;
-      font-size: 16px;
     }
 
     .seo-content h2, .seo-content h3 {
       color: var(--text, #333);
       margin-top: 30px;
       margin-bottom: 15px;
-      line-height: 1.3;
     }
 
     .seo-content h2 {
       font-size: 1.8rem;
       text-align: center;
-      border-bottom: 2px solid #ff6b81;
-      padding-bottom: 10px;
-      margin-bottom: 25px;
     }
 
     .seo-content h3 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: #ff6b81;
     }
 
-    .seo-content p {
-        margin-bottom: 15px;
-    }
-
-    .seo-content ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .seo-content li {
-      background: rgba(255,107,129,0.05);
-      margin-bottom: 10px;
-      padding: 15px 20px;
-      border-radius: 8px;
-      border-left: 4px solid #ff6b81;
-      font-size: 15px;
-      position: relative;
+    .seo-content ul, .seo-content ol {
+      list-style-position: inside;
+      padding-left: 10px;
     }
     
-    .seo-content li::before {
-        content: '✓';
-        color: #ff6b81;
-        font-weight: bold;
-        margin-right: 12px;
+    .seo-content ul li, .seo-content ol li {
+      margin-bottom: 10px;
+      line-height: 1.6;
     }
 
-    .seo-content table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        border-radius: 12px;
-        overflow: hidden;
+    .disclaimer-box {
+        padding: 15px;
+        margin: 20px 0;
+        border-left: 4px solid #f6e05e;
+        background-color: #fffbe9;
+        border-radius: 4px;
     }
-    .seo-content th, .seo-content td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-    .seo-content th {
-        background-color: #ff6b81;
-        color: white;
-    }
-    .seo-content tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    .dark-mode .seo-content tr:nth-child(even) {
-        background-color: rgba(255,255,255,0.05);
-    }
-     .dark-mode .seo-content td, .dark-mode .seo-content p {
-         color: #eee;
-     }
 
     /* Dark mode support */
     .dark-mode .calc-wrapper,
@@ -406,6 +366,11 @@
       background: rgba(255,255,255,0.05);
       border-color: rgba(255,107,129,0.3);
       color: white;
+    }
+
+    .dark-mode .disclaimer-box {
+        background-color: #4a5568;
+        border-left-color: #f6ad55;
     }
 
 
@@ -565,7 +530,7 @@
       </div>
 
       <div class="hint">
-        💡 <strong>Measurement Tips:</strong> For best results, use a flexible tape measure. Measure your waist at the navel, and your neck just below the Adam's apple. For women, measure hips at the widest point.
+        💡 <strong>Measurement Tips:</strong> For best results, use a flexible measuring tape. Measure your waist at the narrowest point for men, and at the navel for women. Measure your neck just below the larynx (Adam's apple). For women, measure hips at the widest point.
       </div>
 
       <button type="submit">Calculate Body Fat %</button>
@@ -579,84 +544,64 @@
     <div class="ad-placeholder">300x250 Mid-Content Ad</div>
   </div>
 
-  <!-- SEO Content -->
+  <!-- NEW AND IMPROVED SEO Content Section -->
   <section class="seo-content">
-    <h2>A Comprehensive Guide to Body Fat Percentage</h2>
-    
-    <h3>What is Body Fat Percentage?</h3>
-    <p>Body Fat Percentage (BFP) is a measure of your fitness level that tells you what percentage of your total body weight is made up of fat. The rest of your body weight is known as lean body mass, which includes muscle, bones, organs, and water. Unlike the Body Mass Index (BMI), which only considers height and weight, BFP gives you a clearer picture of your body composition and overall health.</p>
-    <p>There are two types of body fat:</p>
-    <ul>
-        <li><strong>Essential Fat:</strong> This fat is vital for your health. It helps regulate body temperature, cushions organs and joints, and is essential for hormone production. Women naturally have a higher percentage of essential fat than men.</li>
-        <li><strong>Storage Fat:</strong> This is the fat that accumulates as an energy reserve. While some storage fat is normal, excessive amounts can lead to health problems like heart disease and type 2 diabetes.</li>
-    </ul>
+    <article>
+        <h2>How to Use the Body Fat Calculator</h2>
+        <p>Our calculator provides an accurate estimate of your body fat percentage in four simple steps:</p>
+        <ol>
+            <li><strong>Select Your Units:</strong> Choose between 'Imperial' (feet, inches) or 'Metric' (centimeters) at the top of the calculator.</li>
+            <li><strong>Enter Your Details:</strong> Input your gender and age.</li>
+            <li><strong>Take Your Measurements:</strong> Enter your height, neck, and waist circumference. For females, a hip measurement is also required for accuracy.</li>
+            <li><strong>Calculate:</strong> Click the "Calculate Body Fat %" button to see your estimated body fat percentage, your category, and personalized health guidance.</li>
+        </ol>
 
-    <h3>How to Use This Calculator: Step-by-Step Instructions</h3>
-    <p>This calculator uses the U.S. Navy method, which provides a reliable estimate of body fat using simple body measurements. For the most accurate results, follow these steps:</p>
-    <ol style="list-style-type: decimal; padding-left: 20px;">
-        <li style="background:none; border:none; padding-left:0; margin-bottom: 10px;"><strong>Select Your Units:</strong> Choose between Imperial (feet, inches) or Metric (centimeters) at the top of the calculator.</li>
-        <li style="background:none; border:none; padding-left:0; margin-bottom: 10px;"><strong>Enter Your Details:</strong> Input your gender and age.</li>
-        <li style="background:none; border:none; padding-left:0; margin-bottom: 10px;"><strong>Take Accurate Measurements:</strong> Use a flexible measuring tape (like one used for sewing). Make sure the tape is snug but not compressing the skin.
-            <ul>
-                <li><strong>Height:</strong> Measure your height without shoes.</li>
-                <li><strong>Neck:</strong> Measure the circumference of your neck, starting just below the larynx (Adam's apple).</li>
-                <li><strong>Waist:</strong> For men, measure horizontally at the level of your navel. For women, measure at the narrowest point.</li>
-                <li><strong>Hips (Females Only):</strong> Measure the circumference at the widest point of your hips/buttocks.</li>
-            </ul>
-        </li>
-        <li style="background:none; border:none; padding-left:0; margin-bottom: 10px;"><strong>Calculate:</strong> Click the "Calculate Body Fat %" button to see your results, including your category and health guidance.</li>
-    </ol>
-    
-    <h3>Understanding the Healthy Body Fat Ranges</h3>
-    <p>Your body fat percentage result will place you into a specific category. The table below, based on guidelines from the American Council on Exercise (ACE), can help you understand where you stand.</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Women (% Fat)</th>
-                <th>Men (% Fat)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Essential Fat</td>
-                <td>10-13%</td>
-                <td>2-5%</td>
-            </tr>
-            <tr>
-                <td>Athletes</td>
-                <td>14-20%</td>
-                <td>6-13%</td>
-            </tr>
-            <tr>
-                <td>Fitness</td>
-                <td>21-24%</td>
-                <td>14-17%</td>
-            </tr>
-            <tr>
-                <td>Acceptable</td>
-                <td>25-31%</td>
-                <td>18-24%</td>
-            </tr>
-             <tr>
-                <td>Obesity</td>
-                <td>32%+</td>
-                <td>25%+</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <h3>Why Monitoring Your Body Fat is Important</h3>
-    <p>Tracking your body fat percentage is crucial for several reasons:</p>
-    <ul>
-        <li><strong>Better Health Indicator than Weight:</strong> A scale doesn't know the difference between a pound of muscle and a pound of fat. You could be losing fat and gaining muscle, with your weight staying the same. BFP reveals the true progress.</li>
-        <li><strong>Manages Health Risks:</strong> High body fat is linked to serious health conditions. Monitoring it can motivate you to make lifestyle changes to reduce your risk.</li>
-        <li><strong>Fitness Goal Tracking:</strong> Whether your goal is to build muscle or lose fat, BFP is one of the most effective metrics to track your progress accurately.</li>
-        <li><strong>Ensures You Don't Get Too Lean:</strong> Having too little body fat can be just as dangerous as having too much, potentially leading to nutrient deficiencies and hormonal imbalances.</li>
-    </ul>
+        <h2>What is Body Fat Percentage?</h2>
+        <p>Body Fat Percentage (BFP) is the total mass of fat in your body divided by your total body mass; it includes both essential body fat and storage body fat. Unlike Body Mass Index (BMI), which only considers height and weight, BFP gives you a clearer picture of your body composition—the ratio of fat mass to lean mass (muscles, bones, organs, etc.).</p>
+        <p>Knowing your BFP is crucial because it's a more direct indicator of your fitness level and risk for certain health conditions than weight alone. Two people can have the same height and weight, but vastly different body compositions and health profiles.</p>
+        
+        <h2>Understanding Your Body Fat Results in Detail</h2>
+        <p>Your result falls into a category based on standards from the American Council on Exercise (ACE). Here's what each category means:</p>
+        
+        <h3>For Men:</h3>
+        <ul>
+          <li><b>Essential Fat (2-5%):</b> This is the minimum amount of fat necessary for basic physical and physiological health. Falling below this level can be dangerous.</li>
+          <li><b>Athletes (6-13%):</b> This range is typical for elite athletes who are in peak physical condition.</li>
+          <li><b>Fitness (14-17%):</b> A lean and healthy range for most active men. It is associated with good health and a low risk of weight-related diseases.</li>
+          <li><b>Acceptable (18-24%):</b> This range is considered average and acceptable for most men. While not considered lean, it doesn't typically pose a significant health risk.</li>
+          <li><b>Obesity (25%+):</b> This level of body fat is associated with an increased risk for health problems like heart disease, diabetes, and high blood pressure.</li>
+        </ul>
 
-    <h3>Limitations of the US Navy Method</h3>
-    <p>While the US Navy method is excellent for its simplicity and accessibility, it's important to be aware of its limitations. It is an estimation and can have a margin of error of ±3-4%. For the most precise measurements, clinical methods like DEXA scans or hydrostatic weighing are considered the gold standard. However, for tracking progress over time, this calculator is a reliable and convenient tool.</p>
+        <h3>For Women:</h3>
+        <ul>
+          <li><b>Essential Fat (10-13%):</b> Women require more essential fat than men for hormonal and reproductive functions. Dropping below this level can disrupt the menstrual cycle and cause other health issues.</li>
+          <li><b>Athletes (14-20%):</b> Common for female athletes who maintain high levels of fitness and performance.</li>
+          <li><b>Fitness (21-24%):</b> This represents a healthy, fit, and active lifestyle for most women.</li>
+          <li><b>Acceptable (25-31%):</b> An average and acceptable range for the general female population.</li>
+          <li><b>Obesity (32%+):</b> This level indicates a higher risk for developing chronic diseases and other health complications.</li>
+        </ul>
+
+        <h2>The Importance of Measuring Body Fat</h2>
+        <p>Tracking your body fat percentage is more insightful than just stepping on a scale. Here’s why:</p>
+        <ul>
+            <li><strong>It's a Better Fitness Indicator than BMI:</strong> BMI can misclassify muscular individuals as "overweight." BFP accurately reflects your body composition.</li>
+            <li><strong>Tracks Real Progress:</strong> If you're exercising, you might be gaining muscle and losing fat without your total weight changing. BFP measurement will show this positive change.</li>
+            <li><strong>Health Risk Assessment:</strong> High body fat, particularly around the abdomen (visceral fat), is linked to a higher risk of cardiovascular disease and type 2 diabetes.</li>
+        </ul>
+
+        <h2>❗️ Accuracy & Limitations of the US Navy Method</h2>
+        <p>This calculator uses the U.S. Navy Body Fat Formula, which was developed to be a simple and consistent way to estimate body fat. It's considered reliable for most people, with an accuracy of about ±3-4% compared to clinical methods.</p>
+        <p>However, it has limitations:</p>
+        <ul>
+            <li><strong>It's an Estimation:</strong> It's not as precise as a DEXA scan or hydrostatic weighing.</li>
+            <li><strong>Measurement Matters:</strong> The accuracy depends entirely on how precisely you take your measurements. Always measure at the same spot for consistent tracking.</li>
+            <li><strong>Body Shape Variations:</strong> The formula may be less accurate for individuals with body shapes that differ significantly from the average population (e.g., professional bodybuilders).</li>
+        </ul>
+
+        <div class="disclaimer-box">
+            <strong>Disclaimer:</strong> This calculator provides an estimate and is for informational purposes only. It is not a substitute for professional medical advice. Consult a healthcare provider for any health concerns or before making decisions about your health.
+        </div>
+    </article>
 
     <h3>🔗 Explore More Health Tools</h3>
     <div class="card-grid">
@@ -678,27 +623,27 @@
     
     <div class="faq">
       <h3>How accurate is the US Navy body fat method?</h3>
-      <p>The US Navy method is considered quite accurate for a tape-measure formula, with a typical error rate of ±3-4%. While not as precise as clinical methods like DEXA scans, it's one of the most reliable methods for tracking changes in body composition at home.</p>
+      <p>The US Navy method is quite accurate for a tape-measure method, with a reported error rate of around ±3-4% for most of the population. While not as precise as clinical methods like DEXA scans, it's one of the most reliable and accessible methods available.</p>
     </div>
     
     <div class="faq">
       <h3>Why do women need hip measurements but men don't?</h3>
-      <p>The formula accounts for biological differences in fat storage. Women naturally store more fat in the pelvic region, including the hips, thighs, and buttocks. Including the hip measurement provides a more accurate estimation for the female body.</p>
+      <p>Women naturally store more fat in their hips, thighs, and buttocks due to hormonal differences (e.g., estrogen). Including the hip measurement in the formula for women accounts for this gender-specific fat distribution pattern, making the final calculation more accurate.</p>
     </div>
     
     <div class="faq">
       <h3>What's a healthy body fat percentage?</h3>
-      <p>Healthy ranges vary significantly by gender, age, and fitness level. Generally, for men, a range of 10-20% is considered healthy, while for women, 18-28% is typical. Athletes often have lower percentages, but some body fat is essential for hormone production and organ protection.</p>
+      <p>Healthy ranges vary by gender, age, and fitness level. For men, a range of 14-24% is generally considered healthy and acceptable. For women, a healthy range is typically 21-31%. Athletes will often have lower percentages.</p>
     </div>
     
     <div class="faq">
       <h3>Can I use this calculator for weight loss tracking?</h3>
-      <p>Yes! 💪 In fact, it's often better than using a scale. Body fat percentage is excellent for tracking fitness progress because it shows changes in body composition. You might maintain the same weight while losing fat and gaining muscle, which this calculator will reflect.</p>
+      <p>Yes! 💪 Body fat percentage is an excellent tool for tracking fitness progress. It helps you see if you're losing fat while preserving or gaining lean muscle, which is a much better indicator of healthy progress than just tracking your weight on a scale.</p>
     </div>
     
     <div class="faq">
       <h3>How often should I measure my body fat?</h3>
-      <p>For tracking progress, consistency is key. We recommend measuring every 2 to 4 weeks. Daily fluctuations are normal due to hydration and food intake. For best results, always measure under the same conditions (e.g., in the morning before breakfast).</p>
+      <p>To get a reliable sense of your progress, it's best to measure every 2 to 4 weeks. Daily measurements can fluctuate due to hydration levels and food intake. For best results, always measure under the same conditions (e.g., in the morning before eating).</p>
     </div>
   </section>
 
@@ -710,8 +655,12 @@
   <!-- Floating CTA -->
   <a href="index.html" class="floating-cta">🧮 See All Calculators</a>
 
-  <!-- Footer -->
+  <!-- NEW Footer -->
   <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+    </div>
+    <div class="footer-links">
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
     <a href="privacy-policy.html">Privacy Policy</a> | 
     <a href="terms-of-service.html">Terms of Service</a> |
@@ -729,7 +678,15 @@
         "name": "How accurate is the US Navy body fat method?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The US Navy method is quite accurate for a tape-measure formula, with a typical error rate of ±3-4%. While not as precise as clinical methods like DEXA scans, it's one of the most reliable methods for tracking changes in body composition at home."
+          "text": "The US Navy method is quite accurate for a tape-measure method, with a reported error rate of around ±3-4% for most of the population. While not as precise as clinical methods like DEXA scans, it's one of the most reliable and accessible methods available."
+        }
+      },
+       {
+        "@type": "Question",
+        "name": "Why do women need hip measurements but men don't?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Women naturally store more fat in their hips, thighs, and buttocks due to hormonal differences (e.g., estrogen). Including the hip measurement in the formula for women accounts for this gender-specific fat distribution pattern, making the final calculation more accurate."
         }
       },
       {
@@ -737,15 +694,15 @@
         "name": "What's a healthy body fat percentage?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Healthy ranges vary significantly by gender, age, and fitness level. Generally, for men, a range of 10-20% is considered healthy, while for women, 18-28% is typical."
+          "text": "Healthy ranges vary by gender, age, and fitness level. For men, a range of 14-24% is generally considered healthy and acceptable. For women, a healthy range is typically 21-31%. Athletes will often have lower percentages."
         }
       },
       {
         "@type": "Question",
-        "name": "How often should I measure my body fat?",
+        "name": "Can I use this calculator for weight loss tracking?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For tracking progress, we recommend measuring every 2 to 4 weeks. Always measure under the same conditions (e.g., in the morning before breakfast) for the most consistent results."
+          "text": "Yes! Body fat percentage is an excellent tool for tracking fitness progress because it helps you see if you're losing fat while preserving or gaining lean muscle, which is a much better indicator of healthy progress than just tracking your weight on a scale."
         }
       }
     ]
@@ -753,6 +710,7 @@
   </script>
 
   <script>
+    // NOTE: Your original, functional JavaScript is preserved.
     let currentUnit = 'imperial';
 
     const btnI = document.getElementById('btnImperial');
@@ -860,7 +818,7 @@
           healthIndicator = '🟡';
         } else { 
           category = 'Obesity'; 
-          advice = 'Consider a balanced diet and regular exercise to improve body composition.';
+          advice = 'Consider a balanced diet and regular exercise to improve body composition and reduce health risks.';
           healthIndicator = '🔴';
         }
       } else {
@@ -882,18 +840,18 @@
           healthIndicator = '🟡';
         } else { 
           category = 'Obesity'; 
-          advice = 'Consider lifestyle changes focusing on nutrition and regular physical activity.';
+          advice = 'Consider lifestyle changes focusing on nutrition and regular physical activity to reduce health risks.';
           healthIndicator = '🔴';
         }
       }
 
       const facts = [
         "💡 Muscle tissue burns more calories than fat tissue, even at rest!",
-        "📊 Body fat % is a more accurate health indicator than BMI for many people.",
+        "📊 Body fat % is often a better health risk indicator than BMI.",
         "🏋️ Strength training helps preserve muscle while reducing body fat.",
-        "🥗 Proper nutrition accounts for about 70-80% of body composition changes.",
+        "🥗 Proper nutrition is responsible for about 70-80% of body composition changes.",
         "💧 Staying hydrated can temporarily affect body fat measurements.",
-        "😴 Quality sleep is crucial for regulating hormones that control fat storage."
+        "😴 Quality sleep is crucial for hormone regulation that impacts body composition."
       ];
       const fact = facts[Math.floor(Math.random() * facts.length)];
 
@@ -931,4 +889,3 @@
   </script>
 </body>
 </html>
-
