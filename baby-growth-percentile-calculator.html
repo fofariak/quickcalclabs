@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Baby Growth Percentile Calculator (WHO Standards) | QuickCalcLabs</title>
-  <meta name="description" content="Track your baby's growth with our free, interactive Baby Growth Percentile Calculator. Understand weight, height, and head circumference percentiles based on WHO standards.">
+  <meta name="description" content="Track your baby's growth with our free percentile calculator based on WHO standards. Understand weight, height, and head circumference charts and learn what the numbers really mean.">
   <link rel="stylesheet" href="css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
@@ -15,94 +15,83 @@
       --accent-purple: #9b59b6;
       --card-bg: #ffffff;
       --text-color: #333;
+      --border-color: #bdc3c7;
+      --body-bg: #ecf0f1;
     }
-    .dark-mode {
-      --card-bg: #2c3e50;
+    body.dark-mode {
+      --card-bg: #2d3748;
       --text-color: #ecf0f1;
+      --border-color: #4a5568;
+      --body-bg: #1a202c;
     }
+    body {
+        background-color: var(--body-bg);
+        color: var(--text-color);
+    }
+    .header { background: var(--card-bg); }
+    .calc-wrapper, .seo-content, .faq-section { background: var(--card-bg); }
     .calc-wrapper { max-width: 600px; }
     .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     
+    input, select {
+        background: var(--card-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
     .segmented-control {
       display: flex;
       border-radius: 10px;
-      border: 1px solid #bdc3c7;
+      border: 1px solid var(--border-color);
       overflow: hidden;
       margin-top: 5px;
       margin-bottom: 15px;
     }
     .segmented-control input[type="radio"] { display: none; }
     .segmented-control label {
-      flex: 1;
-      text-align: center;
-      padding: 10px;
-      cursor: pointer;
-      background: var(--card-bg);
-      color: var(--text-color);
-      transition: background 0.3s;
+      flex: 1; text-align: center; padding: 10px; cursor: pointer;
+      background: var(--card-bg); color: var(--text-color); transition: background 0.3s;
     }
     .segmented-control input[type="radio"]:checked + label {
-      background: var(--accent-blue);
-      color: #fff;
-      font-weight: 600;
+      background: var(--accent-blue); color: #fff; font-weight: 600;
     }
-
+    .meta-info { font-size: 0.9em; color: #7f8c8d; margin-bottom: 20px; text-align: center; }
+    body.dark-mode .meta-info { color: #95a5a6; }
+    .disclaimer-box {
+        padding: 15px; margin: 20px 0; border-left: 5px solid #f1c40f;
+        background-color: #fef9e7; color: #c0392b; border-radius: 4px;
+    }
+    body.dark-mode .disclaimer-box { background-color: #5a4b1b; color: #f9e79f; }
+    
     /* Chart styles */
     .chart-container { margin-top: 25px; }
     .chart-item { margin-bottom: 20px; }
     .chart-item h4 { margin-bottom: 8px; font-size: 16px; }
     .bar-background {
-      width: 100%;
-      height: 25px;
-      background: #ecf0f1;
-      border-radius: 15px;
-      position: relative;
-      overflow: hidden;
+      width: 100%; height: 25px; background: #ecf0f1;
+      border-radius: 15px; position: relative; overflow: hidden;
     }
+    body.dark-mode .bar-background { background: #1f2937; }
     .bar-fill {
-      height: 100%;
-      border-radius: 15px;
-      transition: width 1s ease-out;
-      position: absolute;
-      left: 0;
-      top: 0;
+      height: 100%; border-radius: 15px; transition: width 1s ease-out;
+      position: absolute; left: 0; top: 0;
     }
     .low { background: linear-gradient(90deg, #f39c12, #e67e22); }
     .average { background: linear-gradient(90deg, #2ecc71, #27ae60); }
     .high { background: linear-gradient(90deg, #e74c3c, #c0392b); }
     .percentile-label {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #fff;
-      font-weight: bold;
-      font-size: 12px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      position: absolute; right: 10px; top: 50%;
+      transform: translateY(-50%); color: #fff; font-weight: bold;
+      font-size: 12px; text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
     }
      .legend {
-      margin-top: 15px;
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      font-size: 14px;
+      margin-top: 15px; display: flex; gap: 15px;
+      justify-content: center; font-size: 14px;
     }
     .legend span { display: flex; align-items: center; gap: 5px; }
     .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; color: #fff; }
     .badge.low { background:#f39c12; }
     .badge.average { background:#2ecc71; }
     .badge.high { background:#e74c3c; }
-
-
-    /* Other styles from reference */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 15px; margin-top: 20px; }
-    .card { background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .card a { text-decoration:none; font-weight:600; color: var(--text-color);}
-    .card a:hover { color: var(--accent-blue); }
-    .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
-    .faq summary { margin: 0; padding: 12px; background: var(--accent-blue); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
-    .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -121,7 +110,8 @@
 
   <section class="calc-wrapper">
     <h1>📊 Baby Growth Percentile Calculator</h1>
-    <p class="subtitle">Track your baby's development and understand their growth curve with our easy-to-use percentile calculator.</p>
+    <p class="subtitle">Track your baby's development against WHO standards and understand what the results mean for their health.</p>
+    <p class="meta-info">Last Updated: September 26, 2025</p>
 
     <div class="input-group">
         <div>
@@ -185,7 +175,7 @@
         <input type="number" id="head_cm" placeholder="e.g., 39.0">
     </div>
 
-    <button onclick="calculatePercentiles()">Calculate Growth</button>
+    <button onclick="calculatePercentiles()">Calculate Growth Percentiles</button>
 
     <div id="result" class="result-box"></div>
   </section>
@@ -193,18 +183,29 @@
   <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
 
   <section class="seo-content">
-    <h2>How to Read an Infant Growth Chart</h2>
-    <p>A baby growth percentile chart, based on data from the World Health Organization (WHO), is a standard tool used by pediatricians to track a child's growth over time. When your baby is in the <strong>40th percentile for weight</strong>, it means that compared to 100 babies of the same age and sex, your baby weighs more than 40 of them and less than 60 of them. It is a comparison tool, not a grade!</p>
-    
-    <h3>The Curve is More Important Than the Number</h3>
-    <p>While it's natural to focus on the specific percentile number, what pediatricians value most is the <strong>consistency of the growth curve</strong>. A healthy baby will typically follow their own unique curve over time. This means that a baby who is consistently in the 10th percentile is often just as healthy as a baby who is consistently in the 90th percentile. The key is steady growth along their personal track.</p>
-    <ul>
-      <li><strong>A single measurement is just a snapshot in time.</strong> The overall trend is what matters.</li>
-      <li><strong>There is a wide range of "normal."</strong> A baby in the 5th percentile can be just as healthy as a baby in the 95th percentile, as long as they are growing consistently and meeting developmental milestones.</li>
-      <li><strong>Genetics play a big role.</strong> Parents' heights and builds are strong predictors of a baby's growth track.</li>
-    </ul>
+    <article>
+        <h2>Understanding Your Baby's Growth Chart</h2>
+        <p>A baby growth chart is a standard tool used by pediatricians to assess how your child is growing compared to other children of the same age and sex. This calculator uses data based on the World Health Organization (WHO) Growth Standards to plot your baby's measurements for weight, height (length), and head circumference.</p>
+        
+        <div class="disclaimer-box">
+            <strong>⚠️ Important Medical Disclaimer:</strong> This tool is for informational purposes only and is not a substitute for a pediatrician's assessment. Growth patterns are complex. Always discuss your child's growth and any health concerns with a qualified medical professional.
+        </div>
 
-    <h3>🔗 Explore More Tools</h3>
+        <h3>How to Interpret Growth Percentiles</h3>
+        <p>It's easy to misunderstand percentiles as a "score" or a "grade," but they are simply a comparison. Here’s what they mean:</p>
+        <p>If your baby is in the <strong>60th percentile for weight</strong>, it means that out of 100 babies their age and sex, your baby weighs more than 60 and less than 40. It doesn't mean they are overweight or underweight; it's simply a measurement of their size relative to a standard population.</p>
+
+        <h3>The Most Important Factor: A Steady Growth Curve</h3>
+        <p>Pediatricians are less concerned with a single percentile number and more focused on the overall pattern of growth. A healthy baby will typically follow their own, consistent growth curve over time. This is the key takeaway for parents:</p>
+        <ul>
+          <li><strong>A single measurement is just a snapshot.</strong> Growth happens in spurts, so one low or high reading is usually not a cause for alarm. The trend over several measurements is what provides a clear picture.</li>
+          <li><strong>There is a wide range of "normal."</strong> A baby who is consistently on the 10th percentile curve can be just as healthy as a baby who is on the 90th percentile curve. </li>
+          <li><strong>Genetics play a major role.</strong> A child's genetic background is a primary determinant of their size. Tall parents are likely to have tall children who track on higher height percentiles.</li>
+          <li><strong>A sudden change is what gets attention.</strong> A significant drop across two or more major percentile lines (e.g., from the 75th down to the 25th) is what might prompt a pediatrician to look closer, as it could indicate a feeding issue or health problem.</li>
+        </ul>
+    </article>
+
+    <h3>🔗 Explore More Parenting Tools</h3>
     <div class="card-grid">
       <div class="card"><a href="baby-feeding-schedule-calculator.html">🍼 Baby Feeding Schedule Calculator</a></div>
       <div class="card"><a href="pregnancy-calculator.html">🤰 Pregnancy Due Date Calculator</a></div>
@@ -212,7 +213,7 @@
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator (for adults)</a></div>
     </div>
 
-    <h3>📝 Related Blogs</h3>
+    <h3>📝 Related Blogs for Parents</h3>
     <div class="card-grid">
       <div class="card"><a href="blog/babys-first-milestones-guide.html">📖 A Guide to Baby's First Year Milestones</a></div>
       <div class="card"><a href="blog/introducing-solids-baby-guide.html">💡 Tips for Introducing Solid Foods</a></div>
@@ -222,20 +223,20 @@
   <section class="faq-section">
     <h2>❓ Frequently Asked Questions about Baby Growth Charts</h2>
     <details class="faq">
-      <summary>What do the percentiles mean?</summary>
-      <p>A percentile shows how your child's growth compares to other children of the same age and sex. For example, the 50th percentile is the statistical average. A lower or higher percentile doesn't mean your child is unhealthy; the consistency of their growth curve is what matters most.</p>
+      <summary>What is a "normal" percentile?</summary>
+      <p>Any percentile from the 3rd to the 97th is considered within the normal range. The 50th percentile simply represents the statistical average. What's most important is that your child follows a consistent curve, whatever that percentile may be.</p>
     </details>
     <details class="faq">
       <summary>Should I be worried if my baby is in a low percentile?</summary>
-      <p>Not necessarily. A low percentile can be perfectly normal, especially if the baby is consistently following their own growth curve. If your pediatrician observes a sudden drop across two or more percentile lines (e.g., from the 50th to the 20th), they may investigate further, but a steady curve at a lower percentile is usually not a cause for concern.</p>
+      <p>In most cases, no. A low percentile is not automatically a red flag. If your baby is happy, active, meeting developmental milestones, and consistently tracking along their own curve (e.g., always staying around the 15th percentile), this is usually considered healthy growth. Your pediatrician will let you know if there's any reason for concern.</p>
     </details>
     <details class="faq">
         <summary>Which growth charts does this calculator use?</summary>
-        <p>This calculator uses a simplified model based on the World Health Organization (WHO) growth standards, which are recommended for children up to 24 months of age. These charts are based on data from healthy, breastfed infants from diverse backgrounds and are considered the international standard for infant growth.</p>
+        <p>This calculator uses a simplified model based on the official <strong>World Health Organization (WHO) growth standards</strong>. The WHO charts are recommended for all children up to 24 months of age, regardless of how they are fed, and are considered the international standard for assessing infant growth.</p>
     </details>
     <details class="faq">
-      <summary>How often should I check my baby's growth percentiles?</summary>
-      <p>Your pediatrician will measure your baby at regular well-child visits. It's best to follow their schedule. Checking too frequently at home can cause unnecessary anxiety, as growth happens in spurts. This tool is best used to understand the measurements taken at official doctor's visits.</p>
+      <summary>How often should I check my baby's growth?</summary>
+      <p>Your pediatrician will take official measurements at each well-child visit (typically at 1, 2, 4, 6, 9, and 12 months). It's best to rely on these official measurements rather than trying to measure at home frequently, which can be inaccurate and cause unnecessary stress. This tool is ideal for helping you understand the results from your doctor's appointments.</p>
     </details>
   </section>
 
@@ -257,10 +258,10 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What do the percentiles mean?",
+        "name": "What is a 'normal' percentile?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A percentile shows how your child's growth compares to other children of the same age and sex. For example, the 50th percentile is the average. A lower or higher percentile doesn't mean your child is unhealthy; the consistency of their growth curve is what matters most."
+          "text": "Any percentile from the 3rd to the 97th is considered within the normal range. The 50th percentile simply represents the statistical average. What's most important is that your child follows a consistent curve, whatever that percentile may be."
         }
       },
       {
@@ -268,7 +269,7 @@
         "name": "Should I be worried if my baby is in a low percentile?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not necessarily. A low percentile can be perfectly normal, especially if the baby is consistently following their own growth curve. If your pediatrician observes a sudden drop across two or more percentile lines (e.g., from the 50th to the 20th), they may investigate further, but a steady curve at a lower percentile is usually not a cause for concern."
+          "text": "In most cases, no. A low percentile is not automatically a red flag. If your baby is happy, active, meeting developmental milestones, and consistently tracking along their own curve (e.g., always staying around the 15th percentile), this is usually considered healthy growth. Your pediatrician will let you know if there's any reason for concern."
         }
       },
       {
@@ -276,15 +277,15 @@
         "name": "Which growth charts does this calculator use?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "This calculator uses a simplified model based on the World Health Organization (WHO) growth standards, which are recommended for children up to 24 months of age. These charts are based on data from healthy, breastfed infants from diverse backgrounds and are considered the international standard for infant growth."
+          "text": "This calculator uses a simplified model based on the official World Health Organization (WHO) growth standards. The WHO charts are recommended for all children up to 24 months of age, regardless of how they are fed, and are considered the international standard for assessing infant growth."
         }
       },
       {
         "@type": "Question",
-        "name": "How often should I check my baby's growth percentiles?",
+        "name": "How often should I check my baby's growth?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Your pediatrician will measure your baby at regular well-child visits. It's best to follow their schedule. Checking too frequently at home can cause unnecessary anxiety, as growth happens in spurts. This tool is best used to understand the measurements taken at official doctor's visits."
+          "text": "Your pediatrician will take official measurements at each well-child visit (typically at 1, 2, 4, 6, 9, and 12 months). It's best to rely on these official measurements rather than trying to measure at home frequently, which can be inaccurate and cause unnecessary stress. This tool is ideal for helping you understand the results from your doctor's appointments."
         }
       }
     ]
@@ -380,14 +381,16 @@
             return;
         }
 
-        const ageInMonths = (measurementDate.getFullYear() - birthDate.getFullYear()) * 12 + (measurementDate.getMonth() - birthDate.getMonth());
+        const ageInDays = (measurementDate - birthDate) / (1000 * 60 * 60 * 24);
+        const ageInMonths = ageInDays / 30.4375; // More precise average
 
-        if (ageInMonths > 12) {
-             resultDiv.innerHTML = "<p style='color:orange;'>⚠️ This calculator provides data for babies up to 12 months old.</p>";
+        if (ageInMonths > 12.5) { // Allow a little leeway
+             resultDiv.innerHTML = "<p style='color:orange;'>⚠️ This calculator is best used for babies up to 12 months old.</p>";
             return;
         }
         
-        const ageData = growthData[sex].find(d => d.age === Math.floor(ageInMonths / 2) * 2);
+        const closestAgePoint = Math.floor(ageInMonths / 2) * 2;
+        const ageData = growthData[sex].find(d => d.age === closestAgePoint);
         
         if (!ageData) {
             resultDiv.innerHTML = "<p style='color:red;'>Could not find growth data for this age.</p>";
@@ -405,7 +408,7 @@
         }
 
         resultDiv.innerHTML = `
-            <h3>📊 Growth Results for a ${ageInMonths}-month-old ${sex}</h3>
+            <h3>📊 Growth Results for a ${Math.round(ageInMonths)}-month-old ${sex}</h3>
             <div class="chart-container">
                 <div class="chart-item">
                     <h4>⚖️ Weight: ${weightDisplay}</h4>
@@ -416,7 +419,7 @@
                     </div>
                 </div>
                 <div class="chart-item">
-                    <h4>📏 Height: ${heightDisplay}</h4>
+                    <h4>📏 Height/Length: ${heightDisplay}</h4>
                     <div class="bar-background">
                         <div class="bar-fill ${getBarClass(heightPercentile)}" style="width:${heightPercentile}%;">
                             <span class="percentile-label">${heightPercentile}th Percentile</span>
@@ -451,7 +454,6 @@
         document.body.classList.add("dark-mode");
       }
 
-      // Unit switcher logic
       const imperialRadio = document.getElementById('imperial');
       const metricRadio = document.getElementById('metric');
       const imperialInputs = document.getElementById('imperialInputs');
@@ -474,4 +476,3 @@
 
 </body>
 </html>
-
