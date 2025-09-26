@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Body Fat Percentage Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Calculate your body fat percentage using the US Navy method. Track your body composition, get health insights, and understand your fitness level with our advanced calculator.">
+  <title>Accurate Body Fat Percentage Calculator (US Navy Method) | QuickCalcLabs</title>
+  <meta name="description" content="Estimate your body fat percentage using the U.S. Navy method. Our free calculator provides insights into your body composition, lean body mass, and overall health.">
   <meta name="keywords" content="body fat calculator, body fat percentage, navy body fat, body composition calculator, body fat estimator, fitness tracker, health calculator">
   <link rel="stylesheet" href="css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
+    :root {
+      --card-bg: #fff;
+      --text: #333;
+      --text-muted: #666;
+      --input-bg: #f8f9fa;
+    }
+    body.dark-mode {
+      --card-bg: rgba(255,255,255,0.05);
+      --text: #ecf0f1;
+      --text-muted: #95a5a6;
+      --input-bg: rgba(255,255,255,0.05);
+    }
+    
     /* Modern Calculator Styling */
     .calc-wrapper {
       max-width: 1000px;
@@ -115,6 +128,9 @@
       box-shadow: 0 0 0 3px rgba(255,107,129,0.1);
       background: white;
     }
+    body.dark-mode input:focus, body.dark-mode select:focus {
+        background: var(--card-bg);
+    }
 
     .row {
       display: grid;
@@ -186,13 +202,12 @@
       margin: 15px 0;
       border-left: 4px solid #ff6b81;
     }
-
-    @media (min-width: 1200px) {
-      .hint {
-        padding: 18px 22px;
-        font-size: 15px;
-      }
+    
+    .disclaimer-box {
+        padding: 15px; margin: 20px 0; border-left: 5px solid #f1c40f;
+        background-color: #fef9e7; color: #c0392b; border-radius: 4px;
     }
+    body.dark-mode .disclaimer-box { background-color: #5a4b1b; color: #f9e79f; }
 
     /* Results */
     .result-box {
@@ -223,201 +238,6 @@
       font-style: italic;
       color: var(--text, #555);
     }
-
-    /* Explore more */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 25px;
-    }
-    
-    .card {
-      background: var(--card-bg, #fff);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      text-align: center;
-      border: 1px solid rgba(255,107,129,0.1);
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-      border-color: rgba(255,107,129,0.3);
-    }
-    
-    .card a {
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--text, #333);
-      font-size: 16px;
-    }
-    
-    .card a:hover {
-      color: #ff6b81;
-    }
-
-    /* FAQ Section */
-    .faq-section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .faq-section h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: var(--text, #333);
-      font-size: 2rem;
-    }
-
-    .faq {
-      margin-bottom: 15px;
-      border-radius: 12px;
-      background: var(--card-bg, #fff);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      overflow: hidden;
-      border: 1px solid rgba(255,107,129,0.1);
-    }
-    
-    .faq h3 {
-      margin: 0;
-      padding: 18px 20px;
-      background: linear-gradient(135deg, #ff6b81, #ff8a95);
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .faq h3:hover {
-      background: linear-gradient(135deg, #ff8a95, #ff6b81);
-    }
-    
-    .faq p {
-      margin: 0;
-      padding: 18px 20px;
-      display: none;
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text, #555);
-    }
-    
-    .faq.active p {
-      display: block;
-    }
-
-    /* SEO Content */
-    .seo-content {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .seo-content h2, .seo-content h3 {
-      color: var(--text, #333);
-      margin-top: 30px;
-      margin-bottom: 15px;
-    }
-
-    .seo-content h2 {
-      font-size: 1.8rem;
-      text-align: center;
-    }
-
-    .seo-content h3 {
-      font-size: 1.3rem;
-      color: #ff6b81;
-    }
-
-    .seo-content ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .seo-content li {
-      background: rgba(255,107,129,0.05);
-      margin: 8px 0;
-      padding: 12px 16px;
-      border-radius: 8px;
-      border-left: 3px solid #ff6b81;
-      font-size: 15px;
-    }
-
-    /* Dark mode support */
-    .dark-mode .calc-wrapper,
-    .dark-mode .card,
-    .dark-mode .faq {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,107,129,0.2);
-    }
-
-    .dark-mode input,
-    .dark-mode select {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,107,129,0.3);
-      color: white;
-    }
-
-
-    /* Floating CTA */
-    .floating-cta {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #ff6b81, #ff8a95);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 15px rgba(255,107,129,0.4);
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
-
-    .floating-cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(255,107,129,0.6);
-    }
-
-    @media (max-width: 768px) {
-      .row {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      
-      .calc-wrapper h1 {
-        font-size: 1.8rem;
-      }
-      
-      .floating-cta {
-        bottom: 15px;
-        right: 15px;
-        padding: 10px 16px;
-        font-size: 14px;
-      }
-
-      .calc-wrapper {
-        margin: 0 5px;
-        padding: 20px 15px;
-      }
-
-      input, select {
-        padding: 12px 14px;
-        font-size: 16px;
-        margin-bottom: 14px;
-      }
-
-      .hint {
-        padding: 12px 16px;
-        font-size: 13px;
-        margin: 12px 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -442,6 +262,7 @@
   <section class="calc-wrapper">
     <h1>📏 Body Fat Percentage Calculator</h1>
     <p class="subtitle">Estimate your body fat percentage using the proven US Navy method. Get insights into your body composition and fitness level.</p>
+    <p class="meta-info" style="text-align:center; font-size: 0.9em; color: #7f8c8d;">Last Updated: September 26, 2025</p>
 
     <div class="units">
       <button id="btnImperial" class="active">Imperial (ft, in, lbs)</button>
@@ -475,7 +296,6 @@
             <input id="heightIn" type="number" min="0" max="11" placeholder="e.g., 8" />
           </div>
         </div>
-
         <div class="row">
           <div>
             <label>📐 Neck circumference (inches):</label>
@@ -486,7 +306,6 @@
             <input id="waistIn" type="number" step="0.1" min="20" max="60" placeholder="e.g., 34.0" />
           </div>
         </div>
-
         <div id="hipWrap" style="display:none;">
           <label>📐 Hip circumference (inches) - Required for females:</label>
           <input id="hipIn" type="number" step="0.1" min="25" max="65" placeholder="e.g., 38.5" />
@@ -505,7 +324,6 @@
             <input id="neckCm" type="number" step="0.1" min="20" max="60" placeholder="e.g., 38.0" />
           </div>
         </div>
-
         <div class="row">
           <div>
             <label>📐 Waist circumference (cm):</label>
@@ -517,14 +335,8 @@
           </div>
         </div>
       </div>
-
-      <div class="hint">
-        💡 <strong>Measurement Tips:</strong> Measure your waist at the navel level, neck just below the Adam's apple. For women, measure hips at the widest point. Take measurements without clothes for accuracy.
-      </div>
-
       <button type="submit">Calculate Body Fat %</button>
     </form>
-
     <div id="result"></div>
   </section>
 
@@ -535,39 +347,42 @@
 
   <!-- SEO Content -->
   <section class="seo-content">
-    <h2>Why Track Your Body Fat Percentage?</h2>
-    <p>Body fat percentage provides a more accurate picture of your health and fitness than weight or BMI alone. Unlike these basic measurements, body fat percentage reveals your body composition – the ratio of fat to lean muscle mass.</p>
+    <article>
+        <h2>A Guide to Understanding Body Composition</h2>
+        <p>While the number on a scale tells you your total weight, it doesn't reveal the full story of your health. Body composition—the ratio of fat mass to lean mass (muscle, bones, water)—is a far more insightful metric. This calculator uses the U.S. Navy method, a well-regarded formula that uses body measurements to estimate your body fat percentage, giving you a clearer picture of your fitness level.</p>
 
-    <h3>✨ Benefits of Our Calculator</h3>
-    <ul>
-      <li>📊 Uses the scientifically-proven US Navy method</li>
-      <li>⚡ Instant results with detailed analysis</li>
-      <li>🎯 More accurate than BMI for fitness assessment</li>
-      <li>📱 Mobile-friendly, works on any device</li>
-      <li>🔬 Based on peer-reviewed research</li>
-      <li>💪 Helps track fitness progress over time</li>
-    </ul>
+        <div class="disclaimer-box">
+            <strong>⚠️ Health Disclaimer:</strong> This calculator provides an estimate and is not a substitute for professional medical advice. The results are for informational purposes only. Consult a healthcare provider to understand your health status and before starting any new fitness or diet program.
+        </div>
+        
+        <h3>How to Take Accurate Measurements for This Calculator</h3>
+        <p>The accuracy of this calculator depends entirely on precise measurements. Use a flexible measuring tape and follow these instructions carefully:</p>
+        <ul>
+            <li><strong>Height:</strong> Stand straight against a wall without shoes. Have someone place a flat object (like a book) on your head and mark the wall. Measure from the floor to the mark.</li>
+            <li><strong>Neck:</strong> Measure around your neck, just below the larynx (Adam's apple). Keep the tape level and don't pull it tight.</li>
+            <li><strong>Waist:</strong> For both men and women, measure the natural waist circumference at the narrowest point, usually just above the navel. Keep the tape parallel to the floor and your stomach relaxed (don't suck it in).</li>
+            <li><strong>Hips (Females only):</strong> Measure the circumference of your hips at their widest point. This is crucial for an accurate female-specific calculation.</li>
+        </ul>
 
-    <h3>🎯 Healthy Body Fat Ranges</h3>
-    <ul>
-      <li><strong>Men:</strong> Essential Fat (2-5%) | Athletes (6-13%) | Fitness (14-17%) | Acceptable (18-24%) | Obesity (25%+)</li>
-      <li><strong>Women:</strong> Essential Fat (10-13%) | Athletes (14-20%) | Fitness (21-24%) | Acceptable (25-31%) | Obesity (32%+)</li>
-    </ul>
+        <h3>Why Is Body Fat Percentage a Better Metric Than BMI?</h3>
+        <p>Body Mass Index (BMI) is a simple calculation based on height and weight. However, it has a major flaw: it can't distinguish between fat and muscle. An athletic, muscular person could be classified as "overweight" by BMI standards, even with very low body fat. Body fat percentage solves this problem by directly estimating your body composition, making it a superior tool for tracking fitness progress.</p>
 
-    <h3>🔍 Understanding Your Results</h3>
-    <p>The US Navy method uses circumference measurements to estimate body fat percentage. While not as precise as DEXA scans or hydrostatic weighing, it's remarkably accurate for a simple measurement-based method, with an error rate of approximately ±3-4%.</p>
+        <h3>Understanding the Body Fat Categories</h3>
+        <p>Here’s a general breakdown of body fat percentage ranges (source: American Council on Exercise):</p>
+        <ul>
+            <li><strong>Essential Fat (Men 2-5%, Women 10-13%):</strong> This is the minimum amount of fat needed for basic physical and physiological health. Dropping below this level can be dangerous.</li>
+            <li><strong>Athletes (Men 6-13%, Women 14-20%):</strong> This range is typical for elite athletes and is characterized by a high degree of muscle definition.</li>
+            <li><strong>Fitness (Men 14-17%, Women 21-24%):</strong> This range indicates good health and fitness and is associated with a lower risk of lifestyle-related diseases.</li>
+            <li><strong>Acceptable (Men 18-24%, Women 25-31%):</strong> This is considered an acceptable and average range for the general population.</li>
+            <li><strong>Obesity (Men 25%+, Women 32%+):</strong> This level of body fat is associated with an increased risk for various health problems, including heart disease and type 2 diabetes.</li>
+        </ul>
+    </article>
 
     <h3>🔗 Explore More Health Tools</h3>
     <div class="card-grid">
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
       <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
       <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
-    </div>
-
-    <h3>📚 Related Health & Fitness Blogs</h3>
-    <div class="card-grid">
-      <div class="card"><a href="blog/body-fat-vs-bmi.html">⚖️ Body Fat % vs BMI: Which is Better?</a></div>
-      <div class="card"><a href="blog/how-to-reduce-body-fat-naturally.html">🏃 How to Reduce Body Fat Naturally</a></div>
     </div>
   </section>
 
@@ -577,27 +392,22 @@
     
     <div class="faq">
       <h3>How accurate is the US Navy body fat method?</h3>
-      <p>The US Navy method is quite accurate with an error rate of ±3-4%. While not as precise as DEXA scans, it's one of the most reliable measurement-based methods available and correlates well with more expensive testing methods.</p>
+      <p>The US Navy method is widely considered one of the most accurate circumference-based methods, with a typical error rate of about ±3-4% compared to clinical methods like DEXA scans. Its accuracy depends heavily on taking precise measurements.</p>
     </div>
     
     <div class="faq">
-      <h3>Why do women need hip measurements but men don't?</h3>
-      <p>Women typically store more fat in their hips and thighs due to hormonal differences. The hip measurement helps account for this gender-specific fat distribution pattern, making the calculation more accurate for females.</p>
+      <h3>Why do women need a hip measurement for this calculation?</h3>
+      <p>Men and women store body fat in different patterns due to hormonal differences. Women tend to store more fat around the hips and thighs. Including the hip measurement in the formula for women accounts for this and significantly improves the accuracy of the estimate.</p>
+    </div>
+        
+    <div class="faq">
+      <h3>Can I use this calculator for tracking weight loss?</h3>
+      <p>Yes, it's an excellent tool for this. When you lose weight, you want to ensure you're losing fat, not muscle. Tracking your body fat percentage over time gives you a much clearer picture of your progress than a scale alone.</p>
     </div>
     
     <div class="faq">
-      <h3>What's a healthy body fat percentage?</h3>
-      <p>Healthy ranges vary by gender and fitness level. For men, 10-18% is generally considered healthy, while for women, 16-25% is typical. Athletes often have lower percentages, while some body fat is essential for hormone production and organ protection.</p>
-    </div>
-    
-    <div class="faq">
-      <h3>Can I use this calculator for weight loss tracking?</h3>
-      <p>Yes! 💪 Body fat percentage is excellent for tracking fitness progress because it shows changes in body composition, not just weight. You might maintain the same weight while losing fat and gaining muscle.</p>
-    </div>
-    
-    <div class="faq">
-      <h3>How often should I measure my body fat?</h3>
-      <p>For tracking progress, measure monthly or bi-weekly. Daily fluctuations are normal due to hydration, food intake, and other factors. Consistent measurement conditions (same time of day, similar hydration) improve accuracy.</p>
+      <h3>How often should I measure my body fat percentage?</h3>
+      <p>To see meaningful trends, it's best to measure every 2 to 4 weeks. Daily measurements can fluctuate due to hydration levels and meals. For the most consistent results, always measure at the same time of day under similar conditions (e.g., in the morning before breakfast).</p>
     </div>
   </section>
 
@@ -628,23 +438,31 @@
         "name": "How accurate is the US Navy body fat method?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The US Navy method is quite accurate with an error rate of ±3-4%. While not as precise as DEXA scans, it's one of the most reliable measurement-based methods available."
+          "text": "The US Navy method is widely considered one of the most accurate circumference-based methods, with a typical error rate of about ±3-4% compared to clinical methods like DEXA scans. Its accuracy depends heavily on taking precise measurements."
         }
       },
       {
         "@type": "Question",
-        "name": "What's a healthy body fat percentage?",
+        "name": "Why do women need a hip measurement for this calculation?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Healthy ranges vary by gender and fitness level. For men, 10-18% is generally considered healthy, while for women, 16-25% is typical."
+          "text": "Men and women store body fat in different patterns due to hormonal differences. Women tend to store more fat around the hips and thighs. Including the hip measurement in the formula for women accounts for this and significantly improves the accuracy of the estimate."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I use this calculator for weight loss tracking?",
+        "name": "Can I use this calculator for tracking weight loss?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes! Body fat percentage is excellent for tracking fitness progress because it shows changes in body composition, not just weight."
+          "text": "Yes, it's an excellent tool for this. When you lose weight, you want to ensure you're losing fat, not muscle. Tracking your body fat percentage over time gives you a much clearer picture of your progress than a scale alone."
+        }
+      },
+       {
+        "@type": "Question",
+        "name": "How often should I measure my body fat percentage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To see meaningful trends, it's best to measure every 2 to 4 weeks. Daily measurements can fluctuate due to hydration levels and meals. For the most consistent results, always measure at the same time of day under similar conditions (e.g., in the morning before breakfast)."
         }
       }
     ]
@@ -712,16 +530,16 @@
         heightIn = ft * 12 + inch;
         neckIn = parseFloat(document.getElementById('neckIn').value);
         waistIn = parseFloat(document.getElementById('waistIn').value);
-        hipIn = gender === 'female' ? parseFloat(document.getElementById('hipIn').value) : null;
+        hipIn = gender === 'female' ? parseFloat(document.getElementById('hipIn').value) : 0;
       } else {
         const heightCm = parseFloat(document.getElementById('heightCm').value);
         const neckCm = parseFloat(document.getElementById('neckCm').value);
         const waistCm = parseFloat(document.getElementById('waistCm').value);
-        const hipCm = gender === 'female' ? parseFloat(document.getElementById('hipCm').value) : null;
+        const hipCm = gender === 'female' ? parseFloat(document.getElementById('hipCm').value) : 0;
         heightIn = heightCm / 2.54;
         neckIn = neckCm / 2.54;
         waistIn = waistCm / 2.54;
-        hipIn = gender === 'female' ? hipCm / 2.54 : null;
+        hipIn = gender === 'female' ? hipCm / 2.54 : 0;
       }
 
       if (!heightIn || !neckIn || !waistIn || (gender === 'female' && !hipIn)) {
@@ -741,58 +559,23 @@
 
       let category, advice, healthIndicator;
       if (gender === 'male') {
-        if (bodyFat < 6) { 
-          category = 'Essential Fat'; 
-          advice = 'Very low body fat - ensure adequate nutrition and consult a healthcare professional.';
-          healthIndicator = '🟡';
-        } else if (bodyFat < 14) { 
-          category = 'Athlete'; 
-          advice = 'Excellent athletic body composition. Great for performance sports.';
-          healthIndicator = '🟢';
-        } else if (bodyFat < 18) { 
-          category = 'Fitness'; 
-          advice = 'Healthy and fit body composition. Keep up your exercise routine!';
-          healthIndicator = '🟢';
-        } else if (bodyFat < 25) { 
-          category = 'Acceptable'; 
-          advice = 'Within normal healthy range. Consider increasing activity for better fitness.';
-          healthIndicator = '🟡';
-        } else { 
-          category = 'Above Average'; 
-          advice = 'Consider a balanced diet and regular exercise to improve body composition.';
-          healthIndicator = '🔴';
+        if (bodyFat < 6) { category = 'Essential Fat'; advice = 'Very low body fat - ensure adequate nutrition and consult a healthcare professional.'; healthIndicator = '🟡';
+        } else if (bodyFat < 14) { category = 'Athletes'; advice = 'Excellent athletic body composition. Great for performance sports.'; healthIndicator = '🟢';
+        } else if (bodyFat < 18) { category = 'Fitness'; advice = 'Healthy and fit body composition. Keep up your exercise routine!'; healthIndicator = '🟢';
+        } else if (bodyFat < 25) { category = 'Acceptable'; advice = 'Within normal healthy range. Consider increasing activity for better fitness.'; healthIndicator = '🟡';
+        } else { category = 'Obesity'; advice = 'Consider a balanced diet and regular exercise to improve body composition.'; healthIndicator = '🔴';
         }
       } else {
-        if (bodyFat < 14) { 
-          category = 'Essential Fat'; 
-          advice = 'Very low for women - monitor health markers and ensure adequate nutrition.';
-          healthIndicator = '🟡';
-        } else if (bodyFat < 21) { 
-          category = 'Athlete'; 
-          advice = 'Excellent athletic body composition for female athletes.';
-          healthIndicator = '🟢';
-        } else if (bodyFat < 25) { 
-          category = 'Fitness'; 
-          advice = 'Healthy and fit body composition. Maintain your balanced routine!';
-          healthIndicator = '🟢';
-        } else if (bodyFat < 32) { 
-          category = 'Acceptable'; 
-          advice = 'Within normal range. Regular exercise can help optimize composition.';
-          healthIndicator = '🟡';
-        } else { 
-          category = 'Above Average'; 
-          advice = 'Consider lifestyle changes focusing on nutrition and regular physical activity.';
-          healthIndicator = '🔴';
+        if (bodyFat < 14) { category = 'Essential Fat'; advice = 'Very low for women - monitor health markers and ensure adequate nutrition.'; healthIndicator = '🟡';
+        } else if (bodyFat < 21) { category = 'Athletes'; advice = 'Excellent athletic body composition for female athletes.'; healthIndicator = '🟢';
+        } else if (bodyFat < 25) { category = 'Fitness'; advice = 'Healthy and fit body composition. Maintain your balanced routine!'; healthIndicator = '🟢';
+        } else if (bodyFat < 32) { category = 'Acceptable'; advice = 'Within normal range. Regular exercise can help optimize composition.'; healthIndicator = '🟡';
+        } else { category = 'Obesity'; advice = 'Consider lifestyle changes focusing on nutrition and regular physical activity.'; healthIndicator = '🔴';
         }
       }
 
       const facts = [
-        "💡 Muscle tissue burns 6-7x more calories than fat tissue, even at rest!",
-        "📊 Body fat % is more accurate than BMI for assessing health risks.",
-        "🏋️ Strength training helps preserve muscle while reducing body fat.",
-        "🥗 Proper nutrition accounts for about 70% of body composition changes.",
-        "💧 Staying hydrated can temporarily affect body fat measurements.",
-        "😴 Quality sleep is crucial for maintaining healthy body composition."
+        "💡 Muscle tissue burns more calories than fat tissue, even at rest!", "📊 Body fat % is a more accurate health indicator than BMI for most people.", "🏋️ Strength training is crucial for preserving muscle while reducing body fat.", "🥗 Proper nutrition accounts for about 70-80% of body composition changes.", "💧 Hydration levels can significantly affect body fat measurements.", "😴 Quality sleep helps regulate hormones that control appetite and fat storage."
       ];
       const fact = facts[Math.floor(Math.random() * facts.length)];
 
@@ -820,10 +603,17 @@
         }
       }
 
-      // FAQ accordion
+      // FAQ accordion (assuming .faq structure)
       document.querySelectorAll(".faq h3").forEach(faqHeader => {
         faqHeader.addEventListener("click", () => {
-          faqHeader.parentElement.classList.toggle("active");
+          const faqItem = faqHeader.parentElement;
+          faqItem.classList.toggle("active");
+          const p = faqItem.querySelector('p');
+          if (faqItem.classList.contains('active')) {
+            p.style.display = 'block';
+          } else {
+            p.style.display = 'none';
+          }
         });
       });
     });
