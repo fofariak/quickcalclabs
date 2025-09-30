@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://quickcalclabs.com/sitemap.xml
