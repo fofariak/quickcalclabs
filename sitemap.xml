@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://quickcalclabs.com/</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Calculators -->
+  <url><loc>https://quickcalclabs.com/age-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/bmi-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/body-fat-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/calorie-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/macro-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/period-tracker.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/pregnancy-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/pregnancy-weight-gain-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://quickcalclabs.com/resting-metabolic-rate-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://quickcalclabs.com/water-intake-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://quickcalclabs.com/baby-feeding-schedule-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://quickcalclabs.com/baby-growth-percentile-calculator.html</loc><lastmod>2025-09-30</lastmod><priority>0.7</priority></url>
+
+  <!-- Blog posts -->
+  <url><loc>https://quickcalclabs.com/blog/10-fun-facts-about-age-and-time.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/10-tips-to-reduce-bmi.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/10000-steps-vs-mindful-walking.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/age-calculator-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/babys-first-milestones-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/best-foods-for-pregnancy.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/bmi-calculation-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/body-fat-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/body-fat-vs-bmi.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/calorie-calculator-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/complete-guide-to-macro-nutrients.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/decoding-baby-hunger-cues.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/energy-balance-weight-loss.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/fertility-tips-for-women.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/health-benefits-of-hydration.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/how-many-calories-do-you-need.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/how-to-boost-metabolism.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/how-to-maintain-healthy-bmi.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/how-to-reduce-body-fat-naturally.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/introducing-solids-baby-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/macro-calculator-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/macro-counting-for-beginners.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/period-ovulation-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/pregnancy-due-date-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/safe-exercise-pregnancy-trimester.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/sleep-weight-loss-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/trimester-guide-for-expecting-mothers.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/ultimate-guide-to-daily-hydration.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/understanding-your-menstrual-cycle.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+  <url><loc>https://quickcalclabs.com/blog/water-intake-guide.html</loc><lastmod>2025-09-30</lastmod><priority>0.6</priority></url>
+
+  <!-- Policy & static pages -->
+  <url><loc>https://quickcalclabs.com/blog.html</loc><lastmod>2025-09-30</lastmod><priority>0.5</priority></url>
+  <url><loc>https://quickcalclabs.com/about.html</loc><lastmod>2025-09-30</lastmod><priority>0.4</priority></url>
+  <url><loc>https://quickcalclabs.com/contact.html</loc><lastmod>2025-09-30</lastmod><priority>0.4</priority></url>
+  <url><loc>https://quickcalclabs.com/privacy-policy.html</loc><lastmod>2025-09-30</lastmod><priority>0.3</priority></url>
+  <url><loc>https://quickcalclabs.com/terms-of-service.html</loc><lastmod>2025-09-30</lastmod><priority>0.3</priority></url>
+  <url><loc>https://quickcalclabs.com/affiliate-disclosure.html</loc><lastmod>2025-09-30</lastmod><priority>0.3</priority></url>
+
+</urlset>
