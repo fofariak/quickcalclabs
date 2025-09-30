@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Privacy Policy | QuickCalcLabs</title>
-  <meta name="description" content="QuickCalcLabs Privacy Policy – learn how we handle your data, cookies, and user privacy with transparency and care.">
+  <meta name="description" content="Read the official Privacy Policy for QuickCalcLabs. Learn how we handle data, our use of cookies, third-party services like Google AdSense, and our commitment to protecting your privacy.">
   <link rel="canonical" href="https://quickcalclabs.com/privacy-policy.html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
@@ -11,206 +11,156 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    /* Reuse About.html modern layout */
-    .hero-section {
-      text-align: center;
-      padding: clamp(3rem, 7vw, 5rem) 1rem 2rem;
-      margin: 2rem auto;
-      max-width: var(--container);
-    }
-
-    .hero-section h1 {
-      margin: 0 0 1rem 0;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink), var(--accent-green));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-align: center;
-    }
-
-    .hero-section p {
-      color: var(--text-weak-light);
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      line-height: 1.6;
-    }
-    .dark-mode .hero-section p { color: var(--text-weak-dark); }
-
-    .content-wrapper {
-      max-width: var(--container);
+    /* NOTE: Preserving your original styling */
+    .container {
+      max-width: 800px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 2rem;
     }
-
-    .content-section {
+    .page-header {
+      text-align: center;
+      padding: 3rem 0 2rem;
+    }
+    .page-header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      margin: 0 0 1rem;
+    }
+    .last-updated {
+      color: var(--text-weak-light);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .dark-mode .last-updated {
+        color: var(--text-weak-dark);
+    }
+    .policy-section {
       background: var(--surface-1-light);
-      border-radius: var(--radius-lg);
       padding: 2.5rem;
+      border-radius: var(--radius-lg);
       margin-bottom: 2rem;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid #ffffff70;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
-    .content-section h2 {
-      font-size: 1.8rem;
+    .dark-mode .policy-section {
+      background: var(--surface-1-dark);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .policy-section h2 {
+      font-size: 1.5rem;
       font-weight: 700;
+      margin: 0 0 1.5rem;
+    }
+    .policy-section p, .policy-section li {
+      color: var(--text-weak-light);
+      font-size: 1.05rem;
+      line-height: 1.7;
       margin-bottom: 1rem;
-      display:flex;
-      align-items:center;
-      gap:0.5rem;
     }
-    .content-section p { line-height:1.7; margin-bottom:1rem; font-size:1.1rem; color:var(--text-weak-light); }
-    .dark-mode .content-section { background: var(--surface-1-dark); border-color:#ffffff18; }
-    .dark-mode .content-section p { color: var(--text-weak-dark); }
-
-    /* Modern FAQ Accordion */
-    .faq {
-      max-width: var(--container);
-      margin: 2rem auto;
-      padding: 0 1rem;
+    .dark-mode .policy-section p, .dark-mode .policy-section li {
+      color: var(--text-weak-dark);
     }
-    .faq h2 { text-align:center; margin-bottom:1.5rem; }
-    .faq-item { border:1px solid #e6eef5; border-radius:10px; margin-bottom:12px; background:#fff; overflow:hidden; box-shadow:var(--shadow-sm); }
-    .faq-question { width:100%; padding:1rem 1.2rem; font-weight:600; text-align:left; border:none; background:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:1.1rem; }
-    .faq-answer { display:none; padding:0 1.2rem 1rem; color:#444; }
-    .faq-item.active .faq-answer { display:block; }
-
-    footer { margin-top:3rem; text-align:center; padding:2rem 1rem; font-size:0.9rem; color:var(--text-weak-light); }
-    footer a { color:var(--accent-blue); text-decoration:none; }
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <button id="darkModeToggle">🌙</button>
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero-section">
-    <h1>🔒 Privacy Policy</h1>
-    <p>Your privacy matters. Learn how we collect, use, and protect your information.</p>
-  </section>
+  <main class="container">
+    <div class="page-header">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Effective Date: September 30, 2025</p>
+    </div>
 
-  <!-- Main Content -->
-  <main class="content-wrapper">
-    <section class="content-section">
-      <h2>1. Information We Collect</h2>
-      <p>We collect limited data necessary to improve user experience. This may include cookies, analytics, and usage trends. We never sell your personal information.</p>
-    </section>
+    <div class="policy-section">
+      <h2>1. Introduction</h2>
+      <p>Welcome to QuickCalcLabs ("we," "our," or "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website, quickcalclabs.com (the "Site"). By using the Site, you agree to the collection and use of information in accordance with this policy.</p>
+    </div>
 
-    <section class="content-section">
-      <h2>2. How We Use Your Data</h2>
-      <p>Your data is used to personalize features, optimize performance, and serve relevant content. We ensure compliance with GDPR, CCPA, and other data protection laws.</p>
-    </section>
+    <div class="policy-section">
+      <h2>2. Information We Collect</h2>
+      <p>Our guiding principle is to collect only the minimum information necessary. We do not require you to create an account or provide personal information to use our calculators.</p>
+      <ul>
+        <li><strong>Personal Data:</strong> The only personal data we collect is what you voluntarily provide to us when you contact us via email, such as your name and email address.</li>
+        <li><strong>Calculator Data:</strong> Any data you enter into our calculators (e.g., age, weight, height) is processed in your browser and is not stored on our servers.</li>
+      </ul>
+    </div>
 
-    <section class="content-section">
-      <h2>3. Cookies</h2>
-      <p>Cookies help us remember preferences and analyze traffic. You can disable cookies in your browser settings at any time.</p>
-    </section>
+    <div class="policy-section">
+      <h2>3. How We Use Your Information</h2>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul>
+        <li>To operate and maintain our Site.</li>
+        <li>To improve the user experience and develop new features.</li>
+        <li>To understand and analyze how you use our Site through analytics.</li>
+        <li>To respond to your comments, questions, and provide customer service.</li>
+        <li>To serve advertisements that help keep our services free.</li>
+      </ul>
+    </div>
+    
+    <div class="policy-section">
+      <h2>4. Cookies and Web Beacons</h2>
+      <p>Like many other websites, we use 'cookies'. These are small files stored on your device that help the Site function and allow us to analyze traffic. We use cookies to understand user preferences for future visits and compile aggregate data about site traffic and interaction.</p>
+      <p>You can choose to disable cookies through your individual browser options. However, this may affect your ability to use certain features of our Site.</p>
+    </div>
 
-    <section class="content-section">
-      <h2>4. Third-Party Services</h2>
-      <p>We may use analytics and advertising partners like Google AdSense. These services may set their own cookies and collect data in line with their privacy policies.</p>
-    </section>
+    <div class="policy-section">
+      <h2>5. Third-Party Services & Advertising</h2>
+      <p>We use third-party services to help us operate our Site:</p>
+      <ul>
+        <li><strong>Google AdSense:</strong> We use Google AdSense to display advertisements on our Site. Google uses cookies (such as the DoubleClick DART cookie) to serve ads based on a user's prior visits to our website and other websites on the Internet. Users may opt-out of the use of the DART cookie by visiting the Google Ad and Content Network privacy policy.</li>
+        <li><strong>Google Analytics:</strong> We use this service to understand our website traffic and user engagement. Google Analytics may collect your IP address, but we do not combine this information with any personally identifiable information.</li>
+      </ul>
+      <p>These third-party services have their own privacy policies addressing how they use such information.</p>
+    </div>
 
-    <section class="content-section">
-      <h2>5. Contact Us</h2>
-      <p>If you have any privacy concerns, please reach us at <a href="mailto:support@quickcalclabs.com">support@quickcalclabs.com</a>.</p>
-    </section>
+    <div class="policy-section">
+      <h2>6. Children's Privacy</h2>
+      <p>Our Site is not intended for use by children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we become aware that we have collected such information, we will take steps to delete it.</p>
+    </div>
+
+    <div class="policy-section">
+      <h2>7. Changes to This Privacy Policy</h2>
+      <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+    </div>
+
+    <div class="policy-section">
+      <h2>8. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:quickcalclab@gmail.com" style="color:var(--accent-blue);">quickcalclab@gmail.com</a>.</p>
+    </div>
   </main>
 
-  <!-- FAQ -->
-  <section class="faq">
-    <h2>❓ Frequently Asked Questions</h2>
-    <div class="faq-item">
-      <button class="faq-question">Do you sell my personal data?</button>
-      <div class="faq-answer"><p>No. We never sell or share your personal data with third parties.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question">Can I opt out of cookies?</button>
-      <div class="faq-answer"><p>Yes, you can disable cookies directly from your browser settings.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question">How can I contact you about privacy?</button>
-      <div class="faq-answer"><p>Email us at <a href="mailto:support@quickcalclabs.com">support@quickcalclabs.com</a>.</p></div>
-    </div>
-  </section>
-
-  <!-- Floating CTA -->
-  <a href="index.html" class="floating-cta">
-    🧮 Try Our Calculators
-  </a>
-
-  <!-- Footer -->
   <footer>
-    <p>© 2025 QuickCalcLabs • <a href="privacy-policy.html">Privacy Policy</a> • <a href="terms-of-service.html">Terms</a> • <a href="affiliate-disclosure.html">Affiliate Disclosure</a></p>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
-  <!-- FAQ JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Do you sell my personal data?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. We never sell or share your personal data with third parties."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I opt out of cookies?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, you can disable cookies directly from your browser settings."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can I contact you about privacy?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Email us at support@quickcalclabs.com."
-        }
-      }
-    ]
-  }
-  </script>
-
   <script>
-    // Dark mode toggle + FAQ accordion
     document.addEventListener('DOMContentLoaded', function() {
       const darkModeToggle = document.getElementById('darkModeToggle');
       const body = document.body;
-
       if (localStorage.getItem('theme') === 'dark') {
         body.classList.add('dark-mode');
         darkModeToggle.textContent = '☀️';
       }
-
       darkModeToggle.addEventListener('click', function() {
         body.classList.toggle('dark-mode');
         const isDark = body.classList.contains('dark-mode');
         darkModeToggle.textContent = isDark ? '☀️' : '🌙';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      });
-
-      document.querySelectorAll('.faq-question').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const item = btn.parentElement;
-          item.classList.toggle('active');
-        });
       });
     });
   </script>
