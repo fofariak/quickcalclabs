@@ -13,65 +13,156 @@
      crossorigin="anonymous"></script>
   
   <style>
-    /* NOTE: Preserving your original styling */
+    /* Affiliate disclosure page specific styles */
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 2rem;
+      padding: 2rem 1rem 3rem;
     }
+
     .page-header {
       text-align: center;
       padding: 3rem 0 2rem;
     }
+
     .page-header h1 {
       font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      margin: 0 0 1rem;
+      font-weight: 800;
+      margin: 0 0 1.5rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
     }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
     .last-updated {
-      color: var(--text-weak-light);
+      color: var(--text-weak-light, #64748b);
       font-size: 0.95rem;
       font-weight: 600;
-      background: var(--surface-2-light);
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
       display: inline-block;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
     }
+
     .dark-mode .last-updated {
-        color: var(--text-weak-dark);
-        background: var(--surface-2-dark);
-        border-color: rgba(255,255,255,0.1);
+      color: var(--text-weak-dark, #94a3b8);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
+
     .disclosure-section {
-      background: var(--surface-1-light);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
       padding: 2.5rem;
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-lg, 16px);
       margin-bottom: 2rem;
-      box-shadow: var(--shadow-md);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-     .dark-mode .disclosure-section {
-      background: var(--surface-1-dark);
-      border-color: rgba(255, 255, 255, 0.1);
+
+    .disclosure-section:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
     }
+
+    .dark-mode .disclosure-section {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .disclosure-section:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
     .disclosure-section h2 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       margin: 0 0 1.5rem;
+      color: var(--text-strong-light, #0f172a);
     }
-    .disclosure-section p, .disclosure-section li {
-      color: var(--text-weak-light);
+
+    .dark-mode .disclosure-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .disclosure-section h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .disclosure-section h4 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .disclosure-section p, 
+    .disclosure-section li {
+      color: var(--text-weak-light, #64748b);
       font-size: 1.05rem;
       line-height: 1.7;
       margin-bottom: 1rem;
     }
-     .dark-mode .disclosure-section p, .dark-mode .disclosure-section li {
-      color: var(--text-weak-dark);
+
+    .dark-mode .disclosure-section p, 
+    .dark-mode .disclosure-section li {
+      color: var(--text-weak-dark, #94a3b8);
     }
+
+    .disclosure-section ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .disclosure-section li {
+      margin-bottom: 0.8rem;
+    }
+
+    .disclosure-section a {
+      color: var(--primary, #8b5cf6);
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: all 0.15s ease;
+    }
+
+    .disclosure-section a:hover {
+      text-decoration-color: currentColor;
+    }
+
+    .dark-mode .disclosure-section a {
+      color: var(--primary-light, #a78bfa);
+    }
+
     .contact-section {
       text-align: center;
-      padding: 2rem 0;
+      padding: 1rem 0;
+    }
+
+    @media (max-width: 820px) {
+      .container {
+        padding: 1.5rem 1rem 2rem;
+      }
+
+      .page-header {
+        padding: 2rem 0 1.5rem;
+      }
+
+      .disclosure-section {
+        padding: 1.8rem;
+      }
     }
   </style>
 </head>
@@ -129,16 +220,14 @@
   </main>
 
   <footer>
-    <div class="disclaimer affiliate-disclosure"> 
-
-       <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p> 
-
-     </div>
-    <div class="footer-links"> 
-      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p> 
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
       <a href="privacy-policy.html">Privacy Policy</a> | 
       <a href="terms-of-service.html">Terms of Service</a> | 
-      <a href="affiliate-disclosure.html">Affiliate Disclosure</a> 
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
     </div>
   </footer>
 
