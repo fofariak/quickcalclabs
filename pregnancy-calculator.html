@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Accurate Pregnancy Due Date Calculator &amp; Fetal Development Timeline | QuickCalcLabs</title>
-
-  <meta name="description" content="Calculate your estimated due date with our accurate pregnancy calculator. Get a personalized week-by-week pregnancy timeline, understand your trimesters, and see key fetal development milestones.">
-  
+  <title>Pregnancy Due Date Calculator & Timeline | QuickCalcLabs</title>
+  <meta name="description" content="Use our free and accurate Pregnancy Calculator to estimate your due date based on your last menstrual period (LMP). Track your pregnancy week by week, understand trimesters, and learn about key fetal development milestones.">
   <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy weeks, pregnancy milestones, trimester tracker, conception date calculator, when is my due date, pregnancy timeline">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
@@ -16,23 +13,84 @@
   
   <style>
     /* NOTE: I am preserving your original styling as requested. */
-    .calc-wrapper { padding: 30px; }
-    .result-box { margin-top: 20px; padding: 20px; background: var(--glass-bg, rgba(255, 255, 255, 0.1)); border-radius: var(--radius, 15px); border: 1px solid rgba(255,255,255,0.2); }
-    .calendar-btn { display: inline-block; margin-top: 15px; padding: 10px 20px; border-radius: 25px; background: linear-gradient(135deg, #4dabf7, #228be6); color: white; text-decoration: none; font-weight: 600; transition: transform 0.2s ease, box-shadow 0.2s ease; }
-    .calendar-btn:hover { transform: scale(1.05); box-shadow: var(--glow, 0 0 15px rgba(77, 171, 247, 0.5)); }
-    .input-field { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
-    .seo-content h2, .seo-content h3 { color: var(--text, #333); margin-top: 30px; margin-bottom: 15px; }
-    .seo-content h2 { font-size: 1.8rem; text-align: center; }
-    .seo-content h3 { font-size: 1.3rem; color: #228be6; }
-    .seo-content ul, .seo-content ol { list-style-position: inside; padding-left: 10px; }
-    .seo-content ul li, .seo-content ol li { margin-bottom: 10px; line-height: 1.6; }
-    .seo-content a { color: #228be6; text-decoration: underline; font-weight: 500; }
-    .seo-content a:hover { color: #1c7ed6; text-decoration: none; }
-    .disclaimer-box { padding: 15px; margin: 20px 0; border-left: 4px solid #f6e05e; background-color: #fffbe9; border-radius: 4px; }
-    /* Assuming you have styles for faq-section, floating-cta, footer, etc. in your style.css */
+    .calc-wrapper {
+        padding: 30px;
+    }
+    .result-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+      border-radius: var(--radius, 15px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .calendar-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #4dabf7, #228be6); 
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .calendar-btn:hover {
+      transform: scale(1.05);
+      box-shadow: var(--glow, 0 0 15px rgba(77, 171, 247, 0.5));
+    }
+    .input-field {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+    .seo-content h2, .seo-content h3 {
+      color: var(--text, #333);
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .seo-content h3 {
+      font-size: 1.3rem;
+      color: #228be6;
+    }
+     .seo-content ul, .seo-content ol {
+      list-style-position: inside;
+      padding-left: 10px;
+    }
+
+    .seo-content ul li, .seo-content ol li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .seo-content a {
+        color: #228be6;
+        text-decoration: underline;
+        font-weight: 500;
+    }
+    .seo-content a:hover {
+        color: #1c7ed6;
+        text-decoration: none;
+    }
+    .disclaimer-box {
+        padding: 15px;
+        margin: 20px 0;
+        border-left: 4px solid #f6e05e;
+        background-color: #fffbe9;
+        border-radius: 4px;
+    }
+    
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -43,66 +101,64 @@
     </nav>
   </header>
 
-  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+  <!-- Ad 1 -->
+  <div class="ad-container">
+    <div class="ad-placeholder">728x90 Banner Ad</div>
+  </div>
 
+  <!-- Hero -->
   <section class="calc-wrapper">
-    <h1>🤰 Accurate Pregnancy Due Date Calculator</h1>
-    <p class="subtitle">Congratulations on your exciting journey! Use our tool to estimate your baby's due date and get a personalized timeline of the amazing milestones ahead.</p>
+    <h1>🤰 Pregnancy Due Date Calculator</h1>
+    <p class="subtitle">Estimate your baby's due date, track your pregnancy progress, and discover key milestones on your journey to motherhood.</p>
 
-    <label for="lmp"><strong>Enter the First Day of Your Last Period (LMP):</strong></label>
+    <label for="lmp"><strong>First Day of Your Last Period (LMP):</strong></label>
     <input type="date" id="lmp" class="input-field">
 
     <button onclick="calculatePregnancy()">Calculate My Due Date</button>
     <div id="result" class="result-box"></div>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">300x250 Banner Ad</div></div>
+  <!-- Ad 2 -->
+  <div class="ad-container">
+    <div class="ad-placeholder">300x250 Banner Ad</div>
+  </div>
 
+  <!-- SEO Content -->
   <section class="seo-content">
     <article>
-        <h2>Understanding Your Results & Pregnancy Timeline</h2>
-        <p>Once you enter your Last Menstrual Period (LMP), our calculator provides several key dates that map out your pregnancy. This timeline is based on a standard 40-week gestation period. Here’s what each piece of information means for you and your baby.</p>
+        <h2>How to Use the Pregnancy Calculator</h2>
+        <p>Using our calculator is simple. Just enter the first day of your last menstrual period (LMP) into the date selector and click "Calculate My Due Date." The tool will instantly provide you with a wealth of information about your pregnancy timeline.</p>
+
+        <h2>Understanding Your Pregnancy Timeline</h2>
+        <p>A typical pregnancy lasts about 40 weeks (280 days) from the first day of your last period. This is known as the gestational age. It's important to note that pregnancy is counted from your LMP, not from the date of conception, which usually occurs about two weeks later.</p>
         <ul>
-            <li><strong>Estimated Due Date:</strong> This is the big day! It's the projected date for your baby's arrival, calculated 280 days after your LMP. Remember, only about 5% of babies are born on their exact due date.</li>
-            <li><strong>Current Progress (Gestational Age):</strong> This shows how far along you are in weeks and days. This is the standard measurement used by doctors and is crucial for tracking development and scheduling appointments.</li>
-            <li><strong>Trimesters:</strong> Your pregnancy is divided into three trimesters. Each has distinct phases of fetal development and brings different changes for the mother.</li>
-            <li><strong>Estimated Conception Date:</strong> This is typically around two weeks after your LMP, coinciding with ovulation in a 28-day cycle.</li>
+            <li><strong>Last Menstrual Period (LMP):</strong> The starting point for calculating your due date and pregnancy week.</li>
+            <li><strong>Estimated Conception Date:</strong> This is approximately 14 days after your LMP, around the time of ovulation for a regular 28-day cycle.</li>
+            <li><strong>Fetal Age vs. Gestational Age:</strong> Gestational age (what this calculator shows) is about two weeks longer than the fetal age (the actual age of the baby since conception).</li>
         </ul>
 
-        <h3>What To Do After You Get Your Due Date</h3>
-        <p>Finding out your due date is an exciting first step. Here's what to consider next:</p>
+        <h3>What to Expect in Each Trimester</h3>
+        <p>Your pregnancy is divided into three trimesters, each with unique developments and milestones.</p>
+        <ul>
+            <li><strong>First Trimester (Weeks 1-13):</strong> This is a period of rapid development. The baby's major organs and body systems form. For the mother, this trimester is often marked by symptoms like morning sickness, fatigue, and hormonal changes.</li>
+            <li><strong>Second Trimester (Weeks 14-27):</strong> Often called the "golden period," as many early pregnancy symptoms subside. You may feel your baby's first movements (quickening), and your baby bump will become more noticeable. The baby continues to grow and mature.</li>
+            <li><strong>Third Trimester (Weeks 28-40+):</strong> The final stretch! The baby gains weight rapidly, and their systems prepare for life outside the womb. For the mother, this period can bring physical discomforts as the baby gets bigger.</li>
+        </ul>
+
+        <h2>How is the Due Date Calculated?</h2>
+        <p>This calculator uses <strong>Naegele’s rule</strong>, a standard method used by healthcare professionals worldwide. The rule works by:</p>
         <ol>
-            <li><strong>Schedule a Doctor's Appointment:</strong> Your first prenatal visit is the most important step. A healthcare provider can confirm your pregnancy and due date (often with an ultrasound) and guide you on the path to a healthy pregnancy.</li>
-            <li><strong>Start a Prenatal Vitamin:</strong> If you haven't already, begin taking a prenatal vitamin containing folic acid, which is vital for preventing birth defects.</li>
-            <li><strong>Learn About Early Pregnancy Symptoms:</strong> Understanding what to expect—from morning sickness to fatigue—can help you navigate the first trimester more comfortably.</li>
+            <li>Taking the first day of your last menstrual period (LMP).</li>
+            <li>Adding one year.</li>
+            <li>Subtracting three months.</li>
+            <li>Adding seven days.</li>
         </ol>
-
-        <h3>A Deeper Look at Each Trimester</h3>
-        <p>Your 40-week pregnancy is a transformative journey, broken into three distinct stages.</p>
-        <ul>
-            <li><strong>First Trimester (Weeks 1-13): The Foundation of Life</strong><br>
-            This is a time of incredible, unseen development. The fertilized egg implants in the uterus, and the foundational structures of the brain, spine, and heart are formed. By the end of this trimester, your baby has arms, legs, fingers, and toes. For you, this period is driven by hormonal surges, often causing symptoms like fatigue, nausea (morning sickness), and breast tenderness.</li>
-            <li><strong>Second Trimester (Weeks 14-27): The "Golden" Period</strong><br>
-            Many mothers find this trimester more comfortable as early symptoms often fade and energy levels rise. Your baby bump becomes more prominent. You'll likely feel your baby's first tiny movements, known as "quickening." The baby's hearing develops, and their features become more defined. This is often when an anatomy scan (ultrasound) is performed.</li>
-            <li><strong>Third Trimester (Weeks 28-40+): Preparing for Arrival</strong><br>
-            This is the final stretch of growth and maturation. The baby gains weight rapidly, their bones harden, and their lungs prepare for breathing. For you, this can bring physical challenges like backaches, swelling, and difficulty sleeping as your body prepares for labor and delivery.</li>
-        </ul>
-
-        <h3>How Accurate Is This Due Date?</h3>
-        <p>This calculator uses <strong>Naegele’s rule</strong>, a trusted and standard method for estimating a due date. It works by adding 280 days (40 weeks) to the first day of your last menstrual period. It assumes a regular 28-day cycle with ovulation occurring on day 14.</p>
-        <p>However, it is an **estimate**. The most accurate way to date a pregnancy is via an early ultrasound, usually done between 6 and 9 weeks. A doctor will use the measurement of the fetus (crown-rump length) to determine a highly precise gestational age and due date. Your doctor may adjust your date based on this ultrasound.</p>
+        <p>This calculation is based on a regular 28-day menstrual cycle. If your cycles are significantly longer or shorter, your healthcare provider may adjust your due date after an ultrasound exam, which provides a more precise measurement of the baby's gestational age.</p>
 
         <div class="disclaimer-box">
           <strong>Medical Disclaimer:</strong> This calculator provides an estimate for informational purposes only and is not a substitute for professional medical advice. Your due date may be adjusted by your doctor based on ultrasound results. Please consult with a qualified healthcare provider for any health concerns or for personalized medical guidance throughout your pregnancy.
         </div>
         
-        <h3>Further Reading & Authoritative Sources</h3>
-        <p>To provide you with the most trustworthy information, we base our content on research and guidelines from leading health organizations. You can learn more from these sources:</p>
-        <ul>
-            <li><strong>American College of Obstetricians and Gynecologists (ACOG):</strong> <a href="https://www.acog.org/womens-health/faqs/methods-for-estimating-your-due-date" target="_blank" rel="noopener noreferrer">Methods for Estimating Your Due Date</a> - An overview of clinical best practices.</li>
-            <li><strong>Mayo Clinic:</strong> <a href="https://www.mayoclinic.org/healthy-lifestyle/pregnancy-week-by-week/in-depth/prenatal-care/art-20045302" target="_blank" rel="noopener noreferrer">Calculating a due date</a> - A clear guide on due date calculations and trimesters.</li>
-            <li><strong>Cleveland Clinic:</strong> <a href="https://my.clevelandclinic.org/health/diagnostics/22152-due-date-calculator" target="_blank" rel="noopener noreferrer">Pregnancy Due Date Calculator</a> - More information on pregnancy stages and fetal development.</li>
-        </ul>
     </article>
     
     <h3>🔗 Explore More Women's Health Tools</h3>
@@ -118,15 +174,17 @@
       <div class="card"><a href="blog/best-foods-for-pregnancy.html">🥗 Best Foods for a Healthy Pregnancy</a></div>
       <div class="card"><a href="blog/trimester-guide-for-expecting-mothers.html">📖 Trimester Guide for Expecting Mothers</a></div>
     </div>
+    
   </section>
 
 
+  <!-- FAQ -->
   <section class="faq-section">
     <h2>❓ Frequently Asked Questions</h2>
     <div class="faq">
       <details>
         <summary>How accurate is a due date calculator?</summary>
-        <p>✔️ An LMP-based calculator provides a reliable estimate for a 28-day cycle. However, only about 5% of babies are born on their exact due date. An early ultrasound is the most accurate method for determining gestational age and confirming the due date, especially if you have irregular cycles.</p>
+        <p>✔️ An LMP-based calculator provides a reliable estimate and is a great starting point. However, only about 5% of babies are born on their exact due date. An early ultrasound is the most accurate way to determine the gestational age and confirm the due date.</p>
       </details>
     </div>
     <div class="faq">
@@ -149,12 +207,15 @@
     </div>
   </section>
 
+  <!-- Ad 3 -->
   <div class="ad-container">
     <div class="ad-placeholder">728x90 Banner Ad</div>
   </div>
 
+  <!-- Floating CTA -->
   <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
 
+  <!-- Footer -->
   <footer>
     <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
@@ -166,6 +227,7 @@
     <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
 
+  <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -173,7 +235,7 @@
     "mainEntity": [{
       "@type": "Question",
       "name": "How accurate is a due date calculator?",
-      "acceptedAnswer": { "@type": "Answer", "text": "An LMP-based calculator provides a reliable estimate for a 28-day cycle. However, only about 5% of babies are born on their exact due date. An early ultrasound is the most accurate method for determining gestational age and confirming the due date, especially if you have irregular cycles." }
+      "acceptedAnswer": { "@type": "Answer", "text": "An LMP-based calculator provides a reliable estimate and is a great starting point. However, only about 5% of babies are born on their exact due date. An early ultrasound is the most accurate way to determine the gestational age and confirm the due date." }
     },{
       "@type": "Question",
       "name": "Can my due date change?",
@@ -182,10 +244,6 @@
       "@type": "Question",
       "name": "What if I don't know the date of my last period?",
       "acceptedAnswer": { "@type": "Answer", "text": "If you're unsure about your LMP or have irregular cycles, the most accurate way to determine your due date is through an ultrasound performed by your healthcare provider. They can measure the baby to determine its gestational age." }
-    },{
-        "@type": "Question",
-        "name": "Is it possible to get a positive pregnancy test before a missed period?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Some sensitive home pregnancy tests can detect the pregnancy hormone (hCG) in your urine several days before your expected period. For the most accurate result, it's best to wait until the day of your missed period." }
     }]
   }
   </script>
@@ -229,16 +287,10 @@
 
       const msPerDay = 1000 * 60 * 60 * 24;
       const daysPregnant = Math.floor((today - lmpDate) / msPerDay);
-      
-      if (daysPregnant < 0) {
-          document.getElementById("result").innerHTML = "<p>Your pregnancy journey hasn't started yet based on this date. Please select a date in the past.</p>";
-          return;
-      }
-
       const weeksPregnant = Math.floor(daysPregnant / 7);
       const daysIntoWeek = daysPregnant % 7;
       
-      const fetalAgeWeeks = Math.max(0, weeksPregnant - 2);
+      const fetalAgeWeeks = weeksPregnant - 2;
 
       const trimester = weeksPregnant < 14 ? "First Trimester" : (weeksPregnant < 28 ? "Second Trimester" : "Third Trimester");
 
@@ -261,13 +313,12 @@
         <p><b>Baby's Fetal Age:</b> Approximately ${fetalAgeWeeks} weeks</p>
         <hr style="margin: 15px 0;">
         <p><b>This Week's Milestone:</b> ${milestoneMessage}</p>
-        <a href="#" class="calendar-btn" onclick="downloadICS('Baby\\\'s Estimated Due Date', dueDate)">📅 Add Due Date to Calendar</a>
+        <a href="#" class="calendar-btn" onclick="downloadICS('Baby\'s Estimated Due Date', dueDate)">📅 Add Due Date to Calendar</a>
       `;
     }
 
     function downloadICS(eventTitle, eventDate) {
       const startDate = new Date(eventDate);
-      // Format for ICS: YYYYMMDDTHHMMSSZ, but for all-day events, just YYYYMMDD is enough.
       const start = startDate.toISOString().replace(/[-:]/g, "").split(".")[0];
 
       const icsContent = `BEGIN:VCALENDAR
@@ -278,7 +329,7 @@ DTSTART;VALUE=DATE:${start.substring(0,8)}
 DTEND;VALUE=DATE:${start.substring(0,8)}
 DESCRIPTION:Estimated due date calculated by QuickCalcLabs.
 END:VEVENT
-END:VCALENDAR`.replace(/\\n/g, "\\r\\n");
+END:VCALENDAR`.replace(/\n/g, "\r\n");
 
       const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
       const url = URL.createObjectURL(blob);
@@ -306,3 +357,4 @@ END:VCALENDAR`.replace(/\\n/g, "\\r\\n");
   </script>
 </body>
 </html>
+
