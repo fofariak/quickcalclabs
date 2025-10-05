@@ -3,92 +3,525 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comprehensive BMI Calculator (Body Mass Index) | QuickCalcLabs</title>
-  <meta name="description" content="Calculate your Body Mass Index (BMI) with our free, accurate calculator using metric or imperial units. Learn what BMI is, how to interpret your results, its importance, and its limitations.">
+  <title>BMI Calculator - Calculate Your Body Mass Index Free | QuickCalcLabs</title>
+  <meta name="description" content="Free BMI calculator for adults. Calculate your Body Mass Index using metric or imperial units. Understand BMI ranges, health implications, and limitations with our comprehensive guide.">
+  <meta name="keywords" content="BMI calculator, body mass index, calculate BMI, BMI chart, healthy weight, obesity calculator, weight categories">
+  <link rel="canonical" href="https://quickcalclabs.com/bmi-calculator.html">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    /* Dark Mode */
-    body.dark-mode {
-      background-color: #1a202c;
-      color: #e2e8f0;
-    }
-    .dark-mode .header {
-      background-color: #2d3748;
-    }
-    .dark-mode .calc-wrapper, .dark-mode .seo-content, .dark-mode .related-links, .dark-mode .faq-section, .dark-mode footer, .dark-mode details {
-      background-color: #2d3748;
-      border-color: #4a5568;
-    }
-    .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode a {
-      color: #ffffff;
-    }
-    .dark-mode p, .dark-mode summary, .dark-mode .subtitle, .dark-mode .meta-info {
-      color: #a0aec0;
-    }
-    .dark-mode input, .dark-mode select {
-      background-color: #4a5568;
-      color: #fff;
-      border-color: #718096;
-    }
-    .dark-mode button, .dark-mode .floating-cta {
-      background-color: #4a5568;
-      color: #fff;
-    }
-    .dark-mode button:hover, .dark-mode .floating-cta:hover {
-      background-color: #718096;
-    }
-    .dark-mode .unit-toggle button.active {
-      background: #4299e1;
-      color: white;
-    }
-    .dark-mode .result-box {
-      background-color: #1a202c;
-    }
-    .dark-mode .disclaimer-box {
-        background-color: #4a5568;
-        border-left-color: #f6ad55;
+    /* BMI Calculator page specific styles */
+    .calc-wrapper {
+      max-width: 700px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
 
-    /* General Styles */
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
     .unit-toggle {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      padding: 0.4rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
     }
+
+    .dark-mode .unit-toggle {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
     .unit-toggle button {
-      padding: 10px 20px;
-      border-radius: 25px;
-      border: 1px solid #ddd;
-      background: #f7fafc;
+      flex: 1;
+      padding: 0.7rem 1.2rem;
+      border-radius: var(--radius-sm, 8px);
+      border: none;
+      background: transparent;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-medium-light, #334155);
+      transition: all 0.3s ease;
     }
+
+    .dark-mode .unit-toggle button {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
     .unit-toggle button.active {
-      background: #3182ce;
-      color: white;
-      border-color: #3182ce;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
     }
+
+    .input-section {
+      margin-bottom: 1.2rem;
+    }
+
+    .input-section label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .input-section label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+    }
+
+    input:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode input {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .dark-mode input:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .calc-wrapper button {
+      width: 100%;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .calc-wrapper button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
     .result-box {
-      margin-top: 20px;
-      padding: 15px;
-      background: #f0f4f8;
-      border-radius: 8px;
+      margin-top: 2rem;
+      padding: 1.8rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
     }
-    .meta-info {
-        font-size: 0.9em;
-        color: #718096;
-        margin-bottom: 20px;
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .result-box p {
+      margin: 0.5rem 0;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .dark-mode .result-box p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Quick links after calculator */
+    .quick-links {
+      margin-top: 2rem;
+      padding: 1.2rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .quick-links {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .quick-links h4 {
+      margin: 0 0 0.8rem 0;
+      font-size: 0.95rem;
+      text-align: center;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .quick-links h4 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .quick-link {
+      padding: 0.6rem;
+      text-align: center;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-sm, 8px);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-medium-light, #334155);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .quick-link:hover {
+      background: var(--primary, #8b5cf6);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .dark-mode .quick-link {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .quick-link:hover {
+      background: var(--primary-light, #a78bfa);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
     .disclaimer-box {
-        padding: 15px;
-        margin: 20px 0;
-        border-left: 4px solid #f6e05e;
-        background-color: #fffbe9;
-        border-radius: 4px;
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .disclaimer-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.15));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box strong {
+      color: #d97706;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid, .quick-links-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -104,99 +537,52 @@
     </nav>
   </header>
 
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner</div>
-  </div>
-
   <section class="calc-wrapper">
-    <h1>⚖️ Body Mass Index (BMI) Calculator</h1>
-    <p class="subtitle">A free and simple tool to check your BMI. Understand where you stand on the path to wellness.</p>
+    <h1>Body Mass Index (BMI) Calculator</h1>
+    <p class="subtitle">Calculate your BMI instantly and understand what your number means for your health journey.</p>
     
     <div class="unit-toggle">
-      <button id="btnImperial" class="active" onclick="setUnit('imperial')">Imperial (lbs, ft+in)</button>
+      <button id="btnImperial" class="active" onclick="setUnit('imperial')">Imperial (lbs, ft)</button>
       <button id="btnMetric" onclick="setUnit('metric')">Metric (kg, cm)</button>
     </div>
 
     <div id="metric-fields" style="display:none;">
-      <label>Weight (kg):</label>
-      <input type="number" id="weightMetric" placeholder="e.g., 70">
-      <label>Height (cm):</label>
-      <input type="number" id="heightMetric" placeholder="e.g., 170">
+      <div class="input-section">
+        <label for="weightMetric">Weight (kg):</label>
+        <input type="number" id="weightMetric" placeholder="e.g., 70" aria-label="Weight in kilograms">
+      </div>
+      <div class="input-section">
+        <label for="heightMetric">Height (cm):</label>
+        <input type="number" id="heightMetric" placeholder="e.g., 170" aria-label="Height in centimeters">
+      </div>
     </div>
 
     <div id="imperial-fields">
-      <label>Weight (lbs):</label>
-      <input type="number" id="weightImperial" placeholder="e.g., 154">
-      <label>Height:</label>
-      <div style="display:flex; gap:10px;">
-        <input type="number" id="heightFeet" placeholder="Feet (e.g., 5)">
-        <input type="number" id="heightInches" placeholder="Inches (e.g., 8)">
+      <div class="input-section">
+        <label for="weightImperial">Weight (lbs):</label>
+        <input type="number" id="weightImperial" placeholder="e.g., 154" aria-label="Weight in pounds">
+      </div>
+      <div class="input-section">
+        <label>Height:</label>
+        <div class="input-row">
+          <input type="number" id="heightFeet" placeholder="Feet (e.g., 5)" aria-label="Height feet">
+          <input type="number" id="heightInches" placeholder="Inches (e.g., 8)" aria-label="Height inches">
+        </div>
       </div>
     </div>
 
     <button onclick="calculateBMI()">Calculate My BMI</button>
     <div id="result" class="result-box"></div>
-  </section>
 
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner</div>
-  </div>
+    </section>
 
-  <section class="seo-content">
-    <article>
-        <h2>How to Use Our BMI Calculator</h2>
-        <p>Getting your BMI result is easy. Follow these simple steps:</p>
-        <ol>
-            <li><strong>Select Your Units:</strong> Choose between 'Imperial' (pounds, feet, and inches) or 'Metric' (kilograms and centimeters) units using the buttons at the top of the calculator.</li>
-            <li><strong>Enter Your Weight:</strong> Input your current weight in the corresponding field (lbs or kg).</li>
-            <li><strong>Enter Your Height:</strong> For imperial, enter your height in feet and inches. For metric, enter your height in centimeters.</li>
-            <li><strong>Calculate:</strong> Click the "Calculate My BMI" button to see your result instantly. Your BMI score, weight category, and a healthy weight range for your height will appear in the results box.</li>
-        </ol>
-
-        <h2>What is Body Mass Index (BMI)?</h2>
-        <p>Body Mass Index (BMI) is a numerical value calculated from your weight and height. It's a widely used, simple screening tool to estimate how much body fat a person has. Developed by Adolphe Quetelet in the 19th century, it helps categorize individuals into weight groups that can indicate potential health risks.</p>
-        <p>The formula for BMI is:</p>
-        <ul>
-            <li><b>Metric:</b> BMI = weight (kg) / [height (m)]²</li>
-            <li><b>Imperial:</b> BMI = 703 × weight (lbs) / [height (in)]²</li>
-        </ul>
-        
-        <h2>Understanding Your BMI Results in Detail</h2>
-        <p>Your BMI number places you in one of four main categories. Here’s what each one means:</p>
-        <ul>
-          <li><b>Underweight (BMI below 18.5):</b> This may indicate that you are not eating enough or could be a sign of an underlying illness. It's often associated with health risks like nutritional deficiencies, osteoporosis, and a weakened immune system.</li>
-          <li><b>Normal or Healthy Weight (BMI 18.5 – 24.9):</b> People in this range have the lowest risk of developing weight-related diseases. This is the target range for most adults.</li>
-          <li><b>Overweight (BMI 25 – 29.9):</b> Being overweight can increase your risk of developing health problems such as heart disease, high blood pressure, and type 2 diabetes. Lifestyle changes are often recommended.</li>
-          <li><b>Obese (BMI 30 or above):</b> Obesity is associated with a significantly higher risk of serious health conditions, including heart disease, stroke, certain types of cancer, and severe joint problems.</li>
-        </ul>
-
-        <h2>The Importance of Knowing Your BMI</h2>
-        <p>While not a perfect measure, BMI is a valuable and accessible tool for a few key reasons:</p>
-        <ul>
-            <li><strong>Health Risk Assessment:</strong> It provides a quick snapshot of potential health risks associated with your weight.</li>
-            <li><strong>Starting Point for Health:</strong> Knowing your BMI can be the first step towards making positive changes in your diet and exercise habits.</li>
-            <li><strong>Population-Level Data:</strong> Public health officials use BMI data to track weight trends across populations and develop health strategies.</li>
-        </ul>
-
-        <h2>❗️ Key Limitations of BMI</h2>
-        <p>It's crucial to understand that BMI is a screening tool, not a diagnostic one. It has several important limitations:</p>
-        <ul>
-            <li><strong>It Doesn't Distinguish Fat from Muscle:</strong> BMI can't tell the difference between fat and muscle. Since muscle is denser than fat, very muscular individuals (like athletes or bodybuilders) may have a high BMI and be classified as "overweight" or "obese" despite being in peak physical condition.</li>
-            <li><strong>It Doesn't Consider Body Composition:</strong> It doesn't account for factors like bone density or the distribution of fat (e.g., visceral fat around the organs is more dangerous than subcutaneous fat).</li>
-            <li><strong>Not Always Accurate for All Populations:</strong> BMI may not be equally accurate for different ethnic groups, genders, or age groups. For example, older adults tend to have more body fat than younger adults for the same BMI.</li>
-        </ul>
-
-        <div class="disclaimer-box">
-            <strong>Disclaimer:</strong> This calculator is for informational purposes only and is not a substitute for professional medical advice. Please consult with a qualified healthcare provider for any health concerns or before making any decisions related to your health or treatment.
-        </div>
-    </article>
-
-    <h3>🔗 Explore More Health Tools</h3>
+    <section class="seo-content">
+    <h3>🔗 Explore More Tools</h3>
     <div class="card-grid">
-      <div class="card"><a href="age-calculator.html">📅 Age Calculator</a></div>
-      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
       <div class="card"><a href="body-fat-calculator.html">📊 Body Fat Calculator</a></div>
+      <div class="card"><a href="age-calculator.html">📅 Age Calculator</a></div>
       <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
     </div>
 
     <h3>📝 Related Health Blogs</h3>
@@ -205,43 +591,223 @@
       <div class="card"><a href="blog/10-tips-to-reduce-bmi.html">💡 10 Tips to Reduce BMI Effectively</a></div>
     </div>
   </section>
-    
+  
 
+    <article>
+        <h2>What is Body Mass Index (BMI)?</h2>
+        <p>Body Mass Index, commonly known as BMI, is a numerical measurement that estimates body fat based on your height and weight. Developed in the 19th century by Belgian mathematician Adolphe Quetelet, BMI has become the most widely used screening tool for categorizing weight status in adults worldwide.</p>
+        
+        <p>The BMI calculation provides a simple, quick assessment that doesn't require expensive equipment or medical tests. Healthcare professionals, insurance companies, researchers, and public health organizations use BMI as a standard metric to identify weight categories that may lead to health problems.</p>
+
+        <div class="info-box">
+          <p><strong>The BMI Formula:</strong></p>
+          <ul>
+            <li><strong>Metric:</strong> BMI = weight (kg) / [height (m)]²</li>
+            <li><strong>Imperial:</strong> BMI = 703 × weight (lbs) / [height (inches)]²</li>
+          </ul>
+          <p>Our calculator handles both metric and imperial units automatically, so you can use whichever measurement system you're most comfortable with.</p>
+        </div>
+
+        <h2>How to Use This BMI Calculator</h2>
+        <p>Getting your BMI result is straightforward. Follow these simple steps:</p>
+        <ol>
+            <li><strong>Choose Your Unit System:</strong> Click either "Imperial" (pounds, feet, inches) or "Metric" (kilograms, centimeters) at the top of the calculator</li>
+            <li><strong>Enter Your Weight:</strong> Type your current body weight in the designated field</li>
+            <li><strong>Enter Your Height:</strong> For imperial units, enter both feet and inches separately. For metric, enter your total height in centimeters</li>
+            <li><strong>Calculate:</strong> Click "Calculate My BMI" to instantly see your result, category, health advice, and ideal weight range</li>
+        </ol>
+
+        <p>The calculator provides immediate results showing your exact BMI number, which weight category you fall into, personalized health guidance, and the healthy weight range for your specific height.</p>
+
+        <h2>Understanding BMI Categories and Ranges</h2>
+        <p>The World Health Organization (WHO) and most health authorities worldwide use the following BMI classifications for adults:</p>
+
+        <h3>Underweight (BMI Below 18.5)</h3>
+        <p>A BMI below 18.5 indicates that you may be underweight for your height. While society often focuses on overweight concerns, being underweight carries its own health risks. Underweight individuals may experience nutritional deficiencies, weakened immune system, osteoporosis, anemia, and fertility issues. Causes can include inadequate caloric intake, high metabolism, underlying medical conditions, or eating disorders.</p>
+
+        <p>If your BMI falls in this category, it's important to consult with a healthcare provider to determine if there's an underlying cause and to develop a healthy weight gain plan if needed.</p>
+
+        <h3>Normal or Healthy Weight (BMI 18.5 - 24.9)</h3>
+        <p>This is considered the optimal BMI range for most adults. People within this range typically have the lowest risk of developing weight-related health conditions. A normal BMI doesn't guarantee perfect health, but statistical evidence shows this range is associated with the longest life expectancy and lowest disease risk.</p>
+
+        <p>Maintaining a BMI in this range generally indicates a healthy balance between muscle, bone, and fat tissue. However, even within this "healthy" range, it's important to maintain good nutrition, regular physical activity, and healthy lifestyle habits.</p>
+
+        <h3>Overweight (BMI 25 - 29.9)</h3>
+        <p>A BMI in this range indicates you're carrying more weight than is optimal for your height. Being overweight increases your risk for several health conditions, though not as dramatically as obesity. Health risks include increased blood pressure, elevated cholesterol levels, greater likelihood of developing type 2 diabetes, higher risk of heart disease, and increased strain on joints.</p>
+
+        <p>Many people in this category can improve their health by losing just 5-10% of their current body weight through sustainable dietary changes and increased physical activity. Even modest weight loss can significantly reduce health risks.</p>
+
+        <h3>Obese (BMI 30 and Above)</h3>
+        <p>Obesity is further divided into three classes:</p>
+        <ul>
+            <li><strong>Class I Obesity:</strong> BMI 30-34.9</li>
+            <li><strong>Class II Obesity:</strong> BMI 35-39.9</li>
+            <li><strong>Class III Obesity (Severe):</strong> BMI 40 or higher</li>
+        </ul>
+
+        <p>Obesity significantly increases the risk of serious health conditions including type 2 diabetes, cardiovascular disease, stroke, certain cancers (including breast, colon, and endometrial), sleep apnea, osteoarthritis, liver disease, and mental health challenges. The good news is that obesity is treatable through lifestyle modifications, medical intervention, and in some cases, surgical options.</p>
+
+        <p>If your BMI falls in the obese category, working with healthcare professionals—including doctors, registered dietitians, and potentially behavioral therapists—can help you develop a safe, effective weight management plan tailored to your individual circumstances.</p>
+
+        <h2>The History and Science Behind BMI</h2>
+        <p>BMI was created in the 1830s by Lambert Adolphe Jacques Quetelet, a Belgian astronomer, mathematician, statistician, and sociologist. Interestingly, Quetelet never intended his formula to be used as a measure of individual health. He developed it while studying social physics and attempting to define the characteristics of the "average man" across populations.</p>
+
+        <p>The formula remained relatively obscure until the 1970s when researcher Ancel Keys conducted a study comparing various weight-height indices. He found Quetelet's index performed reasonably well and coined the term "Body Mass Index." Since then, BMI has been adopted worldwide as a simple screening tool.</p>
+
+        <p>Despite its widespread use, it's important to understand that BMI was designed as a population-level statistical tool, not necessarily for individual health assessment. This is why it has limitations when applied to individuals with specific characteristics (athletes, elderly, certain ethnic groups).</p>
+
+        <h2>Important Limitations of BMI You Should Know</h2>
+        <p>While BMI is a useful screening tool, it has significant limitations that everyone should understand:</p>
+
+        <h3>Doesn't Distinguish Between Muscle and Fat</h3>
+        <p>BMI cannot differentiate between weight from muscle mass versus fat tissue. Since muscle is denser than fat, very muscular individuals like athletes, bodybuilders, or those who do regular strength training may have a "high" BMI despite having low body fat percentages. A professional football player might have a BMI of 32 (technically obese) but possess only 8% body fat.</p>
+
+        <h3>Doesn't Consider Body Fat Distribution</h3>
+        <p>Where you carry fat matters significantly for health. Visceral fat (fat around internal organs, typically in the abdomen) is far more dangerous than subcutaneous fat (fat under the skin). Two people with identical BMIs could have vastly different health risks based on their body composition and fat distribution. Waist circumference and waist-to-hip ratio are often better indicators of health risk than BMI alone.</p>
+
+        <h3>Age and Gender Considerations</h3>
+        <p>BMI uses the same formula and categories for both men and women, despite significant biological differences. Women naturally have higher body fat percentages than men at the same BMI. Additionally, older adults naturally lose muscle mass (sarcopenia) and may have a "normal" BMI while actually having excess body fat and insufficient muscle.</p>
+
+        <h3>Ethnic and Racial Differences</h3>
+        <p>Research has shown that BMI cutoff points may not be equally appropriate for all ethnic groups. For example, Asian populations tend to have higher health risks at lower BMI levels compared to European populations. Some health authorities recommend adjusted BMI categories for Asian adults (overweight at 23-27.5, obese at 27.5+).</p>
+
+        <h3>Doesn't Measure Actual Health</h3>
+        <p>BMI tells you nothing about blood pressure, cholesterol levels, blood sugar, cardiovascular fitness, bone density, or any other actual health markers. Someone with a "normal" BMI could be metabolically unhealthy (sedentary, poor diet, high blood pressure), while someone with a slightly elevated BMI who exercises regularly and eats well could be metabolically healthy.</p>
+
+        <div class="disclaimer-box">
+            <strong>Medical Disclaimer:</strong> BMI is a screening tool, not a diagnostic tool. It should be used as one piece of information alongside other health indicators. Always consult qualified healthcare professionals for personalized health assessment and advice. This calculator and information are for educational purposes only.
+        </div>
+
+        <h2>Better Alternatives and Complementary Measurements</h2>
+        <p>To get a more complete picture of your health, consider these additional measurements alongside BMI:</p>
+
+        <h3>Waist Circumference</h3>
+        <p>Measuring around your natural waist (typically just above your belly button) provides valuable information about abdominal fat. Men with waist measurements over 40 inches and women over 35 inches have increased health risks, regardless of BMI.</p>
+
+        <h3>Waist-to-Hip Ratio</h3>
+        <p>Divide your waist measurement by your hip measurement. A ratio above 0.90 for men or 0.85 for women indicates increased health risk due to abdominal fat accumulation.</p>
+
+        <h3>Body Fat Percentage</h3>
+        <p>Measuring actual body fat percentage (through methods like DEXA scans, bioelectrical impedance, or skinfold calipers) provides much more useful information than BMI. Healthy body fat ranges are typically 10-20% for men and 20-30% for women, though this varies by age.</p>
+
+        <h3>Metabolic Health Markers</h3>
+        <p>Blood tests measuring cholesterol, blood sugar, triglycerides, and blood pressure provide direct insight into your health status. These markers are far more important than BMI alone.</p>
+
+        <h2>Practical Steps If Your BMI Indicates a Health Concern</h2>
+        <p>If your BMI calculation suggests you're outside the healthy range, here are evidence-based steps you can take:</p>
+
+        <h3>For Those Who Are Underweight</h3>
+        <ul>
+            <li>Consult with a healthcare provider to rule out underlying medical conditions</li>
+            <li>Work with a registered dietitian to increase caloric intake healthfully</li>
+            <li>Focus on nutrient-dense foods with healthy fats, proteins, and complex carbohydrates</li>
+            <li>Consider strength training to build muscle mass</li>
+            <li>Address any psychological factors that may affect eating</li>
+        </ul>
+
+        <h3>For Those Who Are Overweight or Obese</h3>
+        <ul>
+            <li>Aim for sustainable, gradual weight loss of 1-2 pounds per week (not crash dieting)</li>
+            <li>Focus on whole, unprocessed foods: vegetables, fruits, lean proteins, whole grains</li>
+            <li>Increase physical activity gradually—aim for 150 minutes of moderate exercise weekly</li>
+            <li>Work with healthcare professionals to develop a personalized plan</li>
+            <li>Address emotional eating patterns and develop healthy coping mechanisms</li>
+            <li>Set realistic goals and celebrate non-scale victories (better energy, improved fitness)</li>
+            <li>Consider support groups or behavioral therapy if struggling with motivation</li>
+        </ul>
+
+        <h2>BMI and Children: Why This Calculator Isn't for Kids</h2>
+        <p>This calculator is designed exclusively for adults aged 18 and older. BMI calculation and interpretation for children and teenagers is fundamentally different because they're still growing and developing.</p>
+
+        <p>For children ages 2-19, BMI must be calculated using age- and sex-specific percentile charts developed by the CDC or WHO. A child's BMI is compared to other children of the same age and sex, not to absolute numbers. For example, a BMI that would be "healthy" for an adult might indicate obesity in a young child.</p>
+
+        <p>If you need to assess a child's weight status, consult with a pediatrician who can properly evaluate growth charts, development patterns, and overall health.</p>
+
+        <h2>Maintaining a Healthy BMI: Long-Term Strategies</h2>
+        <p>If you're already in the healthy BMI range, or once you achieve it, these strategies help maintain it:</p>
+
+        <ul>
+            <li><strong>Consistent Eating Patterns:</strong> Regular meal times and avoiding extreme restriction or binging</li>
+            <li><strong>Balanced Nutrition:</strong> Adequate protein, healthy fats, complex carbohydrates, and plenty of vegetables</li>
+            <li><strong>Regular Physical Activity:</strong> Both cardiovascular exercise and strength training</li>
+            <li><strong>Adequate Sleep:</strong> 7-9 hours nightly—sleep deprivation affects hunger hormones</li>
+            <li><strong>Stress Management:</strong> Chronic stress promotes weight gain through cortisol elevation</li>
+            <li><strong>Mindful Eating:</strong> Paying attention to hunger and fullness cues rather than eating emotionally</li>
+            <li><strong>Social Support:</strong> Surrounding yourself with people who support healthy habits</li>
+            <li><strong>Regular Monitoring:</strong> Weighing yourself weekly or checking how clothes fit</li>
+        </ul>
+
+        <h2>The Bottom Line on BMI</h2>
+        <p>BMI is a valuable screening tool that provides a quick assessment of weight status, but it's not the complete picture of health. Use it as a starting point for conversations with healthcare providers, not as a definitive judgment of your health status.</p>
+
+        <p>Remember that health is multifaceted. Someone with a slightly elevated BMI who exercises regularly, eats nutritious foods, doesn't smoke, and has good metabolic markers is likely healthier than someone with a "normal" BMI who is sedentary and has poor health habits.</p>
+
+        <p>Focus on behaviors you can control—nutrition quality, physical activity, sleep, stress management—rather than becoming overly fixated on a single number. Your health journey is personal, and working with qualified healthcare professionals will provide the most accurate, personalized guidance.</p>
+    </article>
+    
+    <h3>Explore More Health Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="age-calculator.html">Age Calculator</a></div>
+      <div class="card"><a href="calorie-calculator.html">Calorie Calculator</a></div>
+      <div class="card"><a href="body-fat-calculator.html">Body Fat Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">Macro Calculator</a></div>
+    </div>
+
+    <h3>Related Health Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/how-to-maintain-healthy-bmi.html">How to Maintain a Healthy BMI</a></div>
+      <div class="card"><a href="blog/10-tips-to-reduce-bmi.html">10 Tips to Reduce BMI Effectively</a></div>
+    </div>
+  </section>
+    
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions</h2>
     <details>
       <summary>What is a healthy BMI range for most adults?</summary>
-      <p>✔️ A BMI between 18.5 and 24.9 is considered the healthy weight range for most adults, as it is associated with the lowest risk of weight-related health problems.</p>
+      <p>A BMI between 18.5 and 24.9 is considered the healthy weight range for most adults. This range is associated with the lowest risk of weight-related health problems. However, remember that BMI is just one indicator and should be considered alongside other health markers.</p>
     </details>
     <details>
       <summary>Is BMI accurate for athletes and bodybuilders?</summary>
-      <p>🏋️ Not always. Athletes often have significant muscle mass, which is dense and heavy. This can result in a high BMI that incorrectly categorizes them as overweight or obese, even if their body fat is very low.</p>
+      <p>No, BMI is not accurate for athletes and bodybuilders. Since BMI cannot distinguish between muscle and fat, very muscular individuals often have high BMI scores that incorrectly categorize them as overweight or obese despite having low body fat percentages. Body fat percentage measurements are more appropriate for athletic populations.</p>
     </details>
     <details>
       <summary>Can children and teenagers use this calculator?</summary>
-      <p>👶 No, this calculator is designed for adults. BMI for children and teens is interpreted differently and uses age- and sex-specific percentile charts. You should consult a pediatrician for this purpose.</p>
+      <p>No, this calculator is designed for adults only. BMI for children and teens (ages 2-19) is interpreted differently using age- and sex-specific percentile charts. Children's BMI must be assessed by a pediatrician using specialized growth charts because they're still developing.</p>
     </details>
     <details>
         <summary>Does gender affect BMI interpretation?</summary>
-        <p>♀️♂️ The BMI calculation formula is the same for men and women. However, body composition naturally differs between sexes—women typically have more body fat than men. While the categories are the same, a healthcare provider may interpret the results in the context of gender and other factors.</p>
+        <p>While the BMI calculation formula is the same for men and women, body composition naturally differs between sexes. Women typically have higher body fat percentages than men at the same BMI due to biological differences. Healthcare providers may interpret BMI results in the context of gender, age, and other individual factors.</p>
+    </details>
+    <details>
+        <summary>Why is my BMI different from my body fat percentage?</summary>
+        <p>BMI and body fat percentage measure different things. BMI is simply a ratio of weight to height, while body fat percentage specifically measures how much of your body weight comes from fat versus muscle, bone, and other tissues. You can have a "normal" BMI but high body fat (if you have low muscle mass) or a "high" BMI with low body fat (if you're very muscular).</p>
+    </details>
+    <details>
+        <summary>How often should I calculate my BMI?</summary>
+        <p>For most people, checking BMI every 1-3 months is sufficient. More frequent checking isn't necessary unless you're actively working on weight change under medical supervision. Focus more on how you feel, your energy levels, how your clothes fit, and objective health markers rather than obsessing over BMI calculations.</p>
+    </details>
+    <details>
+        <summary>Can BMI predict my life expectancy?</summary>
+        <p>BMI can indicate statistical health risks associated with weight, but it cannot predict individual life expectancy. Many factors affect longevity including genetics, lifestyle habits, access to healthcare, stress levels, social connections, and existing health conditions. BMI is just one piece of a complex health puzzle.</p>
+    </details>
+    <details>
+        <summary>Is it possible to be healthy at any BMI?</summary>
+        <p>Health is complex and multifaceted. While extreme BMIs (very low or very high) are associated with increased health risks, individuals in the "overweight" category who exercise regularly, eat nutritious foods, and have good metabolic markers can be healthier than sedentary individuals with "normal" BMI. Focus on healthy behaviors rather than just the number.</p>
     </details>
   </section>
 
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 / Responsive Banner</div>
-  </div>
-
-  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+      <p><strong>Disclaimer:</strong> This BMI calculator is provided for informational and educational purposes only. BMI is a screening tool, not a diagnostic tool, and has known limitations. It should not be used as the sole basis for health decisions. Always consult with qualified healthcare professionals for personalized medical advice, diagnosis, and treatment. The information provided does not replace professional medical consultation.</p>
     </div>
     <div class="footer-links">
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
   <script type="application/ld+json">
@@ -251,19 +817,19 @@
     "mainEntity": [{
       "@type": "Question",
       "name": "What is a healthy BMI range for most adults?",
-      "acceptedAnswer": { "@type": "Answer", "text": "A BMI between 18.5 and 24.9 is considered the healthy weight range for most adults, as it is associated with the lowest risk of weight-related health problems." }
+      "acceptedAnswer": { "@type": "Answer", "text": "A BMI between 18.5 and 24.9 is considered the healthy weight range for most adults. This range is associated with the lowest risk of weight-related health problems." }
     },{
       "@type": "Question",
       "name": "Is BMI accurate for athletes and bodybuilders?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Not always. Athletes often have significant muscle mass, which is dense and heavy. This can result in a high BMI that incorrectly categorizes them as overweight or obese, even if their body fat is very low." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No, BMI is not accurate for athletes and bodybuilders. Since BMI cannot distinguish between muscle and fat, very muscular individuals often have high BMI scores that incorrectly categorize them as overweight or obese despite having low body fat percentages." }
     },{
       "@type": "Question",
       "name": "Can children and teenagers use this calculator?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No, this calculator is designed for adults. BMI for children and teens is interpreted differently and uses age- and sex-specific percentile charts. You should consult a pediatrician for this purpose." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No, this calculator is designed for adults only. BMI for children and teens (ages 2-19) is interpreted differently using age- and sex-specific percentile charts." }
     },{
         "@type": "Question",
         "name": "Does gender affect BMI interpretation?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The BMI calculation formula is the same for men and women. However, body composition naturally differs between sexes—women typically have more body fat than men. While the categories are the same, a healthcare provider may interpret the results in the context of gender and other factors."}
+        "acceptedAnswer": { "@type": "Answer", "text": "While the BMI calculation formula is the same for men and women, body composition naturally differs between sexes. Women typically have higher body fat percentages than men at the same BMI due to biological differences."}
     }]
   }
   </script>
@@ -289,18 +855,18 @@
         const weight = parseFloat(document.getElementById("weightMetric").value);
         const heightCm = parseFloat(document.getElementById("heightMetric").value);
         if (!weight || !heightCm || weight <= 0 || heightCm <= 0) {
-          document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter valid, positive values for weight and height.</p>";
+          document.getElementById("result").innerHTML = "<p style='color:#ef4444; font-weight:600;'>⚠️ Please enter valid, positive values for weight and height.</p>";
           return;
         }
         heightInMeters = heightCm / 100;
         bmi = weight / (heightInMeters * heightInMeters);
-      } else { // Imperial
+      } else {
         const weight = parseFloat(document.getElementById("weightImperial").value);
         const feet = parseFloat(document.getElementById("heightFeet").value) || 0;
         const inches = parseFloat(document.getElementById("heightInches").value) || 0;
         const totalInches = (feet * 12) + inches;
         if (!weight || totalInches <= 0 || weight <= 0) {
-          document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter valid, positive values for weight and height.</p>";
+          document.getElementById("result").innerHTML = "<p style='color:#ef4444; font-weight:600;'>⚠️ Please enter valid, positive values for weight and height.</p>";
           return;
         }
         heightInMeters = totalInches * 0.0254;
@@ -309,19 +875,23 @@
 
       bmi = bmi.toFixed(1);
 
-      let category, advice;
+      let category, advice, categoryColor;
       if (bmi < 18.5) {
         category = "Underweight";
-        advice = "Your BMI is in the underweight range. It's advisable to consult a healthcare provider to ensure you are getting the nutrients you need.";
+        categoryColor = "#3b82f6";
+        advice = "Your BMI is in the underweight range. Consider consulting a healthcare provider to ensure you're getting adequate nutrition and to rule out underlying health conditions.";
       } else if (bmi < 25) {
-        category = "Normal";
-        advice = "Excellent! Your BMI is in the healthy range. Continue maintaining a balanced diet and active lifestyle.";
+        category = "Normal Weight";
+        categoryColor = "#10b981";
+        advice = "Your BMI is in the healthy range. Continue maintaining a balanced diet and active lifestyle to support your wellbeing.";
       } else if (bmi < 30) {
         category = "Overweight";
-        advice = "Your BMI is in the overweight range. Consider incorporating more physical activity and a balanced diet to lower potential health risks.";
+        categoryColor = "#f59e0b";
+        advice = "Your BMI is in the overweight range. Consider incorporating more physical activity and balanced nutrition to support your health goals.";
       } else {
         category = "Obese";
-        advice = "Your BMI is in the obese range. It is strongly recommended to speak with a healthcare professional to create a safe and effective plan for your health.";
+        categoryColor = "#ef4444";
+        advice = "Your BMI is in the obese range. We recommend speaking with a healthcare professional to create a safe and effective health improvement plan tailored to your needs.";
       }
       
       idealMin = (18.5 * (heightInMeters * heightInMeters));
@@ -337,34 +907,40 @@
       }
 
       const facts = [
-        "🌎 The global average BMI is ~24.5.",
-        "🍟 In the US, about 42% of adults have a BMI over 30 (obese).",
-        "🏃 Regular exercise can significantly improve your metabolic health, regardless of BMI.",
-        "🍏 A Mediterranean diet is consistently linked with lower BMI and better heart health."
+        "The global average BMI has increased by approximately 0.4-0.5 kg/m² per decade since the 1980s.",
+        "Regular physical activity can improve metabolic health markers even without significant weight change.",
+        "A Mediterranean-style diet rich in vegetables, fruits, whole grains, and healthy fats is associated with lower BMI and better heart health.",
+        "Muscle tissue burns more calories at rest than fat tissue, making strength training beneficial for weight management."
       ];
       const randomFact = facts[Math.floor(Math.random() * facts.length)];
 
       document.getElementById("result").innerHTML = `
-        <h3>📊 Your BMI Results</h3>
-        <p style="font-size: 1.5rem;">Your BMI is: <b>${bmi}</b></p>
-        <p>This places you in the: <b>${category}</b> category.</p>
-        <hr style="margin: 15px 0;">
-        <p><b>Recommendation:</b> ${advice}</p>
-        <p><b>Healthy Weight Range for Your Height:</b> Approximately ${idealMin} - ${idealMax} ${idealUnit}</p>
-        <hr style="margin: 15px 0;">
-        <p><b>Did You Know?</b> ${randomFact}</p>
+        <h3>Your BMI Results</h3>
+        <p style="font-size: 1.4rem; margin: 0.5rem 0;">Your BMI: <b style="color:${categoryColor}">${bmi}</b></p>
+        <p style="margin: 0.3rem 0;">Category: <b style="color:${categoryColor}">${category}</b></p>
+        <hr>
+        <p style="margin: 0.5rem 0;"><b>Health Guidance:</b> ${advice}</p>
+        <p style="margin: 0.5rem 0;"><b>Healthy Weight Range for Your Height:</b> ${idealMin} - ${idealMax} ${idealUnit}</p>
+        <hr>
+        <p style="margin: 0.5rem 0; font-size: 0.95rem;"><b>Did You Know?</b> ${randomFact}</p>
       `;
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
         const toggle = document.getElementById("darkModeToggle");
-        toggle.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-        });
+        const body = document.body;
+
         if (localStorage.getItem("theme") === "dark") {
-            document.body.classList.add("dark-mode");
+            body.classList.add("dark-mode");
+            toggle.textContent = '☀️';
         }
+
+        toggle.addEventListener("click", () => {
+          body.classList.toggle("dark-mode");
+          const isDark = body.classList.contains("dark-mode");
+          toggle.textContent = isDark ? '☀️' : '🌙';
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
     });
   </script>
 </body>
