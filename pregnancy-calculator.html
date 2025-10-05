@@ -1,165 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pregnancy Due Date Calculator & Timeline | QuickCalcLabs</title>
-  <meta name="description" content="Use our free and accurate Pregnancy Calculator to estimate your due date based on your last menstrual period (LMP). Track your pregnancy week by week, understand trimesters, and learn about key fetal development milestones.">
-  <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy weeks, pregnancy milestones, trimester tracker, conception date calculator, when is my due date, pregnancy timeline">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
-     crossorigin="anonymous"></script>
-  
-  <style>
-    /* NOTE: I am preserving your original styling as requested. */
-    .calc-wrapper {
-        padding: 30px;
-    }
-    .result-box {
-      margin-top: 20px;
-      padding: 20px;
-      background: var(--glass-bg, rgba(255, 255, 255, 0.1));
-      border-radius: var(--radius, 15px);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    .calendar-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      border-radius: 25px;
-      background: linear-gradient(135deg, #4dabf7, #228be6); 
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .calendar-btn:hover {
-      transform: scale(1.05);
-      box-shadow: var(--glow, 0 0 15px rgba(77, 171, 247, 0.5));
-    }
-    .input-field {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-    }
-    .seo-content h2, .seo-content h3 {
-      color: var(--text, #333);
-      margin-top: 30px;
-      margin-bottom: 15px;
-    }
 
-    .seo-content h2 {
-      font-size: 1.8rem;
-      text-align: center;
-    }
-
-    .seo-content h3 {
-      font-size: 1.3rem;
-      color: #228be6;
-    }
-     .seo-content ul, .seo-content ol {
-      list-style-position: inside;
-      padding-left: 10px;
-    }
-
-    .seo-content ul li, .seo-content ol li {
-      margin-bottom: 10px;
-      line-height: 1.6;
-    }
-    .seo-content a {
-        color: #228be6;
-        text-decoration: underline;
-        font-weight: 500;
-    }
-    .seo-content a:hover {
-        color: #1c7ed6;
-        text-decoration: none;
-    }
-    .disclaimer-box {
-        padding: 15px;
-        margin: 20px 0;
-        border-left: 4px solid #f6e05e;
-        background-color: #fffbe9;
-        border-radius: 4px;
-    }
-    
-  </style>
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <a href="index.html" class="logo">QuickCalcLabs</a>
-    <nav>
-      <a href="blog.html">Blog</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <button id="darkModeToggle">🌙</button>
-    </nav>
-  </header>
-
-  <!-- Ad 1 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
-
-  <!-- Hero -->
-  <section class="calc-wrapper">
-    <h1>🤰 Pregnancy Due Date Calculator</h1>
-    <p class="subtitle">Estimate your baby's due date, track your pregnancy progress, and discover key milestones on your journey to motherhood.</p>
-
-    <label for="lmp"><strong>First Day of Your Last Period (LMP):</strong></label>
-    <input type="date" id="lmp" class="input-field">
-
-    <button onclick="calculatePregnancy()">Calculate My Due Date</button>
-    <div id="result" class="result-box"></div>
-  </section>
-
-  <!-- Ad 2 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Banner Ad</div>
-  </div>
-
-  <!-- SEO Content -->
-  <section class="seo-content">
-    <article>
-        <h2>How to Use the Pregnancy Calculator</h2>
-        <p>Using our calculator is simple. Just enter the first day of your last menstrual period (LMP) into the date selector and click "Calculate My Due Date." The tool will instantly provide you with a wealth of information about your pregnancy timeline.</p>
-
-        <h2>Understanding Your Pregnancy Timeline</h2>
-        <p>A typical pregnancy lasts about 40 weeks (280 days) from the first day of your last period. This is known as the gestational age. It's important to note that pregnancy is counted from your LMP, not from the date of conception, which usually occurs about two weeks later.</p>
-        <ul>
-            <li><strong>Last Menstrual Period (LMP):</strong> The starting point for calculating your due date and pregnancy week.</li>
-            <li><strong>Estimated Conception Date:</strong> This is approximately 14 days after your LMP, around the time of ovulation for a regular 28-day cycle.</li>
-            <li><strong>Fetal Age vs. Gestational Age:</strong> Gestational age (what this calculator shows) is about two weeks longer than the fetal age (the actual age of the baby since conception).</li>
-        </ul>
-
-        <h3>What to Expect in Each Trimester</h3>
-        <p>Your pregnancy is divided into three trimesters, each with unique developments and milestones.</p>
-        <ul>
-            <li><strong>First Trimester (Weeks 1-13):</strong> This is a period of rapid development. The baby's major organs and body systems form. For the mother, this trimester is often marked by symptoms like morning sickness, fatigue, and hormonal changes.</li>
-            <li><strong>Second Trimester (Weeks 14-27):</strong> Often called the "golden period," as many early pregnancy symptoms subside. You may feel your baby's first movements (quickening), and your baby bump will become more noticeable. The baby continues to grow and mature.</li>
-            <li><strong>Third Trimester (Weeks 28-40+):</strong> The final stretch! The baby gains weight rapidly, and their systems prepare for life outside the womb. For the mother, this period can bring physical discomforts as the baby gets bigger.</li>
-        </ul>
-
-        <h2>How is the Due Date Calculated?</h2>
-        <p>This calculator uses <strong>Naegele’s rule</strong>, a standard method used by healthcare professionals worldwide. The rule works by:</p>
-        <ol>
-            <li>Taking the first day of your last menstrual period (LMP).</li>
-            <li>Adding one year.</li>
-            <li>Subtracting three months.</li>
-            <li>Adding seven days.</li>
-        </ol>
-        <p>This calculation is based on a regular 28-day menstrual cycle. If your cycles are significantly longer or shorter, your healthcare provider may adjust your due date after an ultrasound exam, which provides a more precise measurement of the baby's gestational age.</p>
-
-        <div class="disclaimer-box">
-          <strong>Medical Disclaimer:</strong> This calculator provides an estimate for informational purposes only and is not a substitute for professional medical advice. Your due date may be adjusted by your doctor based on ultrasound results. Please consult with a qualified healthcare provider for any health concerns or for personalized medical guidance throughout your pregnancy.
-        </div>
-        
-    </article>
     
     <h3>🔗 Explore More Women's Health Tools</h3>
     <div class="card-grid">
@@ -178,56 +17,791 @@
   </section>
 
 
-  <!-- FAQ -->
-  <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <div class="faq">
-      <details>
-        <summary>How accurate is a due date calculator?</summary>
-        <p>✔️ An LMP-based calculator provides a reliable estimate and is a great starting point. However, only about 5% of babies are born on their exact due date. An early ultrasound is the most accurate way to determine the gestational age and confirm the due date.</p>
-      </details>
-    </div>
-    <div class="faq">
-      <details>
-        <summary>Can my due date change?</summary>
-        <p>📅 Yes. Your doctor may adjust your due date based on the size of the baby measured during your first ultrasound, or if you have irregular periods. Once set after an early ultrasound, it typically does not change.</p>
-      </details>
-    </div>
-    <div class="faq">
-      <details>
-        <summary>What if I don't know the date of my last period?</summary>
-        <p>🤔 If you're unsure about your LMP or have irregular cycles, the most accurate way to determine your due date is through an ultrasound performed by your healthcare provider. They can measure the baby to determine its gestational age.</p>
-      </details>
-    </div>
-    <div class="faq">
-      <details>
-        <summary>Is it possible to get a positive pregnancy test before a missed period?</summary>
-        <p>➕ Yes. Some sensitive home pregnancy tests can detect the pregnancy hormone (hCG) in your urine several days before your expected period. For the most accurate result, it's best to wait until the day of your missed period.</p>
-      </details>
-    </div>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregnancy Due Date Calculator - Track Your Pregnancy Week by Week | QuickCalcLabs</title>
+  <meta name="description" content="Free pregnancy due date calculator to estimate your baby's arrival date based on your last menstrual period. Track pregnancy weeks, trimesters, and fetal development milestones with accurate calculations.">
+  <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy weeks, trimester tracker, conception date, gestational age, pregnancy timeline, fetal development">
+  <link rel="canonical" href="https://quickcalclabs.com/pregnancy-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Pregnancy calculator page specific styles */
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .calc-wrapper h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-strong-light, #0f172a);
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .dark-mode label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .calc-wrapper input[type="date"] {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      margin: 0.6rem 0 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+    }
+
+    .calc-wrapper input:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .calc-wrapper button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .calc-wrapper button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button:active {
+      transform: translateY(-1px);
+    }
+
+    .calendar-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #10b981, #34d399);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .calendar-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #059669, #10b981);
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      font-weight: 600;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      color: var(--text-strong-light, #0f172a);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      color: var(--text-strong-dark, #f1f5f9);
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.4rem;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .result-box p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .milestone-box {
+      background: rgba(236, 72, 153, 0.1);
+      padding: 1rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1rem;
+      border-left: 4px solid #ec4899;
+    }
+
+    .dark-mode .milestone-box {
+      background: rgba(236, 72, 153, 0.15);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <section class="calc-wrapper">
+    <h1>Pregnancy Due Date Calculator</h1>
+    <p class="subtitle">Estimate your baby's due date, track your pregnancy progress week by week, and discover key developmental milestones on your journey to motherhood.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
+    
+    <h2>Enter Your Last Period Date</h2>
+    <label>First Day of Your Last Menstrual Period (LMP):</label>
+    <input type="date" id="lmp" aria-label="First day of last menstrual period">
+
+    <button onclick="calculatePregnancy()">Calculate My Due Date</button>
+    <div id="result" class="result-box"></div>
   </section>
 
-  <!-- Ad 3 -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
+  <section class="seo-content">
+    <h3>🔗 Explore More Women's Health Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="period-tracker.html">🌸 Period & Ovulation Calculator</a></a></div>
+      <div class="card"><a href="pregnancy-weight-gain-calculator.html">🤰 Pregnancy Weight Gain Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
+    </div>
 
-  <!-- Floating CTA -->
-  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+    <h3>📝 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/best-foods-for-pregnancy.html">🥗 Best Foods for a Healthy Pregnancy</a></div>
+      <div class="card"><a href="blog/trimester-guide-for-expecting-mothers.html">📖 Trimester Guide for Expecting Mothers</a></div>
+    </div>
 
-  <!-- Footer -->
+    <article>
+        <h2>What is a Pregnancy Due Date Calculator?</h2>
+        <p>A pregnancy due date calculator is a medical tool that estimates when your baby will be born based on the first day of your last menstrual period. This calculation follows the standard medical practice of using gestational age, which counts pregnancy from the first day of your LMP rather than from conception. The calculator uses Naegele's rule, a time-tested formula developed in the early 19th century and still used by healthcare providers worldwide today.</p>
+        
+        <p>Understanding your due date is important for many reasons beyond just knowing when to expect your baby. It helps your healthcare provider schedule appropriate prenatal tests and screenings at the right times, monitor your baby's growth and development against expected milestones, plan for maternity leave and life adjustments, and prepare emotionally and practically for your baby's arrival.</p>
+
+        <div class="info-box">
+          <h4>Why Due Dates Are Estimates</h4>
+          <p>It's important to understand that only about five percent of babies are born on their exact due date. Most babies arrive within two weeks before or after the estimated date. Your due date represents the middle of a normal delivery window, which typically spans from 37 to 42 weeks of pregnancy. This is why your doctor refers to a "due date" rather than a "delivery date," it's an educated estimate, not a guarantee.</p>
+        </div>
+
+        <h2>How to Use This Pregnancy Calculator</h2>
+        <p>Using our pregnancy due date calculator is simple and takes less than a minute. Follow these steps for accurate results:</p>
+        <ol>
+            <li><strong>Identify Your LMP:</strong> The first day of your last menstrual period is the first day of full menstrual bleeding, not spotting. This date is crucial for accurate calculation</li>
+            <li><strong>Enter the Date:</strong> Click on the date field and select the first day of your last period from the calendar picker</li>
+            <li><strong>Calculate:</strong> Click the "Calculate My Due Date" button to instantly receive your estimated due date, current pregnancy week, trimester information, and developmental milestones</li>
+            <li><strong>Add to Calendar:</strong> Use the calendar export feature to add your due date to your digital calendar for easy tracking</li>
+        </ol>
+
+        <p>The calculator will provide comprehensive information including your estimated due date, how many weeks pregnant you are currently, which trimester you're in, your estimated conception date, your baby's current fetal age, and a milestone relevant to your current week of pregnancy.</p>
+
+        <h2>Understanding Naegele's Rule</h2>
+        <p>This calculator uses Naegele's rule, the standard method healthcare providers use worldwide to estimate due dates. Named after German obstetrician Franz Karl Naegele who published it in 1812, this formula has stood the test of time due to its simplicity and reasonable accuracy for women with regular 28-day cycles.</p>
+
+        <p>Naegele's rule works through a simple calculation that takes the first day of your last menstrual period, adds one year, subtracts three months, and then adds seven days. For example, if your last period started on January 10, 2025, you would add one year to get January 10, 2026, subtract three months to get October 10, 2025, and add seven days to arrive at a due date of October 17, 2025.</p>
+
+        <p>This calculation is based on the assumption that pregnancy lasts 280 days or 40 weeks from the first day of your last period. It assumes a regular 28-day menstrual cycle with ovulation occurring on day 14. While not every woman has a 28-day cycle, this formula provides a good starting point that can be adjusted based on ultrasound measurements and individual circumstances.</p>
+
+        <h2>Understanding Gestational Age vs Fetal Age</h2>
+        <p>One common source of confusion during pregnancy is the difference between gestational age and fetal age. Understanding this distinction helps you interpret medical information and tracking tools correctly.</p>
+
+        <h3>Gestational Age</h3>
+        <p>Gestational age is the standard way healthcare providers measure and discuss pregnancy. It's calculated from the first day of your last menstrual period, even though conception hasn't occurred yet. This means gestational age includes approximately two weeks before actual conception. When your doctor says you're "10 weeks pregnant," they're referring to gestational age, 10 weeks from your LMP.</p>
+
+        <p>The reason for using gestational age is practical. The first day of your last period is a definite, knowable date for most women, while the exact date of conception is usually uncertain. Even if you know when you had intercourse, fertilization can occur anywhere from a few hours to five days later, depending on when sperm meets egg.</p>
+
+        <h3>Fetal Age</h3>
+        <p>Fetal age, also called conceptional age or embryonic age, measures the actual time since conception occurred. This is approximately two weeks less than gestational age for most women. So if your gestational age is 10 weeks, your fetal age is approximately 8 weeks. This represents how long the embryo or fetus has actually existed.</p>
+
+        <p>Fetal age is more precise in terms of actual development but less practical for medical tracking. Embryologists and researchers often use fetal age when discussing specific developmental stages, but clinical practice relies on gestational age for consistency and ease of communication.</p>
+
+        <h2>The Three Trimesters of Pregnancy</h2>
+        <p>Pregnancy is divided into three trimesters, each approximately three months long and each with distinct characteristics, developments, and challenges. Understanding what happens in each trimester helps you know what to expect and prepare appropriately.</p>
+
+        <h3>First Trimester: Weeks 1-13</h3>
+        <p>The first trimester is a period of rapid and fundamental development. During these crucial early weeks, all of your baby's major organs and body systems begin to form. By the end of the first trimester, your baby has developed from a single fertilized cell into a recognizable tiny human with beating heart, forming limbs, and developing facial features.</p>
+
+        <p>For many women, the first trimester brings significant physical and emotional changes. Common symptoms include morning sickness, which despite its name can occur any time of day, extreme fatigue and need for more sleep, breast tenderness and swelling, frequent urination, food aversions or cravings, heightened sense of smell, and mood swings due to hormonal changes.</p>
+
+        <p>The first trimester is also when miscarriage risk is highest. About 10 to 20 percent of known pregnancies end in miscarriage, with most occurring before week 12. This is why many couples choose to wait until the second trimester to announce their pregnancy publicly, though this is a personal choice.</p>
+
+        <p>Important first trimester developments include weeks 4-5 when the neural tube begins forming, which will become the brain and spinal cord, weeks 5-6 when the heart begins beating, week 8 when all major organs have begun forming, week 9 when the embryo becomes a fetus, and week 12 when the risk of miscarriage decreases significantly.</p>
+
+        <h3>Second Trimester: Weeks 14-27</h3>
+        <p>Often called the "golden trimester" or "honeymoon period" of pregnancy, the second trimester is typically when women feel their best. Morning sickness usually subsides, energy levels improve, and the pregnancy "glow" often appears due to increased blood circulation and hormonal changes. However, you're not yet experiencing the significant discomfort that comes with carrying a very large baby in the third trimester.</p>
+
+        <p>This trimester brings exciting milestones. Between weeks 18 and 22, most women feel their baby's movements for the first time, called "quickening." These early movements might feel like flutters, bubbles, or gentle nudges. Around week 20, you'll typically have an anatomy scan ultrasound, which can reveal your baby's sex if you want to know and check for proper development of organs and structures.</p>
+
+        <p>Physical changes during the second trimester include a visibly growing baby bump, weight gain of about one pound per week, possible back pain as your center of gravity shifts, potential stretch marks as skin stretches to accommodate baby, and round ligament pain as ligaments supporting your uterus stretch.</p>
+
+        <p>Important second trimester developments include weeks 14-16 when the baby begins making facial expressions and can squint, frown, and grimace, weeks 18-20 when baby develops a sleep-wake cycle and you can feel movements, week 22 when the baby can hear sounds from outside the womb including your voice, and weeks 24-27 when the baby's lungs begin producing surfactant, a substance necessary for breathing air.</p>
+
+        <h3>Third Trimester: Weeks 28-40+</h3>
+        <p>The third trimester is the home stretch. Your baby is growing rapidly, gaining about half a pound per week, and you're preparing mentally and physically for labor and delivery. This trimester often brings renewed fatigue and various physical discomforts as your body works hard to support your growing baby.</p>
+
+        <p>Common third trimester symptoms include shortness of breath as your uterus pushes against your diaphragm, frequent urination as the baby presses on your bladder, heartburn and indigestion, swelling in feet and ankles, difficulty sleeping comfortably, Braxton Hicks contractions, which are practice contractions that prepare your uterus for labor, and anxiety or excitement about the upcoming birth.</p>
+
+        <p>Important third trimester developments include weeks 28-32 when the baby's brain develops rapidly and eye color becomes more defined, weeks 32-36 when the baby usually moves into a head-down position for birth, weeks 36-37 when the baby is considered early term and could be safely born, weeks 38-40 when the baby is full term, and weeks 40+ when pregnancy is considered post-term if labor hasn't begun.</p>
+
+        <h2>Key Fetal Development Milestones</h2>
+        <p>Understanding what's happening with your baby each week can help you feel more connected to your pregnancy and appreciate the amazing developmental process occurring inside you.</p>
+
+        <h3>Early Development: Weeks 1-8</h3>
+        <p>During these early weeks, development proceeds at an astonishing pace. Week 4 sees the embryo implanting into the uterine wall and the placenta beginning to form. By week 5, the neural tube is forming and the heart is developing. Week 6 brings a detectable heartbeat on ultrasound, though you can't feel it yet. At week 7, arm and leg buds appear, and by week 8, all major organs have begun forming and the embryo is about half an inch long.</p>
+
+        <h3>Weeks 9-16: Transition to Fetus</h3>
+        <p>Week 9 marks the transition from embryo to fetus, with more recognizable human features. By week 10, vital organs are functioning and bones are beginning to harden. At week 12, the baby can open and close their fingers and toes are forming. Week 16 sees the baby making coordinated movements and facial muscles developing, allowing for facial expressions.</p>
+
+        <h3>Weeks 17-24: Rapid Growth</h3>
+        <p>During these weeks, your baby grows significantly. Week 20 marks the halfway point, with the baby about 6.5 inches long. By week 22, the baby has developed primitive hearing and can be startled by loud noises. At week 24, the baby's skin is translucent but beginning to develop layers, and survival outside the womb becomes increasingly possible with medical intervention, though significant challenges remain.</p>
+
+        <h3>Weeks 25-32: Maturation</h3>
+        <p>These weeks see continued maturation of all systems. Week 26 brings responsive eyes that can open and close. By week 28, the baby can dream during REM sleep. Week 30 sees the baby gaining about half a pound per week. At week 32, the baby's bones are fully formed but still soft and pliable.</p>
+
+        <h3>Weeks 33-40: Final Preparation</h3>
+        <p>The final weeks focus on growth and preparing for life outside the womb. Week 36 sees the baby typically settling into a head-down position. By week 38, the baby is considered full term. Week 40 marks the official due date, though many babies arrive a bit earlier or later. Throughout these weeks, the baby continues gaining weight and accumulating fat stores that will help regulate body temperature after birth.</p>
+
+        <h2>Accuracy of Due Date Calculations</h2>
+        <p>While our calculator provides an estimate based on established medical formulas, it's important to understand the factors that affect accuracy and why your healthcare provider might adjust your due date.</p>
+
+        <h3>Factors Affecting Due Date Accuracy</h3>
+        <p>Several factors can influence how accurate an LMP-based due date calculation is. Irregular menstrual cycles make LMP dating less reliable since ovulation may not occur on day 14. If you have cycles longer or shorter than 28 days, your actual ovulation date could be quite different from the assumed day 14.</p>
+
+        <p>Uncertainty about LMP can also affect accuracy. Some women experience implantation bleeding, which they might mistake for a light period. If you're unsure about the exact date your last period started, the calculation will be less reliable.</p>
+
+        <p>Recent hormonal contraceptive use can cause irregular cycles immediately after stopping, making LMP dating unreliable. Breastfeeding while conceiving can also affect cycle regularity. Additionally, very early or late ovulation in your cycle can shift your actual conception date significantly from the assumed day 14.</p>
+
+        <h3>Why Ultrasound Dating May Change Your Due Date</h3>
+        <p>Healthcare providers often perform a dating ultrasound, typically between weeks 8 and 13, to confirm or adjust the due date calculated from your LMP. Early ultrasounds are remarkably accurate, with a margin of error of only plus or minus 3 to 5 days when performed in the first trimester.</p>
+
+        <p>During a dating ultrasound, the technician measures the baby from crown to rump, called the crown-rump length or CRL. This measurement corresponds very reliably to gestational age in early pregnancy because all healthy embryos grow at essentially the same rate during the first trimester. Based on this measurement, your provider can calculate a more precise due date.</p>
+
+        <p>If there's a discrepancy of more than 5 to 7 days between your LMP-based date and your ultrasound date, most providers will adjust your due date to match the ultrasound. This is because early ultrasound measurements are more reliable than menstrual dating for predicting actual gestational age.</p>
+
+        <h2>What Happens if Your Baby Doesn't Arrive on Time?</h2>
+        <p>Most babies don't arrive exactly on their due date, and that's completely normal. Understanding the definitions and management of early, on-time, and late deliveries helps reduce anxiety about when labor will begin.</p>
+
+        <h3>Early Term: 37-38 Weeks</h3>
+        <p>Babies born between 37 and 38 weeks are considered early term. While these babies are generally healthy, they have slightly higher risks of breathing difficulties, feeding problems, and temperature regulation issues compared to babies born at 39 to 40 weeks. Unless there's a medical reason for early delivery, most providers aim to let pregnancy continue to at least 39 weeks.</p>
+
+        <h3>Full Term: 39-40 Weeks</h3>
+        <p>Babies born between 39 and 40 weeks are considered full term and have the best outcomes. This is the ideal time for delivery when labor begins naturally. The baby's brain, lungs, and liver benefit from these final weeks of development.</p>
+
+        <h3>Late Term: 41 Weeks</h3>
+        <p>Pregnancy at 41 weeks is considered late term. Many providers will discuss scheduling an induction if you reach 41 weeks without going into labor naturally, though practices vary. Continued monitoring of you and the baby becomes more frequent to ensure ongoing health.</p>
+
+        <h3>Post Term: 42+ Weeks</h3>
+        <p>Pregnancy continuing beyond 42 weeks is post term. At this point, the risk of complications increases for both mother and baby, including decreased placental function, decreased amniotic fluid, and increased baby size making delivery more difficult. Most providers will recommend induction by 42 weeks if labor hasn't started naturally.</p>
+
+        <h2>Important Prenatal Tests and When They Occur</h2>
+        <p>Understanding when standard prenatal tests occur helps you prepare mentally and logistically for your appointments. Knowing your due date allows proper scheduling of these important screenings.</p>
+
+        <h3>First Trimester Tests</h3>
+        <p>Initial prenatal visit, typically at 8 to 10 weeks, includes confirmation of pregnancy, calculation of due date, comprehensive health history, physical exam and pelvic exam, blood tests for blood type, Rh factor, anemia, immunity to certain diseases, and screening for infections.</p>
+
+        <p>The first trimester screening, performed between weeks 11 and 14, includes an ultrasound to measure nuchal translucency, a blood test measuring specific pregnancy hormones, and combined results that assess risk for chromosomal abnormalities like Down syndrome.</p>
+
+        <h3>Second Trimester Tests</h3>
+        <p>The anatomy scan ultrasound at weeks 18 to 22 is a comprehensive evaluation checking baby's growth and development, examining all major organs and structures, assessing placental position, measuring amniotic fluid levels, and potentially revealing baby's sex if desired.</p>
+
+        <p>Quad screen blood test between weeks 15 and 20 measures four substances to screen for birth defects and chromosomal abnormalities. Glucose screening test at weeks 24 to 28 checks for gestational diabetes.</p>
+
+        <h3>Third Trimester Tests</h3>
+        <p>Group B Strep screening between weeks 35 and 37 tests for bacteria that could be harmful to baby during delivery. Non-stress tests and biophysical profiles after week 32 if there are any concerns monitor baby's heart rate, movements, and amniotic fluid levels.</p>
+
+        <h2>Preparing for Your Due Date</h2>
+        <p>Knowing your due date helps you prepare practically and emotionally for your baby's arrival. Here are important preparations to make as you approach your due date.</p>
+
+        <h3>Physical Preparations</h3>
+        <p>Pack your hospital bag by week 36, including items for labor, recovery, and the baby. Prepare your home with nursery setup, baby supplies, and meal prep. Install the car seat properly and have it inspected by a certified technician. Arrange childcare for other children if applicable. Prepare pets for the new arrival.</p>
+
+        <h3>Practical Arrangements</h3>
+        <p>Arrange maternity leave and finalize work transition plans. Discuss and practice your route to the hospital or birth center. Know when to call your healthcare provider and when to go to the hospital. Have emergency contacts readily available. Arrange for help after birth whether from family, friends, or hired support.</p>
+
+        <h3>Educational Preparation</h3>
+        <p>Take childbirth education classes to learn about labor stages, pain management options, and delivery procedures. Consider breastfeeding classes if you plan to breastfeed. Learn infant CPR and basic baby care. Discuss your birth preferences with your provider and create a flexible birth plan.</p>
+
+        <h3>Emotional Preparation</h3>
+        <p>Acknowledge and discuss fears or anxieties with your partner and healthcare provider. Connect with other expectant parents through classes or online communities. Practice stress-reduction techniques like meditation or prenatal yoga. Discuss postpartum expectations and support plans with your partner.</p>
+
+        <h2>Signs of Labor and When to Go to the Hospital</h2>
+        <p>As you approach your due date, understanding the signs of labor helps you know when it's time to head to the hospital or call your midwife.</p>
+
+        <h3>Early Labor Signs</h3>
+        <p>The mucus plug release creates bloody show, which is a thick mucus discharge that may be tinged with blood. Your water breaking releases amniotic fluid as a gush or steady trickle. Regular contractions that grow closer together, longer, and stronger are the hallmark of true labor. Lower back pain that comes and goes with contractions is common. Diarrhea or upset stomach can occur as the body prepares for labor.</p>
+
+        <h3>When to Call Your Provider</h3>
+        <p>Contact your healthcare provider immediately if your water breaks regardless of whether contractions have started. Call if you're having regular contractions that are 5 minutes apart, lasting 1 minute each, for at least 1 hour, this is the 5-1-1 rule. Contact them for any vaginal bleeding beyond light bloody show, severe or constant abdominal pain, decreased baby movement, fever over 100.4 degrees Fahrenheit, or severe headache with vision changes.</p>
+
+        <h3>False Labor vs True Labor</h3>
+        <p>False labor or Braxton Hicks contractions are irregular, don't get closer together, stop when you change positions or rest, are felt mainly in the front, and don't increase in intensity. True labor contractions are regular and predictable, get progressively closer together, continue regardless of position or activity, are felt in the back and front, and steadily increase in intensity.</p>
+
+        <h2>Privacy and Data Security</h2>
+        <p>Your privacy and the security of your sensitive health information are our top priorities. When you use our pregnancy due date calculator:</p>
+        
+        <ul>
+            <li>All calculations are performed locally in your web browser using JavaScript</li>
+            <li>We do not store, save, or transmit your LMP date or any pregnancy information to any server</li>
+            <li>No cookies are set specifically for tracking your pregnancy data</li>
+            <li>Your personal health information remains completely private and secure on your device</li>
+        </ul>
+
+        <p>You can use this calculator with complete confidence knowing that your sensitive reproductive and pregnancy health data never leaves your device.</p>
+
+        <div class="info-box">
+            <h4>Medical Disclaimer</h4>
+            <p>This calculator provides estimates for informational and educational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Only about 5% of babies arrive on their exact due date. Your actual due date may be adjusted by your healthcare provider based on ultrasound measurements and individual circumstances. Always seek the advice of your physician, obstetrician, midwife, or other qualified healthcare provider with any questions you may have regarding your pregnancy, prenatal care, or childbirth. Never disregard professional medical advice or delay seeking it because of information from this calculator. If you suspect you may be pregnant or have a medical emergency, contact your healthcare provider immediately.</p>
+        </div>
+
+        <h2>When to Seek Medical Attention During Pregnancy</h2>
+        <p>Knowing when to contact your healthcare provider is crucial for a healthy pregnancy. While many discomforts are normal, certain symptoms require immediate medical attention.</p>
+
+        <h3>Contact Your Provider Immediately For:</h3>
+        <ul>
+            <li>Vaginal bleeding or spotting, especially if accompanied by cramping or pain</li>
+            <li>Severe abdominal pain or cramping</li>
+            <li>Sudden decrease in baby's movement or no movement for several hours after week 28</li>
+            <li>Signs of preterm labor before 37 weeks, including regular contractions, pelvic pressure, or backache</li>
+            <li>Rupture of membranes or leaking fluid from the vagina</li>
+            <li>Severe headache that doesn't respond to rest or medication</li>
+            <li>Vision changes including blurriness, spots, or flashing lights</li>
+            <li>Sudden severe swelling of face, hands, or feet</li>
+            <li>Fever over 100.4 degrees Fahrenheit</li>
+            <li>Persistent nausea and vomiting preventing you from keeping food or fluids down</li>
+            <li>Painful or burning urination</li>
+            <li>Severe dizziness or fainting</li>
+        </ul>
+
+        <h2>Resources for Expectant Parents</h2>
+        <p>For additional pregnancy information and support, consider these reputable resources:</p>
+
+        <ul>
+            <li><strong>American College of Obstetricians and Gynecologists:</strong> Provides comprehensive patient education materials on pregnancy, childbirth, and women's health topics</li>
+            <li><strong>March of Dimes:</strong> Offers information on pregnancy health, birth defects prevention, and premature birth</li>
+            <li><strong>What to Expect:</strong> Provides week-by-week pregnancy guides and community support</li>
+            <li><strong>La Leche League:</strong> Offers breastfeeding support and education</li>
+            <li><strong>Postpartum Support International:</strong> Provides resources for perinatal mood and anxiety disorders</li>
+        </ul>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is a due date calculator?</summary>
+      <p>An LMP-based calculator provides a reliable estimate and is the standard starting point used by healthcare providers worldwide. However, only about 5% of babies are born on their exact due date, with most arriving within two weeks before or after the estimated date. An early ultrasound performed between 8 and 13 weeks is the most accurate way to determine gestational age and confirm or adjust the due date, with an accuracy of plus or minus 3 to 5 days.</p>
+    </details>
+    <details>
+      <summary>Can my due date change?</summary>
+      <p>Yes, your due date can be adjusted based on early ultrasound measurements. If there's a discrepancy of more than 5 to 7 days between your LMP-based due date and the measurements from a first trimester ultrasound, most healthcare providers will adjust your due date to match the ultrasound dating. This is because early ultrasound measurements are more accurate than menstrual dating, especially for women with irregular cycles. Once adjusted based on an early ultrasound, the due date typically remains the same throughout pregnancy.</p>
+    </details>
+    <details>
+      <summary>What if I don't know the date of my last period?</summary>
+      <p>If you're unsure about your LMP, have irregular cycles, or recently stopped hormonal birth control, the most accurate way to determine your due date is through an ultrasound performed by your healthcare provider. A dating ultrasound, ideally performed between 8 and 13 weeks, measures the baby to determine gestational age very accurately. Your provider can then calculate a reliable due date from this measurement. It's important to attend prenatal appointments early so proper dating can be established.</p>
+    </details>
+    <details>
+      <summary>Is it possible to get a positive pregnancy test before a missed period?</summary>
+      <p>Yes, some sensitive home pregnancy tests can detect the pregnancy hormone hCG in your urine several days before your expected period. However, testing too early increases the chance of a false negative result because hCG levels may not yet be high enough to detect. For the most accurate result, it's best to wait until the first day of your missed period or later to test. If you test early and get a negative result but still don't get your period, test again a few days later.</p>
+    </details>
+    <details>
+      <summary>Why is pregnancy counted from the last menstrual period?</summary>
+      <p>Pregnancy is dated from the first day of your last menstrual period because this date is definite and knowable for most women, while the exact date of conception is usually uncertain. Even if you know when you had intercourse, fertilization can occur anywhere from a few hours to five days later. Using LMP provides a consistent, standardized way for healthcare providers to track pregnancy, schedule tests, and monitor fetal development. This is why gestational age is about two weeks longer than the baby's actual age since conception.</p>
+    </details>
+    <details>
+      <summary>What's the difference between gestational age and fetal age?</summary>
+      <p>Gestational age is measured from the first day of your last menstrual period and is the standard way healthcare providers track pregnancy. Fetal age, also called conceptional age, measures the actual time since conception occurred and is approximately two weeks less than gestational age. When your doctor says you're "12 weeks pregnant," they're referring to gestational age. The baby's actual age since conception, the fetal age, would be approximately 10 weeks. Medical professionals use gestational age for consistency in tracking and communication.</p>
+    </details>
+    <details>
+      <summary>What happens if I go past my due date?</summary>
+      <p>Going past your due date is common, many first-time mothers deliver after their due date. At 40 weeks, you're considered full term. At 41 weeks, you're late term, and your provider will likely increase monitoring to check on you and the baby. Most providers recommend induction by 42 weeks because continuing past this point increases risks for both mother and baby, including decreased placental function and increased baby size. Your provider will discuss the best approach based on your individual circumstances, the baby's condition, and current medical guidelines.</p>
+    </details>
+    <details>
+      <summary>When will I start feeling my baby move?</summary>
+      <p>Most women feel their baby's first movements, called quickening, between 18 and 22 weeks of pregnancy, though it can happen earlier or later. First-time mothers often feel movement a bit later, around 20 to 22 weeks, while women who have been pregnant before may notice movements as early as 16 weeks. Early movements feel like gentle flutters, bubbles, or a light tapping sensation. As pregnancy progresses and the baby grows stronger, movements become more pronounced and may include kicks, rolls, and jabs that are clearly identifiable as your baby.</p>
+    </details>
+  </section>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+      <p><strong>Disclaimer:</strong> This pregnancy due date calculator is provided for informational and educational purposes only. The results are estimates and should not be used as the sole basis for medical decisions. Only about 5% of babies are born on their exact due date. Your actual due date may be adjusted by your healthcare provider based on ultrasound measurements. This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare providers regarding your pregnancy and prenatal care.</p>
     </div>
     <div class="footer-links">
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
-  <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -235,15 +809,31 @@
     "mainEntity": [{
       "@type": "Question",
       "name": "How accurate is a due date calculator?",
-      "acceptedAnswer": { "@type": "Answer", "text": "An LMP-based calculator provides a reliable estimate and is a great starting point. However, only about 5% of babies are born on their exact due date. An early ultrasound is the most accurate way to determine the gestational age and confirm the due date." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An LMP-based calculator provides a reliable estimate used by healthcare providers. However, only about 5% of babies are born on their exact due date. An early ultrasound is the most accurate way to determine gestational age."
+      }
     },{
       "@type": "Question",
       "name": "Can my due date change?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your doctor may adjust your due date based on the size of the baby measured during your first ultrasound, or if you have irregular periods. Once set after an early ultrasound, it typically does not change." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Your doctor may adjust your due date based on early ultrasound measurements. Once set after an early ultrasound, it typically does not change."
+      }
     },{
       "@type": "Question",
       "name": "What if I don't know the date of my last period?",
-      "acceptedAnswer": { "@type": "Answer", "text": "If you're unsure about your LMP or have irregular cycles, the most accurate way to determine your due date is through an ultrasound performed by your healthcare provider. They can measure the baby to determine its gestational age." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you're unsure about your LMP or have irregular cycles, the most accurate way to determine your due date is through an ultrasound performed by your healthcare provider."
+      }
+    },{
+      "@type": "Question",
+      "name": "Why is pregnancy counted from the last menstrual period?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pregnancy is dated from LMP because this date is definite and knowable, while the exact date of conception is usually uncertain. This provides a consistent way to track pregnancy."
+      }
     }]
   }
   </script>
@@ -268,13 +858,20 @@
     };
 
     function calculatePregnancy() {
-      const lmp = document.getElementById("lmp").value;
-      if (!lmp) {
-        document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter the first day of your last period.</p>";
+      const lmpInput = document.getElementById("lmp").value;
+      if (!lmpInput) {
+        document.getElementById("result").innerHTML = "<p style='color: #ef4444; font-weight: 600;'>Please enter the first day of your last menstrual period.</p>";
         return;
       }
 
-      const lmpDate = new Date(lmp + 'T00:00:00'); // Set time to avoid timezone issues
+      const lmpDate = new Date(lmpInput + 'T00:00:00');
+      const today = new Date();
+      today.setHours(0,0,0,0);
+
+      if (lmpDate.getTime() > today.getTime()) {
+        document.getElementById("result").innerHTML = "<p style='color: #f97316; font-weight: 600;'>The first day of your last period cannot be in the future. Please enter a valid past date.</p>";
+        return;
+      }
       
       dueDate = new Date(lmpDate);
       dueDate.setDate(dueDate.getDate() + 280);
@@ -282,20 +879,23 @@
       const conceptionDate = new Date(lmpDate);
       conceptionDate.setDate(conceptionDate.getDate() + 14);
 
-      const today = new Date();
-      today.setHours(0,0,0,0);
-
       const msPerDay = 1000 * 60 * 60 * 24;
       const daysPregnant = Math.floor((today - lmpDate) / msPerDay);
       const weeksPregnant = Math.floor(daysPregnant / 7);
       const daysIntoWeek = daysPregnant % 7;
       
-      const fetalAgeWeeks = weeksPregnant - 2;
+      const fetalAgeWeeks = Math.max(0, weeksPregnant - 2);
 
-      const trimester = weeksPregnant < 14 ? "First Trimester" : (weeksPregnant < 28 ? "Second Trimester" : "Third Trimester");
+      let trimester;
+      if (weeksPregnant < 14) {
+        trimester = "First Trimester";
+      } else if (weeksPregnant < 28) {
+        trimester = "Second Trimester";
+      } else {
+        trimester = "Third Trimester";
+      }
 
-      // Select milestone for closest week
-      let milestoneMessage = "🌸 Your pregnancy is progressing beautifully!";
+      let milestoneMessage = "Your pregnancy is progressing beautifully!";
       let milestoneKeys = Object.keys(milestones).map(Number).sort((a,b) => a-b);
       for (const week of milestoneKeys) {
         if (weeksPregnant >= week) {
@@ -303,17 +903,23 @@
         }
       }
 
+      const daysUntilDue = Math.ceil((dueDate - today) / msPerDay);
+      let dueStatus = daysUntilDue > 0 ? `in ${daysUntilDue} days` : 
+                      daysUntilDue === 0 ? 'Today!' : `${Math.abs(daysUntilDue)} days ago`;
+
       document.getElementById("result").innerHTML = `
-        <h3>📅 Your Pregnancy Journey</h3>
-        <p><b>Estimated Due Date:</b> ${dueDate.toDateString()}</p>
-        <p><b>Current Progress:</b> You are <strong>${weeksPregnant} weeks and ${daysIntoWeek} days</strong> pregnant.</p>
-        <p><b>Current Trimester:</b> ${trimester}</p>
-        <hr style="margin: 15px 0;">
-        <p><b>Estimated Conception Date:</b> ${conceptionDate.toDateString()}</p>
-        <p><b>Baby's Fetal Age:</b> Approximately ${fetalAgeWeeks} weeks</p>
-        <hr style="margin: 15px 0;">
-        <p><b>This Week's Milestone:</b> ${milestoneMessage}</p>
-        <a href="#" class="calendar-btn" onclick="downloadICS('Baby\'s Estimated Due Date', dueDate)">📅 Add Due Date to Calendar</a>
+        <h3>Your Pregnancy Journey</h3>
+        <p><strong>Estimated Due Date:</strong> ${dueDate.toDateString()} (${dueStatus})</p>
+        <p><strong>Current Progress:</strong> You are <strong>${weeksPregnant} weeks and ${daysIntoWeek} days</strong> pregnant</p>
+        <p><strong>Current Trimester:</strong> ${trimester}</p>
+        <hr>
+        <p><strong>Estimated Conception Date:</strong> ${conceptionDate.toDateString()}</p>
+        <p><strong>Baby's Fetal Age:</strong> Approximately ${fetalAgeWeeks} weeks</p>
+        <hr>
+        <div class="milestone-box">
+          <p><strong>This Week's Milestone:</strong> ${milestoneMessage}</p>
+        </div>
+        <a href="#" class="calendar-btn" onclick="event.preventDefault(); downloadICS('Baby\\'s Estimated Due Date', dueDate)">Add Due Date to Calendar</a>
       `;
     }
 
@@ -339,22 +945,40 @@ END:VCALENDAR`.replace(/\n/g, "\r\n");
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
+  </script>
 
-    // Dark mode toggle
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
         const toggle = document.getElementById("darkModeToggle");
-        if(toggle) {
-            toggle.addEventListener("click", () => {
-              document.body.classList.toggle("dark-mode");
-              localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-            });
-            if (localStorage.getItem("theme") === "dark") {
-                document.body.classList.add("dark-mode");
+        const body = document.body;
+
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                toggle.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                toggle.textContent = '🌙';
             }
-        }
+        };
+
+        toggle.addEventListener("click", () => {
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'light');
+                applyTheme('light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+                applyTheme('dark');
+            }
+        });
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
     });
   </script>
+
 </body>
 </html>
-
+ 
