@@ -3,107 +3,601 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pregnancy Weight Gain Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Track your pregnancy weight gain with our free, interactive calculator. Get personalized recommendations based on your pre-pregnancy BMI for a healthy pregnancy.">
+  <title>Pregnancy Weight Gain Calculator - Track Healthy Weight Gain | QuickCalcLabs</title>
+  <meta name="description" content="Free pregnancy weight gain calculator using IOM guidelines. Track your weight gain week by week, get personalized recommendations based on your BMI, and ensure a healthy pregnancy for you and your baby.">
+  <meta name="keywords" content="pregnancy weight gain calculator, healthy pregnancy weight, BMI pregnancy, IOM guidelines, pregnancy weight tracker, trimester weight gain, twin pregnancy weight">
+  <link rel="canonical" href="https://quickcalclabs.com/pregnancy-weight-gain-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
-     crossorigin="anonymous"></script>
   <style>
-    :root {
-      --accent-pink: #e84393;
-      --accent-blue: #3498db;
-      --card-bg: #ffffff;
-      --text-color: #333;
+    /* Pregnancy weight gain calculator page specific styles */
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    .dark-mode {
-      --card-bg: #2c3e50;
-      --text-color: #ecf0f1;
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
-    .calc-wrapper { max-width: 600px; }
-    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .calc-wrapper h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-strong-light, #0f172a);
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .dark-mode label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .calc-wrapper input[type="number"] {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      margin: 0.6rem 0 0;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+    }
+
+    .calc-wrapper input:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
     .segmented-control {
       display: flex;
-      border-radius: 10px;
-      border: 1px solid #bdc3c7;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
       overflow: hidden;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      margin: 0.6rem 0 1.2rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
     }
-    .segmented-control input[type="radio"] { display: none; }
+
+    .dark-mode .segmented-control {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .segmented-control input[type="radio"] {
+      display: none;
+    }
+
     .segmented-control label {
       flex: 1;
       text-align: center;
-      padding: 10px;
+      padding: 0.9rem;
       cursor: pointer;
-      background: var(--card-bg);
-      color: var(--text-color);
-      transition: background 0.3s;
-    }
-    .segmented-control input[type="radio"]:checked + label {
-      background: var(--accent-pink);
-      color: #fff;
+      color: var(--text-medium-light, #334155);
+      transition: all 0.3s ease;
+      margin: 0;
       font-weight: 600;
     }
 
-    /* Result styles */
-    .result-container {
-        margin-top: 25px;
-        background: var(--card-bg);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    .dark-mode .segmented-control label {
+      color: var(--text-medium-dark, #cbd5e1);
     }
-    .result-container h3 { margin-top: 0; color: var(--accent-pink); }
-    .bmi-result { text-align: center; margin-bottom: 15px; }
-    .progress-bar-container { margin: 15px 0; }
-    .progress-bar {
-        height: 30px;
-        background-color: #ecf0f1;
-        border-radius: 15px;
-        position: relative;
-    }
-    .recommended-range {
-        position: absolute;
-        height: 100%;
-        background-color: #2ecc71;
-        border-radius: 15px;
-        opacity: 0.5;
-    }
-    .your-gain {
-        position: absolute;
-        height: 100%;
-        width: 4px;
-        background-color: var(--accent-pink);
-        border-radius: 2px;
-        transform: translateX(-2px);
-    }
-    .your-gain::after {
-        content: '▲ You are here';
-        position: absolute;
-        top: 35px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 12px;
-        font-weight: bold;
-        color: var(--accent-pink);
-        white-space: nowrap;
-    }
-    .range-labels { display: flex; justify-content: space-between; font-size: 12px; margin-top: 5px; }
 
-    /* Other styles */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 15px; margin-top: 20px; }
-    .card { background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .card a { text-decoration:none; font-weight:600; color: var(--text-color);}
-    .card a:hover { color: var(--accent-pink); }
-    .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
-    .faq summary { margin: 0; padding: 12px; background: var(--accent-pink); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
-    .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
-    .info-table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; }
-    .info-table th, .info-table td { padding: 10px; text-align: left; border-bottom: 1px solid #ecf0f1; }
-    .dark-mode .info-table th, .dark-mode .info-table td { border-bottom-color: #34495e; }
+    .segmented-control input[type="radio"]:checked + label {
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      color: #fff;
+    }
+
+    .calc-wrapper button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .calc-wrapper button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button:active {
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      font-weight: 600;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      color: var(--text-strong-light, #0f172a);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      color: var(--text-strong-dark, #f1f5f9);
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.4rem;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .result-box p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .bmi-result {
+      text-align: center;
+      margin-bottom: 1.2rem;
+      padding: 1rem;
+      background: rgba(236, 72, 153, 0.1);
+      border-radius: var(--radius-md, 12px);
+      border-left: 4px solid #ec4899;
+    }
+
+    .dark-mode .bmi-result {
+      background: rgba(236, 72, 153, 0.15);
+    }
+
+    .progress-bar-container {
+      margin: 1.5rem 0;
+    }
+
+    .progress-bar {
+      height: 30px;
+      background-color: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: 15px;
+      position: relative;
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .progress-bar {
+      background-color: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .recommended-range {
+      position: absolute;
+      height: 100%;
+      background: linear-gradient(135deg, #10b981, #34d399);
+      border-radius: 13px;
+      opacity: 0.6;
+    }
+
+    .your-gain {
+      position: absolute;
+      height: 100%;
+      width: 4px;
+      background-color: var(--accent-pink, #ec4899);
+      border-radius: 2px;
+      transform: translateX(-2px);
+      z-index: 10;
+    }
+
+    .your-gain::after {
+      content: '▲ You are here';
+      position: absolute;
+      top: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--accent-pink, #ec4899);
+      white-space: nowrap;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-top: 5px;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .dark-mode .range-labels {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .info-table {
+      width: 100%;
+      margin: 1.5rem 0;
+      border-collapse: collapse;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+      overflow: hidden;
+    }
+
+    .dark-mode .info-table {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .info-table th, .info-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .info-table th, .dark-mode .info-table td {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .info-table th {
+      background: rgba(139, 92, 246, 0.1);
+      font-weight: 700;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-group {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -117,69 +611,73 @@
     </nav>
   </header>
 
-  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
-
   <section class="calc-wrapper">
-    <h1>🤰 Pregnancy Weight Gain Calculator</h1>
-    <p class="subtitle">Track your weight gain through pregnancy and see if you're on a healthy track based on IOM guidelines.</p>
+    <h1>Pregnancy Weight Gain Calculator</h1>
+    <p class="subtitle">Track your weight gain through pregnancy and receive personalized recommendations based on IOM guidelines and your pre-pregnancy BMI.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
     
-    <label>🔄 Unit System:</label>
+    <h2>Select Your Measurement System</h2>
+    <label>Unit System:</label>
     <div class="segmented-control">
-        <input type="radio" id="imperial" name="unit" value="imperial" checked>
-        <label for="imperial">Imperial</label>
-        <input type="radio" id="metric" name="unit" value="metric">
-        <label for="metric">Metric</label>
+      <input type="radio" id="imperial" name="unit" value="imperial" checked>
+      <label for="imperial">Imperial (lbs/ft)</label>
+      <input type="radio" id="metric" name="unit" value="metric">
+      <label for="metric">Metric (kg/cm)</label>
     </div>
 
     <!-- Imperial Inputs -->
     <div id="imperialInputs">
-        <label>📏 Your Height (ft/in):</label>
-        <div class="input-group">
-             <input type="number" id="height_ft" placeholder="ft">
-             <input type="number" id="height_in" placeholder="in">
+      <label>Your Height:</label>
+      <div class="input-group">
+        <div>
+          <input type="number" id="height_ft" placeholder="Feet (e.g., 5)">
         </div>
-        <div class="input-group">
-            <div>
-                <label>⚖️ Pre-Pregnancy Weight (lbs):</label>
-                <input type="number" id="pre_weight_lbs" placeholder="e.g., 140">
-            </div>
-            <div>
-                <label>⚖️ Current Weight (lbs):</label>
-                <input type="number" id="current_weight_lbs" placeholder="e.g., 150">
-            </div>
+        <div>
+          <input type="number" id="height_in" placeholder="Inches (e.g., 6)">
         </div>
+      </div>
+      <div class="input-group">
+        <div>
+          <label>Pre-Pregnancy Weight (lbs):</label>
+          <input type="number" id="pre_weight_lbs" placeholder="e.g., 140">
+        </div>
+        <div>
+          <label>Current Weight (lbs):</label>
+          <input type="number" id="current_weight_lbs" placeholder="e.g., 150">
+        </div>
+      </div>
     </div>
 
     <!-- Metric Inputs -->
     <div id="metricInputs" style="display: none;">
-        <label>📏 Your Height (cm):</label>
-        <input type="number" id="height_cm" placeholder="e.g., 165">
-        <div class="input-group">
-            <div>
-                <label>⚖️ Pre-Pregnancy Weight (kg):</label>
-                <input type="number" id="pre_weight_kg" placeholder="e.g., 63.5">
-            </div>
-            <div>
-                <label>⚖️ Current Weight (kg):</label>
-                <input type="number" id="current_weight_kg" placeholder="e.g., 68">
-            </div>
+      <label>Your Height (cm):</label>
+      <input type="number" id="height_cm" placeholder="e.g., 165">
+      <div class="input-group">
+        <div>
+          <label>Pre-Pregnancy Weight (kg):</label>
+          <input type="number" id="pre_weight_kg" placeholder="e.g., 63.5">
         </div>
+        <div>
+          <label>Current Weight (kg):</label>
+          <input type="number" id="current_weight_kg" placeholder="e.g., 68">
+        </div>
+      </div>
     </div>
     
     <div class="input-group">
-        <div>
-            <label for="weeks">🗓️ Current Week of Pregnancy:</label>
-            <input type="number" id="weeks" placeholder="e.g., 25">
+      <div>
+        <label>Current Week of Pregnancy:</label>
+        <input type="number" id="weeks" placeholder="e.g., 25" min="1" max="42">
+      </div>
+      <div>
+        <label>Are You Expecting Twins?</label>
+        <div class="segmented-control">
+          <input type="radio" id="no" name="twins" value="no" checked>
+          <label for="no">No</label>
+          <input type="radio" id="yes" name="twins" value="yes">
+          <label for="yes">Yes</label>
         </div>
-        <div>
-            <label>👶 Twins?</label>
-             <div class="segmented-control" style="margin-top:0;">
-                <input type="radio" id="no" name="twins" value="no" checked>
-                <label for="no">No</label>
-                <input type="radio" id="yes" name="twins" value="yes">
-                <label for="yes">Yes</label>
-            </div>
-        </div>
+      </div>
     </div>
 
     <button onclick="calculateGain()">Calculate Weight Gain</button>
@@ -187,139 +685,308 @@
     <div id="result" class="result-box"></div>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
-
   <section class="seo-content">
-    <h2>Understanding Your Pregnancy Weight Gain Journey</h2>
-    <p>Gaining a healthy amount of weight during pregnancy is a crucial part of supporting your baby's development. This calculator uses the official guidelines from the Institute of Medicine (IOM) to provide a recommended weight gain range based on your pre-pregnancy Body Mass Index (BMI). Your BMI category (underweight, normal weight, overweight, or obese) determines your personalized recommendation for a healthy pregnancy.</p>
-    
-    <h3>Where Does the Weight Go?</h3>
-    <p>It's common to wonder how the numbers on the scale add up. The weight you gain is distributed throughout your body to create the perfect environment for your baby to grow. Here is a typical breakdown for a 30-pound (13.6 kg) total weight gain:</p>
-    <table class="info-table">
-        <tr>
-            <td>Baby</td>
-            <td>~7.5 lbs (3.4 kg)</td>
-        </tr>
-        <tr>
-            <td>Placenta</td>
-            <td>~1.5 lbs (0.7 kg)</td>
-        </tr>
-        <tr>
-            <td>Amniotic Fluid</td>
-            <td>~2.0 lbs (0.9 kg)</td>
-        </tr>
-        <tr>
-            <td>Increased Uterus Size</td>
-            <td>~2.0 lbs (0.9 kg)</td>
-        </tr>
-        <tr>
-            <td>Increased Breast Tissue</td>
-            <td>~2.0 lbs (0.9 kg)</td>
-        </tr>
-        <tr>
-            <td>Increased Blood Volume</td>
-            <td>~4.0 lbs (1.8 kg)</td>
-        </tr>
-        <tr>
-            <td>Increased Fluid Volume</td>
-            <td>~4.0 lbs (1.8 kg)</td>
-        </tr>
-        <tr>
-            <td>Maternal Fat Stores</td>
-            <td>~7.0 lbs (3.2 kg)</td>
-        </tr>
-    </table>
-
-    <h3>A Trimester-by-Trimester Guide to Weight Gain</h3>
-    <p>Weight gain is not linear; it happens in stages. Understanding this pattern can help reduce anxiety about the number on the scale.</p>
-    <ul>
-        <li><strong>First Trimester (Weeks 1-13):</strong> This is when you'll gain the least amount of weight. A total gain of 1 to 4.5 pounds is typical. Some women may even lose a little weight due to morning sickness.</li>
-        <li><strong>Second Trimester (Weeks 14-27):</strong> Your baby begins to grow more rapidly. For women with a normal pre-pregnancy BMI, a steady gain of about 1 to 2 pounds per week is recommended.</li>
-        <li><strong>Third Trimester (Weeks 28-40):</strong> Weight gain continues at a similar pace to the second trimester. The baby will do most of their growing during this final stage.</li>
-    </ul>
-
-    <h3>Tips for Healthy Pregnancy Weight Gain</h3>
-    <p>Focus on the quality of your diet, not just the quantity. The goal is to eat nutrient-dense foods that benefit both you and your baby.</p>
-    <ul>
-      <li><strong>Eat Small, Frequent Meals:</strong> This can help manage nausea in the first trimester and prevent heartburn in the third. It also keeps your blood sugar stable.</li>
-      <li><strong>Focus on "Superfoods":</strong> Incorporate foods rich in folate, iron, calcium, and protein, such as leafy greens, lentils, lean meats, and dairy or fortified alternatives.</li>
-      <li><strong>Stay Hydrated:</strong> Drinking plenty of water is essential for supporting increased blood volume and amniotic fluid.</li>
-      <li><strong>Listen to Your Body:</strong> Eat when you're hungry and stop when you're full. Pregnancy is not a time for restrictive dieting.</li>
-      <li><strong>Stay Active:</strong> Unless advised otherwise by your doctor, aim for 30 minutes of moderate exercise (like walking or swimming) most days of the week.</li>
-    </ul>
-
-    <h3>🔗 Explore More Tools</h3>
+    <h3>🔗 Explore More Women's Health Tools</h3>
     <div class="card-grid">
       <div class="card"><a href="pregnancy-calculator.html">🤰 Pregnancy Due Date Calculator</a></div>
-      <div class="card"><a href="baby-growth-percentile-calculator.html">📊 Baby Growth Percentile Calculator</a></div>
+      <div class="card"><a href="period-tracker.html">🌸 Period & Ovulation Calculator</a></div>
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
-      <div class="card"><a href="resting-metabolic-rate-calculator.html">🔥 Resting Metabolic Rate Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
     </div>
 
     <h3>📝 Related Blogs</h3>
     <div class="card-grid">
-        <div class="card"><a href="blog/best-foods-for-pregnancy.html">🍎 The Ultimate Pregnancy Diet Guide</a></div>
-        <div class="card"><a href="blog/safe-exercise-pregnancy-trimester.html">🏃‍♀️ Safe Exercises for Each Trimester</a></div>
+      <div class="card"><a href="blog/best-foods-for-pregnancy.html">🥗 Best Foods for a Healthy Pregnancy</a></div>
+      <div class="card"><a href="blog/trimester-guide-for-expecting-mothers.html">📖 Trimester Guide for Expecting Mothers</a></div>
     </div>
+
+    <article>
+      <h2>Understanding Pregnancy Weight Gain</h2>
+      <p>Gaining the right amount of weight during pregnancy is one of the most important factors in supporting your baby's healthy development and ensuring your own wellbeing throughout this transformative journey. This pregnancy weight gain calculator uses the official guidelines established by the Institute of Medicine, now known as the National Academy of Medicine, to provide personalized recommendations based on your pre-pregnancy Body Mass Index. Understanding where you are in your weight gain journey helps you make informed decisions about nutrition and prenatal care.</p>
+
+      <p>Weight gain during pregnancy is not just about the baby. Your body undergoes remarkable changes to create and sustain new life, and appropriate weight gain ensures that both you and your baby have the energy and nutrients needed for this process. The recommendations vary based on your starting weight because different body types have different nutritional needs during pregnancy.</p>
+
+      <h2>Where Does the Pregnancy Weight Go?</h2>
+      <p>Many expectant mothers wonder where all the extra weight actually goes. Understanding the distribution helps you appreciate that pregnancy weight gain is purposeful and necessary for supporting your baby's development and your body's changes. Here's a typical breakdown for a 30-pound total weight gain:</p>
+
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Approximate Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Baby</td>
+            <td>7 to 8 lbs (3.2 to 3.6 kg)</td>
+          </tr>
+          <tr>
+            <td>Placenta</td>
+            <td>1.5 lbs (0.7 kg)</td>
+          </tr>
+          <tr>
+            <td>Amniotic Fluid</td>
+            <td>2 lbs (0.9 kg)</td>
+          </tr>
+          <tr>
+            <td>Enlarged Uterus</td>
+            <td>2 lbs (0.9 kg)</td>
+          </tr>
+          <tr>
+            <td>Enlarged Breast Tissue</td>
+            <td>2 lbs (0.9 kg)</td>
+          </tr>
+          <tr>
+            <td>Increased Blood Volume</td>
+            <td>4 lbs (1.8 kg)</td>
+          </tr>
+          <tr>
+            <td>Increased Fluid Volume</td>
+            <td>4 lbs (1.8 kg)</td>
+          </tr>
+          <tr>
+            <td>Maternal Fat and Protein Stores</td>
+            <td>7 lbs (3.2 kg)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>As you can see, the baby accounts for only about 25 percent of the total weight gain. The rest supports pregnancy processes and prepares your body for breastfeeding after birth. The maternal fat stores, for instance, provide energy reserves for both the late stages of pregnancy and for producing breast milk after delivery.</p>
+
+      <h2>IOM Weight Gain Guidelines by BMI Category</h2>
+      <p>The Institute of Medicine provides specific weight gain recommendations based on your pre-pregnancy BMI. These evidence-based guidelines are designed to optimize outcomes for both mother and baby. Here are the recommended ranges for singleton pregnancies:</p>
+
+      <div class="info-box">
+        <h4>Singleton Pregnancy Recommendations</h4>
+        <ul>
+          <li><strong>Underweight (BMI less than 18.5):</strong> 28 to 40 pounds (12.5 to 18 kg)</li>
+          <li><strong>Normal Weight (BMI 18.5 to 24.9):</strong> 25 to 35 pounds (11.5 to 16 kg)</li>
+          <li><strong>Overweight (BMI 25 to 29.9):</strong> 15 to 25 pounds (7 to 11.5 kg)</li>
+          <li><strong>Obese (BMI 30 or greater):</strong> 11 to 20 pounds (5 to 9 kg)</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h4>Twin Pregnancy Recommendations</h4>
+        <ul>
+          <li><strong>Underweight (BMI less than 18.5):</strong> 50 to 62 pounds (22.7 to 28.1 kg)</li>
+          <li><strong>Normal Weight (BMI 18.5 to 24.9):</strong> 37 to 54 pounds (16.8 to 24.5 kg)</li>
+          <li><strong>Overweight (BMI 25 to 29.9):</strong> 31 to 50 pounds (14.1 to 22.7 kg)</li>
+          <li><strong>Obese (BMI 30 or greater):</strong> 25 to 42 pounds (11.3 to 19.1 kg)</li>
+        </ul>
+      </div>
+
+      <p>These ranges are guidelines, not absolute rules. Individual circumstances, health conditions, and medical history can influence what's appropriate for you. Your healthcare provider may recommend different targets based on your specific situation.</p>
+
+      <h2>Weight Gain Patterns Throughout Pregnancy</h2>
+      <p>Weight gain during pregnancy doesn't happen at a constant rate. Understanding the typical pattern can help reduce anxiety when you notice changes in how quickly you're gaining weight from one trimester to the next.</p>
+
+      <h3>First Trimester: Weeks 1 to 13</h3>
+      <p>The first trimester typically sees the least amount of weight gain, often only 1 to 4.5 pounds total for the entire trimester. Some women may even lose weight during this period, especially if experiencing significant morning sickness or food aversions. This limited weight gain is normal and not cause for concern as long as you're staying hydrated and able to keep some food down.</p>
+
+      <p>During these early weeks, the embryo is incredibly small and doesn't require substantial additional calories. Your body is undergoing metabolic and hormonal changes, but significant physical expansion hasn't yet begun. If you're struggling with nausea, focus on eating what you can tolerate and staying hydrated rather than worrying about weight gain.</p>
+
+      <h3>Second Trimester: Weeks 14 to 27</h3>
+      <p>The second trimester is when steady, more noticeable weight gain typically begins. For women with a normal pre-pregnancy BMI, gaining about 1 to 2 pounds per week is expected and healthy during this period. This is when many women feel their best, morning sickness has usually subsided, energy levels improve, and appetite normalizes or increases.</p>
+
+      <p>This trimester corresponds with rapid fetal growth and development. Your baby is growing from about 3 inches to nearly 14 inches long by the end of this period. Your body is also expanding blood volume, building placental tissue, and accumulating the nutrients needed to support continued development.</p>
+
+      <h3>Third Trimester: Weeks 28 to 40</h3>
+      <p>Weight gain continues at a similar pace during the third trimester, though some women find it slightly slows in the final weeks before delivery. The baby is doing most of their growing during this time, gaining about half a pound per week. You're also accumulating additional fat stores that will support breastfeeding after birth.</p>
+
+      <p>Physical discomfort may increase during this period, making eating more challenging. Heartburn, feeling full quickly due to the baby pressing on your stomach, and general discomfort can affect appetite. Continue focusing on nutrient-dense foods and eating smaller, more frequent meals if large meals are uncomfortable.</p>
+
+      <h2>Factors That Influence Healthy Weight Gain</h2>
+      <p>While the IOM guidelines provide a framework, several factors influence what constitutes healthy weight gain for your individual pregnancy. Understanding these factors helps contextualize the recommendations and work with your healthcare provider on personalized targets.</p>
+
+      <h3>Age</h3>
+      <p>Maternal age can influence appropriate weight gain. Teenagers who are still growing themselves may need to gain at the higher end of their recommended range or even slightly above it. Their bodies are supporting both their own continued development and their baby's growth. Older mothers may have different metabolic patterns that affect weight gain.</p>
+
+      <h3>Activity Level</h3>
+      <p>Your activity level before and during pregnancy affects caloric needs. Women who maintain regular exercise throughout pregnancy may need more calories and could gain weight differently than those who are less active. Physical activity is generally beneficial during pregnancy unless contraindicated by medical conditions.</p>
+
+      <h3>Multiple Pregnancies</h3>
+      <p>Carrying twins, triplets, or more requires significantly more weight gain than singleton pregnancies. Our calculator adjusts recommendations for twins, but higher-order multiples require individualized guidance from your healthcare provider and potentially a maternal-fetal medicine specialist.</p>
+
+      <h3>Pre-existing Health Conditions</h3>
+      <p>Conditions like diabetes, hypertension, thyroid disorders, or PCOS can affect metabolism and appropriate weight gain targets. Women with these conditions should work closely with their healthcare team to establish personalized goals that manage both the condition and healthy pregnancy progression.</p>
+
+      <h3>Pregnancy Complications</h3>
+      <p>Complications like gestational diabetes, preeclampsia, or growth restriction may necessitate adjusted weight gain goals and closer monitoring. These situations require medical supervision and individualized nutritional planning.</p>
+
+      <h2>Tips for Healthy Pregnancy Weight Gain</h2>
+      <p>Achieving healthy weight gain during pregnancy isn't about dieting or restricting calories. Instead, it's about making nutritious food choices that support both your health and your baby's development while listening to your body's signals.</p>
+
+      <h3>Focus on Nutrient-Dense Foods</h3>
+      <p>Prioritize foods that provide substantial nutrition relative to their calorie content. These include fruits and vegetables rich in vitamins, minerals, and fiber, lean proteins like chicken, fish, beans, and tofu, whole grains providing sustained energy and B vitamins, dairy or fortified alternatives for calcium and vitamin D, and healthy fats from nuts, avocados, and olive oil.</p>
+
+      <p>During pregnancy, you need increased amounts of certain nutrients like folate, iron, calcium, and protein. Getting these primarily from whole foods rather than supplements when possible ensures better absorption and provides additional beneficial compounds.</p>
+
+      <h3>Eat Regular, Balanced Meals</h3>
+      <p>Rather than eating for two in terms of quantity, think of eating twice as well in terms of quality. Most pregnant women need only an additional 300 to 400 calories per day during the second and third trimesters, that's roughly equivalent to a Greek yogurt with berries and granola or a peanut butter sandwich.</p>
+
+      <p>Eating regular meals and snacks helps maintain stable blood sugar levels, reduces nausea, prevents excessive hunger that can lead to overeating, and ensures steady nutrient availability for your baby. Many women find that smaller, more frequent meals work better than three large meals, especially as the growing uterus reduces stomach capacity.</p>
+
+      <h3>Stay Hydrated</h3>
+      <p>Water is crucial during pregnancy for increased blood volume, amniotic fluid production, supporting digestion and preventing constipation, regulating body temperature, and reducing swelling. Aim for 8 to 12 cups of water daily, more if you're active or in hot weather. If plain water is unappealing, try adding lemon, cucumber, or fruit for flavor.</p>
+
+      <h3>Listen to Your Body's Hunger and Fullness Cues</h3>
+      <p>Pregnancy is not the time for restrictive dieting, but it's also not a free pass to ignore your body's signals. Eat when you're genuinely hungry and stop when you're comfortably satisfied rather than overly full. This intuitive approach helps you gain weight at an appropriate pace while meeting your body's actual needs.</p>
+
+      <h3>Maintain Appropriate Physical Activity</h3>
+      <p>Unless contraindicated by your healthcare provider, regular moderate exercise during pregnancy offers numerous benefits. It helps manage weight gain, reduces pregnancy discomforts like back pain, improves mood and energy, helps prepare your body for labor, and promotes better sleep. Safe activities for most pregnant women include walking, swimming, prenatal yoga, and stationary cycling. Always consult your provider before starting or continuing an exercise program during pregnancy.</p>
+
+      <h3>Manage Stress and Emotional Eating</h3>
+      <p>Pregnancy brings significant physical and emotional changes that can affect eating patterns. If you find yourself eating in response to stress, anxiety, or emotions rather than physical hunger, consider alternative coping strategies like talking with a supportive friend or therapist, practicing relaxation techniques or meditation, engaging in gentle physical activity, or journaling about your feelings. Emotional eating occasionally is normal, but if it's significantly affecting your weight gain or wellbeing, discuss it with your healthcare provider.</p>
+
+      <h2>What If You're Gaining Too Much or Too Little?</h2>
+      <p>Not everyone's weight gain will fall perfectly within the recommended ranges, and that's okay. What matters most is overall trends and your individual health circumstances. However, gaining significantly more or less than recommended does warrant discussion with your healthcare provider.</p>
+
+      <h3>Gaining More Than Recommended</h3>
+      <p>Excessive weight gain during pregnancy is associated with certain risks including gestational diabetes, high blood pressure and preeclampsia, larger than average baby potentially complicating delivery, increased likelihood of needing cesarean delivery, difficulty losing weight after pregnancy, and increased risk of the child developing obesity later in life.</p>
+
+      <p>If you're gaining more rapidly than expected, don't panic or drastically restrict calories. Instead, review your eating patterns with your healthcare provider or a registered dietitian, focus on nutrient-dense foods rather than empty calories, assess portion sizes to ensure they're appropriate, increase physical activity if approved by your provider, and identify any emotional or situational eating triggers.</p>
+
+      <h3>Gaining Less Than Recommended</h3>
+      <p>Insufficient weight gain can also pose risks including low birth weight baby, preterm delivery, developmental delays, and compromised maternal health. If you're not gaining enough weight, possible causes include inadequate caloric intake, persistent morning sickness or food aversions, underlying health conditions affecting absorption or metabolism, excessive physical activity without adequate nutrition, or high stress levels affecting appetite.</p>
+
+      <p>Work with your healthcare team to identify barriers to adequate weight gain and develop strategies to address them. This might include eating smaller, more frequent meals, choosing higher-calorie nutrient-dense foods, managing nausea with medication if needed, or addressing any underlying health issues.</p>
+
+      <h2>Special Considerations for Different BMI Categories</h2>
+      <p>Women in different BMI categories face unique considerations during pregnancy. Understanding these helps you work effectively with your healthcare team.</p>
+
+      <h3>Underweight Women (BMI Less Than 18.5)</h3>
+      <p>Women who begin pregnancy underweight need to gain more weight to ensure adequate nutrient stores for both mother and baby. This doesn't mean eating unlimited amounts, but rather consistently meeting increased caloric needs through nutritious foods. Focus on calorie-dense nutritious options like nuts, nut butters, avocados, dried fruits, and whole milk products if tolerated. Eat frequent meals and snacks rather than trying to consume large amounts at once.</p>
+
+      <h3>Overweight and Obese Women (BMI 25 or Greater)</h3>
+      <p>Women who start pregnancy at a higher weight have lower weight gain recommendations but still need to gain weight. Pregnancy is never a time to attempt weight loss. The focus should be on gaining slowly and steadily while ensuring adequate nutrition for the baby. Work closely with your healthcare team as you may face higher risks for gestational diabetes, hypertension, and other complications that require monitoring and management.</p>
+
+      <h2>After Pregnancy: Postpartum Weight Loss</h2>
+      <p>Understanding that pregnancy weight gain is temporary and purposeful can reduce anxiety. Most women lose about 12 to 14 pounds within the first week after delivery, from the baby, placenta, and amniotic fluid. The remaining weight comes off gradually over the following months.</p>
+
+      <p>Breastfeeding can help with postpartum weight loss as it burns additional calories, typically 300 to 500 per day. However, some women find they hold onto the last few pounds until after weaning. This is normal, as the body maintains some fat stores to support milk production.</p>
+
+      <p>Give yourself grace and time for postpartum weight loss. It took nine months to gain the weight, and it's reasonable for it to take at least that long to lose it. Focus on eating nutritious foods to support your recovery and, if breastfeeding, milk production, rather than aggressive calorie restriction. Resume physical activity gradually as approved by your healthcare provider, typically starting with gentle walks and progressing as you heal and regain strength.</p>
+
+      <h2>Privacy and Data Security</h2>
+      <p>Your privacy and the security of your health information are our top priorities. When you use our pregnancy weight gain calculator, all calculations are performed locally in your web browser using JavaScript. We do not store, save, or transmit your height, weight, or any pregnancy information to any server. No cookies are set specifically for tracking your pregnancy data. Your personal health information remains completely private and secure on your device. You can use this calculator with complete confidence knowing that your sensitive health data never leaves your device.</p>
+
+      <div class="info-box">
+        <h4>Medical Disclaimer</h4>
+        <p>This calculator provides estimates for informational and educational purposes only based on Institute of Medicine guidelines. It is not a substitute for professional medical advice, diagnosis, or treatment. Individual circumstances, health conditions, and pregnancy complications may necessitate different weight gain targets. The recommendations provided are guidelines, not absolute rules. Always seek the advice of your physician, obstetrician, midwife, or other qualified healthcare provider with any questions you may have regarding your pregnancy weight gain, nutrition, or prenatal care. Never disregard professional medical advice or delay seeking it because of information from this calculator. If you have concerns about your weight gain pattern, nutritional intake, or overall pregnancy health, contact your healthcare provider immediately.</p>
+      </div>
+
+      <h2>When to Contact Your Healthcare Provider</h2>
+      <p>While weight gain that falls slightly outside the recommended ranges isn't necessarily cause for alarm, certain situations warrant immediate medical attention or discussion with your provider.</p>
+
+      <h3>Contact Your Provider If You Experience:</h3>
+      <ul>
+        <li>Sudden rapid weight gain of more than 5 pounds in a week, especially if accompanied by swelling, headaches, or vision changes, these can indicate preeclampsia</li>
+        <li>Inability to gain weight or significant weight loss at any point during pregnancy</li>
+        <li>Persistent nausea and vomiting preventing adequate nutrition and hydration</li>
+        <li>Concerns about eating disorders or disordered eating patterns affecting your ability to nourish yourself and your baby</li>
+        <li>Extreme anxiety about weight gain affecting your mental health or eating behaviors</li>
+        <li>Symptoms of gestational diabetes such as excessive thirst, frequent urination, or unusual fatigue</li>
+        <li>Any other concerns about your nutrition, weight, or overall pregnancy health</li>
+      </ul>
+
+      <h2>Resources for Nutrition and Healthy Pregnancy</h2>
+      <p>For additional information about pregnancy nutrition and healthy weight gain, consider these reputable resources:</p>
+
+      <ul>
+        <li><strong>Academy of Nutrition and Dietetics:</strong> Offers evidence-based nutrition information and can help you find a registered dietitian specializing in prenatal nutrition</li>
+        <li><strong>American College of Obstetricians and Gynecologists:</strong> Provides comprehensive patient education on pregnancy weight gain and nutrition</li>
+        <li><strong>USDA MyPlate for Pregnancy and Breastfeeding:</strong> Offers personalized meal planning tools and nutrition guidance</li>
+        <li><strong>March of Dimes:</strong> Provides information on healthy pregnancy, nutrition, and reducing risk of complications</li>
+        <li><strong>Your Healthcare Provider:</strong> Your obstetrician, midwife, or family medicine doctor should be your primary source for personalized guidance</li>
+      </ul>
+    </article>
   </section>
 
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions about Pregnancy Weight Gain</h2>
-    <details class="faq">
-      <summary>What is my pre-pregnancy BMI category?</summary>
-      <p>Your pre-pregnancy BMI is calculated from your height and pre-pregnancy weight. The categories are: Underweight (BMI < 18.5), Normal Weight (18.5 - 24.9), Overweight (25.0 - 29.9), and Obese (BMI ≥ 30.0). This calculator determines your category automatically.</p>
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How is pre-pregnancy BMI calculated and why does it matter?</summary>
+      <p>Pre-pregnancy BMI is calculated by dividing your pre-pregnancy weight in kilograms by your height in meters squared, or using pounds and inches with a conversion factor. Your BMI category determines your recommended weight gain range because different body types have different nutritional needs during pregnancy. Women who start pregnancy underweight need to gain more to ensure adequate nutrient stores, while women who start at a higher weight need to gain less but still must gain weight to support the baby's development.</p>
     </details>
-    <details class="faq">
-      <summary>What are the recommendations for twins?</summary>
-      <p>Weight gain recommendations are higher for twin pregnancies. For example, a woman with a normal BMI is recommended to gain 37-54 pounds for twins, compared to 25-35 pounds for a single baby. This calculator adjusts the recommendations if you select "Yes" for twins.</p>
+    <details>
+      <summary>What are the weight gain recommendations for twin pregnancies?</summary>
+      <p>Twin pregnancies require significantly more weight gain than singleton pregnancies. For a woman with normal pre-pregnancy BMI, the recommendation is 37 to 54 pounds for twins compared to 25 to 35 pounds for a single baby. Underweight women should gain 50 to 62 pounds, overweight women 31 to 50 pounds, and obese women 25 to 42 pounds. Our calculator automatically adjusts recommendations when you select twins. Higher-order multiples require individualized guidance from a maternal-fetal medicine specialist.</p>
     </details>
-    <details class="faq">
-      <summary>What if I'm not within the recommended range?</summary>
-      <p>Don't panic. This calculator is a guide, not a diagnosis. Many healthy pregnancies fall slightly outside these ranges. The most important step is to discuss your weight gain, nutrition, and activity level with your healthcare provider at your regular prenatal appointments.</p>
+    <details>
+      <summary>What if my weight gain is outside the recommended range?</summary>
+      <p>Many healthy pregnancies fall slightly outside the standard ranges, and individual circumstances vary. These guidelines are not absolute rules. The most important step is to discuss your weight gain pattern, nutrition, and overall health with your healthcare provider at your regular prenatal appointments. They can assess whether adjustments are needed based on your specific situation, health history, and how your baby is developing. Avoid making drastic changes to diet or exercise without medical guidance.</p>
+    </details>
+    <details>
+      <summary>Do I really need to gain weight if I'm overweight or obese?</summary>
+      <p>Yes, all pregnant women need to gain some weight to support the baby's growth and the physiological changes of pregnancy. Even women who are obese before pregnancy should gain 11 to 20 pounds. This weight includes the baby, placenta, amniotic fluid, increased blood and fluid volumes, and breast tissue, none of which is optional. Pregnancy is never an appropriate time to attempt weight loss. Focus on eating nutritious foods and gaining slowly and steadily within your recommended range.</p>
+    </details>
+    <details>
+      <summary>How many extra calories do I need during pregnancy?</summary>
+      <p>In the first trimester, most women don't need any additional calories. In the second and third trimesters, you typically need an extra 300 to 400 calories per day, not the "eating for two" amount many people imagine. This is roughly equivalent to a substantial healthy snack like Greek yogurt with granola and berries, or a peanut butter sandwich on whole grain bread with an apple. The emphasis should be on nutrient density rather than simply increasing food quantity.</p>
+    </details>
+    <details>
+      <summary>What can I do about sudden weight gain or swelling?</summary>
+      <p>Some swelling, especially in feet and ankles, is normal during pregnancy due to increased fluid volume. However, sudden rapid weight gain of more than 5 pounds in a week, especially accompanied by severe swelling in hands and face, headaches, vision changes, or upper abdominal pain, can indicate preeclampsia, a serious pregnancy complication. Contact your healthcare provider immediately if you experience these symptoms. Normal swelling can be managed by staying hydrated, elevating your feet, avoiding prolonged standing, and wearing comfortable shoes.</p>
+    </details>
+    <details>
+      <summary>Is it safe to exercise during pregnancy if I'm trying to manage weight gain?</summary>
+      <p>For most women, regular moderate exercise during pregnancy is not only safe but beneficial. It helps manage weight gain, reduces common pregnancy discomforts, improves mood and energy, and prepares your body for labor. Safe activities typically include walking, swimming, prenatal yoga, and stationary cycling. However, you should always consult your healthcare provider before starting or continuing an exercise program during pregnancy. Certain conditions may require modified activity or rest. Never use exercise as a way to compensate for eating or to lose weight during pregnancy.</p>
+    </details>
+    <details>
+      <summary>How long will it take to lose the pregnancy weight after delivery?</summary>
+      <p>Most women lose about 12 to 14 pounds within the first week after delivery from the baby, placenta, and amniotic fluid. The remaining weight typically comes off gradually over 6 to 12 months, though this varies significantly between individuals. Breastfeeding can support weight loss as it burns 300 to 500 extra calories daily, though some women retain a few pounds until after weaning. Focus on eating nutritiously to support recovery and, if breastfeeding, milk production, rather than aggressive dieting. Resume physical activity gradually as approved by your provider. Give yourself grace, it took nine months to gain the weight, and it's reasonable for it to take at least that long to lose it.</p>
     </details>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
-
-  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
   <footer>
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This pregnancy weight gain calculator is provided for informational and educational purposes only using Institute of Medicine guidelines. The results are estimates and should not be used as the sole basis for medical decisions. Individual circumstances, health conditions, and pregnancy complications may require different weight gain targets. This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare providers regarding your pregnancy nutrition and weight gain.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is my pre-pregnancy BMI category?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your pre-pregnancy BMI is calculated from your height and pre-pregnancy weight. The categories are: Underweight (BMI < 18.5), Normal Weight (18.5 - 24.9), Overweight (25.0 - 29.9), and Obese (BMI ≥ 30.0). This calculator determines your category automatically."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What are the recommendations for twins?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Weight gain recommendations are higher for twin pregnancies. For example, a woman with a normal BMI is recommended to gain 37-54 pounds for twins, compared to 25-35 pounds for a single baby. This calculator adjusts the recommendations if you select 'Yes' for twins."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What if I'm not within the recommended range?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Don't panic. This calculator is a guide, not a diagnosis. Many healthy pregnancies fall slightly outside these ranges. The most important step is to discuss your weight gain, nutrition, and activity level with your healthcare provider at your regular prenatal appointments."
-        }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How is pre-pregnancy BMI calculated and why does it matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pre-pregnancy BMI is calculated by dividing your pre-pregnancy weight in kilograms by your height in meters squared. Your BMI category determines your recommended weight gain range because different body types have different nutritional needs during pregnancy."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "What are the weight gain recommendations for twin pregnancies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Twin pregnancies require significantly more weight gain. For a woman with normal pre-pregnancy BMI, the recommendation is 37 to 54 pounds for twins compared to 25 to 35 pounds for a single baby."
+      }
+    },{
+      "@type": "Question",
+      "name": "What if my weight gain is outside the recommended range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many healthy pregnancies fall slightly outside the standard ranges. The most important step is to discuss your weight gain pattern with your healthcare provider at your regular prenatal appointments."
+      }
+    },{
+      "@type": "Question",
+      "name": "Do I really need to gain weight if I'm overweight or obese?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, all pregnant women need to gain some weight to support the baby's growth and the physiological changes of pregnancy. Pregnancy is never an appropriate time to attempt weight loss."
+      }
+    }]
   }
   </script>
 
@@ -346,7 +1013,7 @@
                 preWeightKg = preWeightLbs * 0.453592;
                 currentWeightKg = currentWeightLbs * 0.453592;
             }
-        } else { // Metric
+        } else {
             heightCm = parseFloat(document.getElementById('height_cm').value);
             preWeightKg = parseFloat(document.getElementById('pre_weight_kg').value);
             currentWeightKg = parseFloat(document.getElementById('current_weight_kg').value);
@@ -360,12 +1027,14 @@
         }
         
         if (hasErrors) {
-            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields with valid, positive numbers (weeks 1-42).</p>";
+            resultDiv.innerHTML = "<p style='color:#ef4444; font-weight:600;'>⚠️ Please fill in all fields with valid, positive numbers (weeks 1-42).</p>";
+            resultDiv.style.display = 'block';
             return;
         }
 
         if (currentWeightKg < preWeightKg) {
-             resultDiv.innerHTML = "<p style='color:orange;'>Your current weight should be higher than your pre-pregnancy weight.</p>";
+            resultDiv.innerHTML = "<p style='color:#f97316; font-weight:600;'>Your current weight should be equal to or higher than your pre-pregnancy weight. Weight loss during pregnancy should be discussed with your healthcare provider.</p>";
+            resultDiv.style.display = 'block';
             return;
         }
 
@@ -378,7 +1047,7 @@
             else if (bmi < 25) { bmiCategory = "Normal weight"; gainRangeKg = [16.8, 24.5]; }
             else if (bmi < 30) { bmiCategory = "Overweight"; gainRangeKg = [14.1, 22.7]; }
             else { bmiCategory = "Obese"; gainRangeKg = [11.3, 19.1]; }
-        } else { // Singleton
+        } else {
             if (bmi < 18.5) { bmiCategory = "Underweight"; gainRangeKg = [12.5, 18]; }
             else if (bmi < 25) { bmiCategory = "Normal weight"; gainRangeKg = [11.5, 16]; }
             else if (bmi < 30) { bmiCategory = "Overweight"; gainRangeKg = [7, 11.5]; }
@@ -387,7 +1056,6 @@
         
         gainRangeLbs = [gainRangeKg[0] * 2.20462, gainRangeKg[1] * 2.20462];
 
-        // Calculate recommended gain for the current week
         let weeklyGainLbs = (bmi < 18.5) ? 1.1 : (bmi < 25) ? 1.0 : (bmi < 30) ? 0.6 : 0.5;
         if(isTwins) weeklyGainLbs = (bmi < 25) ? 1.5 : (bmi < 30) ? 1.3 : 1.1;
 
