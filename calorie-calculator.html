@@ -1,112 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Calorie Calculator: TDEE for Weight Loss & Gain | QuickCalcLabs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Our free Calorie Calculator estimates your daily calorie needs (TDEE) for weight loss, maintenance, or muscle gain using the Mifflin-St Jeor formula. Learn about calories, macros, and how to reach your fitness goals." />
-  <meta name="keywords" content="calorie calculator, tdee calculator, calories for weight loss, maintenance calories, calorie needs, daily calorie intake, mifflin st jeor, bulking calories, cutting calories">
-  <link rel="canonical" href="https://quickcalclabs.com/calorie-calculator.html" />
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="css/style.css" /> 
-
-  <!-- Open Graph / Twitter -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calorie Calculator - Calculate Your Daily TDEE for Weight Loss & Gain | QuickCalcLabs</title>
+  <meta name="description" content="Free calorie calculator to estimate your daily calorie needs (TDEE) for weight loss, maintenance, or muscle gain. Uses the Mifflin-St Jeor formula with Imperial and Metric support.">
+  <meta name="keywords" content="calorie calculator, TDEE calculator, calories for weight loss, maintenance calories, calorie needs, daily calorie intake, Mifflin St Jeor, bulking calories, cutting calories">
+  <link rel="canonical" href="https://quickcalclabs.com/calorie-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  
   <meta property="og:type" content="website">
   <meta property="og:title" content="Calorie Calculator (TDEE) | QuickCalcLabs">
-  <meta property="og:description" content="Estimate daily calories for cutting, maintenance, or bulking. Imperial & Metric, instant targets, interactive gauge, FAQs and more.">
+  <meta property="og:description" content="Calculate your daily calories for weight loss, maintenance, or muscle gain with scientific accuracy.">
   <meta property="og:url" content="https://quickcalclabs.com/calorie-calculator.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Calorie Calculator (TDEE) | QuickCalcLabs">
-  <meta name="twitter:description" content="Estimate daily calories for cutting, maintenance, or bulking with a clean, modern calculator.">
-
+  
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
 
   <style>
-    /* NOTE: I am preserving your original styling as requested. */
-    /* Modern styling inspired by period tracker */
+    /* Calorie calculator page specific styles */
     .calc-wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background: var(--card-bg, #fff);
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     .calc-wrapper h1 {
-      text-align: center;
-      color: var(--accent, #ff6b81);
-      margin-bottom: 10px;
-      font-size: 2.5rem;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .subtitle {
-      text-align: center;
-      color: var(--text, #666);
-      margin-bottom: 30px;
-      font-size: 1.1rem;
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
       line-height: 1.6;
     }
 
-    /* Unit toggle */
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Unit Toggle */
     .unit-toggle {
       display: flex;
       gap: 10px;
-      margin-bottom: 25px;
       justify-content: center;
+      margin-bottom: 1.5rem;
     }
 
     .unit-btn {
-      padding: 10px 20px;
-      border: 2px solid var(--accent, #ff6b81);
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid var(--primary, #8b5cf6);
       background: transparent;
-      color: var(--accent, #ff6b81);
-      border-radius: 25px;
+      color: var(--primary, #8b5cf6);
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-weight: 600;
     }
 
     .unit-btn.active {
-      background: var(--accent, #ff6b81);
+      background: var(--primary, #8b5cf6);
       color: white;
     }
 
     .unit-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255,107,129,0.3);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
     }
 
-    /* Form styling */
-    #calorieForm {
-      display: grid;
-      gap: 20px;
+    .dark-mode .unit-btn {
+      border-color: var(--primary-light, #a78bfa);
+      color: var(--primary-light, #a78bfa);
     }
 
-    #calorieForm label {
+    .dark-mode .unit-btn.active {
+      background: var(--primary-light, #a78bfa);
+      color: var(--text-strong-dark, #0f172a);
+    }
+
+    /* Form Styling */
+    .calc-wrapper label {
       display: block;
-      font-weight: 600;
-      color: var(--text, #333);
-      margin-bottom: 8px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      margin: 1rem 0 0.5rem;
+      font-size: 1rem;
     }
 
-    #calorieForm input, #calorieForm select {
+    .dark-mode .calc-wrapper label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .calc-wrapper input, .calc-wrapper select {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #e9ecef;
-      border-radius: 10px;
-      font-size: 16px;
-      transition: border-color 0.3s ease;
-      background: var(--input-bg, #fff);
-      color: var(--text, #333);
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
     }
 
-    #calorieForm input:focus, #calorieForm select:focus {
+    .calc-wrapper input:focus, .calc-wrapper select:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
       outline: none;
-      border-color: var(--accent, #ff6b81);
-      box-shadow: 0 0 0 3px rgba(255,107,129,0.1);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input, .dark-mode .calc-wrapper select {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus, .dark-mode .calc-wrapper select:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
     }
 
     .height-inputs {
@@ -118,31 +168,40 @@
       flex: 1;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent, #ff6b81), #ff8a95);
-      color: white;
-      padding: 15px 30px;
+    .calc-wrapper button[type="submit"] {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
       border: none;
-      border-radius: 25px;
-      font-size: 18px;
-      font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
       transition: all 0.3s ease;
-      margin-top: 20px;
     }
 
-    .btn-primary:hover {
+    .calc-wrapper button[type="submit"]:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(255,107,129,0.3);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
     }
 
-    /* Results section */
+    .calc-wrapper button[type="submit"]:active {
+      transform: translateY(-1px);
+    }
+
+    /* Results Section */
     .result-box {
-      margin-top: 30px;
-      padding: 25px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 15px;
-      color: white;
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
       display: none;
     }
 
@@ -156,156 +215,357 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
     .calorie-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
 
     .calorie-card {
-      background: rgba(255,255,255,0.2);
-      padding: 20px;
-      border-radius: 15px;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
       text-align: center;
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .calorie-card:hover {
       transform: translateY(-5px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .calorie-card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .dark-mode .calorie-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     .calorie-number {
       font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 5px;
+      font-weight: 800;
+      color: var(--text-strong-light, #0f172a);
+      margin-bottom: 0.5rem;
+    }
+
+    .dark-mode .calorie-number {
+      color: var(--text-strong-dark, #f1f5f9);
     }
 
     .calorie-label {
       font-size: 0.9rem;
-      opacity: 0.9;
+      color: var(--text-weak-light, #64748b);
+      font-weight: 600;
     }
 
-    /* Progress bars */
-    .progress-container {
-      margin-top: 20px;
+    .dark-mode .calorie-label {
+      color: var(--text-weak-dark, #94a3b8);
     }
 
-    .progress-item {
-      margin-bottom: 15px;
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1.5rem 0;
     }
 
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
+    .fun-fact-box {
+      background: rgba(139, 92, 246, 0.08);
+      padding: 1rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1rem;
+      border-left: 4px solid var(--primary, #8b5cf6);
     }
 
-    .progress-bar {
-      height: 8px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 4px;
-      overflow: hidden;
+    .dark-mode .fun-fact-box {
+      background: rgba(139, 92, 246, 0.12);
     }
 
-    .progress-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 0.8s ease;
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
 
-    .progress-fill.cutting { background: #e74c3c; }
-    .progress-fill.maintain { background: #f39c12; }
-    .progress-fill.bulking { background: #27ae60; }
-
-    /* Fun facts section */
-    .fun-facts {
-      margin-top: 25px;
-      padding: 20px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .fun-facts h3 {
-      margin-bottom: 15px;
-      font-size: 1.3rem;
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
     }
 
-    .fact-item {
-      margin-bottom: 10px;
-      padding: 10px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 8px;
-      font-size: 0.95rem;
+    .seo-content h2:first-of-type {
+      margin-top: 0;
     }
 
-    /* Card grid for tools */
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    /* Card Grid */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
     }
 
     .card {
-      background: var(--card-bg, #fff);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
       text-align: center;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     .card a {
       text-decoration: none;
-      font-weight: 600;
-      color: var(--text, #222);
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
     }
 
     .card a:hover {
-      color: var(--accent, #ff6b81);
+      color: var(--primary, #8b5cf6);
     }
 
-   
-
-    .disclaimer-box {
-        padding: 15px;
-        margin: 20px 0;
-        border-left: 4px solid #f6e05e;
-        background-color: #fffbe9;
-        border-radius: 4px;
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
     }
 
-    
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
 
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .calc-wrapper h1 {
-        font-size: 2rem;
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
       }
-      
-      .height-inputs {
-        flex-direction: column;
+
+      .card-grid {
+        grid-template-columns: 1fr;
       }
-      
+
       .calorie-grid {
         grid-template-columns: 1fr;
       }
-    }
 
-    .hidden { display: none !important; }
+      .height-inputs {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
+
   <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -316,155 +576,73 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
-
-
-  <!-- Hero Calculator -->
   <section class="calc-wrapper">
-    <h1>🔥 Calorie Calculator (TDEE)</h1>
-    <p class="subtitle">Estimate your daily calories for weight maintenance, fat loss, and muscle gain using a scientifically backed formula. Supports both Metric and Imperial units.</p>
+    <h1>🔥 Calorie Calculator - Calculate Your Daily TDEE</h1>
+    <p class="subtitle">Estimate your Total Daily Energy Expenditure (TDEE) and calorie needs for weight loss, maintenance, or muscle gain using the scientifically-validated Mifflin-St Jeor equation.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
 
     <!-- Unit Toggle -->
     <div class="unit-toggle">
-      <button class="unit-btn active" data-unit="imperial">Imperial (lbs, ft+in)</button>
+      <button class="unit-btn active" data-unit="imperial">Imperial (lbs, ft/in)</button>
       <button class="unit-btn" data-unit="metric">Metric (kg, cm)</button>
     </div>
 
     <form id="calorieForm">
-      <label>📅 Age:</label>
+      <label for="age">Age:</label>
       <input type="number" id="age" placeholder="Enter your age" required>
 
-      <label>👤 Gender:</label>
+      <label for="gender">Gender:</label>
       <select id="gender">
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
 
-      <label id="weightLabel">⚖️ Weight (lbs):</label>
-      <input type="number" id="weight" placeholder="Enter your weight" required>
+      <label id="weightLabel" for="weight">Weight (lbs):</label>
+      <input type="number" id="weight" step="0.1" placeholder="Enter your weight" required>
 
-      <label id="heightLabel">📏 Height (ft/in):</label>
+      <label id="heightLabel">Height (ft/in):</label>
       <div class="height-inputs">
-        <input type="number" id="feet" placeholder="ft">
-        <input type="number" id="inches" placeholder="in">
+        <input type="number" id="feet" placeholder="Feet">
+        <input type="number" id="inches" placeholder="Inches">
       </div>
 
-      <label>🏃 Activity Level:</label>
+      <label for="activity">Activity Level:</label>
       <select id="activity">
         <option value="1.2">Sedentary (desk job, little to no exercise)</option>
-        <option value="1.375">Lightly Active (light exercise/sports 1-3 days/week)</option>
-        <option value="1.55">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
-        <option value="1.725">Very Active (hard exercise/sports 6-7 days a week)</option>
-        <option value="1.9">Extra Active (very hard exercise/sports & a physical job)</option>
+        <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
+        <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
+        <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+        <option value="1.9">Extra Active (very hard exercise & physical job)</option>
       </select>
 
-      <button type="submit" class="btn-primary">Calculate My Calories</button>
+      <button type="submit">Calculate My Calories</button>
     </form>
 
     <div id="results" class="result-box">
-      <h3>📊 Your Calorie Results</h3>
+      <h3>Your Daily Calorie Targets</h3>
       <div class="calorie-grid">
         <div class="calorie-card">
           <div class="calorie-number" id="cuttingNumber">0</div>
-          <div class="calorie-label">🔥 Cutting (Fat Loss)</div>
+          <div class="calorie-label">Cutting (Fat Loss)</div>
         </div>
         <div class="calorie-card">
           <div class="calorie-number" id="maintainNumber">0</div>
-          <div class="calorie-label">⚖️ Maintenance</div>
+          <div class="calorie-label">Maintenance</div>
         </div>
         <div class="calorie-card">
           <div class="calorie-number" id="bulkingNumber">0</div>
-          <div class="calorie-label">💪 Bulking (Muscle Gain)</div>
+          <div class="calorie-label">Bulking (Muscle Gain)</div>
         </div>
       </div>
-
-      <div class="progress-container">
-        <div class="progress-item">
-          <div class="progress-label">
-            <span>🔥 Cutting</span>
-            <span id="cuttingCals">0 cals</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill cutting" id="cuttingBar"></div>
-          </div>
-        </div>
-        <div class="progress-item">
-          <div class="progress-label">
-            <span>⚖️ Maintenance</span>
-            <span id="maintainCals">0 cals</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill maintain" id="maintainBar"></div>
-          </div>
-        </div>
-        <div class="progress-item">
-          <div class="progress-label">
-            <span>💪 Bulking</span>
-            <span id="bulkingCals">0 cals</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill bulking" id="bulkingBar"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="fun-facts">
-        <h3>🎉 Fun Facts About Calories</h3>
-        <div id="fact-item" class="fact-item">⚡ Your brain uses ~20% of your daily calories!</div>
+      <hr>
+      <div class="fun-fact-box">
+        <strong>Did You Know?</strong> <span id="funFact"></span>
       </div>
     </div>
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
-
-  <!-- NEW AND IMPROVED SEO Content Section -->
   <section class="seo-content">
-    <article>
-        <h2>How to Use the Calorie Calculator</h2>
-        <ol>
-            <li><strong>Select Units:</strong> Start by choosing 'Imperial' (lbs, ft, in) or 'Metric' (kg, cm).</li>
-            <li><strong>Enter Personal Details:</strong> Input your age, gender, weight, and height.</li>
-            <li><strong>Choose Activity Level:</strong> Select the option that best describes your weekly physical activity. Be honest for the most accurate results!</li>
-            <li><strong>Calculate:</strong> Click the "Calculate My Calories" button to see your results.</li>
-        </ol>
-
-        <h2>What are Calories and TDEE?</h2>
-        <p>A calorie is a unit of energy. In nutrition, calories refer to the energy people get from the food and drink they consume, as well as the energy they use in physical activity. Calories are essential for human health; the key is consuming the right amount.</p>
-        <p>Your <strong>Total Daily Energy Expenditure (TDEE)</strong> is the total number of calories your body burns in a 24-hour period. It's composed of three main components:</p>
-        <ul>
-            <li><strong>Basal Metabolic Rate (BMR):</strong> The energy your body uses at rest for basic functions like breathing, circulation, and cell production. This is the largest component of your TDEE.</li>
-            <li><strong>Thermic Effect of Food (TEF):</strong> The calories burned during the digestion and processing of food.</li>
-            <li><strong>Physical Activity:</strong> The energy used during exercise and daily movements (from walking to intense workouts).</li>
-        </ul>
-        
-        <h2>Understanding Your Calorie Goals</h2>
-        <p>Our calculator provides three main targets based on your TDEE:</p>
-        <ul>
-          <li><b>⚖️ Maintenance Calories:</b> This is your TDEE. Eating this number of calories per day will help you maintain your current weight.</li>
-          <li><b>🔥 Cutting (Weight Loss):</b> To lose weight, you need to be in a calorie deficit, meaning you consume fewer calories than your TDEE. Our calculator suggests a moderate deficit (typically 500 calories less than maintenance) for sustainable fat loss of about 1 lb per week.</li>
-          <li><b>💪 Bulking (Weight Gain):</b> To gain weight (ideally muscle), you need to be in a calorie surplus. Our calculator suggests a modest surplus (typically 500 calories more than maintenance) to promote lean muscle gain while minimizing fat gain.</li>
-        </ul>
-
-        <h2>The Science Behind the Calculation</h2>
-        <p>This calculator uses the <strong>Mifflin-St Jeor equation</strong> to estimate your Basal Metabolic Rate (BMR). Published in 1990, it is considered one of the most accurate BMR formulas. It is more reliable than the older Harris-Benedict equation. The formula is:</p>
-        <ul>
-            <li><strong>For Men:</strong> BMR = 10 * weight (kg) + 6.25 * height (cm) - 5 * age (y) + 5</li>
-            <li><strong>For Women:</strong> BMR = 10 * weight (kg) + 6.25 * height (cm) - 5 * age (y) - 161</li>
-        </ul>
-        <p>Your BMR is then multiplied by an activity factor to determine your TDEE (maintenance calories).</p>
-        
-        <div class="disclaimer-box">
-            <strong>Disclaimer:</strong> This tool provides an estimate of your calorie needs. Individual needs may vary. This information is not intended to be a substitute for professional medical advice. Always consult a healthcare provider or registered dietitian for personalized advice.
-        </div>
-    </article>
-
-    <h3>🔗 Explore More Health Tools</h3>
+    <h3>Explore More Health Calculators</h3>
     <div class="card-grid">
       <div class="card"><a href="body-fat-calculator.html">💪 Body Fat Calculator</a></div>
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
@@ -472,89 +650,284 @@
       <div class="card"><a href="water-intake-calculator.html">💧 Water Intake Calculator</a></div>
     </div>
 
-    <h3>📝 Related Blogs</h3>
+    <h3>Related Blog Posts</h3>
     <div class="card-grid">
       <div class="card"><a href="blog/how-many-calories-do-you-need.html">🔥 How Many Calories Do You Really Need?</a></div>
       <div class="card"><a href="calorie-calculation-guide.html">⚡ Understanding TDEE & Energy Balance</a></div>
     </div>
+
+    <article>
+      <h2>What Is a Calorie Calculator and Why Use One?</h2>
+      <p>A calorie calculator is a tool that estimates your Total Daily Energy Expenditure, the total number of calories your body burns in a 24-hour period. This includes calories burned through basic bodily functions at rest, the energy used to digest food, and calories expended during physical activity. Understanding your TDEE is crucial for anyone looking to lose weight, gain muscle, or maintain their current physique.</p>
+      
+      <p>Our free online calorie calculator uses the Mifflin-St Jeor equation, which is widely regarded as one of the most accurate methods for estimating Basal Metabolic Rate. The calculator then applies an activity multiplier to determine your complete daily calorie needs. With this information, you can make informed decisions about your nutrition and create effective meal plans tailored to your specific goals.</p>
+
+      <div class="info-box">
+        <h4>Why Accuracy Matters</h4>
+        <p>Knowing your accurate calorie needs is essential for achieving your health and fitness goals. Eating too few calories can slow your metabolism, cause muscle loss, and leave you feeling fatigued. Eating too many calories can lead to unwanted fat gain. Our calculator helps you find the right balance for sustainable, healthy results.</p>
+      </div>
+
+      <h2>How to Use This Calorie Calculator</h2>
+      <p>Using our calorie calculator is straightforward and takes less than a minute. Follow these simple steps:</p>
+      <ol>
+        <li><strong>Choose Your Unit System:</strong> Select either Imperial (pounds, feet, inches) or Metric (kilograms, centimeters) based on your preference.</li>
+        <li><strong>Enter Your Age:</strong> Input your current age in years.</li>
+        <li><strong>Select Your Gender:</strong> Choose male or female, as the formula uses different constants for each gender.</li>
+        <li><strong>Input Your Weight:</strong> Enter your current weight in pounds or kilograms.</li>
+        <li><strong>Provide Your Height:</strong> Enter your height in feet and inches or centimeters.</li>
+        <li><strong>Choose Activity Level:</strong> Select the option that best describes your typical weekly physical activity. Be honest for accurate results.</li>
+        <li><strong>Calculate:</strong> Click the button to see your personalized calorie targets.</li>
+      </ol>
+
+      <p>The calculator will display three key numbers: your cutting calories for fat loss, maintenance calories to stay at your current weight, and bulking calories for muscle gain.</p>
+
+      <h2>Understanding Calories and TDEE</h2>
+      <p>A calorie is a unit of energy that measures how much energy food provides to your body. Your body uses calories for everything from breathing and circulating blood to walking, exercising, and digesting food. The number of calories you need depends on several factors including your age, gender, size, and activity level.</p>
+      
+      <p>Your <strong>Total Daily Energy Expenditure (TDEE)</strong> represents the complete picture of your daily calorie burn. It consists of three main components:</p>
+      <ul>
+        <li><strong>Basal Metabolic Rate (BMR):</strong> The calories your body burns at complete rest to maintain vital functions like breathing, circulation, cell production, and nutrient processing. This typically accounts for 60-75% of your total daily calorie burn.</li>
+        <li><strong>Thermic Effect of Food (TEF):</strong> The energy required to digest, absorb, and process nutrients from food. This accounts for approximately 10% of your total calorie expenditure.</li>
+        <li><strong>Activity Energy Expenditure (AEE):</strong> The calories burned through all physical activity, from structured exercise to daily movements like walking, climbing stairs, and fidgeting. This is the most variable component.</li>
+      </ul>
+
+      <h2>The Science Behind the Mifflin-St Jeor Equation</h2>
+      <p>This calculator uses the Mifflin-St Jeor equation, developed in 1990 and published in the American Journal of Clinical Nutrition. Research has shown it to be more accurate than the older Harris-Benedict equation, particularly for modern populations. The formula calculates your Basal Metabolic Rate using the following equations:</p>
+      
+      <ul>
+        <li><strong>For Men:</strong> BMR equals 10 times weight in kilograms plus 6.25 times height in centimeters minus 5 times age in years plus 5</li>
+        <li><strong>For Women:</strong> BMR equals 10 times weight in kilograms plus 6.25 times height in centimeters minus 5 times age in years minus 161</li>
+      </ul>
+
+      <p>Once your BMR is calculated, it's multiplied by an activity factor ranging from 1.2 for sedentary individuals to 1.9 for extremely active people. This gives you your TDEE, which represents your maintenance calories.</p>
+
+      <h2>Understanding Your Calorie Targets</h2>
+      <p>Our calculator provides three distinct calorie targets to help you achieve different fitness goals:</p>
+
+      <h3>Maintenance Calories</h3>
+      <p>Your maintenance calories equal your TDEE. This is the number of calories you need to consume each day to maintain your current weight. If you eat exactly this amount consistently, your weight should remain stable over time. This number serves as your baseline for adjusting calories up or down depending on your goals.</p>
+
+      <h3>Cutting Calories for Fat Loss</h3>
+      <p>To lose weight, you need to create a calorie deficit by consuming fewer calories than your TDEE. Our calculator suggests a moderate deficit of 500 calories below maintenance, which typically results in losing approximately one pound per week. This rate of weight loss is considered safe and sustainable by health professionals, as it allows you to lose fat while preserving muscle mass and maintaining energy levels.</p>
+
+      <p>Larger deficits can lead to faster weight loss initially, but often result in muscle loss, metabolic adaptation, extreme hunger, and difficulty maintaining the diet long-term. A moderate approach leads to better outcomes and is easier to stick with over time.</p>
+
+      <h3>Bulking Calories for Muscle Gain</h3>
+      <p>To gain weight and build muscle, you need to consume more calories than your TDEE, creating a calorie surplus. Our calculator recommends a modest surplus of 500 calories above maintenance. Combined with proper strength training, this typically results in gaining approximately one pound per week, with most of that weight being muscle rather than fat.</p>
+
+      <p>Larger surpluses lead to faster weight gain, but the additional weight is often primarily fat rather than muscle. Your body can only build muscle at a certain rate, so eating excessively beyond your needs simply leads to unnecessary fat gain that you'll need to lose later.</p>
+
+      <h2>Factors That Affect Your Calorie Needs</h2>
+      <p>While our calculator provides accurate estimates, several factors can influence your actual calorie needs:</p>
+
+      <ul>
+        <li><strong>Body Composition:</strong> Muscle tissue burns more calories at rest than fat tissue. People with more muscle mass have higher BMRs than those with less muscle, even at the same body weight.</li>
+        <li><strong>Genetics:</strong> Some people naturally have faster or slower metabolisms due to genetic factors, though the variation is usually smaller than people think.</li>
+        <li><strong>Hormones:</strong> Thyroid hormones, cortisol, insulin, and other hormones significantly affect metabolism. Conditions like hypothyroidism can lower metabolic rate.</li>
+        <li><strong>Diet History:</strong> Prolonged severe calorie restriction can lead to metabolic adaptation, where your body becomes more efficient and burns fewer calories.</li>
+        <li><strong>Sleep Quality:</strong> Poor sleep can negatively affect metabolism and hunger hormones, potentially increasing calorie needs or making weight management more difficult.</li>
+        <li><strong>Stress Levels:</strong> Chronic stress can affect metabolism and hormone balance, potentially influencing your calorie needs.</li>
+        <li><strong>Environmental Temperature:</strong> Your body burns more calories maintaining body temperature in cold environments.</li>
+      </ul>
+
+      <h2>How to Choose Your Activity Level</h2>
+      <p>Selecting the correct activity level is crucial for getting accurate results. Here's a detailed breakdown of each level:</p>
+
+      <h3>Sedentary (1.2 multiplier)</h3>
+      <p>Choose this if you have a desk job and do little to no exercise. Your typical day involves mostly sitting, with minimal walking or physical activity. You might go to the gym once a week or less, or not at all. Most of your leisure time is spent in sedentary activities.</p>
+
+      <h3>Lightly Active (1.375 multiplier)</h3>
+      <p>Select this if you have a mostly sedentary job but exercise lightly 1-3 days per week. This might include light cardio, yoga, or recreational walking. You're on your feet occasionally throughout the day but not constantly moving.</p>
+
+      <h3>Moderately Active (1.55 multiplier)</h3>
+      <p>This level suits people who exercise moderately 3-5 days per week or have jobs that involve being on your feet frequently. Your workouts might include moderate cardio, weight training, or sports. You're active most days but not at high intensity.</p>
+
+      <h3>Very Active (1.725 multiplier)</h3>
+      <p>Choose this if you exercise hard 6-7 days per week or have a physically demanding job. You might be a competitive athlete, do intense workouts daily, or work in construction, landscaping, or similar physically demanding fields.</p>
+
+      <h3>Extra Active (1.9 multiplier)</h3>
+      <p>This is for people who do very hard exercise multiple times per day or have extremely physical jobs combined with intense training. This might apply to professional athletes, military personnel in active training, or manual laborers who also train intensely.</p>
+
+      <div class="info-box">
+        <h4>Tip: When in Doubt, Start Conservative</h4>
+        <p>If you're between two activity levels, start with the lower one. It's easier to add calories if you're losing weight too quickly than to cut calories if you're gaining unwanted weight. You can always adjust after tracking your results for a few weeks.</p>
+      </div>
+
+      <h2>Practical Tips for Meeting Your Calorie Goals</h2>
+      <p>Knowing your calorie target is only the first step. Here are practical strategies to help you meet your goals:</p>
+
+      <h3>For Weight Loss (Cutting)</h3>
+      <ul>
+        <li>Track your food intake using a food diary or app to ensure accuracy</li>
+        <li>Focus on high-volume, low-calorie foods like vegetables to stay full</li>
+        <li>Prioritize protein to preserve muscle mass and increase satiety</li>
+        <li>Drink plenty of water, as thirst can be mistaken for hunger</li>
+        <li>Plan meals in advance to avoid impulsive high-calorie choices</li>
+        <li>Allow yourself occasional treats to maintain sustainability</li>
+      </ul>
+
+      <h3>For Muscle Gain (Bulking)</h3>
+      <ul>
+        <li>Eat frequent, balanced meals throughout the day</li>
+        <li>Choose calorie-dense foods like nuts, avocados, and whole grains</li>
+        <li>Include protein with every meal to support muscle growth</li>
+        <li>Don't skip post-workout nutrition</li>
+        <li>Consider liquid calories like smoothies if you struggle to eat enough</li>
+        <li>Focus on progressive overload in your strength training</li>
+      </ul>
+
+      <h3>For Maintenance</h3>
+      <ul>
+        <li>Weigh yourself weekly to monitor for any drift up or down</li>
+        <li>Adjust calories by 100-200 if you notice consistent weight changes</li>
+        <li>Focus on food quality and balanced nutrition</li>
+        <li>Maintain consistent exercise habits</li>
+        <li>Practice intuitive eating while staying generally aware of portions</li>
+      </ul>
+
+      <h2>Common Mistakes to Avoid</h2>
+      <p>Many people struggle to reach their goals due to these common errors:</p>
+
+      <ul>
+        <li><strong>Overestimating Activity Level:</strong> Most people burn fewer calories from exercise than they think. Be honest about your activity level.</li>
+        <li><strong>Not Tracking Accurately:</strong> Eyeballing portions and forgetting small snacks can lead to consuming hundreds of extra calories unknowingly.</li>
+        <li><strong>Ignoring Liquid Calories:</strong> Beverages, sauces, and cooking oils add up quickly but often go untracked.</li>
+        <li><strong>Being Too Aggressive:</strong> Extreme deficits or surpluses are hard to maintain and can be counterproductive.</li>
+        <li><strong>Not Adjusting Over Time:</strong> As you lose or gain weight, your calorie needs change. Recalculate every 10-15 pounds of change.</li>
+        <li><strong>Forgetting About Weekends:</strong> Many people eat well during the week but consume far more calories on weekends, negating their deficit.</li>
+      </ul>
+
+      <h2>When to Recalculate Your Calories</h2>
+      <p>Your calorie needs aren't static. You should recalculate when:</p>
+
+      <ul>
+        <li>You've lost or gained 10-15 pounds</li>
+        <li>Your activity level changes significantly</li>
+        <li>You've been at the same calorie intake for several months and progress has stalled</li>
+        <li>You're starting a new training program with different intensity</li>
+        <li>Your age changes enough to impact metabolism (though this is gradual)</li>
+      </ul>
+
+      <h2>The Role of Macronutrients</h2>
+      <p>While total calories determine whether you lose, maintain, or gain weight, the breakdown of those calories into macronutrients (protein, carbohydrates, and fat) affects your body composition, energy levels, and health:</p>
+
+      <ul>
+        <li><strong>Protein:</strong> Essential for building and maintaining muscle, especially important during weight loss. Aim for 0.7-1 gram per pound of body weight.</li>
+        <li><strong>Fats:</strong> Necessary for hormone production and nutrient absorption. Include 20-35% of calories from healthy fats.</li>
+        <li><strong>Carbohydrates:</strong> Provide energy for workouts and daily activities. The remaining calories after protein and fat should come from carbs.</li>
+      </ul>
+
+      <p>For detailed macronutrient recommendations, check out our Macro Calculator tool.</p>
+
+      <div class="info-box">
+        <h4>Remember: Calculators Provide Estimates</h4>
+        <p>No calculator can be 100% accurate for everyone due to individual variations in metabolism, genetics, and lifestyle factors. Use these numbers as a starting point, then adjust based on your real-world results over 2-4 weeks. If you're not seeing expected changes, modify your calorie intake by 100-200 calories and reassess.</p>
+      </div>
+
+      <h2>Special Considerations</h2>
+
+      <h3>For Older Adults</h3>
+      <p>Metabolic rate naturally declines with age, primarily due to muscle loss. Older adults may need fewer calories than the calculator suggests, especially if they've experienced sarcopenia. Resistance training becomes increasingly important to maintain muscle mass and metabolic rate.</p>
+
+      <h3>For Athletes</h3>
+      <p>Competitive athletes or those training for specific events may need additional calories beyond what standard multipliers suggest. Consider working with a sports nutritionist for personalized guidance during intense training periods.</p>
+
+      <h3>Medical Conditions</h3>
+      <p>Certain medical conditions like thyroid disorders, PCOS, diabetes, or metabolic syndrome can affect calorie needs. If you have a diagnosed condition, consult with your healthcare provider or a registered dietitian for personalized advice.</p>
+    </article>
   </section>
 
-  <!-- FAQ Section -->
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <div class="faq">
-        <details>
-            <summary>How accurate is this calorie calculator?</summary>
-            <p>Our calculator uses the Mifflin-St Jeor equation, which is widely considered by experts to be one of the most accurate methods for estimating Basal Metabolic Rate (BMR). However, it's still an estimate. Individual metabolism can vary, so it's best to use this as a starting point and adjust based on your results.</p>
-        </details>
-    </div>
-    <div class="faq">
-        <details>
-            <summary>Why do I need to enter my activity level?</summary>
-            <p>Your activity level is a crucial factor in determining your Total Daily Energy Expenditure (TDEE). Your BMR is the calories you burn at rest, but any movement—from walking to intense exercise—burns additional calories. The activity multiplier helps to account for this, providing a more realistic daily calorie target.</p>
-        </details>
-    </div>
-    <div class="faq">
-        <details>
-            <summary>How fast can I expect to lose weight on a cutting diet?</summary>
-            <p>A safe and sustainable rate of weight loss is generally considered to be 1-2 pounds (about 0.5-1 kg) per week. This typically requires a daily calorie deficit of 500-1000 calories. Losing weight faster than this often leads to muscle loss and is harder to maintain long-term.</p>
-        </details>
-    </div>
-    <div class="faq">
-        <details>
-            <summary>Should I eat the same number of calories on rest days?</summary>
-            <p>For simplicity and consistency, most people eat the same number of calories each day. However, some advanced individuals practice "calorie cycling," where they eat more calories on training days and fewer on rest days. For most people, maintaining a consistent daily average is effective and easier to manage.</p>
-        </details>
-    </div>
+    <h2>Frequently Asked Questions</h2>
+    
+    <details>
+      <summary>How accurate is this calorie calculator?</summary>
+      <p>Our calculator uses the Mifflin-St Jeor equation, which is considered one of the most accurate methods for estimating BMR and has been validated in numerous scientific studies. However, it's still an estimate. Individual variations in metabolism, genetics, and lifestyle can affect your actual needs. Use these numbers as a starting point and adjust based on your real-world results over 2-4 weeks.</p>
+    </details>
+
+    <details>
+      <summary>Why do I need to enter my activity level?</summary>
+      <p>Your Basal Metabolic Rate only accounts for calories burned at rest. Physical activity burns additional calories, and the amount varies dramatically between sedentary and very active individuals. The activity multiplier helps estimate your total daily energy expenditure by accounting for exercise and daily movement, providing a more realistic calorie target.</p>
+    </details>
+
+    <details>
+      <summary>How fast can I expect to lose weight on a cutting diet?</summary>
+      <p>Our calculator recommends a 500-calorie daily deficit, which typically results in losing about 1 pound per week. This is considered a safe, sustainable rate that preserves muscle mass and energy levels. Faster weight loss often leads to muscle loss, metabolic slowdown, and difficulty maintaining the diet long-term. Patience and consistency lead to better lasting results.</p>
+    </details>
+
+    <details>
+      <summary>Should I eat the same calories every day or adjust for workout days?</summary>
+      <p>For simplicity, most people eat the same calories daily, as the activity multiplier averages out your weekly activity. However, some advanced individuals practice calorie cycling, eating more on training days and less on rest days. For beginners and most people, maintaining consistent daily intake is easier to manage and equally effective.</p>
+    </details>
+
+    <details>
+      <summary>What if I'm not losing weight at my cutting calories?</summary>
+      <p>If you've been consistent for 2-3 weeks without seeing progress, several factors might be at play. You may be underestimating food intake, overestimating activity level, retaining water (especially if you recently started exercising), or have a slower metabolism than average. Try reducing calories by 100-200 per day, ensuring accurate tracking, and reassess after another 2 weeks.</p>
+    </details>
+
+    <details>
+      <summary>Can I use this calculator if I'm pregnant or breastfeeding?</summary>
+      <p>This calculator is not designed for pregnant or breastfeeding women, who have significantly different nutritional needs. Pregnancy typically requires an additional 300-500 calories per day, while breastfeeding may require 400-500 extra calories. Please consult with your healthcare provider or a registered dietitian for personalized guidance during these life stages.</p>
+    </details>
+
+    <details>
+      <summary>How often should I recalculate my calorie needs?</summary>
+      <p>Recalculate whenever you've lost or gained 10-15 pounds, when your activity level changes significantly, or if you've plateaued for several weeks despite consistency. Your calorie needs decrease as you lose weight and increase as you gain weight, so periodic recalculation ensures your targets remain appropriate for your current situation.</p>
+    </details>
+
+    <details>
+      <summary>Do I need to track calories forever?</summary>
+      <p>Not necessarily. Many people track calories initially to learn portion sizes and build awareness, then transition to intuitive eating while occasionally tracking to ensure they're on track. Some people prefer ongoing tracking for accountability, while others find it stressful. Find an approach that's sustainable for you long-term while helping you maintain your goals.</p>
+    </details>
   </section>
 
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
-  <!-- Floating CTA -->
-  <a href="index.html" class="floating-cta">📢 See All Calculators</a>
-
-  <!-- Footer -->
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+      <p><strong>Disclaimer:</strong> This calorie calculator is provided for informational purposes only and is not intended as medical advice. Individual calorie needs vary based on many factors. For personalized nutrition guidance, especially if you have medical conditions or specific health concerns, consult with a registered dietitian or healthcare provider.</p>
     </div>
     <div class="footer-links">
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
-  <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How accurate is this calorie calculator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Our calculator uses the Mifflin-St Jeor equation, which is widely considered by experts to be one of the most accurate methods for estimating Basal Metabolic Rate (BMR). However, it's still an estimate. Individual metabolism can vary, so it's best to use this as a starting point and adjust based on your results." }
-      },
-      {
-        "@type": "Question",
-        "name": "Why do I need to enter my activity level?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Your activity level is a crucial factor in determining your Total Daily Energy Expenditure (TDEE). Your BMR is the calories you burn at rest, but any movement—from walking to intense exercise—burns additional calories. The activity multiplier helps to account for this, providing a more realistic daily calorie target." }
-      },
-      {
-        "@type": "Question",
-        "name": "How fast can I expect to lose weight on a cutting diet?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A safe and sustainable rate of weight loss is generally considered to be 1-2 pounds (about 0.5-1 kg) per week. This typically requires a daily calorie deficit of 500-1000 calories. Losing weight faster than this often leads to muscle loss and is harder to maintain long-term." }
-      },
-      {
-        "@type": "Question",
-        "name": "Should I eat the same number of calories on rest days?",
-        "acceptedAnswer": { "@type": "Answer", "text": "For simplicity and consistency, most people eat the same number of calories each day. However, some advanced individuals practice \"calorie cycling,\" where they eat more calories on training days and fewer on rest days. For most people, maintaining a consistent daily average is effective and easier to manage." }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How accurate is this calorie calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our calculator uses the Mifflin-St Jeor equation, which is considered one of the most accurate methods for estimating BMR. However, it's an estimate. Use these numbers as a starting point and adjust based on your results."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "Why do I need to enter my activity level?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your Basal Metabolic Rate only accounts for calories burned at rest. The activity multiplier helps estimate your total daily energy expenditure by accounting for exercise and daily movement."
+      }
+    },{
+      "@type": "Question",
+      "name": "How fast can I expect to lose weight on a cutting diet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our calculator recommends a 500-calorie daily deficit, which typically results in losing about 1 pound per week. This is a safe, sustainable rate that preserves muscle mass."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I eat the same calories every day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For simplicity, most people eat the same calories daily. However, some practice calorie cycling. For most people, maintaining consistent daily intake is easier to manage."
+      }
+    }]
   }
   </script>
 
@@ -563,6 +936,17 @@
     const results = document.getElementById('results');
     const unitBtns = document.querySelectorAll('.unit-btn');
     let isMetric = false;
+
+    // Fun facts array
+    const funFacts = [
+      "Your brain uses about 20% of your daily calories, despite being only 2% of your body weight!",
+      "Running a marathon burns approximately 2,600 calories on average.",
+      "Muscle tissue burns more calories at rest than fat tissue, even while you sleep.",
+      "Drinking cold water can temporarily boost your metabolism as your body warms it up.",
+      "Spicy foods containing capsaicin can slightly increase calorie burning.",
+      "Standing burns about 50% more calories than sitting.",
+      "Fidgeting and small movements throughout the day can burn an extra 300-500 calories."
+    ];
 
     // Unit toggle functionality
     unitBtns.forEach(btn => {
@@ -576,13 +960,13 @@
         const weightInput = document.getElementById('weight');
         
         if (isMetric) {
-          weightLabel.innerHTML = '⚖️ Weight (kg):';
-          heightLabel.innerHTML = '📏 Height (cm):';
-          document.querySelector('.height-inputs').innerHTML = '<input type="number" id="cm" placeholder="Enter height in cm" required>';
+          weightLabel.textContent = 'Weight (kg):';
+          heightLabel.textContent = 'Height (cm):';
+          document.querySelector('.height-inputs').innerHTML = '<input type="number" id="cm" step="0.1" placeholder="Enter height in cm" required>';
         } else {
-          weightLabel.innerHTML = '⚖️ Weight (lbs):';
-          heightLabel.innerHTML = '📏 Height (ft/in):';
-          document.querySelector('.height-inputs').innerHTML = '<input type="number" id="feet" placeholder="ft"> <input type="number" id="inches" placeholder="in">';
+          weightLabel.textContent = 'Weight (lbs):';
+          heightLabel.textContent = 'Height (ft/in):';
+          document.querySelector('.height-inputs').innerHTML = '<input type="number" id="feet" placeholder="Feet"><input type="number" id="inches" placeholder="Inches">';
         }
         
         weightInput.placeholder = isMetric ? "Enter weight in kg" : "Enter weight in lbs";
@@ -590,7 +974,7 @@
     });
 
     // Form submission
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       
       const age = parseInt(document.getElementById('age').value);
@@ -598,24 +982,39 @@
       const activity = parseFloat(document.getElementById('activity').value);
       let weight, heightCm;
 
-      if (!age || age < 10) {
-        alert("Please enter a valid age.");
+      if (!age || age < 10 || age > 120) {
+        alert("Please enter a valid age between 10 and 120.");
         return;
       }
 
       if (isMetric) {
         weight = parseFloat(document.getElementById('weight').value);
         heightCm = parseFloat(document.getElementById('cm').value);
+        
+        if (!weight || weight <= 0 || weight > 500) {
+          alert("Please enter a valid weight.");
+          return;
+        }
+        if (!heightCm || heightCm <= 0 || heightCm > 300) {
+          alert("Please enter a valid height.");
+          return;
+        }
       } else {
-        weight = parseFloat(document.getElementById('weight').value) * 0.453592; // Convert lbs to kg
+        const weightLbs = parseFloat(document.getElementById('weight').value);
+        weight = weightLbs * 0.453592; // Convert lbs to kg
+        
         const feet = parseFloat(document.getElementById('feet').value) || 0;
         const inches = parseFloat(document.getElementById('inches').value) || 0;
         heightCm = ((feet * 12) + inches) * 2.54; // Convert to cm
-      }
-
-      if (!weight || !heightCm || weight <= 0 || heightCm <=0) {
-        alert("Please enter valid weight and height.");
-        return;
+        
+        if (!weightLbs || weightLbs <= 0 || weightLbs > 1000) {
+          alert("Please enter a valid weight.");
+          return;
+        }
+        if ((!feet && !inches) || heightCm <= 0 || heightCm > 300) {
+          alert("Please enter a valid height.");
+          return;
+        }
       }
 
       // Mifflin-St Jeor equation
@@ -631,51 +1030,52 @@
       const bulking = Math.round(maintain + 500);
 
       // Update results
-      document.getElementById('cuttingNumber').textContent = cutting;
-      document.getElementById('maintainNumber').textContent = maintain;
-      document.getElementById('bulkingNumber').textContent = bulking;
+      document.getElementById('cuttingNumber').textContent = cutting.toLocaleString();
+      document.getElementById('maintainNumber').textContent = maintain.toLocaleString();
+      document.getElementById('bulkingNumber').textContent = bulking.toLocaleString();
       
-      document.getElementById('cuttingCals').textContent = cutting + ' cals';
-      document.getElementById('maintainCals').textContent = maintain + ' cals';
-      document.getElementById('bulkingCals').textContent = bulking + ' cals';
-
-      // Update progress bars
-      const maxVal = bulking + 100; // Add padding to max val
-      document.getElementById('cuttingBar').style.width = (cutting / maxVal * 100) + '%';
-      document.getElementById('maintainBar').style.width = (maintain / maxVal * 100) + '%';
-      document.getElementById('bulkingBar').style.width = (bulking / maxVal * 100) + '%';
-
-      // Update fun fact dynamically
-      const facts = [
-        "🔥 Running a marathon burns about 2,600 calories.",
-        "🥑 Avocados are calorie-dense, with one containing over 200 calories.",
-        "🧠 Your brain is a calorie furnace, using about 20% of your daily intake!",
-        "💪 Gaining 1 lb of muscle requires a surplus of about 2,500-3,500 calories.",
-        "💧 Drinking cold water can slightly boost your metabolism as your body warms it up.",
-        "🌶️ Spicy foods containing capsaicin can temporarily increase calorie burning."
-      ];
-      const randomFact = facts[Math.floor(Math.random() * facts.length)];
-      document.getElementById('fact-item').textContent = randomFact;
+      // Random fun fact
+      const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+      document.getElementById('funFact').textContent = randomFact;
 
       // Show results with animation
-      results.classList.remove('hidden');
       results.classList.add('show');
       
-      // Scroll to results
-      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Scroll to results smoothly
+      setTimeout(() => {
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     });
 
     // Dark mode toggle
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+
       toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'light');
+          applyTheme('light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+          applyTheme('dark');
+        }
       });
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
     });
   </script>
+
 </body>
 </html>
