@@ -3,110 +3,557 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Period & Ovulation Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Track your menstrual cycle, predict your next period, fertile window, and ovulation with our free Period & Ovulation Calculator.">
+  <title>Period & Ovulation Calculator - Track Your Cycle & Fertile Days | QuickCalcLabs</title>
+  <meta name="description" content="Free period and ovulation calculator to track your menstrual cycle, predict your next period, identify fertile windows, and calculate ovulation dates. Plan ahead with accurate cycle predictions.">
+  <meta name="keywords" content="period calculator, ovulation calculator, menstrual cycle tracker, fertile window, period tracker, cycle calculator, fertility calendar, ovulation predictor">
+  <link rel="canonical" href="https://quickcalclabs.com/period-tracker.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
-     crossorigin="anonymous"></script>
   <style>
+    /* Period tracker page specific styles */
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .calc-wrapper h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-strong-light, #0f172a);
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .dark-mode label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .calc-wrapper input[type="date"],
+    .calc-wrapper input[type="number"] {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      margin: 0.6rem 0 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+    }
+
+    .calc-wrapper input:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .calc-wrapper button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .calc-wrapper button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button:active {
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      font-weight: 600;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      color: var(--text-strong-light, #0f172a);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      color: var(--text-strong-dark, #f1f5f9);
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .badge.period { background: #ec4899; }
+    .badge.fertile { background: #10b981; }
+    .badge.ovulation { background: #8b5cf6; }
+
     /* Timeline */
     .timeline {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-      padding: 10px;
-      border-radius: 10px;
-      background: var(--card-bg, #f8f9fa);
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: var(--radius-md, 12px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
       overflow-x: auto;
+      gap: 0.3rem;
     }
+
+    .dark-mode .timeline {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
     .day {
       flex: 1;
+      min-width: 35px;
       text-align: center;
-      font-size: 12px;
-      padding: 6px;
-      border-radius: 6px;
-      margin: 0 2px;
-      background: #e9ecef;
+      font-size: 0.85rem;
+      padding: 0.6rem 0.4rem;
+      border-radius: var(--radius-md, 12px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
       position: relative;
       cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-medium-light, #334155);
+      font-weight: 600;
     }
-    .period { background: #ff6b81; color: #fff; }
-    .fertile { background: #2ecc71; color: #fff; }
-    .ovulation { background: #9b59b6; color:#fff; font-weight: bold; }
+
+    .dark-mode .day {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .day:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .period { 
+      background: linear-gradient(135deg, #ec4899, #f472b6) !important; 
+      color: #fff !important; 
+      border-color: #ec4899 !important;
+    }
+
+    .fertile { 
+      background: linear-gradient(135deg, #10b981, #34d399) !important; 
+      color: #fff !important; 
+      border-color: #10b981 !important;
+    }
+
+    .ovulation { 
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa) !important; 
+      color: #fff !important; 
+      border-color: #8b5cf6 !important;
+      font-weight: 800 !important;
+    }
+
     .legend {
-      margin-top: 15px;
+      margin-top: 1.2rem;
       display: flex;
-      gap: 15px;
+      gap: 1.2rem;
       justify-content: center;
-      font-size: 14px;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
     }
+
     .legend span {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 0.5rem;
+      color: var(--text-medium-light, #334155);
     }
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-size: 12px;
-      color: #fff;
-    }
-    .badge.period { background:#ff6b81; }
-    .badge.fertile { background:#2ecc71; }
-    .badge.ovulation { background:#9b59b6; }
 
-    /* Explore more */
+    .dark-mode .legend span {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    /* Card Grid */
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap: 15px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
     }
+
     .card {
-      background: var(--card-bg, #fff);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
       text-align: center;
     }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .card a { text-decoration:none; font-weight:600; color: var(--text,#222);}
-    .card a:hover { color: var(--accent,#ff6b81); }
 
-    /* FAQ accordion */
-    .faq {
-      margin-bottom: 10px;
-      border-radius: 8px;
-      background: var(--card-bg,#fff);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
       overflow: hidden;
+      transition: all 0.3s ease;
     }
-    .faq h3 {
-      margin: 0;
-      padding: 12px;
-      background: var(--accent,#ff6b81);
-      color: #fff;
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
       cursor: pointer;
-      font-size: 16px;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
     }
-    .faq p {
-      margin: 0;
-      padding: 12px;
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
       display: none;
-      font-size: 14px;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
       line-height: 1.6;
     }
-    .faq.active p { display: block; }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        padding: 0.8rem;
+      }
+
+      .day {
+        min-width: 30px;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.3rem;
+      }
+
+      .legend {
+        font-size: 0.85rem;
+        gap: 0.8rem;
+      }
+    }
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -117,46 +564,25 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
-
-  <!-- Hero Calculator -->
   <section class="calc-wrapper">
     <h1>🌸 Period & Ovulation Calculator</h1>
-    <p class="subtitle">Track your cycle, predict fertile days, and understand your ovulation window.</p>
+    <p class="subtitle">Track your menstrual cycle, predict your next period, identify fertile windows, and calculate ovulation dates with precision.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
+    
+    <h2>Enter Your Cycle Information</h2>
+    <label>First Day of Last Period:</label>
+    <input type="date" id="lastPeriod" aria-label="First day of last period">
 
-    <label>📅 First Day of Last Period:</label>
-    <input type="date" id="lastPeriod">
+    <label>Average Cycle Length (days):</label>
+    <input type="number" id="cycleLength" placeholder="e.g., 28" min="20" max="40" aria-label="Average cycle length in days">
 
-    <label>🔢 Average Cycle Length (days):</label>
-    <input type="number" id="cycleLength" placeholder="28">
-
-    <button onclick="calculatePeriod()">Calculate</button>
+    <button onclick="calculatePeriod()">Calculate My Cycle</button>
 
     <div id="result" class="result-box"></div>
     <div id="timelineContainer"></div>
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
-
-  <!-- SEO Content -->
   <section class="seo-content">
-    <h2>Why Use Our Period & Ovulation Calculator?</h2>
-    <p>Our Period & Ovulation Calculator provides accurate predictions for your cycle, fertile window, and ovulation day. It’s a powerful tool for family planning, fertility awareness, and cycle tracking.</p>
-
-    <h3>✨ Benefits</h3>
-    <ul>
-      <li>🌸 Predict your next period</li>
-      <li>💝 Identify fertile days</li>
-      <li>🌙 Track ovulation with ease</li>
-      <li>📱 Mobile-friendly, easy to use</li>
-    </ul>
-
     <h3>🔗 Explore More Tools</h3>
     <div class="card-grid">
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
@@ -170,82 +596,329 @@
       <div class="card"><a href="blog/understanding-your-menstrual-cycle.html">📖 Understanding Your Menstrual Cycle</a></div>
       <div class="card"><a href="blog/fertility-tips-for-women.html">💡 Fertility Tips for Women</a></div>
     </div>
+
+    <article>
+        <h2>What is a Period & Ovulation Calculator?</h2>
+        <p>A period and ovulation calculator is a specialized tool designed to help you track your menstrual cycle and predict important dates including your next period, fertile window, and ovulation day. By entering the first day of your last period and your average cycle length, the calculator uses established medical algorithms to forecast when these key events will likely occur in your current and upcoming cycles.</p>
+        
+        <p>Understanding your menstrual cycle is fundamental to reproductive health, whether you're trying to conceive, avoid pregnancy naturally, or simply want to better understand your body's rhythms. This calculator provides personalized predictions based on your unique cycle pattern, helping you plan ahead and recognize any irregularities that might warrant medical attention.</p>
+
+        <div class="info-box">
+          <h4>Why Track Your Cycle?</h4>
+          <p>Tracking your menstrual cycle offers numerous benefits beyond pregnancy planning. It helps you anticipate and prepare for your period, understand hormonal fluctuations that affect mood and energy, identify irregular patterns that may indicate health issues, and gain deeper awareness of your overall reproductive health.</p>
+        </div>
+
+        <h2>How to Use This Period Calculator</h2>
+        <p>Using our period and ovulation calculator is straightforward and takes less than a minute. Follow these simple steps:</p>
+        <ol>
+            <li><strong>Enter the First Day of Your Last Period:</strong> Click the date field and select the first day of your most recent menstrual period. This is the day when menstrual bleeding began, not spotting.</li>
+            <li><strong>Input Your Average Cycle Length:</strong> Enter the typical number of days in your menstrual cycle. The average cycle is 28 days, but normal cycles can range from 21 to 35 days. Count from the first day of one period to the first day of the next period.</li>
+            <li><strong>Calculate:</strong> Click the "Calculate My Cycle" button to generate your personalized predictions including your next period date, fertile window, and ovulation day.</li>
+            <li><strong>View Your Timeline:</strong> Review the visual timeline that shows your cycle phases, making it easy to see period days, fertile days, and ovulation at a glance.</li>
+        </ol>
+
+        <h2>Understanding Your Menstrual Cycle</h2>
+        <p>The menstrual cycle is a complex series of hormonal changes that prepare your body for potential pregnancy each month. A complete cycle is counted from the first day of one period to the first day of the next. While 28 days is often cited as average, cycles ranging from 21 to 35 days are considered normal for adults, and 21 to 45 days for teens.</p>
+
+        <h3>The Four Phases of the Menstrual Cycle</h3>
+        <p>Your menstrual cycle consists of four distinct phases, each characterized by specific hormonal changes and physical processes:</p>
+
+        <h4>Menstrual Phase (Days 1-5)</h4>
+        <p>This phase begins on the first day of your period when the uterine lining (endometrium) sheds because fertilization did not occur. Menstrual bleeding typically lasts 3 to 7 days. During this time, estrogen and progesterone levels are at their lowest, which can affect energy levels and mood. Common symptoms include cramps, bloating, fatigue, and mood changes.</p>
+
+        <h4>Follicular Phase (Days 1-13)</h4>
+        <p>The follicular phase overlaps with menstruation and continues until ovulation. It begins when the hypothalamus signals the pituitary gland to release follicle-stimulating hormone (FSH). This hormone stimulates the ovaries to produce follicles, each containing an immature egg. As follicles develop, they release estrogen, which thickens the uterine lining in preparation for potential pregnancy. Rising estrogen levels during this phase often lead to increased energy, improved mood, and clearer skin.</p>
+
+        <h4>Ovulation Phase (Around Day 14)</h4>
+        <p>Ovulation typically occurs around the midpoint of your cycle, approximately 14 days before your next period begins. Rising estrogen levels trigger a surge in luteinizing hormone (LH), causing the dominant follicle to release a mature egg. The egg travels down the fallopian tube where it may be fertilized by sperm. Ovulation lasts only 12 to 24 hours, making this the most fertile time of your cycle. Signs of ovulation may include a slight increase in basal body temperature, changes in cervical mucus (becoming clear, stretchy, and resembling egg whites), mild pelvic pain, and increased sexual desire.</p>
+
+        <h4>Luteal Phase (Days 15-28)</h4>
+        <p>After the egg is released, the empty follicle transforms into the corpus luteum, which secretes progesterone. This hormone further thickens the uterine lining and prepares it to support a fertilized egg. If pregnancy doesn't occur, the corpus luteum breaks down, causing progesterone and estrogen levels to drop. This hormonal decline triggers the start of your next period. The luteal phase typically lasts 12 to 14 days and is when premenstrual syndrome symptoms may occur, including mood changes, breast tenderness, bloating, and food cravings.</p>
+
+        <h2>Understanding Your Fertile Window</h2>
+        <p>Your fertile window is the timeframe during your menstrual cycle when pregnancy is most likely to occur if you have unprotected intercourse. This window includes the five days before ovulation and the day of ovulation itself, totaling approximately six days. Sperm can survive in the female reproductive tract for up to five days, while an egg remains viable for fertilization for about 12 to 24 hours after release.</p>
+
+        <p>The highest probability of conception occurs on the two to three days before ovulation and on ovulation day itself. Having intercourse during this window ensures that sperm are present when the egg is released, maximizing the chances of fertilization. Our calculator identifies this fertile window based on your cycle length, helping you plan accordingly whether you're trying to conceive or avoid pregnancy.</p>
+
+        <h3>Signs You May Be in Your Fertile Window</h3>
+        <p>Your body provides several natural signs that can help you identify when you're most fertile:</p>
+        <ul>
+            <li><strong>Cervical Mucus Changes:</strong> As ovulation approaches, cervical mucus becomes clear, stretchy, and slippery, resembling raw egg whites. This consistency helps sperm travel through the cervix to reach the egg.</li>
+            <li><strong>Increased Basal Body Temperature:</strong> Your resting body temperature rises slightly (about 0.5 to 1 degree Fahrenheit) after ovulation due to increased progesterone levels.</li>
+            <li><strong>Ovulation Pain:</strong> Some women experience mittelschmerz, a mild ache or sharp pain on one side of the lower abdomen during ovulation.</li>
+            <li><strong>Increased Libido:</strong> Many women experience heightened sexual desire during their fertile window due to hormonal changes.</li>
+            <li><strong>Breast Tenderness:</strong> Hormonal fluctuations can cause temporary breast sensitivity during ovulation.</li>
+            <li><strong>Heightened Senses:</strong> Some women report improved sense of smell and taste during their fertile period.</li>
+        </ul>
+
+        <h2>What is Ovulation and When Does It Occur?</h2>
+        <p>Ovulation is the process by which a mature egg is released from one of your ovaries and becomes available for fertilization. This typically occurs once per menstrual cycle, usually around 14 days before your next period begins. For a woman with a 28-day cycle, ovulation typically happens around day 14. However, for shorter or longer cycles, the timing adjusts accordingly.</p>
+
+        <p>The key to understanding ovulation timing is that it typically occurs 14 days before your next period, not 14 days after your last period. This is why our calculator asks for your cycle length, it allows us to work backwards from your expected next period to accurately predict ovulation. For example, if your cycle is 32 days long, ovulation would typically occur around day 18, not day 14.</p>
+
+        <h3>Ovulation Predictor Kits</h3>
+        <p>For more precise ovulation tracking, especially if you're trying to conceive or have irregular cycles, ovulation predictor kits can be helpful. These home tests detect the surge in luteinizing hormone that occurs 24 to 36 hours before ovulation. When used in conjunction with cycle tracking, they can provide highly accurate ovulation predictions. Ovulation predictor kits are available at most pharmacies and are most effective when testing begins a few days before your predicted ovulation date.</p>
+
+        <h2>Accuracy and Limitations of Period Calculators</h2>
+        <p>While our period and ovulation calculator provides reliable estimates based on your cycle information, it's important to understand its limitations. The calculator assumes regular cycles and uses the standard ovulation timing of 14 days before the next period. For many women, these assumptions provide accurate predictions. However, several factors can affect accuracy:</p>
+
+        <ul>
+            <li><strong>Irregular Cycles:</strong> If your cycle length varies significantly from month to month, predictions become less reliable. Irregular cycles may indicate hormonal imbalances, stress, significant weight changes, or conditions like polycystic ovary syndrome.</li>
+            <li><strong>Anovulatory Cycles:</strong> Occasionally, a menstrual cycle may occur without ovulation. This is more common in certain situations such as during the first year after menarche, in perimenopause, after stopping hormonal birth control, or due to certain medical conditions.</li>
+            <li><strong>Hormonal Changes:</strong> Factors like stress, illness, travel, changes in sleep patterns, and significant life events can temporarily disrupt your normal cycle pattern.</li>
+            <li><strong>Medical Conditions:</strong> Conditions such as thyroid disorders, PCOS, endometriosis, or premature ovarian failure can cause cycle irregularities that make predictions less accurate.</li>
+            <li><strong>Medications:</strong> Certain medications, including hormonal birth control, can affect cycle regularity and ovulation patterns.</li>
+        </ul>
+
+        <p>For the most accurate tracking, combine this calculator with other methods such as monitoring basal body temperature, tracking cervical mucus changes, and using ovulation predictor kits. If you have consistently irregular cycles or difficulty conceiving, consult with a healthcare provider.</p>
+
+        <h2>Using This Calculator for Pregnancy Planning</h2>
+        <p>If you're trying to conceive, understanding your fertile window and ovulation timing is crucial. Our calculator helps you identify the best days for intercourse to maximize your chances of pregnancy. Research shows that having intercourse during the three days leading up to and including ovulation offers the highest probability of conception.</p>
+
+        <h3>Tips for Increasing Conception Chances</h3>
+        <ul>
+            <li><strong>Time Intercourse Strategically:</strong> Have intercourse every one to two days during your fertile window. More frequent intercourse than this may reduce sperm count, while less frequent may miss optimal timing.</li>
+            <li><strong>Track Multiple Signs:</strong> Combine calendar tracking with monitoring cervical mucus and using ovulation predictor kits for more accurate identification of your fertile window.</li>
+            <li><strong>Maintain a Healthy Lifestyle:</strong> Both partners should eat a balanced diet, maintain a healthy weight, exercise regularly, avoid smoking and excessive alcohol, and manage stress levels.</li>
+            <li><strong>Take Prenatal Vitamins:</strong> Begin taking folic acid supplements at least one month before trying to conceive to reduce the risk of neural tube defects.</li>
+            <li><strong>Be Patient:</strong> For healthy couples under 35, it's normal for conception to take up to one year. Most couples conceive within six months of actively trying.</li>
+            <li><strong>Seek Help When Needed:</strong> If you're under 35 and haven't conceived after 12 months of trying, or over 35 and haven't conceived after 6 months, consult a fertility specialist.</li>
+        </ul>
+
+        <h2>Natural Family Planning and Cycle Awareness</h2>
+        <p>Some couples use fertility awareness methods, also called natural family planning, to avoid pregnancy. These methods involve tracking your cycle to identify fertile days and avoiding unprotected intercourse during that time. While our calculator can help identify your fertile window, it's important to understand that fertility awareness methods have varying effectiveness rates.</p>
+
+        <div class="info-box">
+            <h4>Important Contraception Notice</h4>
+            <p>This calculator should not be used as your primary method of contraception. Fertility awareness methods have a typical use failure rate of about 24%, meaning approximately 24 out of 100 women using these methods will become pregnant within one year. For reliable contraception, use FDA-approved birth control methods such as hormonal contraceptives, intrauterine devices, or barrier methods in consultation with your healthcare provider.</p>
+        </div>
+
+        <h2>When Your Cycle is Irregular</h2>
+        <p>An irregular menstrual cycle is one that varies in length by more than 7 to 9 days from month to month. While occasional irregularity is normal, especially during times of stress or lifestyle changes, consistently irregular cycles may indicate underlying health issues that warrant medical evaluation.</p>
+
+        <h3>Common Causes of Irregular Periods</h3>
+        <ul>
+            <li><strong>Polycystic Ovary Syndrome:</strong> A hormonal disorder causing enlarged ovaries with small cysts, leading to irregular or absent periods, excess androgen levels, and difficulty conceiving.</li>
+            <li><strong>Thyroid Disorders:</strong> Both hypothyroidism and hyperthyroidism can disrupt menstrual regularity. The thyroid plays a crucial role in regulating metabolism and hormone balance.</li>
+            <li><strong>Premature Ovarian Insufficiency:</strong> A condition where ovaries stop functioning normally before age 40, leading to irregular periods and reduced fertility.</li>
+            <li><strong>Uterine Fibroids or Polyps:</strong> Noncancerous growths in the uterus can cause irregular bleeding, heavy periods, and pelvic discomfort.</li>
+            <li><strong>Endometriosis:</strong> A condition where tissue similar to the uterine lining grows outside the uterus, causing pain and potentially affecting cycle regularity.</li>
+            <li><strong>Stress and Lifestyle Factors:</strong> Significant stress, extreme exercise, eating disorders, rapid weight changes, and sleep disruptions can all affect cycle regularity.</li>
+        </ul>
+
+        <h3>When to See a Doctor</h3>
+        <p>Consult a healthcare provider if you experience any of the following:</p>
+        <ul>
+            <li>Periods that regularly occur less than 21 days or more than 35 days apart</li>
+            <li>Missing three or more periods in a row without being pregnant</li>
+            <li>Menstrual bleeding lasting longer than 7 days</li>
+            <li>Extremely heavy bleeding requiring pad or tampon changes every hour</li>
+            <li>Severe pain during periods that interferes with daily activities</li>
+            <li>Bleeding or spotting between periods</li>
+            <li>Difficulty conceiving after 12 months of trying (6 months if over 35)</li>
+        </ul>
+
+        <h2>Menstrual Cycle Changes Throughout Life</h2>
+        <p>Your menstrual cycle naturally changes throughout different life stages. Understanding these changes helps you know what's normal and when to seek medical advice.</p>
+
+        <h3>Adolescence</h3>
+        <p>When menstruation first begins (menarche), typically between ages 10 and 15, cycles are often irregular as the body adjusts to hormonal changes. It can take several years for cycles to become regular. Periods may be skipped, come closer together, or vary in length and flow. This irregularity is usually normal during the first year or two after menarche.</p>
+
+        <h3>Reproductive Years</h3>
+        <p>During your 20s and 30s, cycles typically become more regular and predictable. This is often when cycle tracking is most accurate and fertility is at its peak. However, factors like stress, lifestyle changes, and medical conditions can still cause variations.</p>
+
+        <h3>Perimenopause</h3>
+        <p>In your 40s and early 50s, you may enter perimenopause, the transition period before menopause. During this time, cycles may become irregular again as hormone levels fluctuate. Periods may be lighter or heavier, closer together or farther apart. Perimenopause can last several years before periods stop completely.</p>
+
+        <h3>Menopause</h3>
+        <p>Menopause is officially diagnosed after 12 consecutive months without a period, typically occurring around age 51. After menopause, you no longer ovulate or menstruate. Any vaginal bleeding after menopause should be evaluated by a healthcare provider as it may indicate underlying health issues.</p>
+
+        <h2>Tracking Your Cycle for Health Insights</h2>
+        <p>Beyond pregnancy planning and period prediction, tracking your menstrual cycle provides valuable insights into your overall health. Your cycle is often called the "fifth vital sign" because irregularities can indicate various health conditions.</p>
+
+        <h3>What Your Cycle Can Tell You</h3>
+        <ul>
+            <li><strong>Hormonal Balance:</strong> Regular cycles generally indicate healthy hormone levels, while irregular cycles may suggest hormonal imbalances requiring medical attention.</li>
+            <li><strong>Thyroid Function:</strong> The thyroid significantly impacts menstrual regularity, and cycle changes can be an early indicator of thyroid problems.</li>
+            <li><strong>Nutritional Status:</strong> Severely restricted diets, eating disorders, or nutritional deficiencies can cause cycle irregularities or amenorrhea.</li>
+            <li><strong>Stress Levels:</strong> Chronic stress affects the hypothalamic-pituitary-ovarian axis, potentially disrupting normal cycle patterns.</li>
+            <li><strong>Reproductive Health:</strong> Tracking cycles helps identify potential fertility issues, PCOS, endometriosis, and other reproductive conditions early.</li>
+        </ul>
+
+        <h2>Best Practices for Cycle Tracking</h2>
+        <p>For the most accurate and useful cycle information, follow these tracking best practices:</p>
+
+        <ul>
+            <li><strong>Mark the First Day:</strong> Always mark the first day of full menstrual flow, not spotting, as Day 1 of your cycle.</li>
+            <li><strong>Track Consistently:</strong> Record your period start date every month for at least three to six months to identify patterns.</li>
+            <li><strong>Note Flow Changes:</strong> Keep track of whether your flow is light, moderate, or heavy, and how many days bleeding lasts.</li>
+            <li><strong>Record Symptoms:</strong> Document any symptoms like cramps, mood changes, breast tenderness, headaches, or digestive issues.</li>
+            <li><strong>Monitor Cervical Mucus:</strong> Observing daily changes in cervical mucus can help pinpoint your fertile window more precisely.</li>
+            <li><strong>Consider Additional Tools:</strong> Use apps, calendars, or journals to maintain detailed records over time.</li>
+            <li><strong>Share with Healthcare Providers:</strong> Bring your cycle tracking information to medical appointments for more informed discussions about your reproductive health.</li>
+        </ul>
+
+        <h2>Understanding Cycle Variations and What's Normal</h2>
+        <p>No woman's cycle is exactly the same every month. Small variations are completely normal and expected. Understanding what constitutes normal variation versus concerning irregularity helps you make informed decisions about when to seek medical advice.</p>
+
+        <h3>Normal Cycle Characteristics</h3>
+        <ul>
+            <li><strong>Cycle Length:</strong> 21 to 35 days for adults, with variation of up to 7 to 9 days from month to month being normal</li>
+            <li><strong>Period Duration:</strong> 2 to 7 days of bleeding</li>
+            <li><strong>Blood Loss:</strong> 30 to 40 milliliters per period on average (about 2 to 3 tablespoons), though this varies widely</li>
+            <li><strong>Cycle Regularity:</strong> Most cycles falling within a consistent range, even if not exactly the same length</li>
+        </ul>
+
+        <h3>Temporary Cycle Disruptions</h3>
+        <p>Several factors can temporarily affect your cycle without indicating a serious problem:</p>
+        <ul>
+            <li>Major life stress or significant emotional events</li>
+            <li>Illness or infection</li>
+            <li>Travel, especially across time zones</li>
+            <li>Significant changes in sleep patterns or shift work</li>
+            <li>Intense exercise or training programs</li>
+            <li>Moderate weight gain or loss</li>
+            <li>Starting or stopping hormonal birth control</li>
+        </ul>
+
+        <p>If your cycle returns to normal within two to three months after these disruptions resolve, there's typically no cause for concern. However, persistent irregularities warrant medical evaluation.</p>
+
+        <h2>Privacy and Data Security</h2>
+        <p>Your privacy is important to us. When you use our period and ovulation calculator:</p>
+        
+        <ul>
+            <li>All calculations are performed locally in your browser using JavaScript</li>
+            <li>We do not store, save, or transmit your cycle information to any server</li>
+            <li>No cookies are set specifically for tracking your menstrual data</li>
+            <li>Your personal health information remains completely private and secure</li>
+        </ul>
+
+        <p>You can use this calculator with confidence knowing that your sensitive reproductive health data never leaves your device.</p>
+
+        <div class="info-box">
+            <h4>Medical Disclaimer</h4>
+            <p>This calculator provides estimates and educational information only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician, gynecologist, or other qualified healthcare provider with any questions you may have regarding your menstrual cycle, fertility, or reproductive health. Never disregard professional medical advice or delay seeking it because of information from this calculator. If you suspect you may be pregnant or have a medical emergency, contact your healthcare provider immediately.</p>
+        </div>
+
+        <h2>Additional Resources and Support</h2>
+        <p>For comprehensive reproductive health information and support, consider these resources:</p>
+
+        <ul>
+            <li><strong>Your Healthcare Provider:</strong> Your primary care physician, gynecologist, or reproductive endocrinologist can provide personalized medical advice based on your health history.</li>
+            <li><strong>Planned Parenthood:</strong> Offers reproductive health services, education, and counseling on a sliding fee scale.</li>
+            <li><strong>American College of Obstetricians and Gynecologists:</strong> Provides patient education materials on menstrual health and reproductive issues.</li>
+            <li><strong>Fertility Apps:</strong> Consider comprehensive tracking apps that combine calendar methods with symptom tracking and data analysis.</li>
+            <li><strong>Support Groups:</strong> Online and in-person communities can provide support for those dealing with cycle irregularities, fertility challenges, or reproductive health conditions.</li>
+        </ul>
+    </article>
   </section>
 
-  <!-- FAQ Section -->
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <div class="faq">
-      <h3>How accurate is this calculator?</h3>
-      <p>It provides estimates based on your average cycle length. Irregular cycles may vary and should be confirmed with medical advice.</p>
-    </div>
-    <div class="faq">
-      <h3>Can it help me conceive?</h3>
-      <p>Yes 💝, it highlights your fertile days and ovulation window to improve chances of conception.</p>
-    </div>
-    <div class="faq">
-      <h3>Can I use this as birth control?</h3>
-      <p>No ❌, this calculator should not be used as a reliable contraceptive method.</p>
-    </div>
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is this period and ovulation calculator?</summary>
+      <p>This calculator provides reliable estimates for women with regular menstrual cycles. It uses the standard ovulation timing of 14 days before the next period and calculates fertile windows accordingly. However, accuracy depends on cycle regularity. Women with irregular cycles, recently discontinued birth control, or certain medical conditions may experience different patterns. For most accurate tracking, combine this calculator with other fertility awareness methods.</p>
+    </details>
+    <details>
+      <summary>Can this calculator help me get pregnant?</summary>
+      <p>Yes, this calculator can be a valuable tool when trying to conceive. It identifies your fertile window and ovulation day, which are the best times for intercourse to maximize conception chances. However, it should be used as part of a comprehensive approach that may include tracking cervical mucus, using ovulation predictor kits, and consulting with your healthcare provider if conception doesn't occur within expected timeframes.</p>
+    </details>
+    <details>
+      <summary>Can I use this calculator as birth control?</summary>
+      <p>No, this calculator should not be used as your primary method of contraception. While it can help identify fertile days, fertility awareness methods have relatively high failure rates with typical use (about 24% per year). Sperm can survive for up to 5 days, ovulation timing can vary, and cycles can be unpredictable. For reliable contraception, use FDA-approved birth control methods and consult with your healthcare provider.</p>
+    </details>
+    <details>
+      <summary>What if my cycle length varies each month?</summary>
+      <p>If your cycle length varies significantly (more than 7-9 days difference between cycles), the calculator's predictions will be less accurate. Use the average of your last 3-6 cycles for the calculation. However, significant cycle irregularity may warrant consultation with a healthcare provider to rule out hormonal imbalances or other medical conditions. Consider tracking additional fertility signs like cervical mucus and using ovulation predictor kits for better accuracy.</p>
+    </details>
+    <details>
+      <summary>When is the best time to have intercourse if I'm trying to conceive?</summary>
+      <p>The highest probability of conception occurs during the three days before ovulation and on ovulation day itself. Having intercourse every 1-2 days during your fertile window provides the best chances. More frequent intercourse may reduce sperm count, while less frequent may miss the optimal window. The fertile window includes the 5 days before ovulation plus ovulation day because sperm can survive up to 5 days in the female reproductive tract.</p>
+    </details>
+    <details>
+      <summary>What does ovulation feel like?</summary>
+      <p>Many women don't feel ovulation at all, but some experience symptoms including mild cramping or sharp pain on one side of the lower abdomen (mittelschmerz), changes in cervical mucus (becoming clear and stretchy like egg whites), slight increase in basal body temperature, increased sexual desire, breast tenderness, or heightened sense of smell. These signs vary greatly between individuals, and not experiencing them doesn't mean you're not ovulating.</p>
+    </details>
+    <details>
+      <summary>How long does ovulation last?</summary>
+      <p>The ovulation process itself, when the egg is released from the ovary, happens very quickly and is essentially instantaneous. However, the egg remains viable for fertilization for approximately 12 to 24 hours after release. This is why the fertile window extends beyond just ovulation day, sperm can survive in the reproductive tract for up to 5 days waiting for the egg to be released, but once ovulation occurs, there's only a 12-24 hour window for fertilization.</p>
+    </details>
+    <details>
+      <summary>Why do I need to know my cycle length?</summary>
+      <p>Your cycle length is crucial for accurately predicting ovulation because ovulation typically occurs 14 days before your next period starts, not 14 days after your last period began. For someone with a 28-day cycle, this means ovulation around day 14. But for a 32-day cycle, ovulation would occur around day 18. Without knowing your cycle length, predictions would only be accurate for the "average" 28-day cycle and could be significantly off for women with shorter or longer cycles.</p>
+    </details>
   </section>
 
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
-  <!-- Floating CTA -->
-  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
-
-  <!-- Footer -->
   <footer>
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This period and ovulation calculator is provided for informational and educational purposes only. The results are estimates and should not be used as the sole basis for medical decisions or as a reliable method of contraception. While we strive for accuracy, individual cycles vary and many factors can affect fertility and menstruation. This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare providers regarding your reproductive health.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
-  <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How accurate is this calculator?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "It provides estimates based on your average cycle length. Irregular cycles may vary and should be confirmed with medical advice."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can it help me conceive?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, it highlights your fertile days and ovulation window to improve chances of conception."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use this as birth control?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No, this calculator should not be used as a reliable contraceptive method."
-        }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How accurate is this period and ovulation calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator provides reliable estimates for women with regular menstrual cycles. It uses the standard ovulation timing of 14 days before the next period. However, accuracy depends on cycle regularity."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "Can this calculator help me get pregnant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, this calculator can be a valuable tool when trying to conceive. It identifies your fertile window and ovulation day, which are the best times for intercourse to maximize conception chances."
+      }
+    },{
+      "@type": "Question",
+      "name": "Can I use this calculator as birth control?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, this calculator should not be used as your primary method of contraception. Fertility awareness methods have relatively high failure rates. For reliable contraception, use FDA-approved birth control methods."
+      }
+    },{
+      "@type": "Question",
+      "name": "What if my cycle length varies each month?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your cycle length varies significantly, the calculator's predictions will be less accurate. Use the average of your last 3-6 cycles. Significant irregularity may warrant consultation with a healthcare provider."
+      }
+    }]
   }
   </script>
 
   <script>
     function calculatePeriod() {
-      const lastPeriod = new Date(document.getElementById("lastPeriod").value);
+      const lastPeriodInput = document.getElementById("lastPeriod").value;
       const cycleLength = parseInt(document.getElementById("cycleLength").value);
 
-      if (!lastPeriod || isNaN(cycleLength) || cycleLength < 20 || cycleLength > 40) {
-        document.getElementById("result").innerHTML = "<p style='color:red;'>⚠️ Please enter a valid date and cycle length (20–40 days).</p>";
+      if (!lastPeriodInput) {
+        document.getElementById("result").innerHTML = "<p style='color: #ef4444; font-weight: 600;'>Please select the first day of your last period.</p>";
+        return;
+      }
+
+      if (isNaN(cycleLength) || cycleLength < 20 || cycleLength > 40) {
+        document.getElementById("result").innerHTML = "<p style='color: #ef4444; font-weight: 600;'>Please enter a valid cycle length between 20 and 40 days.</p>";
+        return;
+      }
+
+      const lastPeriod = new Date(lastPeriodInput);
+      const today = new Date();
+
+      if (lastPeriod.getTime() > today.getTime()) {
+        document.getElementById("result").innerHTML = "<p style='color: #f97316; font-weight: 600;'>The first day of your last period cannot be in the future. Please enter a valid past date.</p>";
         return;
       }
 
@@ -260,11 +933,18 @@
       const fertileEnd = new Date(ovulation);
       fertileEnd.setDate(ovulation.getDate() + 2);
 
+      const daysUntilPeriod = Math.ceil((nextPeriod - today) / (1000 * 60 * 60 * 24));
+      const daysUntilOvulation = Math.ceil((ovulation - today) / (1000 * 60 * 60 * 24));
+
+      let periodStatus = daysUntilPeriod > 0 ? `in ${daysUntilPeriod} days` : `${Math.abs(daysUntilPeriod)} days ago`;
+      let ovulationStatus = daysUntilOvulation > 0 ? `in ${daysUntilOvulation} days` : 
+                           daysUntilOvulation === 0 ? 'Today!' : `${Math.abs(daysUntilOvulation)} days ago`;
+
       document.getElementById("result").innerHTML = `
-        <h3>📊 Results</h3>
-        <p><span class="badge period">🌸 Period</span> Next Period: <b>${nextPeriod.toDateString()}</b></p>
-        <p><span class="badge fertile">💝 Fertile</span> Window: <b>${fertileStart.toDateString()} - ${fertileEnd.toDateString()}</b></p>
-        <p><span class="badge ovulation">🌙 Ovulation</span> Day: <b>${ovulation.toDateString()}</b></p>
+        <h3>Your Cycle Predictions</h3>
+        <p><span class="badge period">Period</span> <strong>Next Period:</strong> ${nextPeriod.toDateString()} (${periodStatus})</p>
+        <p><span class="badge fertile">Fertile</span> <strong>Fertile Window:</strong> ${fertileStart.toDateString()} - ${fertileEnd.toDateString()}</p>
+        <p><span class="badge ovulation">Ovulation</span> <strong>Ovulation Day:</strong> ${ovulation.toDateString()} (${ovulationStatus})</p>
       `;
 
       // Timeline
@@ -278,36 +958,48 @@
         if (currentDay >= fertileStart && currentDay <= fertileEnd) cssClass += " fertile";
         if (currentDay.toDateString() === ovulation.toDateString()) cssClass = "day ovulation";
 
-        timelineHTML += `<div class="${cssClass}">${currentDay.getDate()}</div>`;
+        timelineHTML += `<div class="${cssClass}" title="Day ${i + 1}">${currentDay.getDate()}</div>`;
       }
       timelineHTML += '</div>';
       timelineHTML += `<div class="legend">
-        <span><span class="badge period">🌸</span> Period</span>
-        <span><span class="badge fertile">💝</span> Fertile</span>
-        <span><span class="badge ovulation">🌙</span> Ovulation</span>
+        <span><span class="badge period">Period</span> Menstruation</span>
+        <span><span class="badge fertile">Fertile</span> Fertile Window</span>
+        <span><span class="badge ovulation">Ovulation</span> Ovulation Day</span>
       </div>`;
 
       document.getElementById("timelineContainer").innerHTML = timelineHTML;
     }
+  </script>
 
-    // Dark mode toggle
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById("darkModeToggle");
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-      });
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const toggle = document.getElementById("darkModeToggle");
+        const body = document.body;
 
-      // FAQ accordion
-      document.querySelectorAll(".faq h3").forEach(faqHeader => {
-        faqHeader.addEventListener("click", () => {
-          faqHeader.parentElement.classList.toggle("active");
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                toggle.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                toggle.textContent = '🌙';
+            }
+        };
+
+        toggle.addEventListener("click", () => {
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'light');
+                applyTheme('light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+                applyTheme('dark');
+            }
         });
-      });
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
     });
   </script>
+
 </body>
 </html>
