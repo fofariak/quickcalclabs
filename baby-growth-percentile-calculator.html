@@ -3,97 +3,619 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baby Growth Percentile Calculator (WHO Standards) | QuickCalcLabs</title>
-  <meta name="description" content="Track your baby's growth with our free percentile calculator based on WHO standards. Understand weight, height, and head circumference charts and learn what the numbers really mean.">
+  <title>Baby Growth Percentile Calculator - WHO Standards | Free Growth Chart | QuickCalcLabs</title>
+  <meta name="description" content="Free baby growth percentile calculator using WHO standards. Track your baby's weight, height, and head circumference. Understand growth charts and percentiles with expert guidance.">
+  <meta name="keywords" content="baby growth calculator, growth percentile, WHO growth chart, baby weight percentile, infant growth tracker, baby development calculator">
+  <link rel="canonical" href="https://quickcalclabs.com/baby-growth-percentile-calculator.html">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
-     crossorigin="anonymous"></script>
   <style>
-    :root {
-      --accent-blue: #3498db;
-      --accent-green: #2ecc71;
-      --accent-purple: #9b59b6;
-      --card-bg: #ffffff;
-      --text-color: #333;
-      --border-color: #bdc3c7;
-      --body-bg: #ecf0f1;
+    /* Baby growth calculator specific styles */
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    body.dark-mode {
-      --card-bg: #2d3748;
-      --text-color: #ecf0f1;
-      --border-color: #4a5568;
-      --body-bg: #1a202c;
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
-    body {
-        background-color: var(--body-bg);
-        color: var(--text-color);
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
     }
-    .header { background: var(--card-bg); }
-    .calc-wrapper, .seo-content, .faq-section { background: var(--card-bg); }
-    .calc-wrapper { max-width: 600px; }
-    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    
-    input, select {
-        background: var(--card-bg);
-        color: var(--text-color);
-        border: 1px solid var(--border-color);
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .calc-wrapper h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .input-wrapper {
+      text-align: left;
+    }
+
+    .input-wrapper label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .input-wrapper label {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .calc-wrapper input[type="date"],
+    .calc-wrapper input[type="number"] {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+    }
+
+    .calc-wrapper input[type="date"]:focus,
+    .calc-wrapper input[type="number"]:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input[type="date"],
+    .dark-mode .calc-wrapper input[type="number"] {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input[type="date"]:focus,
+    .dark-mode .calc-wrapper input[type="number"]:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
     .segmented-control {
       display: flex;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md, 12px);
       overflow: hidden;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      margin: 0.6rem 0 1.2rem;
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    .segmented-control input[type="radio"] { display: none; }
+
+    .dark-mode .segmented-control {
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .segmented-control input[type="radio"] {
+      display: none;
+    }
+
     .segmented-control label {
-      flex: 1; text-align: center; padding: 10px; cursor: pointer;
-      background: var(--card-bg); color: var(--text-color); transition: background 0.3s;
+      flex: 1;
+      text-align: center;
+      padding: 0.9rem;
+      cursor: pointer;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-medium-light, #334155);
+      transition: all 0.15s ease;
+      font-weight: 600;
+      border-right: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
+
+    .segmented-control label:last-child {
+      border-right: none;
+    }
+
+    .dark-mode .segmented-control label {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      color: var(--text-medium-dark, #cbd5e1);
+      border-right-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
     .segmented-control input[type="radio"]:checked + label {
-      background: var(--accent-blue); color: #fff; font-weight: 600;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      color: #fff;
     }
-    .meta-info { font-size: 0.9em; color: #7f8c8d; margin-bottom: 20px; text-align: center; }
-    body.dark-mode .meta-info { color: #95a5a6; }
-    .disclaimer-box {
-        padding: 15px; margin: 20px 0; border-left: 5px solid #f1c40f;
-        background-color: #fef9e7; color: #c0392b; border-radius: 4px;
+
+    .height-input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
     }
-    body.dark-mode .disclaimer-box { background-color: #5a4b1b; color: #f9e79f; }
-    
-    /* Chart styles */
-    .chart-container { margin-top: 25px; }
-    .chart-item { margin-bottom: 20px; }
-    .chart-item h4 { margin-bottom: 8px; font-size: 16px; }
+
+    .calc-wrapper button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .calc-wrapper button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button:active {
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      font-weight: 600;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      color: var(--text-strong-light, #0f172a);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      color: var(--text-strong-dark, #f1f5f9);
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.4rem;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .chart-container {
+      margin: 1.5rem 0;
+    }
+
+    .chart-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-item h4 {
+      margin: 0 0 0.8rem 0;
+      font-size: 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .chart-item h4 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
     .bar-background {
-      width: 100%; height: 25px; background: #ecf0f1;
-      border-radius: 15px; position: relative; overflow: hidden;
+      width: 100%;
+      height: 30px;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    body.dark-mode .bar-background { background: #1f2937; }
+
+    .dark-mode .bar-background {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
     .bar-fill {
-      height: 100%; border-radius: 15px; transition: width 1s ease-out;
-      position: absolute; left: 0; top: 0;
+      height: 100%;
+      border-radius: var(--radius-md, 12px);
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 0.8rem;
     }
-    .low { background: linear-gradient(90deg, #f39c12, #e67e22); }
-    .average { background: linear-gradient(90deg, #2ecc71, #27ae60); }
-    .high { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+
+    .bar-fill.low {
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+    }
+
+    .bar-fill.average {
+      background: linear-gradient(90deg, #10b981, #059669);
+    }
+
+    .bar-fill.high {
+      background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    }
+
     .percentile-label {
-      position: absolute; right: 10px; top: 50%;
-      transform: translateY(-50%); color: #fff; font-weight: bold;
-      font-size: 12px; text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      white-space: nowrap;
     }
-     .legend {
-      margin-top: 15px; display: flex; gap: 15px;
-      justify-content: center; font-size: 14px;
+
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
     }
-    .legend span { display: flex; align-items: center; gap: 5px; }
-    .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; color: #fff; }
-    .badge.low { background:#f39c12; }
-    .badge.average { background:#2ecc71; }
-    .badge.high { background:#e74c3c; }
+
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .badge.low {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+    }
+
+    .badge.average {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .badge.high {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1.5rem 0;
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .warning-box {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(251, 146, 60, 0.1));
+      border-left: 4px solid #eab308;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+    }
+
+    .dark-mode .warning-box {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(251, 146, 60, 0.15));
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .input-group {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -107,73 +629,75 @@
     </nav>
   </header>
 
-  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
-
   <section class="calc-wrapper">
-    <h1>📊 Baby Growth Percentile Calculator</h1>
-    <p class="subtitle">Track your baby's development against WHO standards and understand what the results mean for their health.</p>
-    <p class="meta-info">Last Updated: September 26, 2025</p>
+    <h1>Baby Growth Percentile Calculator</h1>
+    <p class="subtitle">Track your baby's growth using WHO standards. Calculate weight, height, and head circumference percentiles with instant visual results.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
 
+    <h2>Baby Information</h2>
+    
     <div class="input-group">
-        <div>
-            <label for="birthDate">🎂 Date of Birth:</label>
-            <input type="date" id="birthDate">
-        </div>
-        <div>
-            <label for="measurementDate">🗓️ Date of Measurement:</label>
-            <input type="date" id="measurementDate">
-        </div>
+      <div class="input-wrapper">
+        <label for="birthDate">Date of Birth</label>
+        <input type="date" id="birthDate" aria-label="Baby's birth date">
+      </div>
+      <div class="input-wrapper">
+        <label for="measurementDate">Measurement Date</label>
+        <input type="date" id="measurementDate" aria-label="Date of measurement">
+      </div>
     </div>
 
-    <label>🚻 Sex:</label>
+    <label>Sex</label>
     <div class="segmented-control">
-        <input type="radio" id="boy" name="sex" value="boy" checked>
-        <label for="boy">Boy</label>
-        <input type="radio" id="girl" name="sex" value="girl">
-        <label for="girl">Girl</label>
+      <input type="radio" id="boy" name="sex" value="boy" checked>
+      <label for="boy">Boy</label>
+      <input type="radio" id="girl" name="sex" value="girl">
+      <label for="girl">Girl</label>
     </div>
 
-    <label>🔄 Unit System:</label>
+    <label>Unit System</label>
     <div class="segmented-control">
-        <input type="radio" id="imperial" name="unit" value="imperial" checked>
-        <label for="imperial">Imperial</label>
-        <input type="radio" id="metric" name="unit" value="metric">
-        <label for="metric">Metric</label>
+      <input type="radio" id="imperial" name="unit" value="imperial" checked>
+      <label for="imperial">Imperial</label>
+      <input type="radio" id="metric" name="unit" value="metric">
+      <label for="metric">Metric</label>
     </div>
 
-    <!-- Imperial Inputs -->
     <div id="imperialInputs">
-        <div class="input-group">
-            <div>
-                <label for="weight_lbs">⚖️ Weight (lbs):</label>
-                <input type="number" id="weight_lbs" placeholder="e.g., 12.1">
-            </div>
-            <div>
-                <label>📏 Height (ft/in):</label>
-                <div class="input-group" style="gap: 5px;">
-                     <input type="number" id="height_ft" placeholder="ft">
-                     <input type="number" id="height_in" placeholder="in">
-                </div>
-            </div>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <label for="weight_lbs">Weight (lbs)</label>
+          <input type="number" id="weight_lbs" placeholder="e.g., 12.5" step="0.1" aria-label="Weight in pounds">
         </div>
-        <label for="head_in">🧠 Head Circumference (in):</label>
-        <input type="number" id="head_in" placeholder="e.g., 15.4">
+        <div class="input-wrapper">
+          <label>Height (ft / in)</label>
+          <div class="height-input-group">
+            <input type="number" id="height_ft" placeholder="ft" min="0" aria-label="Height feet">
+            <input type="number" id="height_in" placeholder="in" min="0" step="0.1" aria-label="Height inches">
+          </div>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <label for="head_in">Head Circumference (in)</label>
+        <input type="number" id="head_in" placeholder="e.g., 15.4" step="0.1" aria-label="Head circumference in inches">
+      </div>
     </div>
 
-    <!-- Metric Inputs -->
     <div id="metricInputs" style="display: none;">
-        <div class="input-group">
-            <div>
-                <label for="weight_kg">⚖️ Weight (kg):</label>
-                <input type="number" id="weight_kg" placeholder="e.g., 5.5">
-            </div>
-            <div>
-                <label for="height_cm">📏 Height/Length (cm):</label>
-                <input type="number" id="height_cm" placeholder="e.g., 58.5">
-            </div>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <label for="weight_kg">Weight (kg)</label>
+          <input type="number" id="weight_kg" placeholder="e.g., 5.5" step="0.1" aria-label="Weight in kilograms">
         </div>
-        <label for="head_cm">🧠 Head Circumference (cm):</label>
-        <input type="number" id="head_cm" placeholder="e.g., 39.0">
+        <div class="input-wrapper">
+          <label for="height_cm">Height/Length (cm)</label>
+          <input type="number" id="height_cm" placeholder="e.g., 58.5" step="0.1" aria-label="Height in centimeters">
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <label for="head_cm">Head Circumference (cm)</label>
+        <input type="number" id="head_cm" placeholder="e.g., 39.0" step="0.1" aria-label="Head circumference in centimeters">
+      </div>
     </div>
 
     <button onclick="calculatePercentiles()">Calculate Growth Percentiles</button>
@@ -181,37 +705,13 @@
     <div id="result" class="result-box"></div>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
-
   <section class="seo-content">
-    <article>
-        <h2>Understanding Your Baby's Growth Chart</h2>
-        <p>A baby growth chart is a standard tool used by pediatricians to assess how your child is growing compared to other children of the same age and sex. This calculator uses data based on the World Health Organization (WHO) Growth Standards to plot your baby's measurements for weight, height (length), and head circumference.</p>
-        
-        <div class="disclaimer-box">
-            <strong>⚠️ Important Medical Disclaimer:</strong> This tool is for informational purposes only and is not a substitute for a pediatrician's assessment. Growth patterns are complex. Always discuss your child's growth and any health concerns with a qualified medical professional.
-        </div>
-
-        <h3>How to Interpret Growth Percentiles</h3>
-        <p>It's easy to misunderstand percentiles as a "score" or a "grade," but they are simply a comparison. Here’s what they mean:</p>
-        <p>If your baby is in the <strong>60th percentile for weight</strong>, it means that out of 100 babies their age and sex, your baby weighs more than 60 and less than 40. It doesn't mean they are overweight or underweight; it's simply a measurement of their size relative to a standard population.</p>
-
-        <h3>The Most Important Factor: A Steady Growth Curve</h3>
-        <p>Pediatricians are less concerned with a single percentile number and more focused on the overall pattern of growth. A healthy baby will typically follow their own, consistent growth curve over time. This is the key takeaway for parents:</p>
-        <ul>
-          <li><strong>A single measurement is just a snapshot.</strong> Growth happens in spurts, so one low or high reading is usually not a cause for alarm. The trend over several measurements is what provides a clear picture.</li>
-          <li><strong>There is a wide range of "normal."</strong> A baby who is consistently on the 10th percentile curve can be just as healthy as a baby who is on the 90th percentile curve. </li>
-          <li><strong>Genetics play a major role.</strong> A child's genetic background is a primary determinant of their size. Tall parents are likely to have tall children who track on higher height percentiles.</li>
-          <li><strong>A sudden change is what gets attention.</strong> A significant drop across two or more major percentile lines (e.g., from the 75th down to the 25th) is what might prompt a pediatrician to look closer, as it could indicate a feeding issue or health problem.</li>
-        </ul>
-    </article>
-
     <h3>🔗 Explore More Parenting Tools</h3>
     <div class="card-grid">
-      <div class="card"><a href="baby-feeding-schedule-calculator.html">🍼 Baby Feeding Schedule Calculator</a></div>
-      <div class="card"><a href="pregnancy-calculator.html">🤰 Pregnancy Due Date Calculator</a></div>
-      <div class="card"><a href="period-tracker.html">🌸 Period & Ovulation Calculator</a></div>
-      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator (for adults)</a></div>
+      <div class="card"><a href="baby-feeding-schedule-calculator.html">🍼 Baby Feeding Calculator</a></div>
+      <div class="card"><a href="age-calculator.html">📅 Age Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
     </div>
 
     <h3>📝 Related Blogs for Parents</h3>
@@ -219,245 +719,511 @@
       <div class="card"><a href="blog/babys-first-milestones-guide.html">📖 A Guide to Baby's First Year Milestones</a></div>
       <div class="card"><a href="blog/introducing-solids-baby-guide.html">💡 Tips for Introducing Solid Foods</a></div>
     </div>
+
+    
+
+    <article>
+      <h2>Understanding Baby Growth Charts and Percentiles</h2>
+      <p>Baby growth charts are essential tools used by pediatricians worldwide to monitor infant and child development. These charts plot a child's measurements—weight, height, and head circumference—against standardized reference data to determine how they compare to other children of the same age and sex. Understanding these growth percentiles is crucial for parents who want to track their baby's development and recognize potential health concerns early.</p>
+
+      <p>Our baby growth percentile calculator uses World Health Organization standards, which are based on data collected from healthy, breastfed infants across diverse populations worldwide. These standards represent optimal growth conditions rather than simply average growth, making them the gold standard for assessing infant development.</p>
+
+      <div class="warning-box">
+        <h4>⚠️ Important Medical Disclaimer</h4>
+        <p>This calculator provides general growth percentile estimates for informational purposes only and is not a substitute for professional medical evaluation. Growth assessment is complex and requires consideration of many factors including family history, feeding practices, and overall health. Always consult your pediatrician with questions about your baby's growth, development, or health. Only a qualified healthcare provider can properly interpret growth patterns in the context of your baby's individual situation.</p>
+      </div>
+
+      <h2>How to Use the Baby Growth Percentile Calculator</h2>
+      <p>Using our calculator is straightforward and provides instant visual feedback. Follow these steps to calculate your baby's growth percentiles:</p>
+      <ol>
+        <li><strong>Enter Birth Date:</strong> Input your baby's date of birth. This allows the calculator to determine your baby's exact age for accurate percentile comparison.</li>
+        <li><strong>Enter Measurement Date:</strong> Input the date when the measurements were taken. This is typically the date of your baby's most recent pediatrician appointment.</li>
+        <li><strong>Select Sex:</strong> Choose whether your baby is a boy or girl. Growth patterns differ between sexes, so this information is essential for accurate percentile calculation.</li>
+        <li><strong>Choose Unit System:</strong> Select Imperial (pounds, feet/inches) or Metric (kilograms, centimeters) based on your preference.</li>
+        <li><strong>Enter Measurements:</strong> Input your baby's weight, height/length, and head circumference. These should be measurements taken by your pediatrician for maximum accuracy.</li>
+        <li><strong>Calculate:</strong> Click the button to see visual percentile results with color-coded bars showing where your baby falls on the growth chart.</li>
+      </ol>
+
+      <h2>What Do Percentiles Actually Mean?</h2>
+      <p>Growth percentiles are often misunderstood by parents, who may interpret them as grades or scores. However, percentiles are simply comparative measurements that show how your baby's size compares to a reference population of babies of the same age and sex.</p>
+
+      <h3>Breaking Down Percentiles</h3>
+      <p>If your baby is in the 60th percentile for weight, this means that out of 100 babies of the same age and sex, your baby weighs more than 60 of them and less than 40 of them. It does not mean your baby is overweight, underweight, or that they scored 60 out of 100 on some health test. It's simply a position on a distribution curve.</p>
+
+      <p>Here's what different percentile ranges generally indicate:</p>
+      <ul>
+        <li><strong>Below 3rd Percentile:</strong> Your baby is smaller than 97% of babies their age and sex. This may warrant medical evaluation to rule out growth issues, though some healthy babies naturally fall here due to genetics.</li>
+        <li><strong>3rd to 15th Percentile:</strong> Your baby is on the smaller side but within the normal range. Many healthy babies consistently track in this range.</li>
+        <li><strong>15th to 85th Percentile:</strong> This is considered the average range where most babies fall. A baby anywhere in this range is growing typically.</li>
+        <li><strong>85th to 97th Percentile:</strong> Your baby is larger than average but still within normal limits. This often reflects genetics and family size patterns.</li>
+        <li><strong>Above 97th Percentile:</strong> Your baby is larger than 97% of babies their age and sex. While often perfectly healthy, your pediatrician may monitor this to ensure proper feeding practices.</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>The 50th Percentile Myth</h4>
+        <p>Many parents mistakenly believe their baby should be at the 50th percentile. This is not true. The 50th percentile simply represents the statistical median—half of all babies are above it and half below it. A baby at the 15th percentile can be just as healthy as one at the 75th percentile. What matters most is consistent growth along a steady curve, not the specific percentile number.</p>
+      </div>
+
+      <h2>The Most Important Factor: Growth Trajectory</h2>
+      <p>Pediatricians emphasize that the pattern of growth over time is far more important than any single percentile measurement. A healthy baby will typically follow their own consistent growth curve, staying roughly within the same percentile range from visit to visit. This consistent trajectory indicates proper nutrition, good health, and normal development.</p>
+
+      <h3>What Pediatricians Look For</h3>
+      <p>When evaluating your baby's growth, pediatricians assess several factors beyond the raw percentile numbers:</p>
+      <ul>
+        <li><strong>Consistency:</strong> Does your baby stay on approximately the same growth curve over time? A baby who consistently tracks along the 25th percentile is growing normally.</li>
+        <li><strong>Proportionality:</strong> Are weight, height, and head circumference all in roughly similar percentile ranges? Significant discrepancies may warrant investigation.</li>
+        <li><strong>Parental Size:</strong> Is your baby's size appropriate given family genetics? Tall parents typically have babies who track higher on height percentiles.</li>
+        <li><strong>Overall Health:</strong> Is your baby meeting developmental milestones, eating well, and appearing generally healthy? These factors matter as much as growth measurements.</li>
+        <li><strong>Major Changes:</strong> Has there been a sudden drop or jump of two or more major percentile lines? This change might indicate a problem requiring medical attention.</li>
+      </ul>
+
+      <h2>Understanding the Three Growth Measurements</h2>
+      <p>The calculator tracks three key measurements, each providing different insights into your baby's development.</p>
+
+      <h3>Weight Percentiles</h3>
+      <p>Weight is the most frequently tracked measurement and the one that can fluctuate most dramatically. Weight percentiles reflect your baby's total body mass compared to others their age. Factors affecting weight include genetics, feeding type and frequency, activity level, metabolism, and overall health status.</p>
+
+      <p>It's normal for babies to lose up to ten percent of their birth weight in the first few days of life, then regain it by about two weeks old. After that, healthy babies typically gain four to seven ounces per week during the first few months, though this varies considerably by individual.</p>
+
+      <h3>Height/Length Percentiles</h3>
+      <p>Height measurements track linear growth and are strongly influenced by genetics. Unlike weight, height percentiles tend to be more stable over time. A baby born to tall parents will likely track on higher height percentiles throughout childhood, while children of shorter parents typically track lower.</p>
+
+      <p>Until about age two, this measurement is called "length" because babies are measured lying down. After age two, when children can stand reliably, it becomes "height" and is measured standing up. Accurate length measurements in babies can be challenging, which is why pediatricians use special measuring boards.</p>
+
+      <h3>Head Circumference Percentiles</h3>
+      <p>Head circumference tracks brain growth during the critical first two years of life. This measurement is taken around the largest part of the head, above the eyebrows and ears. Head circumference percentiles are particularly important during infancy because they can help identify potential neurological concerns.</p>
+
+      <p>The brain grows rapidly during the first year, with head circumference increasing by about five inches from birth to twelve months. After age two, head growth slows considerably. Pediatricians pay special attention to head circumference measurements that are significantly above the 97th percentile or below the 3rd percentile, or that show sudden changes in trajectory.</p>
+
+      <h2>WHO Growth Standards vs CDC Growth Charts</h2>
+      <p>You may have heard of both WHO growth standards and CDC growth charts. Understanding the difference helps you interpret growth data accurately.</p>
+
+      <h3>WHO Growth Standards</h3>
+      <p>Our calculator uses WHO standards, which are based on data from healthy, predominantly breastfed infants from six countries worldwide. These standards describe how children should grow under optimal conditions with proper nutrition and healthcare. WHO standards are recommended for all children under 24 months, regardless of feeding type, ethnicity, or socioeconomic status.</p>
+
+      <h3>CDC Growth Charts</h3>
+      <p>The CDC charts, by contrast, are based on data from U.S. children and describe how children in the United States actually grew during specific time periods. These charts are more commonly used for children over 24 months old in the United States.</p>
+
+      <p>You may notice slight differences in percentiles if you compare WHO and CDC charts for the same measurements. This is normal and reflects the different populations and methodologies used to create each reference.</p>
+
+      <h2>Factors That Influence Baby Growth</h2>
+      <p>Many factors affect how babies grow, and understanding these helps put percentile measurements in proper context.</p>
+
+      <h3>Genetic Factors</h3>
+      <p>Genetics are the primary determinant of your baby's ultimate size and shape. Tall parents typically have tall children, short parents typically have short children, and these patterns are visible even in infancy. If both parents are above average height, a baby tracking at the 75th percentile for length is entirely expected. Conversely, petite parents should not be surprised if their baby tracks at the 20th percentile.</p>
+
+      <h3>Feeding Type and Practices</h3>
+      <p>How babies are fed influences growth patterns, particularly in the early months. Breastfed babies typically gain weight more rapidly in the first few months, then may slow down and appear leaner after six months compared to formula-fed babies. Formula-fed babies often show steadier, more predictable weight gain throughout the first year. Both patterns are healthy and normal.</p>
+
+      <h3>Prematurity</h3>
+      <p>Premature babies require special consideration when plotting growth. Pediatricians use "corrected age" or "adjusted age" for premature infants until about 24 months. Corrected age is calculated from the due date rather than the actual birth date. For example, a six-month-old baby born two months early would be plotted as a four-month-old on growth charts.</p>
+
+      <h3>Illness and Medical Conditions</h3>
+      <p>Illness can temporarily affect growth. It's common for babies to lose weight during sickness and then catch up quickly during recovery. This is one reason why pediatricians look at long-term patterns rather than single data points. Chronic medical conditions can have more significant impacts on growth trajectories.</p>
+
+      <h3>Introduction of Solid Foods</h3>
+      <p>Around six months, when solid foods are introduced, you may notice changes in your baby's growth pattern. Some babies show increased weight gain as they consume more calories from solids, while others may slow down slightly as they explore new foods and textures. These variations are normal during the transition to solid foods.</p>
+
+      <h2>When Growth Percentiles Signal Concern</h2>
+      <p>While most variations in growth percentiles are perfectly normal, certain patterns warrant medical attention and follow-up with your pediatrician.</p>
+
+      <h3>Significant Percentile Drops</h3>
+      <p>A drop of two or more major percentile curves (for example, dropping from the 75th percentile to below the 25th percentile over a few months) is called "crossing percentile lines" and may indicate a feeding problem, absorption issue, or other health concern. However, some percentile crossing is normal, especially during the first year when babies are finding their genetic growth curve.</p>
+
+      <h3>Failure to Thrive</h3>
+      <p>This medical term describes inadequate weight gain or growth in infants and children. It's not defined by a single percentile but rather by patterns showing insufficient growth over time. Babies with failure to thrive may drop across multiple percentile lines, fall below the 3rd percentile, or show weight gain that's significantly slower than expected. This condition always requires medical evaluation to identify and address the underlying cause.</p>
+
+      <h3>Disproportionate Growth</h3>
+      <p>When different measurements fall in very different percentile ranges, it may warrant investigation. For example, a baby at the 90th percentile for weight but only the 10th percentile for height might have a feeding or metabolic issue. Similarly, head circumference that's dramatically different from weight and height percentiles should be evaluated.</p>
+
+      <h3>Consistently Extreme Percentiles</h3>
+      <p>While being consistently at the 5th or 95th percentile is often perfectly healthy, being below the 3rd percentile or above the 97th percentile consistently may require evaluation to ensure there are no underlying health issues and that feeding practices are appropriate.</p>
+
+      <div class="info-box">
+        <h4>Trust Your Pediatrician</h4>
+        <p>Your pediatrician considers many factors beyond growth percentiles when assessing your baby's health, including developmental milestones, physical examination findings, feeding behavior, family history, and overall appearance. If your pediatrician says your baby is growing well despite percentiles that worry you, trust their professional judgment. They have the complete picture of your baby's health.</p>
+      </div>
+
+      <h2>Getting Accurate Measurements</h2>
+      <p>The accuracy of percentile calculations depends entirely on accurate measurements. Here's how to ensure measurements are as precise as possible.</p>
+
+      <h3>Weight Measurements</h3>
+      <p>Babies should be weighed naked on a calibrated infant scale. Home scales may not be accurate enough for reliable tracking. Weight can vary by several ounces depending on factors like time of day, time since last feeding, bladder and bowel fullness, and clothing. This is why pediatricians weigh babies consistently at appointments.</p>
+
+      <h3>Length Measurements</h3>
+      <p>Accurate length measurements require a specialized measuring board with a fixed headboard and movable footboard. Two people are typically needed—one to hold the baby's head against the headboard while keeping the body straight, and another to position the legs and read the measurement. Even under ideal conditions, infant length measurements can vary by up to half an inch, which is why pediatricians measure carefully and may repeat measurements if they seem inconsistent.</p>
+
+      <h3>Head Circumference Measurements</h3>
+      <p>Head circumference is measured with a flexible, non-stretchy measuring tape placed around the largest part of the head, just above the eyebrows and ears and around the back of the head where it slopes up from the neck. The tape should be snug but not tight. Hair should be flattened under the tape for accuracy.</p>
+
+      <h3>Home vs. Medical Office Measurements</h3>
+      <p>While you can certainly measure your baby at home, measurements taken during pediatric appointments are more reliable for tracking growth percentiles. Medical offices use calibrated equipment and trained staff, and consistent measurement technique matters significantly. Use your pediatrician's measurements when calculating percentiles for the most accurate results.</p>
+
+      <h2>Growth Patterns Through the First Year</h2>
+      <p>Understanding typical growth patterns helps you know what to expect as your baby develops.</p>
+
+      <h3>Birth to Three Months</h3>
+      <p>This is the period of most rapid growth. Babies typically gain five to seven ounces per week and grow about one inch per month. They may feed very frequently, every two to three hours around the clock. Many babies appear chubby during this phase as they build fat stores. Head circumference increases rapidly as brain development accelerates.</p>
+
+      <h3>Three to Six Months</h3>
+      <p>Growth remains rapid but begins to slow slightly from the newborn pace. Babies typically gain four to six ounces per week and continue growing about one inch per month. Many babies become more efficient feeders and begin spacing feedings further apart. Activity levels increase as babies become more alert and interactive.</p>
+
+      <h3>Six to Twelve Months</h3>
+      <p>Growth slows considerably during the second half of the first year. Babies typically gain three to five ounces per week and grow about half an inch per month. Weight gain is especially variable during this period as babies become more mobile, burning more calories through increased activity. The introduction of solid foods around six months changes feeding dynamics and may affect growth patterns. Many babies slim down during this phase as they crawl, pull to stand, and become more active.</p>
+
+      <h2>Cultural and Ethnic Considerations</h2>
+      <p>The WHO growth standards are based on diverse international populations and are appropriate for use with babies of all ethnicities. However, there can be some average differences in growth patterns among different ethnic groups.</p>
+
+      <p>Some ethnic groups tend toward smaller average stature, while others tend toward larger average size. These differences are reflected in family genetics. A baby with Asian heritage may naturally track on lower height percentiles, while a baby with Scandinavian heritage may track higher. Neither pattern indicates a problem—both simply reflect normal genetic variation.</p>
+
+      <p>What matters most is that your baby grows consistently along their own curve, appropriate for their genetic background. Your pediatrician considers family history when evaluating whether growth patterns are appropriate for your individual baby.</p>
+
+      <h2>Growth and Developmental Milestones</h2>
+      <p>While growth percentiles measure physical size, they don't directly correlate with developmental milestones. A baby at the 10th percentile for weight can reach developmental milestones just as quickly as a baby at the 90th percentile.</p>
+
+      <p>However, pediatricians do look at growth and development together as part of comprehensive health assessment. Significant growth problems can sometimes be associated with developmental delays, which is one reason regular well-child visits track both measurements and milestone achievement.</p>
+
+      <h2>Feeding Concerns Related to Growth</h2>
+      <p>Parents often have questions about whether feeding practices are adequate when they see growth percentiles.</p>
+
+      <h3>Is My Baby Getting Enough to Eat?</h3>
+      <p>The best indicators of adequate nutrition include consistent weight gain along your baby's growth curve, at least six wet diapers per day after the first week, regular bowel movements, satisfaction after feedings, and alertness and appropriate development. If your baby shows these signs and your pediatrician isn't concerned, your baby is getting enough nutrition even if percentiles seem low to you.</p>
+
+      <h3>Should I Change How I Feed My Baby?</h3>
+      <p>Never make significant feeding changes based solely on growth percentiles without consulting your pediatrician. If there's a true feeding problem, your pediatrician will identify it and provide specific guidance. Overfeeding to try to increase percentiles can create unhealthy eating patterns. Underfeeding based on high percentiles can deprive a growing baby of needed nutrition. Always discuss feeding concerns with your healthcare provider.</p>
+
+      <h2>Long-Term Growth Predictions</h2>
+      <p>Many parents wonder if baby growth percentiles predict adult size. The correlation exists but isn't perfect. Babies who track on higher height percentiles often become taller adults, and those on lower percentiles often remain shorter, but there are many exceptions.</p>
+
+      <p>Height percentiles become more predictive after age two, when growth has stabilized somewhat. However, puberty timing significantly affects final adult height, and this cannot be predicted from infant growth charts. Weight percentiles in infancy have even less correlation with adult weight, as factors like activity level, diet, and lifestyle during childhood and adolescence play major roles.</p>
+
+      <h2>Tracking Growth Over Time</h2>
+      <p>Maintaining a record of your baby's growth measurements helps you and your pediatrician identify patterns and trends. Many parents find it helpful to keep a simple growth log noting the date, age, weight, length, and head circumference for each measurement.</p>
+
+      <p>However, avoid the temptation to measure too frequently at home. Babies don't grow at a completely steady rate—they may have periods of more rapid growth followed by plateaus. Measuring too often can cause unnecessary anxiety when you see normal day-to-day or week-to-week variations. Trust your pediatrician's regular measurement schedule, typically at one, two, four, six, nine, and twelve months during the first year.</p>
+
+      <h2>Special Situations</h2>
+
+      <h3>Multiple Births</h3>
+      <p>Twins, triplets, and other multiples often have different growth patterns than singleton babies. They're more likely to be born prematurely and at lower birth weights, so they may start on lower percentile curves. Some multiples have different growth rates from each other, which is usually normal as long as each baby follows their own consistent curve. Pediatricians with experience in multiples can help parents understand appropriate expectations.</p>
+
+      <h3>Adopted Children</h3>
+      <p>When family history is unknown, pediatricians focus even more heavily on the growth trajectory and less on specific percentile numbers. As long as an adopted child grows consistently along a curve and appears healthy, their growth is likely appropriate regardless of which percentile curve they follow.</p>
+
+      <h3>Medical Conditions</h3>
+      <p>Certain medical conditions affect growth patterns. These include chromosomal abnormalities like Down syndrome, endocrine disorders affecting growth hormone or thyroid function, chronic diseases affecting nutrition absorption, congenital heart disease, and metabolic disorders. Children with these conditions may require specialized growth charts and expectations appropriate to their specific diagnosis.</p>
+
+      <h2>Common Myths About Baby Growth</h2>
+      <p>Let's address some widespread misconceptions about baby growth and percentiles.</p>
+
+      <h3>Myth: Higher Percentiles Mean Healthier Babies</h3>
+      <p>Reality: Health is not determined by percentile number. A baby at the 15th percentile can be just as healthy as one at the 85th percentile. What matters is consistent growth, good nutrition, and overall wellbeing.</p>
+
+      <h3>Myth: Babies Should Gain Weight Steadily Every Week</h3>
+      <p>Reality: Growth happens in spurts, not at a perfectly steady rate. Some weeks babies gain more, some weeks less. Pediatricians look at overall trends over months, not week-to-week variations.</p>
+
+      <h3>Myth: Chubby Babies Will Become Overweight Adults</h3>
+      <p>Reality: Baby fat and adult obesity are not strongly correlated. Most babies slim down naturally as they become mobile and active during the second year. Infant weight percentiles are poor predictors of adult weight status.</p>
+
+      <h3>Myth: Breastfed and Formula-Fed Babies Should Grow Identically</h3>
+      <p>Reality: Breastfed babies often have different growth patterns, especially after six months when they may appear leaner. Both patterns are healthy. WHO standards are based primarily on breastfed babies.</p>
+
+      <h3>Myth: You Can Tell if a Baby Is Healthy Just by Looking at Growth Charts</h3>
+      <p>Reality: Growth charts are one tool among many. A complete health assessment includes physical examination, developmental milestones, feeding behavior, activity level, and many other factors that numbers alone cannot capture.</p>
+
+      <h2>Emotional Aspects of Growth Tracking</h2>
+      <p>It's natural for parents to feel anxious when they see their baby's growth percentiles, especially if numbers are lower or higher than expected. Remember that percentiles are statistical comparisons, not judgments of your baby's health or your parenting abilities.</p>
+
+      <p>If you find yourself obsessing over percentiles, comparing your baby to others, or feeling stressed about growth measurements, it may help to step back and focus on what you can observe: Is your baby generally happy? Do they feed well? Are they reaching developmental milestones? Do they seem healthy and content? These observations often provide more reassurance than any number on a chart.</p>
+
+      <p>If growth concerns are causing significant anxiety, discuss your feelings openly with your pediatrician. They can provide perspective, explain why they're not concerned (if they're not), and offer reassurance based on their complete assessment of your baby's health.</p>
+
+      <h2>The Role of Pediatric Appointments</h2>
+      <p>Regular well-child visits serve many purposes beyond measuring growth. During these appointments, your pediatrician assesses development, provides vaccinations, offers anticipatory guidance about upcoming stages, addresses parental concerns, and monitors overall health and wellbeing.</p>
+
+      <p>Growth measurements are just one component of these comprehensive visits. Your pediatrician integrates growth data with everything else they observe and learn about your baby to form a complete picture of health and development. This is why they can sometimes reassure parents that growth is fine even when percentiles seem concerning—they're seeing the whole child, not just the numbers.</p>
+
+      <h2>When to Request Additional Evaluation</h2>
+      <p>While pediatricians monitor growth carefully, you know your baby best. Request additional evaluation if you notice your baby seems constantly hungry despite frequent feeding, appears lethargic or less active than usual, has feeding difficulties or refuses to eat, shows signs of illness along with poor weight gain, or if you have persistent concerns that aren't being addressed.</p>
+
+      <p>Trust your instincts. If something feels wrong despite reassurances about growth percentiles, it's appropriate to request further investigation or seek a second opinion. Parents' observations and intuitions about their babies are valuable and should be taken seriously by healthcare providers.</p>
+    </article>
   </section>
 
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions about Baby Growth Charts</h2>
-    <details class="faq">
-      <summary>What is a "normal" percentile?</summary>
-      <p>Any percentile from the 3rd to the 97th is considered within the normal range. The 50th percentile simply represents the statistical average. What's most important is that your child follows a consistent curve, whatever that percentile may be.</p>
+    <h2>❓ Frequently Asked Questions</h2>
+    <details>
+      <summary>What is considered a "normal" growth percentile?</summary>
+      <p>Any percentile from the 3rd to the 97th is considered within the normal, healthy range. The 50th percentile simply represents the statistical average—it's not a target or goal. What's most important is that your baby follows a consistent growth curve over time, whatever percentile range that may be. A baby consistently at the 15th percentile can be just as healthy as one at the 75th percentile.</p>
     </details>
-    <details class="faq">
+    <details>
       <summary>Should I be worried if my baby is in a low percentile?</summary>
-      <p>In most cases, no. A low percentile is not automatically a red flag. If your baby is happy, active, meeting developmental milestones, and consistently tracking along their own curve (e.g., always staying around the 15th percentile), this is usually considered healthy growth. Your pediatrician will let you know if there's any reason for concern.</p>
+      <p>Not necessarily. A low percentile is not automatically a red flag. If your baby is happy, active, feeding well, meeting developmental milestones, and consistently tracking along their own curve (even if it's a lower percentile), this usually indicates healthy growth appropriate for their genetic background. Your pediatrician will let you know if there's reason for concern. Many factors including family genetics strongly influence percentile placement.</p>
     </details>
-    <details class="faq">
-        <summary>Which growth charts does this calculator use?</summary>
-        <p>This calculator uses a simplified model based on the official <strong>World Health Organization (WHO) growth standards</strong>. The WHO charts are recommended for all children up to 24 months of age, regardless of how they are fed, and are considered the international standard for assessing infant growth.</p>
+    <details>
+      <summary>Which growth standards does this calculator use?</summary>
+      <p>This calculator uses a model based on the World Health Organization (WHO) Child Growth Standards. The WHO standards are recommended internationally for all children from birth to 24 months of age, regardless of ethnicity, feeding type, or location. These standards are based on data from healthy, primarily breastfed infants from six countries and represent optimal growth under ideal conditions.</p>
     </details>
-    <details class="faq">
-      <summary>How often should I check my baby's growth?</summary>
-      <p>Your pediatrician will take official measurements at each well-child visit (typically at 1, 2, 4, 6, 9, and 12 months). It's best to rely on these official measurements rather than trying to measure at home frequently, which can be inaccurate and cause unnecessary stress. This tool is ideal for helping you understand the results from your doctor's appointments.</p>
+    <details>
+      <summary>How often should I check my baby's growth percentiles?</summary>
+      <p>Your pediatrician will take official measurements at each scheduled well-child visit, typically at 1, 2, 4, 6, 9, and 12 months during the first year. It's best to rely on these professional measurements rather than measuring frequently at home, which can be inaccurate and cause unnecessary stress. Home measurements are difficult to perform correctly and normal variations can be misinterpreted as problems. Use this calculator with your pediatrician's measurements to understand the results from medical appointments.</p>
+    </details>
+    <details>
+      <summary>Why are my baby's percentiles different on different calculators or charts?</summary>
+      <p>Different calculators may use different reference standards (WHO vs. CDC charts) or different measurement time points in their data. Additionally, if measurements aren't precise or if there are small data entry errors, results can vary. The WHO and CDC charts show slightly different percentiles for the same measurements because they're based on different populations and methodologies. Both are valid, but WHO standards are recommended for babies under 2 years old.</p>
+    </details>
+    <details>
+      <summary>My baby dropped percentiles. Is this a problem?</summary>
+      <p>It depends on the magnitude and context. Small percentile changes are normal as babies find their genetic growth curve. However, a drop of two or more major percentile curves (for example, from 75th to 25th percentile) over a short time period may indicate a feeding issue or health problem and should be discussed with your pediatrician. Temporary drops during illness are common and typically resolve quickly. Your pediatrician will determine if a percentile change warrants investigation.</p>
+    </details>
+    <details>
+      <summary>Do breastfed and formula-fed babies have different growth patterns?</summary>
+      <p>Yes, they often do. Breastfed babies typically gain weight more rapidly in the first 2-3 months, then may slow down and appear leaner after 6 months compared to formula-fed babies. Formula-fed babies often show steadier, more predictable weight gain throughout the first year. Both patterns are completely healthy and normal. The WHO standards are based primarily on breastfed babies, making them appropriate for assessing all babies regardless of feeding type.</p>
+    </details>
+    <details>
+      <summary>Can I predict my child's adult height from baby percentiles?</summary>
+      <p>Baby height percentiles provide some indication but are not highly predictive of adult height. Height percentiles become more predictive after age 2-3 when growth stabilizes. However, puberty timing significantly affects final adult height and cannot be predicted from infant measurements. Genetics are the primary determinant of adult height, so family height patterns are more informative than infant percentiles. Many factors during childhood and adolescence influence ultimate height.</p>
     </details>
   </section>
-
-  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
 
   <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
 
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+      <p><strong>Disclaimer:</strong> This baby growth percentile calculator is provided for informational and educational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. Growth assessment is complex and requires consideration of many individual factors. Every baby is unique with their own growth pattern. Always consult your pediatrician, family doctor, or other qualified healthcare provider with questions about your baby's growth, development, health, or any medical concerns. The percentiles shown are estimates based on simplified models and may differ from official medical charts.</p>
     </div>
     <div class="footer-links">
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is a 'normal' percentile?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Any percentile from the 3rd to the 97th is considered within the normal range. The 50th percentile simply represents the statistical average. What's most important is that your child follows a consistent curve, whatever that percentile may be."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Should I be worried if my baby is in a low percentile?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "In most cases, no. A low percentile is not automatically a red flag. If your baby is happy, active, meeting developmental milestones, and consistently tracking along their own curve (e.g., always staying around the 15th percentile), this is usually considered healthy growth. Your pediatrician will let you know if there's any reason for concern."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which growth charts does this calculator use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "This calculator uses a simplified model based on the official World Health Organization (WHO) growth standards. The WHO charts are recommended for all children up to 24 months of age, regardless of how they are fed, and are considered the international standard for assessing infant growth."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How often should I check my baby's growth?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your pediatrician will take official measurements at each well-child visit (typically at 1, 2, 4, 6, 9, and 12 months). It's best to rely on these official measurements rather than trying to measure at home frequently, which can be inaccurate and cause unnecessary stress. This tool is ideal for helping you understand the results from your doctor's appointments."
-        }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is considered a 'normal' growth percentile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any percentile from the 3rd to the 97th is considered within the normal, healthy range. The 50th percentile simply represents the statistical average—it's not a target or goal. What's most important is that your baby follows a consistent growth curve over time."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "Should I be worried if my baby is in a low percentile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not necessarily. If your baby is happy, active, feeding well, meeting developmental milestones, and consistently tracking along their own curve, this usually indicates healthy growth appropriate for their genetic background."
+      }
+    },{
+      "@type": "Question",
+      "name": "Which growth standards does this calculator use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator uses a model based on the World Health Organization (WHO) Child Growth Standards, which are recommended internationally for all children from birth to 24 months of age."
+      }
+    },{
+      "@type": "Question",
+      "name": "How often should I check my baby's growth percentiles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your pediatrician will take official measurements at each scheduled well-child visit, typically at 1, 2, 4, 6, 9, and 12 months during the first year. It's best to rely on these professional measurements rather than measuring frequently at home."
+      }
+    }]
   }
   </script>
 
   <script>
     // Simplified WHO growth data for boys and girls (0-12 months)
+    // Data points represent 3rd, 50th, and 97th percentiles
     const growthData = {
-        boy: [
-            { age: 0, w: [2.5, 3.3, 4.4], h: [46.1, 49.9, 53.7], hc: [32.1, 34.5, 36.9] },
-            { age: 2, w: [4.4, 5.6, 7.1], h: [54.7, 58.4, 62.2], hc: [36.9, 39.1, 41.2] },
-            { age: 4, w: [5.6, 7.0, 8.7], h: [59.9, 63.9, 67.8], hc: [39.7, 41.8, 43.8] },
-            { age: 6, w: [6.4, 8.0, 9.8], h: [63.6, 67.6, 71.6], hc: [41.5, 43.5, 45.4] },
-            { age: 8, w: [7.0, 8.8, 10.8],h: [66.5, 70.6, 74.7], hc: [42.8, 44.8, 46.6] },
-            { age: 10, w: [7.5, 9.4, 11.5],h: [69.0, 73.3, 77.5], hc: [43.8, 45.8, 47.6] },
-            { age: 12, w: [7.8, 9.9, 12.2],h: [71.3, 75.7, 80.1], hc: [44.6, 46.6, 48.4] }
-        ],
-        girl: [
-            { age: 0, w: [2.4, 3.2, 4.2], h: [45.4, 49.1, 52.9], hc: [31.7, 33.9, 36.1] },
-            { age: 2, w: [4.0, 5.1, 6.5], h: [53.0, 57.1, 61.1], hc: [36.2, 38.3, 40.3] },
-            { age: 4, w: [5.1, 6.4, 8.1], h: [58.4, 62.1, 65.9], hc: [38.8, 40.9, 42.9] },
-            { age: 6, w: [5.8, 7.3, 9.1], h: [62.1, 65.7, 69.4], hc: [40.5, 42.4, 44.3] },
-            { age: 8, w: [6.3, 8.1, 10.0],h: [65.0, 68.7, 72.4], hc: [41.7, 43.6, 45.4] },
-            { age: 10, w: [6.8, 8.7, 10.8],h: [67.6, 71.5, 75.3], hc: [42.7, 44.6, 46.4] },
-            { age: 12, w: [7.1, 9.2, 11.5],h: [69.9, 74.0, 78.1], hc: [43.5, 45.4, 47.2] }
-        ]
-    }; // Data points for 3rd, 50th, 97th percentiles
+      boy: [
+        { age: 0, w: [2.5, 3.3, 4.4], h: [46.1, 49.9, 53.7], hc: [32.1, 34.5, 36.9] },
+        { age: 2, w: [4.4, 5.6, 7.1], h: [54.7, 58.4, 62.2], hc: [36.9, 39.1, 41.2] },
+        { age: 4, w: [5.6, 7.0, 8.7], h: [59.9, 63.9, 67.8], hc: [39.7, 41.8, 43.8] },
+        { age: 6, w: [6.4, 8.0, 9.8], h: [63.6, 67.6, 71.6], hc: [41.5, 43.5, 45.4] },
+        { age: 8, w: [7.0, 8.8, 10.8], h: [66.5, 70.6, 74.7], hc: [42.8, 44.8, 46.6] },
+        { age: 10, w: [7.5, 9.4, 11.5], h: [69.0, 73.3, 77.5], hc: [43.8, 45.8, 47.6] },
+        { age: 12, w: [7.8, 9.9, 12.2], h: [71.3, 75.7, 80.1], hc: [44.6, 46.6, 48.4] }
+      ],
+      girl: [
+        { age: 0, w: [2.4, 3.2, 4.2], h: [45.4, 49.1, 52.9], hc: [31.7, 33.9, 36.1] },
+        { age: 2, w: [4.0, 5.1, 6.5], h: [53.0, 57.1, 61.1], hc: [36.2, 38.3, 40.3] },
+        { age: 4, w: [5.1, 6.4, 8.1], h: [58.4, 62.1, 65.9], hc: [38.8, 40.9, 42.9] },
+        { age: 6, w: [5.8, 7.3, 9.1], h: [62.1, 65.7, 69.4], hc: [40.5, 42.4, 44.3] },
+        { age: 8, w: [6.3, 8.1, 10.0], h: [65.0, 68.7, 72.4], hc: [41.7, 43.6, 45.4] },
+        { age: 10, w: [6.8, 8.7, 10.8], h: [67.6, 71.5, 75.3], hc: [42.7, 44.6, 46.4] },
+        { age: 12, w: [7.1, 9.2, 11.5], h: [69.9, 74.0, 78.1], hc: [43.5, 45.4, 47.2] }
+      ]
+    };
 
     function getPercentile(value, dataPoints) {
-        if (value < dataPoints[0]) return 2;
-        if (value >= dataPoints[0] && value < dataPoints[1]) return Math.round(3 + 47 * (value - dataPoints[0]) / (dataPoints[1] - dataPoints[0]));
-        if (value >= dataPoints[1] && value <= dataPoints[2]) return Math.round(50 + 47 * (value - dataPoints[1]) / (dataPoints[2] - dataPoints[1]));
-        if (value > dataPoints[2]) return 98;
-        return 50; // Default
+      if (value < dataPoints[0]) return 2;
+      if (value >= dataPoints[0] && value < dataPoints[1]) {
+        return Math.round(3 + 47 * (value - dataPoints[0]) / (dataPoints[1] - dataPoints[0]));
+      }
+      if (value >= dataPoints[1] && value <= dataPoints[2]) {
+        return Math.round(50 + 47 * (value - dataPoints[1]) / (dataPoints[2] - dataPoints[1]));
+      }
+      if (value > dataPoints[2]) return 98;
+      return 50;
+    }
+
+    function getBarClass(percentile) {
+      if (percentile < 15) return 'low';
+      if (percentile > 85) return 'high';
+      return 'average';
     }
 
     function calculatePercentiles() {
-        const birthDate = new Date(document.getElementById('birthDate').value);
-        const measurementDate = new Date(document.getElementById('measurementDate').value);
-        const sex = document.querySelector('input[name="sex"]:checked').value;
-        const unit = document.querySelector('input[name="unit"]:checked').value;
-        const resultDiv = document.getElementById('result');
-        
-        let weightInKg, heightInCm, headInCm;
-        let weightDisplay, heightDisplay, headDisplay;
-        let hasErrors = false;
+      const birthDate = new Date(document.getElementById('birthDate').value);
+      const measurementDate = new Date(document.getElementById('measurementDate').value);
+      const sex = document.querySelector('input[name="sex"]:checked').value;
+      const unit = document.querySelector('input[name="unit"]:checked').value;
+      const resultDiv = document.getElementById('result');
 
-        if (unit === 'imperial') {
-            const weightLbs = parseFloat(document.getElementById('weight_lbs').value);
-            const heightFt = parseFloat(document.getElementById('height_ft').value) || 0;
-            const heightIn = parseFloat(document.getElementById('height_in').value) || 0;
-            const headIn = parseFloat(document.getElementById('head_in').value);
+      let weightInKg, heightInCm, headInCm;
+      let weightDisplay, heightDisplay, headDisplay;
+      let hasErrors = false;
 
-            if (isNaN(weightLbs) || isNaN(heightFt) || isNaN(heightIn) || isNaN(headIn) || weightLbs <= 0 || (heightFt <= 0 && heightIn <= 0) || headIn <= 0) {
-                hasErrors = true;
-            } else {
-                weightInKg = weightLbs * 0.453592;
-                heightInCm = ((heightFt * 12) + heightIn) * 2.54;
-                headInCm = headIn * 2.54;
-                weightDisplay = `${weightLbs} lbs`;
-                heightDisplay = `${heightFt} ft ${heightIn} in`;
-                headDisplay = `${headIn} in`;
-            }
-        } else { // Metric
-            const weightKg = parseFloat(document.getElementById('weight_kg').value);
-            const heightCm = parseFloat(document.getElementById('height_cm').value);
-            const headCm = parseFloat(document.getElementById('head_cm').value);
+      if (unit === 'imperial') {
+        const weightLbs = parseFloat(document.getElementById('weight_lbs').value);
+        const heightFt = parseFloat(document.getElementById('height_ft').value) || 0;
+        const heightIn = parseFloat(document.getElementById('height_in').value) || 0;
+        const headIn = parseFloat(document.getElementById('head_in').value);
 
-            if (isNaN(weightKg) || isNaN(heightCm) || isNaN(headCm) || weightKg <= 0 || heightCm <= 0 || headCm <= 0) {
-                hasErrors = true;
-            } else {
-                weightInKg = weightKg;
-                heightInCm = heightCm;
-                headInCm = headCm;
-                weightDisplay = `${weightKg} kg`;
-                heightDisplay = `${heightCm} cm`;
-                headDisplay = `${headCm} cm`;
-            }
+        if (isNaN(weightLbs) || isNaN(heightFt) || isNaN(heightIn) || isNaN(headIn) || 
+            weightLbs <= 0 || (heightFt <= 0 && heightIn <= 0) || headIn <= 0) {
+          hasErrors = true;
+        } else {
+          weightInKg = weightLbs * 0.453592;
+          heightInCm = ((heightFt * 12) + heightIn) * 2.54;
+          headInCm = headIn * 2.54;
+          weightDisplay = `${weightLbs} lbs`;
+          heightDisplay = `${heightFt}' ${heightIn}"`;
+          headDisplay = `${headIn} in`;
         }
+      } else {
+        const weightKg = parseFloat(document.getElementById('weight_kg').value);
+        const heightCm = parseFloat(document.getElementById('height_cm').value);
+        const headCm = parseFloat(document.getElementById('head_cm').value);
 
-        if (isNaN(birthDate.getTime()) || isNaN(measurementDate.getTime())) {
-            hasErrors = true;
+        if (isNaN(weightKg) || isNaN(heightCm) || isNaN(headCm) || 
+            weightKg <= 0 || heightCm <= 0 || headCm <= 0) {
+          hasErrors = true;
+        } else {
+          weightInKg = weightKg;
+          heightInCm = heightCm;
+          headInCm = headCm;
+          weightDisplay = `${weightKg} kg`;
+          heightDisplay = `${heightCm} cm`;
+          headDisplay = `${headCm} cm`;
         }
-        
-        if (hasErrors) {
-            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields with valid dates and positive numbers.</p>";
-            return;
-        }
+      }
 
-        if (measurementDate < birthDate) {
-            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Measurement date cannot be before birth date.</p>";
-            return;
-        }
+      if (isNaN(birthDate.getTime()) || isNaN(measurementDate.getTime())) {
+        hasErrors = true;
+      }
 
-        const ageInDays = (measurementDate - birthDate) / (1000 * 60 * 60 * 24);
-        const ageInMonths = ageInDays / 30.4375; // More precise average
+      if (hasErrors) {
+        resultDiv.innerHTML = "<p style='color: #ef4444; font-weight: 600;'>⚠️ Please fill in all required fields with valid dates and positive numbers.</p>";
+        return;
+      }
 
-        if (ageInMonths > 12.5) { // Allow a little leeway
-             resultDiv.innerHTML = "<p style='color:orange;'>⚠️ This calculator is best used for babies up to 12 months old.</p>";
-            return;
-        }
-        
-        const closestAgePoint = Math.floor(ageInMonths / 2) * 2;
-        const ageData = growthData[sex].find(d => d.age === closestAgePoint);
-        
-        if (!ageData) {
-            resultDiv.innerHTML = "<p style='color:red;'>Could not find growth data for this age.</p>";
-            return;
-        }
+      if (measurementDate < birthDate) {
+        resultDiv.innerHTML = "<p style='color: #f97316; font-weight: 600;'>⚠️ Measurement date cannot be before birth date. Please check your dates.</p>";
+        return;
+      }
 
-        const weightPercentile = getPercentile(weightInKg, ageData.w);
-        const heightPercentile = getPercentile(heightInCm, ageData.h);
-        const headPercentile = getPercentile(headInCm, ageData.hc);
-        
-        function getBarClass(p) {
-            if (p < 15) return 'low';
-            if (p > 85) return 'high';
-            return 'average';
-        }
+      const ageInDays = (measurementDate - birthDate) / (1000 * 60 * 60 * 24);
+      const ageInMonths = ageInDays / 30.4375;
 
-        resultDiv.innerHTML = `
-            <h3>📊 Growth Results for a ${Math.round(ageInMonths)}-month-old ${sex}</h3>
-            <div class="chart-container">
-                <div class="chart-item">
-                    <h4>⚖️ Weight: ${weightDisplay}</h4>
-                    <div class="bar-background">
-                        <div class="bar-fill ${getBarClass(weightPercentile)}" style="width:${weightPercentile}%;">
-                            <span class="percentile-label">${weightPercentile}th Percentile</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="chart-item">
-                    <h4>📏 Height/Length: ${heightDisplay}</h4>
-                    <div class="bar-background">
-                        <div class="bar-fill ${getBarClass(heightPercentile)}" style="width:${heightPercentile}%;">
-                            <span class="percentile-label">${heightPercentile}th Percentile</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="chart-item">
-                    <h4>🧠 Head Circumference: ${headDisplay}</h4>
-                    <div class="bar-background">
-                        <div class="bar-fill ${getBarClass(headPercentile)}" style="width:${headPercentile}%;">
-                            <span class="percentile-label">${headPercentile}th Percentile</span>
-                        </div>
-                    </div>
-                </div>
+      if (ageInMonths > 13) {
+        resultDiv.innerHTML = "<p style='color: #f97316; font-weight: 600;'>⚠️ This calculator is designed for babies up to 12 months old. For older children, please consult your pediatrician for appropriate growth charts.</p>";
+        return;
+      }
+
+      const closestAgePoint = Math.floor(ageInMonths / 2) * 2;
+      const ageData = growthData[sex].find(d => d.age === closestAgePoint);
+
+      if (!ageData) {
+        resultDiv.innerHTML = "<p style='color: #ef4444; font-weight: 600;'>Unable to calculate percentiles. Please verify all information is correct.</p>";
+        return;
+      }
+
+      const weightPercentile = getPercentile(weightInKg, ageData.w);
+      const heightPercentile = getPercentile(heightInCm, ageData.h);
+      const headPercentile = getPercentile(headInCm, ageData.hc);
+
+      const ageText = Math.round(ageInMonths) === 1 ? '1 month' : `${Math.round(ageInMonths)} months`;
+
+      resultDiv.innerHTML = `
+        <h3>Growth Results for ${ageText} old ${sex}</h3>
+        <div class="chart-container">
+          <div class="chart-item">
+            <h4>⚖️ Weight: ${weightDisplay}</h4>
+            <div class="bar-background">
+              <div class="bar-fill ${getBarClass(weightPercentile)}" style="width: ${weightPercentile}%;">
+                <span class="percentile-label">${weightPercentile}th</span>
+              </div>
             </div>
-            <div class="legend">
-                <span><span class="badge low"></span> Lower Range</span>
-                <span><span class="badge average"></span> Average Range</span>
-                <span><span class="badge high"></span> Higher Range</span>
+          </div>
+          <div class="chart-item">
+            <h4>📏 Height/Length: ${heightDisplay}</h4>
+            <div class="bar-background">
+              <div class="bar-fill ${getBarClass(heightPercentile)}" style="width: ${heightPercentile}%;">
+                <span class="percentile-label">${heightPercentile}th</span>
+              </div>
             </div>
-            <p style="font-size:12px; text-align:center; margin-top:15px;"><strong>Disclaimer:</strong> This tool is for informational purposes only. Always consult a pediatrician for medical advice regarding your child's health and growth.</p>
-        `;
+          </div>
+          <div class="chart-item">
+            <h4>🧠 Head Circumference: ${headDisplay}</h4>
+            <div class="bar-background">
+              <div class="bar-fill ${getBarClass(headPercentile)}" style="width: ${headPercentile}%;">
+                <span class="percentile-label">${headPercentile}th</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="legend">
+          <span><span class="badge low"></span> Lower Range (Below 15th)</span>
+          <span><span class="badge average"></span> Average Range (15th-85th)</span>
+          <span><span class="badge high"></span> Higher Range (Above 85th)</span>
+        </div>
+        <hr>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 1rem;"><strong>Important:</strong> These percentiles are estimates based on WHO growth standards. Remember that percentiles are comparative measurements, not health scores. What matters most is that your baby follows a consistent growth curve over time. Always discuss growth patterns and any concerns with your pediatrician, who can interpret results in the context of your baby's complete health picture.</p>
+      `;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+
       toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'light');
+          applyTheme('light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+          applyTheme('dark');
+        }
       });
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
 
       const imperialRadio = document.getElementById('imperial');
       const metricRadio = document.getElementById('metric');
@@ -465,17 +1231,22 @@
       const metricInputs = document.getElementById('metricInputs');
 
       imperialRadio.addEventListener('change', () => {
-          if (imperialRadio.checked) {
-              imperialInputs.style.display = 'block';
-              metricInputs.style.display = 'none';
-          }
+        if (imperialRadio.checked) {
+          imperialInputs.style.display = 'block';
+          metricInputs.style.display = 'none';
+        }
       });
+
       metricRadio.addEventListener('change', () => {
-          if (metricRadio.checked) {
-              imperialInputs.style.display = 'none';
-              metricInputs.style.display = 'block';
-          }
+        if (metricRadio.checked) {
+          imperialInputs.style.display = 'none';
+          metricInputs.style.display = 'block';
+        }
       });
+
+      // Set today's date as default for measurement date
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('measurementDate').value = today;
     });
   </script>
 
