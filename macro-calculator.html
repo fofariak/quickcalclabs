@@ -3,237 +3,670 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Macro Calculator - Protein, Carbs & Fat Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Free macro calculator with adjustable protein, carbs, and fat ratios. Calculate daily calorie needs, macros, and grams for weight loss, maintenance, or muscle gain.">
+  <title>Macro Calculator - Calculate Protein, Carbs & Fat | QuickCalcLabs</title>
+  <meta name="description" content="Free macro calculator to calculate your optimal protein, carbohydrate, and fat intake. Get personalized macronutrient targets for weight loss, muscle gain, or maintenance with visual charts.">
+  <meta name="keywords" content="macro calculator, macronutrient calculator, protein calculator, carbs calculator, fat calculator, IIFYM calculator, flexible dieting, macro split">
+  <link rel="canonical" href="https://quickcalclabs.com/macro-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Macro Calculator - Protein, Carbs & Fat | QuickCalcLabs">
+  <meta property="og:description" content="Calculate your optimal macronutrient split with our free macro calculator. Get personalized protein, carb, and fat targets.">
+  <meta property="og:url" content="https://quickcalclabs.com/macro-calculator.html">
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
+
   <style>
-    /* Modern Macro Calculator Styles */
-    .goal-slider-container {
-      background: var(--card-bg, #f8f9fa);
-      padding: 15px;
-      border-radius: 10px;
-      margin: 15px 0;
-    }
-    
-    .macro-sliders {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
-    }
-    
-    .slider-group {
-      background: var(--card-bg, #f8f9fa);
-      padding: 15px;
-      border-radius: 10px;
+    /* Macro calculator page specific styles */
+    .calc-wrapper {
+      max-width: 800px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
       text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    
-    .slider-group label {
-      font-weight: 600;
-      color: var(--text, #333);
-      margin-bottom: 10px;
-      display: block;
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
-    
-    .slider-value {
-      font-size: 18px;
-      font-weight: bold;
-      color: var(--accent, #4facfe);
-      margin-bottom: 8px;
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
     }
-    
-    .slider-group input[type="range"] {
-      width: 100%;
-      appearance: none;
-      height: 6px;
-      border-radius: 3px;
-      background: #ddd;
-      outline: none;
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
-    
-    .slider-group input[type="range"]::-webkit-slider-thumb {
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--accent, #4facfe);
-      cursor: pointer;
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
     }
-    
-    .toggle-group {
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Unit Toggle */
+    .unit-toggle {
       display: flex;
       gap: 10px;
       justify-content: center;
-      margin: 20px 0;
+      margin-bottom: 1.5rem;
     }
-    
-    .toggle-group button {
-      padding: 10px 20px;
-      border: 2px solid var(--accent, #4facfe);
+
+    .unit-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid var(--primary, #8b5cf6);
       background: transparent;
-      color: var(--accent, #4facfe);
-      border-radius: 25px;
+      color: var(--primary, #8b5cf6);
+      font-weight: 700;
       cursor: pointer;
-      font-weight: 600;
       transition: all 0.3s ease;
     }
-    
-    .toggle-group button.active {
-      background: var(--accent, #4facfe);
+
+    .unit-btn.active {
+      background: var(--primary, #8b5cf6);
       color: white;
     }
-    
-    .toggle-group button:hover {
+
+    .unit-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(79, 172, 254, 0.3);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
     }
-    
-    .chart-container {
-      display: flex;
-      justify-content: center;
-      margin: 30px 0;
+
+    .dark-mode .unit-btn {
+      border-color: var(--primary-light, #a78bfa);
+      color: var(--primary-light, #a78bfa);
     }
-    
-    #macroChart {
-      max-width: 400px;
-      margin: 20px auto;
-      display: none;
+
+    .dark-mode .unit-btn.active {
+      background: var(--primary-light, #a78bfa);
+      color: var(--text-strong-dark, #0f172a);
     }
-    
-    /* Card Grid Styles */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .card {
-      background: var(--card-bg, #fff);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      text-align: center;
-      border: 2px solid transparent;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      border-color: var(--accent, #4facfe);
-    }
-    
-    .card a {
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--text, #222);
-      font-size: 16px;
-    }
-    
-    .card a:hover {
-      color: var(--accent, #4facfe);
-    }
-    
-    /* FAQ Styles */
-    .faq {
-      margin-bottom: 15px;
-      border-radius: 12px;
-      background: var(--card-bg, #fff);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      overflow: hidden;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
-    }
-    
-    .faq:hover {
-      border-color: var(--accent, #4facfe);
-    }
-    
-    .faq h3 {
-      margin: 0;
-      padding: 18px 20px;
-      background: linear-gradient(135deg, var(--accent, #4facfe), #00f2fe);
-      color: #fff;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .faq h3:hover {
-      background: linear-gradient(135deg, #3d8bfe, #4facfe);
-    }
-    
-    .faq p {
-      margin: 0;
-      padding: 18px 20px;
-      display: none;
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--text, #444);
-    }
-    
-    .faq.active p {
+
+    /* Form Styling */
+    .calc-wrapper label {
       display: block;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      margin: 1rem 0 0.5rem;
+      font-size: 1rem;
     }
-    
-    /* Benefits List */
-    .benefits-list {
+
+    .dark-mode .calc-wrapper label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .calc-wrapper input, .calc-wrapper select {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+    }
+
+    .calc-wrapper input:focus, .calc-wrapper select:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input, .dark-mode .calc-wrapper select {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus, .dark-mode .calc-wrapper select:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .height-inputs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .height-inputs input {
+      flex: 1;
+    }
+
+    /* Goal Slider */
+    .goal-slider-container {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      margin: 1.5rem 0;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .goal-slider-container {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .slider-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary, #8b5cf6);
+      margin: 0.5rem 0;
+    }
+
+    .dark-mode .slider-value {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--border-light, rgba(226, 232, 240, 0.8));
+      outline: none;
+      -webkit-appearance: none;
+      margin: 1rem 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary, #8b5cf6);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary, #8b5cf6);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+    }
+
+    .dark-mode input[type="range"] {
+      background: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .dark-mode input[type="range"]::-webkit-slider-thumb {
+      background: var(--primary-light, #a78bfa);
+    }
+
+    .dark-mode input[type="range"]::-moz-range-thumb {
+      background: var(--primary-light, #a78bfa);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin-top: 0.5rem;
+    }
+
+    .dark-mode .slider-labels {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Macro Sliders */
+    .macro-sliders {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
-    
-    .benefit-item {
-      background: var(--card-bg, #f8f9fa);
-      padding: 15px;
-      border-radius: 10px;
-      border-left: 4px solid var(--accent, #4facfe);
-      transition: transform 0.3s ease;
+
+    .slider-group {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      text-align: center;
     }
-    
-    .benefit-item:hover {
-      transform: translateX(5px);
+
+    .dark-mode .slider-group {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
     }
-    
-    /* Result styling */
-    .macro-result {
-      background: linear-gradient(135deg, var(--accent, #4facfe), #00f2fe);
-      color: white;
-      padding: 25px;
-      border-radius: 15px;
-      margin: 20px 0;
+
+    .slider-group label {
+      text-align: center;
+      margin: 0 0 0.5rem;
     }
-    
-    .macro-result h2 {
+
+    .calc-wrapper button[type="button"] {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .calc-wrapper button[type="button"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button[type="button"]:active {
+      transform: translateY(-1px);
+    }
+
+    /* Results Section */
+    .result-box {
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
       margin-top: 0;
-      color: white;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
-    
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
     .macro-breakdown {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
-    
+
     .macro-item {
-      background: rgba(255,255,255,0.2);
-      padding: 15px;
-      border-radius: 10px;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
       text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: transform 0.3s ease;
+    }
+
+    .macro-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .dark-mode .macro-item {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .macro-item .macro-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .macro-item strong {
+      display: block;
+      color: var(--text-strong-light, #0f172a);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .dark-mode .macro-item strong {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1.5rem 0;
+    }
+
+    /* Chart Container */
+    .chart-container {
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    #macroChart {
+      max-width: 400px;
+      display: none;
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .macro-breakdown {
+        grid-template-columns: 1fr;
+      }
+
+      .macro-sliders {
+        grid-template-columns: 1fr;
+      }
+
+      .height-inputs {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -244,27 +677,22 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">728x90 Banner Ad</div>
-  </div>
-
-  <!-- Hero Calculator -->
   <section class="calc-wrapper">
-    <h1>🥗 Macro Calculator</h1>
-    <p class="subtitle">Calculate your perfect macronutrient split for optimal health, weight loss, or muscle gain.</p>
+    <h1>Macro Calculator - Calculate Your Macronutrients</h1>
+    <p class="subtitle">Calculate your optimal protein, carbohydrate, and fat intake for weight loss, muscle gain, or maintenance. Get personalized macronutrient targets with visual breakdown.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
 
     <!-- Unit Toggle -->
-    <div class="toggle-group">
-      <button id="unitImperial" class="active">🇺🇸 Imperial (lbs, ft/in)</button>
-      <button id="unitMetric">🌍 Metric (kg, cm)</button>
+    <div class="unit-toggle">
+      <button class="unit-btn active" data-unit="imperial">Imperial (lbs, ft/in)</button>
+      <button class="unit-btn" data-unit="metric">Metric (kg, cm)</button>
     </div>
 
     <form id="macroForm">
-      <label>🎂 Age:</label>
-      <input type="number" id="age" placeholder="25" required>
+      <label for="age">Age:</label>
+      <input type="number" id="age" placeholder="Enter your age" required>
 
-      <label>👤 Gender:</label>
+      <label for="gender">Gender:</label>
       <select id="gender">
         <option value="male">Male</option>
         <option value="female">Female</option>
@@ -272,62 +700,62 @@
 
       <!-- Imperial Fields -->
       <div id="imperialFields">
-        <label>⚖️ Weight (lbs):</label>
-        <input type="number" id="weightLbs" placeholder="150">
+        <label for="weightLbs">Weight (lbs):</label>
+        <input type="number" id="weightLbs" step="0.1" placeholder="Enter your weight">
         
-        <label>📏 Height:</label>
+        <label>Height (ft/in):</label>
         <div class="height-inputs">
-          <input type="number" id="heightFt" placeholder="5 ft" style="width:100px;">
-          <input type="number" id="heightIn" placeholder="8 in" style="width:100px;">
+          <input type="number" id="heightFt" placeholder="Feet">
+          <input type="number" id="heightIn" placeholder="Inches">
         </div>
       </div>
 
       <!-- Metric Fields -->
       <div id="metricFields" style="display:none;">
-        <label>⚖️ Weight (kg):</label>
-        <input type="number" id="weightKg" placeholder="68">
+        <label for="weightKg">Weight (kg):</label>
+        <input type="number" id="weightKg" step="0.1" placeholder="Enter your weight">
         
-        <label>📏 Height (cm):</label>
-        <input type="number" id="heightCm" placeholder="173">
+        <label for="heightCm">Height (cm):</label>
+        <input type="number" id="heightCm" step="0.1" placeholder="Enter your height">
       </div>
 
-      <label>🏃‍♂️ Activity Level:</label>
+      <label for="activity">Activity Level:</label>
       <select id="activity">
-        <option value="1.2">🛋️ Sedentary (desk job, no exercise)</option>
-        <option value="1.375">🚶 Lightly active (light exercise 1-3 days/week)</option>
-        <option value="1.55">🏃 Moderately active (moderate exercise 3-5 days/week)</option>
-        <option value="1.725">💪 Very active (hard exercise 6-7 days/week)</option>
-        <option value="1.9">🏋️ Extra active (very hard exercise, physical job)</option>
+        <option value="1.2">Sedentary (desk job, little exercise)</option>
+        <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
+        <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
+        <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+        <option value="1.9">Extra Active (very hard exercise & physical job)</option>
       </select>
 
       <!-- Goal Slider -->
       <div class="goal-slider-container">
-        <label>🎯 Goal Intensity: <span id="goalVal" class="slider-value">0% (Maintain Weight)</span></label>
+        <label>Goal Intensity: <span id="goalVal" class="slider-value">0% (Maintain Weight)</span></label>
         <input type="range" id="goalSlider" min="-30" max="30" value="0">
-        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-top: 5px;">
-          <span>📉 Weight Loss</span>
-          <span>⚖️ Maintenance</span>
-          <span>📈 Weight Gain</span>
+        <div class="slider-labels">
+          <span>Weight Loss</span>
+          <span>Maintenance</span>
+          <span>Weight Gain</span>
         </div>
       </div>
 
       <!-- Macro Sliders -->
-      <h3>🍽️ Customize Your Macro Split</h3>
+      <label style="text-align: center; font-size: 1.1rem; margin-top: 1rem;">Customize Your Macro Split</label>
       <div class="macro-sliders">
         <div class="slider-group">
-          <label>🥩 Protein</label>
+          <label>Protein</label>
           <div id="proteinVal" class="slider-value">30%</div>
           <input type="range" id="proteinSlider" min="10" max="70" value="30">
         </div>
         
         <div class="slider-group">
-          <label>🍞 Carbs</label>
+          <label>Carbs</label>
           <div id="carbVal" class="slider-value">40%</div>
           <input type="range" id="carbSlider" min="10" max="70" value="40">
         </div>
         
         <div class="slider-group">
-          <label>🥑 Fat</label>
+          <label>Fat</label>
           <div id="fatVal" class="slider-value">30%</div>
           <input type="range" id="fatSlider" min="10" max="70" value="30">
         </div>
@@ -336,148 +764,330 @@
       <button type="button" id="calcBtn">Calculate My Macros</button>
     </form>
 
-    <div id="result" class="macro-result" style="display:none;"></div>
+    <div id="result" class="result-box"></div>
     
     <div class="chart-container">
       <canvas id="macroChart" width="400" height="400"></canvas>
     </div>
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">300x250 Mid-Content Ad</div>
-  </div>
-
-  <!-- SEO Content -->
   <section class="seo-content">
-    <h2>Why Use Our Macro Calculator?</h2>
-    <p>Our advanced Macro Calculator helps you determine the perfect balance of protein, carbohydrates, and fats for your specific goals. Whether you're looking to lose weight, build muscle, or maintain your current physique, understanding your macronutrient needs is crucial for success.</p>
-
-    <h3>✨ Benefits</h3>
-    <div class="benefits-list">
-      <div class="benefit-item">
-        <strong>🎯 Precision Targeting</strong><br>
-        Get exact gram amounts for each macro based on your goals
-      </div>
-      <div class="benefit-item">
-        <strong>📊 Visual Breakdown</strong><br>
-        Interactive pie chart shows your macro distribution
-      </div>
-      <div class="benefit-item">
-        <strong>⚖️ Flexible Goals</strong><br>
-        Adjust calories from -30% to +30% for any objective
-      </div>
-      <div class="benefit-item">
-        <strong>🔄 Customizable Ratios</strong><br>
-        Fine-tune protein, carb, and fat percentages
-      </div>
-      <div class="benefit-item">
-        <strong>🌍 Dual Units</strong><br>
-        Switch between imperial and metric measurements
-      </div>
-      <div class="benefit-item">
-        <strong>📱 Mobile Friendly</strong><br>
-        Calculate macros anywhere, anytime
-      </div>
-    </div>
-
-    <h3>🔗 Explore More Tools</h3>
+    <h3>Explore More Health Calculators</h3>
     <div class="card-grid">
-      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
-      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
-      <div class="card"><a href="body-fat-calculator.html">📐 Body Fat Calculator</a></div>
-      <div class="card"><a href="water-intake-calculator.html">💧 Water Intake Calculator</a></div>
+      <div class="card"><a href="calorie-calculator.html">Calorie Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">BMI Calculator</a></div>
+      <div class="card"><a href="body-fat-calculator.html">Body Fat Calculator</a></div>
+      <div class="card"><a href="water-intake-calculator.html">Water Intake Calculator</a></div>
     </div>
 
-    <h3>📚 Related Blogs</h3>
+    <h3>Related Blog Posts</h3>
     <div class="card-grid">
-      <div class="card"><a href="blog/complete-guide-to-macro-nutrients.html">📖 Complete Guide to Macronutrients</a></div>
-      <div class="card"><a href="blog/macro-counting-for-beginners.html">🎯 Macro Counting for Beginners</a></div>
+      <div class="card"><a href="blog/complete-guide-to-macronutrients.html">Complete Guide to Macronutrients</a></div>
+      <div class="card"><a href="blog/macro-counting-for-beginners.html">Macro Counting for Beginners</a></div>
     </div>
+
+    <article>
+      <h2>What Is a Macro Calculator and Why Use One?</h2>
+      <p>A macro calculator is a specialized tool that determines your optimal intake of the three macronutrients: protein, carbohydrates, and fats. While a calorie calculator tells you how many total calories to eat, a macro calculator breaks those calories down into specific gram amounts for each macronutrient, ensuring you get the right balance for your goals.</p>
+      
+      <p>Understanding and tracking macros, often called "flexible dieting" or "If It Fits Your Macros" (IIFYM), gives you much more control over your body composition than simply counting calories. Each macronutrient plays a unique role in your body, and the right balance can dramatically improve your results whether you're trying to lose fat, build muscle, or maintain your current physique.</p>
+
+      <div class="info-box">
+        <h4>Why Macros Matter More Than Just Calories</h4>
+        <p>Two people eating the same number of calories can see vastly different results based on their macro distribution. Someone eating adequate protein will preserve muscle during weight loss, while someone eating mostly carbs and fats might lose muscle along with fat. Similarly, someone trying to build muscle needs sufficient protein, while someone eating only protein without enough carbs may struggle with workout performance and recovery.</p>
+      </div>
+
+      <h2>How to Use This Macro Calculator</h2>
+      <p>Our macro calculator is designed to be comprehensive yet user-friendly. Here's how to get accurate, personalized results:</p>
+      <ol>
+        <li><strong>Select Your Unit System:</strong> Choose between Imperial (pounds, feet, inches) or Metric (kilograms, centimeters).</li>
+        <li><strong>Enter Basic Information:</strong> Provide your age, gender, weight, and height. These factors significantly affect your metabolic rate.</li>
+        <li><strong>Choose Activity Level:</strong> Be honest about your typical weekly physical activity. Overestimating leads to eating too much; underestimating leaves you underfed.</li>
+        <li><strong>Set Your Goal:</strong> Use the goal slider to adjust from -30% (aggressive fat loss) to +30% (aggressive muscle gain). Zero represents maintenance.</li>
+        <li><strong>Customize Macro Ratios:</strong> Adjust the protein, carb, and fat percentages using the sliders. The calculator ensures they always add up to 100%.</li>
+        <li><strong>Calculate:</strong> Click the button to see your complete macro breakdown including daily calorie target and gram amounts for each macronutrient.</li>
+      </ol>
+
+      <h2>Understanding Macronutrients: The Building Blocks of Nutrition</h2>
+      <p>Macronutrients are nutrients your body needs in large amounts for energy, growth, and bodily functions. Each macronutrient has unique properties and provides different amounts of energy:</p>
+
+      <h3>Protein</h3>
+      <p>Protein provides 4 calories per gram and is essential for building and repairing tissues, producing enzymes and hormones, and maintaining immune function. It's made up of amino acids, which are the building blocks your body uses to create muscle tissue, organs, skin, hair, and nails.</p>
+      
+      <p>Protein is the most thermogenic macronutrient, meaning your body burns more calories digesting and processing protein compared to carbs or fats. It's also the most satiating, helping you feel fuller for longer periods. For these reasons, adequate protein intake is crucial during weight loss to preserve muscle mass and control hunger.</p>
+
+      <h3>Carbohydrates</h3>
+      <p>Carbohydrates also provide 4 calories per gram and serve as your body's preferred source of quick energy. They're broken down into glucose, which fuels your brain, muscles, and all cellular processes. Carbs are stored in your muscles and liver as glycogen, which provides energy during exercise.</p>
+      
+      <p>Not all carbohydrates are created equal. Complex carbohydrates from whole grains, vegetables, and legumes provide sustained energy and important nutrients. Simple carbohydrates from refined sugars provide quick energy but little nutritional value. The quality of your carb sources matters significantly for health and performance.</p>
+
+      <h3>Fats</h3>
+      <p>Fats provide 9 calories per gram, making them the most calorie-dense macronutrient. They're essential for hormone production, vitamin absorption, brain function, and cell membrane structure. Certain fats, called essential fatty acids, must be obtained from your diet because your body cannot produce them.</p>
+      
+      <p>Like carbs, not all fats are equal. Unsaturated fats from sources like olive oil, avocados, nuts, and fatty fish are considered heart-healthy. Saturated fats should be consumed in moderation, while trans fats should be avoided entirely. Getting adequate healthy fats is crucial for hormone balance, especially important during weight loss.</p>
+
+      <h2>Optimal Macro Ratios for Different Goals</h2>
+      <p>The ideal macro distribution varies based on your specific goals, activity level, and individual response. Here are evidence-based recommendations:</p>
+
+      <h3>For Fat Loss</h3>
+      <p>When cutting body fat, prioritize protein to preserve muscle mass while in a calorie deficit. A typical fat loss macro split might be:</p>
+      <ul>
+        <li><strong>Protein:</strong> 35-40% of calories (or 0.8-1.2g per pound of body weight)</li>
+        <li><strong>Carbohydrates:</strong> 30-40% of calories</li>
+        <li><strong>Fats:</strong> 25-30% of calories (minimum 0.3g per pound of body weight for hormone health)</li>
+      </ul>
+      <p>Higher protein helps maintain muscle, increases satiety, and has a higher thermic effect. Moderate carbs provide energy for workouts while keeping insulin relatively controlled. Adequate fat ensures hormone production remains healthy.</p>
+
+      <h3>For Muscle Gain</h3>
+      <p>Building muscle requires adequate protein and sufficient overall calories. A typical bulking macro split might be:</p>
+      <ul>
+        <li><strong>Protein:</strong> 25-35% of calories (or 0.7-1.0g per pound of body weight)</li>
+        <li><strong>Carbohydrates:</strong> 40-50% of calories</li>
+        <li><strong>Fats:</strong> 20-30% of calories</li>
+      </ul>
+      <p>Adequate protein supports muscle protein synthesis. Higher carbs fuel intense training and optimize recovery. The calorie surplus provides the energy needed to build new tissue without excessive fat gain.</p>
+
+      <h3>For Maintenance and Performance</h3>
+      <p>For maintaining weight while optimizing performance:</p>
+      <ul>
+        <li><strong>Protein:</strong> 25-30% of calories</li>
+        <li><strong>Carbohydrates:</strong> 40-50% of calories</li>
+        <li><strong>Fats:</strong> 25-30% of calories</li>
+      </ul>
+      <p>This balanced approach ensures adequate protein for muscle maintenance, sufficient carbs for energy and performance, and healthy fats for overall function.</p>
+
+      <h3>For Endurance Athletes</h3>
+      <p>Athletes doing prolonged endurance exercise need more carbohydrates:</p>
+      <ul>
+        <li><strong>Protein:</strong> 20-25% of calories</li>
+        <li><strong>Carbohydrates:</strong> 50-60% of calories</li>
+        <li><strong>Fats:</strong> 20-25% of calories</li>
+      </ul>
+      <p>Higher carbohydrate intake supports glycogen stores needed for endurance performance. Protein needs are moderate since endurance training is less demanding on muscle protein turnover than strength training.</p>
+
+      <h2>How Much Protein Do You Really Need?</h2>
+      <p>Protein requirements are one of the most debated topics in nutrition. Research provides clear guidelines based on goals:</p>
+
+      <h3>Minimum Requirements</h3>
+      <p>The RDA (Recommended Dietary Allowance) is 0.36 grams per pound of body weight or 0.8 grams per kilogram. This amount prevents deficiency but is far below optimal for anyone exercising regularly or trying to improve body composition.</p>
+
+      <h3>Optimal for Most Active People</h3>
+      <p>Most research suggests 0.7-1.0 grams per pound of body weight (1.6-2.2g per kg) is optimal for building and maintaining muscle while supporting recovery. This applies to most people engaging in regular resistance training.</p>
+
+      <h3>During Weight Loss</h3>
+      <p>When in a calorie deficit, protein needs increase to 1.0-1.2 grams per pound of body weight (2.2-2.7g per kg) to maximize muscle retention. The combination of calorie restriction and higher protein helps preserve metabolically active muscle tissue.</p>
+
+      <h3>For Older Adults</h3>
+      <p>Adults over 65 may benefit from higher protein intake (1.0-1.2g per pound) to combat age-related muscle loss (sarcopenia). Combining higher protein with resistance training is particularly effective for maintaining strength and function with aging.</p>
+
+      <h2>Carbohydrate Timing and Quality</h2>
+      <p>When and what type of carbohydrates you consume can impact your results:</p>
+
+      <h3>Pre-Workout Carbohydrates</h3>
+      <p>Consuming carbs 1-3 hours before training ensures adequate glycogen stores for performance. This is especially important for high-intensity or long-duration exercise. Complex carbs provide sustained energy, while simple carbs closer to training offer quick fuel.</p>
+
+      <h3>Post-Workout Carbohydrates</h3>
+      <p>After intense exercise, consuming carbs helps replenish muscle glycogen and promotes recovery. The "anabolic window" is less critical than once thought, but post-workout nutrition still matters for overall daily recovery, especially if training frequently.</p>
+
+      <h3>Carbohydrate Quality</h3>
+      <p>Focus on nutrient-dense carbohydrate sources including whole grains, fruits, vegetables, and legumes. These provide fiber, vitamins, minerals, and phytonutrients alongside energy. Limit refined carbohydrates and added sugars, which provide calories with minimal nutritional benefit.</p>
+
+      <h2>The Importance of Dietary Fat</h2>
+      <p>Fat often gets vilified, but it's essential for health and performance:</p>
+
+      <h3>Hormone Production</h3>
+      <p>Fat, especially saturated and monounsaturated fats, serves as the building block for hormones including testosterone, estrogen, and cortisol. Very low-fat diets can impair hormone production, potentially affecting muscle building, fat loss, and overall health.</p>
+
+      <h3>Vitamin Absorption</h3>
+      <p>Vitamins A, D, E, and K are fat-soluble, meaning they require dietary fat for absorption. Without adequate fat intake, you may develop deficiencies even if consuming enough of these vitamins.</p>
+
+      <h3>Brain Health</h3>
+      <p>Your brain is approximately 60% fat, and omega-3 fatty acids play crucial roles in cognitive function, mood regulation, and neurological health. Adequate healthy fat intake supports mental clarity and emotional wellbeing.</p>
+
+      <h3>Minimum Fat Requirements</h3>
+      <p>Never let fat drop below 15-20% of total calories or 0.3 grams per pound of body weight. Going lower can lead to hormonal issues, decreased performance, and health problems. Some people perform better with fats comprising 25-35% of calories.</p>
+
+      <h2>Flexible Dieting: The IIFYM Approach</h2>
+      <p>IIFYM (If It Fits Your Macros) is a flexible approach to nutrition that focuses on hitting macro targets rather than restricting specific foods. The philosophy is that no foods are inherently "good" or "bad" - what matters is whether they fit within your daily macro goals.</p>
+
+      <h3>Benefits of Flexible Dieting</h3>
+      <ul>
+        <li><strong>Sustainability:</strong> Allowing foods you enjoy makes the diet easier to maintain long-term</li>
+        <li><strong>Reduced Stress:</strong> No foods are forbidden, reducing feelings of deprivation and potential for binge eating</li>
+        <li><strong>Social Flexibility:</strong> You can eat at restaurants and social events while still hitting your goals</li>
+        <li><strong>Education:</strong> Tracking macros teaches you about food composition and portion sizes</li>
+      </ul>
+
+      <h3>The 80/20 Rule</h3>
+      <p>While flexibility is valuable, aim for about 80% of your diet to come from whole, minimally processed foods. Fill the remaining 20% with foods you enjoy, even if they're less nutrient-dense. This balance ensures adequate micronutrient intake while maintaining dietary satisfaction.</p>
+
+      <h2>Tracking Your Macros Effectively</h2>
+      <p>Knowing your macro targets is only useful if you can track them accurately:</p>
+
+      <h3>Use a Food Tracking App</h3>
+      <p>Apps like MyFitnessPal, Cronometer, or MacroFactor make tracking easy by providing food databases and barcode scanners. Invest time in setting up your profile correctly and learning to use the app efficiently.</p>
+
+      <h3>Invest in a Food Scale</h3>
+      <p>A digital food scale is essential for accuracy. Eyeballing portions consistently underestimates or overestimates intake. Weighing food takes seconds and dramatically improves tracking accuracy.</p>
+
+      <h3>Prepare Foods Simply</h3>
+      <p>When starting out, keep meal preparation simple. Plain proteins, single-ingredient carbs, and identifiable fats are easier to track than complex recipes with multiple ingredients.</p>
+
+      <h3>Create Favorite Meals</h3>
+      <p>Once you track a meal or recipe, save it as a favorite. This makes future tracking much faster. Build a rotation of go-to meals that fit your macros and that you enjoy eating.</p>
+
+      <h3>Track Consistently</h3>
+      <p>Track everything, including cooking oils, beverages, condiments, and weekend meals. Small untracked items add up quickly. Be honest and comprehensive in your tracking for best results.</p>
+
+      <h2>Adjusting Your Macros Over Time</h2>
+      <p>Your macro needs change as your body composition evolves:</p>
+
+      <h3>During Weight Loss</h3>
+      <p>As you lose weight, your metabolic rate decreases because there's less body mass to support. Recalculate your macros every 10-15 pounds of weight loss to ensure your calorie deficit remains appropriate. If weight loss stalls for 2-3 weeks despite accurate tracking, reduce calories by 100-200 or increase activity slightly.</p>
+
+      <h3>During Muscle Gain</h3>
+      <p>As you gain weight, periodically reassess to ensure the rate is appropriate (0.5-1 lb per week for most people). If gaining too quickly, you're likely adding excess fat. If not gaining at all, increase calories by 100-200 per day.</p>
+
+      <h3>Metabolic Adaptation</h3>
+      <p>Extended dieting can lead to metabolic adaptation where your body becomes more efficient, requiring fewer calories. If this happens, consider taking a diet break at maintenance calories for 2-4 weeks before resuming your deficit. This can help restore metabolic rate and hormone levels.</p>
+
+      <h2>Common Macro Tracking Mistakes</h2>
+      <p>Avoid these frequent errors that undermine results:</p>
+
+      <ul>
+        <li><strong>Inconsistent Tracking:</strong> Tracking perfectly on weekdays but not weekends can negate your weekly deficit or surplus</li>
+        <li><strong>Forgetting Cooking Oils:</strong> A tablespoon of oil contains 120 calories and 14g of fat - easy to miss but significant</li>
+        <li><strong>Misunderstanding Serving Sizes:</strong> Always read labels carefully and measure portions accurately</li>
+        <li><strong>Not Adjusting for Weight Changes:</strong> Your needs change as your weight changes - recalculate regularly</li>
+        <li><strong>Ignoring Liquid Calories:</strong> Beverages can contain substantial calories and macros</li>
+        <li><strong>Overestimating Activity Level:</strong> Be honest about your true activity level for accurate starting macros</li>
+        <li><strong>Expecting Perfection:</strong> Aim to hit within 5-10g of your targets - obsessing over exact numbers creates unnecessary stress</li>
+      </ul>
+
+      <h2>Macro Cycling and Advanced Strategies</h2>
+      <p>Once comfortable with basic macro tracking, you might explore more advanced approaches:</p>
+
+      <h3>Carb Cycling</h3>
+      <p>Varying carbohydrate intake day-to-day, with higher carbs on training days and lower carbs on rest days. This approach may help with adherence while optimizing performance and recovery. Keep protein consistent and adjust fats inversely to carbs.</p>
+
+      <h3>Refeed Days</h3>
+      <p>During extended dieting, periodic high-carb days at or above maintenance calories can help restore leptin levels, replenish glycogen, and provide a psychological break. Plan these strategically, perhaps weekly or bi-weekly during aggressive cuts.</p>
+
+      <h3>Reverse Dieting</h3>
+      <p>After a diet phase, gradually increase calories week by week rather than immediately jumping to maintenance. This allows metabolic rate to recover while minimizing fat regain. Increase by 50-100 calories weekly while monitoring weight and performance.</p>
+
+      <div class="info-box">
+        <h4>Advanced Strategies Are Optional</h4>
+        <p>These advanced techniques provide small optimizations. Most people see excellent results with consistent, simple macro tracking. Don't overcomplicate things until you've mastered the basics and are getting consistent results.</p>
+      </div>
+
+      <h2>Special Considerations</h2>
+
+      <h3>For Women</h3>
+      <p>Women may need to adjust macro ratios throughout their menstrual cycle. During the luteal phase (after ovulation), some women feel better with slightly higher carbs and calories. Never restrict fats below recommended minimums, as this can disrupt hormone production and menstrual cycles.</p>
+
+      <h3>For Vegetarians and Vegans</h3>
+      <p>Plant-based eaters need to be strategic about protein sources to meet targets. Combine complementary proteins (like rice and beans) and consider protein supplements if needed. Focus on high-protein plant foods like tofu, tempeh, seitan, legumes, quinoa, and nutritional yeast.</p>
+
+      <h3>For Older Adults</h3>
+      <p>Adults over 50 should prioritize protein intake to combat age-related muscle loss. Higher protein (1.0-1.2g per pound) combined with resistance training is particularly effective for maintaining strength, bone density, and metabolic health as you age.</p>
+
+      <h3>Medical Conditions</h3>
+      <p>Individuals with diabetes, kidney disease, or other medical conditions should consult healthcare providers before significantly changing macronutrient intake. Certain conditions require modified macro ratios for health and safety.</p>
+    </article>
   </section>
 
-  <!-- FAQ Section -->
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions</h2>
     
-    <div class="faq">
-      <h3>What are macronutrients?</h3>
-      <p>Macronutrients (macros) are the three main nutrients your body needs in large amounts: protein (4 calories/gram), carbohydrates (4 calories/gram), and fats (9 calories/gram). Each plays a crucial role in your body's function and energy production.</p>
-    </div>
-    
-    <div class="faq">
-      <h3>How accurate is this macro calculator?</h3>
-      <p>Our calculator uses the scientifically-backed Mifflin-St Jeor equation to estimate your metabolic rate, then applies activity multipliers and goal adjustments. While highly accurate for most people, individual metabolism can vary by ±10-15%.</p>
-    </div>
-    
-    <div class="faq">
-      <h3>What's the best macro ratio for weight loss?</h3>
-      <p>For weight loss, a higher protein ratio (30-40%) helps preserve muscle mass and increase satiety. A common effective split is 35% protein, 35% carbs, and 30% fat, but individual needs may vary based on activity level and preferences.</p>
-    </div>
-    
-    <div class="faq">
-      <h3>Should I track macros or just calories?</h3>
-      <p>While calories determine weight change, tracking macros ensures better body composition, energy levels, and health outcomes. Macros help you eat adequate protein for muscle maintenance and choose nutrient-dense foods.</p>
-    </div>
-    
-    <div class="faq">
-      <h3>How often should I recalculate my macros?</h3>
-      <p>Recalculate your macros every 10-15 pounds of weight change, when your activity level significantly changes, or if you plateau for 2-3 weeks. Your metabolic needs change as your body composition evolves.</p>
-    </div>
-    
-    <div class="faq">
-      <h3>Can I use this for muscle building?</h3>
-      <p>Absolutely! 💪 Set the goal slider to +10% to +20% for muscle building, ensure protein is 25-35% of total calories, and maintain adequate carbs (35-45%) to fuel your workouts and recovery.</p>
-    </div>
+    <details>
+      <summary>What are macronutrients and why should I track them?</summary>
+      <p>Macronutrients are the three main nutrients your body needs in large amounts: protein (4 calories per gram), carbohydrates (4 calories per gram), and fats (9 calories per gram). Tracking macros ensures you get the right balance for your goals. While total calories determine weight change, macro distribution affects body composition, energy levels, hunger, and performance.</p>
+    </details>
+
+    <details>
+      <summary>How accurate is this macro calculator?</summary>
+      <p>Our calculator uses the scientifically-validated Mifflin-St Jeor equation to estimate your metabolic rate, then applies activity multipliers and goal adjustments. It's highly accurate for most people, but individual metabolism can vary by 10-15%. Use these numbers as a starting point and adjust based on your real-world results after 2-4 weeks of consistent tracking.</p>
+    </details>
+
+    <details>
+      <summary>What's the best macro ratio for weight loss?</summary>
+      <p>For fat loss, higher protein (35-40% of calories or 1.0-1.2g per pound of body weight) helps preserve muscle and control hunger. A common effective split is 35-40% protein, 30-40% carbs, and 25-30% fats. Individual needs vary based on activity level, preferences, and how your body responds. The key is maintaining a calorie deficit while meeting minimum protein and fat requirements.</p>
+    </details>
+
+    <details>
+      <summary>Should I track macros or just calories?</summary>
+      <p>While calories determine whether you lose, maintain, or gain weight, tracking macros ensures better results. Adequate protein preserves muscle during weight loss and supports muscle growth during bulking. Proper macro balance optimizes energy levels, workout performance, recovery, and overall health. Start with calories if tracking seems overwhelming, then progress to macros as you become comfortable.</p>
+    </details>
+
+    <details>
+      <summary>How often should I recalculate my macros?</summary>
+      <p>Recalculate your macros every 10-15 pounds of weight change, when your activity level significantly changes, or if you plateau for 2-3 weeks despite accurate tracking. As your body weight changes, your calorie and macro needs change proportionally. Regular recalculation ensures your targets remain appropriate for your current situation.</p>
+    </details>
+
+    <details>
+      <summary>Can I build muscle while losing fat?</summary>
+      <p>Simultaneous muscle gain and fat loss (body recomposition) is possible but challenging, especially for experienced lifters. It works best for beginners, those returning after a break, or people with higher body fat. Set a modest calorie deficit (10-15%), prioritize protein (1.0-1.2g per pound), follow progressive resistance training, and be patient. Most people see better results by focusing on one goal at a time.</p>
+    </details>
+
+    <details>
+      <summary>Do I need to hit my macros exactly every day?</summary>
+      <p>Aim to get within 5-10 grams of each macro target. Perfect precision isn't necessary and creates unnecessary stress. What matters most is weekly consistency. If you're significantly over or under one day, don't stress - just get back on track the next day. Think of macro targets as ranges rather than exact numbers you must hit perfectly.</p>
+    </details>
+
+    <details>
+      <summary>Is tracking macros suitable for everyone?</summary>
+      <p>Macro tracking is a tool that works well for many people, but it's not required for everyone. Some people thrive with the structure and data, while others find it stressful or conducive to unhealthy obsession. If tracking negatively affects your relationship with food or mental health, consider intuitive eating or simpler approaches like portion control. Consult a healthcare provider if you have a history of disordered eating.</p>
+    </details>
   </section>
 
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">Responsive Footer Ad</div>
-  </div>
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
-  <!-- Floating CTA -->
-  <a href="index.html" class="floating-cta">🧮 See All Calculators</a>
-
-  <!-- Footer -->
   <footer>
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This macro calculator is provided for informational purposes only and is not intended as medical or nutritional advice. Individual macro needs vary based on many factors. For personalized nutrition guidance, especially if you have medical conditions or specific health concerns, consult with a registered dietitian or healthcare provider.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
-  <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What are macronutrients?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Macronutrients (macros) are the three main nutrients your body needs in large amounts: protein (4 calories/gram), carbohydrates (4 calories/gram), and fats (9 calories/gram). Each plays a crucial role in your body's function and energy production."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How accurate is this macro calculator?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Our calculator uses the scientifically-backed Mifflin-St Jeor equation to estimate your metabolic rate, then applies activity multipliers and goal adjustments. While highly accurate for most people, individual metabolism can vary by ±10-15%."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What's the best macro ratio for weight loss?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "For weight loss, a higher protein ratio (30-40%) helps preserve muscle mass and increase satiety. A common effective split is 35% protein, 35% carbs, and 30% fat, but individual needs may vary based on activity level and preferences."
-        }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What are macronutrients and why should I track them?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Macronutrients are the three main nutrients your body needs in large amounts: protein, carbohydrates, and fats. Tracking macros ensures you get the right balance for your goals and affects body composition, energy levels, and performance."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "How accurate is this macro calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our calculator uses the scientifically-validated Mifflin-St Jeor equation. It's highly accurate for most people, but individual metabolism can vary by 10-15%. Use these numbers as a starting point and adjust based on results."
+      }
+    },{
+      "@type": "Question",
+      "name": "What's the best macro ratio for weight loss?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For fat loss, higher protein (35-40%) helps preserve muscle and control hunger. A common effective split is 35-40% protein, 30-40% carbs, and 25-30% fats."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I track macros or just calories?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While calories determine weight change, tracking macros ensures better results by optimizing muscle retention, energy levels, performance, and overall health."
+      }
+    }]
   }
   </script>
 
@@ -486,21 +1096,23 @@
     let currentUnit = 'imperial';
     let chartInstance = null;
 
-    // Unit toggle
-    el('unitImperial').addEventListener('click', () => {
-      currentUnit = 'imperial';
-      el('imperialFields').style.display = 'block';
-      el('metricFields').style.display = 'none';
-      el('unitImperial').classList.add('active');
-      el('unitMetric').classList.remove('active');
-    });
+    const unitBtns = document.querySelectorAll('.unit-btn');
     
-    el('unitMetric').addEventListener('click', () => {
-      currentUnit = 'metric';
-      el('imperialFields').style.display = 'none';
-      el('metricFields').style.display = 'block';
-      el('unitMetric').classList.add('active');
-      el('unitImperial').classList.remove('active');
+    // Unit toggle
+    unitBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        unitBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentUnit = btn.dataset.unit;
+        
+        if (currentUnit === 'metric') {
+          el('imperialFields').style.display = 'none';
+          el('metricFields').style.display = 'block';
+        } else {
+          el('imperialFields').style.display = 'block';
+          el('metricFields').style.display = 'none';
+        }
+      });
     });
 
     // Goal slider with descriptive text
@@ -557,8 +1169,6 @@
       el('proteinVal').textContent = protein + '%';
       el('carbVal').textContent = carbs + '%';
       el('fatVal').textContent = fat + '%';
-
-      updateChart(protein, carbs, fat);
     }
 
     ['protein', 'carb', 'fat'].forEach(name => {
@@ -579,16 +1189,17 @@
       chartInstance = new Chart(ctx, {
         type: 'doughnut',
         data: {
-          labels: ['🥩 Protein', '🍞 Carbs', '🥑 Fat'],
+          labels: ['Protein', 'Carbs', 'Fat'],
           datasets: [{
             data: [protein, carbs, fat],
-            backgroundColor: ['#ff6b81', '#4facfe', '#00f2fe'],
+            backgroundColor: ['#8b5cf6', '#3b82f6', '#ec4899'],
             borderWidth: 3,
             borderColor: '#fff'
           }]
         },
         options: {
           responsive: true,
+          maintainAspectRatio: true,
           plugins: {
             tooltip: {
               callbacks: {
@@ -636,7 +1247,17 @@
           return;
         }
         
-        weightKg = lbs * 0.45359237;
+        if (age < 10 || age > 120) {
+          alert("Please enter a valid age between 10 and 120");
+          return;
+        }
+
+        if (lbs <= 0 || lbs > 1000) {
+          alert("Please enter a valid weight");
+          return;
+        }
+        
+        weightKg = lbs * 0.453592;
         heightCm = (ft * 30.48) + (inch * 2.54);
       } else {
         const kg = parseFloat(el('weightKg').value);
@@ -644,6 +1265,21 @@
         
         if (!kg || !cm || !age) {
           alert("Please fill all fields correctly");
+          return;
+        }
+
+        if (age < 10 || age > 120) {
+          alert("Please enter a valid age between 10 and 120");
+          return;
+        }
+
+        if (kg <= 0 || kg > 500) {
+          alert("Please enter a valid weight");
+          return;
+        }
+
+        if (cm <= 0 || cm > 300) {
+          alert("Please enter a valid height");
           return;
         }
         
@@ -666,36 +1302,49 @@
       const proteinGrams = Math.round(goalCals * (proteinPct / 100) / 4);
       const carbGrams = Math.round(goalCals * (carbPct / 100) / 4);
       const fatGrams = Math.round(goalCals * (fatPct / 100) / 9);
+      const proteinCals = proteinGrams * 4;
+      const carbCals = carbGrams * 4;
+      const fatCals = fatGrams * 9;
 
       const resultHTML = `
-        <h2>🎯 Your Personalized Macro Plan</h2>
-        <p><strong>BMR:</strong> ${Math.round(bmr)} calories/day</p>
-        <p><strong>TDEE:</strong> ${Math.round(tdee)} calories/day</p>
-        <p><strong>Target Calories:</strong> ${Math.round(goalCals)} calories/day</p>
+        <h3>Your Personalized Macro Plan</h3>
+        <p style="color: var(--text-strong-light, #0f172a); font-size: 1.05rem; margin-bottom: 0.5rem;"><strong>BMR (Basal Metabolic Rate):</strong> ${Math.round(bmr).toLocaleString()} calories/day</p>
+        <p style="color: var(--text-strong-light, #0f172a); font-size: 1.05rem; margin-bottom: 0.5rem;"><strong>TDEE (Total Daily Energy Expenditure):</strong> ${Math.round(tdee).toLocaleString()} calories/day</p>
+        <p style="color: var(--text-strong-light, #0f172a); font-size: 1.2rem; font-weight: 700; margin: 1rem 0;"><strong>Target Daily Calories:</strong> ${Math.round(goalCals).toLocaleString()} calories</p>
         
+        <hr>
+        <h4 style="text-align: center; color: var(--text-strong-light, #0f172a); margin: 1rem 0;">Your Daily Macronutrient Targets</h4>
         <div class="macro-breakdown">
           <div class="macro-item">
-            <div style="font-size: 24px;">🥩</div>
-            <strong>Protein</strong><br>
-            ${proteinPct}% • ${proteinGrams}g
+            <div class="macro-icon">🥩</div>
+            <strong>Protein</strong>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary, #8b5cf6); margin: 0.5rem 0;">${proteinGrams}g</div>
+            <div style="color: var(--text-weak-light, #64748b); font-size: 0.9rem;">${proteinPct}% • ${proteinCals} cal</div>
           </div>
           <div class="macro-item">
-            <div style="font-size: 24px;">🍞</div>
-            <strong>Carbs</strong><br>
-            ${carbPct}% • ${carbGrams}g
+            <div class="macro-icon">🍞</div>
+            <strong>Carbs</strong>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--secondary, #3b82f6); margin: 0.5rem 0;">${carbGrams}g</div>
+            <div style="color: var(--text-weak-light, #64748b); font-size: 0.9rem;">${carbPct}% • ${carbCals} cal</div>
           </div>
           <div class="macro-item">
-            <div style="font-size: 24px;">🥑</div>
-            <strong>Fat</strong><br>
-            ${fatPct}% • ${fatGrams}g
+            <div class="macro-icon">🥑</div>
+            <strong>Fat</strong>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-pink, #ec4899); margin: 0.5rem 0;">${fatGrams}g</div>
+            <div style="color: var(--text-weak-light, #64748b); font-size: 0.9rem;">${fatPct}% • ${fatCals} cal</div>
           </div>
         </div>
       `;
       
       el('result').innerHTML = resultHTML;
-      el('result').style.display = 'block';
+      el('result').classList.add('show');
 
       updateChart(proteinPct, carbPct, fatPct, goalCals);
+
+      // Scroll to results
+      setTimeout(() => {
+        el('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     });
 
     // Initialize sliders
@@ -704,22 +1353,32 @@
     // Dark mode toggle
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-      });
-      
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+      const body = document.body;
 
-      // FAQ accordion
-      document.querySelectorAll(".faq h3").forEach(faqHeader => {
-        faqHeader.addEventListener("click", () => {
-          faqHeader.parentElement.classList.toggle("active");
-        });
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+
+      toggle.addEventListener("click", () => {
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'light');
+          applyTheme('light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+          applyTheme('dark');
+        }
       });
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
     });
   </script>
+
 </body>
 </html>
