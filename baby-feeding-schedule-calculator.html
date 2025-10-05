@@ -3,111 +3,603 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baby Feeding Schedule & Amount Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Get a sample feeding schedule for your baby based on age and weight. Learn about hunger cues, responsive feeding, and how much breastmilk or formula your baby needs.">
+  <title>Baby Feeding Schedule Calculator - Free Newborn & Infant Feeding Guide | QuickCalcLabs</title>
+  <meta name="description" content="Free baby feeding calculator to create personalized feeding schedules based on age and weight. Get feeding amounts, frequency, and hunger cues for breastfed or formula-fed babies.">
+  <meta name="keywords" content="baby feeding schedule, newborn feeding calculator, infant feeding guide, how much formula, breastfeeding schedule, baby feeding chart">
+  <link rel="canonical" href="https://quickcalclabs.com/baby-feeding-schedule-calculator.html">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
-     crossorigin="anonymous"></script>
   <style>
-    :root {
-      --accent-blue: #3498db;
-      --accent-green: #2ecc71;
-      --accent-purple: #9b59b6;
-      --card-bg: #ffffff;
-      --text-color: #333;
-      --border-color: #bdc3c7;
-      --body-bg: #ecf0f1;
+    /* Baby feeding calculator specific styles */
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    body.dark-mode {
-      --card-bg: #2d3748;
-      --text-color: #ecf0f1;
-      --border-color: #4a5568;
-      --body-bg: #1a202c;
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
-    body {
-        background-color: var(--body-bg);
-        color: var(--text-color);
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
     }
-    .header { background: var(--card-bg); }
-    .calc-wrapper, .seo-content, .faq-section { background: var(--card-bg); }
-    .calc-wrapper { max-width: 600px; }
-    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .calc-wrapper h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .input-wrapper {
+      text-align: left;
+    }
+
+    .input-wrapper label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .input-wrapper label {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
     .age-input-group {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 10px;
+      gap: 0.5rem;
     }
 
-    input, select {
-        background: var(--card-bg);
-        color: var(--text-color);
-        border: 1px solid var(--border-color);
+    .calc-wrapper input[type="number"],
+    .calc-wrapper select {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
     }
 
-    select {
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 16px;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px top 50%;
-      background-size: .65em auto;
+    .calc-wrapper input[type="number"]:focus,
+    .calc-wrapper select:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
     }
-    body.dark-mode select {
-      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+
+    .dark-mode .calc-wrapper input[type="number"],
+    .dark-mode .calc-wrapper select {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .dark-mode .calc-wrapper input[type="number"]:focus,
+    .dark-mode .calc-wrapper select:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
     }
 
     .segmented-control {
       display: flex;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md, 12px);
       overflow: hidden;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      margin: 0.6rem 0 1.2rem;
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    .segmented-control input[type="radio"] { display: none; }
+
+    .dark-mode .segmented-control {
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .segmented-control input[type="radio"] {
+      display: none;
+    }
+
     .segmented-control label {
       flex: 1;
       text-align: center;
-      padding: 10px;
+      padding: 0.9rem;
       cursor: pointer;
-      background: var(--card-bg);
-      color: var(--text-color);
-      transition: background 0.3s;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-medium-light, #334155);
+      transition: all 0.15s ease;
+      font-weight: 600;
+      border-right: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
+
+    .segmented-control label:last-child {
+      border-right: none;
+    }
+
+    .dark-mode .segmented-control label {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      color: var(--text-medium-dark, #cbd5e1);
+      border-right-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
     .segmented-control input[type="radio"]:checked + label {
-      background: var(--accent-blue);
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
       color: #fff;
+    }
+
+    .calc-wrapper button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .calc-wrapper button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button:active {
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      font-weight: 600;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      color: var(--text-strong-light, #0f172a);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      color: var(--text-strong-dark, #f1f5f9);
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.4rem;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .schedule-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+    }
+
+    .dark-mode .schedule-summary {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .summary-item h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
       font-weight: 600;
     }
-    .meta-info { font-size: 0.9em; color: #7f8c8d; margin-bottom: 20px; text-align: center; }
-    body.dark-mode .meta-info { color: #95a5a6; }
-    .disclaimer-box {
-        padding: 15px; margin: 20px 0; border-left: 5px solid #f1c40f;
-        background-color: #fef9e7; color: #c0392b; border-radius: 4px;
+
+    .dark-mode .summary-item h4 {
+      color: var(--text-weak-dark, #94a3b8);
     }
-    body.dark-mode .disclaimer-box { background-color: #5a4b1b; color: #f9e79f; }
-    /* Result styles */
-    .schedule-container {
-        margin-top: 25px; padding: 20px; border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color);
+
+    .summary-item p {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary, #8b5cf6);
     }
-    .schedule-summary {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px; text-align: center; margin-bottom: 20px;
+
+    .dark-mode .summary-item p {
+      color: var(--primary-light, #a78bfa);
     }
-    .summary-item h4 { margin: 0 0 5px 0; font-size: 14px; color: var(--accent-blue); }
-    .summary-item p { margin: 0; font-size: 18px; font-weight: bold; }
-    .timeline { list-style: none; padding-left: 0; margin: 0; position: relative; border-left: 2px solid var(--accent-blue); margin-left: 20px; }
-    .timeline li { padding: 10px 20px; position: relative; }
-    .timeline li::before { content: '🍼'; position: absolute; left: -15px; top: 50%; transform: translateY(-50%); font-size: 20px; }
-    .timeline span { font-weight: 600; }
+
+    .timeline {
+      list-style: none;
+      padding-left: 0;
+      margin: 1.5rem 0;
+      position: relative;
+      border-left: 3px solid var(--primary, #8b5cf6);
+      margin-left: 1.5rem;
+    }
+
+    .timeline li {
+      padding: 0.8rem 0 0.8rem 2rem;
+      position: relative;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .timeline li {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .timeline li::before {
+      content: '🍼';
+      position: absolute;
+      left: -1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dark-mode .timeline li::before {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+    }
+
+    .timeline span {
+      font-weight: 700;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .timeline span {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1.5rem 0;
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .warning-box {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(251, 146, 60, 0.1));
+      border-left: 4px solid #eab308;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+    }
+
+    .dark-mode .warning-box {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(251, 146, 60, 0.15));
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .input-group {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -121,99 +613,59 @@
     </nav>
   </header>
 
-  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
-
   <section class="calc-wrapper">
-    <h1>🍼 Baby Feeding Schedule & Amount Calculator</h1>
-    <p class="subtitle">Get a sample feeding schedule and daily milk intake estimate for your little one.</p>
-    <p class="meta-info">Last Updated: September 26, 2025</p>
+    <h1>Baby Feeding Schedule Calculator</h1>
+    <p class="subtitle">Create a personalized feeding schedule for your baby based on age and weight. Get feeding amounts, frequency guidelines, and expert tips.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
 
+    <h2>Enter Your Baby's Information</h2>
+    
     <div class="input-group">
-      <div>
-        <label for="age">👶 Baby's Age:</label>
+      <div class="input-wrapper">
+        <label for="age">Baby's Age</label>
         <div class="age-input-group">
-            <input type="number" id="age" placeholder="e.g., 3">
-            <select id="ageUnit">
-                <option value="months">Months</option>
-                <option value="weeks">Weeks</option>
-                <option value="days">Days</option>
-            </select>
+          <input type="number" id="age" placeholder="e.g., 3" aria-label="Baby's age">
+          <select id="ageUnit" aria-label="Age unit">
+            <option value="months">Months</option>
+            <option value="weeks">Weeks</option>
+            <option value="days">Days</option>
+          </select>
         </div>
       </div>
-      <div>
-        <label for="weight" id="weightLabel">⚖️ Baby's Weight (lbs):</label>
-        <input type="number" id="weight" placeholder="e.g., 12.5">
+      <div class="input-wrapper">
+        <label for="weight" id="weightLabel">Baby's Weight (lbs)</label>
+        <input type="number" id="weight" placeholder="e.g., 12.5" step="0.1" aria-label="Baby's weight">
       </div>
     </div>
 
-    <label>🔄 Unit System:</label>
+    <label>Unit System</label>
     <div class="segmented-control">
-        <input type="radio" id="imperial" name="unit" value="imperial" checked>
-        <label for="imperial">Imperial (lbs)</label>
-        <input type="radio" id="metric" name="unit" value="metric">
-        <label for="metric">Metric (kg)</label>
+      <input type="radio" id="imperial" name="unit" value="imperial" checked>
+      <label for="imperial">Imperial (lbs)</label>
+      <input type="radio" id="metric" name="unit" value="metric">
+      <label for="metric">Metric (kg)</label>
     </div>
 
-    <label>🥛 Feeding Type:</label>
+    <label>Feeding Type</label>
     <div class="segmented-control">
-        <input type="radio" id="formula" name="feedingType" value="formula" checked>
-        <label for="formula">Formula</label>
-        <input type="radio" id="breastmilk" name="feedingType" value="breastmilk">
-        <label for="breastmilk">Breastmilk</label>
+      <input type="radio" id="formula" name="feedingType" value="formula" checked>
+      <label for="formula">Formula</label>
+      <input type="radio" id="breastmilk" name="feedingType" value="breastmilk">
+      <label for="breastmilk">Breastmilk</label>
     </div>
 
-    <button onclick="calculateSchedule()">Generate Sample Schedule</button>
+    <button onclick="calculateSchedule()">Generate Feeding Schedule</button>
 
     <div id="result" class="result-box"></div>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
-
   <section class="seo-content">
-    <article>
-        <h2>A Parent's Guide to Baby Feeding</h2>
-        <p>Navigating your baby's nutritional needs is one of the most important parts of early parenthood. This calculator is designed to provide a sample feeding schedule based on general pediatric guidelines for a baby's age and weight. However, it's a starting point, not a strict rulebook.</p>
-        
-        <div class="disclaimer-box">
-            <strong>⚠️ Important Medical Disclaimer:</strong> This tool provides general estimates and is not a substitute for professional medical advice. Every baby is unique. Always consult your pediatrician or a lactation consultant with any questions about your baby's health, feeding, or growth.
-        </div>
-
-        <h3>How to Use This Calculator</h3>
-        <ol>
-            <li><strong>Enter Age and Weight:</strong> Input your baby's current age and weight.</li>
-            <li><strong>Select Units:</strong> Choose whether you are using Imperial (pounds) or Metric (kilograms).</li>
-            <li><strong>Choose Feeding Type:</strong> Select "Formula" or "Breastmilk," as their feeding patterns can differ.</li>
-            <li><strong>Generate Schedule:</strong> Click the button to see a sample schedule, daily intake goal, and estimated amount per feeding.</li>
-        </ol>
-
-        <h3>The Golden Rule: Responsive Feeding (Feeding on Demand)</h3>
-        <p>The most important principle in infant feeding is to watch your baby, not the clock. <strong>Responsive feeding</strong> means you feed your baby whenever they show signs of hunger. This helps establish a healthy feeding relationship, ensures they get the right amount of milk, and supports your milk supply if you are breastfeeding.</p>
-
-        <h3>How to Recognize Your Baby's Hunger Cues</h3>
-        <p>Learning to spot early hunger cues can make feedings much smoother and prevent your baby from becoming overly distressed. Look for these signs in order:</p>
-        <ul>
-            <li><strong>Early Cues (I'm hungry):</strong> Stirring, opening their mouth, turning their head and rooting (searching for the nipple).</li>
-            <li><strong>Active Cues (I'm really hungry):</strong> Stretching, increasing physical movement, bringing their hand to their mouth.</li>
-            <li><strong>Late Cues (Calm me, then feed me):</strong> Crying, agitated body movements, turning red. Crying is a late sign of hunger; try to feed them before they get to this point.</li>
-        </ul>
-
-        <h3>Breastmilk vs. Formula: Understanding Feeding Patterns</h3>
-        <p>Your baby's feeding frequency will differ based on what they are eating:</p>
-        <ul>
-            <li><strong>Breastfed Babies:</strong> Breast milk is digested more easily and quickly than formula. Because of this, breastfed newborns may feed very frequently, often 8-12 times (or more) in 24 hours. This is normal and helps establish a robust milk supply.</li>
-            <li><strong>Formula-Fed Babies:</strong> Formula is digested more slowly, so formula-fed babies typically go longer between feedings, often every 3 to 4 hours in the newborn stage.</li>
-        </ul>
-
-        <h3>What About Growth Spurts?</h3>
-        <p>During a growth spurt, your baby will be hungrier than usual. They might want to feed more often or take more milk at each feeding. This is called cluster feeding and is completely normal. Common growth spurt times are around <strong>2-3 weeks, 6 weeks, 3 months, and 6 months</strong>. Follow your baby's lead during these times; their intake will return to normal after a few days.</p>
-    </article>
-
     <h3>🔗 Explore More Parenting Tools</h3>
     <div class="card-grid">
-      <div class="card"><a href="baby-growth-percentile-calculator.html">📊 Baby Growth Percentile Calculator</a></div>
-      <div class="card"><a href="pregnancy-calculator.html">🤰 Pregnancy Due Date Calculator</a></div>
-      <div class="card"><a href="period-tracker.html">🌸 Period & Ovulation Calculator</a></div>
-      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator (for adults)</a></div>
+      <div class="card"><a href="age-calculator.html">📅 Age Calculator</a></div>
+      <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
+      <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
     </div>
 
     <h3>📝 Related Blogs for Parents</h3>
@@ -221,188 +673,393 @@
       <div class="card"><a href="blog/decoding-baby-hunger-cues.html">📖 Reading Your Baby's Hunger Cues</a></div>
       <div class="card"><a href="blog/introducing-solids-baby-guide.html">💡 A Guide to Introducing Solid Foods</a></div>
     </div>
+
+    <article>
+      <h2>Understanding Baby Feeding: A Complete Guide for Parents</h2>
+      <p>Feeding your baby is one of the most fundamental and important aspects of parenthood. Whether you're breastfeeding, formula feeding, or combining both methods, understanding how much and how often to feed your baby can help ensure healthy growth and development. This comprehensive guide will help you navigate the sometimes confusing world of infant nutrition.</p>
+
+      <p>Our baby feeding calculator provides personalized schedule recommendations based on your baby's age and weight, following established pediatric guidelines. However, it's crucial to remember that every baby is unique, and feeding schedules should be flexible to accommodate your baby's individual needs and hunger cues.</p>
+
+      <div class="warning-box">
+        <h4>⚠️ Important Medical Disclaimer</h4>
+        <p>This calculator provides general guidance based on pediatric recommendations and is for informational purposes only. It is not a substitute for professional medical advice. Always consult your pediatrician or healthcare provider with any questions about your baby's feeding, growth, or development. Every baby is different, and your healthcare provider can give personalized advice based on your baby's specific needs.</p>
+      </div>
+
+      <h2>How to Use the Baby Feeding Calculator</h2>
+      <p>Using our feeding calculator is simple and takes just a few seconds. Here's how to get personalized feeding recommendations for your baby:</p>
+      <ol>
+        <li><strong>Enter Your Baby's Age:</strong> Input your baby's age and select whether you're measuring in days, weeks, or months. The calculator works for babies from birth to 12 months old.</li>
+        <li><strong>Enter Your Baby's Weight:</strong> Input your baby's current weight. You can use either pounds (Imperial) or kilograms (Metric) by selecting your preferred unit system.</li>
+        <li><strong>Select Feeding Type:</strong> Choose whether you're formula feeding or breastfeeding. The calculator adjusts recommendations based on feeding type, as breast milk and formula have different digestion rates.</li>
+        <li><strong>Generate Schedule:</strong> Click the button to receive a personalized feeding schedule showing recommended feeding frequency, amount per feeding, and total daily intake.</li>
+      </ol>
+
+      <p>The results will display a sample feeding schedule with specific times, feeding amounts, and helpful information to guide your feeding routine. Remember that this is a general guideline, and your baby's actual needs may vary.</p>
+
+      <h2>The Fundamental Principle: Responsive Feeding</h2>
+      <p>The most important concept in infant feeding is responsive feeding, also called feeding on demand or cue-based feeding. This approach means you feed your baby based on their hunger signals rather than strictly following a clock. Responsive feeding supports healthy growth, helps establish breastfeeding, prevents overfeeding or underfeeding, and builds a positive feeding relationship between you and your baby.</p>
+
+      <p>While feeding schedules can be helpful guides, especially for new parents who want to understand typical patterns, your baby's hunger cues should always take priority. Some days your baby will eat more frequently, other days less so. Growth spurts, developmental leaps, illness, and teething can all affect feeding patterns.</p>
+
+      <h3>Recognizing Your Baby's Hunger Cues</h3>
+      <p>Learning to identify when your baby is hungry helps you respond quickly before they become overly distressed. Babies communicate hunger through progressive stages of cues, from subtle early signs to more obvious late indicators. Here's what to watch for at each stage:</p>
+
+      <h4>Early Hunger Cues (Feed Me Soon)</h4>
+      <ul>
+        <li>Stirring and becoming more alert when sleeping</li>
+        <li>Opening and closing mouth</li>
+        <li>Turning head from side to side (rooting reflex)</li>
+        <li>Bringing hands to face or mouth</li>
+        <li>Making sucking motions or sounds</li>
+        <li>Smacking or licking lips</li>
+      </ul>
+
+      <h4>Active Hunger Cues (I'm Getting Hungry)</h4>
+      <ul>
+        <li>Stretching and increasing physical movement</li>
+        <li>Fidgeting and squirming</li>
+        <li>Hitting your chest or pulling at your clothing</li>
+        <li>Making fussing sounds</li>
+        <li>Breathing faster</li>
+        <li>Attempting to position for feeding</li>
+      </ul>
+
+      <h4>Late Hunger Cues (I'm Very Hungry - Calm Me First)</h4>
+      <ul>
+        <li>Crying loudly</li>
+        <li>Agitated body movements</li>
+        <li>Turning red or flushed</li>
+        <li>Frantic or panicked behavior</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>Important Note About Crying</h4>
+        <p>Crying is actually a late hunger cue. By the time your baby is crying, they're already very hungry and may be too upset to feed effectively. If your baby is crying from hunger, try to calm them first by holding, rocking, or offering a pacifier, then attempt feeding once they've settled slightly. Learning to recognize earlier hunger cues helps prevent reaching this distressed state.</p>
+      </div>
+
+      <h2>Breastfeeding vs Formula Feeding: Key Differences</h2>
+      <p>Both breastfeeding and formula feeding can provide complete nutrition for your baby, but they have different characteristics that affect feeding patterns and schedules.</p>
+
+      <h3>Breastfed Babies</h3>
+      <p>Breast milk is specifically designed for human babies and is easier to digest than formula. This faster digestion means breastfed babies typically need to eat more frequently than formula-fed babies. Newborn breastfed babies often feed eight to twelve times in twenty-four hours, and sometimes even more during growth spurts or cluster feeding periods.</p>
+
+      <p>Breastfeeding frequency naturally decreases as babies grow, but even older infants typically nurse more often than formula-fed babies. This frequent feeding is normal and beneficial—it helps establish and maintain milk supply, provides antibodies and immune factors multiple times per day, and supports the mother-baby bonding process.</p>
+
+      <h3>Formula-Fed Babies</h3>
+      <p>Formula takes longer to digest than breast milk, which means formula-fed babies can typically go longer between feedings. Newborns on formula often feed every three to four hours, though individual babies vary. As babies grow, they take larger amounts less frequently.</p>
+
+      <p>Formula feeding allows for more predictable schedules since you can measure exactly how much your baby consumes at each feeding. However, it's still important to watch for hunger cues rather than forcing your baby to finish a bottle or waiting until a scheduled time if your baby shows hunger signs earlier.</p>
+
+      <h3>Combination Feeding</h3>
+      <p>Many families use a combination of breast milk and formula. If you're combination feeding, your baby's feeding pattern may fall somewhere between typical breastfed and formula-fed patterns. Pay attention to your baby's hunger cues to find the right balance for your family.</p>
+
+      <h2>Understanding Feeding Amounts by Age</h2>
+      <p>Babies' nutritional needs change rapidly during their first year. Here's a general overview of typical feeding patterns at different ages, though remember individual babies may need more or less than these averages.</p>
+
+      <h3>Newborns (Birth to 1 Month)</h3>
+      <p>Newborns have tiny stomachs—about the size of a cherry at birth, growing to the size of a large egg by one month. They need to eat very frequently in small amounts. Breastfed newborns typically nurse eight to twelve times per day, while formula-fed newborns consume about one to three ounces every two to three hours.</p>
+
+      <p>During the first few days, your baby's stomach capacity is extremely small, but it grows quickly. By day three, babies typically take about one ounce per feeding. By two weeks, this increases to two to three ounces. By one month, most babies consume about three to four ounces per feeding.</p>
+
+      <h3>One to Three Months</h3>
+      <p>During this period, babies begin to settle into more predictable patterns. Formula-fed babies typically consume four to five ounces every three to four hours, totaling about twenty-four to thirty-two ounces per day. Breastfed babies still nurse frequently, usually every two to three hours during the day, though some may start spacing feedings slightly further apart.</p>
+
+      <h3>Three to Six Months</h3>
+      <p>Babies this age are growing rapidly and increasing their milk intake. Formula-fed babies typically take six to seven ounces every four to five hours, consuming about twenty-eight to thirty-two ounces daily. Breastfed babies continue nursing every three to four hours during the day and may still wake for one or two night feedings.</p>
+
+      <h3>Six to Twelve Months</h3>
+      <p>Around six months, you'll introduce solid foods, but breast milk or formula remains the primary nutrition source. As babies eat more solids, their milk intake may gradually decrease slightly. Formula-fed babies typically consume about twenty-four to thirty-two ounces per day, distributed across three to five feedings. Breastfed babies continue nursing four to six times per day.</p>
+
+      <h2>Growth Spurts and Cluster Feeding</h2>
+      <p>Even with a regular feeding routine, there will be times when your baby suddenly seems much hungrier than usual. These periods are called growth spurts, and they're a normal part of infant development.</p>
+
+      <h3>Common Growth Spurt Timing</h3>
+      <p>Growth spurts commonly occur around two to three weeks, six weeks, three months, and six months, though timing varies by baby. During growth spurts, your baby may want to feed much more frequently, seem fussier than usual, be more clingy, and have disrupted sleep patterns.</p>
+
+      <h3>Cluster Feeding</h3>
+      <p>Cluster feeding describes when babies feed very frequently over a short period, often in the evening. This is especially common in breastfed babies and is completely normal. Cluster feeding helps increase milk supply, provides extra calories for growth, and often occurs before a longer sleep stretch. While exhausting for parents, cluster feeding typically lasts only a few days during growth spurts.</p>
+
+      <div class="info-box">
+        <h4>Responding to Growth Spurts</h4>
+        <p>During growth spurts, follow your baby's lead and feed on demand, even if it's much more frequent than usual. For breastfeeding mothers, the increased nursing will boost milk supply to match your baby's growing needs. For formula-feeding parents, you may need to offer slightly more at each feeding or feed more frequently. Growth spurts typically last two to three days before feeding patterns return to normal.</p>
+      </div>
+
+      <h2>Night Feedings: What to Expect</h2>
+      <p>Night feedings are normal and necessary for babies, though the frequency decreases as they grow. Understanding age-appropriate expectations can help you prepare and cope with nighttime wake-ups.</p>
+
+      <h3>Newborns (Birth to 3 Months)</h3>
+      <p>Newborns need to eat frequently around the clock. They should not go longer than four to five hours without feeding, even at night. Most newborns wake two to four times per night to eat. This frequent feeding supports rapid growth and helps establish milk supply in breastfeeding mothers.</p>
+
+      <h3>Three to Six Months</h3>
+      <p>Many babies begin sleeping for longer stretches at this age, though they still need one to two night feedings. Some babies may drop to one feeding per night, while others continue waking twice. Both patterns are normal.</p>
+
+      <h3>Six to Twelve Months</h3>
+      <p>After six months and with solid foods introduced, some babies begin sleeping through the night without feeding. However, many healthy babies continue needing one night feeding throughout their first year. Teething, developmental leaps, and illness can temporarily increase night waking even in babies who previously slept longer stretches.</p>
+
+      <h2>Signs Your Baby Is Getting Enough Milk</h2>
+      <p>Many parents worry about whether their baby is eating enough, especially in the early weeks. Here are reliable indicators that your baby is well-fed:</p>
+
+      <h3>Diaper Output</h3>
+      <p>After the first few days, well-fed babies produce at least six wet diapers and three to four dirty diapers per day. Urine should be pale yellow or clear, not dark or concentrated. Breastfed babies' stools are typically yellow, seedy, and loose, while formula-fed babies have tan or yellow stools that are firmer.</p>
+
+      <h3>Weight Gain</h3>
+      <p>Babies typically lose up to ten percent of their birth weight in the first few days but should regain it by two weeks old. After that, babies gain about four to seven ounces per week for the first few months, though growth rates vary. Your pediatrician tracks weight gain at regular checkups to ensure your baby is growing appropriately along their individual growth curve.</p>
+
+      <h3>Feeding Behavior</h3>
+      <p>Well-fed babies seem satisfied after feedings, appear alert and active when awake, and reach developmental milestones on time. During feedings, you should hear swallowing sounds, and your baby should have periods of active sucking.</p>
+
+      <h3>Your Observations</h3>
+      <p>For breastfeeding mothers, breasts should feel softer after nursing. You may notice your baby's sucking pattern changes from rapid nutritive sucking to slower, more relaxed comfort sucking near the end of a feeding. Babies often fall asleep or appear drowsy and satisfied when they've had enough.</p>
+
+      <h2>Common Feeding Challenges and Solutions</h2>
+      <p>Most parents encounter feeding difficulties at some point. Here are solutions to common challenges:</p>
+
+      <h3>Refusing the Bottle or Breast</h3>
+      <p>Babies may refuse feeding for various reasons including illness, teething, distractions, or flow rate issues with bottles. Try feeding in a quiet, dimly lit environment, checking bottle nipple flow rate, offering feeding when baby is calm rather than overtired, and consulting your pediatrician if refusal persists.</p>
+
+      <h3>Spitting Up</h3>
+      <p>Many babies spit up small amounts after feeding, which is normal. However, if your baby spits up large amounts, seems uncomfortable, isn't gaining weight well, or has forceful projectile vomiting, consult your pediatrician to rule out reflux or other issues.</p>
+
+      <h3>Gassiness and Fussiness</h3>
+      <p>Some babies experience gas discomfort, leading to fussiness during or after feeding. Try burping your baby during and after feedings, using paced bottle feeding to reduce air intake, bicycling baby's legs to help pass gas, and holding baby upright for fifteen to twenty minutes after feeding.</p>
+
+      <h3>Inconsistent Schedule</h3>
+      <p>Young babies don't follow predictable schedules, which is completely normal. Rather than forcing a schedule, watch for hunger cues and feed responsively. Most babies naturally develop more predictable patterns between three to six months old.</p>
+
+      <h2>Introducing Solid Foods</h2>
+      <p>Around six months, babies are developmentally ready to begin solid foods alongside continued breast milk or formula. Signs of readiness include sitting up with minimal support, showing interest in food, losing the tongue-thrust reflex, and bringing objects to mouth.</p>
+
+      <p>Start with single-ingredient foods like iron-fortified infant cereal, pureed vegetables, or pureed fruits. Introduce new foods one at a time, waiting three to five days between new foods to watch for allergic reactions. Continue offering breast milk or formula as the primary nutrition source through the first year, gradually increasing solids as your baby shows interest.</p>
+
+      <h2>Special Considerations</h2>
+
+      <h3>Premature Babies</h3>
+      <p>Premature babies often need to eat more frequently and may tire easily during feedings. Your neonatologist or pediatrician will provide specific feeding guidance based on your baby's adjusted age and individual needs.</p>
+
+      <h3>Multiples</h3>
+      <p>Parents of twins, triplets, or more face unique feeding challenges. Whether breastfeeding or formula feeding, establishing a system that works for your family is essential. Some parents feed babies simultaneously, while others prefer individual feeding times. Do what works best for your situation.</p>
+
+      <h3>Medical Conditions</h3>
+      <p>Babies with certain medical conditions may need specialized feeding plans. Always follow your pediatrician's specific recommendations if your baby has reflux, food allergies, failure to thrive, or other medical concerns affecting feeding.</p>
+
+      <h2>When to Contact Your Pediatrician</h2>
+      <p>While feeding challenges are common, certain signs warrant immediate medical attention. Contact your pediatrician if your baby has fewer than six wet diapers per day after the first week, shows signs of dehydration including dark urine, dry mouth, or sunken soft spot, refuses multiple feedings in a row, vomits forcefully or repeatedly, has blood in stools, isn't gaining weight appropriately, or seems lethargic or unresponsive.</p>
+
+      <p>Trust your instincts—if you're concerned about your baby's feeding or growth, it's always appropriate to contact your healthcare provider for guidance and reassurance.</p>
+
+      <h2>Feeding Resources and Support</h2>
+      <p>You don't have to navigate feeding challenges alone. Many resources are available including pediatricians and family doctors, lactation consultants certified by the International Board of Lactation Consultant Examiners, local breastfeeding support groups like La Leche League, WIC programs offering nutrition education and support, and online communities of parents sharing experiences and advice.</p>
+
+      <p>Remember that every baby is unique, and what works for one family may not work for another. Be patient with yourself and your baby as you learn together. Feeding your baby is about more than just nutrition—it's also about bonding, comfort, and building a loving relationship.</p>
+    </article>
   </section>
 
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions about Infant Feeding</h2>
-    <details class="faq">
-      <summary>How much milk does my newborn really need?</summary>
-      <p>A general pediatric guideline is that babies need about 2.5 ounces of formula or breastmilk per pound of body weight per day (or about 150-200 mL per kg). So, a 10 lb baby needs approximately 25 ounces over 24 hours. This calculator uses this principle for its estimation, but always follow your baby's cues.</p>
+    <h2>❓ Frequently Asked Questions</h2>
+    <details>
+      <summary>How much milk should my baby drink per day?</summary>
+      <p>The general guideline is that babies need about 2.5 ounces of breast milk or formula per pound of body weight per day (approximately 150-200 mL per kilogram). For example, a 10-pound baby would need about 25 ounces total per day. However, this is just an average—some babies need more, some less. The best indicators are your baby's diaper output, weight gain, and satisfaction after feedings. Always consult your pediatrician if you're concerned about your baby's intake.</p>
     </details>
-    <details class="faq">
-      <summary>How do I know if my baby is getting enough milk?</summary>
-      <p>The best indicators are output and growth. Look for these reliable signs: 1) Consistent weight gain along their unique growth curve. 2) At least 5-6 wet diapers per day after the first week. 3) Your baby seems relatively content and satisfied after most feedings. If you have any concerns, your pediatrician is the best resource.</p>
+    <details>
+      <summary>How do I know if my baby is getting enough to eat?</summary>
+      <p>The most reliable signs that your baby is well-fed include at least 6 wet diapers per day after the first week, steady weight gain following their growth curve, satisfaction and alertness after feedings, and meeting developmental milestones. Your baby's stool frequency and appearance should also be normal for their feeding type. If your baby seems constantly hungry, is losing weight, or has fewer wet diapers than expected, contact your pediatrician immediately.</p>
     </details>
-    <details class="faq">
+    <details>
       <summary>Should I wake my newborn to feed?</summary>
-      <p>In the first two weeks, yes. Newborns can be very sleepy and may not wake for feedings. It's often recommended to wake them to feed every 2-3 hours during the day and at least every 4 hours at night until they have surpassed their birth weight and are on a steady growth track. Always follow your pediatrician's specific advice on this.</p>
+      <p>Yes, during the first two weeks of life, you should wake your newborn every 3 hours during the day and at least every 4 hours at night until they've regained their birth weight and are showing appropriate weight gain. Newborns can be very sleepy and may not wake on their own despite being hungry. Once your baby has regained birth weight and your pediatrician confirms they're growing well, you can usually let them sleep for longer stretches at night. Always follow your pediatrician's specific recommendations for your baby.</p>
     </details>
-    <details class="faq">
-      <summary>Can I overfeed my baby?</summary>
-      <p>It is very difficult to overfeed a breastfed baby. For bottle-fed babies (formula or breastmilk), it's possible. Practice "paced bottle feeding": hold the bottle horizontally, let the baby pause, and watch for fullness cues (like turning away or slowing down sucking). This prevents them from drinking too quickly and helps them recognize when they're full.</p>
+    <details>
+      <summary>Is it possible to overfeed a baby?</summary>
+      <p>It's very difficult to overfeed a breastfed baby because they control the milk flow and stop when satisfied. For bottle-fed babies (formula or pumped breast milk), overfeeding is possible but uncommon. Practice paced bottle feeding by holding the bottle horizontally, allowing your baby to pause, and watching for fullness cues like turning away, slowing sucking, or pushing the bottle away. Never force your baby to finish a bottle. Overfeeding signs include frequent spitting up, excessive weight gain, and discomfort during or after feedings.</p>
+    </details>
+    <details>
+      <summary>Why does my baby want to eat constantly in the evening?</summary>
+      <p>This is called cluster feeding and is completely normal, especially in breastfed babies. Cluster feeding often occurs in the evening hours and serves several purposes: it helps increase milk supply, provides extra calories before a longer sleep stretch, and meets your baby's need for closeness during a fussy period. Growth spurts also cause increased feeding frequency. While exhausting, cluster feeding is temporary and usually lasts just a few hours. If you're concerned about constant feeding or your baby seems distressed, consult your pediatrician.</p>
+    </details>
+    <details>
+      <summary>When will my baby sleep through the night without feeding?</summary>
+      <p>Every baby is different, but many babies can sleep 6-8 hour stretches by 3-6 months old, though they may still wake for one feeding. Some babies naturally drop night feedings earlier, while others continue needing one night feeding through 12 months or beyond—both patterns are normal. Factors affecting this include age, weight, solid food intake, and individual metabolism. Never withhold nighttime feedings unless your pediatrician specifically recommends it. Sleeping through the night is a developmental milestone that happens when your baby is ready.</p>
+    </details>
+    <details>
+      <summary>How do I know if my baby needs more formula or is having a growth spurt?</summary>
+      <p>Growth spurts typically occur around 2-3 weeks, 6 weeks, 3 months, and 6 months. During these times, your baby may suddenly seem much hungrier, want to feed more frequently, seem fussier, sleep less well, and be more clingy. If your baby consistently finishes bottles and still seems hungry, shows hunger cues shortly after feeding, or isn't satisfied with their usual amount, they may need more formula. Try offering an extra ounce or two per feeding. Growth spurts usually last 2-3 days before feeding patterns normalize. Your pediatrician can confirm your baby's growth is on track.</p>
+    </details>
+    <details>
+      <summary>Can I follow a feeding schedule or should I feed on demand?</summary>
+      <p>For young babies, feeding on demand (responsive feeding) is recommended because it ensures your baby gets enough to eat, supports breastfeeding milk supply, and helps you learn your baby's hunger cues. As babies get older (typically 3-4 months), they often naturally develop more predictable patterns, and you can work toward a flexible routine. However, even with a general schedule, you should always respond to clear hunger cues. Schedules work best as guides rather than strict rules—your baby's needs should take priority over the clock.</p>
     </details>
   </section>
-
-  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
 
   <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
 
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+      <p><strong>Disclaimer:</strong> This baby feeding calculator is provided for informational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. Every baby is unique with individual nutritional needs. Always consult your pediatrician, family doctor, or lactation consultant with questions about your baby's feeding, growth, or health. The feeding schedules and amounts provided are general guidelines based on typical patterns and may not be appropriate for your specific situation.</p>
     </div>
     <div class="footer-links">
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How much milk does my newborn really need?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A general pediatric guideline is that babies need about 2.5 ounces of formula or breastmilk per pound of body weight per day (or about 150-200 mL per kg). So, a 10 lb baby needs approximately 25 ounces over 24 hours. This calculator uses this principle for its estimation, but always follow your baby's cues."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I know if my baby is getting enough milk?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The best indicators are output and growth. Look for these reliable signs: 1) Consistent weight gain along their unique growth curve. 2) At least 5-6 wet diapers per day after the first week. 3) Your baby seems relatively content and satisfied after most feedings. If you have any concerns, your pediatrician is the best resource."
-        }
-      },
-       {
-        "@type": "Question",
-        "name": "Should I wake my newborn to feed?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "In the first two weeks, yes. Newborns can be very sleepy and may not wake for feedings. It's often recommended to wake them to feed every 2-3 hours during the day and at least every 4 hours at night until they have surpassed their birth weight and are on a steady growth track. Always follow your pediatrician's specific advice on this."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I overfeed my baby?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "It is very difficult to overfeed a breastfed baby. For bottle-fed babies (formula or breastmilk), it's possible. Practice \"paced bottle feeding\": hold the bottle horizontally, let the baby pause, and watch for fullness cues (like turning away or slowing down sucking). This prevents them from drinking too quickly and helps them recognize when they're full."
-        }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How much milk should my baby drink per day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The general guideline is that babies need about 2.5 ounces of breast milk or formula per pound of body weight per day (approximately 150-200 mL per kilogram). However, this is just an average—some babies need more, some less. The best indicators are your baby's diaper output, weight gain, and satisfaction after feedings."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "How do I know if my baby is getting enough to eat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The most reliable signs include at least 6 wet diapers per day after the first week, steady weight gain following their growth curve, satisfaction and alertness after feedings, and meeting developmental milestones."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I wake my newborn to feed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, during the first two weeks of life, you should wake your newborn every 3 hours during the day and at least every 4 hours at night until they've regained their birth weight and are showing appropriate weight gain."
+      }
+    },{
+      "@type": "Question",
+      "name": "Is it possible to overfeed a baby?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's very difficult to overfeed a breastfed baby. For bottle-fed babies, overfeeding is possible but uncommon. Practice paced bottle feeding and watch for fullness cues. Never force your baby to finish a bottle."
+      }
+    }]
   }
   </script>
 
   <script>
     function calculateSchedule() {
-        let age = parseInt(document.getElementById('age').value);
-        const ageUnit = document.getElementById('ageUnit').value;
-        let weight = parseFloat(document.getElementById('weight').value);
-        const unit = document.querySelector('input[name="unit"]:checked').value;
-        const feedingType = document.querySelector('input[name="feedingType"]:checked').value;
-        const resultDiv = document.getElementById('result');
+      let age = parseInt(document.getElementById('age').value);
+      const ageUnit = document.getElementById('ageUnit').value;
+      let weight = parseFloat(document.getElementById('weight').value);
+      const unit = document.querySelector('input[name="unit"]:checked').value;
+      const feedingType = document.querySelector('input[name="feedingType"]:checked').value;
+      const resultDiv = document.getElementById('result');
 
-        if (isNaN(age) || isNaN(weight) || age < 0 || weight <= 0) {
-            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please enter a valid age and positive weight.</p>";
-            return;
-        }
+      if (isNaN(age) || isNaN(weight) || age < 0 || weight <= 0) {
+        resultDiv.innerHTML = "<p style='color: #ef4444; font-weight: 600;'>⚠️ Please enter a valid age and positive weight to calculate feeding schedule.</p>";
+        return;
+      }
 
-        let ageInMonths;
-        let ageDisplay;
-        if (ageUnit === 'days') {
-            ageInMonths = age / 30.44;
-            ageDisplay = `${age} days`;
-        } else if (ageUnit === 'weeks') {
-            ageInMonths = age / 4.345;
-            ageDisplay = `${age} weeks`;
-        } else {
-            ageInMonths = age;
-            ageDisplay = `${age} ${age === 1 ? 'month' : 'months'}`;
-        }
+      let ageInMonths;
+      let ageDisplay;
+      if (ageUnit === 'days') {
+        ageInMonths = age / 30.44;
+        ageDisplay = `${age} ${age === 1 ? 'day' : 'days'}`;
+      } else if (ageUnit === 'weeks') {
+        ageInMonths = age / 4.345;
+        ageDisplay = `${age} ${age === 1 ? 'week' : 'weeks'}`;
+      } else {
+        ageInMonths = age;
+        ageDisplay = `${age} ${age === 1 ? 'month' : 'months'}`;
+      }
 
-        const weightInKg = (unit === 'imperial') ? weight * 0.453592 : weight;
-        let dailyIntakeMl, feedingsPerDay, interval;
-        
-        if (ageInMonths < 1) { 
-            feedingsPerDay = 9;
-        } else if (ageInMonths < 3) {
-            feedingsPerDay = 8;
-        } else if (ageInMonths < 5) {
-            feedingsPerDay = 7;
-        } else if (ageInMonths < 7) {
-            feedingsPerDay = 6;
-        } else if (ageInMonths < 10) {
-            feedingsPerDay = 5;
-        } else if (ageInMonths <= 12) {
-            feedingsPerDay = 4;
-        } else {
-            resultDiv.innerHTML = "<p style='color:orange;'>This calculator is designed for babies up to 12 months old.</p>";
-            return;
-        }
+      if (ageInMonths > 12) {
+        resultDiv.innerHTML = "<p style='color: #f97316; font-weight: 600;'>⚠️ This calculator is designed for babies up to 12 months old. For toddlers over 1 year, consult your pediatrician for feeding guidance.</p>";
+        return;
+      }
 
-        if (feedingType === 'breastmilk' && ageInMonths < 6) {
-            feedingsPerDay += 1; // Breastfed babies often eat slightly more frequently in early months
-        }
-        
-        interval = Math.round(24 / feedingsPerDay);
-        dailyIntakeMl = Math.round(weightInKg * 155);
-        const amountPerFeedingMl = Math.round(dailyIntakeMl / feedingsPerDay);
+      const weightInKg = (unit === 'imperial') ? weight * 0.453592 : weight;
+      let feedingsPerDay, interval;
+      
+      if (ageInMonths < 1) { 
+        feedingsPerDay = feedingType === 'breastmilk' ? 10 : 9;
+      } else if (ageInMonths < 3) {
+        feedingsPerDay = feedingType === 'breastmilk' ? 9 : 8;
+      } else if (ageInMonths < 5) {
+        feedingsPerDay = feedingType === 'breastmilk' ? 8 : 7;
+      } else if (ageInMonths < 7) {
+        feedingsPerDay = feedingType === 'breastmilk' ? 7 : 6;
+      } else if (ageInMonths < 10) {
+        feedingsPerDay = feedingType === 'breastmilk' ? 6 : 5;
+      } else {
+        feedingsPerDay = feedingType === 'breastmilk' ? 5 : 4;
+      }
+      
+      interval = Math.round(24 / feedingsPerDay);
+      const dailyIntakeMl = Math.round(weightInKg * 155);
+      const amountPerFeedingMl = Math.round(dailyIntakeMl / feedingsPerDay);
 
-        const dailyIntakeOz = (dailyIntakeMl / 29.574).toFixed(1);
-        const amountPerFeedingOz = (amountPerFeedingMl / 29.574).toFixed(1);
+      const dailyIntakeOz = (dailyIntakeMl / 29.574).toFixed(1);
+      const amountPerFeedingOz = (amountPerFeedingMl / 29.574).toFixed(1);
 
-        const dailyDisplay = (unit === 'imperial') ? `${dailyIntakeOz} oz` : `${dailyIntakeMl} mL`;
-        const perFeedDisplay = (unit === 'imperial') ? `${amountPerFeedingOz} oz` : `${amountPerFeedingMl} mL`;
+      const dailyDisplay = (unit === 'imperial') ? `${dailyIntakeOz} oz` : `${dailyIntakeMl} mL`;
+      const perFeedDisplay = (unit === 'imperial') ? `${amountPerFeedingOz} oz` : `${amountPerFeedingMl} mL`;
 
-        let scheduleHtml = '<h4>🗓️ Sample Daily Schedule</h4><ul class="timeline">';
-        let hour = 7; 
-        for (let i = 0; i < feedingsPerDay; i++) {
-            const displayHour = (hour % 12 === 0) ? 12 : hour % 12;
-            const ampm = (hour >= 12 && hour < 24) ? 'PM' : 'AM';
-            scheduleHtml += `<li><span>${displayHour}:00 ${ampm}</span> - Approx. ${perFeedDisplay}</li>`;
-            hour += interval;
-            if(hour >= 24) hour -= 24;
-        }
-        scheduleHtml += '</ul>';
+      let scheduleHtml = '<h4>🗓️ Sample Daily Schedule</h4><ul class="timeline">';
+      let hour = 7; 
+      for (let i = 0; i < feedingsPerDay; i++) {
+        const displayHour = (hour % 12 === 0) ? 12 : hour % 12;
+        const ampm = (hour >= 12 && hour < 24) ? 'PM' : 'AM';
+        scheduleHtml += `<li><span>${displayHour}:00 ${ampm}</span> - Approximately ${perFeedDisplay}</li>`;
+        hour += interval;
+        if(hour >= 24) hour -= 24;
+      }
+      scheduleHtml += '</ul>';
 
-        resultDiv.innerHTML = `
-            <div class="schedule-container">
-                <h3>📋 Feeding Estimate for a ${ageDisplay} old baby</h3>
-                <div class="schedule-summary">
-                    <div class="summary-item">
-                        <h4>Total Daily Goal</h4>
-                        <p>${dailyDisplay}</p>
-                    </div>
-                    <div class="summary-item">
-                        <h4>Feeding Frequency</h4>
-                        <p>Every ~${interval} hours</p>
-                    </div>
-                    <div class="summary-item">
-                        <h4>Amount Per Feeding</h4>
-                        <p>~ ${perFeedDisplay}</p>
-                    </div>
-                </div>
-                ${scheduleHtml}
-                 <p style="font-size:12px; text-align:center; margin-top:15px;"><strong>Disclaimer:</strong> This is a sample schedule. Always feed your baby on demand based on their hunger cues.</p>
-            </div>
-        `;
+      const feedingTypeText = feedingType === 'breastmilk' ? 'breastfed' : 'formula-fed';
+
+      resultDiv.innerHTML = `
+        <h3>🍼 Feeding Schedule for ${ageDisplay} Old Baby</h3>
+        <div class="schedule-summary">
+          <div class="summary-item">
+            <h4>Total Daily Intake</h4>
+            <p>${dailyDisplay}</p>
+          </div>
+          <div class="summary-item">
+            <h4>Feeding Frequency</h4>
+            <p>Every ~${interval} hrs</p>
+          </div>
+          <div class="summary-item">
+            <h4>Per Feeding</h4>
+            <p>${perFeedDisplay}</p>
+          </div>
+        </div>
+        ${scheduleHtml}
+        <hr>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 1rem;"><strong>Important:</strong> This is a sample schedule for a ${feedingTypeText} baby. Always feed your baby based on hunger cues rather than strictly following a clock. Every baby is unique, and actual feeding amounts and frequency may vary. Consult your pediatrician if you have concerns about your baby's feeding or growth.</p>
+      `;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+
       toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'light');
+          applyTheme('light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+          applyTheme('dark');
+        }
       });
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
 
       const weightLabel = document.getElementById('weightLabel');
       const unitRadios = document.querySelectorAll('input[name="unit"]');
@@ -410,19 +1067,21 @@
       
       function updateWeightLabel() {
         if(document.getElementById('imperial').checked) {
-            weightLabel.innerHTML = '⚖️ Baby\'s Weight (lbs):';
-            weightInput.placeholder = 'e.g., 12.5';
+          weightLabel.textContent = 'Baby\'s Weight (lbs)';
+          weightInput.placeholder = 'e.g., 12.5';
         } else {
-            weightLabel.innerHTML = '⚖️ Baby\'s Weight (kg):';
-            weightInput.placeholder = 'e.g., 5.7';
+          weightLabel.textContent = 'Baby\'s Weight (kg)';
+          weightInput.placeholder = 'e.g., 5.7';
         }
       }
 
       unitRadios.forEach(radio => radio.addEventListener('change', updateWeightLabel));
-      updateWeightLabel(); 
+      updateWeightLabel();
     });
   </script>
 
 </body>
 </html>
+
+
 
