@@ -1,132 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Water Intake Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Water Intake Calculator — find how much water you need daily based on weight, activity and climate. Default units: lbs. Results shown in liters + oz + cups." />
-  <meta name="keywords" content="water intake calculator, hydration calculator, how much water to drink, daily water needs" />
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-
-   <!-- AdSense placeholder -->
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
-     crossorigin="anonymous"></script>
-  
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Intake Calculator - Calculate Your Daily Hydration Needs | QuickCalcLabs</title>
+  <meta name="description" content="Free water intake calculator to determine your personalized daily hydration needs based on weight, activity level, and climate. Get results in liters, ounces, and cups with science-backed recommendations.">
+  <meta name="keywords" content="water intake calculator, hydration calculator, daily water needs, how much water to drink, water consumption calculator, hydration tracker">
+  <link rel="canonical" href="https://quickcalclabs.com/water-intake-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-
   <style>
-    /* Modern styling inspired by period tracker */
+    /* Water calculator page specific styles */
     .calc-wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background: var(--card-bg, #fff);
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     .calc-wrapper h1 {
-      text-align: center;
-      color: var(--accent, #4fc3f7);
-      margin-bottom: 10px;
-      font-size: 2.5rem;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4, #0ea5e9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .subtitle {
-      text-align: center;
-      color: var(--text, #666);
-      margin-bottom: 30px;
-      font-size: 1.1rem;
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
       line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .calc-wrapper h2 {
+      color: var(--text-strong-dark, #f1f5f9);
     }
 
     /* Unit toggle */
     .unit-toggle {
       display: flex;
       gap: 10px;
-      margin-bottom: 25px;
+      margin-bottom: 1.5rem;
       justify-content: center;
     }
 
     .unit-btn {
-      padding: 10px 20px;
-      border: 2px solid var(--accent, #4fc3f7);
+      padding: 0.7rem 1.5rem;
+      border: 2px solid var(--primary, #3b82f6);
       background: transparent;
-      color: var(--accent, #4fc3f7);
-      border-radius: 25px;
+      color: var(--primary, #3b82f6);
+      border-radius: 999px;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 0.95rem;
     }
 
     .unit-btn.active {
-      background: var(--accent, #4fc3f7);
+      background: linear-gradient(135deg, #3b82f6, #0ea5e9);
       color: white;
+      border-color: transparent;
     }
 
     .unit-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
     }
 
-    /* Form styling */
-    #waterForm {
-      display: grid;
-      gap: 20px;
-    }
-
-    #waterForm label {
+    label {
       display: block;
+      margin-bottom: 0.5rem;
       font-weight: 600;
-      color: var(--text, #333);
-      margin-bottom: 8px;
+      color: var(--text-strong-light, #0f172a);
+      font-size: 0.95rem;
+      text-align: left;
     }
 
-    #waterForm input, #waterForm select {
+    .dark-mode label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .calc-wrapper input[type="number"],
+    .calc-wrapper select {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #e9ecef;
-      border-radius: 10px;
-      font-size: 16px;
-      transition: border-color 0.3s ease;
-      background: var(--input-bg, #fff);
-      color: var(--text, #333);
+      padding: 0.9rem 1.2rem;
+      margin: 0.6rem 0 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+      box-sizing: border-box;
     }
 
-    #waterForm input:focus, #waterForm select:focus {
+    .calc-wrapper input:focus,
+    .calc-wrapper select:focus {
+      border-color: var(--primary, #3b82f6);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
       outline: none;
-      border-color: var(--accent, #4fc3f7);
-      box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.1);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
     }
 
-    .hero-cta {
-      background: linear-gradient(135deg, var(--accent, #4fc3f7), #29b6f6);
-      color: white;
-      padding: 15px 30px;
+    .dark-mode .calc-wrapper input,
+    .dark-mode .calc-wrapper select {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus,
+    .dark-mode .calc-wrapper select:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #60a5fa);
+    }
+
+    .calc-wrapper button[type="submit"] {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, #3b82f6, #0ea5e9);
       border: none;
-      border-radius: 25px;
-      font-size: 18px;
-      font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
       transition: all 0.3s ease;
-      margin-top: 20px;
       width: 100%;
+      margin-top: 0.5rem;
     }
 
-    .hero-cta:hover {
+    .calc-wrapper button[type="submit"]:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(79, 195, 247, 0.3);
+      box-shadow: 0 10px 28px rgba(59, 130, 246, 0.4);
+      background: linear-gradient(135deg, #2563eb, #0284c7);
     }
 
-    /* Results section */
+    .calc-wrapper button[type="submit"]:active {
+      transform: translateY(-1px);
+    }
+
     .result-box {
-      margin-top: 30px;
-      padding: 25px;
-      background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
-      border-radius: 15px;
-      color: white;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      font-weight: 600;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+      color: var(--text-strong-light, #0f172a);
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
       display: none;
     }
 
@@ -140,213 +208,371 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
+      color: var(--text-strong-dark, #f1f5f9);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #3b82f6);
+      font-size: 1.4rem;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #60a5fa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .result-box p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
     .water-visual {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
 
     .water-card {
-      background: rgba(255,255,255,0.2);
-      padding: 20px;
-      border-radius: 15px;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
       text-align: center;
-      backdrop-filter: blur(10px);
       transition: transform 0.3s ease;
     }
 
+    .dark-mode .water-card {
+      background: rgba(59, 130, 246, 0.15);
+    }
+
     .water-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-3px);
     }
 
     .water-number {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-bottom: 5px;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary, #3b82f6);
+      margin-bottom: 0.3rem;
+    }
+
+    .dark-mode .water-number {
+      color: var(--primary-light, #60a5fa);
     }
 
     .water-label {
       font-size: 0.9rem;
-      opacity: 0.9;
+      color: var(--text-weak-light, #64748b);
+      font-weight: 600;
     }
 
-    /* Water level indicator */
-    .water-level {
-      margin: 20px 0;
-      text-align: center;
+    .dark-mode .water-label {
+      color: var(--text-weak-dark, #94a3b8);
     }
 
-    .water-glass {
-      width: 80px;
-      height: 120px;
-      border: 3px solid rgba(255,255,255,0.4);
-      border-radius: 0 0 40px 40px;
-      margin: 0 auto 15px;
-      position: relative;
-      background: rgba(255,255,255,0.1);
-      overflow: hidden;
-    }
-
-    .water-fill {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(0deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
-      border-radius: 0 0 37px 37px;
-      animation: fillWater 1.5s ease-out forwards;
-      transform-origin: bottom;
-    }
-
-    @keyframes fillWater {
-      from { height: 0; }
-      to { height: var(--fill-height, 80%); }
-    }
-
-    /* Hydration tips */
     .hydration-tips {
-      margin-top: 25px;
-      padding: 20px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
+      margin-top: 1.5rem;
+      padding: 1.2rem;
+      background: rgba(6, 182, 212, 0.1);
+      border-radius: var(--radius-md, 12px);
+      border-left: 4px solid #06b6d4;
     }
 
-    .hydration-tips h3 {
-      margin-bottom: 15px;
-      font-size: 1.3rem;
+    .dark-mode .hydration-tips {
+      background: rgba(6, 182, 212, 0.15);
+    }
+
+    .hydration-tips h4 {
+      margin: 0 0 0.8rem;
+      color: var(--text-strong-light, #0f172a);
+      font-size: 1.1rem;
+    }
+
+    .dark-mode .hydration-tips h4 {
+      color: var(--text-strong-dark, #f1f5f9);
     }
 
     .tip-item {
-      margin-bottom: 10px;
-      padding: 10px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 8px;
+      margin-bottom: 0.6rem;
       font-size: 0.95rem;
+      line-height: 1.5;
+      font-weight: 500;
     }
 
-    /* SEO content styling */
+    /* SEO Content Section */
     .seo-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background: var(--card-bg, #fff);
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .seo-content h2 {
-      color: var(--accent, #4fc3f7);
-      margin-bottom: 20px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #3b82f6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #60a5fa);
     }
 
     .seo-content h3 {
-      color: var(--text, #333);
-      margin-top: 25px;
-      margin-bottom: 15px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
     }
 
-    .seo-content ul {
-      list-style: none;
-      padding-left: 0;
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
     }
 
     .seo-content li {
-      padding: 8px 0;
-      padding-left: 25px;
-      position: relative;
+      margin-bottom: 0.8rem;
     }
 
-    .seo-content li:before {
-      content: "💧";
-      position: absolute;
-      left: 0;
+    .info-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.08));
+      border-left: 4px solid var(--primary, #3b82f6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
     }
 
-    /* Card grid for tools */
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(6, 182, 212, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    /* Card Grid */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
     }
 
     .card {
-      background: var(--card-bg, #fff);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
       text-align: center;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     .card a {
       text-decoration: none;
-      font-weight: 600;
-      color: var(--text, #222);
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
     }
 
     .card a:hover {
-      color: var(--accent, #4fc3f7);
+      color: var(--primary, #3b82f6);
     }
 
-    /* FAQ styling */
-    .faq {
-      margin-bottom: 10px;
-      border-radius: 8px;
-      background: var(--card-bg, #fff);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #60a5fa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
       overflow: hidden;
+      transition: all 0.3s ease;
     }
 
-     .faq-question {
-      width: 100%;
-      margin: 0;
-      padding: 12px;
-      background: var(--accent, #ff6b81);
-      color: #fff;
+    .faq-section details:hover {
+      border-color: var(--primary, #3b82f6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #60a5fa);
+    }
+
+    .faq-section summary {
+      list-style: none;
       cursor: pointer;
-      font-size: 16px;
-      border: none;
-      text-align: left;
-      font-weight: 600;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
     }
 
-    .faq-answer {
-      margin: 0;
-      padding: 12px;
+    .faq-section summary:hover {
+      background: rgba(59, 130, 246, 0.08);
+      color: var(--primary, #3b82f6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary-light, #60a5fa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
       display: none;
-      font-size: 14px;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
       line-height: 1.6;
-      background: var(--card-bg, #fff);
     }
 
-    .faq-item.active .faq-answer {
-      display: block;
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .calc-wrapper h1 {
-        font-size: 2rem;
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
       }
-      
-      
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
       .water-visual {
         grid-template-columns: 1fr;
       }
     }
-
-    .hidden { display: none !important; }
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- Header -->
+
   <header class="header">
     <a href="index.html" class="logo">QuickCalcLabs</a>
     <nav>
@@ -357,212 +583,338 @@
     </nav>
   </header>
 
-  <!-- Top Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">
-      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
-           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1234567890"></ins>
-      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-      <p>Advertisement</p>
-    </div>
-  </div>
-
-  <!-- Hero Calculator -->
   <section class="calc-wrapper">
-    <h1>💧 Water Intake Calculator</h1>
-    <p class="subtitle">Default units: <strong>lbs</strong>. Enter your weight and choose activity & climate — we'll show how many liters (and oz/cups) you should drink daily.</p>
-
+    <h1>Water Intake Calculator</h1>
+    <p class="subtitle">Calculate your personalized daily water intake based on your weight, activity level, and climate conditions. Get science-backed hydration recommendations in liters, ounces, and cups.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
+    
+    <h2>Calculate Your Daily Water Needs</h2>
+    
     <!-- Unit Toggle -->
-    <div class="unit-toggle" role="tablist" aria-label="Unit toggle">
-      <button id="btnImperial" class="unit-btn active" aria-pressed="true">Imperial (lbs)</button>
-      <button id="btnMetric" class="unit-btn" aria-pressed="false">Metric (kg)</button>
+    <div class="unit-toggle">
+      <button id="btnImperial" class="unit-btn active">Imperial (lbs)</button>
+      <button id="btnMetric" class="unit-btn">Metric (kg)</button>
     </div>
 
-    <form id="waterForm" novalidate>
-      <!-- Imperial (default) -->
-      <div id="imperial-fields" aria-hidden="false">
-        <label for="weightLbs">⚖️ Weight (lbs)</label>
-        <input id="weightLbs" type="number" inputmode="decimal" placeholder="e.g. 154" />
+    <form id="waterForm">
+      <!-- Imperial Fields -->
+      <div id="imperial-fields">
+        <label for="weightLbs">Your Weight (pounds):</label>
+        <input type="number" id="weightLbs" placeholder="e.g., 154" min="1" step="0.1">
       </div>
 
-      <!-- Metric -->
-      <div id="metric-fields" style="display:none;" aria-hidden="true">
-        <label for="weightKg">⚖️ Weight (kg)</label>
-        <input id="weightKg" type="number" inputmode="decimal" placeholder="e.g. 70" />
+      <!-- Metric Fields -->
+      <div id="metric-fields" style="display:none;">
+        <label for="weightKg">Your Weight (kilograms):</label>
+        <input type="number" id="weightKg" placeholder="e.g., 70" min="1" step="0.1">
       </div>
 
-      <label for="activity">🏃 Activity Level</label>
+      <label for="activity">Activity Level:</label>
       <select id="activity">
-        <option value="1">Low (sedentary)</option>
-        <option value="1.2">Moderate (exercise 2-3x/week)</option>
-        <option value="1.4">Active (exercise 4-5x/week)</option>
-        <option value="1.6">Very active (athlete/manual labor)</option>
+        <option value="1">Low (Sedentary, little to no exercise)</option>
+        <option value="1.2">Moderate (Light exercise 2-3 times per week)</option>
+        <option value="1.4">Active (Moderate exercise 4-5 times per week)</option>
+        <option value="1.6">Very Active (Intense exercise 6-7 times per week or physical job)</option>
       </select>
 
-      <label for="climate">🌡️ Climate</label>
+      <label for="climate">Climate Conditions:</label>
       <select id="climate">
-        <option value="1">Cool / Normal</option>
-        <option value="1.1">Warm</option>
-        <option value="1.2">Hot / Humid</option>
+        <option value="1">Cool or Normal Temperature</option>
+        <option value="1.1">Warm Climate</option>
+        <option value="1.2">Hot or Humid Climate</option>
       </select>
 
-      <button type="submit" class="hero-cta">Calculate My Water Needs</button>
+      <button type="submit">Calculate My Water Intake</button>
     </form>
 
-    <div id="result" class="result-box" aria-live="polite">
-      <h3>💦 Your Daily Water Requirement</h3>
-      
-      <div class="water-visual">
-        <div class="water-card">
-          <div class="water-number" id="litersAmount">0</div>
-          <div class="water-label">Liters</div>
-        </div>
-        <div class="water-card">
-          <div class="water-number" id="ozAmount">0</div>
-          <div class="water-label">Ounces</div>
-        </div>
-        <div class="water-card">
-          <div class="water-number" id="cupsAmount">0</div>
-          <div class="water-label">Cups</div>
-        </div>
-      </div>
-
-      <div class="water-level">
-        <div class="water-glass">
-          <div class="water-fill" id="waterFill"></div>
-        </div>
-        <p><strong>Stay Hydrated!</strong></p>
-      </div>
-
-      <div class="hydration-tips">
-        <h3>💡 Hydration Tips</h3>
-        <div class="tip-item">💧 Sip water consistently throughout the day — aim for a glass every 1-2 hours rather than a big gulp now and then.</div>
-        <div class="tip-item">🍽️ Drinking a glass of water before meals can help reduce calorie intake — another simple trick to support weight control.</div>
-        <div class="tip-item">🌅 Start your day with a glass of water to kickstart hydration after hours of sleep.</div>
-      </div>
-    </div>
+    <div id="result" class="result-box"></div>
   </section>
 
-  <!-- Mid Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">
-      <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
-           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1122334455"></ins>
-      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-      <p>Advertisement</p>
-    </div>
-  </div>
-
-  <!-- SEO Content -->
   <section class="seo-content">
-    <h2>✨ Benefits of Using Our Water Intake Calculator</h2>
-    <ul>
-      <li>💧 Get precise daily hydration targets</li>
-      <li>🏃 Adjusts for your activity level and climate</li>
-      <li>⚡ Switch between Imperial and Metric instantly</li>
-      <li>📱 Works perfectly on mobile & desktop</li>
-    </ul>
-
-    <h3>🔗 Explore More Tools</h3>
+    <h3>🔗 Explore More Health Tools</h3>
     <div class="card-grid">
       <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator</a></div>
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
-      <div class="card"><a href="macro-calculator.html">🥩 Macro Calculator</a></div>
+      <div class="card"><a href="macro-calculator.html">🥗 Macro Calculator</a></div>
       <div class="card"><a href="period-tracker.html">🌸 Period Tracker</a></div>
     </div>
 
-    <h3>📝 Related Blogs</h3>
+    <h3>📚 Related Blogs</h3>
     <div class="card-grid">
       <div class="card"><a href="blog/ultimate-guide-to-daily-hydration.html">💧 Ultimate Guide to Daily Hydration</a></div>
       <div class="card"><a href="blog/health-benefits-of-hydration.html">🌊 Health Benefits of Proper Hydration</a></div>
     </div>
 
-    <h2>Personalized Daily Water Intake</h2>
-    <p>We start with a baseline of ~35 ml per kg of body weight, then adjust for activity and climate. This method gives a practical, easy-to-follow hydration recommendation.</p>
-    
-    <h3>Why Hydration Matters</h3>
-    <ul>
-      <li>Supports energy, cognition & digestion</li>
-      <li>Improves exercise performance and recovery</li>
-      <li>Helps regulate body temperature and skin health</li>
-    </ul>
-    
-    <h3>Fun Fact</h3>
-    <p>Drinking a glass of water before meals can help reduce calorie intake — another simple trick to support weight control.</p>
+    <article>
+      <h2>What is a Water Intake Calculator?</h2>
+      <p>A water intake calculator is a scientific tool that helps you determine your personalized daily hydration needs based on multiple factors including body weight, physical activity level, and environmental conditions. Unlike the oversimplified "8 glasses a day" rule, this calculator provides customized recommendations that account for your unique circumstances and lifestyle.</p>
+      
+      <p>Proper hydration is fundamental to human health, affecting everything from physical performance and cognitive function to digestion and skin health. However, individual water needs vary significantly based on body size, metabolism, activity patterns, and environmental exposure. This calculator uses evidence-based formulas to provide accurate, personalized hydration targets that support optimal health and wellbeing.</p>
+
+      <div class="info-box">
+        <h4>Why Personalized Hydration Matters</h4>
+        <p>Generic hydration advice fails to account for the significant variations in individual water needs. A 120-pound sedentary office worker in a cool climate needs substantially less water than a 200-pound athlete training in hot conditions. Our calculator factors in these critical variables to provide recommendations tailored specifically to you, ensuring you maintain optimal hydration without over or under consuming fluids.</p>
+      </div>
+
+      <h2>How to Use the Water Intake Calculator</h2>
+      <p>Using our water intake calculator is straightforward and takes less than a minute to get your personalized hydration recommendations:</p>
+      <ol>
+        <li><strong>Choose Your Unit System:</strong> Select either Imperial (pounds) or Metric (kilograms) based on your preference. The calculator seamlessly converts between systems</li>
+        <li><strong>Enter Your Weight:</strong> Input your current body weight accurately, as this is the primary factor in calculating baseline water needs</li>
+        <li><strong>Select Activity Level:</strong> Choose the option that best describes your typical weekly exercise routine, from sedentary to very active</li>
+        <li><strong>Specify Climate Conditions:</strong> Indicate whether you live in a cool, warm, or hot and humid climate, as environmental temperature significantly affects fluid loss</li>
+        <li><strong>Calculate:</strong> Click the calculate button to receive your personalized daily water intake recommendation</li>
+      </ol>
+
+      <p>The calculator will display your recommended daily water intake in three convenient formats including liters for international measurement, fluid ounces for precise tracking, and cups for easy visualization and practical application. You'll also receive personalized hydration tips to help you meet your daily water goals.</p>
+
+      <h2>Understanding the Science Behind Water Intake Recommendations</h2>
+      <p>Our calculator uses a scientifically-validated approach based on the widely accepted baseline of approximately 35 milliliters of water per kilogram of body weight per day. This baseline is then adjusted using multipliers for activity level and climate conditions to account for increased fluid loss through sweating and respiration.</p>
+
+      <p>The baseline water requirement of 35 ml per kg body weight comes from extensive research by nutrition and physiology experts, including recommendations from institutions like the European Food Safety Authority. This baseline represents the minimum fluid intake needed to maintain proper hydration in temperate conditions with low activity levels.</p>
+
+      <h3>Activity Level Adjustments</h3>
+      <p>Physical activity significantly increases water needs through several mechanisms. During exercise, your body generates heat that must be dissipated through sweating. The more intense and prolonged the activity, the greater the fluid loss. Additionally, increased respiration during exercise leads to water loss through breathing.</p>
+
+      <p>Our calculator applies the following activity multipliers: Sedentary individuals with little to no regular exercise use a 1.0 multiplier representing baseline needs. Those with moderate activity performing light exercise 2-3 times per week use a 1.2 multiplier accounting for modest increases in fluid loss. Active individuals exercising moderately 4-5 times weekly use a 1.4 multiplier reflecting substantial regular activity. Very active people with intense daily exercise or physically demanding jobs use a 1.6 multiplier to account for significant daily fluid loss.</p>
+
+      <h3>Climate Adjustments</h3>
+      <p>Environmental temperature and humidity dramatically affect your water requirements. In hot conditions, your body must work harder to maintain normal temperature through increased sweating. Humid environments further complicate this process by reducing sweat evaporation efficiency, requiring even more fluid loss to achieve the same cooling effect.</p>
+
+      <p>Climate multipliers include: Cool or normal temperatures at 1.0 for baseline needs, warm climates at 1.1 accounting for moderately increased perspiration, and hot or humid conditions at 1.2 reflecting significantly elevated fluid loss through sweating.</p>
+
+      <h2>Why Proper Hydration is Essential for Health</h2>
+      <p>Water is the most abundant substance in the human body, comprising approximately 60% of total body weight in adults. Every system in your body depends on water to function properly. Understanding why hydration matters helps motivate consistent fluid intake.</p>
+
+      <h3>Physical Performance and Exercise</h3>
+      <p>Even mild dehydration can significantly impair physical performance. Research shows that losing just 2% of body weight through fluid loss can reduce exercise capacity, increase fatigue, and impair temperature regulation. For athletes and active individuals, maintaining proper hydration is crucial for optimal performance, endurance, and recovery.</p>
+
+      <p>Dehydration reduces blood volume, making your heart work harder to circulate oxygen and nutrients to working muscles. This leads to increased heart rate, elevated body temperature, and perceived exertion. Proper hydration helps maintain blood volume, supports efficient nutrient delivery, enhances thermoregulation, and improves endurance and strength performance.</p>
+
+      <h3>Cognitive Function and Mental Performance</h3>
+      <p>Your brain is approximately 75% water, and even mild dehydration can affect cognitive function. Studies demonstrate that dehydration impairs concentration, alertness, short-term memory, and mood. These effects can occur before you even feel thirsty, making proactive hydration important for maintaining mental clarity throughout the day.</p>
+
+      <p>Adequate hydration supports brain function by maintaining proper electrolyte balance, facilitating neurotransmitter production, ensuring efficient brain cell communication, and supporting concentration and decision-making abilities.</p>
+
+      <h3>Digestive Health</h3>
+      <p>Water plays a critical role in digestion from start to finish. Saliva, which begins the digestive process, is primarily water. Throughout the digestive tract, water helps break down food, absorb nutrients, and move waste through the intestines. Chronic dehydration commonly contributes to constipation and other digestive issues.</p>
+
+      <h3>Temperature Regulation</h3>
+      <p>One of water's most vital functions is helping regulate body temperature. When you become warm, your body produces sweat, which evaporates from your skin surface, cooling you down. This process is remarkably effective but requires adequate fluid intake to function properly. Insufficient hydration impairs your body's ability to regulate temperature, increasing risk of heat exhaustion and heat stroke.</p>
+
+      <h3>Kidney Function and Detoxification</h3>
+      <p>Your kidneys filter approximately 150 quarts of blood daily, removing waste products and excess substances while retaining what your body needs. This filtration process requires adequate water intake. Chronic dehydration forces kidneys to work harder and can increase risk of kidney stones and urinary tract infections.</p>
+
+      <h3>Skin Health and Appearance</h3>
+      <p>While topical treatments matter for skin health, adequate hydration from within is fundamental. Proper water intake helps maintain skin moisture, supports skin barrier function, aids in nutrient delivery to skin cells, and may help reduce appearance of fine lines. While drinking water alone won't eliminate wrinkles, chronic dehydration can make skin appear dull and more lined.</p>
+
+      <h3>Joint Health and Lubrication</h3>
+      <p>Cartilage in your joints contains approximately 80% water. This water content provides cushioning and allows smooth joint movement. Adequate hydration helps maintain joint lubrication, supports cartilage health, and may reduce joint pain and stiffness.</p>
+
+      <h2>Signs You May Need More Water</h2>
+      <p>Learning to recognize dehydration symptoms helps you adjust intake before significant problems develop. Dehydration signs range from mild to severe, and early intervention is always preferable.</p>
+
+      <h3>Early Dehydration Signs</h3>
+      <p>Initial indicators include thirst, which is actually a late sign that your body is already mildly dehydrated. Dark yellow urine indicates concentration due to insufficient fluid intake, normal urine should be pale yellow. Dry mouth and lips signal reduced saliva production. Mild headaches often result from dehydration affecting brain tissue volume. Fatigue and reduced energy can stem from dehydration impacting circulation and cellular function. Decreased urination frequency or volume indicates your body conserving fluids.</p>
+
+      <h3>Moderate to Severe Dehydration Signs</h3>
+      <p>More serious symptoms requiring immediate attention include dizziness or lightheadedness, rapid heartbeat, confusion or difficulty concentrating, very dark urine or no urination for several hours, extreme thirst, and dry, cool skin. Severe dehydration constitutes a medical emergency requiring professional treatment.</p>
+
+      <div class="info-box">
+        <h4>When to Seek Medical Attention</h4>
+        <p>Contact a healthcare provider immediately if you experience signs of severe dehydration including inability to keep fluids down, severe diarrhea lasting more than 24 hours, bloody or black stools, extreme fatigue or confusion, or lack of urination for 12 hours or more. These symptoms may indicate serious medical conditions requiring professional evaluation and treatment.</p>
+      </div>
+
+      <h2>Practical Tips for Meeting Your Daily Water Intake Goal</h2>
+      <p>Knowing your target water intake is one thing, actually achieving it consistently is another. These evidence-based strategies help make adequate hydration a sustainable habit.</p>
+
+      <h3>Start Your Day with Water</h3>
+      <p>Begin each morning by drinking a full glass of water before consuming anything else. After hours of sleep without fluid intake, your body needs rehydration. Morning water consumption kickstarts metabolism, rehydrates after overnight fluid loss, prepares your digestive system, and helps establish a hydration routine.</p>
+
+      <h3>Use Time-Based Reminders</h3>
+      <p>Rather than trying to drink large amounts at once, distribute intake throughout the day. Set hourly reminders to drink water, aiming for approximately one cup every one to two hours during waking hours. This approach is more effective and comfortable than trying to consume large volumes at once.</p>
+
+      <h3>Pair Water with Daily Habits</h3>
+      <p>Link water consumption to existing habits to build sustainable routines. Drink water before each meal and snack, after using the bathroom, when you check your phone, and during your commute. These habit pairings create automatic triggers for hydration.</p>
+
+      <h3>Keep Water Accessible</h3>
+      <p>Convenience dramatically increases consumption. Keep a reusable water bottle with you throughout the day. Place glasses of water in frequently visited locations at home and work. Have water easily visible and within reach. Research shows we drink more when water is readily available.</p>
+
+      <h3>Enhance Water Appeal</h3>
+      <p>If plain water feels boring, make it more appealing without adding significant calories or artificial ingredients. Try infusing water with fresh fruits like lemon, lime, berries, or cucumber, adding fresh herbs like mint or basil, using sparkling water for variety, or adjusting temperature since some people prefer cold while others like room temperature water.</p>
+
+      <h3>Eat Water-Rich Foods</h3>
+      <p>While this calculator focuses on beverages, remember that approximately 20% of daily fluid intake typically comes from food. High-water-content foods contribute to overall hydration including fruits like watermelon, strawberries, cantaloupe, and peaches, vegetables like cucumbers, lettuce, celery, and tomatoes, soups and broths, and yogurt. These foods supplement but don't replace adequate water consumption.</p>
+
+      <h3>Monitor Your Urine Color</h3>
+      <p>Urine color provides simple, immediate feedback about hydration status. Aim for pale yellow, similar to lemonade. Dark yellow or amber indicates need for more fluids. Clear urine might indicate overhydration, though this is rare. This visual check helps you adjust intake throughout the day.</p>
+
+      <h3>Adjust for Exercise and Heat</h3>
+      <p>While our calculator accounts for activity level, specific situations require additional attention. Drink extra water before, during, and after exercise. In hot weather or when sweating heavily, increase intake beyond your calculated baseline. For prolonged intense exercise lasting over an hour, consider beverages with electrolytes to replace minerals lost through sweat.</p>
+
+      <h2>Common Hydration Myths Debunked</h2>
+      <p>Numerous misconceptions about hydration persist despite scientific evidence. Understanding fact from fiction helps you make informed decisions about fluid intake.</p>
+
+      <h3>Myth: Everyone Needs Eight Glasses Daily</h3>
+      <p>The famous "8x8 rule" suggesting eight 8-ounce glasses daily lacks scientific basis and fails to account for individual variations in body size, activity, and environment. Your actual needs depend on multiple personal factors, which is why personalized calculation is more accurate than generic advice.</p>
+
+      <h3>Myth: Thirst is an Adequate Indicator</h3>
+      <p>While thirst signals dehydration, it's actually a late-stage indicator appearing after mild dehydration has begun. For optimal hydration, drink water consistently throughout the day rather than waiting until you feel thirsty, especially during exercise or in hot conditions.</p>
+
+      <h3>Myth: Coffee and Tea Don't Count</h3>
+      <p>Caffeinated beverages do contribute to daily fluid intake, though less efficiently than water. While caffeine has mild diuretic effects, research shows regular coffee and tea drinkers develop tolerance, and these beverages still provide net hydration. However, water remains the optimal choice for primary hydration.</p>
+
+      <h3>Myth: Clear Urine Means Perfect Hydration</h3>
+      <p>While dark urine indicates dehydration, completely clear urine may actually indicate overhydration. Pale yellow represents optimal hydration. Excessive water intake can dilute essential electrolytes, potentially causing health issues in extreme cases.</p>
+
+      <h3>Myth: You Can't Drink Too Much Water</h3>
+      <p>While rare, overhydration or hyponatremia can occur when excessive water intake dilutes blood sodium levels. This typically happens during endurance events when people drink large volumes without adequate electrolyte replacement. For most people following reasonable recommendations, overhydration isn't a concern, but it's worth noting that more isn't always better.</p>
+
+      <h2>Special Hydration Considerations</h2>
+      <p>Certain life stages and health conditions affect fluid requirements beyond what standard calculators account for. If any of these apply to you, consult healthcare providers for personalized guidance.</p>
+
+      <h3>Pregnancy and Breastfeeding</h3>
+      <p>Pregnant women need additional water to support increased blood volume, amniotic fluid, and fetal circulation. The American College of Obstetricians and Gynecologists recommends approximately 8 to 12 cups daily during pregnancy. Breastfeeding mothers need even more, approximately 13 cups daily, to support milk production while maintaining personal hydration.</p>
+
+      <h3>Older Adults</h3>
+      <p>Aging affects hydration in multiple ways. Kidney function typically declines with age, reducing ability to concentrate urine. Thirst sensation diminishes, meaning older adults may not feel thirsty despite dehydration. Some medications increase fluid loss. Mobility limitations may reduce drinking frequency. Older adults should pay extra attention to maintaining adequate hydration through scheduled intake rather than relying on thirst signals.</p>
+
+      <h3>Children and Adolescents</h3>
+      <p>Children have higher water needs relative to body weight compared to adults due to higher metabolic rates and surface area to volume ratios. Age-specific guidelines exist, but generally children need approximately 1 to 2 liters daily depending on age, with needs increasing through adolescence.</p>
+
+      <h3>Illness and Fever</h3>
+      <p>Illness significantly increases fluid needs. Fever raises metabolism and fluid loss through perspiration. Vomiting and diarrhea cause rapid fluid and electrolyte depletion. Respiratory infections increase fluid loss through breathing. During illness, increase fluid intake substantially beyond normal levels and contact healthcare providers if you're unable to maintain adequate hydration.</p>
+
+      <h3>Medications Affecting Hydration</h3>
+      <p>Various medications influence fluid balance. Diuretics intentionally increase urination requiring compensatory fluid intake. Some blood pressure medications, certain antidepressants, antihistamines, and laxatives can affect hydration status. If taking medications regularly, ask your healthcare provider whether they affect hydration and whether you need adjusted fluid intake.</p>
+
+      <h2>Understanding Electrolytes and Hydration</h2>
+      <p>While water is essential, proper hydration involves more than just water volume. Electrolytes, minerals carrying electrical charges in body fluids, play crucial roles in hydration and cellular function.</p>
+
+      <h3>Key Electrolytes</h3>
+      <p>Important electrolytes include sodium regulating fluid balance and nerve signals, potassium supporting heart function and muscle contractions, magnesium involved in hundreds of biochemical reactions, calcium essential for bones, muscles, and nerve function, and chloride working with sodium to maintain fluid balance.</p>
+
+      <h3>When Electrolytes Matter Most</h3>
+      <p>For typical daily hydration, plain water with a balanced diet provides adequate electrolytes. However, certain situations require attention to electrolyte replacement including prolonged intense exercise exceeding 60 minutes, excessive sweating in hot conditions, illness involving vomiting or diarrhea, and very low-sodium diets.</p>
+
+      <p>In these situations, consider beverages or foods containing electrolytes. Sports drinks, coconut water, electrolyte tablets or powders, and foods like bananas, leafy greens, and yogurt can help maintain proper electrolyte balance during situations of increased loss.</p>
+
+      <h2>Privacy and Your Health Data</h2>
+      <p>Your privacy and the security of your personal health information are paramount. Our water intake calculator is designed with privacy protection as a core principle:</p>
+      
+      <ul>
+        <li>All calculations are performed locally in your web browser using JavaScript technology</li>
+        <li>Your weight, activity level, and climate data are never stored, saved, or transmitted to any server</li>
+        <li>No cookies are set to track your personal health information</li>
+        <li>Your health data remains completely private and secure on your device</li>
+        <li>You can use this calculator with complete confidence knowing your information never leaves your browser</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>Medical Disclaimer</h4>
+        <p>This water intake calculator provides estimates for general informational and educational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Individual hydration needs vary based on numerous factors including health conditions, medications, pregnancy status, and specific circumstances not captured by this calculator. Always consult qualified healthcare providers regarding hydration needs specific to your health situation. If you have kidney disease, heart conditions, or take medications affecting fluid balance, consult your doctor before significantly changing fluid intake. In cases of severe dehydration or inability to maintain adequate hydration, seek immediate medical attention. This tool should not be used as the sole basis for making health decisions.</p>
+      </div>
+
+      <h2>The Bottom Line on Daily Water Intake</h2>
+      <p>Adequate hydration is fundamental to health, affecting virtually every bodily function from physical performance to cognitive clarity. While generic advice like "drink eight glasses daily" provides a starting point, personalized recommendations based on your body weight, activity level, and environmental conditions offer more accurate guidance for optimal hydration.</p>
+
+      <p>Our water intake calculator uses evidence-based formulas to provide customized daily recommendations accounting for your unique circumstances. By following these personalized targets and implementing practical hydration strategies, you can maintain optimal fluid balance supporting overall health and wellbeing.</p>
+
+      <p>Remember that hydration is an ongoing process requiring consistent attention throughout the day. Start by using this calculator to establish your baseline target, then develop sustainable habits that make meeting this goal feel effortless. Pay attention to your body's signals, adjust intake for exercise and environmental conditions, and make water consumption a natural part of your daily routine.</p>
+
+      <p>Proper hydration is one of the simplest yet most powerful actions you can take for your health. By understanding your personalized needs and implementing strategies to meet them consistently, you're investing in better physical performance, mental clarity, and long-term wellness.</p>
+    </article>
   </section>
 
-  <!-- FAQ Section -->
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions</h2>
-    <div class="faq">
-      <div class="faq-item">
-        <button class="faq-question">How accurate is this water calculator?</button>
-        <div class="faq-answer">Our calculator uses the scientifically-backed baseline of 35ml per kg body weight, adjusted for activity and climate factors for personalized hydration needs.</div>
-      </div>
-    </div>
-    <div class="faq">
-      <div class="faq-item">
-        <button class="faq-question">Does climate really affect water needs?</button>
-        <div class="faq-answer">Yes! Hot and humid climates increase water loss through sweating, requiring 10-20% more fluid intake to maintain proper hydration.</div>
-      </div>
-    </div>
-    <div class="faq">
-      <div class="faq-item">
-        <button class="faq-question">Should I drink all this water at once?</button>
-        <div class="faq-answer">No! Spread your water intake throughout the day. Aim for a glass every 1-2 hours for optimal hydration and better absorption.</div>
-      </div>
-    </div>
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is this water intake calculator?</summary>
+      <p>Our calculator uses scientifically-validated methods based on the baseline of approximately 35 milliliters per kilogram of body weight, adjusted for activity level and climate conditions. This approach is more accurate than generic "8 glasses" advice because it accounts for individual variations in body size and lifestyle. However, individual needs can vary based on health conditions, medications, pregnancy status, and other factors. Use the calculator as a starting guideline and adjust based on your body's signals and healthcare provider recommendations.</p>
+    </details>
+    <details>
+      <summary>Does climate really affect how much water I need?</summary>
+      <p>Yes, climate significantly impacts water requirements. In hot and humid environments, your body produces more sweat to regulate temperature, increasing fluid loss by 10-20% or more compared to temperate conditions. High humidity makes sweat evaporation less efficient, requiring even more perspiration for the same cooling effect. If you live in or visit hot climates, you need substantially more water to maintain proper hydration and support your body's temperature regulation system.</p>
+    </details>
+    <details>
+      <summary>Should I drink all my water at once or spread it throughout the day?</summary>
+      <p>Definitely spread water intake throughout the day rather than consuming large amounts at once. Your body absorbs water more effectively when consumed in moderate amounts consistently. Drinking too much at once can overwhelm your kidneys and lead to frequent bathroom trips without improving hydration. Aim for approximately one cup every one to two hours during waking hours. This approach maintains steady hydration, supports consistent energy levels, and is more comfortable than trying to drink large volumes at specific times.</p>
+    </details>
+    <details>
+      <summary>What if I don't like drinking plain water?</summary>
+      <p>There are many ways to make water more appealing while still achieving proper hydration. Try infusing water with fresh fruits, vegetables, or herbs like lemon, cucumber, berries, or mint. Sparkling water provides variety with the same hydration benefits. Herbal teas count toward fluid intake. You can also consume water-rich foods like watermelon, cucumbers, and soups which contribute to overall hydration. The key is finding options you enjoy enough to consume consistently throughout the day.</p>
+    </details>
+    <details>
+      <summary>Can I drink too much water?</summary>
+      <p>While rare, overhydration or hyponatremia can occur when excessive water intake dilutes blood sodium levels to dangerous levels. This typically happens during endurance events when people drink large volumes without adequate electrolyte replacement, or in certain medical conditions. For most people following reasonable recommendations like those from this calculator, overhydration isn't a concern. However, if you're consistently drinking far beyond recommended amounts and experiencing symptoms like nausea, headache, or confusion, consult a healthcare provider.</p>
+    </details>
+    <details>
+      <summary>Do coffee and tea count toward my daily water intake?</summary>
+      <p>Yes, coffee and tea do contribute to daily fluid intake, though they're less efficient than plain water. While caffeine has mild diuretic effects that increase urination, research shows regular consumers develop tolerance to this effect. The fluid in these beverages still provides net hydration. However, water remains the optimal primary source for hydration because it contains no additives, stimulants, or calories. If you enjoy coffee and tea, they can supplement but shouldn't completely replace water consumption.</p>
+    </details>
+    <details>
+      <summary>How can I tell if I'm properly hydrated?</summary>
+      <p>The simplest indicator is urine color. Aim for pale yellow, similar to lemonade. Dark yellow or amber indicates dehydration and need for more fluids. Completely clear urine might indicate overhydration, though this is uncommon. Other signs of proper hydration include consistent energy levels, absence of persistent thirst, regular urination approximately every 2-4 hours, and absence of headaches or dizziness. If you notice dark urine consistently despite adequate intake, or other concerning symptoms, consult a healthcare provider.</p>
+    </details>
+    <details>
+      <summary>Do I need more water when exercising?</summary>
+      <p>Yes, exercise significantly increases water needs through sweating and increased respiration. While our calculator's activity level adjustment accounts for regular exercise patterns, specific workout sessions require additional hydration. Drink water before, during, and after exercise. For exercise lasting less than 60 minutes, plain water is typically sufficient. For prolonged intense exercise exceeding one hour, consider beverages with electrolytes to replace minerals lost through heavy sweating. Weigh yourself before and after long workouts to estimate fluid loss and ensure adequate rehydration.</p>
+    </details>
   </section>
 
-  <!-- Bottom Ad -->
-  <div class="ad-container">
-    <div class="ad-placeholder">
-      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
-           data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="9988776655"></ins>
-      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-      <p>Advertisement</p>
-    </div>
-  </div>
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
-  <!-- Floating CTA -->
-  <a href="index.html" class="floating-cta">📢 See All Calculators</a>
-
-  <!-- Footer -->
   <footer>
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This water intake calculator is provided for informational and educational purposes only. The results are estimates and should not be used as the sole basis for health decisions. Individual hydration needs vary based on health conditions, medications, pregnancy status, and other factors not captured by this calculator. This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always consult qualified healthcare providers regarding hydration needs specific to your health situation.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
-   <!-- JSON-LD FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How accurate is this water calculator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Our calculator uses the scientifically-backed baseline of 35ml per kg body weight, adjusted for activity and climate factors for personalized hydration needs." }
-      },
-      {
-        "@type": "Question",
-        "name": "Does climate really affect water needs?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes! Hot and humid climates increase water loss through sweating, requiring 10-20% more fluid intake to maintain proper hydration." }
-      },
-      {
-        "@type": "Question",
-        "name": "Should I drink all this water at once?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No! Spread your water intake throughout the day. Aim for a glass every 1-2 hours for optimal hydration and better absorption." }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How accurate is this water intake calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our calculator uses scientifically-validated methods based on approximately 35 milliliters per kilogram of body weight, adjusted for activity and climate. This is more accurate than generic advice because it accounts for individual variations in body size and lifestyle."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "Does climate really affect how much water I need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, climate significantly impacts water requirements. In hot and humid environments, your body produces more sweat to regulate temperature, increasing fluid loss by 10-20% or more compared to temperate conditions."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I drink all my water at once or spread it throughout the day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Spread water intake throughout the day. Your body absorbs water more effectively when consumed in moderate amounts consistently. Aim for approximately one cup every one to two hours during waking hours."
+      }
+    },{
+      "@type": "Question",
+      "name": "Can I drink too much water?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While rare, overhydration can occur. For most people following reasonable recommendations, this isn't a concern. However, excessive intake can dilute blood sodium levels in certain situations."
+      }
+    }]
   }
   </script>
 
   <script>
-    // Track current unit explicitly (fixes "must click Imperial first" bug)
-    let currentUnit = 'imperial'; // default
+    // Track current unit explicitly
+    let currentUnit = 'imperial';
 
     const btnImperial = document.getElementById('btnImperial');
     const btnMetric = document.getElementById('btnMetric');
@@ -578,47 +930,35 @@
         metricFields.style.display = 'none';
         btnImperial.classList.add('active');
         btnMetric.classList.remove('active');
-        btnImperial.setAttribute('aria-pressed','true');
-        btnMetric.setAttribute('aria-pressed','false');
-        imperialFields.setAttribute('aria-hidden','false');
-        metricFields.setAttribute('aria-hidden','true');
       } else {
         imperialFields.style.display = 'none';
         metricFields.style.display = 'block';
         btnMetric.classList.add('active');
         btnImperial.classList.remove('active');
-        btnMetric.setAttribute('aria-pressed','true');
-        btnImperial.setAttribute('aria-pressed','false');
-        metricFields.setAttribute('aria-hidden','false');
-        imperialFields.setAttribute('aria-hidden','true');
       }
-      // Clear previous result when switching units
       resultEl.classList.remove('show');
     }
 
-    // wire buttons
     btnImperial.addEventListener('click', () => setUnit('imperial'));
     btnMetric.addEventListener('click', () => setUnit('metric'));
 
-    // ensure default visually active (in case CSS loads differently)
     setUnit('imperial');
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
       
-      // read inputs based on currentUnit (not on style)
       let weightKg = 0;
       if (currentUnit === 'imperial') {
         const lbs = parseFloat(document.getElementById('weightLbs').value);
         if (!Number.isFinite(lbs) || lbs <= 0) {
-          showError('⚠️ Please enter a valid weight in pounds.');
+          alert('Please enter a valid weight in pounds.');
           return;
         }
         weightKg = lbs * 0.45359237;
       } else {
         const kg = parseFloat(document.getElementById('weightKg').value);
         if (!Number.isFinite(kg) || kg <= 0) {
-          showError('⚠️ Please enter a valid weight in kilograms.');
+          alert('Please enter a valid weight in kilograms.');
           return;
         }
         weightKg = kg;
@@ -632,58 +972,69 @@
       const waterOz = waterLiters * 33.8140226;
       const cups = Math.round(waterOz / 8);
 
-      // Update result display
-      document.getElementById('litersAmount').textContent = waterLiters.toFixed(2);
-      document.getElementById('ozAmount').textContent = Math.round(waterOz);
-      document.getElementById('cupsAmount').textContent = cups;
+      resultEl.innerHTML = `
+        <h3>💦 Your Daily Water Requirement</h3>
+        
+        <div class="water-visual">
+          <div class="water-card">
+            <div class="water-number">${waterLiters.toFixed(2)}</div>
+            <div class="water-label">Liters</div>
+          </div>
+          <div class="water-card">
+            <div class="water-number">${Math.round(waterOz)}</div>
+            <div class="water-label">Ounces</div>
+          </div>
+          <div class="water-card">
+            <div class="water-number">${cups}</div>
+            <div class="water-label">Cups (8 oz)</div>
+          </div>
+        </div>
 
-      // Animate water fill based on intake level (scale 1-4 liters)
-      const fillPercentage = Math.min((waterLiters / 4) * 100, 100);
-      document.getElementById('waterFill').style.setProperty('--fill-height', fillPercentage + '%');
+        <hr>
 
-      // Show results with animation
+        <div class="hydration-tips">
+          <h4>💡 Personalized Hydration Tips</h4>
+          <div class="tip-item">💧 Distribute your water intake evenly throughout the day – aim for one glass every 1-2 hours rather than large amounts at once.</div>
+          <div class="tip-item">🍽️ Drinking a glass of water before meals can support digestion and help with portion control.</div>
+          <div class="tip-item">🌅 Start your morning with a full glass of water to rehydrate after sleep and kickstart your metabolism.</div>
+          <div class="tip-item">🎨 Use urine color as a guide – aim for pale yellow like lemonade, which indicates optimal hydration.</div>
+        </div>
+      `;
+
       resultEl.classList.add('show');
-      
-      // Scroll to results
       resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+  </script>
 
-    function showError(message) {
-      const existingError = document.querySelector('.error-message');
-      if (existingError) existingError.remove();
-      
-      const errorDiv = document.createElement('div');
-      errorDiv.className = 'error-message';
-      errorDiv.innerHTML = message;
-      form.appendChild(errorDiv);
-      
-      setTimeout(() => errorDiv.remove(), 5000);
-    }
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const toggle = document.getElementById("darkModeToggle");
+        const body = document.body;
 
-    // Dark mode toggle
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById("darkModeToggle");
-      if (toggle) {
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                toggle.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                toggle.textContent = '🌙';
+            }
+        };
+
         toggle.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'light');
+                applyTheme('light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+                applyTheme('dark');
+            }
         });
-        if (localStorage.getItem("theme") === "dark") {
-          document.body.classList.add("dark-mode");
-        }
-      }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
     });
   </script>
-  <script>
-  // FAQ Accordion Fix
-  document.querySelectorAll(".faq-question").forEach(button => {
-    button.addEventListener("click", () => {
-      const faqItem = button.parentElement;
-      faqItem.classList.toggle("active");
-    });
-  });
-</script>
 
-  
 </body>
 </html>
