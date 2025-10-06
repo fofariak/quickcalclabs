@@ -3,102 +3,565 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resting Metabolic Rate (RMR) Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Calculate your Resting Metabolic Rate (RMR) with our free, interactive calculator. Understand the calories you burn at rest to better manage your weight and health goals.">
+  <title>Resting Metabolic Rate Calculator - Calculate Your Daily Calorie Burn | QuickCalcLabs</title>
+  <meta name="description" content="Free RMR calculator using the Mifflin-St Jeor equation. Calculate your resting metabolic rate, discover your daily calorie needs, and create personalized nutrition plans for weight loss, maintenance, or muscle gain.">
+  <meta name="keywords" content="RMR calculator, resting metabolic rate, BMR calculator, basal metabolic rate, TDEE calculator, daily calorie needs, metabolism calculator, calorie burn calculator, weight loss calculator">
+  <link rel="canonical" href="https://quickcalclabs.com/resting-metabolic-rate-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
-     crossorigin="anonymous"></script>
   <style>
-    :root {
-      --accent-blue: #3498db;
-      --accent-green: #2ecc71;
-      --accent-purple: #9b59b6;
-      --card-bg: #ffffff;
-      --text-color: #333;
+    /* RMR calculator page specific styles */
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
-    .dark-mode {
-      --card-bg: #2c3e50;
-      --text-color: #ecf0f1;
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
-    .calc-wrapper { max-width: 600px; }
-    .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 1.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .calc-wrapper h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-strong-light, #0f172a);
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .dark-mode label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .calc-wrapper input[type="number"] {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      margin: 0.6rem 0 0;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+    }
+
+    .calc-wrapper input:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
     .segmented-control {
       display: flex;
-      border-radius: 10px;
-      border: 1px solid #bdc3c7;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
       overflow: hidden;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      margin: 0.6rem 0 1.2rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
     }
-    .segmented-control input[type="radio"] { display: none; }
+
+    .dark-mode .segmented-control {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .segmented-control input[type="radio"] {
+      display: none;
+    }
+
     .segmented-control label {
       flex: 1;
       text-align: center;
-      padding: 10px;
+      padding: 0.9rem;
       cursor: pointer;
-      background: var(--card-bg);
-      color: var(--text-color);
-      transition: background 0.3s;
-    }
-    .segmented-control input[type="radio"]:checked + label {
-      background: var(--accent-blue);
-      color: #fff;
+      color: var(--text-medium-light, #334155);
+      transition: all 0.3s ease;
+      margin: 0;
       font-weight: 600;
     }
 
-    /* Result styles */
-    .rmr-result-container {
-        margin-top: 25px;
-        background: var(--card-bg);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        text-align: center;
-    }
-    .rmr-result-container h3 {
-        margin-top: 0;
-        color: var(--accent-blue);
-    }
-    .rmr-value {
-        font-size: 48px;
-        font-weight: bold;
-        margin: 10px 0;
-    }
-    .rmr-value span {
-        font-size: 20px;
-        font-weight: normal;
-        color: #7f8c8d;
-    }
-    .dark-mode .rmr-value span { color: #bdc3c7; }
-    .tdee-table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-        text-align: left;
-    }
-    .tdee-table th, .tdee-table td {
-        padding: 8px;
-        border-bottom: 1px solid #ecf0f1;
-    }
-    .dark-mode .tdee-table th, .dark-mode .tdee-table td {
-        border-bottom: 1px solid #34495e;
-    }
-    .tdee-table td:last-child {
-        font-weight: bold;
-        text-align: right;
+    .dark-mode .segmented-control label {
+      color: var(--text-medium-dark, #cbd5e1);
     }
 
-    /* Other styles */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 15px; margin-top: 20px; }
-    .card { background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .card a { text-decoration:none; font-weight:600; color: var(--text-color);}
-    .card a:hover { color: var(--accent-blue); }
-    .faq { margin-bottom: 10px; border-radius: 8px; background: var(--card-bg); box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
-    .faq summary { margin: 0; padding: 12px; background: var(--accent-blue); color: #fff; cursor: pointer; font-size: 16px; font-weight: 600; }
-    .faq p { margin: 0; padding: 12px; font-size: 14px; line-height: 1.6; }
+    .segmented-control input[type="radio"]:checked + label {
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      color: #fff;
+    }
+
+    .calc-wrapper button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .calc-wrapper button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button:active {
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      font-weight: 600;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      color: var(--text-strong-light, #0f172a);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      color: var(--text-strong-dark, #f1f5f9);
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.4rem;
+      text-align: center;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .result-box p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .rmr-value {
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 1rem 0;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .rmr-value span {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .dark-mode .rmr-value span {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .tdee-table {
+      width: 100%;
+      margin-top: 1.5rem;
+      border-collapse: collapse;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+      overflow: hidden;
+    }
+
+    .dark-mode .tdee-table {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .tdee-table th, .tdee-table td {
+      padding: 0.9rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .tdee-table th, .dark-mode .tdee-table td {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .tdee-table th {
+      background: rgba(139, 92, 246, 0.1);
+      font-weight: 700;
+    }
+
+    .tdee-table td:last-child {
+      font-weight: 700;
+      text-align: right;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .tdee-table td:last-child {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-group {
+        grid-template-columns: 1fr;
+      }
+
+      .rmr-value {
+        font-size: 2.5rem;
+      }
+    }
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -112,90 +575,66 @@
     </nav>
   </header>
 
-  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
-
   <section class="calc-wrapper">
-    <h1>🔥 Resting Metabolic Rate (RMR) Calculator</h1>
-    <p class="subtitle">Discover the number of calories your body burns at rest to tailor your nutrition and fitness goals.</p>
-
+    <h1>Resting Metabolic Rate Calculator</h1>
+    <p class="subtitle">Calculate your resting metabolic rate and discover your daily calorie needs based on your activity level using the scientifically validated Mifflin-St Jeor equation.</p>
+    <p class="meta-info">Last Updated: January 2025</p>
+    
+    <h2>Enter Your Information</h2>
     <div class="input-group">
-        <div>
-            <label for="age">🎂 Age (years):</label>
-            <input type="number" id="age" placeholder="e.g., 30">
+      <div>
+        <label>Age (years):</label>
+        <input type="number" id="age" placeholder="e.g., 30" min="1" max="120">
+      </div>
+      <div>
+        <label>Biological Sex:</label>
+        <div class="segmented-control">
+          <input type="radio" id="male" name="sex" value="male" checked>
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="sex" value="female">
+          <label for="female">Female</label>
         </div>
-        <div>
-            <label>🚻 Sex:</label>
-            <div class="segmented-control" style="margin-top:0;">
-                <input type="radio" id="male" name="sex" value="male" checked>
-                <label for="male">Male</label>
-                <input type="radio" id="female" name="sex" value="female">
-                <label for="female">Female</label>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <label>🔄 Unit System:</label>
+    <label>Unit System:</label>
     <div class="segmented-control">
-        <input type="radio" id="imperial" name="unit" value="imperial" checked>
-        <label for="imperial">Imperial</label>
-        <input type="radio" id="metric" name="unit" value="metric">
-        <label for="metric">Metric</label>
+      <input type="radio" id="imperial" name="unit" value="imperial" checked>
+      <label for="imperial">Imperial (lbs/ft)</label>
+      <input type="radio" id="metric" name="unit" value="metric">
+      <label for="metric">Metric (kg/cm)</label>
     </div>
 
     <!-- Imperial Inputs -->
     <div id="imperialInputs">
-        <div class="input-group">
-            <div>
-                <label for="weight_lbs">⚖️ Weight (lbs):</label>
-                <input type="number" id="weight_lbs" placeholder="e.g., 150">
-            </div>
-            <div>
-                <label>📏 Height (ft/in):</label>
-                <div class="input-group" style="gap: 5px;">
-                     <input type="number" id="height_ft" placeholder="ft">
-                     <input type="number" id="height_in" placeholder="in">
-                </div>
-            </div>
+      <label>Your Height:</label>
+      <div class="input-group">
+        <div>
+          <input type="number" id="height_ft" placeholder="Feet (e.g., 5)">
         </div>
+        <div>
+          <input type="number" id="height_in" placeholder="Inches (e.g., 8)">
+        </div>
+      </div>
+      <label>Your Weight (lbs):</label>
+      <input type="number" id="weight_lbs" placeholder="e.g., 150">
     </div>
 
     <!-- Metric Inputs -->
     <div id="metricInputs" style="display: none;">
-        <div class="input-group">
-            <div>
-                <label for="weight_kg">⚖️ Weight (kg):</label>
-                <input type="number" id="weight_kg" placeholder="e.g., 68">
-            </div>
-            <div>
-                <label for="height_cm">📏 Height (cm):</label>
-                <input type="number" id="height_cm" placeholder="e.g., 175">
-            </div>
-        </div>
+      <label>Your Height (cm):</label>
+      <input type="number" id="height_cm" placeholder="e.g., 175">
+      <label>Your Weight (kg):</label>
+      <input type="number" id="weight_kg" placeholder="e.g., 68">
     </div>
 
-    <button onclick="calculateRMR()">Calculate RMR</button>
+    <button onclick="calculateRMR()">Calculate My RMR</button>
 
-    <div id="result" class="result-box"></div>
+    <div id="result" class="result-box" style="display: none;"></div>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">300x250 Mid-Content Ad</div></div>
-
   <section class="seo-content">
-    <h2>What is Resting Metabolic Rate (RMR)?</h2>
-    <p>Your Resting Metabolic Rate (RMR) is an estimate of how many calories your body burns while in a state of complete rest. It represents the minimum amount of energy needed to keep your vital organs and bodily systems functioning, including breathing, circulating blood, regulating body temperature, and basic brain functions. Knowing your RMR is the foundational first step in determining your total daily calorie needs, whether your goal is weight loss, muscle gain, or weight maintenance.</p>
-    
-    <h3>RMR vs. BMR: What's the Difference?</h3>
-    <p>You may also hear the term Basal Metabolic Rate (BMR). RMR and BMR are very similar and often used interchangeably, but there's a slight technical difference. BMR is a more restrictive measurement taken in a dark, temperature-controlled lab after an overnight fast and a full, uninterrupted night of sleep. RMR is a less restrictive, more practical estimate of your resting energy expenditure and is typically about 10% higher than BMR. For most practical purposes, RMR is the more useful number for creating a real-world diet and exercise plan.</p>
-    
-    <h3>How to Use Your RMR Result for Your Goals</h3>
-    <p>Your RMR is your metabolic baseline. To find your Total Daily Energy Expenditure (TDEE)—the total number of calories you burn in a typical day—you multiply your RMR by an activity factor. The calculator does this for you automatically, providing a clear path to setting your calorie targets:</p>
-    <ul>
-        <li><strong>For Weight Loss:</strong> Aim for a daily calorie intake that is 300-500 calories below your TDEE.</li>
-        <li><strong>For Weight Maintenance:</strong> Aim to eat at or very close to your calculated TDEE.</li>
-        <li><strong>For Weight Gain:</strong> Aim for a daily calorie intake that is 300-500 calories above your TDEE.</li>
-    </ul>
-
-    <h3>🔗 Explore More Tools</h3>
+    <h3>🔗 Related Health Tools</h3>
     <div class="card-grid">
       <div class="card"><a href="calorie-calculator.html">🔥 Calorie Calculator (TDEE)</a></div>
       <div class="card"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></div>
@@ -205,68 +644,261 @@
 
     <h3>📝 Related Blogs</h3>
     <div class="card-grid">
-        <div class="card"><a href="blog/how-to-boost-metabolism.html">🚀 How to Boost Your Metabolism: A Science-Backed Guide</a></div>
-        <div class="card"><a href="blog/energy-balance-weight-loss.html">💡 Understanding Energy Balance for Weight Loss</a></div>
+      <div class="card"><a href="blog/how-to-boost-metabolism.html">🚀 How to Boost Your Metabolism</a></div>
+      <div class="card"><a href="blog/energy-balance-weight-loss.html">💡 Understanding Energy Balance</a></div>
     </div>
+
+    <article>
+      <h2>What is Resting Metabolic Rate?</h2>
+      <p>Your Resting Metabolic Rate, commonly abbreviated as RMR, represents the number of calories your body burns while at complete rest. It's the energy your body requires to maintain essential physiological functions such as breathing, circulating blood, regulating body temperature, producing hormones, synthesizing proteins, and supporting brain and nervous system activity. RMR typically accounts for 60 to 75 percent of your total daily calorie expenditure, making it the largest component of your overall energy needs.</p>
+
+      <p>Understanding your RMR is fundamental to achieving any body composition goal, whether you're trying to lose weight, maintain your current weight, or build muscle mass. It provides the baseline upon which all other calorie calculations are built. Without knowing your RMR, you're essentially guessing at how many calories you should consume, which can lead to frustration when you don't see the results you expect.</p>
+
+      <h2>RMR vs BMR: Understanding the Difference</h2>
+      <p>You may encounter the term Basal Metabolic Rate or BMR when researching metabolism and calorie needs. While RMR and BMR are very similar and often used interchangeably in casual conversation, there are subtle but important technical differences between the two measurements.</p>
+
+      <h3>Basal Metabolic Rate</h3>
+      <p>BMR is a highly controlled measurement taken under strict laboratory conditions. To measure true BMR, you must be in a darkened room with a neutral temperature, having fasted for at least 12 hours and slept for eight consecutive hours. You must be completely relaxed with no physical or mental stress. These stringent requirements make true BMR measurements impractical for most people and primarily relevant for research purposes.</p>
+
+      <h3>Resting Metabolic Rate</h3>
+      <p>RMR is a more practical measurement that can be taken under less restrictive conditions. While you should still be rested and have avoided eating for several hours, the conditions don't need to be as rigidly controlled as with BMR. RMR is typically about 10 percent higher than BMR because the less restrictive conditions mean your body is slightly more active. For real-world applications like planning your diet and exercise regimen, RMR is the more relevant and useful number.</p>
+
+      <h2>How This Calculator Works: The Mifflin-St Jeor Equation</h2>
+      <p>This calculator uses the Mifflin-St Jeor equation, which is widely recognized as one of the most accurate formulas for estimating resting metabolic rate. Developed in 1990, this equation has been validated through numerous studies and is considered more accurate than the older Harris-Benedict equation, particularly for modern populations.</p>
+
+      <p>The Mifflin-St Jeor equation calculates RMR using four variables: weight in kilograms, height in centimeters, age in years, and biological sex. The formula is:</p>
+
+      <div class="info-box">
+        <h4>The Mifflin-St Jeor Formula</h4>
+        <p><strong>For Men:</strong> RMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5</p>
+        <p><strong>For Women:</strong> RMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161</p>
+      </div>
+
+      <p>The equation accounts for the fact that men typically have more muscle mass and less body fat than women at similar weights, resulting in a higher metabolic rate. Age is factored in because metabolism naturally decreases as we get older, primarily due to loss of muscle mass and changes in hormonal activity.</p>
+
+      <h2>Understanding Your TDEE: Total Daily Energy Expenditure</h2>
+      <p>While your RMR tells you how many calories you burn at rest, your Total Daily Energy Expenditure or TDEE represents the total calories you burn throughout an entire day, including all physical activity. TDEE is calculated by multiplying your RMR by an activity factor that corresponds to your typical activity level.</p>
+
+      <h3>Activity Level Multipliers</h3>
+      <p>The calculator provides TDEE estimates for five different activity levels:</p>
+
+      <ul>
+        <li><strong>Sedentary (1.2x RMR):</strong> Little or no exercise, desk job, minimal daily movement beyond basic activities</li>
+        <li><strong>Lightly Active (1.375x RMR):</strong> Light exercise or sports 1 to 3 days per week, moderate daily activity</li>
+        <li><strong>Moderately Active (1.55x RMR):</strong> Moderate exercise or sports 3 to 5 days per week, fairly active lifestyle</li>
+        <li><strong>Very Active (1.725x RMR):</strong> Hard exercise or sports 6 to 7 days per week, very active lifestyle</li>
+        <li><strong>Extra Active (1.9x RMR):</strong> Very hard exercise or sports daily plus a physical job or training twice daily</li>
+      </ul>
+
+      <p>Most people fall into the sedentary to moderately active categories. It's important to be honest about your activity level, as overestimating can lead to consuming more calories than you actually burn, preventing weight loss or causing unwanted weight gain.</p>
+
+      <h2>Using Your RMR and TDEE for Different Goals</h2>
+      <p>Once you know your RMR and TDEE, you can create a strategic nutrition plan tailored to your specific body composition goals. The key is manipulating your calorie intake relative to your TDEE while ensuring you still meet your nutritional needs.</p>
+
+      <h3>For Weight Loss</h3>
+      <p>To lose weight, you need to create a calorie deficit, meaning you consume fewer calories than your TDEE. A sustainable approach is to aim for a deficit of 300 to 500 calories per day below your TDEE, which typically results in losing about 0.5 to 1 pound per week. This gradual approach is more sustainable and helps preserve muscle mass compared to extreme calorie restriction.</p>
+
+      <p>It's crucial that you never eat below your RMR for extended periods. Consistently eating below your RMR can slow your metabolism, cause muscle loss, lead to nutrient deficiencies, and create unsustainable dietary patterns. Your body needs those baseline calories to maintain essential functions.</p>
+
+      <h3>For Weight Maintenance</h3>
+      <p>To maintain your current weight, aim to consume calories equal to your TDEE. This balance means you're eating exactly what you're burning. Weight maintenance allows you to focus on body recomposition, building muscle while maintaining weight, improving fitness, or simply sustaining a healthy weight you've achieved.</p>
+
+      <h3>For Muscle Gain and Bulking</h3>
+      <p>To gain weight, particularly muscle mass, you need a calorie surplus, consuming 300 to 500 calories above your TDEE. This surplus provides the extra energy needed for muscle protein synthesis and tissue growth. Combine this surplus with resistance training to ensure the weight gained is primarily muscle rather than fat.</p>
+
+      <p>The rate of healthy muscle gain is limited, typically about 0.5 to 1 pound per week for beginners and even slower for advanced lifters. Eating excessively above your TDEE will result in unnecessary fat gain rather than additional muscle.</p>
+
+      <h2>Factors That Influence Your Metabolic Rate</h2>
+      <p>While the Mifflin-St Jeor equation provides an accurate estimate for most people, several factors can cause individual variations in metabolic rate. Understanding these factors helps explain why some people may find their actual calorie needs differ slightly from calculated estimates.</p>
+
+      <h3>Body Composition</h3>
+      <p>Muscle tissue is metabolically active, burning more calories at rest than fat tissue. Two people of the same weight, height, age, and sex can have different RMRs if one has significantly more muscle mass. This is why strength training is so effective for long-term weight management, building muscle increases your RMR so you burn more calories even at rest.</p>
+
+      <h3>Age</h3>
+      <p>Metabolism naturally decreases with age, primarily because of the gradual loss of muscle mass that occurs as we age, a process called sarcopenia. Starting around age 30, most people lose 3 to 8 percent of muscle mass per decade without intervention. This decline can be significantly slowed or even reversed through regular resistance training and adequate protein intake.</p>
+
+      <h3>Genetics</h3>
+      <p>Genetic factors influence metabolism to some degree, affecting muscle fiber composition, hormone levels, and how efficiently your body uses energy. However, genetics typically account for only a 200 to 300 calorie per day variation between individuals of similar size and composition, much less than many people believe. Lifestyle factors like diet and exercise have a far greater impact than genetics alone.</p>
+
+      <h3>Hormones</h3>
+      <p>Thyroid hormones are the primary regulators of metabolic rate. Hypothyroidism, an underactive thyroid, can decrease metabolism by 10 to 15 percent, while hyperthyroidism, an overactive thyroid, can increase it. Other hormones including testosterone, estrogen, cortisol, and insulin also play roles in regulating metabolism and body composition. If you suspect hormonal issues are affecting your metabolism, consult with a healthcare provider.</p>
+
+      <h3>Diet and Eating Patterns</h3>
+      <p>Severe calorie restriction can slow metabolism as your body adapts to conserve energy, a phenomenon called metabolic adaptation or adaptive thermogenesis. This is why crash diets are counterproductive for long-term weight management. Eating adequate protein helps maintain muscle mass and has a higher thermic effect, meaning your body burns more calories digesting and processing protein compared to fats and carbohydrates.</p>
+
+      <h2>Strategies to Support a Healthy Metabolism</h2>
+      <p>While you can't dramatically change your basal metabolic rate overnight, several evidence-based strategies can help optimize your metabolism and support your body composition goals.</p>
+
+      <h3>Build and Maintain Muscle Mass</h3>
+      <p>Resistance training is the most effective way to increase your RMR over time. Aim for at least 2 to 3 strength training sessions per week targeting all major muscle groups. Progressive overload, gradually increasing the weight or difficulty over time, is key to continued muscle growth. Each pound of muscle burns approximately 6 calories per day at rest, while fat burns only 2 calories per pound.</p>
+
+      <h3>Eat Adequate Protein</h3>
+      <p>Protein supports muscle maintenance and growth, and it has the highest thermic effect of all macronutrients. Your body burns 20 to 30 percent of protein calories during digestion and processing, compared to 5 to 10 percent for carbohydrates and 0 to 3 percent for fats. Aim for 0.7 to 1 gram of protein per pound of body weight if you're active, or 0.8 to 1.2 grams per pound if you're trying to build muscle or lose fat.</p>
+
+      <h3>Don't Crash Diet</h3>
+      <p>Avoid extreme calorie restriction below your RMR. Gradual, sustainable calorie deficits preserve muscle mass and keep your metabolism functioning optimally. If you've been dieting for an extended period, consider taking a diet break at maintenance calories for one to two weeks to help restore hormonal balance and reduce metabolic adaptation.</p>
+
+      <h3>Stay Active Throughout the Day</h3>
+      <p>Non-exercise activity thermogenesis, or NEAT, refers to the calories you burn through daily activities outside of formal exercise. This includes walking, fidgeting, standing, and general movement. Increasing NEAT by taking the stairs, standing more, walking during phone calls, and staying generally active can add 200 to 400 calories to your daily expenditure.</p>
+
+      <h3>Prioritize Sleep</h3>
+      <p>Poor sleep disrupts hormones that regulate hunger and metabolism, including leptin, ghrelin, cortisol, and growth hormone. Chronic sleep deprivation is associated with decreased RMR, increased appetite, and preferential loss of muscle mass during weight loss. Aim for 7 to 9 hours of quality sleep per night.</p>
+
+      <h3>Manage Stress</h3>
+      <p>Chronic stress elevates cortisol, which can promote muscle breakdown and fat storage, particularly in the abdominal area. High cortisol also increases appetite and cravings for high-calorie foods. Incorporate stress management techniques like meditation, yoga, deep breathing, or regular exercise.</p>
+
+      <h3>Stay Hydrated</h3>
+      <p>Adequate hydration is essential for optimal metabolic function. Studies show that drinking water can temporarily increase RMR by 10 to 30 percent for about an hour. Cold water may have an even greater effect as your body expends energy warming it to body temperature. Aim for at least 8 cups of water daily, more if you're active or in hot weather.</p>
+
+      <h2>Common Metabolic Myths Debunked</h2>
+      <p>Many misconceptions about metabolism persist in popular culture. Understanding the science helps you make informed decisions about your health and avoid ineffective or harmful practices.</p>
+
+      <h3>Myth: Eating Small Frequent Meals Boosts Metabolism</h3>
+      <p>While eating does temporarily increase metabolism through the thermic effect of food, the total effect over a day depends on total calories consumed, not meal frequency. Eating six small meals burns the same total calories through digestion as eating three larger meals with the same total calorie content. Meal frequency should be based on personal preference, lifestyle, and hunger patterns rather than attempting to manipulate metabolism.</p>
+
+      <h3>Myth: Certain Foods or Supplements Dramatically Speed Up Metabolism</h3>
+      <p>While some foods and compounds like caffeine, green tea, capsaicin from hot peppers, and protein have modest effects on metabolism, these effects are small and temporary. No food or supplement can dramatically increase your RMR. Claims about metabolism-boosting superfoods or supplements are generally exaggerated. Focus on overall diet quality and the strategies mentioned above for meaningful results.</p>
+
+      <h3>Myth: You Can't Change Your Metabolism</h3>
+      <p>While genetics influence your baseline metabolism, you absolutely can change it through lifestyle factors. Building muscle, staying active, eating adequate protein, and avoiding extreme dieting all positively impact metabolic rate. The changes may be gradual but they're significant over time.</p>
+
+      <h3>Myth: Eating Late at Night Slows Metabolism</h3>
+      <p>Your metabolism doesn't shut down at night. What matters for body composition is your total daily calorie intake and macronutrient distribution, not the timing of when you eat. Some people find that eating late leads to consuming excess calories or choosing less nutritious foods, but the timing itself doesn't affect metabolism. Eat according to your schedule, preferences, and hunger patterns.</p>
+
+      <h2>When Calculated RMR Doesn't Match Reality</h2>
+      <p>For most people, the Mifflin-St Jeor equation provides an accurate estimate of RMR within about 10 percent. However, some individuals may find their actual calorie needs differ from calculated estimates. Several factors can explain these discrepancies.</p>
+
+      <h3>Inaccurate Tracking</h3>
+      <p>The most common reason for discrepancies between calculated and actual calorie needs is inaccurate tracking. Studies show that people tend to underestimate food intake by 20 to 50 percent and overestimate activity by a similar margin. If your results don't match expectations, first ensure you're accurately tracking portion sizes, weighing foods, and honestly assessing activity level.</p>
+
+      <h3>Metabolic Adaptation</h3>
+      <p>If you've been dieting for an extended period, metabolic adaptation may have reduced your actual calorie expenditure below calculated estimates. This is a normal physiological response to prolonged calorie restriction. The solution is typically a diet break at maintenance calories to restore hormonal balance and metabolism.</p>
+
+      <h3>Medical Conditions</h3>
+      <p>Certain medical conditions can significantly affect metabolism. Hypothyroidism, PCOS, Cushing's syndrome, and other hormonal disorders can reduce metabolic rate. Medications including some antidepressants, antipsychotics, corticosteroids, and diabetes medications can also affect metabolism and appetite. If you suspect a medical issue, consult with a healthcare provider for proper evaluation and treatment.</p>
+
+      <h3>Extreme Body Compositions</h3>
+      <p>The Mifflin-St Jeor equation is most accurate for people with typical body compositions. Very muscular individuals may find their actual RMR is higher than estimated because the equation doesn't account for above-average muscle mass. Conversely, individuals with very high body fat percentages may find their actual RMR is slightly lower because fat tissue is less metabolically active.</p>
+
+      <h2>Privacy and Data Security</h2>
+      <p>Your privacy and the security of your health information are our top priorities. When you use our resting metabolic rate calculator, all calculations are performed locally in your web browser using JavaScript. We do not store, save, or transmit your age, weight, height, or any personal information to any server. No cookies are set specifically for tracking your health data. Your personal health information remains completely private and secure on your device. You can use this calculator with complete confidence knowing that your sensitive health data never leaves your device.</p>
+
+      <div class="info-box">
+        <h4>Medical Disclaimer</h4>
+        <p>This calculator provides estimates for informational and educational purposes only using the scientifically validated Mifflin-St Jeor equation. It is not a substitute for professional medical advice, diagnosis, or treatment. Individual variations in metabolism, body composition, medical conditions, and medications can affect actual calorie needs. The recommendations provided are general guidelines and may not be appropriate for everyone. Always seek the advice of your physician, registered dietitian, or other qualified healthcare provider with any questions you may have regarding your metabolism, calorie needs, nutrition, or weight management. Never disregard professional medical advice or delay seeking it because of information from this calculator. If you have concerns about your metabolism, unexplained weight changes, or overall health, contact your healthcare provider.</p>
+      </div>
+
+      <h2>When to Seek Professional Guidance</h2>
+      <p>While this calculator provides useful estimates for most people, certain situations warrant consultation with healthcare professionals who can provide personalized guidance.</p>
+
+      <h3>Consider Consulting a Healthcare Provider If:</h3>
+      <ul>
+        <li>You have unexplained weight gain or loss despite consistent eating and activity patterns</li>
+        <li>You suspect thyroid or other hormonal issues affecting your metabolism</li>
+        <li>You have diabetes, heart disease, or other chronic health conditions requiring specialized nutrition guidance</li>
+        <li>You're taking medications that may affect metabolism or appetite</li>
+        <li>You have a history of eating disorders or disordered eating patterns</li>
+        <li>You're pregnant or breastfeeding and need specialized calorie recommendations</li>
+        <li>You're an athlete with high training demands requiring precise nutrition planning</li>
+        <li>You've experienced significant metabolic adaptation from prolonged dieting</li>
+        <li>You want the most accurate possible measurement of your RMR through indirect calorimetry testing</li>
+      </ul>
+
+      <h2>Additional Resources for Metabolic Health</h2>
+      <p>For additional information about metabolism, nutrition, and healthy weight management, consider these reputable resources:</p>
+
+      <ul>
+        <li><strong>Academy of Nutrition and Dietetics:</strong> Offers evidence-based nutrition information and can help you find a registered dietitian for personalized guidance</li>
+        <li><strong>National Institute of Diabetes and Digestive and Kidney Diseases:</strong> Provides comprehensive information on metabolism, weight management, and related health topics</li>
+        <li><strong>American College of Sports Medicine:</strong> Offers guidance on exercise, fitness, and how physical activity affects metabolism</li>
+        <li><strong>Your Healthcare Provider:</strong> Your doctor or registered dietitian should be your primary source for personalized medical and nutritional guidance</li>
+      </ul>
+    </article>
   </section>
 
   <section class="faq-section">
-    <h2>❓ Frequently Asked Questions about RMR</h2>
-    <details class="faq">
-      <summary>Which formula does this calculator use?</summary>
-      <p>This calculator uses the Mifflin-St Jeor equation, which is widely considered one of the most accurate methods for estimating Resting Metabolic Rate. Multiple studies have shown it to be more reliable than the older Harris-Benedict equation for a broader range of people.</p>
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Which formula does this calculator use and why?</summary>
+      <p>This calculator uses the Mifflin-St Jeor equation, which is widely considered the most accurate formula for estimating Resting Metabolic Rate for the general population. Developed in 1990 and validated through numerous studies, it has been shown to be more accurate than the older Harris-Benedict equation, particularly for modern populations. The equation accounts for weight, height, age, and biological sex to provide a scientifically sound estimate of your resting calorie burn.</p>
     </details>
-    <details class="faq">
-      <summary>How can I increase my metabolism?</summary>
-      <p>While factors like age and genetics are fixed, you can boost your metabolism. The most effective way is through strength training to build more muscle mass. Muscle is more metabolically active than fat, meaning it burns more calories at rest. Eating enough protein, staying hydrated, and getting quality sleep also support a healthy metabolism.</p>
+    <details>
+      <summary>How can I increase my metabolism naturally?</summary>
+      <p>The most effective way to increase metabolism is through strength training to build muscle mass, as muscle tissue burns more calories at rest than fat tissue. Additional strategies include eating adequate protein with each meal, staying active throughout the day to increase NEAT, getting 7 to 9 hours of quality sleep, managing stress levels, staying well hydrated, and avoiding extreme calorie restriction. While these changes won't dramatically transform your metabolism overnight, they have meaningful cumulative effects over time when practiced consistently.</p>
     </details>
-    <details class="faq">
-      <summary>Is this RMR calculation 100% accurate?</summary>
-      <p>No formula can be 100% accurate for every individual. This calculator provides a very strong scientific estimate that is highly useful for most people. The most precise way to measure RMR is through a clinical test called indirect calorimetry, but this is expensive and not easily accessible. For all practical purposes, this formula is an excellent starting point for your health journey.</p>
+    <details>
+      <summary>Is this RMR calculation 100 percent accurate for everyone?</summary>
+      <p>No formula can be perfectly accurate for every individual due to variations in body composition, genetics, hormones, and metabolic adaptation. However, the Mifflin-St Jeor equation is accurate within about 10 percent for most people, making it highly useful for practical nutrition planning. The most precise way to measure RMR is through indirect calorimetry, a clinical test that measures oxygen consumption and carbon dioxide production, but this is expensive and not readily accessible. For most people, this calculator provides an excellent starting point that can be adjusted based on real-world results.</p>
+    </details>
+    <details>
+      <summary>Should I eat below my RMR to lose weight faster?</summary>
+      <p>No, you should never consistently eat below your RMR for extended periods. Your RMR represents the minimum calories your body needs to maintain essential physiological functions. Eating below this level can slow your metabolism through adaptive thermogenesis, cause muscle loss, lead to nutrient deficiencies, disrupt hormones, and create unsustainable dietary patterns that often result in regaining weight. Instead, calculate your TDEE and create a moderate deficit of 300 to 500 calories below that number for sustainable weight loss while preserving muscle and metabolic health.</p>
+    </details>
+    <details>
+      <summary>Why is there a different formula for men and women?</summary>
+      <p>Men and women have different metabolic rates primarily due to differences in body composition. On average, men have more muscle mass and less body fat than women at the same weight and height. Since muscle tissue is more metabolically active than fat tissue, men typically have a higher RMR. The Mifflin-St Jeor equation accounts for this by adding 5 calories for men and subtracting 161 calories for women after calculating the base formula. This sex-based adjustment improves the accuracy of the estimate for both sexes.</p>
+    </details>
+    <details>
+      <summary>How does age affect metabolism?</summary>
+      <p>Metabolism decreases with age primarily due to the gradual loss of muscle mass, a process called sarcopenia. Starting around age 30, most people lose 3 to 8 percent of muscle mass per decade without intervention. Since muscle is metabolically active, this loss reduces RMR. Additionally, hormonal changes, decreased physical activity, and cellular changes contribute to metabolic slowdown. However, this decline is not inevitable. Regular resistance training, adequate protein intake, and staying physically active can significantly slow or even reverse age-related metabolic decline.</p>
+    </details>
+    <details>
+      <summary>What's the difference between RMR and TDEE?</summary>
+      <p>RMR is your Resting Metabolic Rate, the calories your body burns at complete rest to maintain essential functions. TDEE is your Total Daily Energy Expenditure, which represents all calories you burn throughout an entire day including RMR plus physical activity, exercise, digestion, and other daily movements. TDEE is calculated by multiplying your RMR by an activity factor ranging from 1.2 for sedentary individuals to 1.9 for extremely active people. Your TDEE is the number you should use when planning your calorie intake for weight loss, maintenance, or gain.</p>
+    </details>
+    <details>
+      <summary>Can certain foods really boost my metabolism significantly?</summary>
+      <p>While some foods and compounds like caffeine, green tea extract, capsaicin from hot peppers, and protein have modest temporary effects on metabolism, none can dramatically increase your RMR. Protein has the highest thermic effect, meaning your body burns more calories digesting it compared to fats and carbohydrates, but this accounts for only a small percentage of total calorie burn. Claims about metabolism-boosting superfoods or supplements are generally exaggerated marketing. Focus on overall diet quality, adequate protein intake, and the lifestyle strategies discussed above for meaningful metabolic improvements.</p>
     </details>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
-
-  <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
   <footer>
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This resting metabolic rate calculator is provided for informational and educational purposes only using the Mifflin-St Jeor equation. The results are estimates and should not be used as the sole basis for medical or nutritional decisions. Individual variations in metabolism, body composition, health conditions, and medications can affect actual calorie needs. This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare providers regarding your metabolism, nutrition, and weight management.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
   </footer>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Which formula does this calculator use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "This calculator uses the Mifflin-St Jeor equation, which is widely considered one of the most accurate methods for estimating Resting Metabolic Rate. Multiple studies have shown it to be more reliable than the older Harris-Benedict equation for a broader range of people."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can I increase my metabolism?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "While factors like age and genetics are fixed, you can boost your metabolism. The most effective way is through strength training to build more muscle mass. Muscle is more metabolically active than fat, meaning it burns more calories at rest. Eating enough protein, staying hydrated, and getting quality sleep also support a healthy metabolism."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is this RMR calculation 100% accurate?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No formula can be 100% accurate for every individual. This calculator provides a very strong scientific estimate that is highly useful for most people. The most precise way to measure RMR is through a clinical test called indirect calorimetry, but this is expensive and not easily accessible. For all practical purposes, this formula is an excellent starting point for your health journey."
-        }
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Which formula does this calculator use and why?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator uses the Mifflin-St Jeor equation, widely considered the most accurate formula for estimating Resting Metabolic Rate. It accounts for weight, height, age, and biological sex to provide a scientifically sound estimate."
       }
-    ]
+    },{
+      "@type": "Question",
+      "name": "How can I increase my metabolism naturally?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The most effective way is through strength training to build muscle mass. Additional strategies include eating adequate protein, staying active, getting quality sleep, managing stress, and staying hydrated."
+      }
+    },{
+      "@type": "Question",
+      "name": "Is this RMR calculation 100 percent accurate for everyone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Mifflin-St Jeor equation is accurate within about 10 percent for most people. The most precise measurement is through indirect calorimetry, but for most people, this calculator provides an excellent starting point."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I eat below my RMR to lose weight faster?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, you should never consistently eat below your RMR. Instead, calculate your TDEE and create a moderate deficit of 300 to 500 calories below that for sustainable weight loss."
+      }
+    }]
   }
   </script>
 
@@ -283,97 +915,4 @@
         if (unit === 'imperial') {
             const weightLbs = parseFloat(document.getElementById('weight_lbs').value);
             const heightFt = parseFloat(document.getElementById('height_ft').value) || 0;
-            const heightIn = parseFloat(document.getElementById('height_in').value) || 0;
-
-            if (isNaN(weightLbs) || isNaN(heightFt) || isNaN(heightIn) || weightLbs <= 0 || (heightFt <= 0 && heightIn <= 0)) {
-                hasErrors = true;
-            } else {
-                weightInKg = weightLbs * 0.453592;
-                heightInCm = ((heightFt * 12) + heightIn) * 2.54;
-            }
-        } else { // Metric
-            const weightKg = parseFloat(document.getElementById('weight_kg').value);
-            const heightCm = parseFloat(document.getElementById('height_cm').value);
-
-            if (isNaN(weightKg) || isNaN(heightCm) || weightKg <= 0 || heightCm <= 0) {
-                hasErrors = true;
-            } else {
-                weightInKg = weightKg;
-                heightInCm = heightCm;
-            }
-        }
-
-        if (isNaN(age) || age <= 0) {
-            hasErrors = true;
-        }
-        
-        if (hasErrors) {
-            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields with valid, positive numbers.</p>";
-            return;
-        }
-
-        // Mifflin-St Jeor Equation
-        // RMR = 10 * weight (kg) + 6.25 * height (cm) - 5 * age (years) + s
-        // s = +5 for males, -161 for females
-        const sexConstant = (sex === 'male') ? 5 : -161;
-        const rmr = Math.round((10 * weightInKg) + (6.25 * heightInCm) - (5 * age) + sexConstant);
-
-        const activityLevels = {
-            "Sedentary (little or no exercise)": 1.2,
-            "Lightly active (light exercise/sports 1-3 days/week)": 1.375,
-            "Moderately active (moderate exercise/sports 3-5 days/week)": 1.55,
-            "Very active (hard exercise/sports 6-7 days a week)": 1.725,
-            "Extra active (very hard exercise/sports & physical job)": 1.9
-        };
-        
-        let tdeeHtml = `<h4>Daily Calorie Needs (TDEE) based on Activity</h4><table class="tdee-table">`;
-        for (const [level, factor] of Object.entries(activityLevels)) {
-            const tdee = Math.round(rmr * factor);
-            tdeeHtml += `<tr><td>${level}</td><td>${tdee} Calories/day</td></tr>`;
-        }
-        tdeeHtml += `</table>`;
-
-        resultDiv.innerHTML = `
-            <div class="rmr-result-container">
-                <h3>Your Resting Metabolic Rate is:</h3>
-                <div class="rmr-value">${rmr} <span>Calories/day</span></div>
-                <p>This is the energy your body needs to function at rest.</p>
-                ${tdeeHtml}
-            </div>
-        `;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById("darkModeToggle");
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-      });
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
-
-      // Unit switcher logic
-      const imperialRadio = document.getElementById('imperial');
-      const metricRadio = document.getElementById('metric');
-      const imperialInputs = document.getElementById('imperialInputs');
-      const metricInputs = document.getElementById('metricInputs');
-
-      imperialRadio.addEventListener('change', () => {
-          if (imperialRadio.checked) {
-              imperialInputs.style.display = 'block';
-              metricInputs.style.display = 'none';
-          }
-      });
-      metricRadio.addEventListener('change', () => {
-          if (metricRadio.checked) {
-              imperialInputs.style.display = 'none';
-              metricInputs.style.display = 'block';
-          }
-      });
-    });
-  </script>
-
-</body>
-</html>
-
+            const heightIn = parseFloat(document.getElementById('height_in').value) ||
