@@ -1059,19 +1059,16 @@
         let weeklyGainLbs = (bmi < 18.5) ? 1.1 : (bmi < 25) ? 1.0 : (bmi < 30) ? 0.6 : 0.5;
         if(isTwins) weeklyGainLbs = (bmi < 25) ? 1.5 : (bmi < 30) ? 1.3 : 1.1;
 
-        let firstTrimesterGainLbs = isTwins ? 4 : 2;
         let recMinLbs, recMaxLbs;
 
         if (weeks <= 13) {
             recMinLbs = 1.1;
             recMaxLbs = 4.4;
         } else {
-            // A more detailed weekly calculation
-            let baseGain = 4.4; // Upper end of first trimester
-            recMaxLbs = baseGain + (weeks - 13) * (weeklyGainLbs + 0.2); // Upper range
-            recMinLbs = baseGain + (weeks - 13) * (weeklyGainLbs - 0.2); // Lower range
+            let baseGain = 4.4;
+            recMaxLbs = baseGain + (weeks - 13) * (weeklyGainLbs + 0.2);
+            recMinLbs = baseGain + (weeks - 13) * (weeklyGainLbs - 0.2);
         }
-
 
         const yourGainKg = currentWeightKg - preWeightKg;
         const yourGainLbs = yourGainKg * 2.20462;
@@ -1083,50 +1080,82 @@
         const displayYourGain = (unit === 'imperial') ? `${yourGainLbs.toFixed(1)} lbs` : `${yourGainKg.toFixed(1)} kg`;
         const displayRecGain = (unit === 'imperial') ? `${recMinLbs.toFixed(1)} - ${recMaxLbs.toFixed(1)} lbs` : `${recMinKg.toFixed(1)} - ${recMaxKg.toFixed(1)} kg`;
 
-        // Chart logic
-        const overallMin = gainRangeLbs[0] * 0.5;
-        const overallMax = gainRangeLbs[1] * 1.1;
+        const overallMin = Math.min(recMinLbs * 0.5, yourGainLbs * 0.8);
+        const overallMax = Math.max(recMaxLbs * 1.2, yourGainLbs * 1.1);
         const chartRange = overallMax - overallMin;
         
         const rangeStartPercent = Math.max(0, ((recMinLbs - overallMin) / chartRange) * 100);
         const rangeWidthPercent = Math.min(100 - rangeStartPercent, ((recMaxLbs - recMinLbs) / chartRange) * 100);
         const yourGainPercent = Math.max(0, Math.min(100, ((yourGainLbs - overallMin) / chartRange) * 100));
 
+        let statusMessage = '';
+        let statusColor = '';
+        if (yourGainLbs < recMinLbs) {
+            statusMessage = 'You are gaining less than recommended. Discuss nutrition strategies with your healthcare provider.';
+            statusColor = '#f97316';
+        } else if (yourGainLbs > recMaxLbs) {
+            statusMessage = 'You are gaining more than recommended. Please consult your healthcare provider about your weight gain pattern.';
+            statusColor = '#ef4444';
+        } else {
+            statusMessage = 'Your weight gain is within the recommended range. Keep up the great work!';
+            statusColor = '#10b981';
+        }
 
         resultDiv.innerHTML = `
             <div class="result-container">
                 <h3>Your Pregnancy Weight Gain Tracker</h3>
                 <div class="bmi-result">
                     <p>Based on your pre-pregnancy BMI of <strong>${bmi.toFixed(1)}</strong>, you are in the <strong>${bmiCategory}</strong> category.</p>
-                    <p>Your total recommended gain is <strong>${displayTotalGain}</strong>.</p>
+                    <p>Your total recommended gain for full pregnancy is <strong>${displayTotalGain}</strong>.</p>
                 </div>
+                <hr>
                 <h4>Your Progress at Week ${weeks}</h4>
-                <p>You have gained: <strong>${displayYourGain}</strong><br>
-                Recommended gain for this week: <strong>${displayRecGain}</strong></p>
+                <p><strong>You have gained:</strong> ${displayYourGain}</p>
+                <p><strong>Recommended gain for week ${weeks}:</strong> ${displayRecGain}</p>
+                <p style="color: ${statusColor}; font-weight: 700; margin-top: 1rem;">${statusMessage}</p>
                 <div class="progress-bar-container">
+                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-weak-light, #64748b);"><strong>Visual Guide:</strong> The green bar shows the healthy range. The pink marker shows your current weight gain.</p>
                     <div class="progress-bar">
                         <div class="recommended-range" style="left: ${rangeStartPercent}%; width: ${rangeWidthPercent}%;"></div>
                         <div class="your-gain" style="left: ${yourGainPercent}%;"></div>
                     </div>
                     <div class="range-labels">
-                        <span>${(unit === 'imperial' ? recMinLbs.toFixed(1) : recMinKg.toFixed(1))}</span>
-                        <span>${(unit === 'imperial' ? recMaxLbs.toFixed(1) : recMaxKg.toFixed(1))}</span>
+                        <span>${(unit === 'imperial' ? recMinLbs.toFixed(1) : recMinKg.toFixed(1))} (Min Recommended)</span>
+                        <span>${(unit === 'imperial' ? recMaxLbs.toFixed(1) : recMaxKg.toFixed(1))} (Max Recommended)</span>
                     </div>
                 </div>
-                 <p style="font-size:12px; text-align:center; margin-top:15px;"><strong>Disclaimer:</strong> This is a guide based on IOM recommendations. Consult your healthcare provider for personalized advice.</p>
+                <p style="font-size:12px; text-align:center; margin-top:15px; color: var(--text-weak-light, #64748b);"><strong>Disclaimer:</strong> This is a guide based on IOM recommendations. Consult your healthcare provider for personalized advice.</p>
             </div>
         `;
+        resultDiv.style.display = 'block';
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      const applyTheme = (theme) => {
+          if (theme === 'dark') {
+              body.classList.add('dark-mode');
+              toggle.textContent = '☀️';
+          } else {
+              body.classList.remove('dark-mode');
+              toggle.textContent = '🌙';
+          }
+      };
+
       toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+          if (body.classList.contains('dark-mode')) {
+              localStorage.setItem('theme', 'light');
+              applyTheme('light');
+          } else {
+              localStorage.setItem('theme', 'dark');
+              applyTheme('dark');
+          }
       });
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
 
       const imperialRadio = document.getElementById('imperial');
       const metricRadio = document.getElementById('metric');
@@ -1150,4 +1179,3 @@
 
 </body>
 </html>
-
