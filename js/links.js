@@ -3,7 +3,7 @@
 
 const productLinks = {
   // Time & Age Related Products
-  'star-maps': 'https://www.amazon.com/dp/YOUR_PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
+  'star-maps': 'https://amzn.to/3IRmdjq',
   'time-capsule': 'https://www.amazon.com/dp/YOUR_PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
   'hourglass': 'https://www.amazon.com/dp/YOUR_PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
   
