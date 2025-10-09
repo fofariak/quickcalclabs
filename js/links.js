@@ -3,9 +3,12 @@
 
 const productLinks = {
   // Time & Age Related Products
-  'star-maps': 'https://amzn.to/3IRmdjq',
+  'star-maps': 'https://amzn.to/4ofq491',
   'time-capsule': 'https://amzn.to/48ngX1k',
-  'hourglass': 'https://amzn.to/3VWSjgt',
+  'hourglass': 'https://amzn.to/4nIMSy5',
+  'digital-food-scale': 'https://amzn.to/432Pkaa',
+  'meal-prep-containers': 'https://amzn.to/46HSOkL',
+  'smart-weight-body-scale': 'https://amzn.to/3KHaJj1',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
