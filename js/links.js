@@ -12,6 +12,8 @@ const productLinks = {
   'fitbit-charge': 'https://amzn.to/3WuDrGh',
   'smartring': 'https://amzn.to/4mUwXLK',
   'walking-shoes':  'https://amzn.to/4obuUnA',
+  'skincare': 'https://amzn.to/46VwIKj',
+  'books-on-aging': 'https://amzn.to/3Wt0dOL',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
