@@ -14,6 +14,9 @@ const productLinks = {
   'walking-shoes':  'https://amzn.to/4obuUnA',
   'skincare': 'https://amzn.to/46VwIKj',
   'books-on-aging': 'https://amzn.to/3Wt0dOL',
+  'baby-monitor': 'https://amzn.to/4h3GHCa',
+  'play-kits': 'https://amzn.to/3KK5wa0',
+  'dream-sock' 'https://amzn.to/46T8SQV',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
