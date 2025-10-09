@@ -348,6 +348,27 @@ section, .ad-container {
   color: var(--text-weak-dark);
 }
 
+.product-link {
+  color: var(--primary, #8b5cf6);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  transition: all 0.15s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.product-link:hover {
+  color: var(--primary-dark, #7c3aed);
+  text-decoration-style: solid;
+}
+
+.dark-mode .product-link {
+  color: var(--primary-light, #a78bfa);
+}
+
+
 /* ------------- Stats ------------- */
 .stats {
   display: grid;
