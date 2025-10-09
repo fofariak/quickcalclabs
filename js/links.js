@@ -9,6 +9,9 @@ const productLinks = {
   'digital-food-scale': 'https://amzn.to/432Pkaa',
   'meal-prep-containers': 'https://amzn.to/46HSOkL',
   'smart-weight-body-scale': 'https://amzn.to/3KHaJj1',
+  'fitbit-charge': 'https://amzn.to/3WuDrGh',
+  'smartring': 'https://amzn.to/4mUwXLK',
+  'walking-shoes':  'https://amzn.to/4obuUnA',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
