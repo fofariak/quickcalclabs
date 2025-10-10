@@ -36,6 +36,9 @@ const productLinks = {
   'healthy-cookbook': 'https://amzn.to/4h9if2e',
   'adjustable-dumbbell': 'https://amzn.to/4nUJkZx',
   'resistance-bands': 'https://amzn.to/4h2ylum',
+  'high-chair': 'https://amzn.to/3KMzlGY',
+  'baby-spoon': 'https://amzn.to/4o6BADi',
+  'silicone-bibs': 'https://amzn.to/42wi379',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
