@@ -234,16 +234,6 @@ const blogPosts = [
   }
 ,
 {
-    title: "Understanding Energy Balance for Sustainable Weight Loss",
-    href: "blog/energy-balance-weight-loss.html",
-    excerpt: "Discover the fundamental principle of energy balance and how it drives weight loss. Understand the science behind calories, metabolism, and practical tips for success.",
-    category: "Fitness",
-    date: "September 6, 2025",
-    readTime: "8 min read",
-    featured: false
-  }
-,
-{
     title: "Baby's First Milestones: A Comprehensive Guide for New Parents",
     href: "blog/babys-first-milestones-guide.html",
     excerpt: "Welcoming a new baby is an incredible journey filled with wonder and a rapid succession of 'firsts.' From their first smile to their first steps, each milestone is a unique moment in your child's development. This guide helps new parents understand, track, and celebrate these precious early achievements.",
