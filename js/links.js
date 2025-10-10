@@ -26,6 +26,8 @@ const productLinks = {
   'smoothie-blender': 'https://amzn.to/479TtKW',
   'protein-powder': 'https://amzn.to/43d6jqe',
   'macro-guide': 'https://amzn.to/42Clg53',
+  'nursing-pillow': 'https://amzn.to/4nMasde',
+  'feeding-bottle': 'https://amzn.to/3L3rS6s',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
