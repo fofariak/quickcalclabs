@@ -48,6 +48,9 @@ const productLinks = {
   'pregnancy-clothes': 'https://amzn.to/4oe9whw',
   'stretch-mark': 'https://amzn.to/3J5CSQc',
   'water-filter': 'https://amzn.to/3J15RVd',
+  'heating-pads': 'https://amzn.to/4od6iuy',
+  'period-journal': 'https://amzn.to/47kOyYE',
+  'herbal-teas': 'https://amzn.to/3W0x1yG',
   
   
   // Add more products as needed
