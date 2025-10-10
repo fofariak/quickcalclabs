@@ -22,7 +22,8 @@ const productLinks = {
   'water-bottle': 'https://amzn.to/4ohHulq',
   'portion-control': 'https://amzn.to/4736PIP',
   'fat-clippers': 'https://amzn.to/3WwRcEp',
-  
+  'fitness-trackers': 'https://amzn.to/3ITyow8',
+  'smoothie-blender': 'https://amzn.to/479TtKW',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
