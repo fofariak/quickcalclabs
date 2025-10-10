@@ -43,6 +43,9 @@ const productLinks = {
   'pregnancy-book': 'https://amzn.to/3ISmB14',
   'women-footwear': 'https://amzn.to/473ASA7',
   'support-belt': 'https://amzn.to/46OB6fC',
+  'blackout-curtains': 'https://amzn.to/48UhxUj',
+  'sleep-gummies': 'https://amzn.to/4n9O8t2',
+  
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
