@@ -47,6 +47,7 @@ const productLinks = {
   'sleep-gummies': 'https://amzn.to/4n9O8t2',
   'pregnancy-clothes': 'https://amzn.to/4oe9whw',
   'stretch-mark': 'https://amzn.to/3J5CSQc',
+  'water-filter': 'https://amzn.to/3J15RVd',
   
   
   // Add more products as needed
