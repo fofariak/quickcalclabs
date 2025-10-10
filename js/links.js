@@ -21,6 +21,7 @@ const productLinks = {
   'cookbooks': 'https://amzn.to/4n4EDuZ',
   'water-bottle': 'https://amzn.to/4ohHulq',
   'portion-control': 'https://amzn.to/4736PIP',
+  'fat-clippers': 'https://amzn.to/3WwRcEp',
   
   
   // Add more products as needed
