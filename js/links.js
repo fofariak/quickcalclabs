@@ -39,6 +39,8 @@ const productLinks = {
   'high-chair': 'https://amzn.to/3KMzlGY',
   'baby-spoon': 'https://amzn.to/4o6BADi',
   'silicone-bibs': 'https://amzn.to/42wi379',
+  'pregnancy-pillow': 'https://amzn.to/46WzPSh',
+  'pregnancy-book': 'https://amzn.to/3ISmB14',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
