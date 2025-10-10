@@ -45,6 +45,8 @@ const productLinks = {
   'support-belt': 'https://amzn.to/46OB6fC',
   'blackout-curtains': 'https://amzn.to/48UhxUj',
   'sleep-gummies': 'https://amzn.to/4n9O8t2',
+  'pregnancy-clothes': 'https://amzn.to/4oe9whw',
+  'stretch-mark': 'https://amzn.to/3J5CSQc',
   
   
   // Add more products as needed
