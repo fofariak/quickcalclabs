@@ -17,6 +17,10 @@ const productLinks = {
   'baby-monitor': 'https://amzn.to/4h3GHCa',
   'play-kits': 'https://amzn.to/48na8gc',
   'dream-sock': 'https://amzn.to/46T8SQV',
+  'prenatal-vitamin': 'https://amzn.to/4pZQSf7',
+  'cookbooks': 'https://amzn.to/4n4EDuZ',
+  'water-bottle': 'https://amzn.to/4ohHulq',
+  
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
