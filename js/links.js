@@ -41,6 +41,8 @@ const productLinks = {
   'silicone-bibs': 'https://amzn.to/42wi379',
   'pregnancy-pillow': 'https://amzn.to/46WzPSh',
   'pregnancy-book': 'https://amzn.to/3ISmB14',
+  'women-footwear': 'https://amzn.to/473ASA7',
+  'support-belt': 'https://amzn.to/46OB6fC',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
