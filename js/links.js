@@ -20,7 +20,7 @@ const productLinks = {
   'prenatal-vitamin': 'https://amzn.to/4pZQSf7',
   'cookbooks': 'https://amzn.to/4n4EDuZ',
   'water-bottle': 'https://amzn.to/4ohHulq',
-  'portion-control: 'https://amzn.to/4736PIP',
+  'portion-control': 'https://amzn.to/4736PIP',
   
   
   // Add more products as needed
