@@ -29,7 +29,7 @@ const productLinks = {
   'nursing-pillow': 'https://amzn.to/4nMasde',
   'feeding-bottle': 'https://amzn.to/3L3rS6s',
   'opk-kit': 'https://amzn.to/48pYSzB',
-  'basal-thermometer': 'https://amzn.to/4obGM8W'
+  'basal-thermometer': 'https://amzn.to/4obGM8W',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
