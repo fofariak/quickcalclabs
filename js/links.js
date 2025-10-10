@@ -30,6 +30,9 @@ const productLinks = {
   'feeding-bottle': 'https://amzn.to/3L3rS6s',
   'opk-kit': 'https://amzn.to/48pYSzB',
   'basal-thermometer': 'https://amzn.to/4obGM8W',
+  'insulated-bottle': 'https://amzn.to/4odoBQs',
+  'infused-pitcher': 'https://amzn.to/3WtWG2O',
+  'electrolyte-powder': 'https://amzn.to/3KLMsbu',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
