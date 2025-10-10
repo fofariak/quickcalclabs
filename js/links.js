@@ -33,6 +33,7 @@ const productLinks = {
   'insulated-bottle': 'https://amzn.to/4odoBQs',
   'infused-pitcher': 'https://amzn.to/3WtWG2O',
   'electrolyte-powder': 'https://amzn.to/3KLMsbu',
+  'healthy-cookbook': 'https://amzn.to/4h9if2e',
   
   // Add more products as needed
   // 'product-key': 'https://www.amazon.com/dp/PRODUCT_ID?tag=YOUR_AFFILIATE_TAG',
