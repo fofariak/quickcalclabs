@@ -1618,12 +1618,14 @@ footer .affiliate-disclosure {
 #ad-banner-top,
 #ad-banner-mid,
 #ad-banner-end {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
   margin: 2rem auto;
   padding: 1rem;
   min-height: 100px;
-  text-align: center;
   background: transparent;
   position: relative;
   z-index: 1;
@@ -1661,8 +1663,9 @@ footer .affiliate-disclosure {
 #ad-banner-top > *,
 #ad-banner-mid > *,
 #ad-banner-end > * {
-  display: inline-block;
+  display: block;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 /* Responsive ad containers */
