@@ -1618,23 +1618,25 @@ footer .affiliate-disclosure {
 #ad-banner-top,
 #ad-banner-mid,
 #ad-banner-end {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  margin: 2rem auto;
-  padding: 1rem;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 2rem auto !important;
+  padding: 1rem !important;
   min-height: 100px;
   background: transparent;
   position: relative;
   z-index: 1;
   overflow: visible;
+  text-align: center !important;
 }
 
 #ad-banner-top {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem !important;
+  margin-bottom: 2rem !important;
   background: var(--surface-1-light);
   border-radius: var(--radius-md);
 }
@@ -1644,13 +1646,13 @@ footer .affiliate-disclosure {
 }
 
 #ad-banner-mid {
-  margin: 3rem auto;
+  margin: 3rem auto !important;
   background: transparent;
 }
 
 #ad-banner-end {
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-top: 3rem !important;
+  margin-bottom: 2rem !important;
   background: var(--surface-1-light);
   border-radius: var(--radius-md);
 }
@@ -1663,9 +1665,18 @@ footer .affiliate-disclosure {
 #ad-banner-top > *,
 #ad-banner-mid > *,
 #ad-banner-end > * {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
+  display: block !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+  text-align: center !important;
+}
+
+/* Force center alignment for ad iframes */
+#ad-banner-top iframe,
+#ad-banner-mid iframe,
+#ad-banner-end iframe {
+  display: block !important;
+  margin: 0 auto !important;
 }
 
 /* Responsive ad containers */
