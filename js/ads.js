@@ -1,53 +1,63 @@
-// ads.js - Advanced version
-function loadAdBanner(position, key) {
-  const adDiv = document.createElement('div');
-  adDiv.id = 'ad-container-' + position;
-  adDiv.style.textAlign = 'center';
-  adDiv.style.margin = '1rem auto';
-  adDiv.style.maxWidth = '728px';
-
-  const optionsScript = document.createElement('script');
-  optionsScript.type = 'text/javascript';
-  optionsScript.text = `
-    atOptions = {
-      'key' : '${key}',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
-  `;
-
-  const invokeScript = document.createElement('script');
-  invokeScript.type = 'text/javascript';
-  invokeScript.src = '//www.highperformanceformat.com/${key}/invoke.js';
-  invokeScript.async = true;
-
-  adDiv.appendChild(optionsScript);
-  adDiv.appendChild(invokeScript);
-
-  return adDiv;
+// Banner 728x90
+function renderAdBanner728x90(containerId) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    container.innerHTML = `
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '0f30d8d002656d29a062c88d9dd54fa9',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/0f30d8d002656d29a062c88d9dd54fa9/invoke.js"></script>
+    `;
+  }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
-    // Top ad (after body opens)
-    document.body.insertAdjacentElement('afterbegin', loadAdBanner(1, '0f30d8d002656d29a062c88d9dd54fa9'));
-    
-    // Middle ad (after first paragraph)
-    const firstP = document.querySelector('p');
-    if (firstP) {
-      firstP.insertAdjacentElement('afterend', loadAdBanner(2, '0f30d8d002656d29a062c88d9dd54fa9'));
-    }
-    
-    // Bottom ad (before body closes)
-    document.body.appendChild(loadAdBanner(3, '0f30d8d002656d29a062c88d9dd54fa9'));
-  });
-} else {
-  document.body.insertAdjacentElement('afterbegin', loadAdBanner(1, '0f30d8d002656d29a062c88d9dd54fa9'));
-  const firstP = document.querySelector('p');
-  if (firstP) {
-    firstP.insertAdjacentElement('afterend', loadAdBanner(2, '0f30d8d002656d29a062c88d9dd54fa9'));
+// Banner 320x50
+function renderAdBanner320x50(containerId) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    container.innerHTML = `
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '1bd80cb650cefb9e21bdb1bb21def2c7',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/1bd80cb650cefb9e21bdb1bb21def2c7/invoke.js"></script>
+    `;
   }
-  document.body.appendChild(loadAdBanner(3, '0f30d8d002656d29a062c88d9dd54fa9'));
+}
+
+// Banner 300x250
+function renderAdBanner300x250(containerId) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    container.innerHTML = `
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '21c3bdcbb595adb2c550f8c8d41ef140',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/21c3bdcbb595adb2c550f8c8d41ef140/invoke.js"></script>
+    `;
+  }
+}
+
+// Social Bar
+function renderSocialBar() {
+  const script = document.createElement('script');
+  script.src = '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
+  document.body.appendChild(script);
 }
