@@ -6,279 +6,31 @@
   <title>Your Guide to Calories and Weight Management | QuickCalcLabs</title>
   <meta name="description" content="Learn what a calorie is, how to calculate your daily needs for weight loss, maintenance, or gain, and get tips for effective calorie tracking.">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    /* Blog post specific styles */
-
-    .muted {
-      color: var(--text-weak-light, #64748b);
-      font-size: 0.95rem;
-      font-weight: 600;
-      font-style: italic;
-    }
-
-    .dark-mode .muted {
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    /* Table of Contents */
-    .toc {
-      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
-      padding: 1.8rem;
-      border-radius: var(--radius-lg, 16px);
-      margin: 2rem 0;
-      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
-    }
-
-    .dark-mode .toc {
-      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
-      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
-    }
-
-    .toc h3 {
-      margin-top: 0;
-      font-size: 1.3rem;
-    }
-
-    .toc ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 1rem 0 0;
-    }
-
-    .toc li {
-      margin: 0.6rem 0;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .toc li::before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: var(--primary, #8b5cf6);
-    }
-
-    .toc a {
-      color: var(--primary, #8b5cf6);
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s ease;
-    }
-
-    .toc a:hover {
-      color: var(--primary-dark, #7c3aed);
-      text-decoration: underline;
-    }
-
-    .dark-mode .toc a {
-      color: var(--primary-light, #a78bfa);
-    }
-
-    /* Info & Highlight Boxes */
-    .info-box {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
-      border-left: 4px solid var(--primary, #8b5cf6);
-      padding: 1.5rem;
-      margin: 2rem 0;
-      border-radius: var(--radius-md, 12px);
-      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
-    }
-
-    .dark-mode .info-box {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .info-box h4 {
-      margin-top: 0;
-    }
-
-    .highlight-box {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(139, 92, 246, 0.08));
-      border: 2px solid var(--accent-green, #10b981);
-      padding: 1.8rem;
-      border-radius: var(--radius-lg, 16px);
-      margin: 2rem 0;
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    .dark-mode .highlight-box {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(139, 92, 246, 0.12));
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .highlight-box h3 {
-      margin-top: 0;
-    }
-
-    /* Comparison Table */
-    .comparison-table {
-      margin: 2rem 0;
-      overflow-x: auto;
-      border-radius: var(--radius-md, 12px);
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    .comparison-table table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .comparison-table th {
-      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
-      color: white;
-      padding: 1rem;
-      font-weight: 700;
-      text-align: left;
-    }
-
-    .comparison-table td {
-      padding: 0.9rem 1rem;
-      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
-      color: var(--text-weak-light, #64748b);
-    }
-
-    .dark-mode .comparison-table td {
-      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    .comparison-table tr:nth-child(even) {
-      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
-    }
-
-    .dark-mode .comparison-table tr:nth-child(even) {
-      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
-    }
-
-    .comparison-table tr:hover {
-      background: rgba(139, 92, 246, 0.05);
-    }
-
-    /* Method Grid */
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .method-card {
-      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
-      padding: 1.8rem;
-      border-radius: var(--radius-lg, 16px);
-      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
-      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
-      transition: all 0.3s ease;
-    }
-
-    .method-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    .dark-mode .method-card {
-      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
-      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .dark-mode .method-card:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .method-card h4 {
-      margin-top: 0;
-      color: var(--text-strong-light, #0f172a);
-    }
-
-    .dark-mode .method-card h4 {
-      color: var(--text-strong-dark, #f1f5f9);
-    }
-
-    .method-card p {
-      margin-bottom: 1rem;
-    }
-
-    /* Affiliate Links */
-    .affiliate-link {
-      color: var(--primary, #8b5cf6);
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-      transition: all 0.15s ease;
-    }
-
-    .affiliate-link:hover {
-      color: var(--primary-dark, #7c3aed);
-      text-decoration-style: solid;
-    }
-
-    .dark-mode .affiliate-link {
-      color: var(--primary-light, #a78bfa);
-    }
-
-    /* Blog Image */
-    .blog-image {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      border-radius: var(--radius-lg, 16px);
-      margin: 1.5rem auto;
-      display: block;
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    /* Lists */
-    .seo-content ul, .seo-content ol {
-      margin: 1rem 0;
-      padding-left: 1.5rem;
-    }
-
-    .seo-content li {
-      color: var(--text-weak-light, #64748b);
-      line-height: 1.7;
-      margin-bottom: 0.6rem;
-    }
-
-    .dark-mode .seo-content li {
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    /* CTA Button in content */
-    .seo-content .cta-btn {
-      display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #fff;
-      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
-      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .seo-content .cta-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(139, 92, 246, 0.45);
-      color: #fff;
-    }
-
-    @media (max-width: 820px) {
-      .seo-content {
-        padding: 1.8rem;
-        margin: 1rem auto;
-      }
-
-      .method-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; text-align: left; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .method-card h4 { margin-top: 0; }
   </style>
 </head>
 <body>
@@ -293,7 +45,8 @@
     </nav>
   </header>
 
-  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+  <!-- Top Ad Banner (728x90) -->
+  <div id="ad-banner-top"></div>
 
   <section class="seo-content">
     <h1>Fueling Your Body: The Ultimate Guide to Calorie Management</h1>
@@ -373,7 +126,8 @@
     <h2 id="beyond-calories">Beyond the Numbers: Why Food Quality Matters</h2>
     <p>While a calorie is a calorie from a pure energy standpoint, the source of that calorie has a massive impact on your health, satiety, and body composition. 200 calories from a chicken breast and broccoli will affect your body very differently than 200 calories from a sugary soda.</p>
     <p>Nutrient-dense, whole foods like lean proteins, complex carbohydrates, and healthy fats are packed with the vitamins, minerals, and fiber your body needs to thrive. They keep you feeling full and satisfied, support muscle growth, and provide sustained energy. In contrast, processed foods high in sugar and unhealthy fats are often "empty calories." They provide energy but little nutritional value, leading to energy crashes, increased hunger, and a greater likelihood of fat storage.</p>
-
+        <!-- Mid Ad Banner (320x50) -->
+    <div id="ad-banner-mid"></div>
     <h2 id="tracking-tips">Practical Tips for Effective Calorie Tracking</h2>
     <p>Tracking calories can feel daunting at first, but these tips can make it a sustainable habit:</p>
     <ul>
@@ -389,17 +143,17 @@
       <div class="method-card">
         <h4>⚖️ Digital Kitchen Food Scale</h4>
         <p>The single most important tool for accurate calorie tracking. Measuring ingredients by weight (grams or ounces) is far more precise than using measuring cups or spoons.</p>
-        <a href="javascript:void(0)" data-product="digital-food-scale" class="product-link">🛒 Find a top-rated food scale here.</a>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find a top-rated food scale here.</a>
       </div>
       <div class="method-card">
         <h4>🍱 Meal Prep Containers</h4>
         <p>Plan your meals in advance to stay on track with your calorie goals. Glass or BPA-free plastic containers are perfect for portioning and storing your meals.</p>
-        <a href="javascript:void(0)" data-product="meal-prep-containers" class="product-link">🛒 Shop for meal prep solutions.</a>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Shop for meal prep solutions.</a>
       </div>
       <div class="method-card">
-        <h4> 🌪️ High-Quality Smoothie Blender</h4>
+        <h4> blender-logo High-Quality Blender</h4>
         <p>Quickly make nutritious, calorie-controlled smoothies for a healthy breakfast or post-workout fuel. It's an easy way to pack in protein, fruits, and vegetables.</p>
-        <a href="javascript:void(0)" data-product="smoothie-blender" class="product-link">🛒 Explore powerful Smoothie Blender.</a>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore powerful blenders.</a>
       </div>
     </div>
 
@@ -415,22 +169,21 @@
         <li><strong>Calculate Your Macros:</strong> Take the next step by using our <a href="../macro-calculator.html" class="affiliate-link">Macro Calculator</a> to see how your calories should be divided between protein, carbs, and fats for your specific goals.</li>
       </ul>
     </div>
+
+
+
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
+
   <footer>
-    <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
-    </div>
-    <div class="footer-links">
     <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <a href="../privacy-policy.html">Privacy Policy</a> | 
+    <a href="../terms-of-service.html">Terms of Service</a> |
+    <a href="../affiliate-disclosure.html">Affiliate Disclosure</a>
   </footer>
-
-  <script src="../js/links.js"></script>
-
+  
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
@@ -454,6 +207,13 @@
         });
       });
     });
+  </script>
+  <script src="../js/ad.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+    renderSocialBar();
   </script>
 </body>
 </html>
