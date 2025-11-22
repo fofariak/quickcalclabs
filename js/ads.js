@@ -97,20 +97,8 @@ function renderAdBanner300x250(containerId) {
 
 // Social Bar
 function renderSocialBar() {
-  if (document.getElementById('social-bar-script')) {
-    return;
-  }
-
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.id = 'social-bar-script';
-  script.src = '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
-
-  const appendScript = () => document.body.appendChild(script);
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', appendScript, { once: true });
-  } else {
-    appendScript();
-  }
+  /* Some third-party social scripts rely on document.write to inject markup.
+     Calling document.write from a synchronous script maintains their behavior. */
+  const snippet = '<scr' + 'ipt type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></scr' + 'ipt>';
+  document.write(snippet);
 }
