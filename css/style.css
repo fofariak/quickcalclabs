@@ -638,6 +638,15 @@ section, .ad-container {
   color: var(--text-weak-dark);
 }
 
+/* Override for ad banners inside seo-content */
+.seo-content #ad-banner-mid {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 /* Expandable FAQs */
 details {
   margin-top: 0.8rem;
@@ -1609,28 +1618,51 @@ footer .affiliate-disclosure {
 #ad-banner-top,
 #ad-banner-mid,
 #ad-banner-end {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  width: 100%;
   margin: 2rem auto;
   padding: 1rem;
   min-height: 100px;
-  max-width: 100%;
-  overflow: hidden;
+  text-align: center;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
 }
 
 #ad-banner-top {
   margin-top: 1rem;
   margin-bottom: 2rem;
+  background: var(--surface-1-light);
+  border-radius: var(--radius-md);
+}
+
+.dark-mode #ad-banner-top {
+  background: var(--surface-1-dark);
 }
 
 #ad-banner-mid {
   margin: 3rem auto;
+  background: transparent;
 }
 
 #ad-banner-end {
   margin-top: 3rem;
   margin-bottom: 2rem;
+  background: var(--surface-1-light);
+  border-radius: var(--radius-md);
+}
+
+.dark-mode #ad-banner-end {
+  background: var(--surface-1-dark);
+}
+
+/* Ensure ad scripts and iframes display properly */
+#ad-banner-top > *,
+#ad-banner-mid > *,
+#ad-banner-end > * {
+  display: inline-block;
+  margin: 0 auto;
 }
 
 /* Responsive ad containers */
