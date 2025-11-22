@@ -1604,3 +1604,41 @@ footer .affiliate-disclosure {
 .dark-mode .muted {
   color: var(--text-weak-dark) !important;
 }
+
+/* ------------- Ad Banner Styling ------------- */
+#ad-banner-top,
+#ad-banner-mid,
+#ad-banner-end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 1rem;
+  min-height: 100px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+#ad-banner-top {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+#ad-banner-mid {
+  margin: 3rem auto;
+}
+
+#ad-banner-end {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* Responsive ad containers */
+@media (max-width: 768px) {
+  #ad-banner-top,
+  #ad-banner-mid,
+  #ad-banner-end {
+    padding: 0.5rem;
+    margin: 1.5rem auto;
+  }
+}
