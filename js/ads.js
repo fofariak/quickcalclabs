@@ -97,8 +97,26 @@ function renderAdBanner300x250(containerId) {
 
 // Social Bar
 function renderSocialBar() {
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
-  document.body.appendChild(script);
+  const loadSocialBar = () => {
+    if (document.getElementById('social-bar-script')) {
+      return;
+    }
+
+    const container = document.createElement('div');
+    container.id = 'social-bar-container';
+    document.body.appendChild(container);
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.id = 'social-bar-script';
+    script.src = 'https://pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
+    container.appendChild(script);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadSocialBar, { once: true });
+  } else {
+    loadSocialBar();
+  }
 }
