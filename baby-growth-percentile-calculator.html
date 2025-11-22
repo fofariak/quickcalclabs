@@ -629,6 +629,9 @@
     </nav>
   </header>
 
+  <!-- Top Ad Banner (728x90) -->
+  <div id="ad-banner-top"></div>
+
   <section class="calc-wrapper">
     <h1>Baby Growth Percentile Calculator</h1>
     <p class="subtitle">Track your baby's growth using WHO standards. Calculate weight, height, and head circumference percentiles with instant visual results.</p>
@@ -704,6 +707,9 @@
 
     <div id="result" class="result-box"></div>
   </section>
+
+  <!-- Mid Ad Banner (320x50) -->
+  <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
     <h3>🔗 Explore More Tools</h3>
@@ -988,6 +994,9 @@
 
   <a href="index.html" class="floating-cta">🔢 See All Calculators</a>
 
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
+
   <footer>
     <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> This baby growth percentile calculator is provided for informational and educational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. Growth assessment is complex and requires consideration of many individual factors. Every baby is unique with their own growth pattern. Always consult your pediatrician, family doctor, or other qualified healthcare provider with questions about your baby's growth, development, health, or any medical concerns. The percentiles shown are estimates based on simplified models and may differ from official medical charts.</p>
@@ -1250,5 +1259,12 @@
     });
   </script>
 
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
 </body>
 </html>
