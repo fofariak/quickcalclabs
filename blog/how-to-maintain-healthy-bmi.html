@@ -6,279 +6,31 @@
   <title>How to Maintain a Healthy BMI: A Practical Guide | QuickCalcLabs</title>
   <meta name="description" content="Learn practical, sustainable strategies for maintaining a healthy BMI through balanced nutrition, regular exercise, and positive lifestyle habits.">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    /* Blog post specific styles */
-
-    .muted {
-      color: var(--text-weak-light, #64748b);
-      font-size: 0.95rem;
-      font-weight: 600;
-      font-style: italic;
-    }
-
-    .dark-mode .muted {
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    /* Table of Contents */
-    .toc {
-      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
-      padding: 1.8rem;
-      border-radius: var(--radius-lg, 16px);
-      margin: 2rem 0;
-      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
-    }
-
-    .dark-mode .toc {
-      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
-      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
-    }
-
-    .toc h3 {
-      margin-top: 0;
-      font-size: 1.3rem;
-    }
-
-    .toc ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 1rem 0 0;
-    }
-
-    .toc li {
-      margin: 0.6rem 0;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .toc li::before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: var(--primary, #8b5cf6);
-    }
-
-    .toc a {
-      color: var(--primary, #8b5cf6);
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s ease;
-    }
-
-    .toc a:hover {
-      color: var(--primary-dark, #7c3aed);
-      text-decoration: underline;
-    }
-
-    .dark-mode .toc a {
-      color: var(--primary-light, #a78bfa);
-    }
-
-    /* Info & Highlight Boxes */
-    .info-box {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
-      border-left: 4px solid var(--primary, #8b5cf6);
-      padding: 1.5rem;
-      margin: 2rem 0;
-      border-radius: var(--radius-md, 12px);
-      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
-    }
-
-    .dark-mode .info-box {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .info-box h4 {
-      margin-top: 0;
-    }
-
-    .highlight-box {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(139, 92, 246, 0.08));
-      border: 2px solid var(--accent-green, #10b981);
-      padding: 1.8rem;
-      border-radius: var(--radius-lg, 16px);
-      margin: 2rem 0;
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    .dark-mode .highlight-box {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(139, 92, 246, 0.12));
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .highlight-box h3 {
-      margin-top: 0;
-    }
-
-    /* Comparison Table */
-    .comparison-table {
-      margin: 2rem 0;
-      overflow-x: auto;
-      border-radius: var(--radius-md, 12px);
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    .comparison-table table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .comparison-table th {
-      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
-      color: white;
-      padding: 1rem;
-      font-weight: 700;
-      text-align: left;
-    }
-
-    .comparison-table td {
-      padding: 0.9rem 1rem;
-      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
-      color: var(--text-weak-light, #64748b);
-    }
-
-    .dark-mode .comparison-table td {
-      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    .comparison-table tr:nth-child(even) {
-      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
-    }
-
-    .dark-mode .comparison-table tr:nth-child(even) {
-      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
-    }
-
-    .comparison-table tr:hover {
-      background: rgba(139, 92, 246, 0.05);
-    }
-
-    /* Method Grid */
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .method-card {
-      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
-      padding: 1.8rem;
-      border-radius: var(--radius-lg, 16px);
-      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
-      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
-      transition: all 0.3s ease;
-    }
-
-    .method-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    .dark-mode .method-card {
-      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
-      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .dark-mode .method-card:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .method-card h4 {
-      margin-top: 0;
-      color: var(--text-strong-light, #0f172a);
-    }
-
-    .dark-mode .method-card h4 {
-      color: var(--text-strong-dark, #f1f5f9);
-    }
-
-    .method-card p {
-      margin-bottom: 1rem;
-    }
-
-    /* Affiliate Links */
-    .affiliate-link {
-      color: var(--primary, #8b5cf6);
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-      transition: all 0.15s ease;
-    }
-
-    .affiliate-link:hover {
-      color: var(--primary-dark, #7c3aed);
-      text-decoration-style: solid;
-    }
-
-    .dark-mode .affiliate-link {
-      color: var(--primary-light, #a78bfa);
-    }
-
-    /* Blog Image */
-    .blog-image {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      border-radius: var(--radius-lg, 16px);
-      margin: 1.5rem auto;
-      display: block;
-      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-    }
-
-    /* Lists */
-    .seo-content ul, .seo-content ol {
-      margin: 1rem 0;
-      padding-left: 1.5rem;
-    }
-
-    .seo-content li {
-      color: var(--text-weak-light, #64748b);
-      line-height: 1.7;
-      margin-bottom: 0.6rem;
-    }
-
-    .dark-mode .seo-content li {
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    /* CTA Button in content */
-    .seo-content .cta-btn {
-      display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #fff;
-      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
-      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .seo-content .cta-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(139, 92, 246, 0.45);
-      color: #fff;
-    }
-
-    @media (max-width: 820px) {
-      .seo-content {
-        padding: 1.8rem;
-        margin: 1rem auto;
-      }
-
-      .method-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
+    .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
+    .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
+    .highlight-box { background: linear-gradient(135deg, #e6fff9, #f0e6ff); border: 2px solid var(--accent-teal); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .highlight-box { background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(179,138,255,0.1)); }
+    .toc { background: var(--surface-2-light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+    .dark-mode .toc { background: var(--surface-2-dark); }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 0.5rem 0; }
+    .toc a { color: var(--accent-blue); font-weight: 600; }
+    .comparison-table { margin: 2rem 0; overflow-x: auto; }
+    .comparison-table table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow-md); border-radius: var(--radius-md); overflow: hidden; }
+    .comparison-table th { background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); color: white; padding: 1rem; font-weight: 700; }
+    .comparison-table td { padding: 0.8rem; border-bottom: 1px solid #e1e5e9; text-align: left; }
+    .comparison-table tr:nth-child(even) { background: var(--surface-1-light); }
+    .dark-mode .comparison-table tr:nth-child(even) { background: var(--surface-1-dark); }
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .method-card { background: var(--surface-1-light); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #e1e5e9; text-align: left; }
+    .dark-mode .method-card { background: var(--surface-1-dark); border-color: #2d2d35; }
+    .method-card h4 { margin-top: 0; }
   </style>
 </head>
 <body>
@@ -293,7 +45,8 @@
     </nav>
   </header>
 
-  <div class="ad-container"><div class="ad-placeholder">728x90 Banner Ad</div></div>
+  <!-- Top Ad Banner (728x90) -->
+  <div id="ad-banner-top"></div>
 
   <section class="seo-content">
     <h1>Beyond the Number: A Practical Guide to Maintaining a Healthy BMI</h1>
@@ -317,7 +70,7 @@
     <div style="text-align:center; margin: 2rem 0;"><a href="../bmi-calculator.html" class="cta-btn">⚖️ Check Your BMI Now!</a></div>
 
     <h2 id="balanced-diet">1. Embrace a Balanced Diet, Not a Restrictive One</h2>
-    <p>The foundation of a healthy weight is a balanced and sustainable eating pattern. Restrictive diets often fail because they are not enjoyable or practical for the long haul. Instead of thinking about what to cut out, focus on what you can add in.</p>
+    <p class="muted">The foundation of a healthy weight is a balanced and sustainable eating pattern. Restrictive diets often fail because they are not enjoyable or practical for the long haul. Instead of thinking about what to cut out, focus on what you can add in.</p>
     <ul>
       <li><strong>Fill Up on Whole Foods:</strong> Prioritize fruits, vegetables, lean proteins (chicken, fish, beans, tofu), and whole grains (oats, brown rice, quinoa). These foods are packed with nutrients and fiber, which help you feel full, satisfied, and energized.</li>
       <li><strong>Practice the 80/20 Rule:</strong> Aim to make nutritious choices 80% of the time. This leaves 20% of your intake for treats and your favorite indulgence foods. This flexible approach prevents feelings of deprivation and makes healthy eating a lifelong habit rather than a temporary punishment.</li>
@@ -325,7 +78,7 @@
     </ul>
 
     <h2 id="consistent-movement">2. Make Movement a Consistent Part of Your Week</h2>
-    <p>Regular physical activity is crucial for maintaining weight, boosting metabolism, and improving overall health. The key is consistency, not necessarily intensity. Find activities you genuinely enjoy to make exercise a habit you'll stick with.</p>
+    <p class="muted">Regular physical activity is crucial for maintaining weight, boosting metabolism, and improving overall health. The key is consistency, not necessarily intensity. Find activities you genuinely enjoy to make exercise a habit you'll stick with.</p>
     <h3>A Mix of Cardio and Strength</h3>
     <p>Aim for a well-rounded routine that includes both cardiovascular exercise and strength training.</p>
     <ul>
@@ -334,7 +87,7 @@
     </ul>
 
     <h2 id="sleep-stress">3. Prioritize Sleep and Manage Stress</h2>
-    <p>Your health isn't just about what you eat and how you move. Sleep and stress play a massive, often underestimated, role in weight management.</p>
+    <p class="muted">Your health isn't just about what you eat and how you move. Sleep and stress play a massive, often underestimated, role in weight management.</p>
     <ul>
       <li><strong>Get Enough Quality Sleep:</strong> A chronic lack of sleep can disrupt the hormones that regulate hunger (ghrelin and leptin), leading to increased appetite and intense cravings for unhealthy foods. Aim for 7-9 hours of quality sleep per night for optimal hormonal balance.</li>
       <li><strong>Find Healthy Ways to De-stress:</strong> Chronic stress elevates levels of cortisol, a hormone that can lead to weight gain, especially around the abdomen. It's vital to incorporate stress-reducing activities into your routine. This could be meditation, yoga, reading, spending time in nature, or listening to music.</li>
@@ -345,14 +98,17 @@
     </div>
 
     <h2 id="mindful-eating">4. Practice Mindful and Intuitive Eating</h2>
-    <p>Once you've established healthy habits, you may not need to count calories meticulously. Instead, you can focus on more intuitive approaches to eating.</p>
+    <p class="muted">Once you've established healthy habits, you may not need to count calories meticulously. Instead, you can focus on more intuitive approaches to eating.</p>
     <ul>
         <li><strong>Eat When You're Hungry, Stop When You're Full:</strong> This sounds simple, but many of us eat out of boredom, stress, or habit. Before you eat, ask yourself, "Am I truly hungry?" Pay attention to your body's signals of fullness and stop eating when you feel satisfied, not stuffed.</li>
         <li><strong>Savor Your Food:</strong> Eat slowly and without distractions. Pay attention to the flavors and textures of your meal. This practice not only makes eating more enjoyable but also gives your brain time to register that you're full.</li>
     </ul>
 
     <h2 id="stay-hydrated">5. Stay Adequately Hydrated</h2>
-    <p>Water is essential for every bodily process, including metabolism. Sometimes, the brain can mistake thirst for hunger. By staying well-hydrated throughout the day, you can prevent unnecessary snacking. Carry a water bottle with you as a constant reminder.</p>
+    <p class="muted">Water is essential for every bodily process, including metabolism. Sometimes, the brain can mistake thirst for hunger. By staying well-hydrated throughout the day, you can prevent unnecessary snacking. Carry a water bottle with you as a constant reminder.</p>
+
+    <!-- Mid Ad Banner (320x50) -->
+    <div id="ad-banner-mid"></div>
 
     <h2 id="tools-resources">Tools for a Healthy Lifestyle</h2>
     <p>Maintaining a healthy BMI is easier with the right support. Here are some products that can help you stay on track. <em>(As an Amazon Associate, we earn from qualifying purchases.)</em></p>
@@ -360,17 +116,17 @@
       <div class="method-card">
         <h4>⌚ Fitness Trackers</h4>
         <p>Monitor your daily steps, activity levels, heart rate, and sleep patterns to stay motivated and aware of your habits. Seeing your progress can be a powerful motivator.</p>
-        <a href="javascript:void(0)" data-product="fitbit-charge" class="product-link">🛒 Fitbit Charge 6.</a>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore popular fitness trackers here.</a>
       </div>
       <div class="method-card">
         <h4>📚 Healthy Cookbooks</h4>
         <p>Get inspired with delicious and nutritious meal ideas that make healthy eating exciting and prevent you from falling into a food rut.</p>
-        <a href="javascript:void(0)" data-product="healthy-cookbook" class="product-link">🛒 Find top-rated healthy cookbook.</a>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find top-rated healthy cookbooks.</a>
       </div>
       <div class="method-card">
-        <h4>💧 Insulated Water Bottles</h4>
+        <h4>💧 Reusable Water Bottles</h4>
         <p>A stylish and eco-friendly water bottle can be a great visual reminder to stay hydrated throughout the day, helping you meet your daily fluid needs.</p>
-        <a href="javascript:void(0)" data-product="insulated-bottle" class="product-link">🛒 Check out these popular options.</a>
+        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out these popular options.</a>
       </div>
     </div>
 
@@ -388,19 +144,15 @@
     </div>
   </section>
 
-  <div class="ad-container"><div class="ad-placeholder">Responsive Footer Ad</div></div>
-  <footer>
-    <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> The calculators and information on this website are for informational purposes only and are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
-    </div>
-    <div class="footer-links">
-    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
-    <a href="privacy-policy.html">Privacy Policy</a> | 
-    <a href="terms-of-service.html">Terms of Service</a> |
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-  </footer>
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
 
-  <script src="../js/links.js"></script>
+  <footer>
+    <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+    <a href="../privacy-policy.html">Privacy Policy</a> | 
+    <a href="../terms-of-service.html">Terms of Service</a> |
+    <a href="../affiliate-disclosure.html">Affiliate Disclosure</a>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -425,6 +177,13 @@
         });
       });
     });
+  </script>
+  <script src="../js/ad.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+    renderSocialBar();
   </script>
 </body>
 </html>
