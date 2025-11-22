@@ -537,6 +537,9 @@
     </nav>
   </header>
 
+  <!-- Top Ad Banner (728x90) -->
+  <div id="ad-banner-top"></div>
+
   <section class="calc-wrapper">
     <h1>Body Mass Index (BMI) Calculator</h1>
     <p class="subtitle">Calculate your BMI instantly and understand what your number means for your health journey.</p>
@@ -574,7 +577,10 @@
     <button onclick="calculateBMI()">Calculate My BMI</button>
     <div id="result" class="result-box"></div>
 
-    </section>
+  </section>
+
+  <!-- Mid Ad Banner (320x50) -->
+  <div id="ad-banner-mid"></div>
 
     <section class="seo-content">
     <h3>🔗 Explore More Tools</h3>
@@ -784,6 +790,9 @@
 
   <a href="index.html" class="floating-cta">See All Calculators</a>
 
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
+
   <footer>
     <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> This BMI calculator is provided for informational and educational purposes only. BMI is a screening tool, not a diagnostic tool, and has known limitations. It should not be used as the sole basis for health decisions. Always consult with qualified healthcare professionals for personalized medical advice, diagnosis, and treatment. The information provided does not replace professional medical consultation.</p>
@@ -929,5 +938,12 @@
         });
     });
   </script>
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
 </body>
 </html>
