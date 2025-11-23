@@ -95,42 +95,6 @@ function renderAdBanner300x250(containerId) {
   });
 }
 
-// Social Bar - Auto-load
-function loadSocialBar() {
-  if (document.getElementById('social-bar-script') || !document.body) {
-    return;
-  }
-
-  const script = document.createElement('script');
-  script.id = 'social-bar-script';
-  script.type = 'text/javascript';
-  script.src =
-    '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
-
-  const originalWrite = document.write;
-  const originalWriteln = document.writeln;
-
-  function safeWrite(html) {
-    const temp = document.createElement('div');
-    temp.innerHTML = html;
-    while (temp.firstChild) {
-      document.body.appendChild(temp.firstChild);
-    }
-  }
-
-  document.write = safeWrite;
-  document.writeln = function (html) {
-    safeWrite(html + '\n');
-  };
-
-  script.onload = script.onerror = function () {
-    document.write = originalWrite;
-    document.writeln = originalWriteln;
-  };
-
-  document.body.appendChild(script);
-}
-
 // Adsterra Referral Banner - Side sticky banner
 function createReferralBanner() {
   if (document.getElementById('adsterra-referral-banner-top') || !document.body) {
@@ -153,11 +117,9 @@ function createReferralBanner() {
 // Auto-initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function() {
-    loadSocialBar();
     createReferralBanner();
   });
 } else {
   // DOM already loaded
-  loadSocialBar();
   createReferralBanner();
 }
