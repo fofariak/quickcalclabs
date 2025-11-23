@@ -1689,38 +1689,4 @@ footer .affiliate-disclosure {
   }
 }
 
-/* ------------- Adsterra Referral Banner (Top Inline) ------------- */
-#adsterra-referral-banner-top {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem auto 1rem;
-  padding: 0 1rem;
-}
-
-#adsterra-referral-banner-top a {
-  display: inline-block;
-  line-height: 0;
-}
-
-#adsterra-referral-banner-top img {
-  display: block;
-  max-width: min(720px, 100%);
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: var(--shadow-md, 0 12px 24px rgba(15, 23, 42, 0.12));
-}
-
-@media (max-width: 768px) {
-  #adsterra-referral-banner-top {
-    padding: 0 0.5rem;
-    margin: 0.25rem auto 0.75rem;
-  }
-
-  #adsterra-referral-banner-top img {
-    border-radius: 8px;
-  }
-}
 
