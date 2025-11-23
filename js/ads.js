@@ -95,31 +95,19 @@ function renderAdBanner300x250(containerId) {
   });
 }
 
-// Adsterra Referral Banner - Side sticky banner
-function createReferralBanner() {
-  if (document.getElementById('adsterra-referral-banner-top') || !document.body) {
+// Social Bar
+function renderSocialBar() {
+  // Check if already loaded
+  if (document.getElementById('social-bar-script')) {
     return;
   }
-
-  const banner = document.createElement('div');
-  banner.id = 'adsterra-referral-banner-top';
-  banner.innerHTML =
-    '<a href="https://publishers.adsterra.com/referral/yMDebIPSeq" target="_blank" rel="nofollow"><img alt="Adsterra referral" src="https://landings-cdn.adsterratech.com/referralBanners/gif/720x90_adsterra_reff.gif" /></a>';
-
-  const topAd = document.getElementById('ad-banner-top');
-  if (topAd && topAd.parentNode) {
-    topAd.parentNode.insertBefore(banner, topAd);
-  } else {
-    document.body.insertBefore(banner, document.body.firstChild);
-  }
-}
-
-// Auto-initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
-    createReferralBanner();
-  });
-} else {
-  // DOM already loaded
-  createReferralBanner();
+  
+  // Create script element
+  const script = document.createElement('script');
+  script.id = 'social-bar-script';
+  script.type = 'text/javascript';
+  script.src = '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
+  
+  // Append to body
+  document.body.appendChild(script);
 }
