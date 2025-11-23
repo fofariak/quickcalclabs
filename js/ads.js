@@ -97,17 +97,27 @@ function renderAdBanner300x250(containerId) {
 
 // Social Bar - Auto-load
 function loadSocialBar() {
-  if (document.getElementById('social-bar-script') || !document.body) {
+  if (document.getElementById('social-bar-iframe') || !document.body) {
     return;
   }
 
-  const script = document.createElement('script');
-  script.id = 'social-bar-script';
-  script.type = 'text/javascript';
-  script.src =
-    '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
+  const iframe = document.createElement('iframe');
+  iframe.id = 'social-bar-iframe';
+  iframe.style.display = 'none';
+  iframe.setAttribute('aria-hidden', 'true');
 
-  document.body.appendChild(script);
+  document.body.appendChild(iframe);
+
+  const doc = iframe.contentWindow.document;
+  doc.open();
+  doc.write(`<!DOCTYPE html>
+  <html lang="en">
+    <head><meta charset="UTF-8" /></head>
+    <body>
+      <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"><\\/script>
+    </body>
+  </html>`);
+  doc.close();
 }
 
 // Adsterra Referral Banner - Side sticky banner
