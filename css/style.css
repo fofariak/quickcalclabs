@@ -1689,71 +1689,37 @@ footer .affiliate-disclosure {
   }
 }
 
-/* ------------- Adsterra Referral Banner (Sticky Side) ------------- */
-#adsterra-referral-banner {
-  position: fixed;
-  right: 10px;
-  top: 180px;
-  bottom: auto;
-  transform: none;
-  z-index: 999;
-  width: 120px;
-  height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s ease;
-}
-
-#adsterra-referral-banner:hover {
-  opacity: 0.9;
-}
-
-#adsterra-referral-banner a {
-  display: block;
+/* ------------- Adsterra Referral Banner (Top Inline) ------------- */
+#adsterra-referral-banner-top {
   width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem auto 1rem;
+  padding: 0 1rem;
+}
+
+#adsterra-referral-banner-top a {
+  display: inline-block;
   line-height: 0;
 }
 
-#adsterra-referral-banner img {
+#adsterra-referral-banner-top img {
   display: block;
+  max-width: min(720px, 100%);
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-/* Mobile responsive - show at bottom on small screens */
-@media (max-width: 1200px) {
-  #adsterra-referral-banner {
-    right: 5px;
-    top: 150px;
-    width: 100px;
-    height: 500px;
-  }
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md, 0 12px 24px rgba(15, 23, 42, 0.12));
 }
 
 @media (max-width: 768px) {
-  #adsterra-referral-banner {
-    position: fixed;
-    right: 12px;
-    left: auto;
-    top: auto;
-    bottom: 80px;
-    transform: none;
-    width: 90px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  #adsterra-referral-banner-top {
+    padding: 0 0.5rem;
+    margin: 0.25rem auto 0.75rem;
   }
-  
-  #adsterra-referral-banner img {
-    object-fit: contain;
-    width: 100%;
-    height: auto;
+
+  #adsterra-referral-banner-top img {
+    border-radius: 8px;
   }
 }
