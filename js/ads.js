@@ -1,28 +1,38 @@
 function renderAdSlot({ containerId, options, scriptSrc, delay = 0 }) {
-  setTimeout(() => {
+  const loadAd = () => {
     const container = document.getElementById(containerId);
     if (!container) {
+      console.warn('Ad container not found:', containerId);
       return;
     }
 
     container.innerHTML = '';
     
-    // Set atOptions right before loading the script
-    window.atOptions = options;
+    // Create inline script that sets atOptions
+    const configScript = document.createElement('script');
+    configScript.type = 'text/javascript';
+    configScript.text = `window.atOptions = ${JSON.stringify(options)};`;
+    container.appendChild(configScript);
     
-    // Create invoke script that will read atOptions
+    // Load the invoke script - it will read atOptions when it executes
     const invokeScript = document.createElement('script');
     invokeScript.type = 'text/javascript';
     invokeScript.src = scriptSrc;
-    invokeScript.onload = invokeScript.onerror = () => {
-      // Clean up after script loads
-      setTimeout(() => {
-        delete window.atOptions;
-      }, 50);
-    };
-
+    invokeScript.async = true;
+    
     container.appendChild(invokeScript);
-  }, delay);
+  };
+  
+  if (delay > 0) {
+    setTimeout(loadAd, delay);
+  } else {
+    // Ensure DOM is ready for immediate loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadAd);
+    } else {
+      loadAd();
+    }
+  }
 }
 
 // Banner 728x90
@@ -53,7 +63,7 @@ function renderAdBanner320x50(containerId) {
       params: {}
     },
     scriptSrc: '//www.highperformanceformat.com/1bd80cb650cefb9e21bdb1bb21def2c7/invoke.js',
-    delay: 100
+    delay: 1000
   });
 }
 
@@ -69,7 +79,7 @@ function renderAdBanner300x250(containerId) {
       params: {}
     },
     scriptSrc: '//www.highperformanceformat.com/21c3bdcbb595adb2c550f8c8d41ef140/invoke.js',
-    delay: 200
+    delay: 2000
   });
 }
 
