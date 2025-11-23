@@ -97,27 +97,38 @@ function renderAdBanner300x250(containerId) {
 
 // Social Bar - Auto-load
 function loadSocialBar() {
-  if (document.getElementById('social-bar-iframe') || !document.body) {
+  if (document.getElementById('social-bar-script') || !document.body) {
     return;
   }
 
-  const iframe = document.createElement('iframe');
-  iframe.id = 'social-bar-iframe';
-  iframe.style.display = 'none';
-  iframe.setAttribute('aria-hidden', 'true');
+  const script = document.createElement('script');
+  script.id = 'social-bar-script';
+  script.type = 'text/javascript';
+  script.src =
+    '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
 
-  document.body.appendChild(iframe);
+  const originalWrite = document.write;
+  const originalWriteln = document.writeln;
 
-  const doc = iframe.contentWindow.document;
-  doc.open();
-  doc.write(`<!DOCTYPE html>
-  <html lang="en">
-    <head><meta charset="UTF-8" /></head>
-    <body>
-      <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"><\\/script>
-    </body>
-  </html>`);
-  doc.close();
+  function safeWrite(html) {
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+    while (temp.firstChild) {
+      document.body.appendChild(temp.firstChild);
+    }
+  }
+
+  document.write = safeWrite;
+  document.writeln = function (html) {
+    safeWrite(html + '\n');
+  };
+
+  script.onload = script.onerror = function () {
+    document.write = originalWrite;
+    document.writeln = originalWriteln;
+  };
+
+  document.body.appendChild(script);
 }
 
 // Adsterra Referral Banner - Side sticky banner
