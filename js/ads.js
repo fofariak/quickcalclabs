@@ -1,43 +1,58 @@
-function renderAdSlot({ containerId, options, scriptSrc, delay = 0 }) {
-  const loadAd = () => {
+const adRenderQueue = [];
+let isProcessingAdQueue = false;
+
+function enqueueAdSlot(slotConfig) {
+  adRenderQueue.push(slotConfig);
+  processAdQueue();
+}
+
+function processAdQueue() {
+  if (isProcessingAdQueue) {
+    return;
+  }
+
+  const nextSlot = adRenderQueue.shift();
+  if (!nextSlot) {
+    return;
+  }
+
+  isProcessingAdQueue = true;
+  renderAdSlot(nextSlot).finally(() => {
+    isProcessingAdQueue = false;
+    processAdQueue();
+  });
+}
+
+function renderAdSlot({ containerId, options, scriptSrc }) {
+  return new Promise((resolve) => {
     const container = document.getElementById(containerId);
     if (!container) {
-      console.warn('Ad container not found:', containerId);
+      resolve();
       return;
     }
 
     container.innerHTML = '';
-    
-    // Create inline script that sets atOptions
-    const configScript = document.createElement('script');
-    configScript.type = 'text/javascript';
-    configScript.text = `window.atOptions = ${JSON.stringify(options)};`;
-    container.appendChild(configScript);
-    
-    // Load the invoke script - it will read atOptions when it executes
+    window.atOptions = options;
+
     const invokeScript = document.createElement('script');
     invokeScript.type = 'text/javascript';
     invokeScript.src = scriptSrc;
-    invokeScript.async = true;
-    
+    invokeScript.onload = () => {
+      delete window.atOptions;
+      resolve();
+    };
+    invokeScript.onerror = () => {
+      delete window.atOptions;
+      resolve();
+    };
+
     container.appendChild(invokeScript);
-  };
-  
-  if (delay > 0) {
-    setTimeout(loadAd, delay);
-  } else {
-    // Ensure DOM is ready for immediate loads
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadAd);
-    } else {
-      loadAd();
-    }
-  }
+  });
 }
 
 // Banner 728x90
 function renderAdBanner728x90(containerId) {
-  renderAdSlot({
+  enqueueAdSlot({
     containerId,
     options: {
       key: '0f30d8d002656d29a062c88d9dd54fa9',
@@ -46,14 +61,13 @@ function renderAdBanner728x90(containerId) {
       width: 728,
       params: {}
     },
-    scriptSrc: '//www.highperformanceformat.com/0f30d8d002656d29a062c88d9dd54fa9/invoke.js',
-    delay: 0
+    scriptSrc: '//www.highperformanceformat.com/0f30d8d002656d29a062c88d9dd54fa9/invoke.js'
   });
 }
 
 // Banner 320x50
 function renderAdBanner320x50(containerId) {
-  renderAdSlot({
+  enqueueAdSlot({
     containerId,
     options: {
       key: '1bd80cb650cefb9e21bdb1bb21def2c7',
@@ -62,14 +76,13 @@ function renderAdBanner320x50(containerId) {
       width: 320,
       params: {}
     },
-    scriptSrc: '//www.highperformanceformat.com/1bd80cb650cefb9e21bdb1bb21def2c7/invoke.js',
-    delay: 1000
+    scriptSrc: '//www.highperformanceformat.com/1bd80cb650cefb9e21bdb1bb21def2c7/invoke.js'
   });
 }
 
 // Banner 300x250
 function renderAdBanner300x250(containerId) {
-  renderAdSlot({
+  enqueueAdSlot({
     containerId,
     options: {
       key: '21c3bdcbb595adb2c550f8c8d41ef140',
@@ -78,8 +91,7 @@ function renderAdBanner300x250(containerId) {
       width: 300,
       params: {}
     },
-    scriptSrc: '//www.highperformanceformat.com/21c3bdcbb595adb2c550f8c8d41ef140/invoke.js',
-    delay: 2000
+    scriptSrc: '//www.highperformanceformat.com/21c3bdcbb595adb2c550f8c8d41ef140/invoke.js'
   });
 }
 
