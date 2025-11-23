@@ -1723,3 +1723,36 @@ footer .affiliate-disclosure {
     border-radius: 8px;
   }
 }
+
+/* Social bar iframe container */
+#social-bar-container {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(360px, 90vw);
+  z-index: 998;
+  padding: 0.25rem 0.5rem;
+}
+
+#social-bar-iframe {
+  width: 100%;
+  min-height: 70px;
+  max-height: 110px;
+  border: none;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.25);
+}
+
+@media (max-width: 768px) {
+  #social-bar-container {
+    width: 100%;
+    padding: 0;
+  }
+
+  #social-bar-iframe {
+    border-radius: 0;
+  }
+}
