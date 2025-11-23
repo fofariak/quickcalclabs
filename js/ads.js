@@ -1,20 +1,28 @@
-function renderAdSlot({ containerId, options, scriptSrc }) {
-  const container = document.getElementById(containerId);
-  if (!container) {
-    return;
-  }
+function renderAdSlot({ containerId, options, scriptSrc, delay = 0 }) {
+  setTimeout(() => {
+    const container = document.getElementById(containerId);
+    if (!container) {
+      return;
+    }
 
-  container.innerHTML = '';
-  window.atOptions = options;
+    container.innerHTML = '';
+    
+    // Set atOptions right before loading the script
+    window.atOptions = options;
+    
+    // Create invoke script that will read atOptions
+    const invokeScript = document.createElement('script');
+    invokeScript.type = 'text/javascript';
+    invokeScript.src = scriptSrc;
+    invokeScript.onload = invokeScript.onerror = () => {
+      // Clean up after script loads
+      setTimeout(() => {
+        delete window.atOptions;
+      }, 50);
+    };
 
-  const invokeScript = document.createElement('script');
-  invokeScript.type = 'text/javascript';
-  invokeScript.src = scriptSrc;
-  invokeScript.onload = invokeScript.onerror = () => {
-    delete window.atOptions;
-  };
-
-  container.appendChild(invokeScript);
+    container.appendChild(invokeScript);
+  }, delay);
 }
 
 // Banner 728x90
@@ -28,7 +36,8 @@ function renderAdBanner728x90(containerId) {
       width: 728,
       params: {}
     },
-    scriptSrc: '//www.highperformanceformat.com/0f30d8d002656d29a062c88d9dd54fa9/invoke.js'
+    scriptSrc: '//www.highperformanceformat.com/0f30d8d002656d29a062c88d9dd54fa9/invoke.js',
+    delay: 0
   });
 }
 
@@ -43,7 +52,8 @@ function renderAdBanner320x50(containerId) {
       width: 320,
       params: {}
     },
-    scriptSrc: '//www.highperformanceformat.com/1bd80cb650cefb9e21bdb1bb21def2c7/invoke.js'
+    scriptSrc: '//www.highperformanceformat.com/1bd80cb650cefb9e21bdb1bb21def2c7/invoke.js',
+    delay: 100
   });
 }
 
@@ -58,7 +68,8 @@ function renderAdBanner300x250(containerId) {
       width: 300,
       params: {}
     },
-    scriptSrc: '//www.highperformanceformat.com/21c3bdcbb595adb2c550f8c8d41ef140/invoke.js'
+    scriptSrc: '//www.highperformanceformat.com/21c3bdcbb595adb2c550f8c8d41ef140/invoke.js',
+    delay: 200
   });
 }
 
