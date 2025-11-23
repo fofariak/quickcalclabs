@@ -114,8 +114,8 @@ function loadSocialBar() {
 
 // Adsterra Referral Banner - Side sticky banner
 function createReferralBanner() {
-  // Check if already exists
-  if (document.getElementById('adsterra-referral-banner')) {
+  // Check if already exists or body not ready
+  if (document.getElementById('adsterra-referral-banner') || !document.body) {
     return;
   }
   
@@ -124,7 +124,12 @@ function createReferralBanner() {
   banner.id = 'adsterra-referral-banner';
   banner.innerHTML = '<a href="https://publishers.adsterra.com/referral/yMDebIPSeq" target="_blank" rel="nofollow"><img alt="Adsterra" src="https://landings-cdn.adsterratech.com/referralBanners/gif/120x600_adsterra_reff.gif" /></a>';
   
-  document.body.appendChild(banner);
+  // Insert near top of the body alongside content
+  if (document.body.firstChild) {
+    document.body.insertBefore(banner, document.body.firstChild);
+  } else {
+    document.body.appendChild(banner);
+  }
 }
 
 // Auto-initialize when DOM is ready

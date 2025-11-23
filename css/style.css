@@ -1693,8 +1693,9 @@ footer .affiliate-disclosure {
 #adsterra-referral-banner {
   position: fixed;
   right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 140px;
+  bottom: auto;
+  transform: none;
   z-index: 999;
   width: 120px;
   height: 600px;
@@ -1730,6 +1731,7 @@ footer .affiliate-disclosure {
 @media (max-width: 1200px) {
   #adsterra-referral-banner {
     right: 5px;
+    top: 120px;
     width: 100px;
     height: 500px;
   }
