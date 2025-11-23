@@ -150,6 +150,39 @@
       margin-right: auto !important;
     }
 
+    /* Fix social bar to top right corner only - prevent full page blocking */
+    [id*="social-bar"],
+    [class*="social-bar"],
+    div[style*="position: fixed"][style*="z-index"] {
+      position: fixed !important;
+      top: 10px !important;
+      right: 10px !important;
+      left: auto !important;
+      bottom: auto !important;
+      width: auto !important;
+      max-width: 300px !important;
+      height: auto !important;
+      max-height: 200px !important;
+      z-index: 9999 !important;
+      background: transparent !important;
+      pointer-events: auto !important;
+    }
+
+    /* Prevent overlay backdrop from blocking content */
+    div[style*="position: fixed"][style*="z-index"][style*="width: 100%"],
+    div[style*="position: fixed"][style*="inset"] {
+      position: fixed !important;
+      inset: auto !important;
+      width: auto !important;
+      height: auto !important;
+      top: 10px !important;
+      right: 10px !important;
+      left: auto !important;
+      bottom: auto !important;
+      max-width: 300px !important;
+      background: transparent !important;
+    }
+
     
     .header {
       position: sticky;
@@ -969,6 +1002,40 @@
         localStorage.setItem("theme", "dark");
       } else {
         localStorage.setItem("theme", "light");
+      }
+    });
+
+    // Auto-hide social bar on scroll down, show on scroll up
+    let lastScrollTop = 0;
+    let ticking = false;
+    
+    function updateSocialBarVisibility() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const socialBarElements = document.querySelectorAll('[id*="social-bar"], [class*="social-bar"], div[style*="position: fixed"][style*="z-index"]');
+      
+      socialBarElements.forEach(el => {
+        const style = el.getAttribute('style') || '';
+        if (style.includes('position: fixed') || style.includes('position:fixed')) {
+          if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down - hide social bar
+            el.style.transform = 'translateX(320px)';
+            el.style.transition = 'transform 0.3s ease';
+          } else {
+            // Scrolling up - show social bar
+            el.style.transform = 'translateX(0)';
+            el.style.transition = 'transform 0.3s ease';
+          }
+        }
+      });
+      
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      ticking = false;
+    }
+    
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateSocialBarVisibility);
+        ticking = true;
       }
     });
   </script>

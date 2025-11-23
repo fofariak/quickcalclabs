@@ -1614,6 +1614,39 @@ footer .affiliate-disclosure {
   color: var(--text-weak-dark) !important;
 }
 
+/* ------------- Social Bar Fix - Top Right Only ------------- */
+/* Prevent social bar from blocking entire page */
+[id*="social-bar"],
+[class*="social-bar"],
+div[style*="position: fixed"][style*="z-index: 2147483647"],
+div[style*="position: fixed"][style*="z-index: 999999"] {
+  position: fixed !important;
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
+  bottom: auto !important;
+  width: auto !important;
+  max-width: 300px !important;
+  height: auto !important;
+  max-height: 250px !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
+/* Hide any full-page overlay backdrops from ads */
+div[style*="position: fixed"][style*="inset: 0"],
+div[style*="position: fixed"][style*="width: 100%"][style*="height: 100%"] {
+  width: auto !important;
+  height: auto !important;
+  inset: auto !important;
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
+  bottom: auto !important;
+  max-width: 300px !important;
+  background: transparent !important;
+}
+
 /* ------------- Ad Banner Styling ------------- */
 #ad-banner-top,
 #ad-banner-mid,
