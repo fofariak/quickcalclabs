@@ -95,8 +95,8 @@ function renderAdBanner300x250(containerId) {
   });
 }
 
-// Social Bar
-function renderSocialBar() {
+// Social Bar - Auto-load
+function loadSocialBar() {
   // Check if already loaded
   if (document.getElementById('social-bar-script')) {
     return;
@@ -110,4 +110,31 @@ function renderSocialBar() {
   
   // Append to body
   document.body.appendChild(script);
+}
+
+// Adsterra Referral Banner - Side sticky banner
+function createReferralBanner() {
+  // Check if already exists
+  if (document.getElementById('adsterra-referral-banner')) {
+    return;
+  }
+  
+  // Create banner container
+  const banner = document.createElement('div');
+  banner.id = 'adsterra-referral-banner';
+  banner.innerHTML = '<a href="https://publishers.adsterra.com/referral/yMDebIPSeq" target="_blank" rel="nofollow"><img alt="Adsterra" src="https://landings-cdn.adsterratech.com/referralBanners/gif/120x600_adsterra_reff.gif" /></a>';
+  
+  document.body.appendChild(banner);
+}
+
+// Auto-initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    loadSocialBar();
+    createReferralBanner();
+  });
+} else {
+  // DOM already loaded
+  loadSocialBar();
+  createReferralBanner();
 }

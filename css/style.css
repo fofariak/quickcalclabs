@@ -1688,3 +1688,69 @@ footer .affiliate-disclosure {
     margin: 1.5rem auto;
   }
 }
+
+/* ------------- Adsterra Referral Banner (Sticky Side) ------------- */
+#adsterra-referral-banner {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  width: 120px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+#adsterra-referral-banner:hover {
+  opacity: 0.9;
+}
+
+#adsterra-referral-banner a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+}
+
+#adsterra-referral-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Mobile responsive - show at bottom on small screens */
+@media (max-width: 1200px) {
+  #adsterra-referral-banner {
+    right: 5px;
+    width: 100px;
+    height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  #adsterra-referral-banner {
+    position: fixed;
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 50px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  #adsterra-referral-banner img {
+    object-fit: cover;
+    height: 50px;
+  }
+}
