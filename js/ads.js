@@ -97,21 +97,17 @@ function renderAdBanner300x250(containerId) {
 
 // Social Bar - Auto-load
 function loadSocialBar() {
-  if (document.getElementById('social-bar-container') || !document.body) {
+  if (document.getElementById('social-bar-script') || !document.body) {
     return;
   }
 
-  const container = document.createElement('div');
-  container.id = 'social-bar-container';
+  const script = document.createElement('script');
+  script.id = 'social-bar-script';
+  script.type = 'text/javascript';
+  script.src =
+    '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
 
-  const iframe = document.createElement('iframe');
-  iframe.id = 'social-bar-iframe';
-  iframe.src = 'social-bar.html';
-  iframe.title = 'Promoted social links';
-  iframe.loading = 'lazy';
-
-  container.appendChild(iframe);
-  document.body.appendChild(container);
+  document.body.appendChild(script);
 }
 
 // Adsterra Referral Banner - Side sticky banner
