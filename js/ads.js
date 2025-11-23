@@ -32,22 +32,31 @@ function renderAdSlot({ containerId, options, scriptSrc }) {
     }
 
     container.innerHTML = '';
+    const previousAtOptions = window.atOptions;
     window.atOptions = options;
 
     const invokeScript = document.createElement('script');
     invokeScript.type = 'text/javascript';
     invokeScript.src = scriptSrc;
     invokeScript.onload = () => {
-      delete window.atOptions;
+      cleanupAtOptions(previousAtOptions);
       resolve();
     };
     invokeScript.onerror = () => {
-      delete window.atOptions;
+      cleanupAtOptions(previousAtOptions);
       resolve();
     };
 
     container.appendChild(invokeScript);
   });
+}
+
+function cleanupAtOptions(previous) {
+  if (typeof previous !== 'undefined') {
+    window.atOptions = previous;
+  } else {
+    delete window.atOptions;
+  }
 }
 
 // Banner 728x90
