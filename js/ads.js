@@ -97,36 +97,36 @@ function renderAdBanner300x250(containerId) {
 
 // Social Bar - Auto-load
 function loadSocialBar() {
-  // Check if already loaded
-  if (document.getElementById('social-bar-script')) {
+  // Check if already injected
+  if (document.getElementById('social-bar-container')) {
     return;
   }
-  
-  // Create script element
-  const script = document.createElement('script');
-  script.id = 'social-bar-script';
-  script.type = 'text/javascript';
-  script.src = '//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js';
-  
-  // Append to body
-  document.body.appendChild(script);
+
+  const container = document.createElement('div');
+  container.id = 'social-bar-container';
+  container.style.display = 'contents';
+  container.innerHTML =
+    '<scr' +
+    'ipt type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></scr' +
+    'ipt>';
+
+  document.body.appendChild(container);
 }
 
 // Adsterra Referral Banner - Side sticky banner
 function createReferralBanner() {
-  // Check if already exists or body not ready
   if (document.getElementById('adsterra-referral-banner') || !document.body) {
     return;
   }
-  
-  // Create banner container
+
   const banner = document.createElement('div');
   banner.id = 'adsterra-referral-banner';
-  banner.innerHTML = '<a href="https://publishers.adsterra.com/referral/yMDebIPSeq" target="_blank" rel="nofollow"><img alt="Adsterra" src="https://landings-cdn.adsterratech.com/referralBanners/gif/120x600_adsterra_reff.gif" /></a>';
-  
-  // Insert near top of the body alongside content
-  if (document.body.firstChild) {
-    document.body.insertBefore(banner, document.body.firstChild);
+  banner.innerHTML =
+    '<a href="https://publishers.adsterra.com/referral/yMDebIPSeq" target="_blank" rel="nofollow"><img alt="Adsterra" src="https://landings-cdn.adsterratech.com/referralBanners/gif/120x600_adsterra_reff.gif" /></a>';
+
+  const header = document.querySelector('.header');
+  if (header && header.parentNode) {
+    header.parentNode.insertBefore(banner, header.nextSibling);
   } else {
     document.body.appendChild(banner);
   }
