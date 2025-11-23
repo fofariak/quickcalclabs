@@ -149,6 +149,29 @@
       margin-left: auto !important;
       margin-right: auto !important;
     }
+
+    /* Ensure referral banner centers inside inline styles */
+    #adsterra-referral-banner-top {
+      width: min(720px, 95vw);
+      margin: 0.5rem auto 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 0.5rem;
+    }
+
+    #adsterra-referral-banner-top a {
+      display: inline-block;
+      width: 100%;
+      line-height: 0;
+    }
+
+    #adsterra-referral-banner-top img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md, 0 12px 24px rgba(15, 23, 42, 0.12));
+    }
     
     .header {
       position: sticky;
