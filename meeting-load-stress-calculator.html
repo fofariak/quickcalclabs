@@ -449,39 +449,44 @@
       const weeklyMeetings = dailyMeetings * 5;
       const weeklyMeetingHours = (meetingHours * 5).toFixed(1);
 
-      // Calculate stress score (0-100)
-      let stress = 0;
+      // Normalized stress subscores (0-100, higher = more stressful)
+      const mPercent = parseFloat(meetingPercent);
+      const timeInMeetingsStress = Math.max(0, Math.min(100, Math.round(
+        ((mPercent - 20) / 50) * 100
+      ))); // ~20% -> 0, ~70%+ -> 100
 
-      // Time in meetings (max 30 points)
-      if (meetingPercent > 60) stress += 30;
-      else if (meetingPercent > 50) stress += 25;
-      else if (meetingPercent > 40) stress += 20;
-      else if (meetingPercent > 30) stress += 10;
+      const volumeStress = Math.max(0, Math.min(100, Math.round(
+        ((dailyMeetings - 2) / 8) * 100
+      ))); // 2 or fewer -> 0, ~10+ -> 100
 
-      // Number of meetings (max 20 points)
-      if (dailyMeetings > 8) stress += 20;
-      else if (dailyMeetings > 6) stress += 15;
-      else if (dailyMeetings > 4) stress += 10;
+      const energyStress = Math.max(0, Math.min(100, Math.round(
+        ((energyDrain - 1) / 9) * 100
+      ))); // slider 1–10
 
-      // Energy drain (max 20 points)
-      stress += (energyDrain - 1) * 2.2;
+      const backToBackStress = Math.max(0, Math.min(100, Math.round(
+        (backToBack / 6) * 100
+      ))); // ~6+ back-to-back -> ~100
 
-      // Back-to-back meetings (max 15 points)
-      if (backToBack > 4) stress += 15;
-      else if (backToBack > 2) stress += 10;
-      else if (backToBack > 0) stress += 5;
+      const bufferStress = Math.max(0, Math.min(100, Math.round(
+        ((15 - bufferTime) / 15) * 100
+      ))); // 15+ minutes buffer -> 0, no buffer -> high stress
 
-      // Buffer time (max 15 points penalty/bonus)
-      if (bufferTime < 5) stress += 15;
-      else if (bufferTime < 10) stress += 10;
-      else if (bufferTime >= 20) stress -= 10;
+      const asyncStress = Math.max(0, Math.min(100, Math.round(
+        ((40 - asyncRatio) / 40) * 100
+      ))); // 40%+ async -> low stress, near 0% async -> high stress
 
-      // Async ratio bonus
-      if (asyncRatio > 60) stress -= 10;
-      else if (asyncRatio > 40) stress -= 5;
-      else if (asyncRatio < 20) stress += 10;
+      const factors = [
+        { key: 'time',   label: 'Time spent in meetings',        weight: 0.25, score: timeInMeetingsStress },
+        { key: 'volume', label: 'Number of meetings',            weight: 0.18, score: volumeStress },
+        { key: 'energy', label: 'Energy drain from meetings',   weight: 0.22, score: energyStress },
+        { key: 'b2b',    label: 'Back-to-back meetings',        weight: 0.15, score: backToBackStress },
+        { key: 'buffer', label: 'Lack of buffer time',          weight: 0.10, score: bufferStress },
+        { key: 'async',  label: 'Low async communication',      weight: 0.10, score: asyncStress }
+      ];
 
-      stress = Math.max(0, Math.min(100, Math.round(stress)));
+      const stress = Math.round(
+        factors.reduce((sum, f) => sum + f.score * f.weight, 0)
+      );
 
       // Display results
       document.getElementById('stressScore').textContent = stress;
@@ -509,11 +514,33 @@
         recommendations = '<h4 style="margin-top: 0;">Urgent Changes Needed:</h4><ul style="margin: 0; padding-left: 1.5rem;"><li>Decline or delegate at least 30% of current meetings</li><li>Block entire days as meeting-free</li><li>Speak with your manager about unsustainable meeting culture</li><li>Set "office hours" for meetings (e.g., only 1-5 PM)</li><li>Default to async communication</li><li>Review all recurring meetings—cancel non-essential ones</li></ul>';
       }
 
+      // Personalized driver-based recommendations
+      const driverTips = {
+        time: 'Cap your calendar so meetings take no more than ~40% of your workday and leave large uninterrupted blocks for deep work.',
+        volume: 'Audit recurring meetings and decline or delegate any that are low impact or missing a clear purpose.',
+        energy: 'Shorten meetings, enforce agendas, and protect recovery time between high-energy calls.',
+        b2b: 'Insert 10–15 minute buffers between meetings to reset, capture notes, and prepare for the next session.',
+        buffer: 'Protect buffer time as non-negotiable; avoid scheduling back-to-back meetings.',
+        async: 'Move status updates and simple decisions to async channels (docs, comments, recorded video) instead of meetings.'
+      };
+
+      const strongestDrivers = [...factors]
+        .map(f => ({ ...f, contribution: f.score * f.weight }))
+        .sort((a, b) => b.contribution - a.contribution)
+        .slice(0, 2);
+
+      const driverHtml = `
+        <h4>Top drivers of your meeting stress:</h4>
+        <ul>
+          ${strongestDrivers.map(d => `<li><strong>${d.label}:</strong> ${driverTips[d.key]}</li>`).join('')}
+        </ul>
+      `;
+
       document.getElementById('stressScore').className = 'stress-score ' + colorClass;
       document.getElementById('stressCategory').innerHTML = category;
       document.getElementById('stressCategory').className = colorClass;
       document.getElementById('analysis').innerHTML = analysis;
-      document.getElementById('recommendations').innerHTML = recommendations;
+      document.getElementById('recommendations').innerHTML = recommendations + driverHtml;
       
       document.getElementById('results').classList.add('show');
       setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth' }), 100);

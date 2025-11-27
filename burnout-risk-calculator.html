@@ -500,6 +500,26 @@
       document.getElementById('balanceVal').textContent = e.target.value;
     });
 
+    // Simple helpers for scoring
+    const clamp01 = (value) => Math.max(0, Math.min(1, value));
+
+    const percentFromRatio = (value, goodMin, badMax, invert = false) => {
+      // Maps a raw value into 0-100 based on a [goodMin, badMax] band.
+      // If invert=false: goodMin = 0, badMax = 100 (higher is worse).
+      // If invert=true: higher values are better, lower values worse (e.g., sleep hours).
+      if (invert) {
+        if (value >= badMax) return 0; // fully protective
+        if (value <= goodMin) return 100; // fully risky
+        const ratio = (badMax - value) / (badMax - goodMin);
+        return Math.round(clamp01(ratio) * 100);
+      } else {
+        if (value <= goodMin) return 0;
+        if (value >= badMax) return 100;
+        const ratio = (value - goodMin) / (badMax - goodMin);
+        return Math.round(clamp01(ratio) * 100);
+      }
+    };
+
     // Form submission
     document.getElementById('burnoutForm').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -511,33 +531,38 @@
       const exhaustion = parseFloat(document.getElementById('emotionalExhaustion').value);
       const workLife = parseFloat(document.getElementById('workLife').value);
 
-      // Calculate burnout risk score (0-100)
-      let risk = 0;
+      // --- Evidence-informed, normalized subscores (0 = low risk, 100 = high risk) ---
+      // Long weekly hours: 40h ~ 0 risk, 70h+ ~ 100 risk
+      const hoursRisk = percentFromRatio(weeklyHours, 40, 70, false);
 
-      // Hours penalty (max 25 points)
-      if (weeklyHours > 60) risk += 25;
-      else if (weeklyHours > 50) risk += 20;
-      else if (weeklyHours > 45) risk += 15;
-      else if (weeklyHours > 40) risk += 10;
+      // Feeling overwhelmed: 1 (no overwhelm) -> 0, 10 (constant overwhelm) -> 100
+      const overwhelmedRisk = percentFromRatio(overwhelmed, 1, 10, false);
 
-      // Overwhelmed (max 20 points)
-      risk += (overwhelmed - 1) * 2.2;
+      // Sleep: 7.5–9h protective (0), <=4h very risky (100)
+      const sleepRisk = percentFromRatio(sleep, 4, 7.5, true);
 
-      // Sleep penalty (max 20 points)
-      if (sleep < 5) risk += 20;
-      else if (sleep < 6) risk += 15;
-      else if (sleep < 7) risk += 10;
+      // Weekend recovery: 10 = fully restorative (0), 1 = no recovery (100)
+      const recoveryRisk = percentFromRatio(recovery, 1, 10, false);
 
-      // Poor recovery (max 15 points)
-      risk += (10 - recovery) * 1.5;
+      // Emotional exhaustion: 1 = energized (0), 10 = depleted (100)
+      const exhaustionRisk = percentFromRatio(exhaustion, 1, 10, false);
 
-      // Emotional exhaustion (max 15 points)
-      risk += (exhaustion - 1) * 1.67;
+      // Work-life balance satisfaction: 10 = ideal (0), 1 = work dominates (100)
+      const workLifeRisk = percentFromRatio(workLife, 1, 10, false);
 
-      // Work-life balance (max 15 points)
-      risk += (10 - workLife) * 1.5;
+      // Evidence-weighted mix: emotional exhaustion, overwhelm & sleep carry more weight
+      const factors = [
+        { key: 'hours',       label: 'Long work hours',                  weight: 0.18, score: hoursRisk },
+        { key: 'overwhelmed', label: 'Feeling overwhelmed',             weight: 0.20, score: overwhelmedRisk },
+        { key: 'sleep',       label: 'Insufficient sleep',              weight: 0.20, score: sleepRisk },
+        { key: 'recovery',    label: 'Poor weekend recovery',           weight: 0.14, score: recoveryRisk },
+        { key: 'exhaustion',  label: 'Emotional exhaustion',            weight: 0.18, score: exhaustionRisk },
+        { key: 'workLife',    label: 'Weak work-life boundaries',       weight: 0.10, score: workLifeRisk }
+      ];
 
-      risk = Math.min(Math.round(risk), 100);
+      const risk = Math.round(
+        factors.reduce((sum, f) => sum + f.score * f.weight, 0)
+      );
 
       // Display results
       const scoreEl = document.getElementById('riskScore');
@@ -570,6 +595,30 @@
         description = '<p><strong>Critical situation.</strong> You have severe burnout risk or may already be experiencing burnout. This is a serious health warning requiring urgent intervention.</p>';
         recommendations = '<h4>URGENT: Seek Help Immediately:</h4><ul><li>Consult a mental health professional this week</li><li>Discuss immediate workload reduction with your manager or HR</li><li>Consider medical leave if symptoms are severe</li><li>You cannot continue at this pace—major changes are essential</li><li>Your health must be the #1 priority right now</li></ul>';
       }
+
+      // Personalized recommendations based on strongest drivers
+      const driverTips = {
+        hours: 'Experiment with reducing weekly hours toward the 40–50 range or removing low-value tasks where possible.',
+        overwhelmed: 'Break work into smaller chunks, reduce multitasking, and negotiate clearer priorities with your manager.',
+        sleep: 'Create a consistent wind-down routine, limit screens before bed, and aim for a stable 7–9 hour sleep window.',
+        recovery: 'Protect weekends and evenings as real off-time: no email, no work calls, and schedule activities that truly recharge you.',
+        exhaustion: 'Watch for emotional exhaustion as a red flag—consider talking to a therapist or coach about coping strategies.',
+        workLife: 'Strengthen boundaries by setting explicit stop times, turning off notifications, and communicating your availability.'
+      };
+
+      const driversSorted = [...factors]
+        .map(f => ({ ...f, contribution: f.score * f.weight }))
+        .sort((a, b) => b.contribution - a.contribution);
+
+      const topDrivers = driversSorted.slice(0, 2);
+
+      const driverHtml = `
+        <h4>Top burnout drivers for you:</h4>
+        <ul>
+          ${topDrivers.map(d => `<li><strong>${d.label}:</strong> ${driverTips[d.key]}</li>`).join('')}
+        </ul>
+      `;
+      recommendations += driverHtml;
 
       scoreEl.className = 'risk-score ' + colorClass;
       categoryEl.textContent = category;

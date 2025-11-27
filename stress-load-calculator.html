@@ -475,40 +475,40 @@
       const relationships = parseFloat(document.getElementById('relationships').value);
       const commute = parseFloat(document.getElementById('commute').value);
 
-      // Calculate stress score (0-100)
-      let workStress = 0;
-      let lifestyleStress = 0;
-      let personalStress = 0;
+      // Normalized domain scores (0-100, higher = more stress)
+      const workHoursStress = Math.max(0, Math.min(100, Math.round(((workHours - 40) / 25) * 100))); // ~40h -> 0, 65h+ -> 100
+      const workPressureStress = Math.max(0, Math.min(100, Math.round(((workPressure - 1) / 9) * 100)));
+      const jobSecurityStress = Math.max(0, Math.min(100, Math.round(((10 - jobSecurity) / 9) * 100)));
 
-      // Work stress (max 40)
-      if (workHours > 55) workStress += 15;
-      else if (workHours > 45) workStress += 10;
-      else if (workHours > 40) workStress += 5;
-      
-      workStress += (workPressure - 1) * 1.5; // max 13.5
-      workStress += (10 - jobSecurity) * 1.2; // max 10.8
+      const sleepStress = Math.max(0, Math.min(100, Math.round(((7.5 - sleepHours) / 3.5) * 100))); // 7.5h+ -> 0, ~4h -> 100
+      const exerciseStress = Math.max(0, Math.min(100, Math.round(((30 - exercise) / 30) * 100))); // 30+ min -> 0, 0 min -> 100
+      const screenStress = Math.max(0, Math.min(100, Math.round(((screenTime - 2) / 4) * 100))); // ~2h -> 0, ~6h+ -> 100
 
-      // Lifestyle stress (max 30)
-      if (sleepHours < 5) lifestyleStress += 15;
-      else if (sleepHours < 6) lifestyleStress += 10;
-      else if (sleepHours < 7) lifestyleStress += 5;
-      
-      if (exercise < 20) lifestyleStress += 8;
-      else if (exercise < 30) lifestyleStress += 5;
-      else if (exercise >= 60) lifestyleStress -= 5;
-      
-      if (screenTime > 5) lifestyleStress += 7;
-      else if (screenTime > 3) lifestyleStress += 4;
+      const financialStress = Math.max(0, Math.min(100, Math.round(((financial - 1) / 9) * 100)));
+      const relationshipStress = Math.max(0, Math.min(100, Math.round(((10 - relationships) / 9) * 100)));
+      const commuteStress = Math.max(0, Math.min(100, Math.round(((commute - 15) / 60) * 100))); // ~15min -> 0, ~75min+ -> 100
 
-      // Personal stress (max 30)
-      personalStress += (financial - 1) * 1.8; // max 16.2
-      personalStress += (10 - relationships) * 1.1; // max 9.9
-      
-      if (commute > 60) personalStress += 8;
-      else if (commute > 45) personalStress += 6;
-      else if (commute > 30) personalStress += 4;
+      const workStress = Math.round(
+        workHoursStress * 0.35 +
+        workPressureStress * 0.40 +
+        jobSecurityStress * 0.25
+      );
 
-      const totalStress = Math.max(0, Math.min(100, Math.round(workStress + lifestyleStress + personalStress)));
+      const lifestyleStress = Math.round(
+        sleepStress * 0.45 +
+        exerciseStress * 0.30 +
+        screenStress * 0.25
+      );
+
+      const personalStress = Math.round(
+        financialStress * 0.45 +
+        relationshipStress * 0.30 +
+        commuteStress * 0.25
+      );
+
+      const totalStress = Math.max(0, Math.min(100, Math.round(
+        workStress * 0.4 + lifestyleStress * 0.3 + personalStress * 0.3
+      )));
 
       // Display results
       document.getElementById('stressScore').textContent = totalStress;

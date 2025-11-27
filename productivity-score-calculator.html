@@ -332,6 +332,8 @@
   </footer>
 
   <script>
+    const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
     document.getElementById('productivityForm').addEventListener('submit', (e) => {
       e.preventDefault();
       
@@ -341,37 +343,34 @@
       const distractions = parseFloat(document.getElementById('distractions').value);
       const contextSwitches = parseFloat(document.getElementById('context').value);
 
-      let score = 50;
+      const safeHours = totalHours > 0 ? totalHours : 1;
 
-      // Deep work ratio (max +25)
-      const deepWorkRatio = (deepWork / totalHours) * 100;
-      if (deepWorkRatio >= 60) score += 25;
-      else if (deepWorkRatio >= 50) score += 20;
-      else if (deepWorkRatio >= 40) score += 15;
-      else if (deepWorkRatio >= 30) score += 10;
-      else score -= 10;
+      // Normalized subscores (0-100, higher = better)
+      const deepWorkRatio = Math.max(0, deepWork) / safeHours; // 0–1
+      const deepWorkScore = Math.round(clamp01(deepWorkRatio / 0.6) * 100); // 60%+ deep work => ~100
 
-      // Task completion (max +20)
-      if (taskCompletion >= 90) score += 20;
-      else if (taskCompletion >= 80) score += 15;
-      else if (taskCompletion >= 70) score += 10;
-      else if (taskCompletion >= 60) score += 5;
-      else score -= 10;
+      const taskScore = Math.round(clamp01((taskCompletion - 50) / 50) * 100); // 50% -> 0, 100% -> 100
 
-      // Distractions (max -25)
-      if (distractions <= 3) score += 15;
-      else if (distractions <= 5) score += 10;
-      else if (distractions <= 8) score += 5;
-      else if (distractions > 15) score -= 15;
-      else if (distractions > 10) score -= 10;
+      // Fewer distractions is better: <=3 -> ~100, >=20 -> ~0
+      const distractionScore = Math.round(
+        (1 - clamp01((distractions - 3) / 17)) * 100
+      );
 
-      // Context switches (max -15)
-      if (contextSwitches <= 5) score += 10;
-      else if (contextSwitches <= 10) score += 5;
-      else if (contextSwitches > 20) score -= 15;
-      else if (contextSwitches > 15) score -= 10;
+      // Fewer context switches is better: <=5 -> 100, >=25 -> 0
+      const contextScore = Math.round(
+        (1 - clamp01((contextSwitches - 5) / 20)) * 100
+      );
 
-      score = Math.max(0, Math.min(100, Math.round(score)));
+      const factors = [
+        { key: 'deepWork', label: 'Deep work time',          weight: 0.35, score: deepWorkScore },
+        { key: 'tasks',    label: 'Task completion',         weight: 0.35, score: taskScore },
+        { key: 'distract', label: 'Distraction management',  weight: 0.15, score: distractionScore },
+        { key: 'context',  label: 'Context switching',       weight: 0.15, score: contextScore }
+      ];
+
+      const score = Math.round(
+        factors.reduce((sum, f) => sum + f.score * f.weight, 0)
+      );
 
       // Display results
       document.getElementById('score').textContent = score;
@@ -396,8 +395,28 @@
         tips = '<h4>Urgent Changes Needed:</h4><ul><li>Audit your time—where are hours actually going?</li><li>Eliminate or delegate low-value tasks</li><li>Set up distraction-free work environment</li><li>Consider time-blocking methodology</li><li>Speak with manager about unrealistic demands</li></ul>';
       }
 
+      // Personalized recs based on weakest drivers (largest performance gaps)
+      const driverTips = {
+        deepWork: 'Protect 2–4 hour blocks for deep work by turning off notifications and batching meetings.',
+        tasks: 'Clarify your top 3 priorities daily and break large tasks into smaller, shippable chunks.',
+        distract: 'Silence non-essential notifications and create clear "no interruption" focus windows.',
+        context: 'Batch similar tasks together and avoid rapid task-switching between unrelated work.'
+      };
+
+      const weakest = [...factors]
+        .map(f => ({ ...f, gap: (100 - f.score) * f.weight }))
+        .sort((a, b) => b.gap - a.gap)
+        .slice(0, 2);
+
+      const driverHtml = `
+        <h4>Biggest levers to boost your productivity:</h4>
+        <ul>
+          ${weakest.map(d => `<li><strong>${d.label}:</strong> ${driverTips[d.key]}</li>`).join('')}
+        </ul>
+      `;
+
       document.getElementById('insights').innerHTML = insights;
-      document.getElementById('tips').innerHTML = tips;
+      document.getElementById('tips').innerHTML = tips + driverHtml;
       
       document.getElementById('results').classList.add('show');
       setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth' }), 100);
