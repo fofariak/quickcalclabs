@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity Score Calculator - Measure Your Work Efficiency | QuickCalcLabs</title>
+  <meta name="description" content="Free productivity calculator to measure your work efficiency. Calculate your productivity score based on deep work hours, task completion, and focus time.">
+  <meta name="keywords" content="productivity calculator, work efficiency, productivity score, deep work calculator, task completion, focus time calculator">
+  <link rel="canonical" href="https://quickcalclabs.com/productivity-score-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+
+  <style>
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper label {
+      display: block;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      margin: 1rem 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .dark-mode .calc-wrapper label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .calc-wrapper input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+    }
+
+    .calc-wrapper input:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .calc-wrapper button[type="submit"] {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .calc-wrapper button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      text-align: center;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      border-color: rgba(139, 92, 246, 0.4);
+    }
+
+    .productivity-score {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .score-label {
+      font-size: 1.2rem;
+      color: var(--text-weak-light, #64748b);
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    .dark-mode .score-label {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>📊 Productivity Score Calculator</h1>
+    <p class="subtitle">Measure your work productivity based on deep work hours, task completion rate, and focus quality.</p>
+    <p class="meta-info">Last Updated: November 2025</p>
+
+    <form id="productivityForm">
+      <label for="totalHours">Total hours worked per day:</label>
+      <input type="number" id="totalHours" step="0.5" min="0" max="24" value="8" required>
+
+      <label for="deepWork">Deep work/focused hours per day:</label>
+      <input type="number" id="deepWork" step="0.5" min="0" max="24" value="4" required>
+
+      <label for="taskCompletion">Task completion rate (%):</label>
+      <input type="number" id="taskCompletion" min="0" max="100" value="80" required>
+
+      <label for="distractions">Distractions per day:</label>
+      <input type="number" id="distractions" min="0" max="100" value="10" required>
+
+      <label for="context">Context switches (task changes) per day:</label>
+      <input type="number" id="context" min="0" max="100" value="15" required>
+
+      <button type="submit">Calculate Productivity Score</button>
+    </form>
+
+    <div id="results" class="result-box">
+      <h3 style="color: var(--primary); margin-bottom: 1rem;">Your Productivity Score</h3>
+      <div class="productivity-score" id="score">0</div>
+      <div class="score-label">out of 100</div>
+      <div style="text-align: left; margin-top: 1.5rem;" id="insights"></div>
+      <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); margin-top: 1.5rem; border-left: 4px solid var(--primary);" id="tips"></div>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>What is Productivity Score?</h2>
+      <p>Your productivity score measures how effectively you accomplish meaningful work during your work hours. Unlike simply tracking hours worked, this calculator evaluates the quality and efficiency of your work time based on deep work hours, task completion rates, and your ability to maintain focus despite distractions.</p>
+
+      <div class="info-box">
+        <h4>The Components of Productivity</h4>
+        <ul>
+          <li><strong>Deep Work Ratio:</strong> Percentage of work time spent in focused, distraction-free work</li>
+          <li><strong>Task Completion:</strong> The percentage of planned tasks you actually complete</li>
+          <li><strong>Distraction Management:</strong> How well you minimize interruptions and maintain focus</li>
+          <li><strong>Context Switching:</strong> How often you switch between different tasks (kills productivity)</li>
+        </ul>
+      </div>
+
+      <h2>Why Deep Work Matters</h2>
+      <p>Deep work—cognitively demanding tasks performed in a state of distraction-free concentration—is where the most valuable work happens. Research by Cal Newport shows that deep work produces results that are hard to replicate and creates real value. Most knowledge workers spend less than 30% of their time in deep work, with the rest consumed by meetings, emails, and shallow tasks.</p>
+
+      <h2>The Hidden Cost of Distractions</h2>
+      <p>Every time you're interrupted or switch tasks, your brain needs an average of 23 minutes to regain full focus. If you're getting distracted 10 times per day, you're losing nearly 4 hours of productive potential just to context switching and refocusing.</p>
+
+      <h2>Improving Your Productivity Score</h2>
+      <ul>
+        <li>Block dedicated deep work time in your calendar (2-4 hour chunks)</li>
+        <li>Use the Pomodoro technique: 25 minutes focused, 5 minutes rest</li>
+        <li>Batch similar tasks together to reduce context switching</li>
+        <li>Turn off notifications during focus periods</li>
+        <li>Communicate your "do not disturb" times to colleagues</li>
+      </ul>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This productivity calculator is for informational purposes. Results are estimates based on self-reported data.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('productivityForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const totalHours = parseFloat(document.getElementById('totalHours').value);
+      const deepWork = parseFloat(document.getElementById('deepWork').value);
+      const taskCompletion = parseFloat(document.getElementById('taskCompletion').value);
+      const distractions = parseFloat(document.getElementById('distractions').value);
+      const contextSwitches = parseFloat(document.getElementById('context').value);
+
+      let score = 50;
+
+      // Deep work ratio (max +25)
+      const deepWorkRatio = (deepWork / totalHours) * 100;
+      if (deepWorkRatio >= 60) score += 25;
+      else if (deepWorkRatio >= 50) score += 20;
+      else if (deepWorkRatio >= 40) score += 15;
+      else if (deepWorkRatio >= 30) score += 10;
+      else score -= 10;
+
+      // Task completion (max +20)
+      if (taskCompletion >= 90) score += 20;
+      else if (taskCompletion >= 80) score += 15;
+      else if (taskCompletion >= 70) score += 10;
+      else if (taskCompletion >= 60) score += 5;
+      else score -= 10;
+
+      // Distractions (max -25)
+      if (distractions <= 3) score += 15;
+      else if (distractions <= 5) score += 10;
+      else if (distractions <= 8) score += 5;
+      else if (distractions > 15) score -= 15;
+      else if (distractions > 10) score -= 10;
+
+      // Context switches (max -15)
+      if (contextSwitches <= 5) score += 10;
+      else if (contextSwitches <= 10) score += 5;
+      else if (contextSwitches > 20) score -= 15;
+      else if (contextSwitches > 15) score -= 10;
+
+      score = Math.max(0, Math.min(100, Math.round(score)));
+
+      // Display results
+      document.getElementById('score').textContent = score;
+
+      let category, insights, tips;
+      
+      if (score >= 80) {
+        category = '🌟 Excellent';
+        insights = '<p><strong>Outstanding productivity!</strong> You\'re effectively managing your time, maintaining focus, and completing tasks efficiently. Your deep work ratio is strong and distractions are minimal.</p>';
+        tips = '<h4>Keep It Up:</h4><ul><li>Document what\'s working for you</li><li>Share your productivity strategies with colleagues</li><li>Guard your deep work time jealously</li></ul>';
+      } else if (score >= 60) {
+        category = '✅ Good';
+        insights = '<p><strong>Solid productivity.</strong> You\'re getting meaningful work done, but there\'s room to optimize your focus time and reduce distractions.</p>';
+        tips = '<h4>To Improve:</h4><ul><li>Increase deep work time to 50%+ of your day</li><li>Reduce distractions with "do not disturb" periods</li><li>Batch similar tasks to minimize context switching</li></ul>';
+      } else if (score >= 40) {
+        category = '⚠️ Needs Improvement';
+        insights = '<p><strong>Productivity challenges detected.</strong> Distractions, context switching, or low task completion are hindering your effectiveness.</p>';
+        tips = '<h4>Action Items:</h4><ul><li>Block 2-hour deep work sessions daily</li><li>Turn off all notifications during focus time</li><li>Review task list—are you overcommitted?</li><li>Use the Pomodoro technique for focus</li></ul>';
+      } else {
+        category = '🚨 Low Productivity';
+        insights = '<p><strong>Significant productivity issues.</strong> Your current work patterns are inefficient. You likely feel busy but not productive.</p>';
+        tips = '<h4>Urgent Changes Needed:</h4><ul><li>Audit your time—where are hours actually going?</li><li>Eliminate or delegate low-value tasks</li><li>Set up distraction-free work environment</li><li>Consider time-blocking methodology</li><li>Speak with manager about unrealistic demands</li></ul>';
+      }
+
+      document.getElementById('insights').innerHTML = insights;
+      document.getElementById('tips').innerHTML = tips;
+      
+      document.getElementById('results').classList.add('show');
+      setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>

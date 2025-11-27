@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burnout Risk Calculator - Assess Your Risk & Get Prevention Tips | QuickCalcLabs</title>
+  <meta name="description" content="Free burnout risk calculator. Assess your risk of workplace burnout based on hours worked, stress levels, sleep quality, and recovery. Get personalized prevention strategies.">
+  <meta name="keywords" content="burnout risk calculator, burnout assessment, workplace burnout, stress calculator, burnout prevention, work stress test">
+  <link rel="canonical" href="https://quickcalclabs.com/burnout-risk-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+
+  <style>
+    /* Burnout calculator page specific styles */
+    .calc-wrapper {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-wrapper label {
+      display: block;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      margin: 1rem 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .dark-mode .calc-wrapper label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .calc-wrapper input, .calc-wrapper select {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+    }
+
+    .calc-wrapper input:focus, .calc-wrapper select:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode .calc-wrapper input, .dark-mode .calc-wrapper select {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .calc-wrapper input:focus, .dark-mode .calc-wrapper select:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .range-display {
+      display: inline-block;
+      margin-left: 10px;
+      font-weight: 700;
+      color: var(--primary, #8b5cf6);
+      min-width: 30px;
+    }
+
+    .dark-mode .range-display {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .calc-wrapper button[type="submit"] {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .calc-wrapper button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .calc-wrapper button[type="submit"]:active {
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: left;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .risk-score {
+      font-size: 3rem;
+      font-weight: 900;
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .risk-low { color: #10b981; }
+    .risk-moderate { color: #f59e0b; }
+    .risk-high { color: #f97316; }
+    .risk-severe { color: #ef4444; }
+
+    .risk-category {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .recommendations {
+      background: rgba(139, 92, 246, 0.08);
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .recommendations {
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    .recommendations h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .recommendations h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .recommendations ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .recommendations li {
+      margin: 0.5rem 0;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .dark-mode .recommendations li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <!-- Top Ad Banner (728x90) -->
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🔥 Burnout Risk Calculator</h1>
+    <p class="subtitle">Assess your risk of workplace burnout based on work hours, stress levels, sleep quality, and recovery patterns. Get personalized prevention strategies.</p>
+    <p class="meta-info">Last Updated: November 2025</p>
+
+    <form id="burnoutForm">
+      <label for="weeklyHours">Weekly work hours:</label>
+      <input type="number" id="weeklyHours" min="0" max="168" value="40" required>
+
+      <label for="feelingOverwhelmed">Feeling overwhelmed (1-10): <span class="range-display" id="overwhelmedVal">5</span></label>
+      <input type="range" id="feelingOverwhelmed" min="1" max="10" value="5" required>
+
+      <label for="sleepHours">Average sleep hours per night:</label>
+      <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required>
+
+      <label for="weekendRecovery">Weekend recovery quality (1-10): <span class="range-display" id="recoveryVal">7</span></label>
+      <input type="range" id="weekendRecovery" min="1" max="10" value="7" required>
+
+      <label for="emotionalExhaustion">Emotional exhaustion (1-10): <span class="range-display" id="exhaustionVal">5</span></label>
+      <input type="range" id="emotionalExhaustion" min="1" max="10" value="5" required>
+
+      <label for="workLife">Work-life balance satisfaction (1-10): <span class="range-display" id="balanceVal">6</span></label>
+      <input type="range" id="workLife" min="1" max="10" value="6" required>
+
+      <button type="submit">Calculate Burnout Risk</button>
+    </form>
+
+    <div id="results" class="result-box">
+      <h3>Your Burnout Risk Assessment</h3>
+      <div class="risk-score" id="riskScore">0%</div>
+      <div class="risk-category" id="riskCategory"></div>
+      <hr style="border: none; border-top: 1px solid rgba(139, 92, 246, 0.2); margin: 1.5rem 0;">
+      <div id="riskDescription"></div>
+      <div class="recommendations" id="recommendations"></div>
+    </div>
+  </section>
+
+  <!-- Mid Ad Banner (320x50) -->
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Understanding Burnout Risk</h2>
+      <p>Burnout is a state of physical, emotional, and mental exhaustion caused by prolonged or excessive stress. It occurs when you feel overwhelmed, emotionally drained, and unable to meet constant demands. As the stress continues, you begin to lose the interest and motivation that led you to take on a certain role in the first place.</p>
+      
+      <p>Our burnout risk calculator evaluates six critical factors that research has identified as the strongest predictors of workplace burnout: weekly work hours, feelings of being overwhelmed, sleep quality, weekend recovery, emotional exhaustion, and work-life balance satisfaction.</p>
+
+      <div class="info-box">
+        <h4>🚨 Warning Signs of Burnout</h4>
+        <ul>
+          <li>Feeling tired and drained most of the time</li>
+          <li>Frequent headaches or muscle pain</li>
+          <li>Change in appetite or sleep habits</li>
+          <li>Sense of failure and self-doubt</li>
+          <li>Feeling helpless, trapped, and defeated</li>
+          <li>Decreased satisfaction and sense of accomplishment</li>
+          <li>Detachment and feeling alone in the world</li>
+          <li>Loss of motivation</li>
+          <li>Increasingly cynical and negative outlook</li>
+        </ul>
+      </div>
+
+      <h2>How Work Hours Impact Burnout</h2>
+      <p>Research consistently shows that working more than 50 hours per week significantly increases burnout risk. A study of over 10,000 workers found that those working 55+ hours per week had a 35% higher risk of stroke and 17% higher risk of heart disease compared to those working standard hours. Extended work hours leave less time for recovery, sleep, exercise, and social connection—all protective factors against burnout.</p>
+
+      <h2>The Critical Role of Sleep</h2>
+      <p>Sleep is not optional when it comes to burnout prevention. Adults need 7-9 hours of quality sleep per night. Sleep deprivation impairs judgment, reduces emotional resilience, and compounds the effects of work stress. Chronic sleep deprivation alone can create symptoms that mimic burnout, and when combined with actual work stress, the risk multiplies.</p>
+
+      <h2>Recovery Time Matters</h2>
+      <p>Your ability to recover during off-work time is just as important as the stress you experience at work. Weekend recovery quality reflects whether you can truly disconnect from work and engage in restorative activities. Poor recovery—checking emails on weekends, working evenings, or inability to stop thinking about work—prevents your nervous system from returning to baseline, leading to chronic stress accumulation.</p>
+
+      <h2>Preventing and Recovering from Burnout</h2>
+      <p>If your risk score is elevated, taking action now can prevent full burnout development. Key strategies include:</p>
+      <ul>
+        <li><strong>Set firm boundaries:</strong> Define clear work hours and protect your personal time</li>
+        <li><strong>Prioritize sleep:</strong> Treat sleep as non-negotiable; aim for 7-9 hours nightly</li>
+        <li><strong>Take all vacation days:</strong> And truly disconnect during time off</li>
+        <li><strong>Practice stress management:</strong> Exercise, meditation, hobbies, or therapy</li>
+        <li><strong>Seek support:</strong> Talk to your manager about workload, or consult a mental health professional</li>
+        <li><strong>Address root causes:</strong> If workload is unsustainable, systemic changes are needed</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>💡 Remember</h4>
+        <p>Burnout doesn't happen overnight. It develops gradually through chronic workplace stress. The earlier you recognize warning signs and take action, the easier it is to recover. If your burnout risk is high or severe, consider this a serious health warning that requires immediate attention.</p>
+      </div>
+
+      <h2>Related Tools</h2>
+      <p>For a comprehensive assessment of your work-life quality, try our:</p>
+      <ul>
+        <li><a href="work-life-quality-index.html">Work-Life Quality Index Calculator</a> - Measures 9 dimensions of work wellbeing</li>
+        <li><a href="productivity-score-calculator.html">Productivity Score Calculator</a> - Assess your actual productivity efficiency</li>
+        <li><a href="stress-load-calculator.html">Stress Load Calculator</a> - Calculate your cumulative stress burden</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This burnout risk calculator is for informational purposes only and is not a substitute for professional medical or mental health advice. If you're experiencing severe burnout symptoms, please consult a healthcare provider or mental health professional.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    // Range display updates
+    document.getElementById('feelingOverwhelmed').addEventListener('input', (e) => {
+      document.getElementById('overwhelmedVal').textContent = e.target.value;
+    });
+    document.getElementById('weekendRecovery').addEventListener('input', (e) => {
+      document.getElementById('recoveryVal').textContent = e.target.value;
+    });
+    document.getElementById('emotionalExhaustion').addEventListener('input', (e) => {
+      document.getElementById('exhaustionVal').textContent = e.target.value;
+    });
+    document.getElementById('workLife').addEventListener('input', (e) => {
+      document.getElementById('balanceVal').textContent = e.target.value;
+    });
+
+    // Form submission
+    document.getElementById('burnoutForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const weeklyHours = parseFloat(document.getElementById('weeklyHours').value);
+      const overwhelmed = parseFloat(document.getElementById('feelingOverwhelmed').value);
+      const sleep = parseFloat(document.getElementById('sleepHours').value);
+      const recovery = parseFloat(document.getElementById('weekendRecovery').value);
+      const exhaustion = parseFloat(document.getElementById('emotionalExhaustion').value);
+      const workLife = parseFloat(document.getElementById('workLife').value);
+
+      // Calculate burnout risk score (0-100)
+      let risk = 0;
+
+      // Hours penalty (max 25 points)
+      if (weeklyHours > 60) risk += 25;
+      else if (weeklyHours > 50) risk += 20;
+      else if (weeklyHours > 45) risk += 15;
+      else if (weeklyHours > 40) risk += 10;
+
+      // Overwhelmed (max 20 points)
+      risk += (overwhelmed - 1) * 2.2;
+
+      // Sleep penalty (max 20 points)
+      if (sleep < 5) risk += 20;
+      else if (sleep < 6) risk += 15;
+      else if (sleep < 7) risk += 10;
+
+      // Poor recovery (max 15 points)
+      risk += (10 - recovery) * 1.5;
+
+      // Emotional exhaustion (max 15 points)
+      risk += (exhaustion - 1) * 1.67;
+
+      // Work-life balance (max 15 points)
+      risk += (10 - workLife) * 1.5;
+
+      risk = Math.min(Math.round(risk), 100);
+
+      // Display results
+      const scoreEl = document.getElementById('riskScore');
+      const categoryEl = document.getElementById('riskCategory');
+      const descEl = document.getElementById('riskDescription');
+      const recEl = document.getElementById('recommendations');
+
+      scoreEl.textContent = risk + '%';
+
+      let category, description, recommendations, colorClass;
+
+      if (risk < 25) {
+        category = '✅ Low Risk';
+        colorClass = 'risk-low';
+        description = '<p><strong>Good news!</strong> Your burnout risk is low. You appear to have healthy work patterns, adequate recovery time, and good stress management. Continue prioritizing work-life balance and self-care.</p>';
+        recommendations = '<h4>Maintain Your Healthy Habits:</h4><ul><li>Keep protecting your sleep and recovery time</li><li>Maintain clear work boundaries</li><li>Continue stress management practices</li></ul>';
+      } else if (risk < 50) {
+        category = '⚠️ Moderate Risk';
+        colorClass = 'risk-moderate';
+        description = '<p><strong>Warning signs detected.</strong> You have moderate burnout risk. Some aspects of your work life are beginning to show stress. Take proactive steps now to prevent escalation.</p>';
+        recommendations = '<h4>Recommended Actions:</h4><ul><li>Reduce work hours if possible—aim for under 50 hours/week</li><li>Prioritize 7-9 hours of sleep nightly</li><li>Improve weekend recovery by truly disconnecting from work</li><li>Practice regular stress management (exercise, meditation, hobbies)</li></ul>';
+      } else if (risk < 75) {
+        category = '🚨 High Risk';
+        colorClass = 'risk-high';
+        description = '<p><strong>Significant concern.</strong> You have high burnout risk. Multiple factors are contributing to stress accumulation. Immediate action is needed to prevent full burnout.</p>';
+        recommendations = '<h4>Take Action NOW:</h4><ul><li>Speak with your manager about workload immediately</li><li>Set strict work hour limits and enforce them</li><li>Prioritize sleep above all else—it\'s non-negotiable</li><li>Schedule time off if possible; you need recovery</li><li>Consider professional support (counselor or therapist)</li></ul>';
+      } else {
+        category = '💀 Severe Risk';
+        colorClass = 'risk-severe';
+        description = '<p><strong>Critical situation.</strong> You have severe burnout risk or may already be experiencing burnout. This is a serious health warning requiring urgent intervention.</p>';
+        recommendations = '<h4>URGENT: Seek Help Immediately:</h4><ul><li>Consult a mental health professional this week</li><li>Discuss immediate workload reduction with your manager or HR</li><li>Consider medical leave if symptoms are severe</li><li>You cannot continue at this pace—major changes are essential</li><li>Your health must be the #1 priority right now</li></ul>';
+      }
+
+      scoreEl.className = 'risk-score ' + colorClass;
+      categoryEl.textContent = category;
+      categoryEl.className = 'risk-category ' + colorClass;
+      descEl.innerHTML = description;
+      recEl.innerHTML = recommendations;
+
+      document.getElementById('results').classList.add('show');
+      setTimeout(() => {
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+
+      toggle.addEventListener("click", () => {
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'light');
+          applyTheme('light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+          applyTheme('dark');
+        }
+      });
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
