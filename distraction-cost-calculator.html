@@ -337,7 +337,7 @@
       <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary); margin-top: 1.5rem;" id="recommendations"></div>
       <details class="calc-meta">
         <summary>How your distraction cost is calculated</summary>
-        <p>For each distraction channel we estimate both the direct time and the refocus time needed to get back into your work:</p>
+        <p>For each distraction channel we estimate both the direct time and the refocus time needed to get back into your work, then convert the total into a <strong>normalized 0–100 “distraction burden” score</strong> using an <strong>evidence-based weighting model</strong> (channels that fragment attention more heavily count more):</p>
         <ul>
           <li><strong>Email:</strong> short checks plus ~10–15 minutes of refocus per check</li>
           <li><strong>Instant messaging:</strong> quick glances plus several minutes of refocus per burst</li>
@@ -345,7 +345,7 @@
           <li><strong>Interruptions:</strong> heavier refocus penalty because they are unplanned and disruptive</li>
           <li><strong>Social media:</strong> time spent scrolling plus the cost of regaining focus afterwards</li>
         </ul>
-        <p>All of these are summed into total minutes lost per day, converted to hours and percentage of your workday. A separate 0–100 “distraction burden” score normalizes how extreme that percentage is, so you can easily compare over time.</p>
+        <p>All of these are summed into total minutes lost per day, converted to hours and percentage of your workday, and then mapped to a 0–100 scale so you can compare days and track trends. On top of that, the calculator highlights your single biggest distraction driver and gives <strong>personalized recommendations by factor drivers</strong> so you know exactly where to intervene first.</p>
       </details>
     </div>
   </section>
@@ -386,11 +386,35 @@
       </div>
     </article>
   </section>
-
+  
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What exactly is “distraction cost”?</summary>
+      <p>Distraction cost is the total productive time you lose to interruptions, notifications, context switching, and refocusing. It includes both the obvious time (for example, reading an email) and the hidden refocus tax—research shows it can take 15–23 minutes to fully get back into deep work after an interruption.</p>
+    </details>
+    <details>
+      <summary>What is a healthy or normal level of distraction?</summary>
+      <p>Most knowledge workers will lose some time to communication and coordination. As a rough guide, losing under 20–30% of your workday to distraction is usually manageable, 30–50% suggests you’re feeling busy but not very productive, and 50%+ typically means you have almost no deep work time left. The calculator’s normalized 0–100 distraction burden score helps you see where you fall on that spectrum.</p>
+    </details>
+    <details>
+      <summary>How is the distraction burden score calculated?</summary>
+      <p>Each channel (email, instant messaging, meetings, interruptions, social media) is translated into time spent plus an estimated refocus penalty using research-based averages. Those minutes are summed, divided by your total workday, and then mapped to a <strong>0–100 normalized distraction burden score</strong>. Channels that fragment attention more (like interruptions and meetings) effectively have <strong>evidence-based weighted influence</strong> on the final score.</p>
+    </details>
+    <details>
+      <summary>What do the personalized recommendations mean?</summary>
+      <p>After computing your totals, the calculator identifies which channel is costing you the most hours and surfaces <strong>personalized recommendations by that driver</strong>—for example, batching email if email is the top issue, or enforcing “do not disturb” windows if instant messaging is the biggest problem. This helps you focus on the single highest‑leverage change instead of trying to fix everything at once.</p>
+    </details>
+    <details>
+      <summary>How can I use this tool to improve over time?</summary>
+      <p>Run the calculator with your current habits, implement one or two targeted changes based on the driver recommendations, then re‑check in 2–4 weeks. Your lost hours, percentage of day, and distraction burden score should move down if your changes are working. Treat it like a continuous improvement dashboard for your focus, not a one‑time quiz.</p>
+    </details>
+  </section>
+  
   <div id="ad-banner-end"></div>
-
+  
   <a href="index.html" class="floating-cta">See All Calculators</a>
-
+  
   <footer>
     <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> This calculator provides estimates based on research averages. Individual refocusing times may vary.</p>
@@ -580,6 +604,41 @@
     renderAdBanner728x90('ad-banner-top');
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is distraction cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Distraction cost is the total productive time you lose to interruptions, notifications, context switching, and refocusing. It includes both the obvious time spent on the distraction itself and the hidden refocus time needed to get back into deep work."
+      }
+    },{
+      "@type": "Question",
+      "name": "How is the distraction burden score calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each channel such as email, instant messaging, meetings, interruptions, and social media is translated into direct time plus an estimated refocus penalty using research-based averages. The total is divided by your workday and mapped to a 0–100 normalized distraction burden score, with more fragmenting channels having greater weighted influence."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is a healthy level of distraction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As a rough guide, losing under 20–30% of your workday to distractions is usually manageable, 30–50% suggests you feel busy but not very productive, and 50%+ typically means you have little or no deep work time left."
+      }
+    },{
+      "@type": "Question",
+      "name": "How do the personalized recommendations work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator identifies which distraction channel is costing you the most hours and then generates targeted advice for that specific driver, so you know whether to focus first on changing your email habits, meetings, messaging, interruptions, or social media use."
+      }
+    }]
+  }
   </script>
   <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
 </body>

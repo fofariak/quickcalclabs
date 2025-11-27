@@ -383,7 +383,7 @@
       <div style="background: rgba(59, 130, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary); margin-top: 1.5rem;" id="recommendations"></div>
       <details class="calc-meta">
         <summary>How your meeting load stress score is calculated</summary>
-        <p>Your score is built from six normalized meeting-stress factors, each mapped to a 0–100 scale and then weighted:</p>
+        <p>Your score is built from six <strong>normalized meeting-stress factors</strong>, each mapped to a 0–100 scale and then combined using an <strong>evidence-based weighted influence model</strong> (time in meetings and energy drain count slightly more than the others):</p>
         <ul>
           <li><strong>Time in meetings:</strong> percent of your workday spent in meetings (very high % pushes stress up)</li>
           <li><strong>Meeting volume:</strong> how many meetings you have per day</li>
@@ -392,7 +392,7 @@
           <li><strong>Buffer time:</strong> lack of breaks between meetings increases stress</li>
           <li><strong>Async ratio:</strong> more async communication (docs, comments, recordings) reduces meeting stress</li>
         </ul>
-        <p>Time in meetings and energy drain are weighted slightly more than the other factors to reflect their bigger impact on fatigue and focus. The final 0–100 score helps you see whether your calendar is in a healthy, moderate, or overloaded range.</p>
+        <p>The final <strong>0–100 meeting load stress score</strong> helps you see whether your calendar is in a healthy, moderate, or overloaded range. The results section also highlights your top 1–2 stress drivers and provides <strong>personalized recommendations by factor drivers</strong> so you can target the specific calendar patterns that are hurting you most.</p>
       </details>
     </div>
   </section>
@@ -442,11 +442,35 @@
       </ul>
     </article>
   </section>
-
+  
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is a healthy amount of time to spend in meetings?</summary>
+      <p>Research and practical experience suggest that most knowledge workers do best when meetings take <strong>no more than about 30–40% of the workday</strong>. Once you get beyond ~50% of your time in meetings, it becomes very hard to find 2–3 hour blocks for deep work, which drives up stress and reduces output quality.</p>
+    </details>
+    <details>
+      <summary>How is the 0–100 meeting load stress score calculated?</summary>
+      <p>The calculator turns each input (percent of day in meetings, number of meetings, energy drain, back‑to‑back count, buffer time, async ratio) into a 0–100 stress sub‑score, then combines them using an <strong>evidence-based weighted model</strong>. Time in meetings and perceived energy drain are given slightly higher weight because research shows they have the biggest impact on fatigue and overload. The final result is a <strong>normalized 0–100 index</strong> where higher means more meeting stress.</p>
+    </details>
+    <details>
+      <summary>What do the categories (Healthy, Moderate, Severe Overload) mean?</summary>
+      <p>Scores below ~30 are labeled “Healthy Meeting Load”, 30–59 is “Moderate Meeting Stress”, and 60+ indicates “Severe Meeting Overload” in this model. These ranges are based on typical thresholds where people report calendar stress, fragmentation, and difficulty getting real work done. Treat them as guidance, not rigid medical thresholds.</p>
+    </details>
+    <details>
+      <summary>How do the personalized driver recommendations work?</summary>
+      <p>After calculating each sub‑score, the tool looks at which factors contribute the most to your overall stress (for example, high percent of day in meetings or many back‑to‑back meetings). It then surfaces <strong>personalized recommendations by those top drivers</strong>, so you know whether to focus on cutting meeting volume, increasing buffer time, shifting to async, or improving meeting quality and energy.</p>
+    </details>
+    <details>
+      <summary>How often should I use this meeting load calculator?</summary>
+      <p>You can use it any time your calendar feels out of control, but many people find it helpful to check <strong>once per month</strong> or after a major change in role, team, or company meeting culture. Comparing scores over time helps you see whether your experiments (like meeting‑free days or stricter buffers) are actually reducing your calendar stress.</p>
+    </details>
+  </section>
+  
   <div id="ad-banner-end"></div>
-
+  
   <a href="index.html" class="floating-cta">See All Calculators</a>
-
+  
   <footer>
     <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> This calculator provides estimates based on research. Individual experiences may vary.</p>
@@ -606,6 +630,41 @@
     renderAdBanner728x90('ad-banner-top');
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is a healthy amount of time to spend in meetings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most knowledge workers do best when meetings take no more than about 30\u201340% of the workday. Once you get beyond roughly 50% of your time in meetings, it becomes very hard to find multi-hour blocks for deep work, which increases stress and reduces output quality."
+      }
+    },{
+      "@type": "Question",
+      "name": "How is the meeting load stress score calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator converts each input (percent of day in meetings, number of meetings, perceived energy drain, back-to-back count, buffer time, and async ratio) into a 0\u2013100 stress sub-score, then combines them with an evidence-based weighting model where time in meetings and energy drain are slightly more influential. The final result is a normalized 0\u2011100 index where higher means more meeting stress."
+      }
+    },{
+      "@type": "Question",
+      "name": "What do Healthy, Moderate, and Severe Overload mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In this model, scores below about 30 are labeled Healthy Meeting Load, 30\u201159 is Moderate Meeting Stress, and 60+ indicates Severe Meeting Overload. These ranges reflect typical thresholds where people report calendar stress and difficulty getting real work done."
+      }
+    },{
+      "@type": "Question",
+      "name": "How do the personalized recommendations work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After calculating each sub-score, the tool identifies which factors contribute the most to your overall meeting stress and then generates targeted recommendations for those top drivers, such as reducing meeting volume, increasing buffer time, or shifting more communication to asynchronous channels."
+      }
+    }]
+  }
   </script>
   <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
 </body>

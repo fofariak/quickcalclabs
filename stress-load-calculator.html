@@ -405,13 +405,13 @@
       <div style="background: rgba(59, 130, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary); margin-top: 1.5rem;" id="recommendations"></div>
       <details class="calc-meta">
         <summary>How your stress load score is calculated</summary>
-        <p>The calculator first builds three domain scores (each 0–100, higher = more stress):</p>
+        <p>The calculator first builds three <strong>domain scores</strong> (each 0–100, higher = more stress), each built from multiple inputs that are normalized onto a 0–100 scale and combined with <strong>evidence-based weights</strong> for that domain:</p>
         <ul>
           <li><strong>Work stress:</strong> weekly hours, work pressure, and job security</li>
           <li><strong>Lifestyle stress:</strong> sleep amount, daily exercise, and non‑work screen time</li>
           <li><strong>Personal stress:</strong> financial stress, relationship strain, and commute time</li>
         </ul>
-        <p>Each input is normalized onto a 0–100 scale using ranges that roughly separate \"healthy\" from \"risky\" patterns, then combined into its domain. The final stress load is a weighted mix of domains (work ≈40%, lifestyle ≈30%, personal ≈30%), giving you a single 0–100 index plus a breakdown so you can see where to focus first.</p>
+        <p>Each input is normalized onto a 0–100 scale using ranges that roughly separate “healthy” from “risky” patterns, then combined into its domain. The final <strong>0–100 total stress load index</strong> is a weighted mix of domains (work ≈40%, lifestyle ≈30%, personal ≈30%), and the results page highlights your strongest stress drivers with <strong>personalized recommendations by factor drivers</strong> so you know where to focus first.</p>
       </details>
     </div>
   </section>
@@ -465,11 +465,35 @@
       </ul>
     </article>
   </section>
-
+  
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How is this different from the burnout risk calculator?</summary>
+      <p>The burnout risk calculator focuses specifically on <strong>work-related burnout</strong>—hours, overwhelm, sleep, recovery, and emotional exhaustion tied to your job. The stress load calculator looks at your <strong>total life stress bucket</strong> across work, lifestyle (sleep, exercise, screen time), and personal factors (money, relationships, commute) and produces a single normalized index of overall stress burden.</p>
+    </details>
+    <details>
+      <summary>What is considered a high stress load score?</summary>
+      <p>Scores below ~30 usually indicate a <strong>low stress load</strong>, 30–59 is <strong>moderate</strong>, and 60+ is considered a <strong>high cumulative stress load</strong> in this model. High scores mean that stress is coming from multiple directions at once and your current pattern is likely unsustainable without changes or added support.</p>
+    </details>
+    <details>
+      <summary>How is the 0–100 stress load index calculated?</summary>
+      <p>The calculator builds three domain scores—work, lifestyle, and personal—each made of normalized 0–100 sub‑scores (for example, long work hours, short sleep, or high financial stress push their domains higher). Those domains are then combined with <strong>evidence-based weights</strong> (work ≈40%, lifestyle ≈30%, personal ≈30%) to produce a <strong>single 0–100 normalized stress load score</strong> plus a breakdown by category.</p>
+    </details>
+    <details>
+      <summary>What do the personalized driver recommendations tell me?</summary>
+      <p>After computing your domain scores and sub‑scores, the tool identifies which category (work, lifestyle, or personal) and which specific driver inside that category are contributing most to your total stress. It then gives <strong>personalized recommendations by those drivers</strong>—for example, reducing weekly hours, improving sleep, addressing financial stress, or shortening your commute.</p>
+    </details>
+    <details>
+      <summary>When should I seek professional help?</summary>
+      <p>If your score is high or severe and you’re experiencing persistent anxiety, depression, physical symptoms (such as chest pain, headaches, or digestive issues), or thoughts of self‑harm, you should seek help from a doctor, therapist, or other qualified professional as soon as possible. This tool is educational only and is not a substitute for professional diagnosis or treatment.</p>
+    </details>
+  </section>
+  
   <div id="ad-banner-end"></div>
-
+  
   <a href="index.html" class="floating-cta">See All Calculators</a>
-
+  
   <footer>
     <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> This stress calculator is for informational purposes only and is not a substitute for professional medical or mental health advice. If you're experiencing severe stress, anxiety, or depression, please consult a healthcare provider.</p>
@@ -680,6 +704,41 @@
     renderAdBanner728x90('ad-banner-top');
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How is this different from the burnout risk calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The burnout risk calculator focuses on work-related burnout factors such as long hours, overwhelm, sleep, and recovery. The stress load calculator looks at your total life stress across work, lifestyle, and personal domains and produces a single normalized index of overall stress burden."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is considered a high stress load score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scores below about 30 usually indicate a low stress load, 30\u201159 is moderate, and 60+ is considered a high cumulative stress load. High scores mean that stress is coming from multiple directions at once and your current pattern is likely unsustainable without changes or added support."
+      }
+    },{
+      "@type": "Question",
+      "name": "How is the 0\u2011100 stress load index calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator builds three domain scores (work, lifestyle, and personal), each made of normalized 0\u2011100 sub-scores such as long work hours, short sleep, or financial strain. These domains are then combined with evidence-based weights to produce a single 0\u2011100 total stress load score plus a breakdown by category."
+      }
+    },{
+      "@type": "Question",
+      "name": "When should I seek professional help for stress?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your score is high or severe and you experience persistent anxiety, depression, physical symptoms, or thoughts of self-harm, you should seek help from a doctor, therapist, or other qualified professional as soon as possible. This tool is educational only and is not a substitute for professional diagnosis or treatment."
+      }
+    }]
+  }
   </script>
   <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
 </body>

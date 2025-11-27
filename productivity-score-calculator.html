@@ -302,14 +302,14 @@
       <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); margin-top: 1.5rem; border-left: 4px solid var(--primary);" id="tips"></div>
       <details class="calc-meta">
         <summary>How your productivity score is calculated</summary>
-        <p>Your score is a weighted average of four normalized subscores (each 0–100, higher is better):</p>
+        <p>Your score is a weighted average of four <strong>normalized subscores</strong> (each 0–100, higher is better) combined using an <strong>evidence-based influence model</strong> where deep work and task completion are the primary drivers:</p>
         <ul>
           <li><strong>Deep work ratio (≈35% weight):</strong> share of your workday spent in focused, distraction‑free work</li>
           <li><strong>Task completion (≈35% weight):</strong> how many of your planned tasks you actually finish</li>
           <li><strong>Distraction management (≈15% weight):</strong> fewer daily distractions increase this subscore</li>
           <li><strong>Context switching (≈15% weight):</strong> fewer task changes per day increase this subscore</li>
         </ul>
-        <p>Each input is mapped onto a 0–100 scale using reasonable \"healthy\" ranges (for example, 60%+ of your day in deep work and 90–100% task completion score near 100). The final 0–100 score is meant to highlight patterns, not replace performance reviews or medical advice.</p>
+        <p>Each input is mapped onto a <strong>0–100 normalized scale</strong> using reasonable “healthy” ranges (for example, 60%+ of your day in deep work and 90–100% task completion score near 100). The calculator also looks at your weakest dimensions and surfaces <strong>personalized recommendations by factor drivers</strong>, so you know whether to focus on deep work time, completion rates, distraction control, or context switching. The final score is meant to highlight patterns, not replace performance reviews or medical advice.</p>
       </details>
     </div>
   </section>
@@ -347,11 +347,35 @@
       </ul>
     </article>
   </section>
-
+  
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is a good productivity score?</summary>
+      <p>In this model, scores of <strong>80+</strong> are considered excellent, 60–79 is good, 40–59 suggests meaningful room for improvement, and below 40 indicates that your current work patterns are likely inefficient or unsustainable. Remember that this is a self‑reported, behavior‑focused index, not a performance review.</p>
+    </details>
+    <details>
+      <summary>How is the 0–100 productivity score calculated?</summary>
+      <p>The calculator builds four normalized subscores—deep work ratio, task completion rate, distraction management, and context switching—each scaled from 0–100. These are then combined using an <strong>evidence-based weighted influence model</strong> where deep work and task completion have the largest impact, and distractions and context switching fine‑tune the result. The final number is a <strong>0–100 normalized productivity index</strong>.</p>
+    </details>
+    <details>
+      <summary>Can this replace my manager’s performance evaluation?</summary>
+      <p>No. This tool looks at <strong>how</strong> you work—time allocation, focus, and habits—not at business outcomes, team impact, or qualitative feedback. It’s best used as a personal diagnostics tool to identify leverage points (for example, more deep work, fewer distractions), not as a formal performance assessment.</p>
+    </details>
+    <details>
+      <summary>What do the personalized driver recommendations tell me?</summary>
+      <p>After computing your subscores, the calculator identifies which dimensions are dragging your score down the most and then provides <strong>personalized recommendations by those drivers</strong>. For example, if deep work is low but distraction management is fine, it will focus on scheduling deep work blocks instead of generic “avoid distractions” advice.</p>
+    </details>
+    <details>
+      <summary>How often should I use this productivity calculator?</summary>
+      <p>Many people use it weekly or bi‑weekly as part of a review ritual. Capture a snapshot of your current habits, run a small experiment (like blocking 2 hours of deep work per day), then re‑check a couple of weeks later to see if your normalized score and driver breakdown have improved.</p>
+    </details>
+  </section>
+  
   <div id="ad-banner-end"></div>
-
+  
   <a href="index.html" class="floating-cta">See All Calculators</a>
-
+  
   <footer>
     <div class="disclaimer affiliate-disclosure">
       <p><strong>Disclaimer:</strong> This productivity calculator is for informational purposes. Results are estimates based on self-reported data.</p>
@@ -481,6 +505,41 @@
     renderAdBanner728x90('ad-banner-top');
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is a good productivity score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In this model, scores of 80 or higher are considered excellent, 60\u201379 is good, 40\u201359 suggests meaningful room for improvement, and below 40 indicates that your current work patterns are likely inefficient or unsustainable."
+      }
+    },{
+      "@type": "Question",
+      "name": "How is the productivity score calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator builds four normalized subscores (deep work ratio, task completion rate, distraction management, and context switching), each scaled from 0\u2011100. These are combined with an evidence-based weighting model where deep work and task completion have the largest influence, producing a single 0\u2011100 normalized productivity index."
+      }
+    },{
+      "@type": "Question",
+      "name": "Can this replace my performance review?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This tool focuses on behaviors and work patterns, not on business results, team impact, or qualitative feedback. It is best used as a personal diagnostic and coaching tool rather than a formal evaluation."
+      }
+    },{
+      "@type": "Question",
+      "name": "How do the personalized recommendations work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator identifies which subscores are pulling your overall score down the most and then provides targeted suggestions for those specific drivers, such as increasing deep work time, improving task completion, reducing distractions, or minimizing context switching."
+      }
+    }]
+  }
   </script>
   <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
 </body>

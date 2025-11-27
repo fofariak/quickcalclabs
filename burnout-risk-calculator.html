@@ -427,7 +427,7 @@
       <div class="recommendations" id="recommendations"></div>
       <details class="calc-meta">
         <summary>How your burnout risk score is calculated</summary>
-        <p>This tool combines six evidence-informed factors, each converted to a 0–100 risk score, then weighted and averaged into your final percentage:</p>
+        <p>This tool uses a <strong>normalized 0–100 burnout risk index</strong>, built from six evidence-informed factors. Each input is converted to its own 0–100 sub‑score, then combined using an <strong>evidence-based weighted influence model</strong> so higher‑impact factors (like emotional exhaustion, overwhelm, and sleep) count more toward your final percentage:</p>
         <ul>
           <li><strong>Long work hours:</strong> working &gt;40–70+ hours per week increases risk</li>
           <li><strong>Feeling overwhelmed:</strong> higher 1–10 ratings mean higher chronic stress</li>
@@ -436,7 +436,7 @@
           <li><strong>Emotional exhaustion:</strong> one of the strongest predictors of clinical burnout</li>
           <li><strong>Work–life boundaries:</strong> low boundary control contributes additional risk</li>
         </ul>
-        <p>Emotional exhaustion, overwhelm, and sleep get slightly higher weight than the other factors to reflect their stronger association with burnout in research. This score is an educational screening tool and not a medical diagnosis.</p>
+        <p>On top of the overall percentage, the calculator identifies your top burnout drivers and surfaces <strong>personalized recommendations by factor drivers</strong> so you know exactly where to focus first. This score is an educational screening tool and not a medical diagnosis.</p>
       </details>
     </div>
   </section>
@@ -499,6 +499,30 @@
         <li><a href="stress-load-calculator.html">Stress Load Calculator</a> - Calculate your cumulative stress burden</li>
       </ul>
     </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is this burnout risk calculator a medical diagnosis?</summary>
+      <p>No. This burnout risk calculator is an educational screening tool, not a medical or psychiatric diagnosis. It highlights patterns associated with burnout in research (long hours, high overwhelm, poor sleep, weak recovery, emotional exhaustion, and boundary issues), but only a qualified professional can diagnose burnout or related conditions.</p>
+    </details>
+    <details>
+      <summary>What is a “normal” burnout risk score?</summary>
+      <p>In this model, scores below about 25% are considered <strong>low risk</strong>, 25–49% is <strong>moderate risk</strong>, 50–74% is <strong>high risk</strong>, and 75%+ is <strong>severe risk</strong>. Many knowledge workers fall somewhere in the moderate band, especially during busy periods. Persistent high or severe scores are a warning sign that your workload, recovery, or support systems need urgent attention.</p>
+    </details>
+    <details>
+      <summary>How is the burnout risk score actually calculated?</summary>
+      <p>Each input is first transformed into its own 0–100 sub‑score (for example, very short sleep or extreme overwhelm map closer to 100, healthy sleep or low overwhelm map closer to 0). These are then combined using an <strong>evidence-based weighting scheme</strong> where emotional exhaustion, overwhelm, and sleep carry slightly higher influence than other factors. Finally, we compute a single normalized percentage and identify your top driver factors for <strong>personalized recommendations</strong>.</p>
+    </details>
+    <details>
+      <summary>How often should I recalculate my burnout risk?</summary>
+      <p>For most people, checking every 2–4 weeks is enough to see whether changes to your schedule, boundaries, or recovery habits are improving things. If you are actively in a high or severe risk range while making big changes (reducing hours, taking leave, starting therapy, etc.), you might choose to check weekly to track trends—but avoid obsessively re‑calculating multiple times per day.</p>
+    </details>
+    <details>
+      <summary>What should I do if my score is high or severe?</summary>
+      <p>High or severe scores suggest that your current pattern is unsustainable. Consider speaking with a healthcare or mental health professional, talking with your manager or HR about workload, taking time off if available, and implementing stress‑reduction basics like sleep, exercise, and stronger boundaries. Use the personalized driver recommendations in your results as a roadmap for which 1–2 changes will likely move the needle most.</p>
+    </details>
   </section>
 
   <!-- End Ad Banner (300x250) -->
@@ -700,6 +724,41 @@
     renderAdBanner728x90('ad-banner-top');
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Is this burnout risk calculator a medical diagnosis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This burnout risk calculator is an educational screening tool, not a medical or psychiatric diagnosis. It highlights patterns associated with burnout but only a qualified professional can diagnose burnout or related conditions."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is a normal burnout risk score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In this model, scores below about 25% are considered low risk, 25–49% is moderate risk, 50–74% is high risk, and 75%+ is severe risk. Persistent high or severe scores are a warning sign that your workload, recovery, or support systems need urgent attention."
+      }
+    },{
+      "@type": "Question",
+      "name": "How is the burnout risk score calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each input is transformed into a 0–100 sub-score and then combined using an evidence-based weighting scheme where emotional exhaustion, feeling overwhelmed, and sleep carry more influence. The tool produces a single normalized burnout risk percentage plus personalized recommendations based on your strongest driver factors."
+      }
+    },{
+      "@type": "Question",
+      "name": "What should I do if my burnout risk score is high?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "High or severe scores suggest that your current pattern is unsustainable. Consider speaking with a healthcare or mental health professional, discussing workload with your manager, taking time off if available, and using the personalized driver recommendations in your results as a roadmap for change."
+      }
+    }]
+  }
   </script>
   <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
 </body>
