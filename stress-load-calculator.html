@@ -535,10 +535,7 @@
         recommendations = '<h4 style="margin-top: 0;">URGENT: Take Action Now:</h4><ul style="margin: 0; padding-left: 1.5rem;"><li>Consult a mental health professional this week</li><li>Make sleep your #1 priority—aim for 8+ hours</li><li>Speak with your manager or HR about work stress</li><li>Address financial stress—seek financial counseling if needed</li><li>Start daily exercise, even just 20-minute walks</li><li>Reduce screen time, especially before bed</li><li>Consider major life changes if stress is chronic</li><li>Build a support system—don\'t face this alone</li></ul>';
       }
 
-      document.getElementById('stressScore').className = 'stress-score-display ' + colorClass;
-      document.getElementById('stressCategory').innerHTML = category;
-      document.getElementById('stressCategory').className = colorClass;
-
+      // Domain-level breakdown
       const breakdownHTML = `
         <h4 style="margin-top: 0; color: var(--text-strong-light);">Stress Breakdown by Category:</h4>
         <div class="breakdown-item">
@@ -561,8 +558,66 @@
       `;
       document.getElementById('breakdown').innerHTML = breakdownHTML;
 
+      // Personalized recommendations by strongest stress drivers
+      const domains = [
+        {
+          key: 'work',
+          label: 'Work stress',
+          score: workStress,
+          drivers: [
+            { key: 'workHours',       label: 'Long work hours',            score: workHoursStress },
+            { key: 'workPressure',    label: 'High work pressure',         score: workPressureStress },
+            { key: 'jobSecurity',     label: 'Low job security',           score: jobSecurityStress }
+          ]
+        },
+        {
+          key: 'lifestyle',
+          label: 'Lifestyle stress',
+          score: lifestyleStress,
+          drivers: [
+            { key: 'sleep',      label: 'Insufficient sleep',        score: sleepStress },
+            { key: 'exercise',   label: 'Lack of exercise',          score: exerciseStress },
+            { key: 'screen',     label: 'High non-work screen time', score: screenStress }
+          ]
+        },
+        {
+          key: 'personal',
+          label: 'Personal stress',
+          score: personalStress,
+          drivers: [
+            { key: 'financial',     label: 'Financial stress',        score: financialStress },
+            { key: 'relationships', label: 'Relationship strain',     score: relationshipStress },
+            { key: 'commute',       label: 'Long commute',            score: commuteStress }
+          ]
+        }
+      ];
+
+      const driverTips = {
+        workHours: 'Experiment with bringing weekly hours closer to the 40–50 range and push back on non-essential work.',
+        workPressure: 'Clarify priorities with your manager and reduce multitasking so you are not \"always on\" for everything.',
+        jobSecurity: 'If possible, discuss role clarity and expectations with your manager and build an emergency financial buffer.',
+        sleep: 'Protect a consistent 7–9 hour sleep window by setting a firm bedtime and limiting screens and caffeine in the evening.',
+        exercise: 'Start with short, regular movement—like a 20-minute daily walk—to build stress resilience.',
+        screen: 'Create tech-free windows (especially before bed) and replace doomscrolling with offline relaxation.',
+        financial: 'Create a realistic budget, reduce high-interest debt first, and consider speaking with a financial counselor.',
+        relationships: 'Invest time in supportive relationships and consider counseling if conflicts are a major stress source.',
+        commute: 'Explore options like remote days, flexible hours, carpooling, or relocation to reduce commute burden over time.'
+      };
+
+      const primaryDomain = [...domains].sort((a, b) => b.score - a.score)[0];
+      const primaryDriver = [...primaryDomain.drivers].sort((a, b) => b.score - a.score)[0];
+
+      const driverHtml = `
+        <h4>Biggest stress driver right now:</h4>
+        <p><strong>${primaryDomain.label} → ${primaryDriver.label}</strong></p>
+        <p>${driverTips[primaryDriver.key]}</p>
+      `;
+
+      document.getElementById('stressScore').className = 'stress-score-display ' + colorClass;
+      document.getElementById('stressCategory').innerHTML = category;
+      document.getElementById('stressCategory').className = colorClass;
       document.getElementById('analysis').innerHTML = analysis;
-      document.getElementById('recommendations').innerHTML = recommendations;
+      document.getElementById('recommendations').innerHTML = recommendations + driverHtml;
       
       document.getElementById('results').classList.add('show');
       setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth' }), 100);
