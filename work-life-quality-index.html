@@ -102,34 +102,69 @@
     .worker-type-btn {
       padding: 0.8rem 1.5rem;
       border-radius: 999px;
-      border: 2px solid var(--primary, #8b5cf6);
-      background: transparent;
-      color: var(--primary, #8b5cf6);
+      border: 3px solid transparent;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-medium-light, #334155);
       font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
       font-size: 0.95rem;
+      position: relative;
     }
 
     .worker-type-btn.active {
-      background: var(--primary, #8b5cf6);
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
       color: white;
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+      transform: scale(1.05);
     }
 
-    .worker-type-btn:hover {
+    .worker-type-btn.active::before {
+      content: "✓";
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: white;
+      color: var(--primary, #8b5cf6);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .worker-type-btn:hover:not(.active) {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+      border-color: var(--primary, #8b5cf6);
+      background: var(--surface-hover-light, rgba(241, 245, 249, 0.95));
     }
 
     .dark-mode .worker-type-btn {
-      border-color: var(--primary-light, #a78bfa);
-      color: var(--primary-light, #a78bfa);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      color: var(--text-medium-dark, #cbd5e1);
+      border-color: transparent;
     }
 
     .dark-mode .worker-type-btn.active {
-      background: var(--primary-light, #a78bfa);
+      background: linear-gradient(135deg, var(--primary-light, #a78bfa), var(--secondary-light, #60a5fa));
       color: var(--text-strong-dark, #0f172a);
+      border-color: transparent;
+    }
+
+    .dark-mode .worker-type-btn.active::before {
+      background: var(--text-strong-dark, #0f172a);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .dark-mode .worker-type-btn:hover:not(.active) {
+      background: var(--surface-hover-dark, rgba(71, 85, 105, 0.9));
+      border-color: var(--primary-light, #a78bfa);
     }
 
     /* Checkbox for timezone */
@@ -248,8 +283,152 @@
       color: var(--primary-light, #a78bfa);
     }
 
+    /* Help text for guidance */
+    .help-text {
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      font-style: italic;
+      margin-top: 0.25rem;
+      line-height: 1.4;
+    }
+
+    .dark-mode .help-text {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Collapsible sections */
+    .section-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .section-toggle .toggle-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .section-toggle.collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .section-content {
+      max-height: 3000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    .section-content.collapsed {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    /* Social share buttons */
+    .share-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(139, 92, 246, 0.2);
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-decoration: none;
+      color: white;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .share-btn.linkedin {
+      background: #0077b5;
+    }
+
+    .share-btn.facebook {
+      background: #1877f2;
+    }
+
+    .share-btn.twitter {
+      background: #1da1f2;
+    }
+
+    .share-btn.reddit {
+      background: #ff4500;
+    }
+
+    .share-btn.whatsapp {
+      background: #25d366;
+    }
+
+    .share-btn.email {
+      background: #6b7280;
+    }
+
     .hidden {
       display: none !important;
+    }
+
+    /* Quick fill suggestion */
+    .quick-fill-banner {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      margin-bottom: 1.5rem;
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .dark-mode .quick-fill-banner {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+    }
+
+    .quick-fill-banner p {
+      margin: 0;
+      color: var(--text-medium-light, #334155);
+      font-weight: 600;
+    }
+
+    .dark-mode .quick-fill-banner p {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .quick-fill-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: var(--secondary, #3b82f6);
+      color: white;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .quick-fill-btn:hover {
+      background: var(--secondary-dark, #2563eb);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
     }
 
     /* Submit Button */
@@ -760,9 +939,19 @@
         </div>
       </div>
 
+      <!-- Quick Fill Banner -->
+      <div class="quick-fill-banner">
+        <p>💡 Want to save time? Use typical values for a quick assessment</p>
+        <button type="button" class="quick-fill-btn" id="quickFillBtn">Quick Fill with Average Values</button>
+      </div>
+
       <!-- 1. Productivity Efficiency -->
       <div class="form-section">
-        <h3>📊 Productivity Efficiency <span class="dimension-weight">15%</span></h3>
+        <div class="section-toggle" data-section="productivity">
+          <h3>📊 Productivity Efficiency <span class="dimension-weight">15%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="productivity-content">
         
         <label for="hoursWorked">Hours actually worked per day:</label>
         <input type="number" id="hoursWorked" step="0.5" min="0" max="24" value="8" required>
@@ -781,11 +970,16 @@
         
         <label for="homeDistractions" class="conditional-remote-hybrid">Home distractions per day (remote/hybrid):</label>
         <input type="number" id="homeDistractions" class="conditional-remote-hybrid" min="0" max="50" value="2">
+        </div>
       </div>
 
       <!-- 2. Workload & Meeting Balance -->
       <div class="form-section">
-        <h3>🗓️ Workload & Meeting Balance <span class="dimension-weight">10%</span></h3>
+        <div class="section-toggle" data-section="meetings">
+          <h3>🗓️ Workload & Meeting Balance <span class="dimension-weight">10%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="meetings-content">
         
         <label for="meetingsPerDay">Meetings per day:</label>
         <input type="number" id="meetingsPerDay" min="0" max="20" value="3" required>
@@ -801,17 +995,23 @@
         
         <label for="asyncSyncRatio">Async vs Sync work ratio (% async):</label>
         <input type="number" id="asyncSyncRatio" min="0" max="100" value="60" required>
+        </div>
       </div>
 
       <!-- 3. Burnout & Stress Risk -->
       <div class="form-section">
-        <h3>🔥 Burnout & Stress Risk <span class="dimension-weight">20%</span></h3>
+        <div class="section-toggle" data-section="burnout">
+          <h3>🔥 Burnout & Stress Risk <span class="dimension-weight">20%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="burnout-content">
         
         <label for="weeklyHours">Weekly hours worked:</label>
         <input type="number" id="weeklyHours" min="0" max="168" value="40" required>
         
         <label for="feelingOverwhelmed">Feeling overwhelmed (1-10): <span class="range-display" id="feelingOverwhelmedVal">5</span></label>
         <input type="range" id="feelingOverwhelmed" min="1" max="10" value="5" required>
+        <p class="help-text">1 = Never overwhelmed, always in control | 5 = Sometimes stressed | 10 = Constantly overwhelmed</p>
         
         <label for="sleepHours">Sleep hours per night:</label>
         <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required>
@@ -821,11 +1021,17 @@
         
         <label for="emotionalExhaustion">Emotional exhaustion (1-10): <span class="range-display" id="emotionalExhaustionVal">5</span></label>
         <input type="range" id="emotionalExhaustion" min="1" max="10" value="5" required>
+        <p class="help-text">1 = Energized and motivated | 5 = Moderately tired | 10 = Emotionally drained, burned out</p>
+        </div>
       </div>
 
       <!-- 4. Physical Health & Ergonomics -->
       <div class="form-section">
-        <h3>🏃 Physical Health & Ergonomics <span class="dimension-weight">10%</span></h3>
+        <div class="section-toggle" data-section="physical">
+          <h3>🏃 Physical Health & Ergonomics <span class="dimension-weight">10%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="physical-content">
         
         <label for="stepsPerDay">Steps per day:</label>
         <input type="number" id="stepsPerDay" min="0" max="50000" value="6000" required>
@@ -841,14 +1047,20 @@
         
         <label for="deskSetup">Desk setup score (1-10): <span class="range-display" id="deskSetupVal">7</span></label>
         <input type="range" id="deskSetup" min="1" max="10" value="7" required>
+        </div>
       </div>
 
       <!-- 5. Mental Wellbeing & Social Connection -->
       <div class="form-section">
-        <h3>🧠 Mental Wellbeing & Social Connection <span class="dimension-weight">10%</span></h3>
+        <div class="section-toggle" data-section="mental">
+          <h3>🧠 Mental Wellbeing & Social Connection <span class="dimension-weight">10%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="mental-content">
         
         <label for="loneliness">Loneliness level (1-10): <span class="range-display" id="lonelinessVal">4</span></label>
         <input type="range" id="loneliness" min="1" max="10" value="4" required>
+        <p class="help-text">1 = Well connected, never lonely | 5 = Occasionally feel isolated | 10 = Extremely lonely and disconnected</p>
         
         <label for="moodScore">Mood score (1-10): <span class="range-display" id="moodScoreVal">7</span></label>
         <input type="range" id="moodScore" min="1" max="10" value="7" required>
@@ -858,17 +1070,23 @@
         
         <label for="workPressure">Work pressure (1-10): <span class="range-display" id="workPressureVal">6</span></label>
         <input type="range" id="workPressure" min="1" max="10" value="6" required>
+        <p class="help-text">1 = Relaxed, manageable workload | 5 = Moderate pressure | 10 = Extreme pressure, unrealistic demands</p>
         
         <label for="coworkerQuality" class="conditional-onsite-hybrid">Coworker interaction quality (1-10): <span class="range-display" id="coworkerQualityVal">7</span></label>
         <input type="range" id="coworkerQuality" class="conditional-onsite-hybrid" min="1" max="10" value="7">
         
         <label for="virtualSatisfaction" class="conditional-remote">Virtual interaction satisfaction (1-10): <span class="range-display" id="virtualSatisfactionVal">7</span></label>
         <input type="range" id="virtualSatisfaction" class="conditional-remote" min="1" max="10" value="7">
+        </div>
       </div>
 
       <!-- 6. Work-Life Balance -->
       <div class="form-section">
-        <h3>⚖️ Work-Life Balance <span class="dimension-weight">15%</span></h3>
+        <div class="section-toggle" data-section="worklife">
+          <h3>⚖️ Work-Life Balance <span class="dimension-weight">15%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="worklife-content">
         
         <label for="hoursOutsideSchedule">Hours worked outside schedule per week:</label>
         <input type="number" id="hoursOutsideSchedule" min="0" max="80" value="5" required>
@@ -887,11 +1105,16 @@
         
         <label for="boundaryControl">Boundary control score (1-10): <span class="range-display" id="boundaryControlVal">7</span></label>
         <input type="range" id="boundaryControl" min="1" max="10" value="7" required>
+        </div>
       </div>
 
       <!-- 7. Work Environment Quality -->
       <div class="form-section">
-        <h3>🏡 Work Environment Quality <span class="dimension-weight">10%</span></h3>
+        <div class="section-toggle" data-section="environment">
+          <h3>🏡 Work Environment Quality <span class="dimension-weight">10%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="environment-content">
         
         <!-- Remote inputs -->
         <div class="conditional-remote">
@@ -936,11 +1159,16 @@
           <label for="officeComfortHybrid">Office comfort (1-10): <span class="range-display" id="officeComfortHybridVal">7</span></label>
           <input type="range" id="officeComfortHybrid" min="1" max="10" value="7">
         </div>
+        </div>
       </div>
 
       <!-- 8. Financial & Commute Stress -->
       <div class="form-section">
-        <h3>💰 Financial & Commute Stress <span class="dimension-weight">10%</span></h3>
+        <div class="section-toggle" data-section="financial">
+          <h3>💰 Financial & Commute Stress <span class="dimension-weight">10%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="financial-content">
         
         <!-- Remote inputs -->
         <div class="conditional-remote">
@@ -949,6 +1177,7 @@
           
           <label for="financialStress">Financial stress (1-10): <span class="range-display" id="financialStressVal">5</span></label>
           <input type="range" id="financialStress" min="1" max="10" value="5">
+          <p class="help-text">1 = Financially secure, no worries | 5 = Some concerns but manageable | 10 = Severe financial anxiety</p>
           
           <label for="jobSecurity">Job security (1-10): <span class="range-display" id="jobSecurityVal">7</span></label>
           <input type="range" id="jobSecurity" min="1" max="10" value="7">
@@ -964,15 +1193,21 @@
           
           <label for="trafficStress">Traffic/commute stress (1-10): <span class="range-display" id="trafficStressVal">6</span></label>
           <input type="range" id="trafficStress" min="1" max="10" value="6">
+          <p class="help-text">1 = Easy, relaxing commute | 5 = Moderate inconvenience | 10 = Nightmare commute, constant delays</p>
           
           <label for="transportReliability">Transportation reliability (1-10): <span class="range-display" id="transportReliabilityVal">7</span></label>
           <input type="range" id="transportReliability" min="1" max="10" value="7">
+        </div>
         </div>
       </div>
 
       <!-- 9. Time-Zone Alignment Stress (Conditional) -->
       <div class="form-section hidden" id="timezoneSection">
-        <h3>🌍 Time-Zone Alignment Stress <span class="dimension-weight">10%</span></h3>
+        <div class="section-toggle" data-section="timezone">
+          <h3>🌍 Time-Zone Alignment Stress <span class="dimension-weight">10%</span></h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="timezone-content">
         
         <label for="timezoneGap">Timezone gap with team (hours):</label>
         <input type="number" id="timezoneGap" min="0" max="12" value="3">
@@ -991,9 +1226,11 @@
         
         <label for="sleepDisruption">Sleep disruption score (1-10): <span class="range-display" id="sleepDisruptionVal">5</span></label>
         <input type="range" id="sleepDisruption" min="1" max="10" value="5">
+        <p class="help-text">1 = Sleep not affected by work schedule | 5 = Occasional sleep issues | 10 = Severely disrupted sleep pattern</p>
         
         <label for="familyTimeLoss">Family/social time loss (1-10): <span class="range-display" id="familyTimeLossVal">5</span></label>
         <input type="range" id="familyTimeLoss" min="1" max="10" value="5">
+        <p class="help-text">1 = No impact on personal relationships | 5 = Miss some events | 10 = Missing critical family time regularly</p>
         
         <label for="weekendOnCall">Weekend on-call:</label>
         <select id="weekendOnCall">
@@ -1003,6 +1240,7 @@
         
         <label for="scheduleFlexibility">Flexibility to shift schedule (1-10): <span class="range-display" id="scheduleFlexibilityVal">5</span></label>
         <input type="range" id="scheduleFlexibility" min="1" max="10" value="5">
+        </div>
       </div>
 
       <button type="submit" class="submit-btn">Calculate My WLQI Score</button>
@@ -1029,6 +1267,29 @@
       </div>
       
       <div class="recommendations" id="recommendations"></div>
+
+      <!-- Social Share Buttons -->
+      <div class="share-buttons">
+        <h3 style="width: 100%; text-align: center; margin: 0 0 1rem; color: var(--text-strong-light);">Share Your Results</h3>
+        <button class="share-btn linkedin" id="shareLinkedIn">
+          <span>in</span> LinkedIn
+        </button>
+        <button class="share-btn facebook" id="shareFacebook">
+          <span>f</span> Facebook
+        </button>
+        <button class="share-btn twitter" id="shareTwitter">
+          <span>𝕏</span> Twitter
+        </button>
+        <button class="share-btn reddit" id="shareReddit">
+          <span>↗</span> Reddit
+        </button>
+        <button class="share-btn whatsapp" id="shareWhatsApp">
+          <span>💬</span> WhatsApp
+        </button>
+        <button class="share-btn email" id="shareEmail">
+          <span>✉</span> Email
+        </button>
+      </div>
     </div>
   </section>
 

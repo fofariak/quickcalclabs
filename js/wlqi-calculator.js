@@ -5,6 +5,10 @@ let currentWorkerType = 'remote';
 let isTimezoneWork = false;
 let radarChartInstance = null;
 
+// Store final score for sharing
+let finalWLQIScore = 0;
+let finalRatingText = '';
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
   initializeDarkMode();
@@ -12,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeTimezoneToggle();
   initializeRangeDisplays();
   initializeFormSubmit();
+  initializeQuickFill();
+  initializeSocialSharing();
+  initializeCollapsibleSections();
   updateConditionalInputs();
 });
 
@@ -119,6 +126,197 @@ function initializeFormSubmit() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     calculateWLQI();
+  });
+}
+
+// Quick fill with average values
+function initializeQuickFill() {
+  const quickFillBtn = document.getElementById('quickFillBtn');
+  
+  quickFillBtn.addEventListener('click', () => {
+    // Fill with reasonable average values
+    document.getElementById('hoursWorked').value = 8;
+    document.getElementById('deepWorkHours').value = 4;
+    document.getElementById('taskCompletion').value = 75;
+    document.getElementById('distractionsPerDay').value = 5;
+    
+    if (currentWorkerType === 'onsite' || currentWorkerType === 'hybrid') {
+      document.getElementById('coworkerInterruptions').value = 3;
+    }
+    if (currentWorkerType === 'remote' || currentWorkerType === 'hybrid') {
+      document.getElementById('homeDistractions').value = 3;
+    }
+    
+    document.getElementById('meetingsPerDay').value = 4;
+    document.getElementById('avgMeetingDuration').value = 45;
+    document.getElementById('bufferTime').value = 10;
+    document.getElementById('meetingEnergyDrain').value = 6;
+    document.getElementById('asyncSyncRatio').value = 50;
+    
+    document.getElementById('weeklyHours').value = 45;
+    document.getElementById('feelingOverwhelmed').value = 6;
+    document.getElementById('sleepHours').value = 7;
+    document.getElementById('weekendRecovery').value = 6;
+    document.getElementById('emotionalExhaustion').value = 6;
+    
+    document.getElementById('stepsPerDay').value = 5000;
+    document.getElementById('exerciseMinutes').value = 20;
+    document.getElementById('neckBackPain').value = 5;
+    document.getElementById('eyeStrain').value = 6;
+    document.getElementById('deskSetup').value = 6;
+    
+    document.getElementById('loneliness').value = 5;
+    document.getElementById('moodScore').value = 6;
+    document.getElementById('socialInteractions').value = 10;
+    document.getElementById('workPressure').value = 7;
+    
+    if (currentWorkerType === 'onsite' || currentWorkerType === 'hybrid') {
+      document.getElementById('coworkerQuality').value = 6;
+    }
+    if (currentWorkerType === 'remote') {
+      document.getElementById('virtualSatisfaction').value = 6;
+    }
+    
+    document.getElementById('hoursOutsideSchedule').value = 5;
+    document.getElementById('eveningWorkHours').value = 5;
+    document.getElementById('weekendWorkHours').value = 3;
+    document.getElementById('personalTimeHours').value = 3;
+    document.getElementById('offScreenHours').value = 5;
+    document.getElementById('boundaryControl').value = 5;
+    
+    if (currentWorkerType === 'remote') {
+      document.getElementById('homeWorkspace').value = 7;
+      document.getElementById('lightingScore').value = 7;
+      document.getElementById('noiseLevel').value = 5;
+      document.getElementById('tempComfort').value = 7;
+      document.getElementById('internetStability').value = 8;
+      
+      document.getElementById('incomeStability').value = 7;
+      document.getElementById('financialStress').value = 6;
+      document.getElementById('jobSecurity').value = 7;
+    } else if (currentWorkerType === 'onsite') {
+      document.getElementById('officeNoise').value = 6;
+      document.getElementById('workspaceComfort').value = 6;
+      document.getElementById('privacyRating').value = 5;
+      document.getElementById('commuteEnvironment').value = 5;
+      
+      document.getElementById('commuteTime').value = 35;
+      document.getElementById('commuteCost').value = 200;
+      document.getElementById('trafficStress').value = 7;
+      document.getElementById('transportReliability').value = 6;
+    } else if (currentWorkerType === 'hybrid') {
+      document.getElementById('homeWorkspaceHybrid').value = 7;
+      document.getElementById('officeComfortHybrid').value = 6;
+      
+      document.getElementById('commuteTime').value = 30;
+      document.getElementById('commuteCost').value = 150;
+      document.getElementById('trafficStress').value = 6;
+      document.getElementById('transportReliability').value = 7;
+    }
+    
+    if (isTimezoneWork) {
+      document.getElementById('timezoneGap').value = 4;
+      document.getElementById('requiredOverlap').value = 4;
+      document.getElementById('workingHoursStart').value = 9;
+      document.getElementById('workingHoursEnd').value = 18;
+      document.getElementById('nightWorkDays').value = 1;
+      document.getElementById('sleepDisruption').value = 6;
+      document.getElementById('familyTimeLoss').value = 6;
+      document.getElementById('weekendOnCall').value = 'no';
+      document.getElementById('scheduleFlexibility').value = 5;
+    }
+    
+    // Update all range displays
+    document.querySelectorAll('input[type="range"]').forEach(input => {
+      const displayId = input.id + 'Val';
+      const display = document.getElementById(displayId);
+      if (display) {
+        display.textContent = input.value;
+      }
+    });
+    
+    // Show notification
+    alert('✅ Form filled with average values! You can now adjust any values before calculating.');
+  });
+}
+
+// Social sharing functionality
+function initializeSocialSharing() {
+  document.getElementById('shareLinkedIn').addEventListener('click', () => shareToLinkedIn());
+  document.getElementById('shareFacebook').addEventListener('click', () => shareToFacebook());
+  document.getElementById('shareTwitter').addEventListener('click', () => shareToTwitter());
+  document.getElementById('shareReddit').addEventListener('click', () => shareToReddit());
+  document.getElementById('shareWhatsApp').addEventListener('click', () => shareToWhatsApp());
+  document.getElementById('shareEmail').addEventListener('click', () => shareToEmail());
+}
+
+function getShareText() {
+  return `I just assessed my Work-Life Quality! My WLQI score is ${finalWLQIScore}/100 (${finalRatingText}). Calculate yours:`;
+}
+
+function getShareUrl() {
+  return 'https://quickcalclabs.com/work-life-quality-index.html';
+}
+
+function shareToLinkedIn() {
+  const url = getShareUrl();
+  const text = getShareText();
+  const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+  window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToFacebook() {
+  const url = getShareUrl();
+  const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToTwitter() {
+  const url = getShareUrl();
+  const text = getShareText();
+  const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+  window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToReddit() {
+  const url = getShareUrl();
+  const text = getShareText();
+  const shareUrl = `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}`;
+  window.open(shareUrl, '_blank', 'width=800,height=600');
+}
+
+function shareToWhatsApp() {
+  const url = getShareUrl();
+  const text = `${getShareText()} ${url}`;
+  const shareUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(shareUrl, '_blank');
+}
+
+function shareToEmail() {
+  const url = getShareUrl();
+  const subject = 'Check out my Work-Life Quality Index!';
+  const body = `${getShareText()}\n\n${url}\n\nQuickCalcLabs offers free calculators to help you understand and improve your work-life quality.`;
+  window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// Collapsible sections functionality
+function initializeCollapsibleSections() {
+  const toggles = document.querySelectorAll('.section-toggle');
+  
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const section = toggle.dataset.section;
+      const content = document.getElementById(`${section}-content`);
+      const icon = toggle.querySelector('.toggle-icon');
+      
+      if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        toggle.classList.remove('collapsed');
+      } else {
+        content.classList.add('collapsed');
+        toggle.classList.add('collapsed');
+      }
+    });
   });
 }
 
@@ -589,6 +787,9 @@ function clamp(value, min, max) {
 
 // Display results
 function displayResults(finalScore, scores) {
+  // Store for sharing
+  finalWLQIScore = finalScore;
+  
   // Update score display
   document.getElementById('wlqiScore').textContent = finalScore;
   
@@ -599,18 +800,23 @@ function displayResults(finalScore, scores) {
   if (finalScore >= 90) {
     rating = '🌟 Thriving';
     ratingClass = 'thriving';
+    finalRatingText = 'Thriving';
   } else if (finalScore >= 75) {
     rating = '✅ Healthy';
     ratingClass = 'healthy';
+    finalRatingText = 'Healthy';
   } else if (finalScore >= 60) {
     rating = '⚖️ Stable';
     ratingClass = 'stable';
+    finalRatingText = 'Stable';
   } else if (finalScore >= 40) {
     rating = '⚠️ Struggling';
     ratingClass = 'struggling';
+    finalRatingText = 'Struggling';
   } else {
     rating = '🚨 Critical';
     ratingClass = 'critical';
+    finalRatingText = 'Critical';
   }
   
   const ratingElement = document.getElementById('wlqiRating');
