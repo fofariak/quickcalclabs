@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work-Life Quality Index Calculator - Remote, Hybrid & Onsite Workers | QuickCalcLabs</title>
+  <meta name="description" content="Calculate your Work-Life Quality Index (WLQI) score. Measure productivity, burnout risk, work-life balance, and wellbeing for remote, hybrid, and onsite workers.">
+  <meta name="keywords" content="work life balance calculator, remote work quality, hybrid work calculator, burnout assessment, productivity calculator, work wellbeing, WLQI, work life quality">
+  <link rel="canonical" href="https://quickcalclabs.com/work-life-quality-index.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Work-Life Quality Index Calculator | QuickCalcLabs">
+  <meta property="og:description" content="Assess your work-life quality with our comprehensive WLQI calculator for remote, hybrid, and onsite workers.">
+  <meta property="og:url" content="https://quickcalclabs.com/work-life-quality-index.html">
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* WLQI Calculator Specific Styles */
+    .calc-wrapper {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      text-align: center;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .meta-info {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .dark-mode .meta-info {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Worker Type Selection */
+    .worker-type-section {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(59, 130, 246, 0.05));
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid rgba(139, 92, 246, 0.2);
+    }
+
+    .dark-mode .worker-type-section {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .worker-type-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .worker-type-btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid var(--primary, #8b5cf6);
+      background: transparent;
+      color: var(--primary, #8b5cf6);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .worker-type-btn.active {
+      background: var(--primary, #8b5cf6);
+      color: white;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    .worker-type-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    .dark-mode .worker-type-btn {
+      border-color: var(--primary-light, #a78bfa);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .dark-mode .worker-type-btn.active {
+      background: var(--primary-light, #a78bfa);
+      color: var(--text-strong-dark, #0f172a);
+    }
+
+    /* Checkbox for timezone */
+    .timezone-checkbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    .timezone-checkbox input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    /* Form Sections */
+    .form-section {
+      margin: 2rem 0;
+      padding: 2rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      text-align: left;
+    }
+
+    .dark-mode .form-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .form-section h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary, #8b5cf6);
+      margin: 0 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dark-mode .form-section h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .dimension-weight {
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      background: rgba(139, 92, 246, 0.15);
+      border-radius: 999px;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .dimension-weight {
+      background: rgba(139, 92, 246, 0.25);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .form-section label {
+      display: block;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-strong-light, #0f172a);
+      margin: 1rem 0 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .dark-mode .form-section label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .form-section input,
+    .form-section select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 0.95rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+    }
+
+    .form-section input:focus,
+    .form-section select:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+    }
+
+    .dark-mode .form-section input,
+    .dark-mode .form-section select {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode .form-section input:focus,
+    .dark-mode .form-section select:focus {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .range-display {
+      display: inline-block;
+      margin-left: 10px;
+      font-weight: 700;
+      color: var(--primary, #8b5cf6);
+      min-width: 40px;
+    }
+
+    .dark-mode .range-display {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      margin-top: 2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .submit-btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* Results Section */
+    .result-box {
+      margin-top: 2rem;
+      padding: 2.5rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      text-align: center;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .wlqi-score-display {
+      margin: 2rem 0;
+    }
+
+    .wlqi-score-number {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+
+    .wlqi-score-label {
+      font-size: 1.2rem;
+      color: var(--text-weak-light, #64748b);
+      margin-top: 0.5rem;
+    }
+
+    .dark-mode .wlqi-score-label {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .wlqi-rating {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      margin: 1rem 0;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .wlqi-rating.critical {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+    }
+
+    .wlqi-rating.struggling {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: white;
+    }
+
+    .wlqi-rating.stable {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: white;
+    }
+
+    .wlqi-rating.healthy {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .wlqi-rating.thriving {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      color: white;
+    }
+
+    /* Breakdown Grid */
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+      text-align: left;
+    }
+
+    .breakdown-card {
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .breakdown-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .breakdown-card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .dark-mode .breakdown-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .breakdown-card h4 {
+      font-size: 0.9rem;
+      color: var(--text-medium-light, #334155);
+      margin: 0 0 0.5rem;
+      font-weight: 600;
+    }
+
+    .dark-mode .breakdown-card h4 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .breakdown-score {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .breakdown-score {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* Chart Container */
+    .chart-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .chart-container {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    /* Recommendations */
+    .recommendations {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      text-align: left;
+    }
+
+    .dark-mode .recommendations {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .recommendations h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary, #8b5cf6);
+      margin: 0 0 1rem;
+    }
+
+    .dark-mode .recommendations h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .recommendation-section {
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(59, 130, 246, 0.05));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      border-radius: var(--radius-sm, 8px);
+    }
+
+    .dark-mode .recommendation-section {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    }
+
+    .recommendation-section h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      margin: 0 0 1rem;
+    }
+
+    .dark-mode .recommendation-section h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .recommendation-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .recommendation-section li {
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .recommendation-section li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--primary, #8b5cf6);
+      font-weight: 800;
+    }
+
+    .dark-mode .recommendation-section li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .recommendation-section li:before {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p,
+    .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p,
+    .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul,
+    .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .seo-content li {
+      margin-bottom: 0.8rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .info-box h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper,
+      .seo-content,
+      .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .worker-type-buttons {
+        flex-direction: column;
+      }
+
+      .worker-type-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <!-- Top Ad Banner (728x90) -->
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>💼 Work-Life Quality Index Calculator</h1>
+    <p class="subtitle">Calculate your comprehensive Work-Life Quality Index (WLQI) score across 9 key dimensions. Perfect for remote, hybrid, and onsite workers.</p>
+    <p class="meta-info">Last Updated: November 2025</p>
+
+    <form id="wlqiForm">
+      <!-- Worker Type Selection -->
+      <div class="worker-type-section">
+        <h3 style="margin:0 0 0.5rem; color: var(--text-strong-light);">Select Your Work Type</h3>
+        <div class="worker-type-buttons">
+          <button type="button" class="worker-type-btn active" data-type="remote">🏠 Remote</button>
+          <button type="button" class="worker-type-btn" data-type="hybrid">🔄 Hybrid</button>
+          <button type="button" class="worker-type-btn" data-type="onsite">🏢 Onsite</button>
+        </div>
+        <div class="timezone-checkbox">
+          <input type="checkbox" id="timezoneWork">
+          <label for="timezoneWork" style="margin: 0; font-size: 0.95rem;">I work across time zones</label>
+        </div>
+      </div>
+
+      <!-- 1. Productivity Efficiency -->
+      <div class="form-section">
+        <h3>📊 Productivity Efficiency <span class="dimension-weight">15%</span></h3>
+        
+        <label for="hoursWorked">Hours actually worked per day:</label>
+        <input type="number" id="hoursWorked" step="0.5" min="0" max="24" value="8" required>
+        
+        <label for="deepWorkHours">Deep work hours per day:</label>
+        <input type="number" id="deepWorkHours" step="0.5" min="0" max="24" value="4" required>
+        
+        <label for="taskCompletion">Task completion rate (%):</label>
+        <input type="number" id="taskCompletion" min="0" max="100" value="80" required>
+        
+        <label for="distractionsPerDay">Distractions per day:</label>
+        <input type="number" id="distractionsPerDay" min="0" max="50" value="5" required>
+        
+        <label for="coworkerInterruptions" class="conditional-onsite-hybrid">Interruptions by coworkers (onsite/hybrid):</label>
+        <input type="number" id="coworkerInterruptions" class="conditional-onsite-hybrid" min="0" max="50" value="3">
+        
+        <label for="homeDistractions" class="conditional-remote-hybrid">Home distractions per day (remote/hybrid):</label>
+        <input type="number" id="homeDistractions" class="conditional-remote-hybrid" min="0" max="50" value="2">
+      </div>
+
+      <!-- 2. Workload & Meeting Balance -->
+      <div class="form-section">
+        <h3>🗓️ Workload & Meeting Balance <span class="dimension-weight">10%</span></h3>
+        
+        <label for="meetingsPerDay">Meetings per day:</label>
+        <input type="number" id="meetingsPerDay" min="0" max="20" value="3" required>
+        
+        <label for="avgMeetingDuration">Average meeting duration (minutes):</label>
+        <input type="number" id="avgMeetingDuration" min="0" max="480" value="45" required>
+        
+        <label for="bufferTime">Buffer time between meetings (minutes):</label>
+        <input type="number" id="bufferTime" min="0" max="120" value="15" required>
+        
+        <label for="meetingEnergyDrain">Meeting energy drain (1-10): <span class="range-display" id="meetingEnergyDrainVal">5</span></label>
+        <input type="range" id="meetingEnergyDrain" min="1" max="10" value="5" required>
+        
+        <label for="asyncSyncRatio">Async vs Sync work ratio (% async):</label>
+        <input type="number" id="asyncSyncRatio" min="0" max="100" value="60" required>
+      </div>
+
+      <!-- 3. Burnout & Stress Risk -->
+      <div class="form-section">
+        <h3>🔥 Burnout & Stress Risk <span class="dimension-weight">20%</span></h3>
+        
+        <label for="weeklyHours">Weekly hours worked:</label>
+        <input type="number" id="weeklyHours" min="0" max="168" value="40" required>
+        
+        <label for="feelingOverwhelmed">Feeling overwhelmed (1-10): <span class="range-display" id="feelingOverwhelmedVal">5</span></label>
+        <input type="range" id="feelingOverwhelmed" min="1" max="10" value="5" required>
+        
+        <label for="sleepHours">Sleep hours per night:</label>
+        <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required>
+        
+        <label for="weekendRecovery">Weekend recovery score (1-10): <span class="range-display" id="weekendRecoveryVal">7</span></label>
+        <input type="range" id="weekendRecovery" min="1" max="10" value="7" required>
+        
+        <label for="emotionalExhaustion">Emotional exhaustion (1-10): <span class="range-display" id="emotionalExhaustionVal">5</span></label>
+        <input type="range" id="emotionalExhaustion" min="1" max="10" value="5" required>
+      </div>
+
+      <!-- 4. Physical Health & Ergonomics -->
+      <div class="form-section">
+        <h3>🏃 Physical Health & Ergonomics <span class="dimension-weight">10%</span></h3>
+        
+        <label for="stepsPerDay">Steps per day:</label>
+        <input type="number" id="stepsPerDay" min="0" max="50000" value="6000" required>
+        
+        <label for="exerciseMinutes">Exercise minutes per day:</label>
+        <input type="number" id="exerciseMinutes" min="0" max="240" value="30" required>
+        
+        <label for="neckBackPain">Neck/back pain frequency (1-10): <span class="range-display" id="neckBackPainVal">4</span></label>
+        <input type="range" id="neckBackPain" min="1" max="10" value="4" required>
+        
+        <label for="eyeStrain">Eye strain level (1-10): <span class="range-display" id="eyeStrainVal">5</span></label>
+        <input type="range" id="eyeStrain" min="1" max="10" value="5" required>
+        
+        <label for="deskSetup">Desk setup score (1-10): <span class="range-display" id="deskSetupVal">7</span></label>
+        <input type="range" id="deskSetup" min="1" max="10" value="7" required>
+      </div>
+
+      <!-- 5. Mental Wellbeing & Social Connection -->
+      <div class="form-section">
+        <h3>🧠 Mental Wellbeing & Social Connection <span class="dimension-weight">10%</span></h3>
+        
+        <label for="loneliness">Loneliness level (1-10): <span class="range-display" id="lonelinessVal">4</span></label>
+        <input type="range" id="loneliness" min="1" max="10" value="4" required>
+        
+        <label for="moodScore">Mood score (1-10): <span class="range-display" id="moodScoreVal">7</span></label>
+        <input type="range" id="moodScore" min="1" max="10" value="7" required>
+        
+        <label for="socialInteractions">Social interactions per week:</label>
+        <input type="number" id="socialInteractions" min="0" max="100" value="15" required>
+        
+        <label for="workPressure">Work pressure (1-10): <span class="range-display" id="workPressureVal">6</span></label>
+        <input type="range" id="workPressure" min="1" max="10" value="6" required>
+        
+        <label for="coworkerQuality" class="conditional-onsite-hybrid">Coworker interaction quality (1-10): <span class="range-display" id="coworkerQualityVal">7</span></label>
+        <input type="range" id="coworkerQuality" class="conditional-onsite-hybrid" min="1" max="10" value="7">
+        
+        <label for="virtualSatisfaction" class="conditional-remote">Virtual interaction satisfaction (1-10): <span class="range-display" id="virtualSatisfactionVal">7</span></label>
+        <input type="range" id="virtualSatisfaction" class="conditional-remote" min="1" max="10" value="7">
+      </div>
+
+      <!-- 6. Work-Life Balance -->
+      <div class="form-section">
+        <h3>⚖️ Work-Life Balance <span class="dimension-weight">15%</span></h3>
+        
+        <label for="hoursOutsideSchedule">Hours worked outside schedule per week:</label>
+        <input type="number" id="hoursOutsideSchedule" min="0" max="80" value="5" required>
+        
+        <label for="eveningWorkHours">Evening work hours per week:</label>
+        <input type="number" id="eveningWorkHours" min="0" max="80" value="3" required>
+        
+        <label for="weekendWorkHours">Weekend work hours per week:</label>
+        <input type="number" id="weekendWorkHours" min="0" max="48" value="2" required>
+        
+        <label for="personalTimeHours">Personal time hours per day:</label>
+        <input type="number" id="personalTimeHours" step="0.5" min="0" max="24" value="4" required>
+        
+        <label for="offScreenHours">Off-screen hours per day:</label>
+        <input type="number" id="offScreenHours" step="0.5" min="0" max="24" value="6" required>
+        
+        <label for="boundaryControl">Boundary control score (1-10): <span class="range-display" id="boundaryControlVal">7</span></label>
+        <input type="range" id="boundaryControl" min="1" max="10" value="7" required>
+      </div>
+
+      <!-- 7. Work Environment Quality -->
+      <div class="form-section">
+        <h3>🏡 Work Environment Quality <span class="dimension-weight">10%</span></h3>
+        
+        <!-- Remote inputs -->
+        <div class="conditional-remote">
+          <label for="homeWorkspace">Home workspace quality (1-10): <span class="range-display" id="homeWorkspaceVal">7</span></label>
+          <input type="range" id="homeWorkspace" min="1" max="10" value="7">
+          
+          <label for="lightingScore">Lighting quality (1-10): <span class="range-display" id="lightingScoreVal">8</span></label>
+          <input type="range" id="lightingScore" min="1" max="10" value="8">
+          
+          <label for="noiseLevel">Noise level (1-10, 10 = very noisy): <span class="range-display" id="noiseLevelVal">4</span></label>
+          <input type="range" id="noiseLevel" min="1" max="10" value="4">
+          
+          <label for="tempComfort">Temperature comfort (1-10): <span class="range-display" id="tempComfortVal">7</span></label>
+          <input type="range" id="tempComfort" min="1" max="10" value="7">
+          
+          <label for="internetStability">Internet stability (1-10): <span class="range-display" id="internetStabilityVal">9</span></label>
+          <input type="range" id="internetStability" min="1" max="10" value="9">
+        </div>
+        
+        <!-- Onsite inputs -->
+        <div class="conditional-onsite">
+          <label for="officeNoise">Office noise level (1-10): <span class="range-display" id="officeNoiseVal">5</span></label>
+          <input type="range" id="officeNoise" min="1" max="10" value="5">
+          
+          <label for="workspaceComfort">Workspace comfort (1-10): <span class="range-display" id="workspaceComfortVal">7</span></label>
+          <input type="range" id="workspaceComfort" min="1" max="10" value="7">
+          
+          <label for="privacyRating">Privacy rating (1-10): <span class="range-display" id="privacyRatingVal">6</span></label>
+          <input type="range" id="privacyRating" min="1" max="10" value="6">
+          
+          <label for="commuteEnvironment">Commute environment (1-10): <span class="range-display" id="commuteEnvironmentVal">6</span></label>
+          <input type="range" id="commuteEnvironment" min="1" max="10" value="6">
+        </div>
+        
+        <!-- Hybrid sees both -->
+        <div class="conditional-hybrid">
+          <p style="font-size: 0.9rem; font-style: italic; color: var(--text-weak-light);">Rate both home and office environments (we'll average them)</p>
+          
+          <label for="homeWorkspaceHybrid">Home workspace quality (1-10): <span class="range-display" id="homeWorkspaceHybridVal">7</span></label>
+          <input type="range" id="homeWorkspaceHybrid" min="1" max="10" value="7">
+          
+          <label for="officeComfortHybrid">Office comfort (1-10): <span class="range-display" id="officeComfortHybridVal">7</span></label>
+          <input type="range" id="officeComfortHybrid" min="1" max="10" value="7">
+        </div>
+      </div>
+
+      <!-- 8. Financial & Commute Stress -->
+      <div class="form-section">
+        <h3>💰 Financial & Commute Stress <span class="dimension-weight">10%</span></h3>
+        
+        <!-- Remote inputs -->
+        <div class="conditional-remote">
+          <label for="incomeStability">Income stability (1-10): <span class="range-display" id="incomeStabilityVal">8</span></label>
+          <input type="range" id="incomeStability" min="1" max="10" value="8">
+          
+          <label for="financialStress">Financial stress (1-10): <span class="range-display" id="financialStressVal">5</span></label>
+          <input type="range" id="financialStress" min="1" max="10" value="5">
+          
+          <label for="jobSecurity">Job security (1-10): <span class="range-display" id="jobSecurityVal">7</span></label>
+          <input type="range" id="jobSecurity" min="1" max="10" value="7">
+        </div>
+        
+        <!-- Onsite/Hybrid inputs -->
+        <div class="conditional-onsite-hybrid">
+          <label for="commuteTime">Commute time one way (minutes):</label>
+          <input type="number" id="commuteTime" min="0" max="240" value="30">
+          
+          <label for="commuteCost">Commute cost per month ($):</label>
+          <input type="number" id="commuteCost" min="0" max="1000" value="150">
+          
+          <label for="trafficStress">Traffic/commute stress (1-10): <span class="range-display" id="trafficStressVal">6</span></label>
+          <input type="range" id="trafficStress" min="1" max="10" value="6">
+          
+          <label for="transportReliability">Transportation reliability (1-10): <span class="range-display" id="transportReliabilityVal">7</span></label>
+          <input type="range" id="transportReliability" min="1" max="10" value="7">
+        </div>
+      </div>
+
+      <!-- 9. Time-Zone Alignment Stress (Conditional) -->
+      <div class="form-section hidden" id="timezoneSection">
+        <h3>🌍 Time-Zone Alignment Stress <span class="dimension-weight">10%</span></h3>
+        
+        <label for="timezoneGap">Timezone gap with team (hours):</label>
+        <input type="number" id="timezoneGap" min="0" max="12" value="3">
+        
+        <label for="requiredOverlap">Required overlap hours per day:</label>
+        <input type="number" id="requiredOverlap" min="0" max="24" value="4">
+        
+        <label for="workingHoursStart">Your actual working hours start (0-23):</label>
+        <input type="number" id="workingHoursStart" min="0" max="23" value="9">
+        
+        <label for="workingHoursEnd">Your actual working hours end (0-23):</label>
+        <input type="number" id="workingHoursEnd" min="0" max="23" value="17">
+        
+        <label for="nightWorkDays">Days per week working at night (after 10 PM):</label>
+        <input type="number" id="nightWorkDays" min="0" max="7" value="0">
+        
+        <label for="sleepDisruption">Sleep disruption score (1-10): <span class="range-display" id="sleepDisruptionVal">5</span></label>
+        <input type="range" id="sleepDisruption" min="1" max="10" value="5">
+        
+        <label for="familyTimeLoss">Family/social time loss (1-10): <span class="range-display" id="familyTimeLossVal">5</span></label>
+        <input type="range" id="familyTimeLoss" min="1" max="10" value="5">
+        
+        <label for="weekendOnCall">Weekend on-call:</label>
+        <select id="weekendOnCall">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+        
+        <label for="scheduleFlexibility">Flexibility to shift schedule (1-10): <span class="range-display" id="scheduleFlexibilityVal">5</span></label>
+        <input type="range" id="scheduleFlexibility" min="1" max="10" value="5">
+      </div>
+
+      <button type="submit" class="submit-btn">Calculate My WLQI Score</button>
+    </form>
+
+    <!-- Results Section -->
+    <div id="results" class="result-box">
+      <h2 style="color: var(--primary); margin-bottom: 1rem;">Your Work-Life Quality Index</h2>
+      
+      <div class="wlqi-score-display">
+        <div class="wlqi-score-number" id="wlqiScore">0</div>
+        <div class="wlqi-score-label">out of 100</div>
+      </div>
+      
+      <div class="wlqi-rating" id="wlqiRating">Calculating...</div>
+      
+      <hr style="border: none; border-top: 1px solid rgba(139, 92, 246, 0.2); margin: 2rem 0;">
+      
+      <h3 style="color: var(--primary); margin-bottom: 1rem;">Dimension Breakdown</h3>
+      <div class="breakdown-grid" id="breakdownGrid"></div>
+      
+      <div class="chart-container">
+        <canvas id="radarChart"></canvas>
+      </div>
+      
+      <div class="recommendations" id="recommendations"></div>
+    </div>
+  </section>
+
+  <!-- Mid Ad Banner (320x50) -->
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>What Is the Work-Life Quality Index (WLQI)?</h2>
+      <p>The Work-Life Quality Index (WLQI) is a comprehensive assessment tool that measures the overall quality of your work experience across nine critical dimensions. Unlike traditional work satisfaction surveys that focus on single aspects, WLQI provides a holistic view of how your work arrangement affects your productivity, health, wellbeing, and life balance.</p>
+      
+      <p>This calculator is specifically designed for today's diverse work environments—whether you're working remotely from home, splitting time in a hybrid arrangement, or working full-time at an office. It recognizes that modern work-life quality extends far beyond simple metrics like hours worked or salary earned.</p>
+
+      <div class="info-box">
+        <h4>Why WLQI Matters</h4>
+        <p>Understanding your work-life quality helps identify areas for improvement before they lead to burnout, health issues, or job dissatisfaction. Research shows that workers with higher WLQI scores report better mental health, higher productivity, stronger relationships, and greater career longevity.</p>
+      </div>
+
+      <h2>The 9 Dimensions of Work-Life Quality</h2>
+      
+      <h3>1. Productivity Efficiency (15% Weight)</h3>
+      <p>This dimension measures how effectively you accomplish meaningful work. It considers your deep work hours, task completion rates, and the impact of distractions and interruptions. High productivity efficiency means you're able to focus on important tasks and complete them successfully, rather than spending your day in a state of constant distraction.</p>
+      
+      <p>Remote workers often report higher productivity efficiency due to fewer office interruptions, but may struggle with home distractions. Onsite workers benefit from structured environments but face frequent colleague interruptions. The key is finding your optimal environment for focused work.</p>
+
+      <h3>2. Workload & Meeting Balance (10% Weight)</h3>
+      <p>This dimension evaluates how well your meeting schedule supports rather than hinders your work. Excessive meetings, back-to-back scheduling without breaks, and meetings that drain your energy all negatively impact this score. The ideal balance includes sufficient asynchronous work time, reasonable meeting frequency, and adequate buffer time for recovery between meetings.</p>
+      
+      <p>Studies show that workers perform best with 2-4 meetings per day, with at least 15-minute breaks between them. Meetings that exceed 60 minutes or involve more than 8 people typically show diminishing returns on productivity and engagement.</p>
+
+      <h3>3. Burnout & Stress Risk (20% Weight)</h3>
+      <p>As the highest-weighted dimension, burnout risk recognizes that sustained stress and overwork can undermine all other aspects of work-life quality. This dimension considers your weekly hours, feelings of being overwhelmed, sleep quality, weekend recovery, and emotional exhaustion.</p>
+      
+      <p>Burnout doesn't happen overnight—it develops gradually through chronic workplace stress, emotional demands, and insufficient recovery time. Warning signs include working consistently more than 50 hours per week, sleep deprivation below 7 hours nightly, inability to recover on weekends, and persistent feelings of exhaustion or cynicism about work.</p>
+
+      <h3>4. Physical Health & Ergonomics (10% Weight)</h3>
+      <p>Your physical health directly impacts your work performance and overall wellbeing. This dimension assesses your daily movement, exercise habits, ergonomic setup, and physical pain or discomfort related to work. Desk workers are particularly vulnerable to sedentary lifestyle risks, poor posture, and repetitive strain injuries.</p>
+      
+      <p>The World Health Organization recommends at least 150 minutes of moderate exercise weekly and 6,000-10,000 steps daily. Proper ergonomics—including monitor height, chair support, and keyboard placement—can prevent chronic pain and injury that affects millions of office workers.</p>
+
+      <h3>5. Mental Wellbeing & Social Connection (10% Weight)</h3>
+      <p>Human beings are social creatures, and workplace social connections significantly impact mental health and job satisfaction. This dimension measures loneliness, mood, quality of social interactions, work pressure, and the quality of your connections with colleagues.</p>
+      
+      <p>Remote workers face unique challenges in maintaining social connections and may experience isolation despite regular video calls. Onsite workers benefit from spontaneous interactions but may face social fatigue. Hybrid workers must actively manage relationships across both environments.</p>
+
+      <h3>6. Work-Life Balance (15% Weight)</h3>
+      <p>True work-life balance means having clear boundaries between work and personal time. This dimension evaluates hours worked outside your schedule, evening and weekend work, personal time availability, screen-free hours, and your ability to maintain boundaries.</p>
+      
+      <p>The "always-on" culture enabled by technology has blurred traditional work boundaries. Workers who regularly answer emails after hours, work on weekends, or lack dedicated personal time face increased stress, relationship strain, and decreased life satisfaction. Effective boundaries protect your wellbeing and actually improve long-term productivity.</p>
+
+      <h3>7. Work Environment Quality (10% Weight)</h3>
+      <p>Your physical workspace significantly impacts concentration, comfort, and productivity. For remote workers, this includes home workspace quality, lighting, noise levels, temperature, and internet stability. For onsite workers, it covers office conditions, privacy, workspace comfort, and commute environment. Hybrid workers experience both and must optimize each.</p>
+      
+      <p>Environmental factors like poor lighting can cause eye strain and headaches, while excessive noise reduces concentration and increases stress. Temperature discomfort affects cognition and mood. Inadequate workspace design leads to poor ergonomics and decreased productivity.</p>
+
+      <h3>8. Financial & Commute Stress (10% Weight)</h3>
+      <p>Financial concerns and commute burdens create significant stress that affects overall work-life quality. Remote workers are evaluated on income stability, financial stress, and job security. Onsite and hybrid workers additionally face commute time, costs, traffic stress, and transportation reliability.</p>
+      
+      <p>Long commutes—especially those exceeding 45 minutes each way—are associated with increased stress, reduced exercise, poor sleep, and decreased life satisfaction. The average American spends 54 minutes commuting daily and over $2,000 annually on transportation. These costs in time, money, and wellbeing must be factored into work-life quality.</p>
+
+      <h3>9. Time-Zone Alignment Stress (10% Weight)</h3>
+      <p>For workers collaborating across time zones, misalignment creates unique challenges. This dimension activates when you indicate working across time zones and evaluates the timezone gap, required overlap hours, night work frequency, sleep disruption, family time impact, weekend availability, and schedule flexibility.</p>
+      
+      <p>Working outside your natural circadian rhythm—especially late-night or early-morning hours—disrupts sleep, health, and relationships. The larger the timezone gap and the more inflexible the required overlap, the greater the stress. Teams should minimize synchronous requirements and maximize flexibility for distributed workers.</p>
+
+      <h2>Understanding Your WLQI Score</h2>
+      <p>Your final WLQI score ranges from 0 to 100 and falls into one of five categories:</p>
+
+      <ul>
+        <li><strong>90-100: Thriving</strong> – Exceptional work-life quality across all dimensions. You have excellent balance, strong wellbeing, high productivity, and sustainable work patterns. Maintain your current practices and share what works with others.</li>
+        
+        <li><strong>75-89: Healthy</strong> – Good work-life quality with minor areas for improvement. You're managing well overall but may have one or two dimensions that could be optimized. Focus on addressing specific weak points before they decline.</li>
+        
+        <li><strong>60-74: Stable</strong> – Adequate work-life quality but with notable challenges. You're functioning but experiencing stress or dissatisfaction in several areas. Proactive changes can prevent decline and improve your experience significantly.</li>
+        
+        <li><strong>40-59: Struggling</strong> – Concerning work-life quality requiring attention. Multiple dimensions are problematic, and you're likely experiencing significant stress, health impacts, or dissatisfaction. Immediate action is needed to prevent burnout.</li>
+        
+        <li><strong>0-39: Critical</strong> – Severely compromised work-life quality. You're at high risk for burnout, health issues, and work-life dysfunction. Urgent intervention is essential—consider speaking with your manager, HR, or a professional counselor about major changes.</li>
+      </ul>
+
+      <h2>How to Improve Your WLQI Score</h2>
+      <p>After calculating your score, focus on your two weakest dimensions first. Small, consistent improvements in these areas will have the greatest impact on your overall score and wellbeing.</p>
+
+      <h3>For Low Productivity Efficiency:</h3>
+      <ul>
+        <li>Block dedicated deep work time in your calendar and protect it fiercely</li>
+        <li>Use techniques like the Pomodoro method (25 minutes focused work, 5-minute breaks)</li>
+        <li>Identify your peak productivity hours and schedule important tasks then</li>
+        <li>Minimize distractions: silence notifications, use website blockers, communicate boundaries</li>
+        <li>If remote, create a dedicated workspace separate from living areas</li>
+        <li>If onsite, use headphones or "do not disturb" signals to prevent interruptions</li>
+      </ul>
+
+      <h3>For Poor Meeting Balance:</h3>
+      <ul>
+        <li>Decline meetings where you're not essential or ask for async updates instead</li>
+        <li>Implement meeting-free days or time blocks for focused work</li>
+        <li>Schedule meetings in clusters rather than scattered throughout the day</li>
+        <li>Insist on 25 or 50-minute meetings instead of 30 or 60 to build in buffer time</li>
+        <li>Start meetings with clear agendas and end with specific action items</li>
+        <li>Question the necessity of recurring meetings periodically</li>
+      </ul>
+
+      <h3>For High Burnout Risk:</h3>
+      <ul>
+        <li>Set firm work hour boundaries and communicate them to your team</li>
+        <li>Take all your vacation time and truly disconnect</li>
+        <li>Prioritize 7-9 hours of sleep nightly—it's essential for recovery</li>
+        <li>Schedule regular breaks throughout your workday, not just lunch</li>
+        <li>Delegate tasks when possible and learn to say no to non-essential commitments</li>
+        <li>Consider speaking with a therapist or counselor about stress management</li>
+        <li>If consistently working over 50 hours weekly, discuss workload with your manager</li>
+      </ul>
+
+      <h3>For Physical Health Issues:</h3>
+      <ul>
+        <li>Invest in ergonomic equipment: adjustable chair, monitor stand, keyboard, mouse</li>
+        <li>Set hourly reminders to stand, stretch, or walk briefly</li>
+        <li>Target 6,000-10,000 steps daily—take walking meetings or lunch walks</li>
+        <li>Schedule exercise like any important appointment—don't skip it</li>
+        <li>Practice the 20-20-20 rule for eye strain: every 20 minutes, look 20 feet away for 20 seconds</li>
+        <li>Consult a physical therapist if experiencing chronic pain</li>
+      </ul>
+
+      <h3>For Low Mental Wellbeing:</h3>
+      <ul>
+        <li>Schedule regular social interactions—video calls with friends, team bonding activities</li>
+        <li>If remote, consider coworking spaces occasionally for human connection</li>
+        <li>Build informal connections with colleagues beyond work discussions</li>
+        <li>Practice stress management: meditation, journaling, therapy, or mindfulness apps</li>
+        <li>Communicate openly about workload and pressure with your manager</li>
+        <li>Seek professional mental health support if feeling persistently down or anxious</li>
+      </ul>
+
+      <h3>For Poor Work-Life Balance:</h3>
+      <ul>
+        <li>Disable work notifications outside business hours</li>
+        <li>Create end-of-day rituals to transition from work to personal time</li>
+        <li>Schedule personal activities and treat them as non-negotiable</li>
+        <li>Communicate your boundaries clearly to colleagues and clients</li>
+        <li>Use separate devices or profiles for work vs. personal activities</li>
+        <li>If hybrid/onsite, avoid bringing work home regularly</li>
+        <li>Practice saying "no" to non-urgent requests outside your hours</li>
+      </ul>
+
+      <h2>Remote, Hybrid, or Onsite: Which Is Best?</h2>
+      <p>There's no universal answer—the optimal work arrangement depends on your personality, role, home situation, and company culture. Our calculator helps you assess your current situation objectively.</p>
+
+      <h3>Remote Work Advantages:</h3>
+      <ul>
+        <li>Eliminates commute time and costs</li>
+        <li>Greater flexibility in daily schedule</li>
+        <li>Fewer office interruptions and politics</li>
+        <li>Ability to create personalized work environment</li>
+        <li>More time for family, exercise, and personal activities</li>
+      </ul>
+
+      <h3>Remote Work Challenges:</h3>
+      <ul>
+        <li>Potential isolation and loneliness</li>
+        <li>Blurred boundaries between work and home life</li>
+        <li>Home distractions and inadequate workspace</li>
+        <li>Reduced spontaneous collaboration and mentoring</li>
+        <li>Zoom fatigue from excessive video meetings</li>
+        <li>Difficulty disconnecting from work</li>
+      </ul>
+
+      <h3>Onsite Work Advantages:</h3>
+      <ul>
+        <li>Structured environment with clear work-life separation</li>
+        <li>Easy collaboration and spontaneous interactions</li>
+        <li>Stronger team bonding and company culture</li>
+        <li>Better equipment and ergonomic setup often provided</li>
+        <li>Clear mentorship and career development opportunities</li>
+      </ul>
+
+      <h3>Onsite Work Challenges:</h3>
+      <ul>
+        <li>Daily commute costs in time, money, and stress</li>
+        <li>Frequent interruptions and open office distractions</li>
+        <li>Less flexibility for personal appointments and needs</li>
+        <li>Office politics and social pressures</li>
+        <li>Potentially uncomfortable or noisy workspace</li>
+      </ul>
+
+      <h3>Hybrid Work: The Middle Ground</h3>
+      <p>Hybrid arrangements attempt to capture the best of both worlds—the flexibility and focus time of remote work with the collaboration and connection of office work. Success requires intentional planning: using office days for collaborative work and meetings while reserving home days for focused individual work.</p>
+
+      <p>The key to hybrid success is consistency and communication. Teams should align on core collaboration days to maximize in-person value while respecting focused work time when remote.</p>
+
+      <h2>Special Considerations for Global Teams</h2>
+      <p>If you selected "I work across time zones," you're among millions of workers navigating the complexities of global collaboration. While technology enables 24/7 connectivity, human bodies still operate on circadian rhythms.</p>
+
+      <p>Working regularly outside your natural schedule—especially late-night or early-morning hours—disrupts sleep, increases health risks, strains relationships, and accelerates burnout. If your WLQI shows high timezone stress, consider these strategies:</p>
+
+      <ul>
+        <li><strong>Negotiate schedule flexibility:</strong> Can you shift your day forward or backward rather than extending it?</li>
+        <li><strong>Maximize asynchronous work:</strong> Reduce synchronous meeting requirements through documentation, recorded updates, and collaborative tools</li>
+        <li><strong>Rotate meeting times:</strong> Don't always burden the same people with inconvenient hours—share the pain</li>
+        <li><strong>Cluster overlap hours:</strong> Concentrate required overlap into specific days rather than spreading it across the week</li>
+        <li><strong>Set boundaries:</strong> Define hours when you're unavailable except for emergencies</li>
+        <li><strong>Protect your sleep:</strong> Never sacrifice sleep consistently—it's not sustainable</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>When to Speak Up</h4>
+        <p>If your WLQI score is Struggling or Critical, don't suffer in silence. Schedule a conversation with your manager, HR, or trusted mentor. Most organizations prefer addressing issues early rather than losing valuable employees to burnout or dissatisfaction. Come prepared with specific challenges and potential solutions—approach it as collaborative problem-solving rather than complaining.</p>
+      </div>
+
+      <h2>Using WLQI for Career Decisions</h2>
+      <p>Your WLQI score isn't just diagnostic—it's also a tool for evaluating career opportunities. When considering a new job or work arrangement, reflect on how it would affect each dimension:</p>
+
+      <ul>
+        <li>Will the commute or travel requirements increase stress?</li>
+        <li>Does the role demand regular weekend or evening work?</li>
+        <li>Is the meeting culture excessive or reasonable?</li>
+        <li>What's the company's approach to work-life boundaries?</li>
+        <li>Will you have adequate resources for ergonomic workspace?</li>
+        <li>How does the team support mental wellbeing and connection?</li>
+      </ul>
+
+      <p>A higher salary doesn't compensate for severely compromised work-life quality if it leads to health problems, failed relationships, or burnout. Evaluate total compensation including quality of life factors, not just monetary benefits.</p>
+
+      <h2>The Science Behind Work-Life Quality</h2>
+      <p>The WLQI dimensions are grounded in decades of organizational psychology, occupational health, and wellbeing research. Studies consistently show that work-life quality predicts:</p>
+
+      <ul>
+        <li><strong>Job performance:</strong> Workers with better work-life quality are more productive, creative, and engaged</li>
+        <li><strong>Physical health:</strong> Chronic work stress contributes to cardiovascular disease, obesity, and weakened immunity</li>
+        <li><strong>Mental health:</strong> Poor work-life quality increases risk of anxiety, depression, and burnout</li>
+        <li><strong>Relationship quality:</strong> Work stress and time demands strain marriages, parenting, and friendships</li>
+        <li><strong>Career longevity:</strong> Sustainable work practices prevent burnout and enable longer, more satisfying careers</li>
+        <li><strong>Life satisfaction:</strong> Work quality significantly impacts overall happiness and life fulfillment</li>
+      </ul>
+
+      <p>Organizations with high average WLQI scores among employees see lower turnover, reduced healthcare costs, higher innovation, better customer satisfaction, and stronger financial performance. Investing in work-life quality isn't just humane—it's good business.</p>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    
+    <details>
+      <summary>How accurate is the WLQI calculator?</summary>
+      <p>The WLQI calculator uses research-based dimensions and weighting to provide meaningful assessment of work-life quality. However, it's a self-reported tool based on your subjective experiences. The score is most useful for identifying areas of concern and tracking changes over time rather than as an absolute measure. Retake the assessment every few months to monitor your progress.</p>
+    </details>
+
+    <details>
+      <summary>What's a good WLQI score?</summary>
+      <p>Scores of 75 or higher indicate healthy work-life quality. Scores of 60-74 suggest room for improvement in specific areas. Scores below 60 indicate concerning patterns that require attention. However, the breakdown by dimension is often more useful than the overall score—focus on improving your weakest areas first.</p>
+    </details>
+
+    <details>
+      <summary>Should I share my WLQI score with my employer?</summary>
+      <p>That depends on your workplace culture and relationship with management. If your score is low and indicates systemic issues (excessive meetings, unreasonable hours, poor resources), sharing it could open productive conversations about improvements. However, use judgment—frame it constructively focused on solutions rather than complaints.</p>
+    </details>
+
+    <details>
+      <summary>How often should I recalculate my WLQI?</summary>
+      <p>Reassess quarterly or whenever your work situation changes significantly (new role, new team, change in work arrangement, etc.). This helps you track whether changes are improving or harming your work-life quality and allows you to course-correct quickly.</p>
+    </details>
+
+    <details>
+      <summary>My score is Critical—what should I do immediately?</summary>
+      <p>First, review your dimension breakdown to identify the most problematic areas. Second, consider whether any factors require urgent professional help (severe burnout, depression, physical health issues). Third, schedule a conversation with your manager or HR about the specific challenges. Fourth, identify one or two changes you can implement immediately to reduce stress. Don't try to fix everything at once—small improvements in critical areas make the biggest difference.</p>
+    </details>
+
+    <details>
+      <summary>Does work type (remote/hybrid/onsite) significantly affect WLQI scores?</summary>
+      <p>Research shows mixed results—what matters more than work location is how well the arrangement fits your personal needs, role requirements, and home situation. Some people thrive remotely while others struggle with isolation. Some love office collaboration while others find it draining. The calculator accounts for type-specific factors to give you personalized insights.</p>
+    </details>
+
+    <details>
+      <summary>Can I use this calculator to compare job offers?</summary>
+      <p>Yes—complete the calculator hypothetically for each opportunity based on what you know about schedule, commute, meeting culture, hours, etc. Compare the estimated WLQI scores alongside salary and other factors. This helps evaluate total quality of life, not just compensation.</p>
+    </details>
+
+    <details>
+      <summary>What if my employer requires practices that harm my WLQI?</summary>
+      <p>First, attempt to address concerns through proper channels—speak with your manager, HR, or employee resource groups. Come prepared with data about how changes would benefit both you and the organization. If issues persist and significantly impact your wellbeing, you may need to consider whether the role is sustainable long-term. Your health and wellbeing must be the priority.</p>
+    </details>
+  </section>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> The Work-Life Quality Index calculator is provided for informational and self-assessment purposes only. It is not a substitute for professional psychological counseling, medical advice, or career guidance. If you're experiencing severe stress, burnout, or mental health concerns, please consult qualified professionals.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How accurate is the WLQI calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The WLQI calculator uses research-based dimensions and weighting to provide meaningful assessment of work-life quality. However, it's a self-reported tool based on your subjective experiences."
+      }
+    },{
+      "@type": "Question",
+      "name": "What's a good WLQI score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scores of 75 or higher indicate healthy work-life quality. Scores of 60-74 suggest room for improvement. Scores below 60 indicate concerning patterns that require attention."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I share my WLQI score with my employer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That depends on your workplace culture. If your score indicates systemic issues, sharing it could open productive conversations about improvements."
+      }
+    }]
+  }
+  </script>
+
+  <script src="js/wlqi-calculator.js"></script>
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
