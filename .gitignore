@@ -1,0 +1,31 @@
+# Protect proprietary source code
+# Only commit obfuscated versions to public repos
+
+# Original calculator source (keep private)
+js/wlqi-calculator.js.original
+js/*-source.js
+
+# Obfuscation config (trade secret)
+.obfuscate-config.json
+
+# Development files
+node_modules/
+npm-debug.log
+.DS_Store
+.env
+
+# Build artifacts
+*.log
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files
+*.bak
+*~
+

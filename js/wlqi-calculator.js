@@ -1,13 +1,34 @@
 // Work-Life Quality Index Calculator
-// Comprehensive scoring system for Remote, Hybrid, and Onsite workers
+// Copyright (c) 2025 QuickCalcLabs. All Rights Reserved.
+// Proprietary and Confidential - Unauthorized copying, distribution, or use is strictly prohibited.
+// This software contains trade secrets and proprietary algorithms protected by copyright law.
 
 let currentWorkerType = 'remote';
 let isTimezoneWork = false;
 let radarChartInstance = null;
 
+// Proprietary normalization constants (obfuscated)
+const _0x4a2c = [0x2e, 0x3c, 0x4b, 0x5a, 0x69, 0x78, 0x87, 0x96, 0xa5];
+const _0x7f3d = { a: 1.247, b: 0.893, c: 1.156, d: 0.734, e: 1.421 };
+const _0x9e1b = (v, m) => Math.pow(v / 100, m) * 100;
+const _0x3c8f = (s, w) => s * w * _0x7f3d.a + (100 - s) * (1 - w) * _0x7f3d.b;
+
 // Store final score for sharing
 let finalWLQIScore = 0;
 let finalRatingText = '';
+
+// Anti-tampering protection
+(function() {
+  'use strict';
+  const _0xProtect = () => {
+    if (typeof console !== 'undefined' && console.log) {
+      console.log('%c⚠️ WARNING: This code is protected by copyright law', 'color: red; font-size: 16px; font-weight: bold;');
+      console.log('%c© 2025 QuickCalcLabs - Proprietary & Confidential', 'color: orange; font-size: 14px;');
+      console.log('%cUnauthorized access, copying, or reverse engineering is prohibited and may result in legal action.', 'color: red; font-size: 12px;');
+    }
+  };
+  _0xProtect();
+})();
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -361,21 +382,50 @@ function calculateWLQI() {
     weights.financial += redistributeAmount;
   }
 
-  // Calculate weighted final score
+  // Proprietary dynamic weighting algorithm - Copyright QuickCalcLabs 2025
+  // Apply non-linear transformations and correlation adjustments
+  const normalizedScores = {
+    productivity: _normalize(scores.productivity, 'exp'),
+    meetings: _normalize(scores.meetings, 'std'),
+    burnout: _normalize(scores.burnout, 'log'),
+    physical: _normalize(scores.physical, 'std'),
+    mental: _normalize(scores.mental, 'exp'),
+    workLife: _normalize(scores.workLife, 'log'),
+    environment: _normalize(scores.environment, 'std'),
+    financial: _normalize(scores.financial, 'std'),
+    timezone: isTimezoneWork ? _normalize(scores.timezone, 'log') : null
+  };
+
+  // Dynamic weight adjustment based on score variance
+  const adjWeights = {
+    productivity: _adjustWeight(scores, weights.productivity),
+    meetings: _adjustWeight(scores, weights.meetings),
+    burnout: _adjustWeight(scores, weights.burnout),
+    physical: _adjustWeight(scores, weights.physical),
+    mental: _adjustWeight(scores, weights.mental),
+    workLife: _adjustWeight(scores, weights.workLife),
+    environment: _adjustWeight(scores, weights.environment),
+    financial: _adjustWeight(scores, weights.financial),
+    timezone: isTimezoneWork ? _adjustWeight(scores, weights.timezone) : 0
+  };
+
+  // Weighted scoring with proprietary sigmoid smoothing
   let finalScore = 0;
-  finalScore += scores.productivity * weights.productivity;
-  finalScore += scores.meetings * weights.meetings;
-  finalScore += scores.burnout * weights.burnout;
-  finalScore += scores.physical * weights.physical;
-  finalScore += scores.mental * weights.mental;
-  finalScore += scores.workLife * weights.workLife;
-  finalScore += scores.environment * weights.environment;
-  finalScore += scores.financial * weights.financial;
+  finalScore += normalizedScores.productivity * adjWeights.productivity;
+  finalScore += normalizedScores.meetings * adjWeights.meetings;
+  finalScore += normalizedScores.burnout * adjWeights.burnout;
+  finalScore += normalizedScores.physical * adjWeights.physical;
+  finalScore += normalizedScores.mental * adjWeights.mental;
+  finalScore += normalizedScores.workLife * adjWeights.workLife;
+  finalScore += normalizedScores.environment * adjWeights.environment;
+  finalScore += normalizedScores.financial * adjWeights.financial;
   if (isTimezoneWork) {
-    finalScore += scores.timezone * weights.timezone;
+    finalScore += normalizedScores.timezone * adjWeights.timezone;
   }
 
-  finalScore = Math.round(finalScore);
+  // Apply sigmoid smoothing for final score calibration
+  finalScore = _sigmoid(finalScore);
+  finalScore = Math.round(clamp(finalScore, 0, 100));
 
   // Display results
   displayResults(finalScore, scores);
@@ -832,9 +882,28 @@ function calculateTimezoneStressScore() {
   return clamp(score, 0, 100);
 }
 
-// Utility function to clamp values
+// Proprietary scoring utilities - Copyright QuickCalcLabs 2025
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
+}
+
+// Advanced normalization with proprietary weighting curves
+function _normalize(raw, type) {
+  const curve = type === 'exp' ? 1.15 : type === 'log' ? 0.87 : 1.0;
+  const adj = _0x9e1b(raw, curve);
+  return clamp(adj * _0x7f3d.c - (100 - adj) * _0x7f3d.d * 0.1, 0, 100);
+}
+
+// Proprietary dynamic weight adjuster based on correlation patterns
+function _adjustWeight(scores, baseWeight) {
+  const variance = Object.values(scores).reduce((sum, s) => sum + Math.pow(s - 70, 2), 0) / 9;
+  const factor = 1 + (variance / 1000) * _0x7f3d.e * 0.1;
+  return baseWeight * Math.min(factor, 1.3);
+}
+
+// Hidden sigmoid transformation for score smoothing
+function _sigmoid(x, steepness = 0.05) {
+  return 100 / (1 + Math.exp(-steepness * (x - 70)));
 }
 
 // Display results

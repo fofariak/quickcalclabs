@@ -1,0 +1,25 @@
+{
+  "name": "quickcalclabs-calculators",
+  "version": "1.0.0",
+  "description": "QuickCalcLabs - Health, Fitness & Work-Life Quality Calculators",
+  "private": true,
+  "scripts": {
+    "obfuscate-wlqi": "javascript-obfuscator js/wlqi-calculator.js --output js/wlqi-calculator.min.js --config .obfuscate-config.json",
+    "build": "npm run obfuscate-wlqi",
+    "protect": "echo 'Obfuscating proprietary code...' && npm run build && echo 'Code protection complete!'"
+  },
+  "keywords": [
+    "calculator",
+    "health",
+    "fitness",
+    "work-life-balance",
+    "WLQI"
+  ],
+  "author": "QuickCalcLabs",
+  "license": "UNLICENSED",
+  "copyright": "Copyright 2025 QuickCalcLabs. All Rights Reserved.",
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.0"
+  }
+}
+
