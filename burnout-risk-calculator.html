@@ -126,6 +126,18 @@
       color: var(--primary-light, #a78bfa);
     }
 
+    .help-text {
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin: -0.3rem 0 0.5rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .dark-mode .help-text {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
     .calc-wrapper button[type="submit"] {
       display: inline-block;
       padding: 1rem 2rem;
@@ -365,18 +377,22 @@
       <input type="number" id="weeklyHours" min="0" max="168" value="40" required>
 
       <label for="feelingOverwhelmed">Feeling overwhelmed (1-10): <span class="range-display" id="overwhelmedVal">5</span></label>
+      <p class="help-text">1 = Rarely stressed, 5 = Sometimes overwhelmed, 10 = Constantly overwhelmed</p>
       <input type="range" id="feelingOverwhelmed" min="1" max="10" value="5" required>
 
       <label for="sleepHours">Average sleep hours per night:</label>
       <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required>
 
       <label for="weekendRecovery">Weekend recovery quality (1-10): <span class="range-display" id="recoveryVal">7</span></label>
+      <p class="help-text">1 = No recovery, work consumes weekends, 10 = Fully disconnect and recharge</p>
       <input type="range" id="weekendRecovery" min="1" max="10" value="7" required>
 
       <label for="emotionalExhaustion">Emotional exhaustion (1-10): <span class="range-display" id="exhaustionVal">5</span></label>
+      <p class="help-text">1 = Energized and engaged, 5 = Sometimes drained, 10 = Completely emotionally depleted</p>
       <input type="range" id="emotionalExhaustion" min="1" max="10" value="5" required>
 
       <label for="workLife">Work-life balance satisfaction (1-10): <span class="range-display" id="balanceVal">6</span></label>
+      <p class="help-text">1 = Work dominates life, no personal time, 10 = Perfect balance and boundaries</p>
       <input type="range" id="workLife" min="1" max="10" value="6" required>
 
       <button type="submit">Calculate Burnout Risk</button>

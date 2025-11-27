@@ -124,6 +124,18 @@
       color: var(--primary-light, #a78bfa);
     }
 
+    .help-text {
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin: -0.3rem 0 0.5rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .dark-mode .help-text {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
     .calc-wrapper button[type="submit"] {
       display: inline-block;
       padding: 1rem 2rem;
@@ -311,6 +323,7 @@
       <input type="number" id="bufferTime" min="0" max="120" value="10" required>
 
       <label for="energyDrain">Meeting energy drain (1-10): <span class="range-display" id="drainVal">6</span></label>
+      <p class="help-text">1 = Meetings are energizing, 5 = Neutral, 10 = Meetings completely exhaust me</p>
       <input type="range" id="energyDrain" min="1" max="10" value="6" required>
 
       <label for="backToBack">Back-to-back meetings per day (no buffer):</label>

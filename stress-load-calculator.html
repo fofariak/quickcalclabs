@@ -138,6 +138,18 @@
       color: var(--primary-light, #a78bfa);
     }
 
+    .help-text {
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin: -0.3rem 0 0.5rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .dark-mode .help-text {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
     .calc-wrapper button[type="submit"] {
       display: inline-block;
       padding: 1rem 2rem;
@@ -320,9 +332,11 @@
       <input type="number" id="workHours" min="0" max="168" value="40" required>
 
       <label for="workPressure">Work pressure level (1-10): <span class="range-display" id="pressureVal">5</span></label>
+      <p class="help-text">1 = Low pressure, manageable pace, 5 = Moderate deadlines, 10 = Extreme pressure, constant urgency</p>
       <input type="range" id="workPressure" min="1" max="10" value="5" required>
 
       <label for="jobSecurity">Job security (1-10): <span class="range-display" id="securityVal">7</span></label>
+      <p class="help-text">1 = High risk of job loss, 5 = Uncertain, 10 = Very secure position</p>
       <input type="range" id="jobSecurity" min="1" max="10" value="7" required>
 
       <div class="section-title">😴 Lifestyle Factors</div>
@@ -339,9 +353,11 @@
       <div class="section-title">💰 Personal Stress</div>
       
       <label for="financial">Financial stress (1-10): <span class="range-display" id="financialVal">5</span></label>
+      <p class="help-text">1 = Financially secure, no money worries, 5 = Some concerns, 10 = Severe financial strain</p>
       <input type="range" id="financial" min="1" max="10" value="5" required>
 
       <label for="relationships">Relationship satisfaction (1-10): <span class="range-display" id="relationVal">7</span></label>
+      <p class="help-text">1 = Major relationship problems, 5 = Some conflicts, 10 = Strong, supportive relationships</p>
       <input type="range" id="relationships" min="1" max="10" value="7" required>
 
       <label for="commute">Daily commute time (minutes):</label>
