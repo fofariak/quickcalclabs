@@ -260,6 +260,26 @@
     .dark-mode .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
     }
+
+    .calc-meta {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .calc-meta summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .calc-meta {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .calc-meta summary {
+      color: var(--primary-light, #a78bfa);
+    }
   </style>
 </head>
 <body>
@@ -315,6 +335,18 @@
       <div class="breakdown" id="breakdown"></div>
       <div style="background: rgba(239, 68, 68, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid #ef4444; margin-top: 1.5rem;" id="annualImpact"></div>
       <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary); margin-top: 1.5rem;" id="recommendations"></div>
+      <details class="calc-meta">
+        <summary>How your distraction cost is calculated</summary>
+        <p>For each distraction channel we estimate both the direct time and the refocus time needed to get back into your work:</p>
+        <ul>
+          <li><strong>Email:</strong> short checks plus ~10–15 minutes of refocus per check</li>
+          <li><strong>Instant messaging:</strong> quick glances plus several minutes of refocus per burst</li>
+          <li><strong>Meetings:</strong> scheduled duration plus extra preparation and recovery time</li>
+          <li><strong>Interruptions:</strong> heavier refocus penalty because they are unplanned and disruptive</li>
+          <li><strong>Social media:</strong> time spent scrolling plus the cost of regaining focus afterwards</li>
+        </ul>
+        <p>All of these are summed into total minutes lost per day, converted to hours and percentage of your workday. A separate 0–100 “distraction burden” score normalizes how extreme that percentage is, so you can easily compare over time.</p>
+      </details>
     </div>
   </section>
 

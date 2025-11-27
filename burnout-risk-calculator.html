@@ -255,6 +255,26 @@
       color: var(--text-weak-dark, #94a3b8);
     }
 
+    .calc-meta {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .calc-meta summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .calc-meta {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .calc-meta summary {
+      color: var(--primary-light, #a78bfa);
+    }
+
     /* SEO Content Section */
     .seo-content {
       max-width: 900px;
@@ -405,6 +425,19 @@
       <hr style="border: none; border-top: 1px solid rgba(139, 92, 246, 0.2); margin: 1.5rem 0;">
       <div id="riskDescription"></div>
       <div class="recommendations" id="recommendations"></div>
+      <details class="calc-meta">
+        <summary>How your burnout risk score is calculated</summary>
+        <p>This tool combines six evidence-informed factors, each converted to a 0–100 risk score, then weighted and averaged into your final percentage:</p>
+        <ul>
+          <li><strong>Long work hours:</strong> working &gt;40–70+ hours per week increases risk</li>
+          <li><strong>Feeling overwhelmed:</strong> higher 1–10 ratings mean higher chronic stress</li>
+          <li><strong>Sleep amount:</strong> sleep below roughly 7–8 hours raises risk, very short sleep raises it most</li>
+          <li><strong>Weekend recovery:</strong> poor ability to disconnect on weekends strongly increases risk</li>
+          <li><strong>Emotional exhaustion:</strong> one of the strongest predictors of clinical burnout</li>
+          <li><strong>Work–life boundaries:</strong> low boundary control contributes additional risk</li>
+        </ul>
+        <p>Emotional exhaustion, overwhelm, and sleep get slightly higher weight than the other factors to reflect their stronger association with burnout in research. This score is an educational screening tool and not a medical diagnosis.</p>
+      </details>
     </div>
   </section>
 

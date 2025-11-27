@@ -233,6 +233,27 @@
     .dark-mode .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
     }
+
+    .calc-meta {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      text-align: left;
+    }
+
+    .calc-meta summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .calc-meta {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .calc-meta summary {
+      color: var(--primary-light, #a78bfa);
+    }
   </style>
 </head>
 <body>
@@ -279,6 +300,17 @@
       <div class="score-label">out of 100</div>
       <div style="text-align: left; margin-top: 1.5rem;" id="insights"></div>
       <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); margin-top: 1.5rem; border-left: 4px solid var(--primary);" id="tips"></div>
+      <details class="calc-meta">
+        <summary>How your productivity score is calculated</summary>
+        <p>Your score is a weighted average of four normalized subscores (each 0–100, higher is better):</p>
+        <ul>
+          <li><strong>Deep work ratio (≈35% weight):</strong> share of your workday spent in focused, distraction‑free work</li>
+          <li><strong>Task completion (≈35% weight):</strong> how many of your planned tasks you actually finish</li>
+          <li><strong>Distraction management (≈15% weight):</strong> fewer daily distractions increase this subscore</li>
+          <li><strong>Context switching (≈15% weight):</strong> fewer task changes per day increase this subscore</li>
+        </ul>
+        <p>Each input is mapped onto a 0–100 scale using reasonable \"healthy\" ranges (for example, 60%+ of your day in deep work and 90–100% task completion score near 100). The final 0–100 score is meant to highlight patterns, not replace performance reviews or medical advice.</p>
+      </details>
     </div>
   </section>
 

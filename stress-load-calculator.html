@@ -304,6 +304,26 @@
     .dark-mode .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
     }
+
+    .calc-meta {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .calc-meta summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .calc-meta {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .calc-meta summary {
+      color: var(--primary-light, #a78bfa);
+    }
   </style>
 </head>
 <body>
@@ -383,6 +403,16 @@
       <div class="category-breakdown" id="breakdown"></div>
       <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary); margin-top: 1.5rem;" id="analysis"></div>
       <div style="background: rgba(59, 130, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary); margin-top: 1.5rem;" id="recommendations"></div>
+      <details class="calc-meta">
+        <summary>How your stress load score is calculated</summary>
+        <p>The calculator first builds three domain scores (each 0–100, higher = more stress):</p>
+        <ul>
+          <li><strong>Work stress:</strong> weekly hours, work pressure, and job security</li>
+          <li><strong>Lifestyle stress:</strong> sleep amount, daily exercise, and non‑work screen time</li>
+          <li><strong>Personal stress:</strong> financial stress, relationship strain, and commute time</li>
+        </ul>
+        <p>Each input is normalized onto a 0–100 scale using ranges that roughly separate \"healthy\" from \"risky\" patterns, then combined into its domain. The final stress load is a weighted mix of domains (work ≈40%, lifestyle ≈30%, personal ≈30%), giving you a single 0–100 index plus a breakdown so you can see where to focus first.</p>
+      </details>
     </div>
   </section>
 

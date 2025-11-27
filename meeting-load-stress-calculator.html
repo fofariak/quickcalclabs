@@ -283,6 +283,26 @@
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
     }
 
+    .calc-meta {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .calc-meta summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .calc-meta {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .calc-meta summary {
+      color: var(--primary-light, #a78bfa);
+    }
+
     @media (max-width: 600px) {
       .stats-grid {
         grid-template-columns: 1fr;
@@ -361,6 +381,19 @@
 
       <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary); margin-top: 1.5rem;" id="analysis"></div>
       <div style="background: rgba(59, 130, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary); margin-top: 1.5rem;" id="recommendations"></div>
+      <details class="calc-meta">
+        <summary>How your meeting load stress score is calculated</summary>
+        <p>Your score is built from six normalized meeting-stress factors, each mapped to a 0–100 scale and then weighted:</p>
+        <ul>
+          <li><strong>Time in meetings:</strong> percent of your workday spent in meetings (very high % pushes stress up)</li>
+          <li><strong>Meeting volume:</strong> how many meetings you have per day</li>
+          <li><strong>Energy drain:</strong> your 1–10 rating of how draining meetings feel</li>
+          <li><strong>Back‑to‑back meetings:</strong> count of meetings with no buffer between them</li>
+          <li><strong>Buffer time:</strong> lack of breaks between meetings increases stress</li>
+          <li><strong>Async ratio:</strong> more async communication (docs, comments, recordings) reduces meeting stress</li>
+        </ul>
+        <p>Time in meetings and energy drain are weighted slightly more than the other factors to reflect their bigger impact on fatigue and focus. The final 0–100 score helps you see whether your calendar is in a healthy, moderate, or overloaded range.</p>
+      </details>
     </div>
   </section>
 
