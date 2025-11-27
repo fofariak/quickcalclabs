@@ -5,13 +5,22 @@ const blogPosts = [
   // The blog.html page will update automatically.
 
   {
+    title: "The Work-Life Quality Index: Your Complete Guide to Measuring Work-Life Balance",
+    href: "blog/work-life-quality-index-guide.html",
+    excerpt: "Discover how to measure your work-life quality across 9 dimensions. Perfect for remote, hybrid, and onsite workers. Take the free WLQI assessment and get personalized recommendations.",
+    category: "Productivity",
+    date: "November 27, 2025",
+    readTime: "12 min read",
+    featured: true // This post will be highlighted at the top.
+  },
+  {
     title: "How to Maintain a Healthy BMI: A Practical Guide",
     href: "blog/how-to-maintain-healthy-bmi.html",
     excerpt: "Learn practical, sustainable strategies for maintaining a healthy BMI through balanced nutrition, regular exercise, and positive lifestyle habits.",
     category: "Health",
     date: "September 3, 2025",
     readTime: "6 min read",
-    featured: true // This post will be highlighted at the top.
+    featured: false
   },
   {
     title: "10 Effective Tips to Reduce Your BMI",
