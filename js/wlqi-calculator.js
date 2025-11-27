@@ -388,41 +388,55 @@ function calculateProductivityScore() {
   const taskCompletion = parseFloat(document.getElementById('taskCompletion').value) || 80;
   const distractionsPerDay = parseFloat(document.getElementById('distractionsPerDay').value) || 5;
   
-  let score = 100;
+  let score = 70; // Start lower to allow room for bonuses
   
-  // Deep work bonus
+  // Deep work bonus (max impact: +15)
   const deepWorkRatio = deepWorkHours / hoursWorked;
-  if (deepWorkRatio > 0.5) {
+  if (deepWorkRatio > 0.6) {
+    score += 15;
+  } else if (deepWorkRatio > 0.5) {
     score += 10;
+  } else if (deepWorkRatio > 0.4) {
+    score += 5;
   } else if (deepWorkRatio < 0.3) {
-    score -= 15;
+    score -= 10;
   }
   
-  // Task completion
-  score += (taskCompletion - 80) * 0.5; // +0.5 for each % above 80, -0.5 for below
-  
-  // Distractions penalty
-  if (distractionsPerDay > 10) {
-    score -= (distractionsPerDay - 10) * 2;
-  } else if (distractionsPerDay < 3) {
+  // Task completion (max impact: +10)
+  if (taskCompletion >= 90) {
     score += 10;
+  } else if (taskCompletion >= 80) {
+    score += 5;
+  } else if (taskCompletion < 70) {
+    score -= 10;
+  } else if (taskCompletion < 80) {
+    score -= 5;
+  }
+  
+  // Distractions penalty (max impact: +10/-15)
+  if (distractionsPerDay <= 2) {
+    score += 10;
+  } else if (distractionsPerDay <= 5) {
+    score += 5;
+  } else if (distractionsPerDay > 10) {
+    score -= (distractionsPerDay - 10) * 1.5;
   }
   
   // Worker-specific factors
   if (currentWorkerType === 'onsite' || currentWorkerType === 'hybrid') {
     const coworkerInterruptions = parseFloat(document.getElementById('coworkerInterruptions').value) || 3;
-    score -= coworkerInterruptions * 2;
+    score -= coworkerInterruptions * 1.5;
   }
   
   if (currentWorkerType === 'remote' || currentWorkerType === 'hybrid') {
     const homeDistractions = parseFloat(document.getElementById('homeDistractions').value) || 2;
-    score -= homeDistractions * 2.5;
+    score -= homeDistractions * 2;
   }
   
   // Timezone work reduces productivity
   if (isTimezoneWork) {
     const nightWorkDays = parseFloat(document.getElementById('nightWorkDays').value) || 0;
-    score -= nightWorkDays * 3;
+    score -= nightWorkDays * 2.5;
   }
   
   return clamp(score, 0, 100);
@@ -436,35 +450,45 @@ function calculateMeetingBalanceScore() {
   const meetingEnergyDrain = parseFloat(document.getElementById('meetingEnergyDrain').value) || 5;
   const asyncSyncRatio = parseFloat(document.getElementById('asyncSyncRatio').value) || 60;
   
-  let score = 100;
+  let score = 70; // Start lower
   
-  // Meetings per day
-  if (meetingsPerDay > 4) {
-    score -= (meetingsPerDay - 4) * 8;
-  } else if (meetingsPerDay < 2) {
+  // Meetings per day (max impact: +10/-20)
+  if (meetingsPerDay <= 2) {
     score += 10;
+  } else if (meetingsPerDay <= 3) {
+    score += 5;
+  } else if (meetingsPerDay > 5) {
+    score -= (meetingsPerDay - 5) * 5;
+  } else if (meetingsPerDay > 4) {
+    score -= 5;
   }
   
-  // Meeting duration
+  // Meeting duration (max impact: -15)
   if (avgMeetingDuration > 60) {
-    score -= (avgMeetingDuration - 60) / 5;
+    score -= Math.min((avgMeetingDuration - 60) / 5, 15);
   }
   
-  // Buffer time
-  if (bufferTime < 10) {
-    score -= 15;
-  } else if (bufferTime >= 15) {
+  // Buffer time (max impact: +10/-10)
+  if (bufferTime >= 15) {
     score += 10;
+  } else if (bufferTime >= 10) {
+    score += 5;
+  } else if (bufferTime < 5) {
+    score -= 10;
   }
   
-  // Energy drain
+  // Energy drain (max impact: +15/-15)
   score -= (meetingEnergyDrain - 5) * 3;
   
-  // Async ratio bonus
-  if (asyncSyncRatio > 70) {
-    score += 15;
+  // Async ratio (max impact: +10/-10)
+  if (asyncSyncRatio >= 70) {
+    score += 10;
+  } else if (asyncSyncRatio >= 60) {
+    score += 5;
   } else if (asyncSyncRatio < 40) {
     score -= 10;
+  } else if (asyncSyncRatio < 50) {
+    score -= 5;
   }
   
   return clamp(score, 0, 100);
@@ -478,34 +502,38 @@ function calculateBurnoutScore() {
   const weekendRecovery = parseFloat(document.getElementById('weekendRecovery').value) || 7;
   const emotionalExhaustion = parseFloat(document.getElementById('emotionalExhaustion').value) || 5;
   
-  let score = 100;
+  let score = 70; // Start lower
   
-  // Weekly hours penalty
-  if (weeklyHours > 50) {
-    score -= (weeklyHours - 50) * 2;
-  } else if (weeklyHours > 45) {
+  // Weekly hours (max impact: +10/-25)
+  if (weeklyHours <= 40) {
+    score += 10;
+  } else if (weeklyHours <= 45) {
+    score += 5;
+  } else if (weeklyHours > 50) {
+    score -= Math.min((weeklyHours - 50) * 1.5, 25);
+  } else {
     score -= (weeklyHours - 45);
-  } else if (weeklyHours <= 40) {
-    score += 10;
   }
   
-  // Feeling overwhelmed
-  score -= (feelingOverwhelmed - 5) * 4;
+  // Feeling overwhelmed (max impact: +12/-20)
+  score -= (feelingOverwhelmed - 5) * 3;
   
-  // Sleep hours (critical factor)
-  if (sleepHours < 6) {
-    score -= (6 - sleepHours) * 8;
-  } else if (sleepHours < 7) {
-    score -= (7 - sleepHours) * 4;
-  } else if (sleepHours >= 8) {
+  // Sleep hours (critical factor, max impact: +10/-20)
+  if (sleepHours >= 8) {
     score += 10;
+  } else if (sleepHours >= 7) {
+    score += 5;
+  } else if (sleepHours < 6) {
+    score -= Math.min((6 - sleepHours) * 6, 20);
+  } else {
+    score -= (7 - sleepHours) * 3;
   }
   
-  // Weekend recovery bonus
-  score += (weekendRecovery - 5) * 3;
+  // Weekend recovery (max impact: +12/-12)
+  score += (weekendRecovery - 6) * 2;
   
-  // Emotional exhaustion
-  score -= (emotionalExhaustion - 5) * 4;
+  // Emotional exhaustion (max impact: +12/-15)
+  score -= (emotionalExhaustion - 5) * 3;
   
   return clamp(score, 0, 100);
 }
@@ -518,32 +546,38 @@ function calculatePhysicalHealthScore() {
   const eyeStrain = parseFloat(document.getElementById('eyeStrain').value) || 5;
   const deskSetup = parseFloat(document.getElementById('deskSetup').value) || 7;
   
-  let score = 100;
+  let score = 70; // Start lower
   
-  // Steps bonus
+  // Steps (max impact: +12/-12)
   if (stepsPerDay >= 10000) {
-    score += 15;
+    score += 12;
+  } else if (stepsPerDay >= 7500) {
+    score += 8;
   } else if (stepsPerDay >= 6000) {
-    score += 5;
+    score += 4;
   } else if (stepsPerDay < 4000) {
-    score -= 15;
+    score -= 12;
+  } else if (stepsPerDay < 5000) {
+    score -= 6;
   }
   
-  // Exercise bonus
-  if (exerciseMinutes >= 30) {
+  // Exercise (max impact: +10/-12)
+  if (exerciseMinutes >= 40) {
     score += 10;
+  } else if (exerciseMinutes >= 30) {
+    score += 7;
   } else if (exerciseMinutes >= 20) {
-    score += 5;
+    score += 3;
   } else if (exerciseMinutes < 10) {
-    score -= 15;
+    score -= 12;
   }
   
-  // Pain penalties
-  score -= (neckBackPain - 5) * 3;
-  score -= (eyeStrain - 5) * 3;
+  // Pain penalties (max impact: +9/-15)
+  score -= (neckBackPain - 5) * 2.5;
+  score -= (eyeStrain - 5) * 2.5;
   
-  // Desk setup bonus
-  score += (deskSetup - 5) * 2;
+  // Desk setup (max impact: +8/-8)
+  score += (deskSetup - 6) * 2;
   
   return clamp(score, 0, 100);
 }
@@ -555,37 +589,41 @@ function calculateMentalWellbeingScore() {
   const socialInteractions = parseFloat(document.getElementById('socialInteractions').value) || 15;
   const workPressure = parseFloat(document.getElementById('workPressure').value) || 6;
   
-  let score = 100;
+  let score = 70; // Start lower
   
-  // Loneliness penalty
-  score -= (loneliness - 5) * 4;
+  // Loneliness (max impact: +12/-16)
+  score -= (loneliness - 5) * 3;
   
-  // Mood bonus
-  score += (moodScore - 5) * 3;
+  // Mood (max impact: +12/-12)
+  score += (moodScore - 6) * 2.5;
   
-  // Social interactions
+  // Social interactions (max impact: +10/-15)
   if (socialInteractions >= 20) {
     score += 10;
+  } else if (socialInteractions >= 15) {
+    score += 7;
   } else if (socialInteractions >= 10) {
-    score += 5;
+    score += 3;
   } else if (socialInteractions < 5) {
-    score -= 20;
+    score -= 15;
+  } else if (socialInteractions < 8) {
+    score -= 8;
   }
   
-  // Work pressure
-  score -= (workPressure - 5) * 3;
+  // Work pressure (max impact: +9/-12)
+  score -= (workPressure - 5) * 2.5;
   
-  // Worker-specific interactions
+  // Worker-specific interactions (max impact: +10/-10)
   if (currentWorkerType === 'onsite' || currentWorkerType === 'hybrid') {
     const coworkerQuality = parseFloat(document.getElementById('coworkerQuality').value) || 7;
-    score += (coworkerQuality - 5) * 3;
+    score += (coworkerQuality - 6) * 2.5;
   }
   
   if (currentWorkerType === 'remote') {
     const virtualSatisfaction = parseFloat(document.getElementById('virtualSatisfaction').value) || 7;
-    score += (virtualSatisfaction - 5) * 3;
+    score += (virtualSatisfaction - 6) * 2.5;
     // Remote workers get slight penalty for isolation risk
-    if (loneliness > 6) {
+    if (loneliness > 7) {
       score -= 5;
     }
   }
@@ -602,46 +640,56 @@ function calculateWorkLifeBalanceScore() {
   const offScreenHours = parseFloat(document.getElementById('offScreenHours').value) || 6;
   const boundaryControl = parseFloat(document.getElementById('boundaryControl').value) || 7;
   
-  let score = 100;
+  let score = 70; // Start lower
   
-  // Hours outside schedule penalty
-  if (hoursOutsideSchedule > 10) {
-    score -= (hoursOutsideSchedule - 10) * 3;
-  } else if (hoursOutsideSchedule > 5) {
-    score -= (hoursOutsideSchedule - 5) * 2;
-  } else if (hoursOutsideSchedule <= 2) {
-    score += 10;
+  // Hours outside schedule (max impact: +8/-20)
+  if (hoursOutsideSchedule <= 2) {
+    score += 8;
+  } else if (hoursOutsideSchedule <= 5) {
+    score += 3;
+  } else if (hoursOutsideSchedule > 10) {
+    score -= Math.min((hoursOutsideSchedule - 10) * 2, 20);
+  } else {
+    score -= (hoursOutsideSchedule - 5) * 1.5;
   }
   
-  // Evening work penalty
-  score -= eveningWorkHours * 2.5;
+  // Evening work (max impact: -20)
+  score -= Math.min(eveningWorkHours * 2, 20);
   
-  // Weekend work penalty
-  score -= weekendWorkHours * 4;
+  // Weekend work (max impact: -20)
+  score -= Math.min(weekendWorkHours * 3, 20);
   
-  // Personal time bonus
-  if (personalTimeHours >= 4) {
+  // Personal time (max impact: +10/-12)
+  if (personalTimeHours >= 5) {
     score += 10;
+  } else if (personalTimeHours >= 4) {
+    score += 5;
   } else if (personalTimeHours < 2) {
-    score -= 15;
+    score -= 12;
+  } else if (personalTimeHours < 3) {
+    score -= 6;
   }
   
-  // Off-screen hours bonus
-  if (offScreenHours >= 6) {
-    score += 10;
+  // Off-screen hours (max impact: +8/-10)
+  if (offScreenHours >= 7) {
+    score += 8;
+  } else if (offScreenHours >= 6) {
+    score += 4;
   } else if (offScreenHours < 4) {
     score -= 10;
+  } else if (offScreenHours < 5) {
+    score -= 5;
   }
   
-  // Boundary control
-  score += (boundaryControl - 5) * 3;
+  // Boundary control (max impact: +10/-10)
+  score += (boundaryControl - 6) * 2.5;
   
   return clamp(score, 0, 100);
 }
 
 // 7. Work Environment Quality Score
 function calculateEnvironmentScore() {
-  let score = 100;
+  let score = 70; // Start lower
   
   if (currentWorkerType === 'remote') {
     const homeWorkspace = parseFloat(document.getElementById('homeWorkspace').value) || 7;
@@ -650,11 +698,11 @@ function calculateEnvironmentScore() {
     const tempComfort = parseFloat(document.getElementById('tempComfort').value) || 7;
     const internetStability = parseFloat(document.getElementById('internetStability').value) || 9;
     
-    score += (homeWorkspace - 5) * 3;
-    score += (lightingScore - 5) * 2;
-    score -= (noiseLevel - 5) * 3;
-    score += (tempComfort - 5) * 2;
-    score += (internetStability - 5) * 3;
+    score += (homeWorkspace - 6) * 2.5;
+    score += (lightingScore - 6) * 2;
+    score -= (noiseLevel - 5) * 2.5;
+    score += (tempComfort - 6) * 2;
+    score += (internetStability - 6) * 2.5;
     
   } else if (currentWorkerType === 'onsite') {
     const officeNoise = parseFloat(document.getElementById('officeNoise').value) || 5;
@@ -662,10 +710,10 @@ function calculateEnvironmentScore() {
     const privacyRating = parseFloat(document.getElementById('privacyRating').value) || 6;
     const commuteEnvironment = parseFloat(document.getElementById('commuteEnvironment').value) || 6;
     
-    score -= (officeNoise - 5) * 3;
-    score += (workspaceComfort - 5) * 3;
-    score += (privacyRating - 5) * 3;
-    score += (commuteEnvironment - 5) * 2;
+    score -= (officeNoise - 5) * 2.5;
+    score += (workspaceComfort - 6) * 2.5;
+    score += (privacyRating - 6) * 2.5;
+    score += (commuteEnvironment - 6) * 2;
     
   } else if (currentWorkerType === 'hybrid') {
     const homeWorkspaceHybrid = parseFloat(document.getElementById('homeWorkspaceHybrid').value) || 7;
@@ -673,7 +721,7 @@ function calculateEnvironmentScore() {
     
     // Average both environments
     const avgEnvironment = (homeWorkspaceHybrid + officeComfortHybrid) / 2;
-    score += (avgEnvironment - 5) * 4;
+    score += (avgEnvironment - 6) * 3.5;
   }
   
   return clamp(score, 0, 100);
@@ -681,16 +729,16 @@ function calculateEnvironmentScore() {
 
 // 8. Financial & Commute Stress Score
 function calculateFinancialStressScore() {
-  let score = 100;
+  let score = 70; // Start lower
   
   if (currentWorkerType === 'remote') {
     const incomeStability = parseFloat(document.getElementById('incomeStability').value) || 8;
     const financialStress = parseFloat(document.getElementById('financialStress').value) || 5;
     const jobSecurity = parseFloat(document.getElementById('jobSecurity').value) || 7;
     
-    score += (incomeStability - 5) * 3;
-    score -= (financialStress - 5) * 4;
-    score += (jobSecurity - 5) * 3;
+    score += (incomeStability - 6) * 2.5;
+    score -= (financialStress - 5) * 3;
+    score += (jobSecurity - 6) * 2.5;
     
   } else {
     // Onsite or Hybrid
@@ -699,29 +747,33 @@ function calculateFinancialStressScore() {
     const trafficStress = parseFloat(document.getElementById('trafficStress').value) || 6;
     const transportReliability = parseFloat(document.getElementById('transportReliability').value) || 7;
     
-    // Commute time penalty
-    if (commuteTime > 60) {
-      score -= (commuteTime - 60) / 2;
+    // Commute time (max impact: +8/-15)
+    if (commuteTime <= 15) {
+      score += 8;
+    } else if (commuteTime <= 25) {
+      score += 4;
+    } else if (commuteTime > 60) {
+      score -= Math.min((commuteTime - 60) / 3, 15);
     } else if (commuteTime > 45) {
-      score -= (commuteTime - 45) / 3;
-    } else if (commuteTime <= 20) {
-      score += 10;
+      score -= (commuteTime - 45) / 4;
     }
     
-    // Commute cost penalty
-    if (commuteCost > 300) {
-      score -= (commuteCost - 300) / 10;
+    // Commute cost (max impact: +8/-15)
+    if (commuteCost <= 75) {
+      score += 8;
+    } else if (commuteCost <= 125) {
+      score += 4;
+    } else if (commuteCost > 300) {
+      score -= Math.min((commuteCost - 300) / 15, 15);
     } else if (commuteCost > 200) {
-      score -= (commuteCost - 200) / 20;
-    } else if (commuteCost < 100) {
-      score += 10;
+      score -= (commuteCost - 200) / 25;
     }
     
-    // Traffic stress
-    score -= (trafficStress - 5) * 3;
+    // Traffic stress (max impact: +9/-12)
+    score -= (trafficStress - 5) * 2.5;
     
-    // Transport reliability
-    score += (transportReliability - 5) * 2;
+    // Transport reliability (max impact: +8/-8)
+    score += (transportReliability - 6) * 2;
   }
   
   return clamp(score, 0, 100);
@@ -739,16 +791,16 @@ function calculateTimezoneStressScore() {
   const weekendOnCall = document.getElementById('weekendOnCall').value === 'yes';
   const scheduleFlexibility = parseFloat(document.getElementById('scheduleFlexibility').value) || 5;
   
-  let score = 100;
+  let score = 70; // Start lower
   
-  // Timezone gap penalty
-  score -= timezoneGap * 3;
+  // Timezone gap (max impact: -25)
+  score -= Math.min(timezoneGap * 2.5, 25);
   
-  // Required overlap penalty
+  // Required overlap (max impact: -15)
   if (requiredOverlap > 6) {
-    score -= (requiredOverlap - 6) * 3;
+    score -= Math.min((requiredOverlap - 6) * 2.5, 15);
   } else if (requiredOverlap > 4) {
-    score -= (requiredOverlap - 4) * 2;
+    score -= (requiredOverlap - 4) * 1.5;
   }
   
   // Working night hours penalty (working between 12 AM - 6 AM)
@@ -757,25 +809,25 @@ function calculateTimezoneStressScore() {
                               (workingHoursStart > workingHoursEnd); // overnight shift
   
   if (isWorkingLateNight) {
-    score -= 20;
-  }
-  
-  // Night work days penalty
-  score -= nightWorkDays * 5;
-  
-  // Sleep disruption
-  score -= (sleepDisruption - 5) * 4;
-  
-  // Family time loss
-  score -= (familyTimeLoss - 5) * 3;
-  
-  // Weekend on-call
-  if (weekendOnCall) {
     score -= 15;
   }
   
-  // Schedule flexibility bonus
-  score += (scheduleFlexibility - 5) * 3;
+  // Night work days (max impact: -20)
+  score -= Math.min(nightWorkDays * 4, 20);
+  
+  // Sleep disruption (max impact: +12/-15)
+  score -= (sleepDisruption - 5) * 3;
+  
+  // Family time loss (max impact: +9/-12)
+  score -= (familyTimeLoss - 5) * 2.5;
+  
+  // Weekend on-call (max impact: -12)
+  if (weekendOnCall) {
+    score -= 12;
+  }
+  
+  // Schedule flexibility (max impact: +12/-12)
+  score += (scheduleFlexibility - 5) * 2.5;
   
   return clamp(score, 0, 100);
 }
