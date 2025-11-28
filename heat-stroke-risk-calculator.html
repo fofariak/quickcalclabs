@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heat Stroke & Heat Exhaustion Risk Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Estimate your heat exhaustion / heat stroke risk based on temperature, humidity, activity, clothing, and hydration. Get a simple 0–100 heat stress score and safety tips.">
+  <meta name="keywords" content="heat stroke risk calculator,heat exhaustion risk,heat index calculator,working in heat safety">
+  <link rel="canonical" href="https://quickcalclabs.com/heat-stroke-risk-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🥵 Heat Stroke &amp; Heat Exhaustion Risk Calculator</h1>
+    <p class="subtitle">Combine temperature, humidity, activity level, clothing, and hydration to estimate a 0–100 heat stress score and get practical safety guidance.</p>
+    <p class="meta-info">Last Updated: November 2025 • Uses a simplified heat index approach (educational only)</p>
+
+    <form id="heatForm">
+      <label for="tempC">Air temperature (°C):</label>
+      <p class="help-text">Check your local forecast; enter shade temperature, not “feels like”.</p>
+      <input type="number" id="tempC" min="10" max="60" value="32" required>
+
+      <label for="humidity">Relative humidity (%):</label>
+      <input type="number" id="humidity" min="10" max="100" value="60" required>
+
+      <label for="sunExposure">Sun exposure:</label>
+      <select id="sunExposure">
+        <option value="shade">Mostly shade</option>
+        <option value="mixed" selected>Mixed sun and shade</option>
+        <option value="full">Direct sun most of the time</option>
+      </select>
+
+      <label for="activity">Activity intensity:</label>
+      <select id="activity">
+        <option value="rest">Resting / casual walking</option>
+        <option value="light" selected>Light work or slow walking</option>
+        <option value="moderate">Moderate work / brisk walking</option>
+        <option value="heavy">Heavy work / running / intense sport</option>
+      </select>
+
+      <label for="clothing">Clothing:</label>
+      <select id="clothing">
+        <option value="light" selected>Light, breathable clothing</option>
+        <option value="normal">Regular clothing</option>
+        <option value="heavy">Heavy / dark / non‑breathable / protective gear</option>
+      </select>
+
+      <label for="hydration">Hydration status today:</label>
+      <select id="hydration">
+        <option value="good" selected>Good (clear/ pale urine, drinking regularly)</option>
+        <option value="okay">Okay (some water, maybe mild thirst)</option>
+        <option value="poor">Poor (very thirsty, dark urine, little water)</option>
+      </select>
+
+      <button type="submit">Calculate Heat Stress Risk</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Your Heat Stress Score</h3>
+      <div class="stress-score-display" id="heatScore">0 / 100</div>
+      <div id="riskCategory" style="text-align:center; font-size:1.2rem; margin-bottom:1rem;"></div>
+
+      <div class="category-breakdown" id="breakdown"></div>
+      <div style="background: rgba(59,130,246,0.08); padding:1.5rem; border-radius:var(--radius-md); border-left:4px solid var(--secondary); margin-top:1.5rem;" id="recommendations"></div>
+
+      <details class="calc-meta">
+        <summary>How your heat stress score is calculated</summary>
+        <p>We estimate a <strong>heat index–like value</strong> from temperature and humidity, adjust it for sun exposure, then combine it with:</p>
+        <ul>
+          <li><strong>Activity intensity:</strong> heavier work generates more internal heat.</li>
+          <li><strong>Clothing / gear:</strong> heavy or non‑breathable clothing traps heat and sweat.</li>
+          <li><strong>Hydration status:</strong> dehydration makes it harder for your body to cool itself.</li>
+        </ul>
+        <p>Each factor is turned into a 0–100 sub‑score (higher = more stress) and weighted, with <strong>environmental heat plus activity level having the biggest impact</strong>. This is an educational tool—not a replacement for occupational safety standards or medical judgement. If anyone shows symptoms of heat stroke, seek emergency care immediately.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Recognizing Heat Exhaustion & Heat Stroke</h2>
+      <p><strong>Heat exhaustion</strong> symptoms can include heavy sweating, weakness, dizziness, nausea, headache, and rapid pulse. <strong>Heat stroke</strong> is a medical emergency with confusion, loss of consciousness, very high body temperature, and sometimes no sweating—call emergency services immediately if suspected.</p>
+
+      <div class="info-box">
+        <h4>Basic Heat Safety Tips</h4>
+        <ul>
+          <li>Drink water regularly—don’t wait until you are very thirsty.</li>
+          <li>Take frequent breaks in the shade or a cool place.</li>
+          <li>Avoid hard outdoor work in the hottest part of the day when possible.</li>
+          <li>Check on children, older adults, and people with chronic illness in heat waves.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Sun &amp; Stress Tools</h2>
+      <div class="explore-grid">
+        <a href="sunburn-time-spf-reapplication-calculator.html" class="explore-card">⏱️ Sunburn Time &amp; SPF Reapplication</a>
+        <a href="skin-cancer-uv-risk-calculator.html" class="explore-card">🧴 Daily UV Skin Cancer Risk Score</a>
+        <a href="melanoma-hyperpigmentation-risk-calculator.html" class="explore-card">☀️ Melanoma &amp; Hyperpigmentation Risk</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is this calculator suitable for workplace safety decisions?</summary>
+      <p>No. It’s a simplified educational tool. Employers should follow official occupational heat‑stress standards and local regulations.</p>
+    </details>
+    <details>
+      <summary>What should I do if someone shows signs of heat stroke?</summary>
+      <p>Call emergency services immediately, move the person to a cooler place, remove excess clothing, and cool with cool (not icy) water or wet cloths while waiting for help.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This heat risk calculator is for informational purposes only and does not replace professional safety guidance or medical care.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const clamp01Heat = (v) => Math.max(0, Math.min(1, v));
+
+    function heatIndexCelsius(tempC, humidity) {
+      // Convert to Fahrenheit, use standard heat index formula, then convert back
+      const T = tempC * 9/5 + 32;
+      const R = humidity;
+      const hiF =
+        -42.379 + 2.04901523 * T + 10.14333127 * R
+        - 0.22475541 * T * R - 0.00683783 * T * T
+        - 0.05481717 * R * R + 0.00122874 * T * T * R
+        + 0.00085282 * T * R * R - 0.00000199 * T * T * R * R;
+      return (hiF - 32) * 5/9;
+    }
+
+    document.getElementById('heatForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const tempC = parseFloat(document.getElementById('tempC').value) || 30;
+      const humidity = parseFloat(document.getElementById('humidity').value) || 50;
+      const sun = document.getElementById('sunExposure').value;
+      const activity = document.getElementById('activity').value;
+      const clothing = document.getElementById('clothing').value;
+      const hydration = document.getElementById('hydration').value;
+
+      let hiC = heatIndexCelsius(tempC, humidity);
+      if (sun === 'full') hiC += 2;
+      else if (sun === 'mixed') hiC += 1;
+
+      const envScore = Math.round(clamp01Heat((hiC - 27) / 13) * 100); // ~27–40°C+
+
+      let activityScore;
+      if (activity === 'rest') activityScore = 20;
+      else if (activity === 'light') activityScore = 40;
+      else if (activity === 'moderate') activityScore = 65;
+      else activityScore = 90;
+
+      let clothingScore;
+      if (clothing === 'light') clothingScore = 25;
+      else if (clothing === 'normal') clothingScore = 50;
+      else clothingScore = 80;
+
+      let hydrationScore;
+      if (hydration === 'good') hydrationScore = 25;
+      else if (hydration === 'okay') hydrationScore = 55;
+      else hydrationScore = 85;
+
+      const factors = [
+        { key: 'env', label: 'Environmental heat (heat index)', weight: 0.4, score: envScore },
+        { key: 'activity', label: 'Activity intensity', weight: 0.25, score: activityScore },
+        { key: 'clothing', label: 'Clothing / gear', weight: 0.2, score: clothingScore },
+        { key: 'hydration', label: 'Hydration status', weight: 0.15, score: hydrationScore }
+      ];
+
+      const score = Math.round(factors.reduce((sum, f) => sum + f.score * f.weight, 0));
+
+      let category, recHtml;
+      if (score < 30) {
+        category = '✅ Low to moderate heat stress (still use caution)';
+        recHtml = `
+          <h4>Stay comfortable:</h4>
+          <ul>
+            <li>Keep drinking water regularly.</li>
+            <li>Take breaks in the shade if you start to feel too warm.</li>
+          </ul>
+        `;
+      } else if (score < 60) {
+        category = '⚠️ Elevated heat stress risk';
+        recHtml = `
+          <h4>Manage the heat:</h4>
+          <ul>
+            <li>Schedule frequent rest breaks in a cool or shaded area.</li>
+            <li>Increase water intake and consider electrolyte drinks.</li>
+            <li>Watch for early symptoms of heat exhaustion in yourself and others.</li>
+          </ul>
+        `;
+      } else {
+        category = '🚨 High risk for heat exhaustion / heat stroke';
+        recHtml = `
+          <h4>Take strong precautions:</h4>
+          <ul>
+            <li>Avoid or significantly reduce intense activity in these conditions.</li>
+            <li>Move work or exercise to a cooler time of day if possible.</li>
+            <li>Ensure rapid access to shade, cool water, and emergency help.</li>
+            <li>If anyone becomes confused, stops sweating, or collapses, call emergency services immediately.</li>
+          </ul>
+        `;
+      }
+
+      const breakdownHtml = `
+        <h4 style="margin-top:0;">Factor breakdown:</h4>
+        ${factors.map(f => `
+          <div class="breakdown-item">
+            <span>${f.label}</span>
+            <strong>${f.score} / 100</strong>
+          </div>
+        `).join('')}
+        <div class="breakdown-item" style="border-top:2px solid var(--primary); margin-top:0.5rem; padding-top:1rem; font-size:1.05rem;">
+          <span><strong>Overall heat stress score</strong></span>
+          <strong>${score} / 100</strong>
+        </div>
+      `;
+
+      document.getElementById('heatScore').textContent = `${score} / 100`;
+      document.getElementById('riskCategory').textContent = category;
+      document.getElementById('breakdown').innerHTML = breakdownHtml;
+      document.getElementById('recommendations').innerHTML = recHtml;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

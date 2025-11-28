@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Am I Drinking Too Much Caffeine? Safe Daily Limit Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Use this free caffeine intake calculator to estimate your daily caffeine in mg, compare it to evidence-based safe limits, and see if you may be drinking too much coffee, energy drinks, or soda.">
+  <meta name="keywords" content="too much caffeine calculator,caffeine intake calculator,coffee safety calculator,how much caffeine is too much,caffeine mg per day,energy drink limit">
+  <link rel="canonical" href="https://quickcalclabs.com/too-much-caffeine-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>☕ Am I Drinking Too Much Caffeine?</h1>
+    <p class="subtitle">Estimate your daily caffeine intake in mg, compare it with age‑appropriate safe limits, and see whether you may be overdoing coffee, energy drinks, or soda.</p>
+    <p class="meta-info">Last Updated: November 2025 • Based on general public health guidance (400 mg/day for most healthy adults)</p>
+
+    <form id="caffeineForm">
+      <label for="age">Your age (years):</label>
+      <input type="number" id="age" min="5" max="100" value="30" required>
+
+      <label for="weight">Your body weight (kg):</label>
+      <p class="help-text">Used to calculate caffeine per kg of body weight (higher mg/kg is more stimulating).</p>
+      <input type="number" id="weight" min="20" max="200" value="70" required>
+
+      <label for="pregnant">Are you pregnant or breastfeeding?</label>
+      <select id="pregnant" required>
+        <option value="no" selected>No</option>
+        <option value="yes">Yes</option>
+        <option value="na">Not applicable / Prefer not to say</option>
+      </select>
+
+      <h2 class="section-title">Daily Drinks</h2>
+
+      <label for="coffeeCups">Brewed coffee (8 oz / 240 ml cups):</label>
+      <p class="help-text">Typical medium‑strength drip coffee (~95 mg caffeine per cup).</p>
+      <input type="number" id="coffeeCups" min="0" max="20" value="2">
+
+      <label for="espressoShots">Espresso shots:</label>
+      <p class="help-text">Single shots (~63 mg caffeine each).</p>
+      <input type="number" id="espressoShots" min="0" max="20" value="0">
+
+      <label for="blackTeaCups">Black tea (8 oz cups):</label>
+      <p class="help-text">Regular black tea (~47 mg per cup).</p>
+      <input type="number" id="blackTeaCups" min="0" max="20" value="1">
+
+      <label for="greenTeaCups">Green tea / matcha (8 oz cups):</label>
+      <p class="help-text">Approx. 30–35 mg per cup.</p>
+      <input type="number" id="greenTeaCups" min="0" max="20" value="0">
+
+      <label for="energyDrinks">Energy drinks (1 can, ~250 ml):</label>
+      <p class="help-text">Typical can (~80 mg); many “extra‑strength” drinks contain considerably more.</p>
+      <input type="number" id="energyDrinks" min="0" max="20" value="0">
+
+      <label for="sodaCans">Cola / caffeinated soda (12 oz cans):</label>
+      <p class="help-text">Regular caffeinated cola (~34 mg per can).</p>
+      <input type="number" id="sodaCans" min="0" max="20" value="0">
+
+      <label for="preworkoutScoops">Pre‑workout / caffeine powder (scoops/servings):</label>
+      <p class="help-text">If used, assume ~150 mg per serving unless your label says otherwise.</p>
+      <input type="number" id="preworkoutScoops" min="0" max="10" value="0">
+
+      <label for="otherMg">Other caffeine (mg):</label>
+      <p class="help-text">Optional: add caffeine from tablets, chocolate, “extra‑strong” drinks, etc.</p>
+      <input type="number" id="otherMg" min="0" max="2000" value="0">
+
+      <button type="submit">Calculate Caffeine Safety</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom: 1rem;">Your Caffeine Safety Check</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="totalMg">0 mg</div>
+          <div class="stat-label">total caffeine today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="limitMg">0 mg</div>
+          <div class="stat-label">recommended upper limit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="percentOfLimit">0%</div>
+          <div class="stat-label">% of daily limit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="mgPerKg">0</div>
+          <div class="stat-label">mg caffeine / kg body weight</div>
+        </div>
+      </div>
+
+      <div class="stress-score-display" id="caffeineCategory" style="font-size:1.8rem; margin-top:1rem;"></div>
+      <div id="caffeineMessage" style="margin-top: 0.5rem;"></div>
+
+      <div style="background: rgba(139,92,246,0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary); margin-top: 1.5rem;" id="recommendations"></div>
+
+      <details class="calc-meta">
+        <summary>How this caffeine safety score is calculated</summary>
+        <p>This tool compares your estimated daily caffeine intake against conservative guideline ranges for your age and situation:</p>
+        <ul>
+          <li><strong>Most healthy adults:</strong> up to about 400 mg/day is commonly cited as a safe upper limit.</li>
+          <li><strong>Pregnant or breastfeeding:</strong> many guidelines recommend staying at or below 200 mg/day.</li>
+          <li><strong>Teens (13–17):</strong> usually advised to keep caffeine under ~100 mg/day.</li>
+          <li><strong>Children:</strong> pediatric guidance is roughly 2.5 mg/kg body weight per day at most.</li>
+        </ul>
+        <p>We also calculate your caffeine in <strong>mg per kg of body weight</strong> and use both total mg and mg/kg to classify your intake as low, near the limit, high, or very high. This is an educational tool and not a substitute for personal medical advice—always follow your doctor’s guidance if you have heart conditions, anxiety, pregnancy, or other health concerns affected by caffeine.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>How Much Caffeine Is Too Much?</h2>
+      <p>Most healthy adults can safely consume up to about <strong>400 mg of caffeine per day</strong>—roughly the amount in four small cups of brewed coffee. But your safe range depends on age, body weight, pregnancy status, medications, and personal sensitivity. Some people feel jittery or anxious at much lower doses, while others tolerate more.</p>
+      <p>This calculator adds up caffeine from common drinks like coffee, tea, soda, energy drinks, and pre‑workout supplements, then compares it to age‑ and situation‑appropriate guidelines. It also looks at <strong>caffeine per kg of body weight</strong>, since very high mg/kg doses are more likely to trigger side effects such as rapid heart rate, insomnia, or anxiety.</p>
+
+      <h2>Typical Caffeine Amounts</h2>
+      <ul>
+        <li>8 oz brewed coffee: ~95 mg</li>
+        <li>1 espresso shot: ~63 mg</li>
+        <li>8 oz black tea: ~47 mg</li>
+        <li>8 oz green tea: ~30–35 mg</li>
+        <li>12 oz cola: ~34 mg</li>
+        <li>250 ml energy drink: ~80 mg (varies a lot by brand)</li>
+        <li>Pre‑workout scoop: often ~150–200 mg or more</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>Who Should Be Extra Careful With Caffeine?</h4>
+        <p>You should talk with a healthcare professional about caffeine limits if you are pregnant, breastfeeding, have heart rhythm problems, high blood pressure, anxiety disorders, sleep issues, or are taking medications that interact with caffeine. Children and teens are much more sensitive and should generally keep intake low.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align: left;">Explore More Health &amp; Lifestyle Tools</h2>
+      <div class="explore-grid">
+        <a href="water-intake-calculator.html" class="explore-card">💧 Daily Water Intake Calculator</a>
+        <a href="resting-metabolic-rate-calculator.html" class="explore-card">🔥 Resting Metabolic Rate Calculator</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+        <a href="sleep-chronotype-bedtime-calculator.html" class="explore-card">😴 Sleep Chronotype &amp; Bedtime Calculator</a>
+      </div>
+
+      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
+      <div class="explore-grid">
+        <a href="blog/health-benefits-of-hydration.html" class="explore-card">📘 Health Benefits of Hydration</a>
+        <a href="blog/how-to-boost-metabolism.html" class="explore-card">⚡ How to Boost Your Metabolism</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is this caffeine calculator a medical diagnosis?</summary>
+      <p>No. This tool provides educational estimates based on public guidance (like 400 mg/day for most adults and 200 mg/day or less in pregnancy). It cannot diagnose caffeine sensitivity or health problems—always follow your doctor’s advice if you have medical conditions.</p>
+    </details>
+    <details>
+      <summary>What if I am very sensitive to caffeine?</summary>
+      <p>Some people feel anxious, shaky, or have palpitations even at modest doses. If you regularly notice unpleasant symptoms after caffeine, consider using a lower personal limit than the general guidelines and talk with a healthcare professional.</p>
+    </details>
+    <details>
+      <summary>Do all coffee brands have the same caffeine?</summary>
+      <p>No. Actual caffeine content varies by bean, roast level, brew method, and serving size. This calculator uses typical averages; strong specialty coffee or large energy drinks may contain far more caffeine than the estimates here.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This caffeine calculator is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Talk with your healthcare provider about caffeine limits that are appropriate for you.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+    document.getElementById('caffeineForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const age = parseFloat(document.getElementById('age').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const pregnant = document.getElementById('pregnant').value;
+
+      const coffeeCups = parseFloat(document.getElementById('coffeeCups').value) || 0;
+      const espressoShots = parseFloat(document.getElementById('espressoShots').value) || 0;
+      const blackTeaCups = parseFloat(document.getElementById('blackTeaCups').value) || 0;
+      const greenTeaCups = parseFloat(document.getElementById('greenTeaCups').value) || 0;
+      const energyDrinks = parseFloat(document.getElementById('energyDrinks').value) || 0;
+      const sodaCans = parseFloat(document.getElementById('sodaCans').value) || 0;
+      const preworkoutScoops = parseFloat(document.getElementById('preworkoutScoops').value) || 0;
+      const otherMg = parseFloat(document.getElementById('otherMg').value) || 0;
+
+      // Typical caffeine amounts (mg) per serving
+      const totalMg =
+        coffeeCups * 95 +
+        espressoShots * 63 +
+        blackTeaCups * 47 +
+        greenTeaCups * 35 +
+        energyDrinks * 80 +
+        sodaCans * 34 +
+        preworkoutScoops * 150 +
+        otherMg;
+
+      const safeWeight = weight > 0 ? weight : 1;
+      const mgPerKg = totalMg / safeWeight;
+
+      // Determine recommended upper limit
+      let limitMg;
+      if (age < 13) {
+        // ~2.5 mg/kg, cap at 100 mg
+        limitMg = Math.min(2.5 * safeWeight, 100);
+      } else if (age < 18) {
+        limitMg = 100;
+      } else if (pregnant === 'yes') {
+        limitMg = 200;
+      } else {
+        // Adults: min of 400 mg and ~6 mg/kg (to reflect body size)
+        limitMg = Math.min(400, 6 * safeWeight);
+      }
+
+      const percentOfLimit = Math.round((totalMg / Math.max(limitMg, 1)) * 100);
+
+      // Category & messages
+      let categoryLabel;
+      let headline;
+      let tipsHtml;
+
+      if (percentOfLimit <= 60) {
+        categoryLabel = '✅ Within a generally safe range';
+        headline = '<p><strong>Your caffeine intake is comfortably below typical guideline limits.</strong> If you feel well and sleep is not affected, this is usually a reasonable range for most people in your situation.</p>';
+        tipsHtml = `
+          <h4>Keep it balanced:</h4>
+          <ul>
+            <li>Avoid caffeine too close to bedtime (aim for a 6–8 hour buffer).</li>
+            <li>Stay hydrated—pair each caffeinated drink with water.</li>
+            <li>Watch for subtle signs of over‑stimulation like restlessness or poor sleep.</li>
+          </ul>
+        `;
+      } else if (percentOfLimit <= 100) {
+        categoryLabel = '⚠️ Near the upper daily limit';
+        headline = '<p><strong>You are close to commonly recommended daily caffeine limits.</strong> This may be fine for many healthy adults, but there is less margin for additional caffeine and more risk of sleep disruption.</p>';
+        tipsHtml = `
+          <h4>Suggestions:</h4>
+          <ul>
+            <li>Try swapping one caffeinated drink for decaf or herbal tea.</li>
+            <li>Move some caffeine earlier in the day to protect your sleep.</li>
+            <li>If you notice anxiety, palpitations, or insomnia, consider reducing by 25–50%.</li>
+          </ul>
+        `;
+      } else if (percentOfLimit <= 150) {
+        categoryLabel = '🚨 Above recommended limit';
+        headline = '<p><strong>Your estimated intake is above standard guideline limits.</strong> Regularly consuming this much caffeine can increase the chance of jitters, poor sleep, and heart palpitations for many people.</p>';
+        tipsHtml = `
+          <h4>Scale back gradually:</h4>
+          <ul>
+            <li>Reduce by 1 drink at a time over several days to avoid withdrawal headaches.</li>
+            <li>Replace late‑day caffeine with water, sparkling water, or non‑caffeinated drinks.</li>
+            <li>If you are pregnant, have heart disease, high blood pressure, or anxiety, talk with your doctor about a much lower personal limit.</li>
+          </ul>
+        `;
+      } else {
+        categoryLabel = '❗ Very high caffeine intake';
+        headline = '<p><strong>Your estimated caffeine intake is well above typical guideline limits.</strong> For many people this level can significantly disrupt sleep and may trigger strong side effects.</p>';
+        tipsHtml = `
+          <h4>Consider urgent changes:</h4>
+          <ul>
+            <li>Plan a step‑down strategy to reduce caffeine over days or weeks.</li>
+            <li>Avoid combining high caffeine with other stimulants or intense exercise until you have reduced.</li>
+            <li>If you experience chest pain, severe anxiety, rapid or irregular heartbeat, or other worrying symptoms, seek medical care promptly.</li>
+          </ul>
+        `;
+      }
+
+      document.getElementById('totalMg').textContent = Math.round(totalMg) + ' mg';
+      document.getElementById('limitMg').textContent = Math.round(limitMg) + ' mg';
+      document.getElementById('percentOfLimit').textContent = Math.max(0, percentOfLimit) + '%';
+      document.getElementById('mgPerKg').textContent = mgPerKg.toFixed(1);
+
+      document.getElementById('caffeineCategory').textContent = categoryLabel;
+      document.getElementById('caffeineMessage').innerHTML = headline;
+      document.getElementById('recommendations').innerHTML = tipsHtml;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+
+      setTimeout(() => {
+        resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    });
+
+    // Dark mode toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

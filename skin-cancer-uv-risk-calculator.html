@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily UV Skin Cancer Risk Score Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Combine today’s UV index, your time outdoors, protection habits, and skin sensitivity into a simple 0–100 daily UV skin cancer risk score.">
+  <meta name="keywords" content="uv risk calculator,skin cancer uv risk score,daily uv exposure calculator,how risky is today uv index">
+  <link rel="canonical" href="https://quickcalclabs.com/skin-cancer-uv-risk-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🧴 Daily UV Skin Cancer Risk Score</h1>
+    <p class="subtitle">Estimate how risky today’s UV exposure might be for your skin based on UV index, time outdoors, protection, and sensitivity.</p>
+    <p class="meta-info">Last Updated: November 2025 • For today’s pattern only (lifetime risk depends on many days like this)</p>
+
+    <form id="uvForm">
+      <label for="todayUv">Today’s maximum UV index:</label>
+      <p class="help-text">Use the UV index from your weather app or local forecast.</p>
+      <input type="number" id="todayUv" min="1" max="15" value="9" required>
+
+      <label for="peakHours">Time outdoors between 10am and 4pm (hours):</label>
+      <input type="number" id="peakHours" min="0" max="12" step="0.25" value="2" required>
+
+      <label for="otherHours">Time outdoors outside peak hours (hours):</label>
+      <input type="number" id="otherHours" min="0" max="12" step="0.25" value="1" required>
+
+      <label for="skinSensitivity">Skin sensitivity:</label>
+      <select id="skinSensitivity">
+        <option value="veryFair">Very fair, always burns, never tans</option>
+        <option value="fair" selected>Fair, usually burns, tans lightly</option>
+        <option value="medium">Medium, sometimes burns, gradually tans</option>
+        <option value="olive">Olive, rarely burns, tans easily</option>
+        <option value="dark">Darker, almost never burns</option>
+      </select>
+
+      <label for="protection">Sun protection today:</label>
+      <select id="protection">
+        <option value="none">No SPF, minimal clothing/hat</option>
+        <option value="some" selected>Some SPF or hat / shade part of the time</option>
+        <option value="strong">Broad‑spectrum SPF 30+, hat, clothing, and frequent shade</option>
+      </select>
+
+      <label for="altitude">Environment:</label>
+      <select id="altitude">
+        <option value="sea" selected>Sea level / low altitude</option>
+        <option value="mountain">High altitude or snow</option>
+      </select>
+
+      <button type="submit">Calculate Today’s UV Risk Score</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Today’s UV Risk Snapshot</h3>
+      <div class="stress-score-display" id="uvScore">0 / 100</div>
+      <div id="riskCategory" style="text-align:center; font-size:1.2rem; margin-bottom:1rem;"></div>
+
+      <div class="category-breakdown" id="breakdown"></div>
+      <div style="background: rgba(139,92,246,0.08); padding:1.5rem; border-radius:var(--radius-md); border-left:4px solid var(--primary); margin-top:1.5rem;" id="recommendations"></div>
+
+      <details class="calc-meta">
+        <summary>How your daily UV risk score is calculated</summary>
+        <p>We estimate a <strong>UV dose</strong> by combining:</p>
+        <ul>
+          <li>Today’s UV index (higher = stronger UV).</li>
+          <li>How many hours you plan to be outdoors in peak vs. non‑peak times.</li>
+          <li>Your skin sensitivity (how easily you burn).</li>
+          <li>Your protection level (SPF, clothing, hats, shade).</li>
+          <li>Environment (altitude / snow can increase UV intensity).</li>
+        </ul>
+        <p>Each factor contributes to a 0–100 daily risk index (higher = more potentially hazardous UV for your skin that day). This doesn’t measure lifetime cancer risk, but it helps you decide whether today’s plan is low, moderate, or high risk and where you can reduce exposure.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Using UV Index for Skin Protection</h2>
+      <p>UV index is a scale from 1 (low) to 11+ (extreme) that summarizes the strength of sunburn‑producing UV radiation. Higher UV index values mean skin damage can occur faster. Pairing UV index with your time outdoors and protection habits gives a clearer picture of daily risk than any one factor alone.</p>
+
+      <div class="info-box">
+        <h4>Rule of Thumb</h4>
+        <ul>
+          <li>UV 1–2: Low (still wear SPF if out for long periods).</li>
+          <li>UV 3–5: Moderate (seek shade in midday, SPF 30+ recommended).</li>
+          <li>UV 6–7: High (reduce midday time, SPF 30+, hats and sunglasses).</li>
+          <li>UV 8–10: Very high (minimize midday exposure, strong protection).</li>
+          <li>UV 11+: Extreme (avoid midday sun; strong protection essential).</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Sun &amp; Skin Tools</h2>
+      <div class="explore-grid">
+        <a href="sunburn-time-spf-reapplication-calculator.html" class="explore-card">⏱️ Sunburn Time &amp; SPF Reapplication</a>
+        <a href="melanoma-hyperpigmentation-risk-calculator.html" class="explore-card">☀️ Melanoma &amp; Hyperpigmentation Risk</a>
+        <a href="heat-stroke-risk-calculator.html" class="explore-card">🥵 Heat Stroke Risk Calculator</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Does a high daily score mean I will definitely get skin cancer?</summary>
+      <p>No. The score reflects relative risk for that day. Skin cancer risk builds over many years of exposure. Consistently keeping daily risk lower can help reduce your lifetime risk.</p>
+    </details>
+    <details>
+      <summary>Should I skip SPF on low UV days?</summary>
+      <p>Not necessarily. Even moderate UV can contribute to cumulative damage and aging. Many dermatologists recommend daily SPF on exposed areas, regardless of season.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This daily UV risk calculator is for informational purposes only and is not a substitute for professional medical or dermatology advice.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const clamp01DailyUV = (v) => Math.max(0, Math.min(1, v));
+
+    document.getElementById('uvForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const uv = parseFloat(document.getElementById('todayUv').value) || 1;
+      const peak = parseFloat(document.getElementById('peakHours').value) || 0;
+      const other = parseFloat(document.getElementById('otherHours').value) || 0;
+      const skin = document.getElementById('skinSensitivity').value;
+      const protection = document.getElementById('protection').value;
+      const altitude = document.getElementById('altitude').value;
+
+      const safeUv = Math.max(1, uv);
+      const envFactor = altitude === 'mountain' ? 1.3 : 1;
+
+      const peakDose = peak * safeUv * 1.0;
+      const otherDose = other * safeUv * 0.4;
+      const rawDose = (peakDose + otherDose) * envFactor;
+
+      const doseScore = Math.round(clamp01DailyUV(rawDose / 40) * 100);
+
+      let skinMultiplier;
+      if (skin === 'veryFair') skinMultiplier = 1.3;
+      else if (skin === 'fair') skinMultiplier = 1.1;
+      else if (skin === 'medium') skinMultiplier = 1.0;
+      else if (skin === 'olive') skinMultiplier = 0.9;
+      else skinMultiplier = 0.8;
+
+      const sensitivityScore = Math.round(clamp01DailyUV(60 * (skinMultiplier - 0.8) / 0.5) * 100);
+
+      let protectionFactor;
+      if (protection === 'none') protectionFactor = 1.0;
+      else if (protection === 'some') protectionFactor = 0.65;
+      else protectionFactor = 0.35;
+
+      const protectionScore = Math.round(clamp01DailyUV((1.1 - protectionFactor) / 0.75) * 100);
+
+      const factors = [
+        { key: 'dose', label: 'Planned UV dose (UV index × hours)', weight: 0.45, score: doseScore },
+        { key: 'skin', label: 'Skin sensitivity', weight: 0.25, score: sensitivityScore },
+        { key: 'prot', label: 'Protection habits today', weight: 0.3, score: protectionScore }
+      ];
+
+      const uvScore = Math.round(factors.reduce((sum, f) => sum + f.score * f.weight, 0));
+
+      let category, recHtml;
+      if (uvScore < 30) {
+        category = '✅ Low daily UV risk pattern';
+        recHtml = `
+          <h4>Nice work protecting your skin today:</h4>
+          <ul>
+            <li>Continue using SPF and shade, even on “low” UV days.</li>
+            <li>Regular skin checks are still important over the long term.</li>
+          </ul>
+        `;
+      } else if (uvScore < 60) {
+        category = '⚠️ Moderate daily UV risk';
+        recHtml = `
+          <h4>Consider small changes to lower today’s risk:</h4>
+          <ul>
+            <li>Shift some outdoor time away from 10am–4pm if possible.</li>
+            <li>Upgrade protection to consistent SPF 30+ plus hats and shade.</li>
+          </ul>
+        `;
+      } else {
+        category = '🚨 High daily UV risk pattern';
+        recHtml = `
+          <h4>Today’s UV exposure may be quite hazardous:</h4>
+          <ul>
+            <li>Limit time outdoors during peak UV hours and seek shade frequently.</li>
+            <li>Use broad‑spectrum SPF 30+ and reapply every 2 hours.</li>
+            <li>Cover up with clothing, hats, and sunglasses.</li>
+          </ul>
+        `;
+      }
+
+      const breakdownHtml = `
+        <h4 style="margin-top:0;">Factor breakdown:</h4>
+        ${factors.map(f => `
+          <div class="breakdown-item">
+            <span>${f.label}</span>
+            <strong>${f.score} / 100</strong>
+          </div>
+        `).join('')}
+        <div class="breakdown-item" style="border-top:2px solid var(--primary); margin-top:0.5rem; padding-top:1rem; font-size:1.05rem;">
+          <span><strong>Overall daily UV risk score</strong></span>
+          <strong>${uvScore} / 100</strong>
+        </div>
+      `;
+
+      document.getElementById('uvScore').textContent = `${uvScore} / 100`;
+      document.getElementById('riskCategory').textContent = category;
+      document.getElementById('breakdown').innerHTML = breakdownHtml;
+      document.getElementById('recommendations').innerHTML = recHtml;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

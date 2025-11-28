@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blue Light Exposure Calculator - Screen Time & Eye Strain Risk | QuickCalcLabs</title>
+  <meta name="description" content="Estimate your daily blue light exposure from screens, see your eye strain and sleep-disruption risk score, and get practical tips to protect your eyes and circadian rhythm.">
+  <meta name="keywords" content="blue light exposure calculator,screen time calculator,eye strain risk,sleep disruption blue light,how much screen time is too much">
+  <link rel="canonical" href="https://quickcalclabs.com/blue-light-exposure-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>📱 Blue Light Exposure Calculator</h1>
+    <p class="subtitle">Estimate your daily blue light exposure from screens, understand eye‑strain and sleep‑disruption risk, and get simple changes that protect your eyes and circadian rhythm.</p>
+    <p class="meta-info">Last Updated: November 2025</p>
+
+    <form id="blueLightForm">
+      <label for="dayHours">Total screen time during the day (hours):</label>
+      <p class="help-text">Work/study screens from waking until 2 hours before bed.</p>
+      <input type="number" id="dayHours" step="0.5" min="0" max="18" value="6" required>
+
+      <label for="eveningHours">Screen time in the last 2 hours before bed (hours):</label>
+      <p class="help-text">Phones, tablets, TVs, or laptops used close to bedtime.</p>
+      <input type="number" id="eveningHours" step="0.25" min="0" max="6" value="2" required>
+
+      <label for="brightness">Typical screen brightness level (1–10): <span class="range-display" id="brightnessVal">6</span></label>
+      <p class="help-text">1 = very dim, 10 = maximum brightness.</p>
+      <input type="range" id="brightness" min="1" max="10" value="6">
+
+      <label for="distance">How close do you usually sit to screens?</label>
+      <select id="distance">
+        <option value="far">Arm’s length or more (&gt;60 cm)</option>
+        <option value="medium" selected>About arm’s length (~40–60 cm)</option>
+        <option value="close">Closer than arm’s length (&lt;40 cm)</option>
+      </select>
+
+      <label for="filter">Blue light filter / night mode:</label>
+      <select id="filter">
+        <option value="always">On most of the time</option>
+        <option value="evening" selected>On in the evening only</option>
+        <option value="rarely">Rarely or never on</option>
+      </select>
+
+      <label for="breaks">How often do you take screen breaks?</label>
+      <select id="breaks">
+        <option value="every20" selected>Roughly every 20–30 minutes</option>
+        <option value="hourly">About once per hour</option>
+        <option value="rarely">Rarely or only a few times per day</option>
+      </select>
+
+      <button type="submit">Calculate Blue Light Risk</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom: 1rem;">Your Blue Light &amp; Screen Strain Score</h3>
+      <div class="stress-score-display" id="scoreNumber">0 / 100</div>
+      <div id="riskCategory" style="text-align:center; font-size:1.2rem; margin-bottom:1rem;"></div>
+
+      <div class="category-breakdown" id="breakdown"></div>
+
+      <div style="background: rgba(59,130,246,0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary); margin-top: 1.5rem;" id="recommendations"></div>
+
+      <details class="calc-meta">
+        <summary>How your blue light risk score is calculated</summary>
+        <p>We build a 0–100 index from four normalized factors:</p>
+        <ul>
+          <li><strong>Total screen time:</strong> more overall hours raise eye‑strain risk.</li>
+          <li><strong>Evening screen time:</strong> screens within 2 hours of bedtime strongly affect melatonin and sleep.</li>
+          <li><strong>Brightness &amp; distance:</strong> high brightness and close viewing increase light reaching your eyes.</li>
+          <li><strong>Protection habits:</strong> blue‑light filters and regular breaks lower the score.</li>
+        </ul>
+        <p>Each factor is mapped to a sub‑score (0–100, higher = more risk) and combined with an evidence‑informed weighting model where <strong>evening exposure and brightness/distance carry extra influence</strong>. This index is educational—eye health and sleep issues should be discussed with your eye‑care or medical professional.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Why Blue Light Exposure Matters</h2>
+      <p>Digital screens emit high‑energy visible (HEV) blue light. In normal amounts during the day, blue light helps keep you alert. But heavy screen use—especially in the evening—can contribute to <strong>digital eye strain</strong>, dry eyes, headaches, and <strong>disrupted sleep</strong> by delaying your body’s natural melatonin release.</p>
+      <p>This calculator brings together screen time, brightness, distance, and your habits (filters and breaks) to estimate whether your daily exposure pattern is low, moderate, high, or very high risk for strain and sleep disturbance.</p>
+
+      <div class="info-box">
+        <h4>Simple Ways to Protect Your Eyes</h4>
+        <ul>
+          <li>Follow the <strong>20‑20‑20 rule</strong>: every 20 minutes, look 20 feet away for 20 seconds.</li>
+          <li>Keep screens about <strong>an arm’s length away</strong> and slightly below eye level.</li>
+          <li>Use night mode / warm color filters in the evening.</li>
+          <li>Dim brightness to match the room—avoid max brightness in dark rooms.</li>
+          <li>Aim for a <strong>screen‑free wind‑down</strong> in the last 60–90 minutes before bed.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align: left;">Explore More Sleep &amp; Lifestyle Tools</h2>
+      <div class="explore-grid">
+        <a href="sleep-chronotype-bedtime-calculator.html" class="explore-card">😴 Sleep Chronotype &amp; Ideal Bedtime Calculator</a>
+        <a href="too-much-caffeine-calculator.html" class="explore-card">☕ Am I Drinking Too Much Caffeine?</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+        <a href="work-life-quality-index.html" class="explore-card">⚖️ Work-Life Quality Index</a>
+      </div>
+
+      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
+      <div class="explore-grid">
+        <a href="blog/sleep-weight-loss-guide.html" class="explore-card">📘 Sleep &amp; Weight Loss Guide</a>
+        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Does blue light from screens cause permanent eye damage?</summary>
+      <p>Current research mainly links screen blue light to <strong>eye strain and sleep disruption</strong>, not clearly to permanent retinal damage at typical use levels. However, long hours of close‑up viewing can still cause discomfort, so good habits (breaks, distance, brightness) are important.</p>
+    </details>
+    <details>
+      <summary>How much evening screen time is too much?</summary>
+      <p>Using bright screens in the last 1–2 hours before bed can delay melatonin and make it harder to fall asleep. Many sleep experts recommend keeping screens dim, using a warm filter, or avoiding them altogether in that window—especially for children and teens.</p>
+    </details>
+    <details>
+      <summary>Will blue light–blocking glasses fix the problem?</summary>
+      <p>Blue‑blocking glasses may reduce some blue light reaching your eyes, but they don’t fix issues like excessive screen time, close viewing, or lack of breaks. Think of them as one tool alongside good screen hygiene, not a magic solution.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This blue light exposure calculator is for informational purposes only and does not diagnose eye disease or sleep disorders. For persistent eye pain, headaches, or severe sleep problems, consult an eye‑care or medical professional.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> | 
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const clamp01BL = (v) => Math.max(0, Math.min(1, v));
+
+    document.getElementById('brightness').addEventListener('input', (e) => {
+      document.getElementById('brightnessVal').textContent = e.target.value;
+    });
+
+    document.getElementById('blueLightForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const dayHours = parseFloat(document.getElementById('dayHours').value) || 0;
+      const eveningHours = parseFloat(document.getElementById('eveningHours').value) || 0;
+      const brightness = parseFloat(document.getElementById('brightness').value) || 1;
+      const distance = document.getElementById('distance').value;
+      const filter = document.getElementById('filter').value;
+      const breaks = document.getElementById('breaks').value;
+
+      // Subscores (0–100, higher = more risk)
+      const totalHours = Math.max(0, dayHours + eveningHours);
+      const screenTimeScore = Math.round(clamp01BL(totalHours / 10) * 100); // 10+ hours -> ~100
+
+      const eveningScore = Math.round(clamp01BL(eveningHours / 3) * 100); // 3+ evening hours -> ~100
+
+      const brightnessNorm = brightness / 10; // 1–10 -> 0.1–1
+      let distanceFactor = distance === 'close' ? 1 : distance === 'medium' ? 0.7 : 0.4;
+      const brightnessScore = Math.round(clamp01BL(brightnessNorm * distanceFactor) * 100);
+
+      let protectionBonus = 0;
+      if (filter === 'always') protectionBonus += 20;
+      else if (filter === 'evening') protectionBonus += 10;
+
+      if (breaks === 'every20') protectionBonus += 20;
+      else if (breaks === 'hourly') protectionBonus += 10;
+
+      // Protection reduces risk (up to 30 points off combined score)
+      const protectionScore = Math.max(0, 100 - protectionBonus);
+
+      const factors = [
+        { key: 'time', label: 'Total daily screen time', weight: 0.3, score: screenTimeScore },
+        { key: 'evening', label: 'Evening / pre‑bed screen time', weight: 0.3, score: eveningScore },
+        { key: 'brightness', label: 'Brightness & viewing distance', weight: 0.25, score: brightnessScore },
+        { key: 'habits', label: 'Protection habits (filters & breaks)', weight: 0.15, score: protectionScore }
+      ];
+
+      const overall = Math.round(
+        factors.reduce((sum, f) => sum + f.score * f.weight, 0)
+      );
+
+      // Category
+      let categoryLabel, explanation, recHtml;
+      if (overall < 30) {
+        categoryLabel = '✅ Low blue light & strain risk';
+        explanation = '<p>Your current screen habits appear relatively gentle on your eyes and sleep. Keep protecting your breaks and evening routine.</p>';
+        recHtml = `
+          <h4>Maintain healthy habits:</h4>
+          <ul>
+            <li>Keep using night mode or warm filters in the evening.</li>
+            <li>Continue taking regular screen breaks during long work sessions.</li>
+            <li>Monitor for new symptoms such as headaches or persistent dry eyes.</li>
+          </ul>
+        `;
+      } else if (overall < 60) {
+        categoryLabel = '⚠️ Moderate blue light & strain risk';
+        explanation = '<p>Your pattern suggests moderate risk for eye strain and some sleep disruption, especially if evenings are screen‑heavy.</p>';
+        recHtml = `
+          <h4>Try these improvements:</h4>
+          <ul>
+            <li>Limit bright screens in the last 60–90 minutes before bed.</li>
+            <li>Lower brightness to match room lighting whenever possible.</li>
+            <li>Take at least a 5‑minute break away from screens every hour.</li>
+          </ul>
+        `;
+      } else {
+        categoryLabel = '🚨 High blue light & strain risk';
+        explanation = '<p>Your estimated exposure pattern is high, particularly for evening use and/or brightness. This may significantly affect comfort and sleep quality.</p>';
+        recHtml = `
+          <h4>Higher‑impact changes:</h4>
+          <ul>
+            <li>Establish a screen‑free wind‑down routine before bed (reading, stretching, audio content).</li>
+            <li>Use strong warm filters or night mode after sunset and reduce brightness by several steps.</li>
+            <li>Increase distance from screens and consider larger text size instead of leaning closer.</li>
+            <li>If you have persistent headaches, blurred vision, or insomnia, talk with an eye‑care or sleep specialist.</li>
+          </ul>
+        `;
+      }
+
+      const breakdownHtml = `
+        <h4 style="margin-top:0;">Factor breakdown:</h4>
+        <div class="breakdown-item">
+          <span>Total screen time</span>
+          <strong>${screenTimeScore} / 100</strong>
+        </div>
+        <div class="breakdown-item">
+          <span>Evening / pre‑bed use</span>
+          <strong>${eveningScore} / 100</strong>
+        </div>
+        <div class="breakdown-item">
+          <span>Brightness &amp; distance</span>
+          <strong>${brightnessScore} / 100</strong>
+        </div>
+        <div class="breakdown-item">
+          <span>Protection habits</span>
+          <strong>${protectionScore} / 100</strong>
+        </div>
+        <div class="breakdown-item" style="border-top:2px solid var(--primary); margin-top:0.5rem; padding-top:1rem; font-size:1.05rem;">
+          <span><strong>Overall blue light / strain score</strong></span>
+          <strong>${overall} / 100</strong>
+        </div>
+      `;
+
+      document.getElementById('scoreNumber').textContent = overall + ' / 100';
+      document.getElementById('riskCategory').textContent = categoryLabel;
+      document.getElementById('breakdown').innerHTML = breakdownHtml + '<p style="margin-top:1rem; font-size:0.95rem; color:var(--text-weak-light);">Lower scores are better. Focus first on the factor with the highest sub‑score.</p>';
+      document.getElementById('recommendations').innerHTML = explanation + recHtml;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

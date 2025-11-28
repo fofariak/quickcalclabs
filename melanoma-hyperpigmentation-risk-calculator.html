@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melanoma & Hyperpigmentation UV Risk Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Estimate your long-term UV skin risk for melanoma and hyperpigmentation based on skin sensitivity, sunburn history, tanning habits, and family history.">
+  <meta name="keywords" content="melanoma risk calculator,hyperpigmentation risk,uv skin damage risk,skin cancer risk factors calculator">
+  <link rel="canonical" href="https://quickcalclabs.com/melanoma-hyperpigmentation-risk-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>☀️ Melanoma &amp; Hyperpigmentation UV Risk Calculator</h1>
+    <p class="subtitle">Estimate your lifetime UV‑related skin risk profile based on sensitivity, sunburn history, tanning habits, and family history. Use it to guide smarter sun‑protection—not as a diagnosis.</p>
+    <p class="meta-info">Last Updated: November 2025</p>
+
+    <form id="melanomaForm">
+      <label for="skinType">How does your skin usually react to strong sun (no protection)?</label>
+      <select id="skinType" required>
+        <option value="veryFair">Always burns, never tans / very light skin with freckles</option>
+        <option value="fair">Usually burns, tans lightly</option>
+        <option value="medium" selected>Sometimes mild burn, gradually tans</option>
+        <option value="olive">Rarely burns, tans easily</option>
+        <option value="dark">Almost never burns, may darken / develop spots</option>
+      </select>
+
+      <label for="sunburns">Number of blistering sunburns in your life (that peeled):</label>
+      <input type="number" id="sunburns" min="0" max="50" value="1" required>
+
+      <label for="tanning">How often do you intentionally tan (sunbathing or tanning beds)?</label>
+      <select id="tanning">
+        <option value="never" selected>Rarely / never</option>
+        <option value="sometimes">A few times per year</option>
+        <option value="often">Regularly in summer or via tanning beds</option>
+      </select>
+
+      <label for="familyHistory">Family history of melanoma or serious skin cancer?</label>
+      <select id="familyHistory">
+        <option value="no" selected>No or unsure</option>
+        <option value="yes">Yes, close relative (parent, sibling, child)</option>
+      </select>
+
+      <label for="spots">Skin changes you’ve noticed:</label>
+      <select id="spots">
+        <option value="none" selected>No changing moles or dark patches I’m worried about</option>
+        <option value="pigment">Dark spots / patches that darken after sun</option>
+        <option value="moles">Several new or changing moles / lesions</option>
+      </select>
+
+      <label for="spfHabit">Typical daytime sun protection habit:</label>
+      <select id="spfHabit">
+        <option value="rarely">Little or no SPF, rarely use hats/shade</option>
+        <option value="sometimes" selected>SPF on sunny days, sometimes hats/shade</option>
+        <option value="consistent">Daily SPF on face/neck + hats/shade when outdoors</option>
+      </select>
+
+      <button type="submit">Calculate UV Skin Risk Score</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Your UV Skin Risk Profile</h3>
+      <div class="stress-score-display" id="riskScore">0 / 100</div>
+      <div id="riskCategory" style="text-align:center; font-size:1.2rem; margin-bottom:1rem;"></div>
+
+      <div class="category-breakdown" id="breakdown"></div>
+      <div style="background: rgba(139,92,246,0.08); padding:1.5rem; border-radius:var(--radius-md); border-left:4px solid var(--primary); margin-top:1.5rem;" id="recommendations"></div>
+
+      <details class="calc-meta">
+        <summary>How your UV risk score is calculated</summary>
+        <p>This tool combines several evidence‑informed risk domains into a single 0–100 index:</p>
+        <ul>
+          <li><strong>Skin sensitivity:</strong> how easily you burn or tan (a proxy for UV vulnerability).</li>
+          <li><strong>Sunburn history:</strong> blistering sunburns, especially in youth, raise melanoma risk.</li>
+          <li><strong>Tanning behavior:</strong> intentional tanning and tanning beds significantly increase UV dose.</li>
+          <li><strong>Family history:</strong> close relatives with melanoma or serious skin cancer increase risk.</li>
+          <li><strong>Visible changes:</strong> new or changing moles and dark patches are warning signs that need evaluation.</li>
+          <li><strong>Protection habits:</strong> consistent SPF, clothing, and shade lower overall risk.</li>
+        </ul>
+        <p>Each domain is mapped to a 0–100 sub‑score and weighted, with <strong>skin sensitivity, sunburn history, and tanning behavior having the greatest influence</strong>. The result is an educational risk profile—not a medical diagnosis. Any concerning spots or very high scores should be discussed with a dermatologist.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Melanoma vs. Hyperpigmentation</h2>
+      <p><strong>Melanoma</strong> is a dangerous skin cancer that develops from pigment‑producing cells. <strong>Hyperpigmentation</strong> refers to benign dark spots or patches (like sun spots or melasma) caused by excess pigment. Both are influenced by UV exposure, but melanoma is life‑threatening and requires early detection, while hyperpigmentation mainly affects appearance and may signal chronic sun damage.</p>
+      <p>This calculator focuses on patterns that increase cumulative UV damage over a lifetime. High scores don’t mean you will get melanoma or severe hyperpigmentation—but they do mean your UV exposure and protection habits deserve attention.</p>
+
+      <div class="info-box">
+        <h4>Warning Signs That Need a Professional Check</h4>
+        <ul>
+          <li>Moles or spots that are <strong>Asymmetric, have irregular Borders, multiple Colors, big Diameter, or are Evolving</strong> (the ABCDE rule).</li>
+          <li>New dark patches that grow quickly or change in color or shape.</li>
+          <li>Any spot that itches, bleeds, or doesn’t heal.</li>
+        </ul>
+        <p>If you see any of these, book a skin check with a dermatologist as soon as possible.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Sun &amp; Skin Safety Tools</h2>
+      <div class="explore-grid">
+        <a href="sunburn-time-spf-reapplication-calculator.html" class="explore-card">⏱️ Sunburn Time &amp; SPF Reapplication Calculator</a>
+        <a href="skin-cancer-uv-risk-calculator.html" class="explore-card">🧴 Daily UV Skin Cancer Risk Score</a>
+        <a href="heat-stroke-risk-calculator.html" class="explore-card">🥵 Heat Stroke Risk Calculator</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+      </div>
+
+      <h2 style="text-align:left; margin-top:2.5rem;">Related Blogs</h2>
+      <div class="explore-grid">
+        <a href="blog/best-foods-for-pregnancy.html" class="explore-card">🥗 Best Foods for a Healthy Pregnancy</a>
+        <a href="blog/how-to-reduce-body-fat-naturally.html" class="explore-card">📘 How to Reduce Body Fat Naturally</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Can an online calculator tell me if I have skin cancer?</summary>
+      <p>No. Only a trained clinician using a full skin exam and, if needed, a biopsy can diagnose melanoma or other skin cancers. This tool is designed to highlight patterns of UV exposure and family history that increase risk—not to detect cancer.</p>
+    </details>
+    <details>
+      <summary>I have darker skin. Do I still need to worry about UV damage?</summary>
+      <p>Yes. Darker skin has more natural UV protection against sunburn, but melanoma can still occur, often diagnosed later. Darker skin is also more prone to certain types of hyperpigmentation. Consistent SPF, shade, and regular skin checks are still important.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This calculator is for educational purposes only and is not a substitute for professional medical or dermatology advice, diagnosis, or treatment.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const clamp01UV = (v) => Math.max(0, Math.min(1, v));
+
+    document.getElementById('melanomaForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const skinType = document.getElementById('skinType').value;
+      const sunburns = parseFloat(document.getElementById('sunburns').value) || 0;
+      const tanning = document.getElementById('tanning').value;
+      const familyHistory = document.getElementById('familyHistory').value;
+      const spots = document.getElementById('spots').value;
+      const spfHabit = document.getElementById('spfHabit').value;
+
+      // Skin sensitivity subscore
+      let skinScore;
+      if (skinType === 'veryFair') skinScore = 90;
+      else if (skinType === 'fair') skinScore = 75;
+      else if (skinType === 'medium') skinScore = 55;
+      else if (skinType === 'olive') skinScore = 40;
+      else skinScore = 35; // dark: less burn risk but still pigmentation risk
+
+      // Sunburns: 0 -> 0, 5+ -> 100
+      const burnScore = Math.round(clamp01UV(sunburns / 5) * 100);
+
+      // Tanning behavior
+      let tanScore = 0;
+      if (tanning === 'sometimes') tanScore = 50;
+      else if (tanning === 'often') tanScore = 90;
+
+      // Family history
+      const familyScore = familyHistory === 'yes' ? 85 : 30;
+
+      // Visible changes
+      let spotsScore = 20;
+      if (spots === 'pigment') spotsScore = 55;
+      else if (spots === 'moles') spotsScore = 90;
+
+      // Protection habits (higher score = more risk)
+      let protectionScore;
+      if (spfHabit === 'rarely') protectionScore = 90;
+      else if (spfHabit === 'sometimes') protectionScore = 60;
+      else protectionScore = 30;
+
+      const factors = [
+        { key: 'skin', label: 'Skin sensitivity to sun', weight: 0.25, score: skinScore },
+        { key: 'burns', label: 'Blistering sunburn history', weight: 0.2, score: burnScore },
+        { key: 'tanning', label: 'Intentional tanning habits', weight: 0.18, score: tanScore },
+        { key: 'family', label: 'Family history of serious skin cancer', weight: 0.15, score: familyScore },
+        { key: 'spots', label: 'Visible spots / moles of concern', weight: 0.12, score: spotsScore },
+        { key: 'protection', label: 'Daily sun protection habits', weight: 0.1, score: protectionScore }
+      ];
+
+      const risk = Math.round(factors.reduce((sum, f) => sum + f.score * f.weight, 0));
+
+      let category, recHtml;
+      if (risk < 30) {
+        category = '✅ Lower‑than‑average UV skin risk (with current habits)';
+        recHtml = `
+          <h4>Keep protecting your skin:</h4>
+          <ul>
+            <li>Continue using SPF and shade, especially during peak UV hours.</li>
+            <li>Schedule routine skin checks if you have many moles or a strong family history.</li>
+            <li>Take photos of any spots you are watching to track changes over time.</li>
+          </ul>
+        `;
+      } else if (risk < 60) {
+        category = '⚠️ Moderate UV skin risk';
+        recHtml = `
+          <h4>Strengthen your protection:</h4>
+          <ul>
+            <li>Use broad‑spectrum SPF 30+ daily on exposed areas, reapplying during long outdoor days.</li>
+            <li>Avoid intentional tanning and consider clothing, hats, and shade as your default.</li>
+            <li>Ask your doctor about how often you should have a full‑body skin exam.</li>
+          </ul>
+        `;
+      } else {
+        category = '🚨 High UV skin risk pattern';
+        recHtml = `
+          <h4>Take sun safety seriously:</h4>
+          <ul>
+            <li>Book a professional skin exam—especially if you have changing moles or a family history.</li>
+            <li>Stop tanning bed use and avoid intentional sunbathing.</li>
+            <li>Use SPF 30+ every day, plus hats, sunglasses, and shade during peak hours.</li>
+            <li>Monitor your skin monthly using the ABCDE rule and seek care for any concerning changes.</li>
+          </ul>
+        `;
+      }
+
+      const breakdownHtml = `
+        <h4 style="margin-top:0;">Factor breakdown:</h4>
+        ${factors.map(f => `
+          <div class="breakdown-item">
+            <span>${f.label}</span>
+            <strong>${f.score} / 100</strong>
+          </div>
+        `).join('')}
+        <div class="breakdown-item" style="border-top:2px solid var(--primary); margin-top:0.5rem; padding-top:1rem; font-size:1.05rem;">
+          <span><strong>Overall UV skin risk score</strong></span>
+          <strong>${risk} / 100</strong>
+        </div>
+      `;
+
+      document.getElementById('riskScore').textContent = `${risk} / 100`;
+      document.getElementById('riskCategory').textContent = category;
+      document.getElementById('breakdown').innerHTML = breakdownHtml;
+      document.getElementById('recommendations').innerHTML = recHtml;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

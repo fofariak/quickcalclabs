@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunburn Time & SPF Reapplication Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Estimate how quickly you might burn in today’s UV index for your skin type and get a simple SPF reapplication timer for safer time in the sun.">
+  <meta name="keywords" content="sunburn time calculator,spf reapplication timer,how long to burn,uv index sunburn calculator">
+  <link rel="canonical" href="https://quickcalclabs.com/sunburn-time-spf-reapplication-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>⏱️ Sunburn Time &amp; SPF Reapplication Calculator</h1>
+    <p class="subtitle">Estimate how fast you could burn in the current UV index for your skin type, and get an easy SPF reapplication timer for safer time outside.</p>
+    <p class="meta-info">Last Updated: November 2025 • Based on simplified UV‑index guidance and typical SPF behavior</p>
+
+    <form id="sunburnForm">
+      <label for="skinSensitivity">Your skin type in strong sun:</label>
+      <select id="skinSensitivity">
+        <option value="veryFair">Very fair, always burns, never tans</option>
+        <option value="fair" selected>Fair, usually burns, tans lightly</option>
+        <option value="medium">Medium, sometimes burns, gradually tans</option>
+        <option value="olive">Olive, rarely burns, tans easily</option>
+        <option value="dark">Darker, almost never burns</option>
+      </select>
+
+      <label for="uvIndex">Today’s UV index:</label>
+      <p class="help-text">Use the UV index from your weather app or local forecast (1–11+).</p>
+      <input type="number" id="uvIndex" min="1" max="15" value="8" required>
+
+      <label for="spf">SPF of sunscreen actually applied:</label>
+      <p class="help-text">Use the SPF on the bottle; effectiveness depends on applying enough and reapplying.</p>
+      <input type="number" id="spf" min="2" max="100" value="30" required>
+
+      <label for="environment">Environment:</label>
+      <select id="environment">
+        <option value="city" selected>City / grass (no strong reflection)</option>
+        <option value="beach">Beach / water / snow (strong reflection)</option>
+      </select>
+
+      <label for="startTime">Planned start time outdoors (optional):</label>
+      <p class="help-text">If you set this, we’ll show approximate reapply‑by clock times.</p>
+      <input type="time" id="startTime">
+
+      <button type="submit">Estimate Sunburn Time</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Your Sun Exposure Estimate</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="burnBare">-- min</div>
+          <div class="stat-label">approx. time to first burn (no protection)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="burnWithSpf">-- min</div>
+          <div class="stat-label">approx. time to burn with SPF</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="reapplyEvery">2 h</div>
+          <div class="stat-label">recommended SPF reapply interval</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="clockTimes">--</div>
+          <div class="stat-label">next reapply times (if start set)</div>
+        </div>
+      </div>
+
+      <div id="riskCategory" style="text-align:center; font-size:1.2rem; margin-top:1rem;"></div>
+      <div id="summary" style="margin-top:1rem;"></div>
+
+      <div style="background: rgba(139,92,246,0.08); padding:1.5rem; border-radius:var(--radius-md); border-left:4px solid var(--primary); margin-top:1.5rem;" id="recommendations"></div>
+
+      <details class="calc-meta">
+        <summary>How these sunburn times are estimated</summary>
+        <p>This calculator uses a simple model:</p>
+        <ul>
+          <li>Each skin type gets a <strong>baseline burn time</strong> at UV index 10 (for example, very fair ~10 minutes, fair ~15, medium ~20, olive ~25, dark ~30).</li>
+          <li>We adjust for today’s UV index (higher UV = faster burn) and for reflective environments like water, beach, or snow (which effectively increase UV).</li>
+          <li>SPF is treated as extending time‑to‑burn up to a point, but we cap the protection and still default to a <strong>2‑hour reapply rule</strong> (or sooner with sweating/swimming).</li>
+        </ul>
+        <p>Real‑world burn time varies with clouds, altitude, exact SPF application, and your individual skin. This is an educational estimate, not a guarantee of safety—if your skin looks or feels red, get out of the sun immediately.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Why Sunburn Time Matters</h2>
+      <p>Even a few bad sunburns—especially in childhood and adolescence—can significantly increase your risk of skin cancer later in life. Knowing roughly how quickly you might burn in today’s conditions helps you plan <strong>shade breaks, clothing, and SPF reapplication</strong> instead of guessing.</p>
+
+      <div class="info-box">
+        <h4>Basic Sun Safety Rules</h4>
+        <ul>
+          <li>Seek shade between 10am and 4pm when UV is strongest.</li>
+          <li>Use broad‑spectrum SPF 30+ on all exposed skin and reapply at least every 2 hours.</li>
+          <li>Reapply after swimming, towel‑drying, or heavy sweating—no matter what the label says.</li>
+          <li>Wear hats, UV‑blocking sunglasses, and protective clothing whenever possible.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Sun &amp; Heat Safety Tools</h2>
+      <div class="explore-grid">
+        <a href="skin-cancer-uv-risk-calculator.html" class="explore-card">🧴 Daily UV Skin Cancer Risk Score</a>
+        <a href="melanoma-hyperpigmentation-risk-calculator.html" class="explore-card">☀️ Melanoma &amp; Hyperpigmentation Risk</a>
+        <a href="heat-stroke-risk-calculator.html" class="explore-card">🥵 Heat Stroke Risk Calculator</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Can SPF completely prevent sunburn?</summary>
+      <p>No. SPF reduces the amount of UV reaching your skin, but application amount, sweating, water, and rubbing all reduce real‑world protection. You can still burn with high SPF if you stay out too long or don’t reapply.</p>
+    </details>
+    <details>
+      <summary>Is this a guarantee that I won’t burn before the shown time?</summary>
+      <p>No. This is a rough estimate only. If your skin feels hot, stings, or turns pink, get into shade immediately—don’t wait for a timer.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This calculator is for educational purposes only and cannot guarantee that you will not burn. Always follow local UV warnings and your healthcare provider’s advice.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function addMinutesToTimeStr(timeStr, minutesToAdd) {
+      if (!timeStr) return null;
+      const [h, m] = timeStr.split(':').map(Number);
+      if (Number.isNaN(h) || Number.isNaN(m)) return null;
+      const total = (h * 60 + m + minutesToAdd + 24 * 60) % (24 * 60);
+      const hh = String(Math.floor(total / 60)).padStart(2, '0');
+      const mm = String(total % 60).padStart(2, '0');
+      return `${hh}:${mm}`;
+    }
+
+    document.getElementById('sunburnForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const skin = document.getElementById('skinSensitivity').value;
+      const uvIndex = parseFloat(document.getElementById('uvIndex').value) || 1;
+      const spf = Math.max(2, Math.min(100, parseFloat(document.getElementById('spf').value) || 30));
+      const environment = document.getElementById('environment').value;
+      const startTime = document.getElementById('startTime').value;
+
+      // Baseline burn minutes at UV 10 for each skin type
+      let baseAt10;
+      if (skin === 'veryFair') baseAt10 = 10;
+      else if (skin === 'fair') baseAt10 = 15;
+      else if (skin === 'medium') baseAt10 = 20;
+      else if (skin === 'olive') baseAt10 = 25;
+      else baseAt10 = 30;
+
+      const effectiveUv = environment === 'beach' ? uvIndex * 1.5 : uvIndex;
+      const safeUv = Math.max(1, effectiveUv);
+
+      const bareMinutes = (baseAt10 * 10) / safeUv;
+
+      // SPF extension: roughly proportional up to ~10x baseline, then cap
+      const spfFactor = Math.min(spf * 0.8, 10); // imperfect but conservative
+      const spfMinutes = bareMinutes * spfFactor;
+
+      const bareClamped = Math.max(5, Math.min(120, bareMinutes));
+      const spfClamped = Math.max(10, Math.min(8 * 60, spfMinutes));
+
+      document.getElementById('burnBare').textContent = `${Math.round(bareClamped)} min`;
+      document.getElementById('burnWithSpf').textContent = `${Math.round(spfClamped)} min`;
+      document.getElementById('reapplyEvery').textContent = '2 h';
+
+      let riskCategory, summaryHtml, recHtml;
+
+      if (safeUv <= 3) {
+        riskCategory = '✅ Low to moderate UV today';
+        summaryHtml = '<p>UV levels are on the lower side, but sensitive skin can still burn with long exposure—especially around midday.</p>';
+      } else if (safeUv <= 7) {
+        riskCategory = '⚠️ High UV – protect your skin';
+        summaryHtml = '<p>UV is strong enough for noticeable sunburn in a relatively short time—good protection and reapplication are essential.</p>';
+      } else {
+        riskCategory = '🚨 Very high / extreme UV – limit exposure';
+        summaryHtml = '<p>UV is very strong. Unprotected skin can burn quickly, and even with SPF you should limit direct sun, especially around midday.</p>';
+      }
+
+      recHtml = `
+        <h4>Practical tips for today:</h4>
+        <ul>
+          <li>Use a generous amount of broad‑spectrum SPF 30+ on all exposed skin.</li>
+          <li>Reapply every 2 hours, and immediately after swimming or sweating.</li>
+          <li>Seek shade and wear protective clothing, especially when UV is highest.</li>
+          <li>For children and very fair skin, be extra cautious—move indoors before any pinkness appears.</li>
+        </ul>
+      `;
+
+      document.getElementById('riskCategory').textContent = riskCategory;
+      document.getElementById('summary').innerHTML = summaryHtml;
+      document.getElementById('recommendations').innerHTML = recHtml;
+
+      // Reapply times
+      let clockText = 'Set a reminder every 2 hours while outdoors.';
+      if (startTime) {
+        const first = addMinutesToTimeStr(startTime, 120);
+        const second = addMinutesToTimeStr(startTime, 240);
+        if (first && second) {
+          clockText = `${first} and ${second} (if you remain in the sun).`;
+        }
+      }
+      document.getElementById('clockTimes').textContent = clockText;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+
