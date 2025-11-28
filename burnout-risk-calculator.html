@@ -491,13 +491,24 @@
         <p>Burnout doesn't happen overnight. It develops gradually through chronic workplace stress. The earlier you recognize warning signs and take action, the easier it is to recover. If your burnout risk is high or severe, consider this a serious health warning that requires immediate attention.</p>
       </div>
 
-      <h2>Related Tools</h2>
-      <p>For a comprehensive assessment of your work-life quality, try our:</p>
-      <ul>
-        <li><a href="work-life-quality-index.html">Work-Life Quality Index Calculator</a> - Measures 9 dimensions of work wellbeing</li>
-        <li><a href="productivity-score-calculator.html">Productivity Score Calculator</a> - Assess your actual productivity efficiency</li>
-        <li><a href="stress-load-calculator.html">Stress Load Calculator</a> - Calculate your cumulative stress burden</li>
-      </ul>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align: left;">Explore More Work &amp; Stress Tools</h2>
+      <div class="explore-grid">
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+        <a href="work-life-quality-index.html" class="explore-card">⚖️ Work-Life Quality Index</a>
+        <a href="distraction-cost-calculator.html" class="explore-card">⏰ Distraction Cost Calculator</a>
+        <a href="meeting-load-stress-calculator.html" class="explore-card">📅 Meeting Load Stress Calculator</a>
+      </div>
+
+      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
+      <div class="explore-grid">
+        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
+        <a href="blog/work-life-quality-index-guide.html" class="explore-card">📘 Work-Life Quality Index Guide</a>
+      </div>
     </article>
   </section>
 
@@ -599,13 +610,13 @@
       const sleepRisk = percentFromRatio(sleep, 4, 7.5, true);
 
       // Weekend recovery: 10 = fully restorative (0), 1 = no recovery (100)
-      const recoveryRisk = percentFromRatio(recovery, 1, 10, false);
+      const recoveryRisk = percentFromRatio(recovery, 1, 10, true);
 
       // Emotional exhaustion: 1 = energized (0), 10 = depleted (100)
       const exhaustionRisk = percentFromRatio(exhaustion, 1, 10, false);
 
       // Work-life balance satisfaction: 10 = ideal (0), 1 = work dominates (100)
-      const workLifeRisk = percentFromRatio(workLife, 1, 10, false);
+      const workLifeRisk = percentFromRatio(workLife, 1, 10, true);
 
       // Evidence-weighted mix: emotional exhaustion, overwhelm & sleep carry more weight
       const factors = [

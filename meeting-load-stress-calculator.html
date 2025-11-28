@@ -433,13 +433,24 @@
         <h4>The 40% Rule</h4>
         <p>Research suggests that knowledge workers should spend no more than 40% of their time in meetings to maintain productivity and wellbeing. Beyond that threshold, meeting overload causes significant stress, reduced work quality, and increased burnout risk.</p>
       </div>
+    </article>
+  </section>
 
-      <h2>Related Tools</h2>
-      <ul>
-        <li><a href="distraction-cost-calculator.html">Distraction Cost Calculator</a> - Calculate total interruption costs</li>
-        <li><a href="productivity-score-calculator.html">Productivity Score Calculator</a> - Measure work efficiency</li>
-        <li><a href="burnout-risk-calculator.html">Burnout Risk Calculator</a> - Assess burnout risk factors</li>
-      </ul>
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align: left;">Explore More Calendar &amp; Focus Tools</h2>
+      <div class="explore-grid">
+        <a href="distraction-cost-calculator.html" class="explore-card">⏰ Distraction Cost Calculator</a>
+        <a href="productivity-score-calculator.html" class="explore-card">📊 Productivity Score Calculator</a>
+        <a href="burnout-risk-calculator.html" class="explore-card">🔥 Burnout Risk Calculator</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+      </div>
+
+      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
+      <div class="explore-grid">
+        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
+        <a href="blog/work-life-quality-index-guide.html" class="explore-card">📘 Work-Life Quality Index Guide</a>
+      </div>
     </article>
   </section>
   
@@ -498,11 +509,14 @@
       const backToBack = parseFloat(document.getElementById('backToBack').value);
       const asyncRatio = parseFloat(document.getElementById('asyncRatio').value);
 
+      const safeDailyHours = dailyHours > 0 ? dailyHours : 1;
+
       // Calculate metrics
       const meetingMinutes = dailyMeetings * avgDuration;
       const meetingHours = meetingMinutes / 60;
-      const meetingPercent = ((meetingHours / dailyHours) * 100).toFixed(0);
-      const focusHours = Math.max(0, dailyHours - meetingHours - (dailyMeetings * bufferTime / 60)).toFixed(1);
+      const rawMeetingPercent = (meetingHours / safeDailyHours) * 100;
+      const meetingPercent = Math.max(0, Math.min(150, rawMeetingPercent)).toFixed(0);
+      const focusHours = Math.max(0, safeDailyHours - meetingHours - (dailyMeetings * bufferTime / 60)).toFixed(1);
       const weeklyMeetings = dailyMeetings * 5;
       const weeklyMeetingHours = (meetingHours * 5).toFixed(1);
 

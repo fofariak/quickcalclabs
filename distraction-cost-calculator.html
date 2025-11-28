@@ -303,24 +303,31 @@
 
     <form id="distractionForm">
       <label for="workHours">Total work hours per day:</label>
+      <p class="help-text">Include your typical working day, not overtime or side projects.</p>
       <input type="number" id="workHours" step="0.5" min="0" max="24" value="8" required>
 
       <label for="emailChecks">Email checks per day:</label>
+      <p class="help-text">How many times you open and scan your inbox (even briefly).</p>
       <input type="number" id="emailChecks" min="0" max="200" value="20" required>
 
       <label for="slackMessages">Slack/Teams messages per day:</label>
+      <p class="help-text">Rough count of pings or threads you actively read or respond to.</p>
       <input type="number" id="slackMessages" min="0" max="300" value="50" required>
 
       <label for="meetings">Number of meetings per day:</label>
+      <p class="help-text">Include 1:1s, standups, Zoom calls, and recurring check-ins.</p>
       <input type="number" id="meetings" min="0" max="20" value="3" required>
 
       <label for="avgMeetingLength">Average meeting length (minutes):</label>
+      <p class="help-text">Use a typical length across most of your meetings (e.g., 25, 45, 60).</p>
       <input type="number" id="avgMeetingLength" min="0" max="300" value="45" required>
 
       <label for="interruptions">In-person/call interruptions per day:</label>
+      <p class="help-text">Unplanned “got a minute?” chats, calls, or pings that steal focus.</p>
       <input type="number" id="interruptions" min="0" max="50" value="5" required>
 
       <label for="socialMedia">Social media checks per day:</label>
+      <p class="help-text">Times you open social apps or feeds during your workday.</p>
       <input type="number" id="socialMedia" min="0" max="100" value="10" required>
 
       <button type="submit">Calculate Distraction Cost</button>
@@ -386,6 +393,24 @@
       </div>
     </article>
   </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align: left;">Explore More Focus &amp; Productivity Tools</h2>
+      <div class="explore-grid">
+        <a href="productivity-score-calculator.html" class="explore-card">📊 Productivity Score Calculator</a>
+        <a href="meeting-load-stress-calculator.html" class="explore-card">📅 Meeting Load Stress Calculator</a>
+        <a href="burnout-risk-calculator.html" class="explore-card">🔥 Burnout Risk Calculator</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+      </div>
+
+      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
+      <div class="explore-grid">
+        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
+        <a href="blog/work-life-quality-index-guide.html" class="explore-card">📘 Work-Life Quality Index Guide</a>
+      </div>
+    </article>
+  </section>
   
   <section class="faq-section">
     <h2>Frequently Asked Questions</h2>
@@ -438,6 +463,8 @@
       const interruptions = parseFloat(document.getElementById('interruptions').value);
       const socialMedia = parseFloat(document.getElementById('socialMedia').value);
 
+      const safeWorkHours = workHours > 0 ? workHours : 1;
+
       // Calculate time costs (in minutes), approximating direct + refocus time
       // Based on research that refocus after an interruption can take ~15–23 minutes.
       const emailCost = emailChecks * (2 + 12);       // 2 min check + ~12 min refocus
@@ -448,7 +475,7 @@
 
       const totalMinutes = emailCost + slackCost + meetingCost + interruptionCost + socialCost;
       const totalHours = (totalMinutes / 60).toFixed(1);
-      const percentLost = ((totalMinutes / (workHours * 60)) * 100).toFixed(0);
+      const percentLost = ((totalMinutes / (safeWorkHours * 60)) * 100).toFixed(0);
 
       // Display results
       document.getElementById('lostHours').textContent = totalHours;
