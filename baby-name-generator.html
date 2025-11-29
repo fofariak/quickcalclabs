@@ -29,7 +29,7 @@
 
   <section class="calc-wrapper">
     <h1>🎲 Baby Name Generator</h1>
-    <p class="subtitle">Get instant baby name ideas by style, gender, and starting letter. Use it as a starting point for your shortlist.</p>
+    <p class="subtitle">Get instant baby name ideas by gender, style, country/region, zodiac vibe, and starting letter—perfect for building your shortlist.</p>
     <p class="meta-info">Names are suggestions only – choose what feels right for your family</p>
 
     <form id="nameGenForm">
@@ -46,6 +46,34 @@
         <option value="modern">Modern & trendy</option>
         <option value="nature">Nature-inspired</option>
         <option value="short">Short & cute</option>
+      </select>
+
+      <label for="country">Name origin / region:</label>
+      <select id="country">
+        <option value="any" selected>Any / global mix</option>
+        <option value="us">US / Canada</option>
+        <option value="uk">UK / Ireland</option>
+        <option value="india">India</option>
+        <option value="latin">Spanish / Latin</option>
+        <option value="nordic">Nordic / Scandinavian</option>
+        <option value="hebrew">Biblical / Hebrew</option>
+      </select>
+
+      <label for="zodiac">Optional: match a zodiac energy:</label>
+      <select id="zodiac">
+        <option value="any" selected>Any sign / not important</option>
+        <option value="aries">Aries ♈</option>
+        <option value="taurus">Taurus ♉</option>
+        <option value="gemini">Gemini ♊</option>
+        <option value="cancer">Cancer ♋</option>
+        <option value="leo">Leo ♌</option>
+        <option value="virgo">Virgo ♍</option>
+        <option value="libra">Libra ♎</option>
+        <option value="scorpio">Scorpio ♏</option>
+        <option value="sagittarius">Sagittarius ♐</option>
+        <option value="capricorn">Capricorn ♑</option>
+        <option value="aquarius">Aquarius ♒</option>
+        <option value="pisces">Pisces ♓</option>
       </select>
 
       <label for="startingLetter">Optional: starting letter:</label>
@@ -66,7 +94,7 @@
   <section class="seo-content">
     <article>
       <h2>How to Use This Baby Name Generator</h2>
-      <p>This generator offers curated lists of classic, modern, nature‑inspired, and short &amp; cute names. Filter by gender and starting letter to quickly scan ideas that fit your vibe. Save the ones that feel good and build a shortlist to discuss with your partner.</p>
+      <p>This generator offers curated lists of classic, modern, nature‑inspired, and short &amp; cute names from multiple regions. Filter by gender, country/region, zodiac vibe, and starting letter to quickly find ideas that match your family’s style.</p>
     </article>
   </section>
 
@@ -99,26 +127,75 @@
   </footer>
 
   <script>
-    const names = {
-      girl: {
-        classic: ['Charlotte','Elizabeth','Katherine','Eleanor','Grace','Julia','Clara','Margaret','Anna','Victoria'],
-        modern: ['Ava','Luna','Harper','Nova','Aria','Willow','Zoe','Mila','Isla','Emery'],
-        nature: ['Ivy','Violet','Autumn','Juniper','Hazel','Skye','River','Daisy','Olive','Meadow'],
-        short: ['Ada','Eva','Mia','Zoe','Aya','Nia','Liv','Gia','Ana','Lia']
-      },
-      boy: {
-        classic: ['William','James','Henry','Arthur','Samuel','Thomas','Benjamin','Alexander','Daniel','Edward'],
-        modern: ['Liam','Noah','Logan','Mason','Jaxon','Levi','Asher','Kai','Ezra','Hudson'],
-        nature: ['River','Rowan','Ash','Leo','Forest','Cedar','Phoenix','Stone','Reed','Orion'],
-        short: ['Leo','Eli','Noel','Max','Theo','Kai','Jude','Owen','Finn','Zane']
-      },
-      unisex: {
-        classic: ['Alex','Jordan','Taylor','Morgan','Casey','Jamie','Avery','Quinn','Rowan','Riley'],
-        modern: ['Skyler','Phoenix','Dakota','Emerson','Blake','River','Sage','Hayden','Parker','Remi'],
-        nature: ['Sage','River','Rowan','Willow','Ocean','Sky','Cedar','Lake','Juniper','Storm'],
-        short: ['Ari','Ash','Sky','Ezra','Remy','Jules','Lux','Rue','Blue','Grey']
-      }
+    const zodiacGroups = {
+      fire: ['aries','leo','sagittarius'],
+      earth: ['taurus','virgo','capricorn'],
+      air: ['gemini','libra','aquarius'],
+      water: ['cancer','scorpio','pisces']
     };
+
+    const nameData = [
+      // Girl names
+      { name: 'Charlotte', gender: 'girl', styles: ['classic'], regions: ['us','uk','global'], vibes: ['earth'] },
+      { name: 'Elizabeth', gender: 'girl', styles: ['classic'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Katherine', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['earth'] },
+      { name: 'Eleanor', gender: 'girl', styles: ['classic'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Grace', gender: 'girl', styles: ['classic','short'], regions: ['us','uk'], vibes: ['water'] },
+      { name: 'Ava', gender: 'girl', styles: ['modern','short'], regions: ['us','global'], vibes: ['fire'] },
+      { name: 'Luna', gender: 'girl', styles: ['modern','nature'], regions: ['us','latin','global'], vibes: ['water'] },
+      { name: 'Harper', gender: 'girl', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Isla', gender: 'girl', styles: ['modern','short'], regions: ['uk','global'], vibes: ['water'] },
+      { name: 'Aria', gender: 'girl', styles: ['modern','short'], regions: ['us','global'], vibes: ['air'] },
+      { name: 'Ivy', gender: 'girl', styles: ['nature','short'], regions: ['uk','global'], vibes: ['earth'] },
+      { name: 'Hazel', gender: 'girl', styles: ['nature','classic'], regions: ['us','global'], vibes: ['earth'] },
+      { name: 'Olive', gender: 'girl', styles: ['nature'], regions: ['us','global'], vibes: ['earth'] },
+      { name: 'Meadow', gender: 'girl', styles: ['nature'], regions: ['us'], vibes: ['earth'] },
+      { name: 'Mia', gender: 'girl', styles: ['modern','short'], regions: ['us','latin','global'], vibes: ['water'] },
+      { name: 'Zoe', gender: 'girl', styles: ['modern','short'], regions: ['us','europe','global'], vibes: ['fire'] },
+      { name: 'Anaya', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['water'] },
+      { name: 'Ishita', gender: 'girl', styles: ['classic'], regions: ['india'], vibes: ['fire'] },
+      { name: 'Aadhya', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['earth'] },
+      { name: 'Saanvi', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['air'] },
+      { name: 'Sofia', gender: 'girl', styles: ['classic','modern'], regions: ['latin','europe','global'], vibes: ['air'] },
+      { name: 'Camila', gender: 'girl', styles: ['modern'], regions: ['latin'], vibes: ['fire'] },
+
+      // Boy names
+      { name: 'William', gender: 'boy', styles: ['classic'], regions: ['us','uk','global'], vibes: ['earth'] },
+      { name: 'James', gender: 'boy', styles: ['classic'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Henry', gender: 'boy', styles: ['classic'], regions: ['uk','us'], vibes: ['earth'] },
+      { name: 'Arthur', gender: 'boy', styles: ['classic'], regions: ['uk'], vibes: ['water'] },
+      { name: 'Samuel', gender: 'boy', styles: ['classic'], regions: ['hebrew','global'], vibes: ['water'] },
+      { name: 'Benjamin', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
+      { name: 'Liam', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['fire'] },
+      { name: 'Noah', gender: 'boy', styles: ['modern'], regions: ['hebrew','us','global'], vibes: ['water'] },
+      { name: 'Logan', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Levi', gender: 'boy', styles: ['modern'], regions: ['hebrew','us'], vibes: ['fire'] },
+      { name: 'Arjun', gender: 'boy', styles: ['classic'], regions: ['india'], vibes: ['fire'] },
+      { name: 'Vihaan', gender: 'boy', styles: ['modern'], regions: ['india'], vibes: ['air'] },
+      { name: 'Krish', gender: 'boy', styles: ['short'], regions: ['india'], vibes: ['fire'] },
+      { name: 'Diego', gender: 'boy', styles: ['modern'], regions: ['latin'], vibes: ['earth'] },
+      { name: 'Mateo', gender: 'boy', styles: ['modern'], regions: ['latin'], vibes: ['water'] },
+
+      // Unisex
+      { name: 'Alex', gender: 'unisex', styles: ['classic','short'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Jordan', gender: 'unisex', styles: ['modern'], regions: ['us','global'], vibes: ['water'] },
+      { name: 'Taylor', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Avery', gender: 'unisex', styles: ['modern'], regions: ['us'], vibes: ['air'] },
+      { name: 'Rowan', gender: 'unisex', styles: ['modern','nature'], regions: ['uk','us'], vibes: ['earth'] },
+      { name: 'Sage', gender: 'unisex', styles: ['nature','short'], regions: ['us','global'], vibes: ['earth'] },
+      { name: 'River', gender: 'unisex', styles: ['nature','modern'], regions: ['us','global'], vibes: ['water'] },
+      { name: 'Sky', gender: 'unisex', styles: ['nature','short'], regions: ['us','global'], vibes: ['air'] },
+      { name: 'Riley', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['fire'] },
+      { name: 'Arya', gender: 'unisex', styles: ['modern'], regions: ['india','us'], vibes: ['fire'] }
+    ];
+
+    function zodiacToVibe(sign) {
+      if (!sign || sign === 'any') return null;
+      for (const [vibe, signs] of Object.entries(zodiacGroups)) {
+        if (signs.includes(sign)) return vibe;
+      }
+      return null;
+    }
 
     function pickNames(list, count) {
       const copy = [...list];
@@ -135,19 +212,42 @@
 
       const gender = document.getElementById('genGender').value;
       const style = document.getElementById('style').value;
+      const country = document.getElementById('country').value;
+      const zodiac = document.getElementById('zodiac').value;
       const letterRaw = document.getElementById('startingLetter').value.trim().toUpperCase();
 
-      let pool = names[gender][style] || [];
+      const vibe = zodiacToVibe(zodiac);
+
+      let pool = nameData.filter(n => n.gender === gender);
+
+      if (style) {
+        pool = pool.filter(n => n.styles.includes(style));
+      }
+
+      if (country && country !== 'any') {
+        const regional = pool.filter(n => n.regions.includes(country) || n.regions.includes('global'));
+        if (regional.length) pool = regional;
+      }
+
+      if (vibe) {
+        const vibed = pool.filter(n => n.vibes && n.vibes.includes(vibe));
+        if (vibed.length) pool = vibed;
+      }
+
       if (letterRaw) {
-        pool = pool.filter(n => n.toUpperCase().startsWith(letterRaw));
-        if (!pool.length) {
-          pool = names[gender][style]; // fall back to full list
+        const letterFiltered = pool.filter(n => n.name.toUpperCase().startsWith(letterRaw));
+        if (letterFiltered.length) {
+          pool = letterFiltered;
         }
       }
 
-      const picks = pickNames(pool, 6);
+      if (!pool.length) {
+        pool = nameData.filter(n => n.gender === gender);
+      }
+
+      const picks = pickNames(pool, 8);
       const nameList = document.getElementById('nameList');
-      nameList.innerHTML = picks.map(n => `<span style="display:inline-block; margin:0.2rem 0.5rem; padding:0.4rem 0.8rem; border-radius:999px; background:rgba(139,92,246,0.08);">${n}</span>`).join('');
+      nameList.innerHTML = picks.map(item => `<span style="display:inline-block; margin:0.2rem 0.5rem; padding:0.4rem 0.8rem; border-radius:999px; background:rgba(139,92,246,0.08);">${item.name}</span>`).join('');
 
       const resultsBox = document.getElementById('results');
       resultsBox.style.display = 'block';

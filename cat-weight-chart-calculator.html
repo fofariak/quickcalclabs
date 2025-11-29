@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Weight Chart & Healthy Range Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Check whether your cat’s weight is roughly within a typical range for their frame and age using a simple cat weight chart style calculator.">
+  <meta name="keywords" content="cat weight chart calculator,ideal cat weight,how much should my cat weigh,overweight cat checker">
+  <link rel="canonical" href="https://quickcalclabs.com/cat-weight-chart-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>⚖️ Cat Weight Chart &amp; Healthy Range Calculator</h1>
+    <p class="subtitle">See if your cat’s current weight is roughly within a typical range for their frame and age.</p>
+    <p class="meta-info">Uses broad averages – your vet and body condition score are more accurate</p>
+
+    <form id="catWeightForm">
+      <label for="catAgeMonths">Cat's age (months):</label>
+      <input type="number" id="catAgeMonths" min="2" max="240" value="18" required>
+
+      <label for="frame">Body frame / build:</label>
+      <p class="help-text">Estimate from breed and bone structure (ask your vet if unsure).</p>
+      <select id="frame">
+        <option value="small" selected>Small / fine‑boned (e.g., many domestic shorthairs)</option>
+        <option value="medium">Medium frame</option>
+        <option value="large">Large / sturdy frame (e.g., Maine Coon)</option>
+      </select>
+
+      <label for="catCurrentWeight">Current weight (kg):</label>
+      <input type="number" id="catCurrentWeight" min="1" max="15" step="0.1" value="4.2" required>
+
+      <button type="submit">Check Weight Range</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Weight Range Check</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="catIdealRange">-- – -- kg</div>
+          <div class="stat-label">approx. healthy band for this age</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="catWeightStatus">--</div>
+          <div class="stat-label">status vs. band</div>
+        </div>
+      </div>
+
+      <div id="catInterpretation" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How this cat weight estimate works</summary>
+        <p>We assume an adult weight band based on frame size and then scale it for age:</p>
+        <ul>
+          <li>Small frame adult: ~3–4 kg.</li>
+          <li>Medium frame adult: ~4–5.5 kg.</li>
+          <li>Large frame adult: ~5.5–7.5 kg.</li>
+        </ul>
+        <p>Most cats reach their adult size by about 12–18 months. We estimate expected % of adult weight at earlier ages and create a ±15% “healthy band” around it. Individual cats vary widely, so always ask your vet to evaluate body condition.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Why Cat Weight Matters</h2>
+      <p>Overweight cats are at higher risk for diabetes, joint problems, and urinary issues. Underweight cats may have underlying disease or inadequate food intake. A simple weight check, combined with a <strong>body condition score (BCS)</strong>, helps keep your cat healthier for longer.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Tools</h2>
+      <div class="explore-grid">
+        <a href="cat-age-calculator.html" class="explore-card">🐱 Cat Age to Human Years</a>
+        <a href="dog-weight-chart-calculator.html" class="explore-card">⚖️ Dog Weight Chart Checker</a>
+        <a href="pet-pregnancy-calculator.html" class="explore-card">🐾 Pet Pregnancy Due Date</a>
+        <a href="water-intake-calculator.html" class="explore-card">💧 Daily Water Intake Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This cat weight checker uses broad averages and is not a substitute for veterinary advice or a professional body condition score.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function catAdultRange(frame) {
+      if (frame === 'small') return [3, 4];
+      if (frame === 'medium') return [4, 5.5];
+      return [5.5, 7.5];
+    }
+
+    function catExpectedFraction(ageMonths) {
+      const age = ageMonths;
+      if (age <= 4) return 0.45;        // young kitten
+      if (age <= 8) return 0.7;         // growing fast
+      if (age <= 12) return 0.9;        // nearly adult
+      if (age <= 18) return 1.0;        // adult size
+      return 1.0;                       // adult / mature
+    }
+
+    document.getElementById('catWeightForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const ageMonths = parseFloat(document.getElementById('catAgeMonths').value) || 0;
+      const frame = document.getElementById('frame').value;
+      const current = parseFloat(document.getElementById('catCurrentWeight').value) || 0;
+
+      const [adultMin, adultMax] = catAdultRange(frame);
+      const frac = catExpectedFraction(ageMonths);
+      const idealMin = adultMin * frac;
+      const idealMax = adultMax * frac;
+
+      const bandMin = idealMin * 0.85;
+      const bandMax = idealMax * 1.15;
+
+      document.getElementById('catIdealRange').textContent = `${bandMin.toFixed(1)} – ${bandMax.toFixed(1)} kg`;
+
+      let status;
+      if (current < bandMin) status = 'Below band';
+      else if (current > bandMax) status = 'Above band';
+      else status = 'Within band';
+      document.getElementById('catWeightStatus').textContent = status;
+
+      let interp = `<p>For a <strong>${frame}</strong> frame cat at about <strong>${ageMonths.toFixed(0)} months</strong>, a broad healthy weight band is around <strong>${bandMin.toFixed(1)}–${bandMax.toFixed(1)} kg</strong>. Your cat weighs <strong>${current.toFixed(1)} kg</strong>, which is <strong>${status.toLowerCase()}</strong> this band.</p>`;
+      interp += '<p>Ask your veterinarian to check body condition score (BCS) and tailor diet and activity to your individual cat.</p>';
+
+      document.getElementById('catInterpretation').innerHTML = interp;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+
