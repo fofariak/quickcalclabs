@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Name Generator – Cute, Modern & Classic Ideas | QuickCalcLabs</title>
+  <meta name="description" content="Generate baby name ideas by style, gender, and first letter. Mix cute, modern, classic, and nature-inspired baby names with one click.">
+  <meta name="keywords" content="baby name generator,unique baby names,cute baby names,modern baby name ideas">
+  <link rel="canonical" href="https://quickcalclabs.com/baby-name-generator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🎲 Baby Name Generator</h1>
+    <p class="subtitle">Get instant baby name ideas by style, gender, and starting letter. Use it as a starting point for your shortlist.</p>
+    <p class="meta-info">Names are suggestions only – choose what feels right for your family</p>
+
+    <form id="nameGenForm">
+      <label for="genGender">Name gender:</label>
+      <select id="genGender">
+        <option value="girl" selected>Girl</option>
+        <option value="boy">Boy</option>
+        <option value="unisex">Unisex</option>
+      </select>
+
+      <label for="style">Name style:</label>
+      <select id="style">
+        <option value="classic" selected>Classic & timeless</option>
+        <option value="modern">Modern & trendy</option>
+        <option value="nature">Nature-inspired</option>
+        <option value="short">Short & cute</option>
+      </select>
+
+      <label for="startingLetter">Optional: starting letter:</label>
+      <input type="text" id="startingLetter" maxlength="1" placeholder="A–Z (optional)">
+
+      <button type="submit">Generate Names</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Name Ideas</h3>
+      <div id="nameList" style="text-align:center; font-size:1.2rem;"></div>
+      <p style="margin-top:1rem; font-size:0.95rem; color:var(--text-weak-light);">Tap the button again for more ideas. Mix and match first and middle names you love.</p>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>How to Use This Baby Name Generator</h2>
+      <p>This generator offers curated lists of classic, modern, nature‑inspired, and short &amp; cute names. Filter by gender and starting letter to quickly scan ideas that fit your vibe. Save the ones that feel good and build a shortlist to discuss with your partner.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Baby Name &amp; Pregnancy Tools</h2>
+      <div class="explore-grid">
+        <a href="baby-name-numerology-calculator.html" class="explore-card">🔢 Baby Name Numerology Calculator</a>
+        <a href="baby-gender-predictor-chinese-calendar.html" class="explore-card">👶 Chinese Baby Gender Predictor</a>
+        <a href="pregnancy-calculator.html" class="explore-card">🤰 Pregnancy Due Date Calculator</a>
+        <a href="baby-height-predictor-calculator.html" class="explore-card">📏 Baby Height Predictor</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This generator is for inspiration only. Always choose names that resonate with you, your culture, and your family.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const names = {
+      girl: {
+        classic: ['Charlotte','Elizabeth','Katherine','Eleanor','Grace','Julia','Clara','Margaret','Anna','Victoria'],
+        modern: ['Ava','Luna','Harper','Nova','Aria','Willow','Zoe','Mila','Isla','Emery'],
+        nature: ['Ivy','Violet','Autumn','Juniper','Hazel','Skye','River','Daisy','Olive','Meadow'],
+        short: ['Ada','Eva','Mia','Zoe','Aya','Nia','Liv','Gia','Ana','Lia']
+      },
+      boy: {
+        classic: ['William','James','Henry','Arthur','Samuel','Thomas','Benjamin','Alexander','Daniel','Edward'],
+        modern: ['Liam','Noah','Logan','Mason','Jaxon','Levi','Asher','Kai','Ezra','Hudson'],
+        nature: ['River','Rowan','Ash','Leo','Forest','Cedar','Phoenix','Stone','Reed','Orion'],
+        short: ['Leo','Eli','Noel','Max','Theo','Kai','Jude','Owen','Finn','Zane']
+      },
+      unisex: {
+        classic: ['Alex','Jordan','Taylor','Morgan','Casey','Jamie','Avery','Quinn','Rowan','Riley'],
+        modern: ['Skyler','Phoenix','Dakota','Emerson','Blake','River','Sage','Hayden','Parker','Remi'],
+        nature: ['Sage','River','Rowan','Willow','Ocean','Sky','Cedar','Lake','Juniper','Storm'],
+        short: ['Ari','Ash','Sky','Ezra','Remy','Jules','Lux','Rue','Blue','Grey']
+      }
+    };
+
+    function pickNames(list, count) {
+      const copy = [...list];
+      const result = [];
+      while (copy.length && result.length < count) {
+        const idx = Math.floor(Math.random() * copy.length);
+        result.push(copy.splice(idx, 1)[0]);
+      }
+      return result;
+    }
+
+    document.getElementById('nameGenForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const gender = document.getElementById('genGender').value;
+      const style = document.getElementById('style').value;
+      const letterRaw = document.getElementById('startingLetter').value.trim().toUpperCase();
+
+      let pool = names[gender][style] || [];
+      if (letterRaw) {
+        pool = pool.filter(n => n.toUpperCase().startsWith(letterRaw));
+        if (!pool.length) {
+          pool = names[gender][style]; // fall back to full list
+        }
+      }
+
+      const picks = pickNames(pool, 6);
+      const nameList = document.getElementById('nameList');
+      nameList.innerHTML = picks.map(n => `<span style="display:inline-block; margin:0.2rem 0.5rem; padding:0.4rem 0.8rem; border-radius:999px; background:rgba(139,92,246,0.08);">${n}</span>`).join('');
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

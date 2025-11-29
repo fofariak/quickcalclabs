@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Weight Chart & Healthy Range Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Check whether your dog’s weight is within a typical range for their size and age using a simple dog weight chart style calculator.">
+  <meta name="keywords" content="dog weight chart calculator,ideal dog weight,puppy weight chart,how much should my dog weigh">
+  <link rel="canonical" href="https://quickcalclabs.com/dog-weight-chart-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>⚖️ Dog Weight Chart &amp; Healthy Range Calculator</h1>
+    <p class="subtitle">See if your dog’s current weight is roughly within a typical range for their size and age.</p>
+    <p class="meta-info">Based on generalized size classes – your vet is the final word</p>
+
+    <form id="dogWeightForm">
+      <label for="ageMonths">Dog's age (months):</label>
+      <input type="number" id="ageMonths" min="2" max="180" value="12" required>
+
+      <label for="adultSize">Expected adult size:</label>
+      <p class="help-text">Use your vet’s estimate or breed standard (small, medium, large, giant).</p>
+      <select id="adultSize">
+        <option value="small" selected>Small (adult 5–10 kg)</option>
+        <option value="medium">Medium (adult 10–25 kg)</option>
+        <option value="large">Large (adult 25–40 kg)</option>
+        <option value="giant">Giant (adult 40–70+ kg)</option>
+      </select>
+
+      <label for="currentWeight">Current weight (kg):</label>
+      <input type="number" id="currentWeight" min="0.5" max="90" step="0.1" value="6.5" required>
+
+      <button type="submit">Check Weight Range</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Weight Range Check</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="idealRange">-- – -- kg</div>
+          <div class="stat-label">approx. healthy band for this age</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="weightStatus">--</div>
+          <div class="stat-label">status vs. band</div>
+        </div>
+      </div>
+
+      <div id="interpretation" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How this dog weight chart estimate works</summary>
+        <p>We assume a typical growth pattern for each size class and use a percentage of expected adult weight at a given age:</p>
+        <ul>
+          <li>At ~3 months, many puppies are ≈ 35–40% of adult weight.</li>
+          <li>At ~6 months, ≈ 60–70% of adult weight.</li>
+          <li>At ~12 months, ≈ 90–100% of adult weight (giant breeds may continue growing).</li>
+        </ul>
+        <p>We then build a reasonable ±15% “healthy band” around this estimate. Individual breeds vary widely, so always confirm with your vet and monitor body condition score (BCS).</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Why Dog Weight Matters</h2>
+      <p>Keeping your dog near an ideal weight helps protect joints, heart health, and lifespan. Underweight dogs may have underlying illness or inadequate nutrition; overweight dogs are at higher risk for arthritis, diabetes, and many other conditions.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Tools</h2>
+      <div class="explore-grid">
+        <a href="dog-age-calculator.html" class="explore-card">🐶 Dog Age to Human Years</a>
+        <a href="cat-age-calculator.html" class="explore-card">🐱 Cat Age to Human Years</a>
+        <a href="pet-pregnancy-calculator.html" class="explore-card">🐾 Pet Pregnancy Due Date</a>
+        <a href="water-intake-calculator.html" class="explore-card">💧 Daily Water Intake Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This weight checker uses broad averages and does not replace veterinary advice or a hands‑on body condition score.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function adultRangeKg(size) {
+      if (size === 'small') return [5, 10];
+      if (size === 'medium') return [10, 25];
+      if (size === 'large') return [25, 40];
+      return [40, 70];
+    }
+
+    function expectedFraction(ageMonths, size) {
+      const age = ageMonths;
+      if (age <= 3) return 0.35;
+      if (age <= 6) return 0.6 + (age - 3) * (0.1 / 3); // 0.6–0.7
+      if (age <= 12) {
+        // 0.7 to 1.0 across 6–12 months
+        return 0.7 + (age - 6) * (0.3 / 6);
+      }
+      // Older than 12 months
+      if (size === 'giant' && age < 24) return 1.0 + (age - 12) * (0.1 / 12); // up to ~1.1
+      return 1.0;
+    }
+
+    document.getElementById('dogWeightForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const ageMonths = parseFloat(document.getElementById('ageMonths').value) || 0;
+      const size = document.getElementById('adultSize').value;
+      const current = parseFloat(document.getElementById('currentWeight').value) || 0;
+
+      const [adultMin, adultMax] = adultRangeKg(size);
+      const frac = expectedFraction(ageMonths, size);
+      const idealMin = adultMin * frac;
+      const idealMax = adultMax * frac;
+
+      const bandMin = idealMin * 0.85;
+      const bandMax = idealMax * 1.15;
+
+      document.getElementById('idealRange').textContent = `${bandMin.toFixed(1)} – ${bandMax.toFixed(1)} kg`;
+
+      let status;
+      if (current < bandMin) status = 'Below band';
+      else if (current > bandMax) status = 'Above band';
+      else status = 'Within band';
+      document.getElementById('weightStatus').textContent = status;
+
+      let interp = `<p>For a ${size} dog around <strong>${ageMonths.toFixed(0)} months</strong> old, a broad healthy band is roughly <strong>${bandMin.toFixed(1)}–${bandMax.toFixed(1)} kg</strong>. Your dog currently weighs <strong>${current.toFixed(1)} kg</strong>, which is <strong>${status.toLowerCase()}</strong> this band.</p>`;
+      interp += '<p>Always ask your veterinarian to assess body condition score (BCS) and adjust food and exercise accordingly.</p>';
+
+      document.getElementById('interpretation').innerHTML = interp;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

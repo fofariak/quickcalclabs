@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Age to Human Years Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Convert your dog’s age to human years using size-based formulas. See a dog age chart and life stage breakdown for small, medium, and large breeds.">
+  <meta name="keywords" content="dog age calculator,dog years to human years,how old is my dog in human years,dog age chart">
+  <link rel="canonical" href="https://quickcalclabs.com/dog-age-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🐶 Dog Age to Human Years Calculator</h1>
+    <p class="subtitle">Estimate your dog’s age in human years based on their size and life‑stage curve.</p>
+    <p class="meta-info">Uses a simplified size-based method – not a veterinary diagnosis</p>
+
+    <form id="dogAgeForm">
+      <label for="dogAge">Dog's age (years):</label>
+      <input type="number" id="dogAge" min="0" max="25" step="0.1" value="3" required>
+
+      <label for="dogSize">Dog's size / weight class:</label>
+      <select id="dogSize">
+        <option value="small" selected>Small (&lt; 10 kg / &lt; 22 lb)</option>
+        <option value="medium">Medium (10–25 kg / 22–55 lb)</option>
+        <option value="large">Large (25–40 kg / 55–88 lb)</option>
+        <option value="giant">Giant (&gt; 40 kg / 88+ lb)</option>
+      </select>
+
+      <button type="submit">Convert to Human Years</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Dog Age Conversion</h3>
+      <div class="stress-score-display" id="humanYears" style="font-size:2.6rem;"></div>
+      <div id="lifeStage" style="text-align:center; margin-top:0.5rem;"></div>
+      <div id="interpretation" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How dog age is converted to human years</summary>
+        <p>Dogs mature quickly in the first years of life, then more slowly. This calculator uses a simple size‑based curve:</p>
+        <ul>
+          <li>The first year ≈ 15 human years for most dogs.</li>
+          <li>The second year adds ≈ 9 human years.</li>
+          <li>Each additional year adds 4–6 human years depending on size (smaller dogs age more slowly).</li>
+        </ul>
+        <p>This is a common rule‑of‑thumb model; real aging varies by breed, genetics, health, and lifestyle. Your veterinarian can give you a more precise view of your dog’s life stage.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Dog Life Stages</h2>
+      <p>Understanding your dog’s life stage helps you choose the right food, exercise, and vet care:</p>
+      <ul>
+        <li><strong>Puppy:</strong> up to ~1 year (longer for giant breeds)</li>
+        <li><strong>Young adult:</strong> ~1–3 years</li>
+        <li><strong>Adult:</strong> ~3–7 years (size‑dependent)</li>
+        <li><strong>Senior:</strong> ~7+ years for large dogs, later for small dogs</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Health Tools</h2>
+      <div class="explore-grid">
+        <a href="cat-age-calculator.html" class="explore-card">🐱 Cat Age to Human Years Calculator</a>
+        <a href="pet-pregnancy-calculator.html" class="explore-card">🐾 Dog &amp; Cat Pregnancy Due Date</a>
+        <a href="dog-weight-chart-calculator.html" class="explore-card">⚖️ Dog Weight Chart Checker</a>
+        <a href="water-intake-calculator.html" class="explore-card">💧 Daily Water Intake Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is this as accurate as a vet’s assessment?</summary>
+      <p>No. It’s a reasonable approximation. Your vet considers breed, health, and exam findings to judge life stage.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This calculator is for informational purposes only and does not replace veterinary advice.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function dogToHuman(age, size) {
+      if (age <= 0) return 0;
+      let human = 0;
+      if (age >= 1) {
+        human += 15;
+      }
+      if (age >= 2) {
+        human += 9;
+      }
+      const remaining = Math.max(0, age - 2);
+      let perYear;
+      if (size === 'small') perYear = 4;
+      else if (size === 'medium') perYear = 4.5;
+      else if (size === 'large') perYear = 5;
+      else perYear = 6; // giant
+      human += remaining * perYear;
+      return human;
+    }
+
+    function lifeStageFromHuman(humanYears) {
+      if (humanYears < 15) return 'Puppy';
+      if (humanYears < 28) return 'Adolescent / young adult';
+      if (humanYears < 50) return 'Adult';
+      if (humanYears < 70) return 'Mature adult';
+      return 'Senior';
+    }
+
+    document.getElementById('dogAgeForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const age = parseFloat(document.getElementById('dogAge').value) || 0;
+      const size = document.getElementById('dogSize').value;
+      const human = dogToHuman(age, size);
+
+      document.getElementById('humanYears').textContent = `${human.toFixed(1)} human years`;
+      const stage = lifeStageFromHuman(human);
+      document.getElementById('lifeStage').textContent = stage;
+      document.getElementById('lifeStage').className = '';
+
+      document.getElementById('interpretation').innerHTML = `<p>Your ${size} dog is roughly equivalent to a <strong>${stage.toLowerCase()}</strong> human at about <strong>${human.toFixed(1)} years old</strong>. Use this as a guide for vet checkups, diet, and exercise—not a strict rule.</p>`;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

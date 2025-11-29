@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby & Child Adult Height Predictor Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Estimate your child's adult height using the mid-parental height formula and current height percentile. Get a realistic height range, not a guarantee.">
+  <meta name="keywords" content="baby height predictor,child adult height calculator,mid parental height calculator,how tall will my child be">
+  <link rel="canonical" href="https://quickcalclabs.com/baby-height-predictor-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>📏 Baby &amp; Child Adult Height Predictor</h1>
+    <p class="subtitle">Use the mid‑parental height formula and your child’s current height to estimate an adult height range.</p>
+    <p class="meta-info">Based on pediatric mid‑parental height method – not a guarantee</p>
+
+    <form id="heightForm">
+      <label for="sex">Child's sex:</label>
+      <select id="sex">
+        <option value="boy" selected>Boy</option>
+        <option value="girl">Girl</option>
+      </select>
+
+      <label for="ageYears">Child's age:</label>
+      <p class="help-text">Use decimal years (e.g., 3.5 years). Works best for ages &gt; 2 years.</p>
+      <input type="number" id="ageYears" min="0" max="20" step="0.1" value="4.0" required>
+
+      <label for="childHeight">Child's current height (cm):</label>
+      <input type="number" id="childHeight" min="40" max="210" value="100" required>
+
+      <label for="momHeight">Mother's height (cm):</label>
+      <input type="number" id="momHeight" min="130" max="210" value="165" required>
+
+      <label for="dadHeight">Father's height (cm):</label>
+      <input type="number" id="dadHeight" min="150" max="220" value="178" required>
+
+      <button type="submit">Predict Adult Height</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Estimated Adult Height</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="midParentCm">-- cm</div>
+          <div class="stat-label">mid‑parental target</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="rangeCm">-- – -- cm</div>
+          <div class="stat-label">approximate adult range</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="midParentInches">--"</div>
+          <div class="stat-label">mid‑parental in feet/inches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="rangeInches">--"</div>
+          <div class="stat-label">range in feet/inches</div>
+        </div>
+      </div>
+
+      <div id="interpretation" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How the height prediction is calculated</summary>
+        <p>We use the commonly taught <strong>mid‑parental height formula</strong>:</p>
+        <ul>
+          <li>For boys: <code>((mother&#39;s height + 13 cm) + father&#39;s height) ÷ 2</code></li>
+          <li>For girls: <code>((father&#39;s height − 13 cm) + mother&#39;s height) ÷ 2</code></li>
+        </ul>
+        <p>This gives a target adult height, and we then apply a typical variability range of about ±8.5 cm (≈3.3 inches) to give a <strong>likely range</strong>. Genetics, nutrition, health conditions, and hormones can all shift height outside that band. This tool is for education and should not replace pediatric evaluation.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>How Accurate Is Adult Height Prediction?</h2>
+      <p>Mid‑parental height is a simple way pediatricians estimate the <strong>center of a child’s expected height range</strong> based on parents’ heights. Most healthy children will grow to somewhere within about ±8–9 cm (3–4 inches) of this value.</p>
+      <p>Children who have chronic illness, nutritional problems, or hormonal disorders may fall well outside this band—your pediatrician is the best person to evaluate growth concerns.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Baby &amp; Child Tools</h2>
+      <div class="explore-grid">
+        <a href="baby-growth-percentile-calculator.html" class="explore-card">📈 Baby Growth Percentile Calculator</a>
+        <a href="baby-feeding-schedule-calculator.html" class="explore-card">🍼 Baby Feeding Schedule Calculator</a>
+        <a href="baby-gender-predictor-chinese-calendar.html" class="explore-card">👶 Chinese Baby Gender Predictor</a>
+        <a href="baby-name-numerology-calculator.html" class="explore-card">🔢 Baby Name Numerology Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Can this calculator replace a visit with our pediatrician?</summary>
+      <p>No. It gives an approximate range only. If you’re worried about slow or very rapid growth, always talk with your child’s doctor.</p>
+    </details>
+    <details>
+      <summary>Does current height change the prediction?</summary>
+      <p>Here we show the standard mid‑parental prediction; your child’s current height is mainly used in the interpretation text. Pediatricians use growth charts over time to see whether a child tracks along a curve.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This height predictor is for informational purposes only and does not replace pediatric or endocrinology evaluation.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function cmToFeetInches(cm) {
+      const totalInches = cm / 2.54;
+      const feet = Math.floor(totalInches / 12);
+      const inches = Math.round(totalInches - feet * 12);
+      return `${feet}′${inches}″`;
+    }
+
+    document.getElementById('heightForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const sex = document.getElementById('sex').value;
+      const ageYears = parseFloat(document.getElementById('ageYears').value) || 0;
+      const childHeight = parseFloat(document.getElementById('childHeight').value) || 0;
+      const momHeight = parseFloat(document.getElementById('momHeight').value) || 0;
+      const dadHeight = parseFloat(document.getElementById('dadHeight').value) || 0;
+
+      let midParent;
+      if (sex === 'boy') {
+        midParent = ((momHeight + 13) + dadHeight) / 2;
+      } else {
+        midParent = ((dadHeight - 13) + momHeight) / 2;
+      }
+
+      const rangeLow = midParent - 8.5;
+      const rangeHigh = midParent + 8.5;
+
+      document.getElementById('midParentCm').textContent = `${midParent.toFixed(1)} cm`;
+      document.getElementById('rangeCm').textContent = `${rangeLow.toFixed(1)} – ${rangeHigh.toFixed(1)} cm`;
+      document.getElementById('midParentInches').textContent = cmToFeetInches(midParent);
+      document.getElementById('rangeInches').textContent = `${cmToFeetInches(rangeLow)} – ${cmToFeetInches(rangeHigh)}`;
+
+      let interp = `<p>Based on parents’ heights, your child’s estimated adult height is around <strong>${midParent.toFixed(1)} cm (${cmToFeetInches(midParent)})</strong>, with a typical range from <strong>${rangeLow.toFixed(1)}–${rangeHigh.toFixed(1)} cm</strong>.</p>`;
+
+      if (ageYears > 0 && childHeight > 0) {
+        interp += `<p>This does not account for your child’s exact growth percentile today, but you can compare their current height of <strong>${childHeight.toFixed(1)} cm</strong> with their pediatric growth chart to see how they’re tracking.</p>`;
+      }
+
+      document.getElementById('interpretation').innerHTML = interp;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

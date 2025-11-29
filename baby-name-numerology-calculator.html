@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Name Numerology Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Enter a baby name to see its Pythagorean numerology number and personality keywords. A fun, spiritual twist for choosing baby names.">
+  <meta name="keywords" content="baby name numerology calculator,baby name number,pythagorean numerology name calculator,name meaning number">
+  <link rel="canonical" href="https://quickcalclabs.com/baby-name-numerology-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🔢 Baby Name Numerology Calculator</h1>
+    <p class="subtitle">Discover the Pythagorean numerology number and vibe behind your favorite baby names.</p>
+    <p class="meta-info">For fun &amp; spiritual insight – not science</p>
+
+    <form id="numerologyForm">
+      <label for="babyName">Baby name:</label>
+      <p class="help-text">You can include first and middle names (e.g., "Ava Rose").</p>
+      <input type="text" id="babyName" required>
+
+      <button type="submit">Calculate Name Number</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Name Numerology Result</h3>
+      <div class="stress-score-display" id="nameNumber" style="font-size:3rem;"></div>
+      <div id="keywords" style="text-align:center; margin-top:0.5rem;"></div>
+      <div id="description" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How baby name numerology is calculated</summary>
+        <p>We use the classic <strong>Pythagorean numerology</strong> system:</p>
+        <ul>
+          <li>Each letter A–Z is assigned a value from 1–9.</li>
+          <li>We add the values for all letters in the name, then keep reducing by adding the digits of the total until we get a single digit (1–9) or a master number (11 or 22).</li>
+        </ul>
+        <p>The result is mapped to common numerology interpretations (for example, 1 = leadership, 2 = harmony, 3 = creativity). This is a <strong>spiritual / symbolic tool, not a scientific one</strong>, and should be used playfully alongside other ways of choosing a name.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Using Numerology to Choose a Baby Name</h2>
+      <p>Many parents enjoy looking at numerology as an extra layer of meaning when picking baby names. While numerology is not evidence‑based science, the words associated with each number can help you think about the <strong>values and qualities</strong> you hope to nurture in your child.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Baby Name &amp; Growth Tools</h2>
+      <div class="explore-grid">
+        <a href="baby-name-generator.html" class="explore-card">🎲 Baby Name Generator</a>
+        <a href="baby-gender-predictor-chinese-calendar.html" class="explore-card">👶 Chinese Baby Gender Predictor</a>
+        <a href="baby-height-predictor-calculator.html" class="explore-card">📏 Baby Height Predictor</a>
+        <a href="baby-growth-percentile-calculator.html" class="explore-card">📈 Growth Percentile Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Does numerology really predict personality?</summary>
+      <p>Numerology is considered a metaphysical or spiritual practice, not a science. Use the meanings as inspiration, not as fixed destiny.</p>
+    </details>
+    <details>
+      <summary>Should I change a name based on the number?</summary>
+      <p>Names carry family meaning, culture, sound, and personal preference. Numerology can be one fun input—not the final decision maker.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This numerology calculator is for entertainment purposes only and does not provide scientific or medical advice.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const numerologyMap = {
+      1: { label: '1 – Leader', keywords: 'Independence • ambition • initiative', desc: 'Names that reduce to 1 are often associated with leadership, drive, and a pioneering spirit.' },
+      2: { label: '2 – Peacemaker', keywords: 'Cooperation • sensitivity • harmony', desc: 'Twos are linked with partnership, diplomacy, and emotional awareness.' },
+      3: { label: '3 – Creator', keywords: 'Creativity • self‑expression • joy', desc: 'Threes are linked with communication, playfulness, and artistic flair.' },
+      4: { label: '4 – Builder', keywords: 'Stability • practicality • reliability', desc: 'Fours are associated with structure, discipline, and a strong work ethic.' },
+      5: { label: '5 – Explorer', keywords: 'Freedom • adaptability • curiosity', desc: 'Fives carry themes of adventure, change, and versatility.' },
+      6: { label: '6 – Nurturer', keywords: 'Love • responsibility • care', desc: 'Sixes are linked with family, service, and creating a warm home environment.' },
+      7: { label: '7 – Seeker', keywords: 'Wisdom • intuition • depth', desc: 'Sevens are associated with introspection, spirituality, and analysis.' },
+      8: { label: '8 – Achiever', keywords: 'Success • strength • abundance', desc: 'Eights are connected to ambition, power, and material success.' },
+      9: { label: '9 – Humanitarian', keywords: 'Compassion • idealism • generosity', desc: 'Nines are linked with empathy, global thinking, and a desire to help others.' },
+      11: { label: '11 – Master Intuitive', keywords: 'Inspiration • insight • sensitivity', desc: 'Master number 11 blends the leadership of 1 with enhanced intuition and spiritual awareness.' },
+      22: { label: '22 – Master Builder', keywords: 'Vision • practicality • impact', desc: 'Master number 22 combines big dreams with the ability to turn them into reality.' }
+    };
+
+    const letterValues = {
+      A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,
+      J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,
+      S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8
+    };
+
+    function reduceNumber(num) {
+      if (num === 11 || num === 22) return num;
+      while (num > 9) {
+        num = num.toString().split('').reduce((sum, d) => sum + parseInt(d, 10), 0);
+        if (num === 11 || num === 22) break;
+      }
+      return num;
+    }
+
+    document.getElementById('numerologyForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const rawName = document.getElementById('babyName').value || '';
+      const letters = rawName.toUpperCase().replace(/[^A-Z]/g, '').split('');
+      if (!letters.length) return;
+      const total = letters.reduce((sum, ch) => sum + (letterValues[ch] || 0), 0);
+      const reduced = reduceNumber(total);
+
+      const info = numerologyMap[reduced] || {};
+
+      document.getElementById('nameNumber').textContent = info.label || `${reduced}`;
+      document.getElementById('keywords').textContent = info.keywords || '';
+      document.getElementById('description').innerHTML = `<p>${info.desc || 'This is your reduced numerology number based on the Pythagorean system.'}</p>`;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

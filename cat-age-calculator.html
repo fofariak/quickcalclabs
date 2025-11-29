@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Age to Human Years Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Convert your cat’s age to human years using a realistic feline aging curve and see their life stage.">
+  <meta name="keywords" content="cat age calculator,cat years to human years,how old is my cat in human years,cat age chart">
+  <link rel="canonical" href="https://quickcalclabs.com/cat-age-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🐱 Cat Age to Human Years Calculator</h1>
+    <p class="subtitle">Estimate your cat’s age in human years with a common veterinary-style aging curve.</p>
+    <p class="meta-info">Educational only – ask your vet for a full health assessment</p>
+
+    <form id="catAgeForm">
+      <label for="catAge">Cat's age (years):</label>
+      <input type="number" id="catAge" min="0" max="30" step="0.1" value="4" required>
+
+      <button type="submit">Convert to Human Years</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Cat Age Conversion</h3>
+      <div class="stress-score-display" id="humanYears" style="font-size:2.6rem;"></div>
+      <div id="lifeStage" style="text-align:center; margin-top:0.5rem;"></div>
+      <div id="interpretation" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How cat age is converted to human years</summary>
+        <p>This tool uses a typical feline curve:</p>
+        <ul>
+          <li>First year ≈ 15 human years.</li>
+          <li>Second year adds ≈ 9 human years (so a 2‑year‑old cat ≈ 24 human years).</li>
+          <li>Each year after adds ≈ 4 human years.</li>
+        </ul>
+        <p>Real aging depends on genetics, indoor vs. outdoor life, diet, and vet care. Use this as a guideline, not an exact conversion.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Cat Life Stages</h2>
+      <p>Cats typically move through these stages:</p>
+      <ul>
+        <li><strong>Kitten:</strong> 0–1 year</li>
+        <li><strong>Young adult:</strong> 1–6 years</li>
+        <li><strong>Mature:</strong> 7–10 years</li>
+        <li><strong>Senior:</strong> 11–14 years</li>
+        <li><strong>Geriatric:</strong> 15+ years</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Health Tools</h2>
+      <div class="explore-grid">
+        <a href="dog-age-calculator.html" class="explore-card">🐶 Dog Age to Human Years</a>
+        <a href="pet-pregnancy-calculator.html" class="explore-card">🐾 Pet Pregnancy Due Date</a>
+        <a href="dog-weight-chart-calculator.html" class="explore-card">⚖️ Dog Weight Chart Checker</a>
+        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This calculator is for informational purposes only and does not replace veterinary advice.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function catToHuman(age) {
+      if (age <= 0) return 0;
+      let human = 0;
+      if (age >= 1) human += 15;
+      if (age >= 2) human += 9;
+      const remaining = Math.max(0, age - 2);
+      human += remaining * 4;
+      return human;
+    }
+
+    function catLifeStage(humanYears) {
+      if (humanYears < 15) return 'Kitten / very young';
+      if (humanYears < 40) return 'Young adult';
+      if (humanYears < 56) return 'Mature adult';
+      if (humanYears < 72) return 'Senior';
+      return 'Geriatric';
+    }
+
+    document.getElementById('catAgeForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const age = parseFloat(document.getElementById('catAge').value) || 0;
+      const human = catToHuman(age);
+      document.getElementById('humanYears').textContent = `${human.toFixed(1)} human years`;
+      const stage = catLifeStage(human);
+      document.getElementById('lifeStage').textContent = stage;
+      document.getElementById('interpretation').innerHTML = `<p>Your cat is roughly comparable to a <strong>${stage.toLowerCase()}</strong> human at <strong>${human.toFixed(1)} years old</strong>. Senior and geriatric cats benefit from more frequent vet checkups.</p>`;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

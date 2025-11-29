@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog & Cat Pregnancy Due Date Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Estimate due dates and key milestones for dog or cat pregnancy using the breeding / mating date.">
+  <meta name="keywords" content="dog pregnancy calculator,cat pregnancy calculator,pet due date calculator,gestation dog cat">
+  <link rel="canonical" href="https://quickcalclabs.com/pet-pregnancy-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🐾 Dog &amp; Cat Pregnancy Due Date Calculator</h1>
+    <p class="subtitle">Enter the breeding / mating date to estimate due dates and key points in pregnancy for dogs or cats.</p>
+    <p class="meta-info">Typical gestation: dogs ≈ 63 days, cats ≈ 63–65 days</p>
+
+    <form id="petPregForm">
+      <label for="species">Species:</label>
+      <select id="species">
+        <option value="dog" selected>Dog</option>
+        <option value="cat">Cat</option>
+      </select>
+
+      <label for="matingDate">Breeding / mating date:</label>
+      <input type="date" id="matingDate" required>
+
+      <button type="submit">Calculate Pet Due Date</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Estimated Pregnancy Timeline</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="dueDate">--</div>
+          <div class="stat-label">estimated due date</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="earlyScan">--</div>
+          <div class="stat-label">early vet check window</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="midPoint">--</div>
+          <div class="stat-label">mid-pregnancy stage</div>
+        </div>
+      </div>
+
+      <div id="notes" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How dog &amp; cat due dates are calculated</summary>
+        <p>We count forward from the breeding date using typical gestation lengths:</p>
+        <ul>
+          <li>Dogs: ~63 days (range about 58–68 days from ovulation).</li>
+          <li>Cats: ~63–65 days (we use 63 days for the estimate).</li>
+        </ul>
+        <p>Actual due dates can vary by several days. Your veterinarian can narrow timing with exams and, if needed, ultrasound.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Preparing for Whelping or Queening</h2>
+      <p>As your pet approaches the final couple of weeks, work with your vet to plan a safe birth environment, monitor appetite and temperature, and know the emergency signs that require immediate care.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Tools</h2>
+      <div class="explore-grid">
+        <a href="dog-age-calculator.html" class="explore-card">🐶 Dog Age to Human Years</a>
+        <a href="cat-age-calculator.html" class="explore-card">🐱 Cat Age to Human Years</a>
+        <a href="dog-weight-chart-calculator.html" class="explore-card">⚖️ Dog Weight Chart Checker</a>
+        <a href="water-intake-calculator.html" class="explore-card">💧 Daily Water Intake Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Can I rely on this date instead of my vet?</summary>
+      <p>No. It’s only an estimate based on average gestation length. Always follow your veterinarian’s guidance for timing, monitoring, and when to seek emergency help.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This pet pregnancy calculator is for informational purposes only and does not replace veterinary care.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function addDays(date, days) {
+      const d = new Date(date.getTime());
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    function formatDate(date) {
+      return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    document.getElementById('petPregForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const species = document.getElementById('species').value;
+      const matingStr = document.getElementById('matingDate').value;
+      if (!matingStr) return;
+      const matingDate = new Date(matingStr + 'T00:00:00');
+      if (Number.isNaN(matingDate.getTime())) return;
+
+      const gestDays = species === 'dog' ? 63 : 63;
+      const due = addDays(matingDate, gestDays);
+      const earlyStart = addDays(matingDate, 21);
+      const earlyEnd = addDays(matingDate, 30);
+      const mid = addDays(matingDate, Math.round(gestDays / 2));
+
+      document.getElementById('dueDate').textContent = formatDate(due);
+      document.getElementById('earlyScan').textContent = `${formatDate(earlyStart)} – ${formatDate(earlyEnd)}`;
+      document.getElementById('midPoint').textContent = formatDate(mid);
+
+      const speciesLabel = species === 'dog' ? 'dog' : 'cat';
+      document.getElementById('notes').innerHTML = `
+        <p>Your ${speciesLabel}'s estimated due date is around <strong>${formatDate(due)}</strong>. Many vets recommend an early pregnancy check between <strong>${formatDate(earlyStart)}</strong> and <strong>${formatDate(earlyEnd)}</strong> to confirm pregnancy and litter size.</p>
+        <p>If you notice signs of distress, prolonged labor with no progress, or discharge with no puppies/kittens, contact an emergency vet immediately.</p>
+      `;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+
