@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Deprivation Calculator – How Much Sleep Do You Need? | QuickCalcLabs</title>
+  <meta name="description" content="Estimate how much sleep you need for your age, compare it to your actual sleep, and see whether you’re mildly, moderately, or severely sleep deprived.">
+  <meta name="keywords" content="sleep deprivation calculator,how much sleep do I need,am I sleep deprived,sleep need by age">
+  <link rel="canonical" href="https://quickcalclabs.com/sleep-deprivation-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>😴 Sleep Deprivation Calculator</h1>
+    <p class="subtitle">See how your recent sleep compares to age‑based recommendations and whether you may be mildly, moderately, or severely sleep deprived.</p>
+    <p class="meta-info">Not a medical diagnosis – talk with a doctor for persistent sleep issues</p>
+
+    <form id="sleepDeprForm">
+      <label for="ageSleep">Your age (years):</label>
+      <input type="number" id="ageSleep" min="5" max="100" value="30" required>
+
+      <label for="nights">Number of recent nights to analyze:</label>
+      <select id="nights">
+        <option value="1">Last night only</option>
+        <option value="3">Last 3 nights</option>
+        <option value="7" selected>Last 7 nights</option>
+      </select>
+
+      <label for="hoursList">Total hours of sleep across those nights:</label>
+      <p class="help-text">For example, if you slept 6, 7, and 5 hours over 3 nights, enter 18.</p>
+      <input type="number" id="hoursList" min="0" max="100" step="0.1" value="42" required>
+
+      <button type="submit">Check Sleep Deprivation</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Your Sleep Deprivation Snapshot</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="recommendedRange">-- – -- h/night</div>
+          <div class="stat-label">recommended for your age</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="avgSleep">-- h/night</div>
+          <div class="stat-label">your average sleep</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="debtPerNight">-- h/night</div>
+          <div class="stat-label">avg shortfall vs. target</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalDebt">-- h</div>
+          <div class="stat-label">total shortfall over period</div>
+        </div>
+      </div>
+
+      <div id="sleepSeverity" style="text-align:center; font-size:1.2rem; margin-top:1rem;"></div>
+      <div id="sleepAdvice" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How sleep need and deprivation are estimated</summary>
+        <p>We use general sleep‑duration ranges from sleep foundations (for most adults 18–64: 7–9 hours, for teens: 8–10, etc.). We take the middle of your age band as a target, compare it to your average sleep across the selected nights, and classify deprivation severity based on the size of the shortfall.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Why Sleep Debt Matters</h2>
+      <p>Even modest, chronic sleep loss (for example, getting 6 instead of 7–9 hours most nights) can impair attention, reaction time, mood, and metabolic health. Catch‑up sleep on weekends helps somewhat but does not fully undo the effects of long‑term sleep deprivation.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Sleep Tools</h2>
+      <div class="explore-grid">
+        <a href="sleep-debt-calculator.html" class="explore-card">📉 Weekly Sleep Debt Calculator</a>
+        <a href="sleep-chronotype-bedtime-calculator.html" class="explore-card">😴 Chronotype &amp; Ideal Bedtime</a>
+        <a href="nap-optimization-calculator.html" class="explore-card">💤 Nap Optimization Calculator</a>
+        <a href="blue-light-exposure-calculator.html" class="explore-card">📱 Blue Light Exposure Calculator</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This calculator is for educational purposes only and is not a substitute for professional medical advice or sleep‑medicine evaluation.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function recommendedRange(age) {
+      if (age < 6) return [11, 14];
+      if (age < 13) return [9, 12];
+      if (age < 18) return [8, 10];
+      if (age < 65) return [7, 9];
+      return [7, 8];
+    }
+
+    document.getElementById('sleepDeprForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const age = parseFloat(document.getElementById('ageSleep').value) || 0;
+      const nights = parseInt(document.getElementById('nights').value, 10) || 1;
+      const totalHours = parseFloat(document.getElementById('hoursList').value) || 0;
+
+      const [minH, maxH] = recommendedRange(age);
+      const target = (minH + maxH) / 2;
+      const avg = nights > 0 ? totalHours / nights : 0;
+      const shortfallPerNight = Math.max(0, target - avg);
+      const totalShortfall = shortfallPerNight * nights;
+
+      document.getElementById('recommendedRange').textContent = `${minH.toFixed(1)}–${maxH.toFixed(1)} h/night`;
+      document.getElementById('avgSleep').textContent = `${avg.toFixed(1)} h/night`;
+      document.getElementById('debtPerNight').textContent = `${shortfallPerNight.toFixed(1)} h/night`;
+      document.getElementById('totalDebt').textContent = `${totalShortfall.toFixed(1)} h`;
+
+      let severity, advice;
+      if (shortfallPerNight < 0.5) {
+        severity = '✅ Little to no sleep deprivation by this rough measure.';
+        advice = '<p>You are close to general recommendations. Keep protecting your sleep window and watch for daytime drowsiness as a more important signal than numbers alone.</p>';
+      } else if (shortfallPerNight < 1.5) {
+        severity = '⚠️ Mild to moderate sleep deprivation.';
+        advice = '<p>Regularly getting 0.5–1.5 hours less than recommended can still affect mood, focus, and appetite. Try expanding your sleep window by 30–60 minutes where possible.</p>';
+      } else {
+        severity = '🚨 Significant sleep deprivation pattern.';
+        advice = '<p>Averaging 1.5+ hours below recommendations is linked to higher health and performance risks. If this is ongoing, consider talking with a healthcare provider or sleep specialist and prioritizing schedule changes.</p>';
+      }
+
+      document.getElementById('sleepSeverity').textContent = severity;
+      document.getElementById('sleepAdvice').innerHTML = advice;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

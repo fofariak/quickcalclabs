@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Vaccination Schedule Guide – Dogs & Cats | QuickCalcLabs</title>
+  <meta name="description" content="See a general vaccination schedule guide for dogs and cats based on age and life stage. Always confirm exact timing with your veterinarian.">
+  <meta name="keywords" content="pet vaccination schedule,dog vaccine schedule,cat vaccine schedule,puppy shots timeline,kitten shots timeline">
+  <link rel="canonical" href="https://quickcalclabs.com/pet-vaccination-schedule-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>💉 Pet Vaccination Schedule Guide</h1>
+    <p class="subtitle">Get a general overview of core vaccine timing for dogs and cats based on age and life stage.</p>
+    <p class="meta-info">Always follow your veterinarian’s specific recommendations and local regulations</p>
+
+    <form id="vaxForm">
+      <label for="vaxSpecies">Species:</label>
+      <select id="vaxSpecies">
+        <option value="dog" selected>Dog</option>
+        <option value="cat">Cat</option>
+      </select>
+
+      <label for="ageMonthsVax">Pet's age (months):</label>
+      <input type="number" id="ageMonthsVax" min="0" max="240" value="4" required>
+
+      <button type="submit">Show Suggested Vaccines</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">General Vaccine Guidance</h3>
+      <div id="vaxStage" style="text-align:center; font-size:1.2rem; margin-bottom:1rem;"></div>
+      <div id="vaxList"></div>
+
+      <details class="calc-meta">
+        <summary>About this vaccine schedule guide</summary>
+        <p>Guidelines summarize common recommendations from veterinary organizations, but actual schedules vary by country, disease risk, vaccine type, and your pet’s health. Some areas combine vaccines into a single shot, and some protocols use different intervals. Only your veterinarian can design the right vaccine plan for your pet.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Core vs. Non‑Core Vaccines</h2>
+      <p>Core vaccines protect against widespread, serious diseases (like distemper, parvovirus, and rabies in dogs; panleukopenia and calicivirus in cats). Non‑core vaccines are recommended based on lifestyle and local risk, such as Lyme disease or kennel cough for dogs that hike or visit boarding facilities.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Tools</h2>
+      <div class="explore-grid">
+        <a href="puppy-training-timeline-calculator.html" class="explore-card">🐕 Puppy Training Timeline</a>
+        <a href="pet-nutrition-calculator.html" class="explore-card">🍖 Pet Nutrition Calculator</a>
+        <a href="pet-pregnancy-calculator.html" class="explore-card">🐾 Pet Pregnancy Due Date</a>
+        <a href="dog-age-calculator.html" class="explore-card">🐶 Dog Age to Human Years</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This vaccine schedule is a high‑level educational guide only and is not a substitute for a veterinarian’s individualized plan.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const vaxSchedules = {
+      dog: [
+        {
+          label: 'Puppy – 6–16 weeks',
+          min: 0, max: 4,
+          vaccines: [
+            'Core: DHPP (distemper, adenovirus/hepatitis, parvovirus, parainfluenza) every 3–4 weeks until at least 16 weeks of age.',
+            'Rabies: often given once between ~12–16 weeks depending on local law.',
+            'Lifestyle (as advised by vet): Bordetella (kennel cough), leptospirosis, Lyme, influenza based on risk.'
+          ]
+        },
+        {
+          label: 'Young dog – 4–12 months',
+          min: 4, max: 12,
+          vaccines: [
+            'Core: final puppy DHPP and rabies booster around 1 year after the initial series.',
+            'Lifestyle: boosters for Bordetella / leptospirosis / Lyme / flu if recommended by your vet.'
+          ]
+        },
+        {
+          label: 'Adult – 1–7 years',
+          min: 12, max: 84,
+          vaccines: [
+            'Core: DHPP booster every 1–3 years, rabies boosters per local law (often every 1 or 3 years).',
+            'Lifestyle: annual or risk‑based boosters (kennel cough, leptospirosis, Lyme, influenza) as recommended.'
+          ]
+        },
+        {
+          label: 'Senior – 7+ years',
+          min: 84, max: 240,
+          vaccines: [
+            'Core and lifestyle vaccines similar to adults but adjusted to health status.',
+            'More frequent wellness exams (every 6–12 months) to decide which vaccines remain appropriate.'
+          ]
+        }
+      ],
+      cat: [
+        {
+          label: 'Kitten – 6–16 weeks',
+          min: 0, max: 4,
+          vaccines: [
+            'Core: FVRCP (feline viral rhinotracheitis, calicivirus, panleukopenia) every 3–4 weeks until at least 16 weeks.',
+            'Rabies: usually given once between ~12–16 weeks depending on local law and product.',
+            'Lifestyle: FeLV (feline leukemia virus) often recommended for kittens and outdoor cats.'
+          ]
+        },
+        {
+          label: 'Young cat – 4–12 months',
+          min: 4, max: 12,
+          vaccines: [
+            'Core: FVRCP and rabies booster around 1 year after initial series.',
+            'Lifestyle: FeLV booster if still at risk (outdoor / multi‑cat households).'
+          ]
+        },
+        {
+          label: 'Adult – 1–7 years',
+          min: 12, max: 84,
+          vaccines: [
+            'Core: FVRCP booster every 1–3 years, rabies boosters per local requirements.',
+            'Lifestyle: FeLV and other vaccines as advised for outdoor or high‑risk cats.'
+          ]
+        },
+        {
+          label: 'Senior – 7+ years',
+          min: 84, max: 240,
+          vaccines: [
+            'Core vaccines may continue at 1–3 year intervals depending on health and vet advice.',
+            'Senior cats benefit from wellness exams (often every 6–12 months) to tailor vaccine plans.'
+          ]
+        }
+      ]
+    };
+
+    document.getElementById('vaxForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const species = document.getElementById('vaxSpecies').value;
+      const ageMonths = parseFloat(document.getElementById('ageMonthsVax').value) || 0;
+
+      const schedule = vaxSchedules[species] || [];
+      let stage = schedule.find(s => ageMonths >= s.min && ageMonths < s.max);
+      if (!stage && schedule.length) stage = schedule[schedule.length - 1];
+
+      if (!stage) return;
+
+      document.getElementById('vaxStage').textContent = stage.label;
+      document.getElementById('vaxList').innerHTML = `
+        <ul>
+          ${stage.vaccines.map(v => `<li>${v}</li>`).join('')}
+        </ul>
+      `;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

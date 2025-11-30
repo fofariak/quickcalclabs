@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nap Optimization Calculator – Best Nap Length & Wake-Up Time | QuickCalcLabs</title>
+  <meta name="description" content="Find the ideal nap length and wake-up time for more energy without grogginess, based on your bedtime and current sleep debt.">
+  <meta name="keywords" content="nap optimization calculator,best nap length,how long should I nap,power nap">
+  <link rel="canonical" href="https://quickcalclabs.com/nap-optimization-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>💤 Nap Optimization Calculator</h1>
+    <p class="subtitle">Pick the best nap length and timing to boost alertness without wrecking your night sleep.</p>
+    <p class="meta-info">General guidance – individual responses to naps vary</p>
+
+    <form id="napForm">
+      <label for="napStart">Planned nap start time:</label>
+      <input type="time" id="napStart" value="14:00" required>
+
+      <label for="bedTime">Usual bedtime:</label>
+      <input type="time" id="bedTime" value="23:00" required>
+
+      <label for="sleepLastNight">Sleep last night (hours):</label>
+      <p class="help-text">Rough total hours you actually slept.</p>
+      <input type="number" id="sleepLastNight" min="0" max="16" step="0.25" value="6.0" required>
+
+      <button type="submit">Find Optimal Nap</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Suggested Nap Plan</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="shortNapLength">20 min</div>
+          <div class="stat-label">power nap length</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="shortNapWake">--:--</div>
+          <div class="stat-label">wake‑up time (short nap)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="longNapLength">90 min</div>
+          <div class="stat-label">full‑cycle nap length</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="longNapWake">--:--</div>
+          <div class="stat-label">wake‑up time (long nap)</div>
+        </div>
+      </div>
+
+      <div id="napAdvice" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How nap timing suggestions are calculated</summary>
+        <p>Research suggests that naps of ≈20 minutes can improve alertness while avoiding deep‑sleep grogginess, and ≈90‑minute naps allow one full sleep cycle. We compute wake‑up times from your chosen nap start and highlight whether the longer nap would end at least ~3 hours before your usual bedtime to lower the risk of insomnia.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Choosing the Right Nap Type</h2>
+      <p>A short “power nap” (10–25 minutes) is best when you need a quick boost without sleep inertia. A longer 60–90 minute nap can help when you’re quite sleep deprived but should be scheduled earlier in the afternoon so it doesn’t delay bedtime.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">More Sleep Tools</h2>
+      <div class="explore-grid">
+        <a href="sleep-debt-calculator.html" class="explore-card">📉 Weekly Sleep Debt</a>
+        <a href="sleep-deprivation-calculator.html" class="explore-card">😴 Sleep Deprivation Check</a>
+        <a href="sleep-chronotype-bedtime-calculator.html" class="explore-card">🕒 Chronotype & Bedtime</a>
+        <a href="blue-light-exposure-calculator.html" class="explore-card">📱 Blue Light Exposure</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This calculator is for general information only and does not replace advice from a healthcare or sleep professional.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function addMinutesToTimeStr(timeStr, minutesToAdd) {
+      if (!timeStr) return null;
+      const [h, m] = timeStr.split(':').map(Number);
+      if (Number.isNaN(h) || Number.isNaN(m)) return null;
+      const total = (h * 60 + m + minutesToAdd + 24 * 60) % (24 * 60);
+      const hh = String(Math.floor(total / 60)).padStart(2, '0');
+      const mm = String(total % 60).padStart(2, '0');
+      return `${hh}:${mm}`;
+    }
+
+    function minutesBetween(startStr, endStr) {
+      const [sh, sm] = startStr.split(':').map(Number);
+      const [eh, em] = endStr.split(':').map(Number);
+      const start = sh * 60 + sm;
+      const end = eh * 60 + em;
+      let diff = end - start;
+      if (diff < 0) diff += 24 * 60;
+      return diff;
+    }
+
+    document.getElementById('napForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const napStart = document.getElementById('napStart').value;
+      const bedTime = document.getElementById('bedTime').value;
+      const sleepLastNight = parseFloat(document.getElementById('sleepLastNight').value) || 0;
+
+      const shortWake = addMinutesToTimeStr(napStart, 20);
+      const longWake = addMinutesToTimeStr(napStart, 90);
+
+      document.getElementById('shortNapWake').textContent = shortWake || '--:--';
+      document.getElementById('longNapWake').textContent = longWake || '--:--';
+
+      let advice = '<p>For a quick boost without much grogginess, aim for a <strong>10–25 minute power nap</strong>. That keeps you mostly in lighter sleep stages.</p>';
+
+      if (napStart && bedTime && longWake) {
+        const gapToBed = minutesBetween(longWake, bedTime);
+        if (gapToBed < 180) {
+          advice += '<p>Your 90‑minute nap would end less than ~3 hours before your usual bedtime. That increases the risk of trouble falling asleep. If you are very sleep deprived, consider a shorter nap or moving the longer nap earlier.</p>';
+        } else {
+          advice += '<p>Your 90‑minute nap ends several hours before bedtime, which is less likely to interfere with night sleep. It may help when you are significantly sleep deprived.</p>';
+        }
+      }
+
+      if (sleepLastNight < 6) {
+        advice += '<p>You slept less than about 6 hours last night. Naps can help in the short term, but try to also expand your night‑time sleep window when possible.</p>';
+      }
+
+      document.getElementById('napAdvice').innerHTML = advice;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

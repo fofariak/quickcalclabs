@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Nutrition Calculator – Daily Food Portions for Dogs & Cats | QuickCalcLabs</title>
+  <meta name="description" content="Estimate daily calorie needs and food portions for your dog or cat based on weight, life stage, and activity level. Educational only – always confirm with your vet.">
+  <meta name="keywords" content="pet nutrition calculator,dog food portion calculator,cat food portion calculator,how much should my dog eat,how much should my cat eat">
+  <link rel="canonical" href="https://quickcalclabs.com/pet-nutrition-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🍖 Pet Nutrition Calculator</h1>
+    <p class="subtitle">Estimate daily calories and food portions for your dog or cat based on weight, life stage, and activity level.</p>
+    <p class="meta-info">Educational guideline only – always confirm feeding plans with your veterinarian</p>
+
+    <form id="petNutritionForm">
+      <label for="species">Species:</label>
+      <select id="species">
+        <option value="dog" selected>Dog</option>
+        <option value="cat">Cat</option>
+      </select>
+
+      <label for="weightKg">Current weight (kg):</label>
+      <input type="number" id="weightKg" min="1" max="90" step="0.1" value="10" required>
+
+      <label for="lifeStage">Life stage:</label>
+      <select id="lifeStage">
+        <option value="puppyKitten">Puppy / kitten (growing)</option>
+        <option value="adult" selected>Adult</option>
+        <option value="senior">Senior</option>
+      </select>
+
+      <label for="activity">Activity level:</label>
+      <select id="activity">
+        <option value="low">Low (indoor / mostly resting)</option>
+        <option value="moderate" selected>Moderate (normal walks / play)</option>
+        <option value="high">High (working / very active)</option>
+      </select>
+
+      <label for="bodyCondition">Body condition:</label>
+      <select id="bodyCondition">
+        <option value="under">Underweight / very lean</option>
+        <option value="ideal" selected>Ideal</option>
+        <option value="over">Overweight</option>
+      </select>
+
+      <label for="foodKcalPer100g">Food energy density (kcal per 100 g):</label>
+      <p class="help-text">Find this on the bag or can (for example, 350–420 kcal per cup ≈ 330–380 kcal per 100 g for many dry foods).</p>
+      <input type="number" id="foodKcalPer100g" min="150" max="600" step="10" value="350" required>
+
+      <button type="submit">Calculate Daily Portions</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Estimated Daily Nutrition Needs</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="rerKcal">-- kcal</div>
+          <div class="stat-label">resting energy requirement (RER)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="merKcal">-- kcal</div>
+          <div class="stat-label">maintenance energy (MER)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="gramsPerDay">-- g</div>
+          <div class="stat-label">approx. grams of this food per day</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="mealsPerDay">2–3</div>
+          <div class="stat-label">suggested meals per day</div>
+        </div>
+      </div>
+
+      <div id="feedingTips" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How this pet nutrition estimate is calculated</summary>
+        <p>We first compute a <strong>Resting Energy Requirement (RER)</strong> using a common veterinary formula: <code>RER = 70 × (body&nbsp;weight<sup>0.75</sup>)</code>. Then we multiply RER by a factor depending on species, life stage, and activity (for example, an adult neutered dog at moderate activity might be ~1.4× RER).</p>
+        <p>You then provide your food’s energy density (kcal per 100 g), and we convert calories into grams per day. These values are meant as a <strong>starting point only</strong>; ideal feeding varies by individual, medical conditions, and the exact formulation of your pet’s diet.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Why Calories Matter for Pets</h2>
+      <p>Too few calories and your pet may lose weight, lose muscle, or become nutrient‑deficient. Too many calories lead to overweight and obesity, which are linked to arthritis, diabetes, and reduced lifespan. Matching calories to needs—and adjusting as weight changes—is a cornerstone of healthy pet nutrition.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Tools</h2>
+      <div class="explore-grid">
+        <a href="dog-weight-chart-calculator.html" class="explore-card">⚖️ Dog Weight Chart Checker</a>
+        <a href="cat-weight-chart-calculator.html" class="explore-card">⚖️ Cat Weight Chart Checker</a>
+        <a href="dog-age-calculator.html" class="explore-card">🐶 Dog Age to Human Years</a>
+        <a href="cat-age-calculator.html" class="explore-card">🐱 Cat Age to Human Years</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Can I use this instead of my vet’s feeding advice?</summary>
+      <p>No. This calculator provides generic estimates only. Your vet may adjust calories up or down based on breed, medical issues, ideal target weight, and lab results.</p>
+    </details>
+    <details>
+      <summary>What if my pet needs to lose or gain weight?</summary>
+      <p>Weight‑loss or weight‑gain plans should be set with a veterinarian. They may recommend a prescription diet, slower calorie changes, and regular re‑checks rather than using generic formulas.</p>
+    </details>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This pet nutrition calculator is for educational purposes only and is not a substitute for professional veterinary advice, diagnosis, or treatment.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    function calcRER(weightKg) {
+      return 70 * Math.pow(weightKg, 0.75);
+    }
+
+    function merMultiplier(species, lifeStage, activity, bodyCondition) {
+      // Very simplified guideline multipliers
+      let base;
+      if (species === 'dog') {
+        if (lifeStage === 'puppyKitten') base = 2.5;
+        else if (lifeStage === 'senior') base = 1.2;
+        else base = 1.4; // adult
+      } else {
+        // cats
+        if (lifeStage === 'puppyKitten') base = 2.5;
+        else if (lifeStage === 'senior') base = 1.1;
+        else base = 1.2;
+      }
+
+      if (activity === 'low') base -= 0.1;
+      if (activity === 'high') base += 0.2;
+
+      if (bodyCondition === 'under') base += 0.1;
+      if (bodyCondition === 'over') base -= 0.1;
+
+      return Math.max(1.0, base);
+    }
+
+    document.getElementById('petNutritionForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const species = document.getElementById('species').value;
+      const weightKg = parseFloat(document.getElementById('weightKg').value) || 1;
+      const lifeStage = document.getElementById('lifeStage').value;
+      const activity = document.getElementById('activity').value;
+      const bodyCondition = document.getElementById('bodyCondition').value;
+      const kcalPer100g = parseFloat(document.getElementById('foodKcalPer100g').value) || 350;
+
+      const rer = calcRER(weightKg);
+      const mult = merMultiplier(species, lifeStage, activity, bodyCondition);
+      const mer = rer * mult;
+      const gramsPerDay = (mer / kcalPer100g) * 100;
+
+      document.getElementById('rerKcal').textContent = `${Math.round(rer)} kcal`;
+      document.getElementById('merKcal').textContent = `${Math.round(mer)} kcal`;
+      document.getElementById('gramsPerDay').textContent = `${Math.round(gramsPerDay)} g`;
+
+      const meals = lifeStage === 'puppyKitten' ? '3–4' : '2–3';
+      document.getElementById('mealsPerDay').textContent = meals;
+
+      const speciesLabel = species === 'dog' ? 'dog' : 'cat';
+      document.getElementById('feedingTips').innerHTML = `
+        <p>For a <strong>${weightKg.toFixed(1)} kg</strong> ${speciesLabel}, this estimate suggests about <strong>${Math.round(mer)} kcal/day</strong>, or roughly <strong>${Math.round(gramsPerDay)} g</strong> of this food split into <strong>${meals}</strong> meals.</p>
+        <p style="font-size:0.95rem; color:var(--text-weak-light);">Always monitor body weight and condition over time and adjust portions with your vet’s guidance.</p>
+      `;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

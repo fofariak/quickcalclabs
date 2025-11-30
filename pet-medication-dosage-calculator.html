@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Medication Safety Guide – Why Only Vets Should Calculate Doses | QuickCalcLabs</title>
+  <meta name="description" content="Understand the factors vets use to calculate pet medication dosages and why online dosage calculators are unsafe. This tool explains questions to ask your vet instead of guessing.">
+  <meta name="keywords" content="pet medication dosage,pet drug dose calculator,dog medicine dose,cat medicine dose,pet medication safety">
+  <link rel="canonical" href="https://quickcalclabs.com/pet-medication-dosage-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>💊 Pet Medication “Dosage Calculator” (Safety Guide)</h1>
+    <p class="subtitle">Learn why exact drug doses for dogs and cats must be prescribed by a veterinarian, and get a checklist of questions to ask instead of guessing.</p>
+    <p class="meta-info">This tool does not calculate or display specific medication doses</p>
+
+    <form id="medForm">
+      <label for="medSpecies">Species:</label>
+      <select id="medSpecies">
+        <option value="dog" selected>Dog</option>
+        <option value="cat">Cat</option>
+      </select>
+
+      <label for="medWeight">Pet weight (kg):</label>
+      <input type="number" id="medWeight" min="1" max="90" step="0.1" value="10" required>
+
+      <label for="medName">Medication name (planned or prescribed):</label>
+      <p class="help-text">For example: anti‑flea tablet, pain medication, antibiotic. Do not give human meds unless explicitly told by a vet.</p>
+      <input type="text" id="medName" required>
+
+      <button type="submit">Show Safety Checklist</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Talk With Your Vet Before Dosing</h3>
+      <div id="warning" style="margin-bottom:1rem;"></div>
+      <div id="checklist"></div>
+
+      <details class="calc-meta">
+        <summary>Why we don’t compute pet drug doses here</summary>
+        <p>Medication dosing in animals depends on far more than weight: species differences (some human drugs are deadly to pets), organ function, other medications, specific product concentration, and the condition being treated. Mis‑dosing can cause internal bleeding, organ failure, or death.</p>
+        <p>Because of this, providing “automatic” dosage numbers online can be dangerous. This tool is intentionally designed to <strong>avoid showing any mg/kg or tablet counts</strong> and instead help you have a safer, clearer conversation with your veterinarian.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Never Guess Pet Medication Dosages</h2>
+      <p>Shortcuts like “just a children’s dose” or “one tablet for every 10 kg” can be extremely dangerous in pets. Cats in particular process many drugs differently from humans and dogs. Even over‑the‑counter pain relievers and cold medicines can be toxic at small amounts.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Health Tools</h2>
+      <div class="explore-grid">
+        <a href="pet-vaccination-schedule-calculator.html" class="explore-card">💉 Pet Vaccination Schedule</a>
+        <a href="pet-nutrition-calculator.html" class="explore-card">🍖 Pet Nutrition Calculator</a>
+        <a href="dog-weight-chart-calculator.html" class="explore-card">⚖️ Dog Weight Chart Checker</a>
+        <a href="cat-weight-chart-calculator.html" class="explore-card">⚖️ Cat Weight Chart Checker</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Important:</strong> This page is an educational safety guide only. It does not provide specific dosing instructions and must not be used to start, stop, or change any medication without veterinary supervision.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('medForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const species = document.getElementById('medSpecies').value;
+      const weight = parseFloat(document.getElementById('medWeight').value) || 0;
+      const medName = document.getElementById('medName').value.trim() || 'the medication';
+
+      const speciesLabel = species === 'dog' ? 'dog' : 'cat';
+
+      document.getElementById('warning').innerHTML = `
+        <p><strong>Do not calculate or guess a dose of ${medName} for your ${speciesLabel} based only on online charts.</strong> Even with weight (${weight.toFixed(1)} kg), safe dosing depends on their age, organ function, diagnosis, and the exact product strength.</p>
+      `;
+
+      document.getElementById('checklist').innerHTML = `
+        <h4>Ask your veterinarian before giving ${medName}:</h4>
+        <ul>
+          <li><strong>Is this medication safe for my ${speciesLabel}?</strong> (Some human meds are toxic even in tiny amounts.)</li>
+          <li><strong>What exact product and strength should I use?</strong> (Example: mg per tablet or mL per mL.)</li>
+          <li><strong>What dose, how often, and for how many days?</strong></li>
+          <li><strong>Are there interactions with other medications or health problems my pet has?</strong></li>
+          <li><strong>What side‑effects should I watch for and when should I stop and call you?</strong></li>
+        </ul>
+        <p style="font-size:0.95rem; color:var(--text-weak-light);">If your pet has accidentally eaten medication, contact your vet or a pet poison hotline immediately rather than using online dosage calculators.</p>
+      `;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

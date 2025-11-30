@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Sleep Debt Calculator | QuickCalcLabs</title>
+  <meta name="description" content="Track how much sleep you’re missing over a week by comparing your nightly sleep target with your actual hours for the last 7 days.">
+  <meta name="keywords" content="sleep debt calculator,weekly sleep debt,how much sleep am I behind,track lost sleep">
+  <link rel="canonical" href="https://quickcalclabs.com/sleep-debt-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>📉 Weekly Sleep Debt Calculator</h1>
+    <p class="subtitle">Enter your nightly sleep target and your sleep for the last 7 nights to see your cumulative sleep debt.</p>
+    <p class="meta-info">Patterns, not perfection – small variations are normal</p>
+
+    <form id="sleepDebtForm">
+      <label for="targetPerNight">Target sleep per night (hours):</label>
+      <p class="help-text">For most adults, this is usually 7–9 hours. Pick what helps you feel best.</p>
+      <input type="number" id="targetPerNight" min="4" max="12" step="0.25" value="8" required>
+
+      <label>Hours slept in the last 7 nights:</label>
+      <p class="help-text">Start with last night and go backwards, or use any recent 7‑day window.</p>
+      <div class="stats-grid" style="grid-template-columns: repeat(4, minmax(0,1fr)); gap:0.75rem;">
+        <div class="stat-card">
+          <div class="stat-label">Night 1</div>
+          <input type="number" id="n1" min="0" max="16" step="0.25" value="7">
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Night 2</div>
+          <input type="number" id="n2" min="0" max="16" step="0.25" value="6.5">
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Night 3</div>
+          <input type="number" id="n3" min="0" max="16" step="0.25" value="7.5">
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Night 4</div>
+          <input type="number" id="n4" min="0" max="16" step="0.25" value="6">
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Night 5</div>
+          <input type="number" id="n5" min="0" max="16" step="0.25" value="8.5">
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Night 6</div>
+          <input type="number" id="n6" min="0" max="16" step="0.25" value="7">
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Night 7</div>
+          <input type="number" id="n7" min="0" max="16" step="0.25" value="6.5">
+        </div>
+      </div>
+
+      <button type="submit">Calculate Weekly Sleep Debt</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Your Weekly Sleep Debt</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="weeklyTarget">-- h</div>
+          <div class="stat-label">target over 7 nights</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="weeklyActual">-- h</div>
+          <div class="stat-label">actual sleep logged</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="weeklyDebt">-- h</div>
+          <div class="stat-label">total sleep debt (positive)</div>
+        </div>
+      </div>
+
+      <div id="debtMessage" style="text-align:center; font-size:1.2rem; margin-top:1rem;"></div>
+      <div id="debtAdvice" style="margin-top:1rem;"></div>
+
+      <details class="calc-meta">
+        <summary>How sleep debt is calculated</summary>
+        <p>We multiply your nightly target by 7 to get a weekly target, sum your actual hours, and define sleep debt as <strong>target − actual</strong> (but never less than 0). This gives a simple estimate of how much you are “behind” on sleep for that week. It doesn’t capture sleep quality or circadian timing, which also matter.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Using Sleep Debt Numbers Wisely</h2>
+      <p>Sleep debt can highlight patterns (for example, consistently losing 5–10 hours per week), but the <strong>best signal is how you feel</strong>: daytime sleepiness, mood swings, or needing an alarm every morning can mean your target is too low or your schedule is too compressed.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">More Sleep Tools</h2>
+      <div class="explore-grid">
+        <a href="sleep-deprivation-calculator.html" class="explore-card">😴 Sleep Deprivation Calculator</a>
+        <a href="nap-optimization-calculator.html" class="explore-card">💤 Nap Optimization Calculator</a>
+        <a href="sleep-chronotype-bedtime-calculator.html" class="explore-card">🕒 Chronotype &amp; Ideal Bedtime</a>
+        <a href="blue-light-exposure-calculator.html" class="explore-card">📱 Blue Light Exposure</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This tool is informational only and does not diagnose sleep disorders. Speak with a healthcare provider if you have persistent insomnia, snoring, or excessive daytime sleepiness.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('sleepDebtForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const target = parseFloat(document.getElementById('targetPerNight').value) || 0;
+      const nights = [1,2,3,4,5,6,7].map(i => parseFloat(document.getElementById('n' + i).value) || 0);
+
+      const weeklyTarget = target * 7;
+      const actual = nights.reduce((sum, h) => sum + h, 0);
+      const debt = Math.max(0, weeklyTarget - actual);
+
+      document.getElementById('weeklyTarget').textContent = `${weeklyTarget.toFixed(1)} h`;
+      document.getElementById('weeklyActual').textContent = `${actual.toFixed(1)} h`;
+      document.getElementById('weeklyDebt').textContent = `${debt.toFixed(1)} h`;
+
+      let msg, advice;
+      if (debt < 3) {
+        msg = '✅ Your weekly sleep debt is small.';
+        advice = '<p>Minor variations are normal. Focus on keeping a consistent bedtime and wake time.</p>';
+      } else if (debt < 10) {
+        msg = '⚠️ Noticeable weekly sleep debt.';
+        advice = '<p>Regularly missing 3–10 hours per week can impact focus and mood. Try adding 15–30 minutes to your nightly window and/or planning an earlier night once or twice per week.</p>';
+      } else {
+        msg = '🚨 High weekly sleep debt.';
+        advice = '<p>Losing 10+ hours per week suggests your schedule may be unsustainable. Consider revisiting your workload, evening habits, and sleep environment, and talk with a doctor if this pattern persists.</p>';
+      }
+
+      document.getElementById('debtMessage').textContent = msg;
+      document.getElementById('debtAdvice').innerHTML = advice;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+

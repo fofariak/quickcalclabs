@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puppy Training Timeline & Milestones Calculator | QuickCalcLabs</title>
+  <meta name="description" content="See age-appropriate puppy training milestones for socialization, house training, basic cues, and impulse control based on your puppy's age.">
+  <meta name="keywords" content="puppy training timeline,puppy milestones,when to start puppy training,puppy socialization schedule">
+  <link rel="canonical" href="https://quickcalclabs.com/puppy-training-timeline-calculator.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>🐕 Puppy Training Timeline &amp; Milestones</h1>
+    <p class="subtitle">Enter your puppy’s age to see what training and socialization milestones to focus on right now.</p>
+    <p class="meta-info">Educational checklist – adapt to your puppy’s temperament and vet’s advice</p>
+
+    <form id="puppyForm">
+      <label for="ageWeeks">Puppy age (weeks):</label>
+      <input type="number" id="ageWeeks" min="6" max="104" value="12" required>
+
+      <button type="submit">Show Training Milestones</button>
+    </form>
+
+    <div id="results" class="result-box" style="display:none;">
+      <h3 style="color: var(--primary); text-align:center; margin-bottom:1rem;">Training Focus for Your Puppy</h3>
+      <div id="stageLabel" style="text-align:center; font-size:1.2rem; margin-bottom:1rem;"></div>
+      <div id="milestones"></div>
+
+      <details class="calc-meta">
+        <summary>How this puppy training timeline is organized</summary>
+        <p>We group ages into broad stages (early socialization, foundation skills, teenage phase, young adult) and list common training goals recommended by many positive‑reinforcement trainers. Every dog is different—go at your puppy’s pace, keep sessions short and fun, and consult a qualified trainer or vet for behavior concerns.</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <article>
+      <h2>Core Puppy Training Priorities</h2>
+      <p>From 8–16 weeks, socialization and learning that the world is safe are critical. As your puppy grows, you’ll layer in house training, crate comfort, basic cues like “sit” and “come,” and later more advanced skills and impulse control.</p>
+    </article>
+  </section>
+
+  <section class="seo-content">
+    <article>
+      <h2 style="text-align:left;">Explore More Pet Tools</h2>
+      <div class="explore-grid">
+        <a href="pet-vaccination-schedule-calculator.html" class="explore-card">💉 Pet Vaccination Schedule</a>
+        <a href="pet-nutrition-calculator.html" class="explore-card">🍖 Pet Nutrition Calculator</a>
+        <a href="dog-age-calculator.html" class="explore-card">🐶 Dog Age to Human Years</a>
+        <a href="dog-weight-chart-calculator.html" class="explore-card">⚖️ Dog Weight Chart Checker</a>
+      </div>
+    </article>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This puppy training timeline is for informational purposes only and does not replace advice from your veterinarian or a qualified dog trainer.</p>
+    </div>
+    <div class="footer-links">
+      <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    const stages = [
+      {
+        min: 6, max: 8,
+        label: 'Early transition (6–8 weeks)',
+        items: [
+          'Short, gentle handling sessions with trusted humans.',
+          'Begin name recognition in a quiet space.',
+          'Start crate as a safe, cozy resting spot (door open at first).',
+          'Pair every new experience with treats and calm encouragement.'
+        ]
+      },
+      {
+        min: 8, max: 16,
+        label: 'Critical socialization window (8–16 weeks)',
+        items: [
+          'Daily positive exposure to people, surfaces, sounds, and safe animals after vet clearance.',
+          'House training: frequent outdoor trips, reward for eliminating outside.',
+          'Introduce crate time in very short sessions with treats and chews.',
+          'Teach basic cues: name, sit, come, touch (hand target).',
+          'Practice gentle handling of paws, ears, mouth for future grooming/vet visits.'
+        ]
+      },
+      {
+        min: 16, max: 28,
+        label: 'Foundation skills (4–7 months)',
+        items: [
+          'Strengthen sit, down, come, leave‑it, and loose‑leash walking.',
+          'Continue house training and gradually increase freedom in the home.',
+          'Begin simple impulse‑control games (wait for food bowl, doorway manners).',
+          'Enroll in positive‑reinforcement puppy classes if available.',
+          'Provide appropriate chew toys and rotate them to prevent boredom.'
+        ]
+      },
+      {
+        min: 28, max: 52,
+        label: 'Teenage phase (7–12 months)',
+        items: [
+          'Expect temporary setbacks in recall and focus—keep rewards high‑value.',
+          'Increase mental enrichment (puzzle toys, scent games, training games).',
+          'Practice calm behavior around distractions (other dogs, visitors, traffic).',
+          'Work on polite greetings instead of jumping.',
+          'Reinforce calm alone‑time to prevent separation issues.'
+        ]
+      },
+      {
+        min: 52, max: 104,
+        label: 'Young adult (1–2 years+)',
+        items: [
+          'Maintain daily training “mini‑sessions” to keep skills sharp.',
+          'Fine‑tune recall in challenging environments with long lines and high‑value rewards.',
+          'Introduce advanced skills or sports (agility, nose work, trick training) as appropriate.',
+          'Adjust exercise and mental stimulation to your dog’s breed and personality.'
+        ]
+      }
+    ];
+
+    document.getElementById('puppyForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const weeks = parseFloat(document.getElementById('ageWeeks').value) || 0;
+      let stage = stages.find(s => weeks >= s.min && weeks < s.max);
+      if (!stage) stage = stages[stages.length - 1];
+
+      document.getElementById('stageLabel').textContent = stage.label;
+      document.getElementById('milestones').innerHTML = `
+        <ul>
+          ${stage.items.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      `;
+
+      const resultsBox = document.getElementById('results');
+      resultsBox.style.display = 'block';
+      resultsBox.classList.add('show');
+      setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener("click", () => {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+  <script type="text/javascript" src="//pl28110863.effectivegatecpm.com/54/37/8e/54378e3408f52b6ab19929b6dbba5157.js"></script>
+</body>
+</html>
+
+
