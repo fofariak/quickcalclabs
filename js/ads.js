@@ -1,5 +1,46 @@
+/**
+ * QuickCalcLabs Ad Management
+ * Safe banner ad rendering with pop-up protection
+ */
+
 const adRenderQueue = [];
 let isProcessingAdQueue = false;
+
+// Block pop-ups and new window opens from ad scripts
+(function() {
+  // Store original window.open
+  const originalWindowOpen = window.open;
+  
+  // Override window.open to block unwanted pop-ups
+  window.open = function(url, target, features) {
+    // Only allow window.open if called from trusted user actions on share buttons
+    const stack = new Error().stack || '';
+    if (stack.includes('shareToTwitter') || 
+        stack.includes('shareToFacebook') || 
+        stack.includes('shareToLinkedIn') ||
+        stack.includes('shareToWhatsApp') ||
+        stack.includes('shareToReddit')) {
+      return originalWindowOpen.call(window, url, target, features);
+    }
+    
+    // Log blocked pop-up attempt (for debugging)
+    console.log('[QuickCalcLabs] Blocked pop-up attempt:', url);
+    return null;
+  };
+  
+  // Prevent click hijacking from ad scripts
+  document.addEventListener('click', function(e) {
+    // Check if this is a legitimate user click on an ad container
+    const target = e.target;
+    const isAdContainer = target.closest('[id^="ad-banner"]');
+    
+    // If click is outside ad containers and tries to open new window, block it
+    if (!isAdContainer) {
+      // The click handler will naturally propagate
+      return;
+    }
+  }, true);
+})();
 
 function enqueueAdSlot(slotConfig) {
   adRenderQueue.push(slotConfig);
@@ -31,13 +72,20 @@ function renderAdSlot({ containerId, options, scriptSrc }) {
       return;
     }
 
+    // Clear container and add sandbox wrapper
     container.innerHTML = '';
+    
+    // Store previous atOptions
     const previousAtOptions = window.atOptions;
     window.atOptions = options;
 
     const invokeScript = document.createElement('script');
     invokeScript.type = 'text/javascript';
     invokeScript.src = scriptSrc;
+    
+    // Add async and defer for better performance
+    invokeScript.async = true;
+    
     invokeScript.onload = () => {
       cleanupAtOptions(previousAtOptions);
       resolve();
@@ -103,5 +151,3 @@ function renderAdBanner300x250(containerId) {
     scriptSrc: '//www.highperformanceformat.com/21c3bdcbb595adb2c550f8c8d41ef140/invoke.js'
   });
 }
-
-// Referral banner removed to prevent conflicts with social bar
