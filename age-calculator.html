@@ -829,9 +829,11 @@
         <p style="margin: 0.3rem 0;"><b>Total Hours (approx.):</b> ${totalHours.toLocaleString()}</p>
         <hr>
         <p style="margin: 0.5rem 0;"><b>Fun Fact:</b> ${randomFact}</p>
+        ${getShareButtonsHTML()}
       `;
         
       document.getElementById('result').innerHTML = resultHTML;
+      initShareButtons('Age Calculator', ageYears + ' years, ' + ageMonths + ' months, ' + ageDays + ' days', zodiacSign);
     }
   </script>
   
@@ -864,6 +866,7 @@
         applyTheme(savedTheme);
     });
   </script>
+  <script src="js/share-buttons.js"></script>
   <script src="js/ads.js"></script>
   <script>
     renderAdBanner728x90('ad-banner-top');

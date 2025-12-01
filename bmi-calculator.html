@@ -918,7 +918,11 @@
         <p style="margin: 0.5rem 0;"><b>Healthy Weight Range for Your Height:</b> ${idealMin} - ${idealMax} ${idealUnit}</p>
         <hr>
         <p style="margin: 0.5rem 0; font-size: 0.95rem;"><b>Did You Know?</b> ${randomFact}</p>
+        ${getShareButtonsHTML()}
       `;
+      
+      // Initialize share buttons with result
+      initShareButtons('BMI Calculator', bmi, category);
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
@@ -938,6 +942,7 @@
         });
     });
   </script>
+  <script src="js/share-buttons.js"></script>
   <script src="js/ads.js"></script>
   <script>
     renderAdBanner728x90('ad-banner-top');

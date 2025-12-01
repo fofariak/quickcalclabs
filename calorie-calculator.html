@@ -641,6 +641,18 @@
       <div class="fun-fact-box">
         <strong>Did You Know?</strong> <span id="funFact"></span>
       </div>
+      <div id="shareButtonsContainer" class="share-buttons-container" style="display: none;">
+        <h4 class="share-title">📤 Share Your Results</h4>
+        <div class="share-buttons">
+          <button class="share-btn twitter" onclick="shareToTwitter()" title="Share on Twitter"><span>𝕏</span></button>
+          <button class="share-btn facebook" onclick="shareToFacebook()" title="Share on Facebook"><span>f</span></button>
+          <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="Share on LinkedIn"><span>in</span></button>
+          <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="Share on WhatsApp"><span>💬</span></button>
+          <button class="share-btn reddit" onclick="shareToReddit()" title="Share on Reddit"><span>↗</span></button>
+          <button class="share-btn email" onclick="shareToEmail()" title="Share via Email"><span>✉</span></button>
+          <button class="share-btn copy" id="shareCopyBtn" onclick="copyToClipboard()" title="Copy to Clipboard"><span>📋</span></button>
+        </div>
+      </div>
     </div>
   </section>
     <!-- Mid Ad Banner (320x50) -->
@@ -1049,6 +1061,9 @@
       // Show results with animation
       results.classList.add('show');
       
+      // Initialize share buttons with result
+      initShareButtons('Calorie Calculator', maintain + ' calories/day', 'Maintenance TDEE');
+      
       // Scroll to results smoothly
       setTimeout(() => {
         results.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1085,6 +1100,7 @@
     });
   </script>
 
+  <script src="js/share-buttons.js"></script>
   <script src="js/ads.js"></script>
   <script>
     renderAdBanner728x90('ad-banner-top');
