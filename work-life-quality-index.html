@@ -341,61 +341,6 @@
       opacity: 0;
     }
 
-    /* Social share buttons */
-    .share-buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 2px solid rgba(139, 92, 246, 0.2);
-    }
-
-    .share-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0.7rem 1.2rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-      text-decoration: none;
-      color: white;
-    }
-
-    .share-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .share-btn.linkedin {
-      background: #0077b5;
-    }
-
-    .share-btn.facebook {
-      background: #1877f2;
-    }
-
-    .share-btn.twitter {
-      background: #1da1f2;
-    }
-
-    .share-btn.reddit {
-      background: #ff4500;
-    }
-
-    .share-btn.whatsapp {
-      background: #25d366;
-    }
-
-    .share-btn.email {
-      background: #6b7280;
-    }
-
     .hidden {
       display: none !important;
     }
@@ -1284,26 +1229,17 @@
       <div class="recommendations" id="recommendations"></div>
 
       <!-- Social Share Buttons -->
-      <div class="share-buttons">
-        <h3 style="width: 100%; text-align: center; margin: 0 0 1rem; color: var(--text-strong-light);">Share Your Results</h3>
-        <button class="share-btn linkedin" id="shareLinkedIn">
-          <span>in</span> LinkedIn
-        </button>
-        <button class="share-btn facebook" id="shareFacebook">
-          <span>f</span> Facebook
-        </button>
-        <button class="share-btn twitter" id="shareTwitter">
-          <span>𝕏</span> Twitter
-        </button>
-        <button class="share-btn reddit" id="shareReddit">
-          <span>↗</span> Reddit
-        </button>
-        <button class="share-btn whatsapp" id="shareWhatsApp">
-          <span>💬</span> WhatsApp
-        </button>
-        <button class="share-btn email" id="shareEmail">
-          <span>✉</span> Email
-        </button>
+      <div id="shareButtonsContainer" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid rgba(139,92,246,0.2);text-align:center;">
+        <p style="font-size:0.95rem;font-weight:700;margin:0 0 1rem;color:#334155;">📤 Share Your Results</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
+          <button type="button" id="shareTwitter" title="Share on X" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:#000;"><span style="line-height:1;">𝕏</span></button>
+          <button type="button" id="shareFacebook" title="Share on Facebook" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:#1877f2;font-weight:700;"><span style="line-height:1;">f</span></button>
+          <button type="button" id="shareLinkedIn" title="Share on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:0.85rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:#0077b5;font-weight:700;"><span style="line-height:1;">in</span></button>
+          <button type="button" id="shareWhatsApp" title="Share on WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:#25d366;"><span style="line-height:1;">💬</span></button>
+          <button type="button" id="shareReddit" title="Share on Reddit" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:#ff4500;"><span style="line-height:1;">↗</span></button>
+          <button type="button" id="shareEmail" title="Share via Email" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:#6b7280;"><span style="line-height:1;">✉️</span></button>
+          <button type="button" id="shareCopyBtn" onclick="copyWLQIToClipboard()" title="Copy Results" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:linear-gradient(135deg,#8b5cf6,#3b82f6);"><span style="line-height:1;">📋</span></button>
+        </div>
       </div>
     </div>
   </section>

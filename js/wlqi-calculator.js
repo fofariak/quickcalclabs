@@ -320,6 +320,27 @@ function shareToEmail() {
   window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+function copyWLQIToClipboard() {
+  const url = getShareUrl();
+  const text = `${getShareText()} ${url}`;
+  
+  navigator.clipboard.writeText(text).then(() => {
+    const copyBtn = document.getElementById('shareCopyBtn');
+    if (copyBtn) {
+      const originalHTML = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<span style="line-height:1;">✓</span>';
+      copyBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+        copyBtn.style.background = 'linear-gradient(135deg, #8b5cf6, #3b82f6)';
+      }, 2000);
+    }
+  }).catch(err => {
+    console.error('Failed to copy:', err);
+    alert('Failed to copy to clipboard. Please try again.');
+  });
+}
+
 // Collapsible sections functionality
 function initializeCollapsibleSections() {
   const toggles = document.querySelectorAll('.section-toggle');
@@ -956,6 +977,12 @@ function displayResults(finalScore, scores) {
   // Show results
   const resultsBox = document.getElementById('results');
   resultsBox.classList.add('show');
+  
+  // Show share buttons
+  const shareContainer = document.getElementById('shareButtonsContainer');
+  if (shareContainer) {
+    shareContainer.style.display = 'block';
+  }
   
   // Scroll to results
   setTimeout(() => {
