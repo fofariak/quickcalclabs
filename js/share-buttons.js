@@ -1,8 +1,8 @@
 // Share Buttons Functionality
 // Copyright (c) 2025 QuickCalcLabs. All Rights Reserved.
 
-// Store result data for sharing
-let shareResultData = {
+// Store result data for sharing - use window to ensure global access
+window.shareResultData = {
   title: '',
   result: '',
   category: '',
@@ -17,28 +17,32 @@ let shareResultData = {
  * @param {string} pageUrl - URL of the calculator page (optional, defaults to current page)
  */
 function initShareButtons(title, result, category, pageUrl) {
-  shareResultData.title = title || 'Calculator';
-  shareResultData.result = result || '';
-  shareResultData.category = category || '';
-  shareResultData.pageUrl = pageUrl || window.location.href.split('?')[0];
+  window.shareResultData.title = title || 'Calculator';
+  window.shareResultData.result = String(result || '');
+  window.shareResultData.category = category || '';
+  window.shareResultData.pageUrl = pageUrl || window.location.href.split('?')[0];
   
   // Show share buttons container if hidden
   const shareContainer = document.getElementById('shareButtonsContainer');
   if (shareContainer) {
     shareContainer.style.display = 'block';
   }
+  
+  // Debug log to verify data is set
+  console.log('Share buttons initialized with:', window.shareResultData);
 }
 
 /**
  * Generate share text with result included
  */
 function getShareText() {
-  let text = `I just used the ${shareResultData.title}! `;
+  const data = window.shareResultData;
+  let text = `I just used the ${data.title}! `;
   
-  if (shareResultData.result && shareResultData.category) {
-    text += `My result: ${shareResultData.result} (${shareResultData.category}). `;
-  } else if (shareResultData.result) {
-    text += `My result: ${shareResultData.result}. `;
+  if (data.result && data.category) {
+    text += `My result: ${data.result} (${data.category}). `;
+  } else if (data.result) {
+    text += `My result: ${data.result}. `;
   }
   
   text += `Try it yourself:`;
@@ -49,7 +53,7 @@ function getShareText() {
  * Get the page URL for sharing
  */
 function getShareUrl() {
-  return shareResultData.pageUrl || window.location.href.split('?')[0];
+  return window.shareResultData.pageUrl || window.location.href.split('?')[0];
 }
 
 /**
@@ -105,7 +109,7 @@ function shareToReddit() {
  */
 function shareToEmail() {
   const url = getShareUrl();
-  const subject = `Check out my ${shareResultData.title} result!`;
+  const subject = `Check out my ${window.shareResultData.title} result!`;
   let body = getShareText();
   body += `\n\n${url}\n\nQuickCalcLabs offers free calculators to help you understand your health and wellness.`;
   window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -143,29 +147,15 @@ function copyToClipboard() {
 function getShareButtonsHTML() {
   return `
     <div id="shareButtonsContainer" class="share-buttons-container" style="display: none;">
-      <h4 class="share-title">📤 Share Your Results</h4>
+      <p class="share-title">📤 Share Your Results</p>
       <div class="share-buttons">
-        <button class="share-btn twitter" onclick="shareToTwitter()" title="Share on Twitter">
-          <span>𝕏</span>
-        </button>
-        <button class="share-btn facebook" onclick="shareToFacebook()" title="Share on Facebook">
-          <span>f</span>
-        </button>
-        <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="Share on LinkedIn">
-          <span>in</span>
-        </button>
-        <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="Share on WhatsApp">
-          <span>💬</span>
-        </button>
-        <button class="share-btn reddit" onclick="shareToReddit()" title="Share on Reddit">
-          <span>↗</span>
-        </button>
-        <button class="share-btn email" onclick="shareToEmail()" title="Share via Email">
-          <span>✉</span>
-        </button>
-        <button class="share-btn copy" id="shareCopyBtn" onclick="copyToClipboard()" title="Copy to Clipboard">
-          <span>📋</span>
-        </button>
+        <button type="button" class="share-btn twitter" onclick="shareToTwitter()" title="Share on X/Twitter"><span>𝕏</span></button>
+        <button type="button" class="share-btn facebook" onclick="shareToFacebook()" title="Share on Facebook"><span>f</span></button>
+        <button type="button" class="share-btn linkedin" onclick="shareToLinkedIn()" title="Share on LinkedIn"><span>in</span></button>
+        <button type="button" class="share-btn whatsapp" onclick="shareToWhatsApp()" title="Share on WhatsApp"><span>💬</span></button>
+        <button type="button" class="share-btn reddit" onclick="shareToReddit()" title="Share on Reddit"><span>↗</span></button>
+        <button type="button" class="share-btn email" onclick="shareToEmail()" title="Share via Email"><span>✉️</span></button>
+        <button type="button" class="share-btn copy" id="shareCopyBtn" onclick="copyToClipboard()" title="Copy to Clipboard"><span>📋</span></button>
       </div>
     </div>
   `;
