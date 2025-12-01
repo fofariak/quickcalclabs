@@ -141,21 +141,25 @@ function copyToClipboard() {
 }
 
 /**
- * Generate share buttons HTML
- * Call this function to get the HTML for share buttons
+ * Generate share buttons HTML with inline styles for maximum compatibility
  */
 function getShareButtonsHTML() {
+  const containerStyle = "display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid rgba(139,92,246,0.2);text-align:center;";
+  const titleStyle = "font-size:0.95rem;font-weight:700;margin:0 0 1rem;color:#334155;";
+  const wrapperStyle = "display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;";
+  const btnBase = "display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:transform 0.2s ease;";
+  
   return `
-    <div id="shareButtonsContainer" class="share-buttons-container" style="display: none;">
-      <p class="share-title">📤 Share Your Results</p>
-      <div class="share-buttons">
-        <button type="button" class="share-btn twitter" onclick="shareToTwitter()" title="Share on X/Twitter"><span>𝕏</span></button>
-        <button type="button" class="share-btn facebook" onclick="shareToFacebook()" title="Share on Facebook"><span>f</span></button>
-        <button type="button" class="share-btn linkedin" onclick="shareToLinkedIn()" title="Share on LinkedIn"><span>in</span></button>
-        <button type="button" class="share-btn whatsapp" onclick="shareToWhatsApp()" title="Share on WhatsApp"><span>💬</span></button>
-        <button type="button" class="share-btn reddit" onclick="shareToReddit()" title="Share on Reddit"><span>↗</span></button>
-        <button type="button" class="share-btn email" onclick="shareToEmail()" title="Share via Email"><span>✉️</span></button>
-        <button type="button" class="share-btn copy" id="shareCopyBtn" onclick="copyToClipboard()" title="Copy to Clipboard"><span>📋</span></button>
+    <div id="shareButtonsContainer" style="${containerStyle}">
+      <p style="${titleStyle}">📤 Share Your Results</p>
+      <div style="${wrapperStyle}">
+        <button type="button" onclick="shareToTwitter()" title="Share on X" style="${btnBase}background:#000;"><span style="line-height:1;">𝕏</span></button>
+        <button type="button" onclick="shareToFacebook()" title="Share on Facebook" style="${btnBase}background:#1877f2;font-weight:700;"><span style="line-height:1;">f</span></button>
+        <button type="button" onclick="shareToLinkedIn()" title="Share on LinkedIn" style="${btnBase}background:#0077b5;font-weight:700;font-size:0.85rem;"><span style="line-height:1;">in</span></button>
+        <button type="button" onclick="shareToWhatsApp()" title="Share on WhatsApp" style="${btnBase}background:#25d366;"><span style="line-height:1;">💬</span></button>
+        <button type="button" onclick="shareToReddit()" title="Share on Reddit" style="${btnBase}background:#ff4500;"><span style="line-height:1;">↗</span></button>
+        <button type="button" onclick="shareToEmail()" title="Share via Email" style="${btnBase}background:#6b7280;"><span style="line-height:1;">✉️</span></button>
+        <button type="button" id="shareCopyBtn" onclick="copyToClipboard()" title="Copy Results" style="${btnBase}background:linear-gradient(135deg,#8b5cf6,#3b82f6);"><span style="line-height:1;">📋</span></button>
       </div>
     </div>
   `;
