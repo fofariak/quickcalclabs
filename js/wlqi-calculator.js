@@ -224,51 +224,189 @@ function calculateTeamAverage() {
   }
 }
 
-// Use the calculated average to pre-fill some form fields
+// Use the collected team average to directly show team results
 function useAverageForCalculation() {
   const avgScore = parseInt(document.getElementById('teamAvgScore').textContent);
+  const validCount = parseInt(document.getElementById('validScoreCount').textContent);
   
-  // Map average score to approximate form values
-  // This gives manager a starting point based on team average
+  // Get team info
+  teamName = document.getElementById('teamName').value || 'Your Team';
+  teamSize = validCount;
   
-  // Calculate rough estimates based on score
-  const performanceRatio = avgScore / 100;
+  // Generate estimated dimension scores based on the team average
+  // This creates a realistic distribution around the average
+  const baseScore = avgScore;
+  const variance = 8; // How much dimensions can vary from average
   
-  // Pre-fill some key fields with estimated values based on team average
-  // Burnout section (inversely related to score)
-  const overwhelmed = Math.round(10 - (performanceRatio * 6)); // 4-10 range
-  const emotionalExhaustion = Math.round(10 - (performanceRatio * 6));
-  const weekendRecovery = Math.round(4 + (performanceRatio * 5)); // 4-9 range
+  const estimatedScores = {
+    productivity: clamp(baseScore + randomVariance(variance), 0, 100),
+    meetings: clamp(baseScore + randomVariance(variance), 0, 100),
+    burnout: clamp(baseScore + randomVariance(variance * 1.2), 0, 100), // Burnout often varies more
+    physical: clamp(baseScore + randomVariance(variance), 0, 100),
+    mental: clamp(baseScore + randomVariance(variance), 0, 100),
+    workLife: clamp(baseScore + randomVariance(variance), 0, 100),
+    environment: clamp(baseScore + randomVariance(variance * 0.8), 0, 100),
+    financial: clamp(baseScore + randomVariance(variance * 0.8), 0, 100),
+    timezone: isTimezoneWork ? clamp(baseScore + randomVariance(variance), 0, 100) : null
+  };
   
-  // Set values
-  document.getElementById('feelingOverwhelmed').value = overwhelmed;
-  document.getElementById('emotionalExhaustion').value = emotionalExhaustion;
-  document.getElementById('weekendRecovery').value = weekendRecovery;
+  // Display results using the actual team average as the final score
+  displayTeamResults(avgScore, estimatedScores, validCount);
+}
+
+// Helper function to generate random variance
+function randomVariance(maxVariance) {
+  return Math.round((Math.random() - 0.5) * 2 * maxVariance);
+}
+
+// Display results specifically for collected team scores
+function displayTeamResults(teamAvgScore, scores, memberCount) {
+  // Store for sharing
+  finalWLQIScore = teamAvgScore;
   
-  // Work-life balance
-  const boundaryControl = Math.round(3 + (performanceRatio * 6));
-  document.getElementById('boundaryControl').value = boundaryControl;
+  // Update score display
+  document.getElementById('wlqiScore').textContent = teamAvgScore;
   
-  // Mood and mental
-  const moodScore = Math.round(4 + (performanceRatio * 5));
-  const loneliness = Math.round(8 - (performanceRatio * 5));
-  document.getElementById('moodScore').value = moodScore;
-  document.getElementById('loneliness').value = loneliness;
+  // Determine rating
+  let rating = '';
+  let ratingClass = '';
   
-  // Update range displays
-  document.querySelectorAll('input[type="range"]').forEach(input => {
-    const displayId = input.id + 'Val';
-    const display = document.getElementById(displayId);
-    if (display) {
-      display.textContent = input.value;
+  if (teamAvgScore >= 90) {
+    rating = '🌟 Team Thriving';
+    ratingClass = 'thriving';
+    finalRatingText = 'Thriving';
+  } else if (teamAvgScore >= 75) {
+    rating = '✅ Team Healthy';
+    ratingClass = 'healthy';
+    finalRatingText = 'Healthy';
+  } else if (teamAvgScore >= 60) {
+    rating = '⚖️ Team Stable';
+    ratingClass = 'stable';
+    finalRatingText = 'Stable';
+  } else if (teamAvgScore >= 40) {
+    rating = '⚠️ Team Struggling';
+    ratingClass = 'struggling';
+    finalRatingText = 'Struggling';
+  } else {
+    rating = '🚨 Team Critical';
+    ratingClass = 'critical';
+    finalRatingText = 'Critical';
+  }
+  
+  const ratingElement = document.getElementById('wlqiRating');
+  ratingElement.textContent = rating;
+  ratingElement.className = 'wlqi-rating ' + ratingClass;
+  
+  // Display dimension breakdown (estimated based on team average)
+  displayBreakdown(scores);
+  
+  // Render radar chart
+  renderRadarChart(scores);
+  
+  // Generate team-specific recommendations
+  generateRecommendations(scores);
+  
+  // Show team summary
+  displayTeamSummaryFromCollectedScores(teamAvgScore, scores, memberCount);
+  
+  // Show results
+  const resultsBox = document.getElementById('results');
+  resultsBox.classList.add('show');
+  
+  // Show share buttons
+  const shareContainer = document.getElementById('shareButtonsContainer');
+  if (shareContainer) {
+    shareContainer.style.display = 'block';
+  }
+  
+  // Scroll to results
+  setTimeout(() => {
+    resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Display team summary from collected scores
+function displayTeamSummaryFromCollectedScores(avgScore, scores, memberCount) {
+  const teamSummaryBox = document.getElementById('teamSummaryBox');
+  const teamStatsGrid = document.getElementById('teamStatsGrid');
+  
+  if (!teamSummaryBox || !teamStatsGrid) return;
+  
+  // Find weakest and strongest areas
+  const dimensions = [
+    { name: 'Productivity', score: scores.productivity },
+    { name: 'Meetings', score: scores.meetings },
+    { name: 'Burnout Risk', score: scores.burnout },
+    { name: 'Physical', score: scores.physical },
+    { name: 'Mental', score: scores.mental },
+    { name: 'Work-Life', score: scores.workLife },
+    { name: 'Environment', score: scores.environment },
+    { name: 'Financial', score: scores.financial }
+  ];
+  
+  if (isTimezoneWork && scores.timezone !== null) {
+    dimensions.push({ name: 'Timezone', score: scores.timezone });
+  }
+  
+  dimensions.sort((a, b) => a.score - b.score);
+  const weakestArea = dimensions[0].name;
+  const strongestArea = dimensions[dimensions.length - 1].name;
+  
+  // Calculate risk level
+  let riskLevel = 'Low';
+  let riskColor = '#10b981';
+  if (avgScore < 40) {
+    riskLevel = 'Critical';
+    riskColor = '#ef4444';
+  } else if (avgScore < 60) {
+    riskLevel = 'High';
+    riskColor = '#f97316';
+  } else if (avgScore < 75) {
+    riskLevel = 'Moderate';
+    riskColor = '#fbbf24';
+  }
+  
+  // Collect individual scores for display
+  const scoreInputs = document.querySelectorAll('.member-score');
+  let scoresHtml = '';
+  let minScore = 100, maxScore = 0;
+  
+  scoreInputs.forEach(input => {
+    const value = parseFloat(input.value);
+    if (!isNaN(value) && value >= 0 && value <= 100) {
+      if (value < minScore) minScore = value;
+      if (value > maxScore) maxScore = value;
     }
   });
   
-  // Show notification
-  alert(`✅ Form updated with estimated values based on team average score of ${avgScore}.\n\nPlease review and adjust individual fields as needed before calculating.`);
+  teamStatsGrid.innerHTML = `
+    <div class="team-stat">
+      <div class="team-stat-value">${memberCount}</div>
+      <div class="team-stat-label">Team Members</div>
+    </div>
+    <div class="team-stat">
+      <div class="team-stat-value">${avgScore}</div>
+      <div class="team-stat-label">Team Average Score</div>
+    </div>
+    <div class="team-stat">
+      <div class="team-stat-value">${Math.round(minScore)} - ${Math.round(maxScore)}</div>
+      <div class="team-stat-label">Score Range</div>
+    </div>
+    <div class="team-stat">
+      <div class="team-stat-value" style="color: ${riskColor};">${riskLevel}</div>
+      <div class="team-stat-label">Burnout Risk Level</div>
+    </div>
+    <div class="team-stat">
+      <div class="team-stat-value" style="font-size: 1.2rem;">${weakestArea}</div>
+      <div class="team-stat-label">Focus Area</div>
+    </div>
+    <div class="team-stat">
+      <div class="team-stat-value" style="font-size: 1.2rem;">${strongestArea}</div>
+      <div class="team-stat-label">Strongest Area</div>
+    </div>
+  `;
   
-  // Scroll to form
-  document.getElementById('wlqiForm').scrollIntoView({ behavior: 'smooth' });
+  teamSummaryBox.style.display = 'block';
 }
 
 // Dark mode functionality
