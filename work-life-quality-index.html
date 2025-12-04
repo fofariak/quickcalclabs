@@ -633,6 +633,194 @@
       color: var(--text-weak-dark, #94a3b8);
     }
 
+    /* Team Survey Sharing */
+    .team-survey-section {
+      display: none;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.08));
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .team-survey-section.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .dark-mode .team-survey-section {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(16, 185, 129, 0.12));
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .team-survey-section h4 {
+      margin: 0 0 0.75rem;
+      color: var(--secondary, #3b82f6);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .team-survey-section p {
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+      margin: 0 0 1rem;
+      line-height: 1.5;
+    }
+
+    .dark-mode .team-survey-section p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .team-survey-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--secondary, #3b82f6), #10b981);
+      color: white;
+      border: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .team-survey-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .team-survey-btn.secondary {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-medium-light, #334155);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .team-survey-btn.secondary:hover {
+      border-color: var(--secondary, #3b82f6);
+      color: var(--secondary, #3b82f6);
+    }
+
+    .dark-mode .team-survey-btn.secondary {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      color: var(--text-medium-dark, #cbd5e1);
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    /* Team Score Collector */
+    .team-collector {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .team-collector.show {
+      display: block;
+    }
+
+    .dark-mode .team-collector {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .team-collector h5 {
+      margin: 0 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      font-size: 1rem;
+    }
+
+    .dark-mode .team-collector h5 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .score-input-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      align-items: center;
+    }
+
+    .score-input-row input {
+      flex: 1;
+      padding: 0.6rem 0.8rem;
+      border-radius: var(--radius-sm, 8px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 0.9rem;
+    }
+
+    .score-input-row input:focus {
+      border-color: var(--secondary, #3b82f6);
+      outline: none;
+    }
+
+    .dark-mode .score-input-row input {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .remove-score-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: #ef4444;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .add-score-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-sm, 8px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-medium-light, #334155);
+      border: 2px dashed var(--border-light, rgba(226, 232, 240, 0.8));
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .add-score-btn:hover {
+      border-color: var(--secondary, #3b82f6);
+      color: var(--secondary, #3b82f6);
+    }
+
+    .dark-mode .add-score-btn {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      color: var(--text-medium-dark, #cbd5e1);
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .team-avg-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+      border-radius: var(--radius-sm, 8px);
+      text-align: center;
+    }
+
+    .team-avg-score {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #10b981;
+    }
+
     /* Collapsible sections */
     .section-toggle {
       display: flex;
@@ -1215,7 +1403,7 @@
     <!-- Team Size Section (Hidden by default) -->
     <div class="team-size-section" id="teamSizeSection">
       <h4>👥 Team Assessment Mode</h4>
-      <p style="font-size: 0.9rem; color: var(--text-weak-light); margin: 0 0 1rem;">As a manager, enter your team's average values across all members to get a team-wide WLQI score. This helps identify team-wide patterns and areas for improvement.</p>
+      <p style="font-size: 0.9rem; color: var(--text-weak-light); margin: 0 0 1rem;">As a manager, you have two options to assess your team's work-life quality:</p>
       <div class="input-row">
         <div>
           <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Team Name (Optional)</label>
@@ -1224,6 +1412,49 @@
         <div>
           <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Number of Team Members</label>
           <input type="number" id="teamSize" min="2" max="500" placeholder="e.g., 8" value="5">
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Survey Sharing Section -->
+    <div class="team-survey-section" id="teamSurveySection">
+      <h4>📤 Share Survey with Your Team</h4>
+      <p>Share this calculator with your team members. Once they complete their individual assessments, collect their scores and calculate the team average below.</p>
+      
+      <button type="button" class="team-survey-btn" id="copyTeamLinkBtn">
+        📋 Copy Survey Link
+      </button>
+      <button type="button" class="team-survey-btn secondary" id="toggleCollectorBtn">
+        📊 Collect Team Scores
+      </button>
+
+      <!-- Team Score Collector -->
+      <div class="team-collector" id="teamCollector">
+        <h5>Enter Individual Team Member Scores</h5>
+        <p style="font-size: 0.85rem; margin-bottom: 1rem;">Ask team members to share their WLQI score (0-100) after completing the calculator. Enter each score below:</p>
+        
+        <div id="scoreInputs">
+          <div class="score-input-row">
+            <input type="text" placeholder="Team member name (optional)" class="member-name">
+            <input type="number" min="0" max="100" placeholder="Score (0-100)" class="member-score">
+            <button type="button" class="remove-score-btn" onclick="removeScoreRow(this)">×</button>
+          </div>
+          <div class="score-input-row">
+            <input type="text" placeholder="Team member name (optional)" class="member-name">
+            <input type="number" min="0" max="100" placeholder="Score (0-100)" class="member-score">
+            <button type="button" class="remove-score-btn" onclick="removeScoreRow(this)">×</button>
+          </div>
+        </div>
+        
+        <button type="button" class="add-score-btn" id="addScoreBtn">+ Add Team Member</button>
+        
+        <div class="team-avg-result" id="teamAvgResult" style="display: none;">
+          <p style="margin: 0 0 0.5rem; font-weight: 600;">Team Average WLQI Score:</p>
+          <div class="team-avg-score" id="teamAvgScore">0</div>
+          <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--text-weak-light);">Based on <span id="validScoreCount">0</span> team members</p>
+          <button type="button" class="team-survey-btn" style="margin-top: 1rem;" onclick="useAverageForCalculation()">
+            📈 Use This Average for Team Analysis
+          </button>
         </div>
       </div>
     </div>
@@ -1240,17 +1471,6 @@
         <div class="timezone-checkbox">
           <input type="checkbox" id="timezoneWork">
           <label for="timezoneWork" style="margin: 0; font-size: 0.95rem;"><span id="timezoneLabel">I work</span> across time zones</label>
-        </div>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="quick-links" style="margin-bottom: 1.5rem;">
-        <h4>🔗 Related Tools</h4>
-        <div class="quick-links-grid">
-          <a href="burnout-risk-calculator.html" class="quick-link">🔥 Burnout Risk</a>
-          <a href="stress-load-calculator.html" class="quick-link">😰 Stress Load</a>
-          <a href="meeting-load-stress-calculator.html" class="quick-link">📅 Meeting Load</a>
-          <a href="productivity-score-calculator.html" class="quick-link">📊 Productivity</a>
         </div>
       </div>
 
@@ -1711,20 +1931,6 @@
   <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
-    <h3>🔗 Explore More Tools</h3>
-    <div class="card-grid">
-      <div class="card"><a href="burnout-risk-calculator.html">🔥 Burnout Risk Calculator</a></div>
-      <div class="card"><a href="stress-load-calculator.html">😰 Stress Load Calculator</a></div>
-      <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Calculator</a></div>
-      <div class="card"><a href="productivity-score-calculator.html">📊 Productivity Score</a></div>
-    </div>
-
-    <h3>📝 Related Blogs</h3>
-    <div class="card-grid">
-      <div class="card"><a href="blog/work-life-quality-index-guide.html">📖 Complete Guide to WLQI</a></div>
-      <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">💡 Ultimate Work-Life Balance Guide</a></div>
-    </div>
-
     <article>
       <h2>What Is the Work-Life Quality Index (WLQI)?</h2>
       <p>The Work-Life Quality Index (WLQI) is a comprehensive assessment tool that measures the overall quality of your work experience across nine critical dimensions. Unlike traditional work satisfaction surveys that focus on single aspects, WLQI provides a holistic view of how your work arrangement affects your productivity, health, wellbeing, and life balance.</p>

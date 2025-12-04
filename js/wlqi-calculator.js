@@ -52,6 +52,7 @@ function initializeModeToggle() {
   const individualBtn = document.getElementById('modeIndividual');
   const teamBtn = document.getElementById('modeTeam');
   const teamSizeSection = document.getElementById('teamSizeSection');
+  const teamSurveySection = document.getElementById('teamSurveySection');
   const workerTypeLabel = document.getElementById('workerTypeLabel');
   const timezoneLabel = document.getElementById('timezoneLabel');
   const quickFillText = document.getElementById('quickFillText');
@@ -63,6 +64,7 @@ function initializeModeToggle() {
     individualBtn.classList.add('active');
     teamBtn.classList.remove('active');
     teamSizeSection.classList.remove('show');
+    if (teamSurveySection) teamSurveySection.classList.remove('show');
     
     // Update labels for individual mode
     if (workerTypeLabel) workerTypeLabel.textContent = 'Your';
@@ -75,12 +77,198 @@ function initializeModeToggle() {
     teamBtn.classList.add('active');
     individualBtn.classList.remove('active');
     teamSizeSection.classList.add('show');
+    if (teamSurveySection) teamSurveySection.classList.add('show');
     
     // Update labels for team mode
     if (workerTypeLabel) workerTypeLabel.textContent = 'Your Team\'s Primary';
     if (timezoneLabel) timezoneLabel.textContent = 'Team members work';
     if (quickFillText) quickFillText.textContent = 'Fill with typical team average values for quick assessment';
   });
+
+  // Initialize team survey functionality
+  initializeTeamSurvey();
+}
+
+// Team Survey Sharing functionality
+function initializeTeamSurvey() {
+  const copyLinkBtn = document.getElementById('copyTeamLinkBtn');
+  const toggleCollectorBtn = document.getElementById('toggleCollectorBtn');
+  const teamCollector = document.getElementById('teamCollector');
+  const addScoreBtn = document.getElementById('addScoreBtn');
+
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', copyTeamSurveyLink);
+  }
+
+  if (toggleCollectorBtn && teamCollector) {
+    toggleCollectorBtn.addEventListener('click', () => {
+      teamCollector.classList.toggle('show');
+      toggleCollectorBtn.textContent = teamCollector.classList.contains('show') 
+        ? '📊 Hide Score Collector' 
+        : '📊 Collect Team Scores';
+    });
+  }
+
+  if (addScoreBtn) {
+    addScoreBtn.addEventListener('click', addScoreRow);
+  }
+
+  // Add input listeners to calculate average on change
+  document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('member-score')) {
+      calculateTeamAverage();
+    }
+  });
+}
+
+// Copy team survey link
+function copyTeamSurveyLink() {
+  const surveyUrl = window.location.origin + '/work-life-quality-index.html';
+  const teamName = document.getElementById('teamName').value || 'Your Team';
+  
+  const shareText = `Hi team! 👋
+
+Please take 5-10 minutes to complete our Work-Life Quality Index assessment. This anonymous survey helps us understand how we can better support your wellbeing.
+
+📊 Survey Link: ${surveyUrl}
+
+After completing the assessment, please share your final WLQI score (the number out of 100) with me.
+
+Thanks!`;
+
+  navigator.clipboard.writeText(shareText).then(() => {
+    const btn = document.getElementById('copyTeamLinkBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '✓ Copied to Clipboard!';
+    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.style.background = '';
+    }, 2500);
+  }).catch(err => {
+    // Fallback: show alert with text
+    alert('Copy this message to share with your team:\n\n' + shareText);
+  });
+}
+
+// Add new score input row
+function addScoreRow() {
+  const container = document.getElementById('scoreInputs');
+  const newRow = document.createElement('div');
+  newRow.className = 'score-input-row';
+  newRow.innerHTML = `
+    <input type="text" placeholder="Team member name (optional)" class="member-name">
+    <input type="number" min="0" max="100" placeholder="Score (0-100)" class="member-score">
+    <button type="button" class="remove-score-btn" onclick="removeScoreRow(this)">×</button>
+  `;
+  container.appendChild(newRow);
+}
+
+// Remove score input row
+function removeScoreRow(btn) {
+  const row = btn.parentElement;
+  const container = document.getElementById('scoreInputs');
+  
+  // Keep at least 2 rows
+  if (container.children.length > 2) {
+    row.remove();
+    calculateTeamAverage();
+  } else {
+    // Just clear the inputs
+    row.querySelector('.member-name').value = '';
+    row.querySelector('.member-score').value = '';
+    calculateTeamAverage();
+  }
+}
+
+// Calculate team average from collected scores
+function calculateTeamAverage() {
+  const scoreInputs = document.querySelectorAll('.member-score');
+  const resultDiv = document.getElementById('teamAvgResult');
+  const avgScoreEl = document.getElementById('teamAvgScore');
+  const countEl = document.getElementById('validScoreCount');
+  
+  let total = 0;
+  let count = 0;
+  
+  scoreInputs.forEach(input => {
+    const value = parseFloat(input.value);
+    if (!isNaN(value) && value >= 0 && value <= 100) {
+      total += value;
+      count++;
+    }
+  });
+  
+  if (count >= 2) {
+    const average = Math.round(total / count);
+    avgScoreEl.textContent = average;
+    countEl.textContent = count;
+    resultDiv.style.display = 'block';
+    
+    // Update team size input
+    document.getElementById('teamSize').value = count;
+    
+    // Color based on score
+    if (average >= 75) {
+      avgScoreEl.style.color = '#10b981';
+    } else if (average >= 60) {
+      avgScoreEl.style.color = '#fbbf24';
+    } else if (average >= 40) {
+      avgScoreEl.style.color = '#f97316';
+    } else {
+      avgScoreEl.style.color = '#ef4444';
+    }
+  } else {
+    resultDiv.style.display = 'none';
+  }
+}
+
+// Use the calculated average to pre-fill some form fields
+function useAverageForCalculation() {
+  const avgScore = parseInt(document.getElementById('teamAvgScore').textContent);
+  
+  // Map average score to approximate form values
+  // This gives manager a starting point based on team average
+  
+  // Calculate rough estimates based on score
+  const performanceRatio = avgScore / 100;
+  
+  // Pre-fill some key fields with estimated values based on team average
+  // Burnout section (inversely related to score)
+  const overwhelmed = Math.round(10 - (performanceRatio * 6)); // 4-10 range
+  const emotionalExhaustion = Math.round(10 - (performanceRatio * 6));
+  const weekendRecovery = Math.round(4 + (performanceRatio * 5)); // 4-9 range
+  
+  // Set values
+  document.getElementById('feelingOverwhelmed').value = overwhelmed;
+  document.getElementById('emotionalExhaustion').value = emotionalExhaustion;
+  document.getElementById('weekendRecovery').value = weekendRecovery;
+  
+  // Work-life balance
+  const boundaryControl = Math.round(3 + (performanceRatio * 6));
+  document.getElementById('boundaryControl').value = boundaryControl;
+  
+  // Mood and mental
+  const moodScore = Math.round(4 + (performanceRatio * 5));
+  const loneliness = Math.round(8 - (performanceRatio * 5));
+  document.getElementById('moodScore').value = moodScore;
+  document.getElementById('loneliness').value = loneliness;
+  
+  // Update range displays
+  document.querySelectorAll('input[type="range"]').forEach(input => {
+    const displayId = input.id + 'Val';
+    const display = document.getElementById(displayId);
+    if (display) {
+      display.textContent = input.value;
+    }
+  });
+  
+  // Show notification
+  alert(`✅ Form updated with estimated values based on team average score of ${avgScore}.\n\nPlease review and adjust individual fields as needed before calculating.`);
+  
+  // Scroll to form
+  document.getElementById('wlqiForm').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Dark mode functionality
