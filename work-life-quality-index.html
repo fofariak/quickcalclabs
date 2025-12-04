@@ -16,8 +16,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Work-Life Quality Index Calculator - Remote, Hybrid & Onsite Workers | QuickCalcLabs</title>
-  <meta name="description" content="Calculate your Work-Life Quality Index (WLQI) score. Measure productivity, burnout risk, work-life balance, and wellbeing for remote, hybrid, and onsite workers.">
-  <meta name="keywords" content="work life balance calculator, remote work quality, hybrid work calculator, burnout assessment, productivity calculator, work wellbeing, WLQI, work life quality">
+  <meta name="description" content="Calculate your Work-Life Quality Index (WLQI) score. Measure productivity, burnout risk, work-life balance, and wellbeing for remote, hybrid, and onsite workers. Team assessment mode available for managers.">
+  <meta name="keywords" content="work life balance calculator, remote work quality, hybrid work calculator, burnout assessment, productivity calculator, work wellbeing, WLQI, work life quality, team assessment, manager tools">
   <meta name="copyright" content="Copyright 2025 QuickCalcLabs. All rights reserved.">
   <meta name="author" content="QuickCalcLabs">
   <meta name="robots" content="index, follow, noarchive">
@@ -27,7 +27,7 @@
   
   <meta property="og:type" content="website">
   <meta property="og:title" content="Work-Life Quality Index Calculator | QuickCalcLabs">
-  <meta property="og:description" content="Assess your work-life quality with our comprehensive WLQI calculator for remote, hybrid, and onsite workers.">
+  <meta property="og:description" content="Assess your work-life quality with our comprehensive WLQI calculator for remote, hybrid, and onsite workers. Team assessment mode for managers.">
   <meta property="og:url" content="https://quickcalclabs.com/work-life-quality-index.html">
   
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
@@ -90,6 +90,107 @@
 
     .dark-mode .meta-info {
       color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Mode Toggle (Individual vs Team) */
+    .mode-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      padding: 0.4rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+    }
+
+    .dark-mode .mode-toggle {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .mode-toggle button {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-sm, 8px);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-medium-light, #334155);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .dark-mode .mode-toggle button {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .mode-toggle button.active {
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Team Size Input */
+    .team-size-section {
+      display: none;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.08));
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .team-size-section.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dark-mode .team-size-section {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .team-size-section h4 {
+      margin: 0 0 1rem;
+      color: #10b981;
+      font-size: 1.1rem;
+    }
+
+    .team-size-section .input-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .team-size-section input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 0.95rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .team-size-section input:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+      outline: none;
+    }
+
+    .dark-mode .team-size-section input {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
     }
 
     /* Worker Type Selection */
@@ -308,6 +409,227 @@
     }
 
     .dark-mode .help-text {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Input guidance box */
+    .input-guidance {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+      border-left: 4px solid var(--secondary, #3b82f6);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0 var(--radius-sm, 8px) var(--radius-sm, 8px) 0;
+      font-size: 0.9rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .input-guidance {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.12));
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .input-guidance strong {
+      color: var(--secondary, #3b82f6);
+    }
+
+    .input-guidance ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    .input-guidance li {
+      margin: 0.3rem 0;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .dark-mode .input-guidance li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* Quick links section */
+    .quick-links {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .quick-links {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .quick-links h4 {
+      margin: 0 0 1rem 0;
+      font-size: 1rem;
+      text-align: center;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .quick-links h4 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .quick-link {
+      padding: 0.7rem;
+      text-align: center;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-sm, 8px);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-medium-light, #334155);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .quick-link:hover {
+      background: var(--primary, #8b5cf6);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    .dark-mode .quick-link {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .quick-link:hover {
+      background: var(--primary-light, #a78bfa);
+    }
+
+    /* Card Grid for related content */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* Related Content Section in Results */
+    .related-content {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(139, 92, 246, 0.2);
+    }
+
+    .related-content h3 {
+      margin: 0 0 1rem;
+      font-size: 1.2rem;
+      color: var(--primary, #8b5cf6);
+      text-align: center;
+    }
+
+    .dark-mode .related-content h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* Team Results Summary */
+    .team-summary {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-md, 12px);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .dark-mode .team-summary {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15));
+    }
+
+    .team-summary h4 {
+      margin: 0 0 1rem;
+      color: #10b981;
+      font-size: 1.1rem;
+    }
+
+    .team-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .team-stat {
+      text-align: center;
+      padding: 1rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-sm, 8px);
+    }
+
+    .dark-mode .team-stat {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+    }
+
+    .team-stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .team-stat-value {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .team-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin-top: 0.25rem;
+    }
+
+    .dark-mode .team-stat-label {
       color: var(--text-weak-dark, #94a3b8);
     }
 
@@ -881,13 +1203,35 @@
 
   <section class="calc-wrapper">
     <h1>💼 Work-Life Quality Index Calculator</h1>
-    <p class="subtitle">Calculate your comprehensive Work-Life Quality Index (WLQI) score across 9 key dimensions. Perfect for remote, hybrid, and onsite workers.</p>
-    <p class="meta-info">Last Updated: November 2025</p>
+    <p class="subtitle">Calculate your comprehensive Work-Life Quality Index (WLQI) score across 9 key dimensions. Perfect for remote, hybrid, and onsite workers—with a special team assessment mode for managers.</p>
+    <p class="meta-info">Last Updated: December 2025</p>
+
+    <!-- Mode Toggle: Individual vs Team -->
+    <div class="mode-toggle">
+      <button type="button" id="modeIndividual" class="active">👤 Individual Assessment</button>
+      <button type="button" id="modeTeam">👥 Team Assessment (Manager)</button>
+    </div>
+
+    <!-- Team Size Section (Hidden by default) -->
+    <div class="team-size-section" id="teamSizeSection">
+      <h4>👥 Team Assessment Mode</h4>
+      <p style="font-size: 0.9rem; color: var(--text-weak-light); margin: 0 0 1rem;">As a manager, enter your team's average values across all members to get a team-wide WLQI score. This helps identify team-wide patterns and areas for improvement.</p>
+      <div class="input-row">
+        <div>
+          <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Team Name (Optional)</label>
+          <input type="text" id="teamName" placeholder="e.g., Engineering Team">
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Number of Team Members</label>
+          <input type="number" id="teamSize" min="2" max="500" placeholder="e.g., 8" value="5">
+        </div>
+      </div>
+    </div>
 
     <form id="wlqiForm">
       <!-- Worker Type Selection -->
       <div class="worker-type-section">
-        <h3 style="margin:0 0 0.5rem; color: var(--text-strong-light);">Select Your Work Type</h3>
+        <h3 style="margin:0 0 0.5rem; color: var(--text-strong-light);" class="dark-mode-text">Select <span id="workerTypeLabel">Your</span> Work Type</h3>
         <div class="worker-type-buttons">
           <button type="button" class="worker-type-btn active" data-type="remote">🏠 Remote</button>
           <button type="button" class="worker-type-btn" data-type="hybrid">🔄 Hybrid</button>
@@ -895,13 +1239,24 @@
         </div>
         <div class="timezone-checkbox">
           <input type="checkbox" id="timezoneWork">
-          <label for="timezoneWork" style="margin: 0; font-size: 0.95rem;">I work across time zones</label>
+          <label for="timezoneWork" style="margin: 0; font-size: 0.95rem;"><span id="timezoneLabel">I work</span> across time zones</label>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="quick-links" style="margin-bottom: 1.5rem;">
+        <h4>🔗 Related Tools</h4>
+        <div class="quick-links-grid">
+          <a href="burnout-risk-calculator.html" class="quick-link">🔥 Burnout Risk</a>
+          <a href="stress-load-calculator.html" class="quick-link">😰 Stress Load</a>
+          <a href="meeting-load-stress-calculator.html" class="quick-link">📅 Meeting Load</a>
+          <a href="productivity-score-calculator.html" class="quick-link">📊 Productivity</a>
         </div>
       </div>
 
       <!-- Quick Fill Banner -->
       <div class="quick-fill-banner">
-        <p>💡 Want to save time? Use typical values for a quick assessment</p>
+        <p>💡 <span id="quickFillText">Want to save time? Use typical values for a quick assessment</span></p>
         <button type="button" class="quick-fill-btn" id="quickFillBtn">Quick Fill with Average Values</button>
       </div>
 
@@ -913,23 +1268,39 @@
         </div>
         <div class="section-content" id="productivity-content">
         
-        <label for="hoursWorked">Hours actually worked per day:</label>
-        <input type="number" id="hoursWorked" step="0.5" min="0" max="24" value="8" required>
+        <div class="input-guidance">
+          <strong>💡 How to fill this section:</strong>
+          <ul>
+            <li><strong>Hours worked:</strong> Actual working hours, not scheduled hours (exclude lunch/breaks)</li>
+            <li><strong>Deep work:</strong> Uninterrupted focused time without meetings or distractions</li>
+            <li><strong>Task completion:</strong> Percentage of planned tasks you finish daily (0-100%)</li>
+            <li><strong>Distractions:</strong> Times you lose focus due to notifications, interruptions, etc.</li>
+          </ul>
+        </div>
         
-        <label for="deepWorkHours">Deep work hours per day:</label>
-        <input type="number" id="deepWorkHours" step="0.5" min="0" max="24" value="4" required>
+        <label for="hoursWorked">Hours actually worked per day:</label>
+        <input type="number" id="hoursWorked" step="0.5" min="0" max="24" value="8" required placeholder="e.g., 8">
+        <p class="help-text">Average hours spent actively working (typical: 6-10 hours)</p>
+        
+        <label for="deepWorkHours">Deep work hours per day (uninterrupted focus):</label>
+        <input type="number" id="deepWorkHours" step="0.5" min="0" max="24" value="4" required placeholder="e.g., 4">
+        <p class="help-text">Hours of concentrated work without meetings or interruptions (ideal: 4+ hours)</p>
         
         <label for="taskCompletion">Task completion rate (%):</label>
-        <input type="number" id="taskCompletion" min="0" max="100" value="80" required>
+        <input type="number" id="taskCompletion" min="0" max="100" value="80" required placeholder="e.g., 80">
+        <p class="help-text">Percentage of planned daily tasks completed (excellent: 90%+, good: 70-89%)</p>
         
         <label for="distractionsPerDay">Distractions per day:</label>
-        <input type="number" id="distractionsPerDay" min="0" max="50" value="5" required>
+        <input type="number" id="distractionsPerDay" min="0" max="50" value="5" required placeholder="e.g., 5">
+        <p class="help-text">Times you lose focus (Slack, email, phone, etc.) - count each interruption</p>
         
-        <label for="coworkerInterruptions" class="conditional-onsite-hybrid">Interruptions by coworkers (onsite/hybrid):</label>
-        <input type="number" id="coworkerInterruptions" class="conditional-onsite-hybrid" min="0" max="50" value="3">
+        <label for="coworkerInterruptions" class="conditional-onsite-hybrid">Interruptions by coworkers:</label>
+        <input type="number" id="coworkerInterruptions" class="conditional-onsite-hybrid" min="0" max="50" value="3" placeholder="e.g., 3">
+        <p class="help-text conditional-onsite-hybrid">Face-to-face interruptions from colleagues (typical: 2-5 in office settings)</p>
         
-        <label for="homeDistractions" class="conditional-remote-hybrid">Home distractions per day (remote/hybrid):</label>
-        <input type="number" id="homeDistractions" class="conditional-remote-hybrid" min="0" max="50" value="2">
+        <label for="homeDistractions" class="conditional-remote-hybrid">Home distractions per day:</label>
+        <input type="number" id="homeDistractions" class="conditional-remote-hybrid" min="0" max="50" value="2" placeholder="e.g., 2">
+        <p class="help-text conditional-remote-hybrid">Family, pets, doorbell, household tasks, etc.</p>
         </div>
       </div>
 
@@ -941,20 +1312,34 @@
         </div>
         <div class="section-content" id="meetings-content">
         
+        <div class="input-guidance">
+          <strong>💡 How to fill this section:</strong>
+          <ul>
+            <li><strong>Meetings:</strong> Count all scheduled calls, standups, 1:1s, etc.</li>
+            <li><strong>Buffer time:</strong> Gap between meetings for breaks/preparation</li>
+            <li><strong>Async work:</strong> Work done via email/docs vs live meetings</li>
+          </ul>
+        </div>
+        
         <label for="meetingsPerDay">Meetings per day:</label>
-        <input type="number" id="meetingsPerDay" min="0" max="20" value="3" required>
+        <input type="number" id="meetingsPerDay" min="0" max="20" value="3" required placeholder="e.g., 3">
+        <p class="help-text">All scheduled calls including standups, 1:1s, etc. (optimal: 2-4, excessive: 6+)</p>
         
         <label for="avgMeetingDuration">Average meeting duration (minutes):</label>
-        <input type="number" id="avgMeetingDuration" min="0" max="480" value="45" required>
+        <input type="number" id="avgMeetingDuration" min="0" max="480" value="45" required placeholder="e.g., 45">
+        <p class="help-text">Typical meeting length (30-45 min is ideal for focus)</p>
         
         <label for="bufferTime">Buffer time between meetings (minutes):</label>
-        <input type="number" id="bufferTime" min="0" max="120" value="15" required>
+        <input type="number" id="bufferTime" min="0" max="120" value="15" required placeholder="e.g., 15">
+        <p class="help-text">Break between back-to-back meetings (recommended: 15+ minutes)</p>
         
         <label for="meetingEnergyDrain">Meeting energy drain (1-10): <span class="range-display" id="meetingEnergyDrainVal">5</span></label>
         <input type="range" id="meetingEnergyDrain" min="1" max="10" value="5" required>
+        <p class="help-text">1 = Meetings are energizing | 5 = Neutral | 10 = Meetings completely drain you</p>
         
         <label for="asyncSyncRatio">Async vs Sync work ratio (% async):</label>
-        <input type="number" id="asyncSyncRatio" min="0" max="100" value="60" required>
+        <input type="number" id="asyncSyncRatio" min="0" max="100" value="60" required placeholder="e.g., 60">
+        <p class="help-text">Percentage of work done via email/docs vs live calls (60-70% async is healthy)</p>
         </div>
       </div>
 
@@ -966,20 +1351,32 @@
         </div>
         <div class="section-content" id="burnout-content">
         
-        <label for="weeklyHours">Weekly hours worked:</label>
-        <input type="number" id="weeklyHours" min="0" max="168" value="40" required>
+        <div class="input-guidance">
+          <strong>⚠️ This is the most important section (20% weight)</strong>
+          <ul>
+            <li>Be honest about your stress levels—this helps identify burnout risk early</li>
+            <li><strong>Weekly hours:</strong> Include all work—emails, calls, tasks after hours</li>
+            <li><strong>Sleep:</strong> Average actual sleep, not time in bed</li>
+          </ul>
+        </div>
+        
+        <label for="weeklyHours">Weekly hours worked (including overtime):</label>
+        <input type="number" id="weeklyHours" min="0" max="168" value="40" required placeholder="e.g., 40">
+        <p class="help-text">Total hours including after-hours email/tasks (healthy: 35-45, warning: 50+)</p>
         
         <label for="feelingOverwhelmed">Feeling overwhelmed (1-10): <span class="range-display" id="feelingOverwhelmedVal">5</span></label>
         <input type="range" id="feelingOverwhelmed" min="1" max="10" value="5" required>
         <p class="help-text">1 = Never overwhelmed, always in control | 5 = Sometimes stressed | 10 = Constantly overwhelmed</p>
         
-        <label for="sleepHours">Sleep hours per night:</label>
-        <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required>
+        <label for="sleepHours">Sleep hours per night (average):</label>
+        <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required placeholder="e.g., 7">
+        <p class="help-text">Actual sleep time (recommended: 7-9 hours for adults)</p>
         
         <label for="weekendRecovery">Weekend recovery score (1-10): <span class="range-display" id="weekendRecoveryVal">7</span></label>
         <input type="range" id="weekendRecovery" min="1" max="10" value="7" required>
+        <p class="help-text">1 = Weekends don't help recovery | 5 = Somewhat recharged | 10 = Fully recharged by Monday</p>
         
-        <label for="emotionalExhaustion">Emotional exhaustion (1-10): <span class="range-display" id="emotionalExhaustionVal">5</span></label>
+        <label for="emotionalExhaustion">Emotional exhaustion level (1-10): <span class="range-display" id="emotionalExhaustionVal">5</span></label>
         <input type="range" id="emotionalExhaustion" min="1" max="10" value="5" required>
         <p class="help-text">1 = Energized and motivated | 5 = Moderately tired | 10 = Emotionally drained, burned out</p>
         </div>
@@ -993,20 +1390,34 @@
         </div>
         <div class="section-content" id="physical-content">
         
-        <label for="stepsPerDay">Steps per day:</label>
-        <input type="number" id="stepsPerDay" min="0" max="50000" value="6000" required>
+        <div class="input-guidance">
+          <strong>💡 How to fill this section:</strong>
+          <ul>
+            <li><strong>Steps:</strong> Check your phone or watch for daily average</li>
+            <li><strong>Exercise:</strong> Intentional physical activity (walking, gym, yoga, etc.)</li>
+            <li><strong>Desk setup:</strong> Consider chair, monitor height, keyboard position</li>
+          </ul>
+        </div>
+        
+        <label for="stepsPerDay">Steps per day (average):</label>
+        <input type="number" id="stepsPerDay" min="0" max="50000" value="6000" required placeholder="e.g., 6000">
+        <p class="help-text">Check your phone/watch health app (sedentary: &lt;4000, goal: 7500-10000)</p>
         
         <label for="exerciseMinutes">Exercise minutes per day:</label>
-        <input type="number" id="exerciseMinutes" min="0" max="240" value="30" required>
+        <input type="number" id="exerciseMinutes" min="0" max="240" value="30" required placeholder="e.g., 30">
+        <p class="help-text">Intentional exercise: gym, walking, yoga, etc. (WHO recommends: 30+ min/day)</p>
         
         <label for="neckBackPain">Neck/back pain frequency (1-10): <span class="range-display" id="neckBackPainVal">4</span></label>
         <input type="range" id="neckBackPain" min="1" max="10" value="4" required>
+        <p class="help-text">1 = Never have pain | 5 = Occasional discomfort | 10 = Chronic daily pain</p>
         
         <label for="eyeStrain">Eye strain level (1-10): <span class="range-display" id="eyeStrainVal">5</span></label>
         <input type="range" id="eyeStrain" min="1" max="10" value="5" required>
+        <p class="help-text">1 = Eyes feel fine | 5 = Sometimes tired/dry | 10 = Severe strain/headaches</p>
         
-        <label for="deskSetup">Desk setup score (1-10): <span class="range-display" id="deskSetupVal">7</span></label>
+        <label for="deskSetup">Desk setup quality (1-10): <span class="range-display" id="deskSetupVal">7</span></label>
         <input type="range" id="deskSetup" min="1" max="10" value="7" required>
+        <p class="help-text">1 = Poor setup (laptop on couch) | 5 = Basic desk/chair | 10 = Ergonomic setup with all equipment</p>
         </div>
       </div>
 
@@ -1018,25 +1429,37 @@
         </div>
         <div class="section-content" id="mental-content">
         
+        <div class="input-guidance">
+          <strong>💡 How to fill this section:</strong>
+          <ul>
+            <li><strong>Social interactions:</strong> Both work (1:1s, team chats) and personal (friends, family)</li>
+            <li>Be honest about loneliness and mood—these significantly impact wellbeing</li>
+          </ul>
+        </div>
+        
         <label for="loneliness">Loneliness level (1-10): <span class="range-display" id="lonelinessVal">4</span></label>
         <input type="range" id="loneliness" min="1" max="10" value="4" required>
         <p class="help-text">1 = Well connected, never lonely | 5 = Occasionally feel isolated | 10 = Extremely lonely and disconnected</p>
         
-        <label for="moodScore">Mood score (1-10): <span class="range-display" id="moodScoreVal">7</span></label>
+        <label for="moodScore">Overall mood score (1-10): <span class="range-display" id="moodScoreVal">7</span></label>
         <input type="range" id="moodScore" min="1" max="10" value="7" required>
+        <p class="help-text">1 = Very low mood, struggling | 5 = Neutral | 10 = Consistently happy and positive</p>
         
         <label for="socialInteractions">Social interactions per week:</label>
-        <input type="number" id="socialInteractions" min="0" max="100" value="15" required>
+        <input type="number" id="socialInteractions" min="0" max="100" value="15" required placeholder="e.g., 15">
+        <p class="help-text">Meaningful conversations (work + personal): 1:1s, calls, coffee chats, etc.</p>
         
-        <label for="workPressure">Work pressure (1-10): <span class="range-display" id="workPressureVal">6</span></label>
+        <label for="workPressure">Work pressure level (1-10): <span class="range-display" id="workPressureVal">6</span></label>
         <input type="range" id="workPressure" min="1" max="10" value="6" required>
         <p class="help-text">1 = Relaxed, manageable workload | 5 = Moderate pressure | 10 = Extreme pressure, unrealistic demands</p>
         
         <label for="coworkerQuality" class="conditional-onsite-hybrid">Coworker interaction quality (1-10): <span class="range-display" id="coworkerQualityVal">7</span></label>
         <input type="range" id="coworkerQuality" class="conditional-onsite-hybrid" min="1" max="10" value="7">
+        <p class="help-text conditional-onsite-hybrid">1 = Negative/toxic interactions | 5 = Neutral | 10 = Very positive, supportive colleagues</p>
         
         <label for="virtualSatisfaction" class="conditional-remote">Virtual interaction satisfaction (1-10): <span class="range-display" id="virtualSatisfactionVal">7</span></label>
         <input type="range" id="virtualSatisfaction" class="conditional-remote" min="1" max="10" value="7">
+        <p class="help-text conditional-remote">1 = Video calls feel isolating | 5 = Adequate | 10 = Virtual connections feel fulfilling</p>
         </div>
       </div>
 
@@ -1048,23 +1471,38 @@
         </div>
         <div class="section-content" id="worklife-content">
         
-        <label for="hoursOutsideSchedule">Hours worked outside schedule per week:</label>
-        <input type="number" id="hoursOutsideSchedule" min="0" max="80" value="5" required>
+        <div class="input-guidance">
+          <strong>💡 How to fill this section:</strong>
+          <ul>
+            <li><strong>Outside schedule:</strong> Work before/after official hours, during breaks</li>
+            <li><strong>Evening work:</strong> After 7 PM work (emails, calls, tasks)</li>
+            <li><strong>Personal time:</strong> Hobbies, family, relaxation—not chores</li>
+          </ul>
+        </div>
         
-        <label for="eveningWorkHours">Evening work hours per week:</label>
-        <input type="number" id="eveningWorkHours" min="0" max="80" value="3" required>
+        <label for="hoursOutsideSchedule">Hours worked outside schedule per week:</label>
+        <input type="number" id="hoursOutsideSchedule" min="0" max="80" value="5" required placeholder="e.g., 5">
+        <p class="help-text">Checking emails early morning, late nights, during lunch (ideal: &lt;3 hours)</p>
+        
+        <label for="eveningWorkHours">Evening work hours per week (after 7 PM):</label>
+        <input type="number" id="eveningWorkHours" min="0" max="80" value="3" required placeholder="e.g., 3">
+        <p class="help-text">Work done after dinner time (healthy: 0-2 hours)</p>
         
         <label for="weekendWorkHours">Weekend work hours per week:</label>
-        <input type="number" id="weekendWorkHours" min="0" max="48" value="2" required>
+        <input type="number" id="weekendWorkHours" min="0" max="48" value="2" required placeholder="e.g., 2">
+        <p class="help-text">Work on Saturday/Sunday (ideal: 0, occasional catch-up: 1-2)</p>
         
         <label for="personalTimeHours">Personal time hours per day:</label>
-        <input type="number" id="personalTimeHours" step="0.5" min="0" max="24" value="4" required>
+        <input type="number" id="personalTimeHours" step="0.5" min="0" max="24" value="4" required placeholder="e.g., 4">
+        <p class="help-text">Time for hobbies, family, relaxation—not chores (recommended: 3-5 hours)</p>
         
-        <label for="offScreenHours">Off-screen hours per day:</label>
-        <input type="number" id="offScreenHours" step="0.5" min="0" max="24" value="6" required>
+        <label for="offScreenHours">Off-screen hours per day (awake):</label>
+        <input type="number" id="offScreenHours" step="0.5" min="0" max="24" value="6" required placeholder="e.g., 6">
+        <p class="help-text">Waking hours without screens: meals, walks, reading, etc. (healthy: 5+ hours)</p>
         
-        <label for="boundaryControl">Boundary control score (1-10): <span class="range-display" id="boundaryControlVal">7</span></label>
+        <label for="boundaryControl">Boundary control ability (1-10): <span class="range-display" id="boundaryControlVal">7</span></label>
         <input type="range" id="boundaryControl" min="1" max="10" value="7" required>
+        <p class="help-text">1 = Can't say no, always available | 5 = Sometimes boundaries | 10 = Clear boundaries respected</p>
         </div>
       </div>
 
@@ -1228,6 +1666,31 @@
       
       <div class="recommendations" id="recommendations"></div>
 
+      <!-- Team Summary (for Team Mode only) -->
+      <div class="team-summary" id="teamSummaryBox" style="display: none;">
+        <h4>👥 Team Assessment Summary</h4>
+        <div class="team-stats" id="teamStatsGrid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Related Tools & Blogs -->
+      <div class="related-content" id="relatedContent">
+        <h3>🔗 Explore More Tools</h3>
+        <div class="card-grid">
+          <div class="card"><a href="burnout-risk-calculator.html">🔥 Burnout Risk Calculator</a></div>
+          <div class="card"><a href="stress-load-calculator.html">😰 Stress Load Calculator</a></div>
+          <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Calculator</a></div>
+          <div class="card"><a href="productivity-score-calculator.html">📊 Productivity Score</a></div>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">📝 Related Blogs</h3>
+        <div class="card-grid">
+          <div class="card"><a href="blog/work-life-quality-index-guide.html">📖 Complete WLQI Guide</a></div>
+          <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">💡 Work-Life Balance Guide</a></div>
+        </div>
+      </div>
+
       <!-- Social Share Buttons -->
       <div id="shareButtonsContainer" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid rgba(139,92,246,0.2);text-align:center;">
         <p style="font-size:0.95rem;font-weight:700;margin:0 0 1rem;color:#334155;">📤 Share Your Results</p>
@@ -1248,6 +1711,20 @@
   <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="burnout-risk-calculator.html">🔥 Burnout Risk Calculator</a></div>
+      <div class="card"><a href="stress-load-calculator.html">😰 Stress Load Calculator</a></div>
+      <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Calculator</a></div>
+      <div class="card"><a href="productivity-score-calculator.html">📊 Productivity Score</a></div>
+    </div>
+
+    <h3>📝 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/work-life-quality-index-guide.html">📖 Complete Guide to WLQI</a></div>
+      <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">💡 Ultimate Work-Life Balance Guide</a></div>
+    </div>
+
     <article>
       <h2>What Is the Work-Life Quality Index (WLQI)?</h2>
       <p>The Work-Life Quality Index (WLQI) is a comprehensive assessment tool that measures the overall quality of your work experience across nine critical dimensions. Unlike traditional work satisfaction surveys that focus on single aspects, WLQI provides a holistic view of how your work arrangement affects your productivity, health, wellbeing, and life balance.</p>
@@ -1430,6 +1907,33 @@
       <p>Hybrid arrangements attempt to capture the best of both worlds—the flexibility and focus time of remote work with the collaboration and connection of office work. Success requires intentional planning: using office days for collaborative work and meetings while reserving home days for focused individual work.</p>
 
       <p>The key to hybrid success is consistency and communication. Teams should align on core collaboration days to maximize in-person value while respecting focused work time when remote.</p>
+
+      <h2>Team Assessment Mode: For Managers</h2>
+      <p>Our Team Assessment Mode allows managers and team leaders to evaluate the collective work-life quality of their entire team. This powerful feature helps identify team-wide patterns, systemic issues, and areas where organizational changes could benefit everyone.</p>
+
+      <h3>How Team Assessment Works</h3>
+      <p>When you switch to Team Assessment Mode, you'll enter the <strong>average values across your team members</strong> rather than individual data. The calculator then provides:</p>
+
+      <ul>
+        <li><strong>Team WLQI Score:</strong> An aggregate score representing your team's overall work-life quality</li>
+        <li><strong>Dimension Breakdown:</strong> See which areas (meetings, burnout risk, work-life balance) need the most attention team-wide</li>
+        <li><strong>Team-Specific Recommendations:</strong> Actionable steps to improve your team's collective wellbeing</li>
+        <li><strong>Risk Identification:</strong> Early warning signs of team-wide burnout or dissatisfaction</li>
+      </ul>
+
+      <h3>Benefits for Managers</h3>
+      <ul>
+        <li><strong>Data-Driven Decisions:</strong> Make informed choices about team policies, meeting schedules, and workload distribution</li>
+        <li><strong>Early Intervention:</strong> Identify burnout risks before they lead to turnover or health issues</li>
+        <li><strong>Benchmark Progress:</strong> Track improvements over time as you implement changes</li>
+        <li><strong>Support Conversations:</strong> Use results to have productive conversations with leadership about team needs</li>
+        <li><strong>Resource Allocation:</strong> Justify requests for additional headcount, tools, or flexible work policies</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>How to Get Team Data</h4>
+        <p>To use Team Assessment Mode effectively, consider conducting an anonymous team survey asking members to share their individual metrics. Then calculate averages for each field. Many teams find it helpful to run this assessment quarterly to track trends and measure the impact of workplace changes.</p>
+      </div>
 
       <h2>Special Considerations for Global Teams</h2>
       <p>If you selected "I work across time zones," you're among millions of workers navigating the complexities of global collaboration. While technology enables 24/7 connectivity, human bodies still operate on circadian rhythms.</p>

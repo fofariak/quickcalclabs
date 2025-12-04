@@ -6,6 +6,7 @@
 let currentWorkerType = 'remote';
 let isTimezoneWork = false;
 let radarChartInstance = null;
+let isTeamMode = false; // New: Track if we're in team assessment mode
 
 // Proprietary normalization constants (obfuscated)
 const _0x4a2c = [0x2e, 0x3c, 0x4b, 0x5a, 0x69, 0x78, 0x87, 0x96, 0xa5];
@@ -16,6 +17,8 @@ const _0x3c8f = (s, w) => s * w * _0x7f3d.a + (100 - s) * (1 - w) * _0x7f3d.b;
 // Store final score for sharing
 let finalWLQIScore = 0;
 let finalRatingText = '';
+let teamName = '';
+let teamSize = 0;
 
 // Anti-tampering protection
 (function() {
@@ -33,6 +36,7 @@ let finalRatingText = '';
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
   initializeDarkMode();
+  initializeModeToggle(); // New: Mode toggle (Individual vs Team)
   initializeWorkerTypeSelection();
   initializeTimezoneToggle();
   initializeRangeDisplays();
@@ -42,6 +46,42 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeCollapsibleSections();
   updateConditionalInputs();
 });
+
+// Mode toggle functionality (Individual vs Team)
+function initializeModeToggle() {
+  const individualBtn = document.getElementById('modeIndividual');
+  const teamBtn = document.getElementById('modeTeam');
+  const teamSizeSection = document.getElementById('teamSizeSection');
+  const workerTypeLabel = document.getElementById('workerTypeLabel');
+  const timezoneLabel = document.getElementById('timezoneLabel');
+  const quickFillText = document.getElementById('quickFillText');
+
+  if (!individualBtn || !teamBtn) return;
+
+  individualBtn.addEventListener('click', () => {
+    isTeamMode = false;
+    individualBtn.classList.add('active');
+    teamBtn.classList.remove('active');
+    teamSizeSection.classList.remove('show');
+    
+    // Update labels for individual mode
+    if (workerTypeLabel) workerTypeLabel.textContent = 'Your';
+    if (timezoneLabel) timezoneLabel.textContent = 'I work';
+    if (quickFillText) quickFillText.textContent = 'Want to save time? Use typical values for a quick assessment';
+  });
+
+  teamBtn.addEventListener('click', () => {
+    isTeamMode = true;
+    teamBtn.classList.add('active');
+    individualBtn.classList.remove('active');
+    teamSizeSection.classList.add('show');
+    
+    // Update labels for team mode
+    if (workerTypeLabel) workerTypeLabel.textContent = 'Your Team\'s Primary';
+    if (timezoneLabel) timezoneLabel.textContent = 'Team members work';
+    if (quickFillText) quickFillText.textContent = 'Fill with typical team average values for quick assessment';
+  });
+}
 
 // Dark mode functionality
 function initializeDarkMode() {
@@ -272,6 +312,9 @@ function initializeSocialSharing() {
 }
 
 function getShareText() {
+  if (isTeamMode) {
+    return `Our team's Work-Life Quality Index score is ${finalWLQIScore}/100 (${finalRatingText}). Assess your team's work-life balance:`;
+  }
   return `I just assessed my Work-Life Quality! My WLQI score is ${finalWLQIScore}/100 (${finalRatingText}). Calculate yours:`;
 }
 
@@ -932,6 +975,12 @@ function displayResults(finalScore, scores) {
   // Store for sharing
   finalWLQIScore = finalScore;
   
+  // Get team info if in team mode
+  if (isTeamMode) {
+    teamName = document.getElementById('teamName').value || 'Your Team';
+    teamSize = parseInt(document.getElementById('teamSize').value) || 5;
+  }
+  
   // Update score display
   document.getElementById('wlqiScore').textContent = finalScore;
   
@@ -940,23 +989,23 @@ function displayResults(finalScore, scores) {
   let ratingClass = '';
   
   if (finalScore >= 90) {
-    rating = '🌟 Thriving';
+    rating = isTeamMode ? '🌟 Team Thriving' : '🌟 Thriving';
     ratingClass = 'thriving';
     finalRatingText = 'Thriving';
   } else if (finalScore >= 75) {
-    rating = '✅ Healthy';
+    rating = isTeamMode ? '✅ Team Healthy' : '✅ Healthy';
     ratingClass = 'healthy';
     finalRatingText = 'Healthy';
   } else if (finalScore >= 60) {
-    rating = '⚖️ Stable';
+    rating = isTeamMode ? '⚖️ Team Stable' : '⚖️ Stable';
     ratingClass = 'stable';
     finalRatingText = 'Stable';
   } else if (finalScore >= 40) {
-    rating = '⚠️ Struggling';
+    rating = isTeamMode ? '⚠️ Team Struggling' : '⚠️ Struggling';
     ratingClass = 'struggling';
     finalRatingText = 'Struggling';
   } else {
-    rating = '🚨 Critical';
+    rating = isTeamMode ? '🚨 Team Critical' : '🚨 Critical';
     ratingClass = 'critical';
     finalRatingText = 'Critical';
   }
@@ -974,6 +1023,9 @@ function displayResults(finalScore, scores) {
   // Generate recommendations
   generateRecommendations(scores);
   
+  // Show team summary if in team mode
+  displayTeamSummary(finalScore, scores);
+  
   // Show results
   const resultsBox = document.getElementById('results');
   resultsBox.classList.add('show');
@@ -988,6 +1040,77 @@ function displayResults(finalScore, scores) {
   setTimeout(() => {
     resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
+}
+
+// Display team summary (Team Mode only)
+function displayTeamSummary(finalScore, scores) {
+  const teamSummaryBox = document.getElementById('teamSummaryBox');
+  const teamStatsGrid = document.getElementById('teamStatsGrid');
+  
+  if (!teamSummaryBox || !teamStatsGrid) return;
+  
+  if (isTeamMode) {
+    // Find weakest areas
+    const dimensions = [
+      { name: 'Productivity', score: scores.productivity },
+      { name: 'Meetings', score: scores.meetings },
+      { name: 'Burnout Risk', score: scores.burnout },
+      { name: 'Physical', score: scores.physical },
+      { name: 'Mental', score: scores.mental },
+      { name: 'Work-Life', score: scores.workLife },
+      { name: 'Environment', score: scores.environment },
+      { name: 'Financial', score: scores.financial }
+    ];
+    
+    if (isTimezoneWork && scores.timezone !== null) {
+      dimensions.push({ name: 'Timezone', score: scores.timezone });
+    }
+    
+    dimensions.sort((a, b) => a.score - b.score);
+    const weakestArea = dimensions[0].name;
+    const strongestArea = dimensions[dimensions.length - 1].name;
+    
+    // Calculate risk level
+    let riskLevel = 'Low';
+    let riskColor = '#10b981';
+    if (finalScore < 40) {
+      riskLevel = 'Critical';
+      riskColor = '#ef4444';
+    } else if (finalScore < 60) {
+      riskLevel = 'High';
+      riskColor = '#f97316';
+    } else if (finalScore < 75) {
+      riskLevel = 'Moderate';
+      riskColor = '#fbbf24';
+    }
+    
+    teamStatsGrid.innerHTML = `
+      <div class="team-stat">
+        <div class="team-stat-value">${teamSize}</div>
+        <div class="team-stat-label">Team Members</div>
+      </div>
+      <div class="team-stat">
+        <div class="team-stat-value">${finalScore}</div>
+        <div class="team-stat-label">Team WLQI Score</div>
+      </div>
+      <div class="team-stat">
+        <div class="team-stat-value" style="color: ${riskColor};">${riskLevel}</div>
+        <div class="team-stat-label">Burnout Risk Level</div>
+      </div>
+      <div class="team-stat">
+        <div class="team-stat-value" style="font-size: 1.2rem;">${weakestArea}</div>
+        <div class="team-stat-label">Weakest Area</div>
+      </div>
+      <div class="team-stat">
+        <div class="team-stat-value" style="font-size: 1.2rem;">${strongestArea}</div>
+        <div class="team-stat-label">Strongest Area</div>
+      </div>
+    `;
+    
+    teamSummaryBox.style.display = 'block';
+  } else {
+    teamSummaryBox.style.display = 'none';
+  }
 }
 
 // Display dimension breakdown
@@ -1146,13 +1269,15 @@ function generateRecommendations(scores) {
   
   const weakest = dimensions.slice(0, 2);
   
-  let html = '<h3>📋 Personalized Recommendations</h3>';
-  html += '<p style="color: var(--text-weak-light); margin-bottom: 2rem;">Focus on improving these two areas for maximum impact on your work-life quality:</p>';
+  let html = isTeamMode ? '<h3>📋 Team Improvement Recommendations</h3>' : '<h3>📋 Personalized Recommendations</h3>';
+  html += isTeamMode 
+    ? '<p style="color: var(--text-weak-light); margin-bottom: 2rem;">Focus on these team-wide areas for maximum impact:</p>'
+    : '<p style="color: var(--text-weak-light); margin-bottom: 2rem;">Focus on improving these two areas for maximum impact on your work-life quality:</p>';
   
   weakest.forEach(dim => {
     html += `<div class="recommendation-section">`;
     html += `<h4>${dim.name} (Score: ${Math.round(dim.score)}/100)</h4>`;
-    html += `<ul>${getRecommendationsForDimension(dim.key)}</ul>`;
+    html += `<ul>${isTeamMode ? getTeamRecommendationsForDimension(dim.key) : getRecommendationsForDimension(dim.key)}</ul>`;
     html += `</div>`;
   });
   
@@ -1210,5 +1335,67 @@ function getRecommendationsForDimension(key) {
   };
   
   return recommendations[key] || '<li>Focus on this area for improvement</li>';
+}
+
+// Get team-specific recommendations for each dimension
+function getTeamRecommendationsForDimension(key) {
+  const recommendations = {
+    productivity: `
+      <li><strong>Implement team-wide "focus time" blocks</strong> where no meetings are scheduled (e.g., mornings)</li>
+      <li><strong>Reduce meeting frequency</strong>—audit recurring meetings and eliminate those that could be async</li>
+      <li><strong>Create clear communication channels</strong>—designate urgent vs. non-urgent channels to reduce interruptions</li>
+      <li>Consider implementing "no-meeting days" like Wednesdays or Fridays for deep work</li>
+    `,
+    meetings: `
+      <li><strong>Audit all team meetings</strong>—cancel those without clear agendas or outcomes</li>
+      <li><strong>Set team-wide meeting guidelines:</strong> 25/50 min meetings, mandatory agendas, optional attendance for updates</li>
+      <li><strong>Default to async communication</strong>—use Loom, Slack threads, or docs instead of live calls</li>
+      <li>Implement a "meeting-free" day each week for focused work time</li>
+    `,
+    burnout: `
+      <li><strong>Evaluate team workload distribution</strong>—are some members consistently overloaded?</li>
+      <li><strong>Set clear expectations about work hours</strong>—discourage after-hours communication</li>
+      <li><strong>Encourage PTO usage</strong>—lead by example and ensure team members take breaks</li>
+      <li>Consider hiring additional support or redistributing responsibilities if workload is unsustainable</li>
+    `,
+    physical: `
+      <li><strong>Provide ergonomic equipment</strong> stipends or reimbursements for home office setups</li>
+      <li><strong>Encourage walking meetings</strong> for 1:1s or brainstorming sessions</li>
+      <li><strong>Promote wellness initiatives</strong>—standing desk options, fitness challenges, or gym memberships</li>
+      <li>Schedule periodic "stretch breaks" or walking meetings into team routines</li>
+    `,
+    mental: `
+      <li><strong>Schedule regular team social activities</strong>—virtual coffee chats, game sessions, or team lunches</li>
+      <li><strong>Create psychological safety</strong>—encourage open conversations about workload and stress</li>
+      <li><strong>Provide mental health resources</strong>—EAP access, meditation app subscriptions, or counseling benefits</li>
+      <li>Hold regular 1:1s focused on wellbeing, not just work progress</li>
+    `,
+    workLife: `
+      <li><strong>Model healthy boundaries</strong>—managers should avoid sending messages after hours</li>
+      <li><strong>Implement "right to disconnect" policies</strong>—no expectation to respond outside work hours</li>
+      <li><strong>Review workload realistically</strong>—are deadlines causing chronic overtime?</li>
+      <li>Use delayed send features on email and messaging to respect team members' personal time</li>
+    `,
+    environment: `
+      <li><strong>Provide home office stipends</strong> for ergonomic chairs, monitors, and proper lighting</li>
+      <li><strong>For hybrid teams:</strong> ensure office space is conducive to focused work (quiet zones)</li>
+      <li><strong>Address noise and distraction issues</strong>—provide noise-canceling headphones or quiet spaces</li>
+      <li>Survey team members about their workspace needs and address common pain points</li>
+    `,
+    financial: `
+      <li><strong>Offer flexible work options</strong> to reduce commute burden and costs</li>
+      <li><strong>Provide commuter benefits</strong>—transit passes, parking subsidies, or carpooling incentives</li>
+      <li><strong>Consider fully remote options</strong> for roles that don't require in-office presence</li>
+      <li>If relocation is common, provide relocation assistance or flexible start dates</li>
+    `,
+    timezone: `
+      <li><strong>Rotate meeting times</strong>—don't always burden the same team members with inconvenient hours</li>
+      <li><strong>Maximize async work</strong>—reduce synchronous meeting requirements through documentation</li>
+      <li><strong>Define "core hours"</strong>—minimize required overlap and let team members flex outside those hours</li>
+      <li>Consider hiring in more time-zone-friendly regions to reduce overlap strain</li>
+    `
+  };
+  
+  return recommendations[key] || '<li>Discuss this area as a team and identify improvements together</li>';
 }
 
