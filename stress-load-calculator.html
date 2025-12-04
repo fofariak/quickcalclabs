@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stress Load Calculator - Measure Your Cumulative Stress Burden | QuickCalcLabs</title>
-  <meta name="description" content="Free stress load calculator. Measure your cumulative stress from work, lifestyle, and personal factors. Get personalized stress management recommendations.">
-  <meta name="keywords" content="stress calculator, stress assessment, stress load, cumulative stress, stress management, work stress, life stress">
+  <title>Stress Load Calculator - Free Cumulative Stress Assessment | QuickCalcLabs</title>
+  <meta name="description" content="Free stress load calculator to measure your cumulative stress burden from work, lifestyle, and personal factors. Get a comprehensive stress assessment with personalized recommendations for better stress management.">
+  <meta name="keywords" content="stress calculator, stress assessment, stress load, cumulative stress, stress management, work stress, life stress, mental health, burnout prevention">
   <link rel="canonical" href="https://quickcalclabs.com/stress-load-calculator.html">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
@@ -14,14 +14,14 @@
      crossorigin="anonymous"></script>
 
   <style>
+    /* Stress Load Calculator Page Styles */
     .calc-wrapper {
-      max-width: 760px;
+      max-width: 700px;
       margin: 2.5rem auto;
       padding: 2.5rem;
       border-radius: var(--radius-lg, 16px);
       background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
       box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-      text-align: center;
       border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
 
@@ -35,6 +35,7 @@
       font-size: clamp(2rem, 4vw, 2.5rem);
       font-weight: 800;
       margin: 0 0 1rem;
+      text-align: center;
       background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
       -webkit-background-clip: text;
       background-clip: text;
@@ -51,7 +52,8 @@
     .subtitle {
       color: var(--text-weak-light, #64748b);
       font-size: 1.05rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
       line-height: 1.6;
     }
 
@@ -59,47 +61,56 @@
       color: var(--text-weak-dark, #94a3b8);
     }
 
-    .meta-info {
-      font-size: 0.9rem;
-      color: var(--text-weak-light, #64748b);
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-
-    .dark-mode .meta-info {
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
     .section-title {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--primary);
       margin: 2rem 0 1rem;
       text-align: left;
       border-bottom: 2px solid var(--primary);
       padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .dark-mode .section-title {
       color: var(--primary-light);
+      border-bottom-color: var(--primary-light);
     }
 
-    .calc-wrapper label {
+    .input-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-section label {
       display: block;
-      text-align: left;
-      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
       color: var(--text-strong-light, #0f172a);
-      margin: 1rem 0 0.5rem;
-      font-size: 1rem;
     }
 
-    .dark-mode .calc-wrapper label {
+    .dark-mode .input-section label {
       color: var(--text-strong-dark, #f1f5f9);
     }
 
-    .calc-wrapper input {
+    .input-hint {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+      padding-left: 0.5rem;
+      border-left: 3px solid var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .input-hint {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    input[type="number"] {
       width: 100%;
-      padding: 0.9rem 1.2rem;
+      padding: 0.9rem 1rem;
       border-radius: var(--radius-md, 12px);
       border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
       font-size: 1rem;
@@ -108,50 +119,99 @@
       transition: all 0.15s ease;
     }
 
-    .calc-wrapper input:focus {
+    input[type="number"]:focus {
       border-color: var(--primary, #8b5cf6);
       box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
       outline: none;
       background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
     }
 
-    .dark-mode .calc-wrapper input {
+    .dark-mode input[type="number"] {
       background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
       border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
       color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
     }
 
-    .dark-mode .calc-wrapper input:focus {
+    .dark-mode input[type="number"]:focus {
       background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
       border-color: var(--primary-light, #a78bfa);
     }
 
-    .range-display {
-      display: inline-block;
-      margin-left: 10px;
+    /* Slider Styles */
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .slider-container input[type="range"] {
+      flex: 1;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      outline: none;
+      -webkit-appearance: none;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .slider-container input[type="range"] {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .slider-container input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .slider-container input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .slider-container input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+    }
+
+    .slider-value {
+      min-width: 45px;
+      padding: 0.5rem 0.8rem;
+      text-align: center;
       font-weight: 700;
-      color: var(--primary, #8b5cf6);
-      min-width: 30px;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border-radius: var(--radius-sm, 8px);
+      box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
     }
 
-    .dark-mode .range-display {
-      color: var(--primary-light, #a78bfa);
-    }
-
-    .help-text {
-      font-size: 0.85rem;
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
       color: var(--text-weak-light, #64748b);
-      margin: -0.3rem 0 0.5rem;
-      font-weight: 400;
-      font-style: italic;
+      margin-top: 0.3rem;
+      padding: 0 5px;
     }
 
-    .dark-mode .help-text {
+    .dark-mode .scale-labels {
       color: var(--text-weak-dark, #94a3b8);
     }
 
     .calc-wrapper button[type="submit"] {
-      display: inline-block;
+      width: 100%;
       padding: 1rem 2rem;
       margin-top: 1.5rem;
       border-radius: 999px;
@@ -173,11 +233,11 @@
 
     .result-box {
       margin-top: 2rem;
-      padding: 2rem;
+      padding: 1.8rem;
       border-radius: var(--radius-md, 12px);
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
       border: 2px solid rgba(139, 92, 246, 0.3);
-      text-align: left;
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
       display: none;
     }
 
@@ -194,26 +254,23 @@
     .dark-mode .result-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
       border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .stress-meter {
-      width: 100%;
-      height: 40px;
-      background: linear-gradient(to right, #10b981 0%, #f59e0b 50%, #ef4444 100%);
-      border-radius: 20px;
-      position: relative;
-      margin: 1.5rem 0;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      text-align: center;
     }
 
-    .stress-marker {
-      position: absolute;
-      top: -10px;
-      width: 4px;
-      height: 60px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      transition: left 0.5s ease;
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
     }
 
     .stress-score-display {
@@ -223,32 +280,143 @@
       margin: 1rem 0;
     }
 
+    .stress-category {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
     .stress-low { color: #10b981; }
     .stress-moderate { color: #f59e0b; }
     .stress-high { color: #ef4444; }
 
+    .stress-meter {
+      width: 100%;
+      height: 24px;
+      background: linear-gradient(to right, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+      border-radius: 12px;
+      position: relative;
+      margin: 1.5rem 0 0.5rem;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .stress-marker {
+      position: absolute;
+      top: -6px;
+      width: 6px;
+      height: 36px;
+      background: #fff;
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: left 0.8s ease;
+    }
+
+    .meter-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-weak-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .dark-mode .meter-labels {
+      color: var(--text-weak-dark);
+    }
+
     .category-breakdown {
-      background: rgba(139, 92, 246, 0.05);
-      padding: 1.5rem;
-      border-radius: var(--radius-md);
-      margin: 1.5rem 0;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      margin: 1rem 0;
     }
 
     .dark-mode .category-breakdown {
-      background: rgba(139, 92, 246, 0.08);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .breakdown-title {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-strong-light);
+    }
+
+    .dark-mode .breakdown-title {
+      color: var(--text-strong-dark);
     }
 
     .breakdown-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .dark-mode .breakdown-item {
+      border-bottom-color: var(--border-dark);
     }
 
     .breakdown-item:last-child {
       border-bottom: none;
     }
 
+    .breakdown-bar-container {
+      flex: 1;
+      margin: 0 1rem;
+      background: var(--surface-1-light);
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .dark-mode .breakdown-bar-container {
+      background: var(--surface-1-dark);
+    }
+
+    .breakdown-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease-out;
+    }
+
+    .recommendations {
+      background: rgba(139, 92, 246, 0.08);
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .recommendations {
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    .recommendations h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .recommendations h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .recommendations ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .recommendations li {
+      margin: 0.5rem 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .recommendations li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* SEO Content Section */
     .seo-content {
       max-width: 900px;
       margin: 2rem auto;
@@ -262,6 +430,7 @@
     .dark-mode .seo-content {
       background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
       border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .seo-content h2 {
@@ -282,6 +451,17 @@
       border-bottom-color: var(--primary-light, #a78bfa);
     }
 
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
     .seo-content p, .seo-content li {
       color: var(--text-weak-light, #64748b);
       font-size: 1.05rem;
@@ -293,16 +473,213 @@
       color: var(--text-weak-dark, #94a3b8);
     }
 
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
     .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
       border-left: 4px solid var(--primary, #8b5cf6);
       padding: 1.5rem;
       margin: 2rem 0;
       border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
     }
 
     .dark-mode .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box {
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .disclaimer-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.15));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box strong {
+      color: #d97706;
+    }
+
+    .warning-box {
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #ef4444;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.1));
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .warning-box {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(248, 113, 113, 0.15));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .warning-box strong {
+      color: #ef4444;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
     }
 
     .calc-meta {
@@ -324,6 +701,17 @@
     .dark-mode .calc-meta summary {
       color: var(--primary-light, #a78bfa);
     }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -338,80 +726,136 @@
     </nav>
   </header>
 
+  <!-- Top Ad Banner (728x90) -->
   <div id="ad-banner-top"></div>
 
   <section class="calc-wrapper">
-    <h1>🧠 Stress Load Calculator</h1>
-    <p class="subtitle">Calculate your cumulative stress burden from work, lifestyle, and personal factors. Get a comprehensive stress assessment and management strategies.</p>
-    <p class="meta-info">Last Updated: November 2025</p>
+    <h1>Stress Load Calculator</h1>
+    <p class="subtitle">Calculate your cumulative stress burden from work, lifestyle, and personal factors. Get a comprehensive stress assessment and personalized management strategies.</p>
 
     <form id="stressForm">
       <div class="section-title">⚡ Work Stress</div>
       
-      <label for="workHours">Weekly work hours:</label>
-      <input type="number" id="workHours" min="0" max="168" value="40" required>
+      <div class="input-section">
+        <label for="workHours">Weekly Work Hours</label>
+        <span class="input-hint">📊 Total hours worked per week including overtime. Standard is 40 hours; >50 is considered high stress. Example: 45.</span>
+        <input type="number" id="workHours" min="0" max="168" value="40" placeholder="e.g., 40" required aria-label="Weekly work hours">
+      </div>
 
-      <label for="workPressure">Work pressure level (1-10): <span class="range-display" id="pressureVal">5</span></label>
-      <p class="help-text">1 = Low pressure, manageable pace, 5 = Moderate deadlines, 10 = Extreme pressure, constant urgency</p>
+      <div class="input-section">
+        <label>Work Pressure Level</label>
+        <span class="input-hint">🔥 Rate your daily work pressure from deadlines, expectations, and workload intensity.</span>
+        <div class="slider-container">
       <input type="range" id="workPressure" min="1" max="10" value="5" required>
+          <span class="slider-value" id="pressureVal">5</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - Low pressure</span>
+          <span>5 - Moderate</span>
+          <span>10 - Extreme pressure</span>
+        </div>
+      </div>
 
-      <label for="jobSecurity">Job security (1-10): <span class="range-display" id="securityVal">7</span></label>
-      <p class="help-text">1 = High risk of job loss, 5 = Uncertain, 10 = Very secure position</p>
+      <div class="input-section">
+        <label>Job Security</label>
+        <span class="input-hint">🛡️ Rate how secure you feel in your current position. Low security = high stress.</span>
+        <div class="slider-container">
       <input type="range" id="jobSecurity" min="1" max="10" value="7" required>
+          <span class="slider-value" id="securityVal">7</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - Very insecure</span>
+          <span>5 - Uncertain</span>
+          <span>10 - Very secure</span>
+        </div>
+      </div>
 
       <div class="section-title">😴 Lifestyle Factors</div>
       
-      <label for="sleepHours">Average sleep hours per night:</label>
-      <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required>
+      <div class="input-section">
+        <label for="sleepHours">Average Sleep Hours Per Night</label>
+        <span class="input-hint">🛏️ Hours of actual sleep (not just time in bed). Adults need 7-9 hours for optimal recovery. Example: 7.</span>
+        <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" placeholder="e.g., 7" required aria-label="Sleep hours per night">
+      </div>
 
-      <label for="exercise">Exercise minutes per day:</label>
-      <input type="number" id="exercise" min="0" max="300" value="30" required>
+      <div class="input-section">
+        <label for="exercise">Daily Exercise Minutes</label>
+        <span class="input-hint">🏃 Average minutes of intentional physical activity daily (walking, gym, sports). 30+ min = healthy. Example: 30.</span>
+        <input type="number" id="exercise" min="0" max="300" value="30" placeholder="e.g., 30" required aria-label="Exercise minutes per day">
+      </div>
 
-      <label for="screenTime">Non-work screen time (hours/day):</label>
-      <input type="number" id="screenTime" step="0.5" min="0" max="24" value="3" required>
+      <div class="input-section">
+        <label for="screenTime">Non-Work Screen Time (Hours/Day)</label>
+        <span class="input-hint">📱 Time spent on phones, TV, gaming outside of work. High screen time disrupts sleep and increases anxiety. Example: 3.</span>
+        <input type="number" id="screenTime" step="0.5" min="0" max="24" value="3" placeholder="e.g., 3" required aria-label="Non-work screen time hours">
+      </div>
 
       <div class="section-title">💰 Personal Stress</div>
       
-      <label for="financial">Financial stress (1-10): <span class="range-display" id="financialVal">5</span></label>
-      <p class="help-text">1 = Financially secure, no money worries, 5 = Some concerns, 10 = Severe financial strain</p>
+      <div class="input-section">
+        <label>Financial Stress</label>
+        <span class="input-hint">💳 Rate your stress about money, bills, debt, or financial security.</span>
+        <div class="slider-container">
       <input type="range" id="financial" min="1" max="10" value="5" required>
+          <span class="slider-value" id="financialVal">5</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - Financially secure</span>
+          <span>5 - Some concerns</span>
+          <span>10 - Severe strain</span>
+        </div>
+      </div>
 
-      <label for="relationships">Relationship satisfaction (1-10): <span class="range-display" id="relationVal">7</span></label>
-      <p class="help-text">1 = Major relationship problems, 5 = Some conflicts, 10 = Strong, supportive relationships</p>
+      <div class="input-section">
+        <label>Relationship Satisfaction</label>
+        <span class="input-hint">❤️ Rate your overall satisfaction with key relationships (partner, family, friends). Low = more stress.</span>
+        <div class="slider-container">
       <input type="range" id="relationships" min="1" max="10" value="7" required>
+          <span class="slider-value" id="relationVal">7</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - Major problems</span>
+          <span>5 - Some conflicts</span>
+          <span>10 - Very supportive</span>
+        </div>
+      </div>
 
-      <label for="commute">Daily commute time (minutes):</label>
-      <input type="number" id="commute" min="0" max="300" value="30" required>
+      <div class="input-section">
+        <label for="commute">Daily Commute Time (Minutes)</label>
+        <span class="input-hint">🚗 Total daily commute time (round trip). Long commutes significantly increase daily stress. Example: 30.</span>
+        <input type="number" id="commute" min="0" max="300" value="30" placeholder="e.g., 30" required aria-label="Daily commute time in minutes">
+      </div>
 
       <button type="submit">Calculate Stress Load</button>
     </form>
 
     <div id="results" class="result-box">
-      <h3 style="color: var(--primary); text-align: center; margin-bottom: 1rem;">Your Cumulative Stress Load</h3>
+      <h3>Cumulative Stress Load Assessment</h3>
       <div class="stress-score-display" id="stressScore">0</div>
-      <div style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;" id="stressCategory"></div>
+      <div class="stress-category" id="stressCategory"></div>
       
       <div class="stress-meter">
         <div class="stress-marker" id="stressMarker"></div>
       </div>
-      <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-weak-light); margin-top: 0.5rem;">
-        <span>Low</span>
+      <div class="meter-labels">
+        <span>Low Stress</span>
         <span>Moderate</span>
-        <span>High</span>
+        <span>High Stress</span>
       </div>
 
+      <hr>
+      <div id="stressDescription"></div>
       <div class="category-breakdown" id="breakdown"></div>
-      <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary); margin-top: 1.5rem;" id="analysis"></div>
-      <div style="background: rgba(59, 130, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary); margin-top: 1.5rem;" id="recommendations"></div>
+      <div class="recommendations" id="recommendations"></div>
       <details class="calc-meta">
-        <summary>How your stress load score is calculated</summary>
-        <p>The calculator first builds three <strong>domain scores</strong> (each 0–100, higher = more stress), each built from multiple inputs that are normalized onto a 0–100 scale and combined with <strong>evidence-based weights</strong> for that domain:</p>
+        <summary>ℹ️ How is your stress load score calculated?</summary>
+        <p>The calculator builds three <strong>domain scores</strong> (each 0–100, higher = more stress), each combining multiple normalized inputs:</p>
         <ul>
-          <li><strong>Work stress:</strong> weekly hours, work pressure, and job security</li>
-          <li><strong>Lifestyle stress:</strong> sleep amount, daily exercise, and non‑work screen time</li>
-          <li><strong>Personal stress:</strong> financial stress, relationship strain, and commute time</li>
+          <li><strong>Work Stress (40% weight):</strong> Weekly hours, work pressure, and job security</li>
+          <li><strong>Lifestyle Stress (30% weight):</strong> Sleep amount, daily exercise, and non-work screen time</li>
+          <li><strong>Personal Stress (30% weight):</strong> Financial stress, relationship satisfaction, and commute time</li>
         </ul>
-        <p>Each input is normalized onto a 0–100 scale using ranges that roughly separate “healthy” from “risky” patterns, then combined into its domain. The final <strong>0–100 total stress load index</strong> is a weighted mix of domains (work ≈40%, lifestyle ≈30%, personal ≈30%), and the results page highlights your strongest stress drivers with <strong>personalized recommendations by factor drivers</strong> so you know where to focus first.</p>
+        <p>Each input is normalized onto a 0–100 scale using research-backed healthy/risky thresholds. The final <strong>0–100 total stress load index</strong> combines domains with evidence-based weights and highlights your strongest stress drivers with <strong>personalized recommendations</strong>.</p>
       </details>
       <div id="shareButtonsContainer" style="display:block;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid rgba(139,92,246,0.2);text-align:center;">
         <p style="font-size:0.95rem;font-weight:700;margin:0 0 1rem;color:#334155;">📤 Share Your Results</p>
@@ -428,113 +872,210 @@
     </div>
   </section>
 
+  <!-- Mid Ad Banner (320x50) -->
   <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
+    <h3>🔗 Explore More Stress & Well-Being Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="burnout-risk-calculator.html">🔥 Burnout Risk Calculator</a></div>
+      <div class="card"><a href="work-life-quality-index.html">⚖️ Work-Life Quality Index</a></div>
+      <div class="card"><a href="productivity-score-calculator.html">📊 Productivity Score Calculator</a></div>
+      <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Stress Calculator</a></div>
+    </div>
+
+    <h3>📝 Related Wellness & Productivity Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">📖 Work-Life Balance: Ultimate Guide</a></div>
+      <div class="card"><a href="blog/work-life-quality-index-guide.html">💡 Work-Life Quality Index Guide</a></div>
+    </div>
+
     <article>
-      <h2>Understanding Cumulative Stress</h2>
-      <p>Stress isn't just about work. It's the cumulative burden from multiple life domains: work pressure, sleep deprivation, financial worries, relationship issues, lifestyle habits, and environmental factors. When stress from multiple sources compounds without adequate recovery, it creates an unsustainable load that leads to burnout, health problems, and reduced quality of life.</p>
+      <h2>Understanding Cumulative Stress: The Total Burden Model</h2>
+      <p>Stress isn't just about work. It's the <strong>cumulative burden from multiple life domains</strong>: work pressure, sleep deprivation, financial worries, relationship issues, lifestyle habits, and environmental factors. When stress from multiple sources compounds without adequate recovery, it creates an unsustainable load that leads to burnout, health problems, and reduced quality of life.</p>
+      
+      <p>Our stress load calculator measures this cumulative burden across three key domains—work, lifestyle, and personal—to give you a comprehensive picture of your total stress exposure and identify which areas need the most attention.</p>
 
       <div class="info-box">
-        <h4>The Stress Bucket Model</h4>
-        <p>Imagine a bucket that collects stress from all sources. Recovery activities (sleep, exercise, social connection, relaxation) drain the bucket. When stress inflow exceeds recovery outflow, the bucket overflows—that's when physical and mental health problems emerge. Our calculator measures how full your stress bucket is.</p>
+        <p><strong>🪣 The Stress Bucket Model:</strong></p>
+        <p>Imagine a bucket that collects stress from all sources. Recovery activities (sleep, exercise, social connection, relaxation) drain the bucket. When stress inflow exceeds recovery outflow, the bucket overflows—that's when physical and mental health problems emerge. This calculator measures how full your stress bucket is.</p>
       </div>
 
-      <h2>Work Stress: The Major Contributor</h2>
-      <p>For most adults, work is the primary source of stress. Long hours, high pressure, job insecurity, and lack of control all contribute. Research shows that work stress doesn't just affect work hours—it spills into evening and weekend time, reducing recovery capacity and amplifying total stress load.</p>
+      <h2>How to Use This Stress Load Calculator</h2>
+      <p>Getting your cumulative stress assessment takes under 3 minutes. Follow these steps:</p>
+      
+      <ol>
+        <li><strong>Work Stress Section:</strong> Enter your weekly work hours, rate your work pressure (1-10), and rate your job security (1-10).</li>
+        <li><strong>Lifestyle Section:</strong> Enter your average sleep hours, daily exercise minutes, and non-work screen time.</li>
+        <li><strong>Personal Stress Section:</strong> Rate your financial stress, relationship satisfaction, and enter your daily commute time.</li>
+        <li><strong>Click Calculate:</strong> Get your total stress load score (0-100), breakdown by domain, and personalized recommendations for your top stress drivers.</li>
+      </ol>
 
-      <h2>Sleep: The Foundation of Stress Management</h2>
-      <p>Sleep is your brain's nightly stress recovery system. During sleep, your body produces cortisol-regulating hormones, consolidates emotional memories, and repairs stress damage. Chronic sleep deprivation (less than 7 hours nightly) prevents this recovery, causing stress to accumulate day after day. One week of 6-hour nights creates cognitive impairment equivalent to missing a full night of sleep.</p>
+      <h2>Understanding Stress Load Categories</h2>
+      <p>Your stress load score is calculated on a 0-100 scale and falls into one of three categories:</p>
 
-      <h2>Financial Stress: The Hidden Health Threat</h2>
-      <p>Financial stress uniquely activates both present worry and future anxiety. Studies link financial stress to increased rates of depression, anxiety, cardiovascular disease, and even premature death. The stress of financial insecurity can be as damaging as having an actual chronic disease.</p>
+      <h3>✅ Low Stress Load (0-29)</h3>
+      <p>Your cumulative stress is manageable. You appear to have healthy work patterns, good lifestyle habits, and adequate stress management. Continue maintaining balance across work, health, and personal life. Monitor for changes that could increase stress.</p>
 
-      <h2>The Exercise Paradox</h2>
-      <p>Exercise is a stressor—but a beneficial one that builds stress resilience. Regular exercise (150 minutes per week of moderate activity) increases your stress tolerance, improves sleep, reduces anxiety, and boosts mood. Sedentary lifestyles leave you more vulnerable to stress from other sources.</p>
+      <h3>⚠️ Moderate Stress Load (30-59)</h3>
+      <p>Multiple stressors are accumulating. While manageable now, this level can lead to problems if sustained over time. You may feel tired, scattered, or struggle to fully relax. Take proactive steps to reduce stress and improve recovery before it escalates.</p>
 
-      <h2>Reducing Your Stress Load</h2>
+      <h3>🚨 High Stress Load (60-100)</h3>
+      <p>Your cumulative stress is severe. High stress from multiple sources is compounding without adequate recovery. This level is unsustainable and poses serious health risks including burnout, cardiovascular issues, immune suppression, and mental health challenges. Immediate intervention is needed.</p>
+
+      <div class="warning-box">
+        <p><strong>⚠️ When to Seek Professional Help:</strong></p>
+        <p>If your stress load is high or severe, or if you're experiencing persistent anxiety, depression, physical symptoms (headaches, digestive issues, chest pain, insomnia), or thoughts of self-harm, please seek help from a mental health professional immediately. High chronic stress is a serious health risk that requires professional intervention.</p>
+      </div>
+
+      <h2>The Three Domains of Stress</h2>
+      <p>Our calculator evaluates stress across three evidence-based domains:</p>
+
+      <h3>⚡ Work Stress (40% Weight)</h3>
+      <p>For most adults, work is the primary source of stress. This domain measures:</p>
       <ul>
-        <li><strong>Prioritize sleep:</strong> 7-9 hours nightly is non-negotiable for stress management</li>
-        <li><strong>Regular exercise:</strong> Even 20 minutes daily has measurable stress-reduction benefits</li>
-        <li><strong>Set work boundaries:</strong> Protect personal time; don't let work overflow into life</li>
-        <li><strong>Address financial stress:</strong> Create a budget, seek financial counseling if needed</li>
-        <li><strong>Cultivate relationships:</strong> Social support is one of the strongest stress buffers</li>
-        <li><strong>Practice stress management:</strong> Meditation, deep breathing, or therapy</li>
-        <li><strong>Limit screen time:</strong> Excessive screens disrupt sleep and increase anxiety</li>
-        <li><strong>Reduce commute:</strong> Long commutes significantly increase daily stress burden</li>
+        <li><strong>Weekly Hours:</strong> Standard is 40 hours; consistently working >50 hours significantly increases stress and health risks</li>
+        <li><strong>Work Pressure:</strong> Deadlines, expectations, workload intensity, and the feeling of being "always on"</li>
+        <li><strong>Job Security:</strong> Fear of job loss creates chronic background stress that's hard to escape</li>
+      </ul>
+      <p>Work stress doesn't just affect work hours—research shows it spills into evening and weekend time, reducing recovery capacity and amplifying total stress load.</p>
+
+      <h3>😴 Lifestyle Stress (30% Weight)</h3>
+      <p>Your daily habits either build stress resilience or undermine it:</p>
+      <ul>
+        <li><strong>Sleep:</strong> Your brain's nightly stress recovery system. Chronic sleep deprivation (<7 hours) prevents stress repair and causes accumulation</li>
+        <li><strong>Exercise:</strong> A beneficial stressor that builds resilience. Sedentary lifestyles increase vulnerability to other stressors</li>
+        <li><strong>Screen Time:</strong> Excessive non-work screen time disrupts sleep, increases anxiety, and prevents mental recovery</li>
       </ul>
 
-      <div class="info-box">
-        <h4>⚠️ When to Seek Professional Help</h4>
-        <p>If your stress load is high or severe, or if you're experiencing persistent anxiety, depression, physical symptoms (headaches, digestive issues, chest pain), or thoughts of self-harm, please seek help from a mental health professional immediately. High chronic stress is a serious health risk that requires professional intervention.</p>
-      </div>
-    </article>
-  </section>
+      <h3>💰 Personal Stress (30% Weight)</h3>
+      <p>Life circumstances outside work contribute significantly to total stress load:</p>
+      <ul>
+        <li><strong>Financial Stress:</strong> Uniquely activates both present worry and future anxiety. Linked to depression, cardiovascular disease, and premature death</li>
+        <li><strong>Relationship Strain:</strong> Poor relationships remove a key stress buffer. Strong relationships are one of the most powerful protectors against stress</li>
+        <li><strong>Commute:</strong> Long commutes add daily stress, reduce exercise and sleep time, and fragment personal life</li>
+      </ul>
 
-  <section class="seo-content">
-    <article>
-      <h2 style="text-align: left;">Explore More Stress &amp; Work-Life Tools</h2>
-      <div class="explore-grid">
-        <a href="burnout-risk-calculator.html" class="explore-card">🔥 Burnout Risk Calculator</a>
-        <a href="work-life-quality-index.html" class="explore-card">⚖️ Work-Life Quality Index</a>
-        <a href="productivity-score-calculator.html" class="explore-card">📊 Productivity Score Calculator</a>
-        <a href="meeting-load-stress-calculator.html" class="explore-card">📅 Meeting Load Stress Calculator</a>
+      <h2>The Science of Cumulative Stress</h2>
+      <p>Stress from multiple sources doesn't just add up—it <strong>compounds</strong>. Understanding this helps explain why addressing stress across multiple domains is so important:</p>
+
+      <h3>Allostatic Load</h3>
+      <p>Allostatic load is the scientific term for cumulative wear and tear on the body from chronic stress. When stress hormones (cortisol, adrenaline) are activated repeatedly without adequate recovery, they cause damage to the cardiovascular, immune, and nervous systems. High allostatic load is associated with accelerated aging, chronic disease, and early mortality.</p>
+
+      <h3>Stress Interaction Effects</h3>
+      <p>Stressors from different domains interact and amplify each other. Work stress disrupts sleep, which reduces exercise motivation, which increases financial stress through healthcare costs, which strains relationships. Breaking this cycle at any point creates positive cascading effects.</p>
+
+      <h3>Recovery Deficit</h3>
+      <p>The modern lifestyle often prevents adequate recovery. Constant connectivity, long work hours, poor sleep habits, and lack of exercise mean many people never fully recover from daily stress before new stress arrives. This creates a cumulative deficit that eventually manifests as burnout or health problems.</p>
+
+      <h2>Strategies for Reducing Stress Load</h2>
+      <p>Based on your results, focus on your highest-stress domain first for maximum impact:</p>
+
+      <h3>Reducing Work Stress</h3>
+      <ul>
+        <li><strong>Set boundaries:</strong> Define clear work hours and protect personal time</li>
+        <li><strong>Prioritize ruthlessly:</strong> Not everything is equally important; focus on high-impact work</li>
+        <li><strong>Communicate capacity:</strong> Discuss workload with your manager before burnout hits</li>
+        <li><strong>Take breaks:</strong> Short breaks throughout the day reduce stress accumulation</li>
+        <li><strong>Build security:</strong> Emergency savings and skill development reduce job insecurity stress</li>
+      </ul>
+
+      <h3>Reducing Lifestyle Stress</h3>
+      <ul>
+        <li><strong>Prioritize sleep:</strong> 7-9 hours is non-negotiable for stress management; create a consistent sleep schedule</li>
+        <li><strong>Start small with exercise:</strong> Even 20-minute daily walks build significant stress resilience</li>
+        <li><strong>Create tech-free windows:</strong> Especially before bed; replace scrolling with offline relaxation</li>
+        <li><strong>Practice recovery activities:</strong> Meditation, hobbies, time in nature, social connection</li>
+      </ul>
+
+      <h3>Reducing Personal Stress</h3>
+      <ul>
+        <li><strong>Address financial stress:</strong> Create a budget, reduce high-interest debt, build emergency savings</li>
+        <li><strong>Invest in relationships:</strong> Schedule time for meaningful connection; seek counseling for conflicts</li>
+        <li><strong>Reduce commute:</strong> Explore remote work, flexible hours, carpooling, or relocation if commute is significant</li>
+        <li><strong>Build support systems:</strong> Strong social support is one of the most powerful stress buffers</li>
+      </ul>
+
+      <div class="disclaimer-box">
+        <strong>Important Note:</strong> This calculator provides estimates based on research averages and patterns. Individual experiences vary significantly based on personality, coping mechanisms, support systems, and life circumstances. Use these results as directional guidance for prioritizing stress management, not as a medical diagnosis.
       </div>
 
-      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
-      <div class="explore-grid">
-        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
-        <a href="blog/work-life-quality-index-guide.html" class="explore-card">📘 Work-Life Quality Index Guide</a>
-      </div>
+      <h2>The Connection to Burnout</h2>
+      <p>High cumulative stress is the primary pathway to burnout. While our <a href="burnout-risk-calculator.html">Burnout Risk Calculator</a> focuses specifically on work-related burnout factors, this Stress Load Calculator captures the total life stress that either protects against or accelerates burnout:</p>
+      <ul>
+        <li>Strong lifestyle factors (good sleep, exercise, low screen time) can buffer against work stress</li>
+        <li>High personal stress (financial, relationship) can accelerate burnout even with moderate work stress</li>
+        <li>Cumulative stress from all domains depletes the same recovery resources</li>
+      </ul>
+      <p>Use both calculators together for a complete picture of your stress and burnout risk.</p>
+
     </article>
   </section>
   
   <section class="faq-section">
-    <h2>Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions About Stress Load</h2>
     <details>
       <summary>How is this different from the burnout risk calculator?</summary>
       <p>The burnout risk calculator focuses specifically on <strong>work-related burnout</strong>—hours, overwhelm, sleep, recovery, and emotional exhaustion tied to your job. The stress load calculator looks at your <strong>total life stress bucket</strong> across work, lifestyle (sleep, exercise, screen time), and personal factors (money, relationships, commute) and produces a single normalized index of overall stress burden.</p>
     </details>
     <details>
       <summary>What is considered a high stress load score?</summary>
-      <p>Scores below ~30 usually indicate a <strong>low stress load</strong>, 30–59 is <strong>moderate</strong>, and 60+ is considered a <strong>high cumulative stress load</strong> in this model. High scores mean that stress is coming from multiple directions at once and your current pattern is likely unsustainable without changes or added support.</p>
+      <p>Scores below ~30 usually indicate a <strong>low stress load</strong>, 30–59 is <strong>moderate</strong>, and 60+ is considered a <strong>high cumulative stress load</strong>. High scores mean that stress is coming from multiple directions at once and your current pattern is likely unsustainable without changes or added support.</p>
     </details>
     <details>
       <summary>How is the 0–100 stress load index calculated?</summary>
-      <p>The calculator builds three domain scores—work, lifestyle, and personal—each made of normalized 0–100 sub‑scores (for example, long work hours, short sleep, or high financial stress push their domains higher). Those domains are then combined with <strong>evidence-based weights</strong> (work ≈40%, lifestyle ≈30%, personal ≈30%) to produce a <strong>single 0–100 normalized stress load score</strong> plus a breakdown by category.</p>
+      <p>The calculator builds three domain scores—work, lifestyle, and personal—each made of normalized 0–100 sub-scores (for example, long work hours, short sleep, or high financial stress push their domains higher). Those domains are then combined with <strong>evidence-based weights</strong> (work ≈40%, lifestyle ≈30%, personal ≈30%) to produce a <strong>single 0–100 normalized stress load score</strong> plus a breakdown by category.</p>
     </details>
     <details>
-      <summary>What do the personalized driver recommendations tell me?</summary>
-      <p>After computing your domain scores and sub‑scores, the tool identifies which category (work, lifestyle, or personal) and which specific driver inside that category are contributing most to your total stress. It then gives <strong>personalized recommendations by those drivers</strong>—for example, reducing weekly hours, improving sleep, addressing financial stress, or shortening your commute.</p>
+      <summary>Why does work stress have higher weight (40%)?</summary>
+      <p>Research consistently shows that work is the primary source of stress for most adults, and work stress has particularly strong spillover effects into other life areas. However, the 30% weights for lifestyle and personal stress are still significant—and for some individuals, these domains may be the primary concern.</p>
+    </details>
+    <details>
+      <summary>Can good lifestyle habits offset work stress?</summary>
+      <p>Partially, yes. Strong sleep, exercise, and recovery practices build stress resilience and can buffer moderate work stress. However, extreme work stress eventually overwhelms even the best lifestyle habits. The goal is to address stress across all domains rather than trying to out-exercise a fundamentally unsustainable work situation.</p>
+    </details>
+    <details>
+      <summary>How often should I use this calculator?</summary>
+      <p>Use it when you sense things are off, after major life changes (new job, relationship changes, financial shifts), or monthly as part of a self-assessment practice. Tracking your score over time helps you see whether your stress management strategies are working and catch problems before they become severe.</p>
     </details>
     <details>
       <summary>When should I seek professional help?</summary>
-      <p>If your score is high or severe and you’re experiencing persistent anxiety, depression, physical symptoms (such as chest pain, headaches, or digestive issues), or thoughts of self‑harm, you should seek help from a doctor, therapist, or other qualified professional as soon as possible. This tool is educational only and is not a substitute for professional diagnosis or treatment.</p>
+      <p>If your score is high or severe and you're experiencing persistent anxiety, depression, physical symptoms (chest pain, headaches, digestive issues), or thoughts of self-harm, you should seek help from a doctor, therapist, or other qualified professional as soon as possible. This tool is educational only and is not a substitute for professional diagnosis or treatment.</p>
+    </details>
+    <details>
+      <summary>What's the relationship between stress and physical health?</summary>
+      <p>Chronic stress significantly impacts physical health through multiple pathways: elevated cortisol weakens immune function, chronic inflammation increases cardiovascular risk, stress-related behaviors (poor sleep, overeating, sedentary activity) compound these effects. High cumulative stress is associated with increased rates of heart disease, diabetes, autoimmune conditions, and shortened lifespan.</p>
     </details>
   </section>
   
-  <div id="ad-banner-end"></div>
-  
   <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
   
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> This stress calculator is for informational purposes only and is not a substitute for professional medical or mental health advice. If you're experiencing severe stress, anxiety, or depression, please consult a healthcare provider.</p>
+      <p><strong>Disclaimer:</strong> This stress load calculator is for informational and educational purposes only. It is not a substitute for professional medical or mental health advice. If you're experiencing severe stress, anxiety, depression, or physical symptoms, please consult a healthcare provider immediately.</p>
     </div>
     <div class="footer-links">
       <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
       <a href="privacy-policy.html">Privacy Policy</a> | 
-      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
     </div>
   </footer>
 
   <script>
-    // Range displays
-    ['workPressure', 'jobSecurity', 'financial', 'relationships'].forEach(id => {
+    // Range displays for sliders
+    const sliders = [
+      { id: 'workPressure', valId: 'pressureVal' },
+      { id: 'jobSecurity', valId: 'securityVal' },
+      { id: 'financial', valId: 'financialVal' },
+      { id: 'relationships', valId: 'relationVal' }
+    ];
+
+    sliders.forEach(({ id, valId }) => {
       document.getElementById(id).addEventListener('input', (e) => {
-        const valId = id === 'workPressure' ? 'pressureVal' : 
-                      id === 'jobSecurity' ? 'securityVal' : 
-                      id === 'financial' ? 'financialVal' : 'relationVal';
         document.getElementById(valId).textContent = e.target.value;
       });
     });
@@ -552,19 +1093,26 @@
       const relationships = parseFloat(document.getElementById('relationships').value);
       const commute = parseFloat(document.getElementById('commute').value);
 
+      // Validate inputs
+      if (isNaN(workHours) || workHours < 0 || workHours > 168) {
+        alert('Please enter valid weekly work hours (0-168).');
+        return;
+      }
+
       // Normalized domain scores (0-100, higher = more stress)
-      const workHoursStress = Math.max(0, Math.min(100, Math.round(((workHours - 40) / 25) * 100))); // ~40h -> 0, 65h+ -> 100
+      const workHoursStress = Math.max(0, Math.min(100, Math.round(((workHours - 40) / 25) * 100)));
       const workPressureStress = Math.max(0, Math.min(100, Math.round(((workPressure - 1) / 9) * 100)));
       const jobSecurityStress = Math.max(0, Math.min(100, Math.round(((10 - jobSecurity) / 9) * 100)));
 
-      const sleepStress = Math.max(0, Math.min(100, Math.round(((7.5 - sleepHours) / 3.5) * 100))); // 7.5h+ -> 0, ~4h -> 100
-      const exerciseStress = Math.max(0, Math.min(100, Math.round(((30 - exercise) / 30) * 100))); // 30+ min -> 0, 0 min -> 100
-      const screenStress = Math.max(0, Math.min(100, Math.round(((screenTime - 2) / 4) * 100))); // ~2h -> 0, ~6h+ -> 100
+      const sleepStress = Math.max(0, Math.min(100, Math.round(((7.5 - sleepHours) / 3.5) * 100)));
+      const exerciseStress = Math.max(0, Math.min(100, Math.round(((30 - exercise) / 30) * 100)));
+      const screenStress = Math.max(0, Math.min(100, Math.round(((screenTime - 2) / 4) * 100)));
 
       const financialStress = Math.max(0, Math.min(100, Math.round(((financial - 1) / 9) * 100)));
       const relationshipStress = Math.max(0, Math.min(100, Math.round(((10 - relationships) / 9) * 100)));
-      const commuteStress = Math.max(0, Math.min(100, Math.round(((commute - 15) / 60) * 100))); // ~15min -> 0, ~75min+ -> 100
+      const commuteStress = Math.max(0, Math.min(100, Math.round(((commute - 15) / 60) * 100)));
 
+      // Domain scores
       const workStress = Math.round(
         workHoursStress * 0.35 +
         workPressureStress * 0.40 +
@@ -588,118 +1136,92 @@
       )));
 
       // Display results
-      document.getElementById('stressScore').textContent = totalStress;
-      
-      const markerPosition = (totalStress / 100) * 100;
-      document.getElementById('stressMarker').style.left = markerPosition + '%';
+      const scoreEl = document.getElementById('stressScore');
+      const categoryEl = document.getElementById('stressCategory');
+      const descEl = document.getElementById('stressDescription');
+      const recEl = document.getElementById('recommendations');
+      const markerEl = document.getElementById('stressMarker');
+      const breakdownEl = document.getElementById('breakdown');
 
-      let category, colorClass, analysis, recommendations;
+      scoreEl.textContent = totalStress;
+      markerEl.style.left = totalStress + '%';
+
+      let category, description, recommendations, colorClass;
 
       if (totalStress < 30) {
         category = '✅ Low Stress Load';
         colorClass = 'stress-low';
-        analysis = '<h4 style="margin-top: 0;">Your stress load is manageable.</h4><p>You appear to have healthy work patterns, good lifestyle habits, and adequate stress management. Continue maintaining balance across work, health, and personal life.</p>';
-        recommendations = '<h4 style="margin-top: 0;">Maintain Healthy Habits:</h4><ul style="margin: 0; padding-left: 1.5rem;"><li>Keep prioritizing sleep and exercise</li><li>Maintain work-life boundaries</li><li>Continue stress management practices</li><li>Monitor for changes that increase stress</li></ul>';
+        description = '<p><strong>Your stress load is manageable.</strong> You appear to have healthy work patterns, good lifestyle habits, and adequate stress management. Continue maintaining balance across work, health, and personal life.</p>';
+        recommendations = '<h4>🌟 Maintain Healthy Habits:</h4><ul><li>Keep prioritizing 7-9 hours of quality sleep</li><li>Continue regular exercise routine</li><li>Maintain work-life boundaries</li><li>Nurture supportive relationships</li><li>Monitor for changes that could increase stress</li></ul>';
       } else if (totalStress < 60) {
         category = '⚠️ Moderate Stress Load';
         colorClass = 'stress-moderate';
-        analysis = '<h4 style="margin-top: 0;">Your stress load is elevated.</h4><p>Multiple stressors are accumulating. While manageable now, this level can lead to problems if sustained. Take proactive steps to reduce stress and improve recovery.</p>';
-        recommendations = '<h4 style="margin-top: 0;">Recommended Actions:</h4><ul style="margin: 0; padding-left: 1.5rem;"><li>Prioritize 7-9 hours of sleep nightly</li><li>Add regular exercise (at least 150 min/week)</li><li>Set firmer work boundaries—limit hours if possible</li><li>Address your highest stress category (see breakdown above)</li><li>Practice daily stress management (meditation, breathing, hobbies)</li><li>Seek support from friends, family, or a counselor</li></ul>';
+        description = '<p><strong>Your stress load is elevated.</strong> Multiple stressors are accumulating. While manageable now, this level can lead to problems if sustained. Take proactive steps to reduce stress and improve recovery.</p>';
+        recommendations = '<h4>🛠️ Recommended Actions:</h4><ul><li>Prioritize 7-9 hours of sleep nightly as non-negotiable</li><li>Add regular exercise (at least 150 min/week)</li><li>Set firmer work boundaries—limit hours if possible</li><li>Address your highest stress domain (see breakdown above)</li><li>Practice daily stress management (meditation, breathing, hobbies)</li><li>Seek support from friends, family, or a counselor</li></ul>';
       } else {
         category = '🚨 High Stress Load';
         colorClass = 'stress-high';
-        analysis = '<h4 style="margin-top: 0;">Your stress load is severe.</h4><p>You have high cumulative stress from multiple sources. This level is unsustainable and poses serious health risks. Immediate intervention is needed.</p>';
-        recommendations = '<h4 style="margin-top: 0;">URGENT: Take Action Now:</h4><ul style="margin: 0; padding-left: 1.5rem;"><li>Consult a mental health professional this week</li><li>Make sleep your #1 priority—aim for 8+ hours</li><li>Speak with your manager or HR about work stress</li><li>Address financial stress—seek financial counseling if needed</li><li>Start daily exercise, even just 20-minute walks</li><li>Reduce screen time, especially before bed</li><li>Consider major life changes if stress is chronic</li><li>Build a support system—don\'t face this alone</li></ul>';
+        description = '<p><strong>Your stress load is severe.</strong> You have high cumulative stress from multiple sources. This level is unsustainable and poses serious health risks including burnout, cardiovascular issues, and mental health challenges. Immediate intervention is needed.</p>';
+        recommendations = '<h4>🆘 URGENT: Take Action Now:</h4><ul><li>Consider consulting a mental health professional this week</li><li>Make sleep your #1 priority—aim for 8+ hours</li><li>Speak with your manager or HR about work stress</li><li>Address financial stress—seek financial counseling if needed</li><li>Start daily exercise, even just 20-minute walks</li><li>Reduce screen time, especially before bed</li><li>Consider major life changes if stress is chronic</li><li>Build a support system—don\'t face this alone</li></ul>';
       }
 
-      // Domain-level breakdown
-      const breakdownHTML = `
-        <h4 style="margin-top: 0; color: var(--text-strong-light);">Stress Breakdown by Category:</h4>
-        <div class="breakdown-item">
-          <span>Work Stress</span>
-          <strong>${Math.round(workStress)} points</strong>
-        </div>
-        <div class="breakdown-item">
-          <span>Lifestyle Stress</span>
-          <strong>${Math.round(lifestyleStress)} points</strong>
-        </div>
-        <div class="breakdown-item">
-          <span>Personal Stress</span>
-          <strong>${Math.round(personalStress)} points</strong>
-        </div>
-        <div class="breakdown-item" style="border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 1rem; font-size: 1.1rem;">
-          <span><strong>Total Stress Load</strong></span>
-          <strong style="color: ${colorClass === 'stress-low' ? '#10b981' : colorClass === 'stress-moderate' ? '#f59e0b' : '#ef4444'};">${totalStress} / 100</strong>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-weak-light);">Focus on reducing your highest stress category for maximum impact.</p>
-      `;
-      document.getElementById('breakdown').innerHTML = breakdownHTML;
-
-      // Personalized recommendations by strongest stress drivers
+      // Domain breakdown with visual bars
       const domains = [
-        {
-          key: 'work',
-          label: 'Work stress',
-          score: workStress,
-          drivers: [
-            { key: 'workHours',       label: 'Long work hours',            score: workHoursStress },
-            { key: 'workPressure',    label: 'High work pressure',         score: workPressureStress },
-            { key: 'jobSecurity',     label: 'Low job security',           score: jobSecurityStress }
-          ]
-        },
-        {
-          key: 'lifestyle',
-          label: 'Lifestyle stress',
-          score: lifestyleStress,
-          drivers: [
-            { key: 'sleep',      label: 'Insufficient sleep',        score: sleepStress },
-            { key: 'exercise',   label: 'Lack of exercise',          score: exerciseStress },
-            { key: 'screen',     label: 'High non-work screen time', score: screenStress }
-          ]
-        },
-        {
-          key: 'personal',
-          label: 'Personal stress',
-          score: personalStress,
-          drivers: [
-            { key: 'financial',     label: 'Financial stress',        score: financialStress },
-            { key: 'relationships', label: 'Relationship strain',     score: relationshipStress },
-            { key: 'commute',       label: 'Long commute',            score: commuteStress }
-          ]
-        }
+        { name: 'Work Stress', score: workStress, icon: '⚡' },
+        { name: 'Lifestyle Stress', score: lifestyleStress, icon: '😴' },
+        { name: 'Personal Stress', score: personalStress, icon: '💰' }
       ];
 
-      const driverTips = {
-        workHours: 'Experiment with bringing weekly hours closer to the 40–50 range and push back on non-essential work.',
-        workPressure: 'Clarify priorities with your manager and reduce multitasking so you are not \"always on\" for everything.',
-        jobSecurity: 'If possible, discuss role clarity and expectations with your manager and build an emergency financial buffer.',
-        sleep: 'Protect a consistent 7–9 hour sleep window by setting a firm bedtime and limiting screens and caffeine in the evening.',
-        exercise: 'Start with short, regular movement—like a 20-minute daily walk—to build stress resilience.',
-        screen: 'Create tech-free windows (especially before bed) and replace doomscrolling with offline relaxation.',
-        financial: 'Create a realistic budget, reduce high-interest debt first, and consider speaking with a financial counselor.',
-        relationships: 'Invest time in supportive relationships and consider counseling if conflicts are a major stress source.',
-        commute: 'Explore options like remote days, flexible hours, carpooling, or relocation to reduce commute burden over time.'
-      };
+      let breakdownHTML = '<p class="breakdown-title">📊 Stress Breakdown by Domain:</p>';
+      domains.forEach(d => {
+        const barColor = d.score < 30 ? '#10b981' : d.score < 60 ? '#f59e0b' : '#ef4444';
+        breakdownHTML += `
+        <div class="breakdown-item">
+            <span style="min-width: 130px; font-size: 0.9rem;">${d.icon} ${d.name}</span>
+            <div class="breakdown-bar-container">
+              <div class="breakdown-bar" style="width: ${d.score}%; background: ${barColor};"></div>
+        </div>
+            <span style="min-width: 50px; text-align: right; font-weight: 700; font-size: 0.9rem; color: ${barColor};">${d.score}/100</span>
+        </div>
+        `;
+      });
 
-      const primaryDomain = [...domains].sort((a, b) => b.score - a.score)[0];
-      const primaryDriver = [...primaryDomain.drivers].sort((a, b) => b.score - a.score)[0];
+      // Personalized driver recommendations
+      const allDrivers = [
+        { key: 'workHours', label: 'Long work hours', score: workHoursStress, domain: 'Work', tip: 'Experiment with bringing weekly hours closer to 40–50 and push back on non-essential work.' },
+        { key: 'workPressure', label: 'High work pressure', score: workPressureStress, domain: 'Work', tip: 'Clarify priorities with your manager and reduce multitasking so you\'re not "always on."' },
+        { key: 'jobSecurity', label: 'Low job security', score: jobSecurityStress, domain: 'Work', tip: 'Discuss role clarity with your manager and build an emergency financial buffer.' },
+        { key: 'sleep', label: 'Insufficient sleep', score: sleepStress, domain: 'Lifestyle', tip: 'Protect a consistent 7–9 hour sleep window by setting a firm bedtime and limiting screens in the evening.' },
+        { key: 'exercise', label: 'Lack of exercise', score: exerciseStress, domain: 'Lifestyle', tip: 'Start with short, regular movement—like a 20-minute daily walk—to build stress resilience.' },
+        { key: 'screen', label: 'High screen time', score: screenStress, domain: 'Lifestyle', tip: 'Create tech-free windows (especially before bed) and replace scrolling with offline relaxation.' },
+        { key: 'financial', label: 'Financial stress', score: financialStress, domain: 'Personal', tip: 'Create a realistic budget, reduce high-interest debt first, and consider speaking with a financial counselor.' },
+        { key: 'relationships', label: 'Relationship strain', score: relationshipStress, domain: 'Personal', tip: 'Invest time in supportive relationships and consider counseling if conflicts are a major stress source.' },
+        { key: 'commute', label: 'Long commute', score: commuteStress, domain: 'Personal', tip: 'Explore remote work, flexible hours, carpooling, or relocation to reduce commute burden.' }
+      ];
+
+      const topDrivers = [...allDrivers].sort((a, b) => b.score - a.score).slice(0, 2);
 
       const driverHtml = `
-        <h4>Biggest stress driver right now:</h4>
-        <p><strong>${primaryDomain.label} → ${primaryDriver.label}</strong></p>
-        <p>${driverTips[primaryDriver.key]}</p>
+        <h4 style="margin-top: 1.5rem;">🎯 Your Top Stress Drivers:</h4>
+        <ul>
+          ${topDrivers.map(d => `<li><strong>${d.domain} → ${d.label}:</strong> ${d.tip}</li>`).join('')}
+        </ul>
       `;
+      recommendations += driverHtml;
 
-      document.getElementById('stressScore').className = 'stress-score-display ' + colorClass;
-      document.getElementById('stressCategory').innerHTML = category;
-      document.getElementById('stressCategory').className = colorClass;
-      document.getElementById('analysis').innerHTML = analysis;
-      document.getElementById('recommendations').innerHTML = recommendations + driverHtml;
+      scoreEl.className = 'stress-score-display ' + colorClass;
+      categoryEl.textContent = category;
+      categoryEl.className = 'stress-category ' + colorClass;
+      descEl.innerHTML = description;
+      breakdownEl.innerHTML = breakdownHTML;
+      recEl.innerHTML = recommendations;
       
       document.getElementById('results').classList.add('show');
       
-      // Initialize share buttons with result  
-      initShareButtons('Stress Load Calculator', document.getElementById('stressScore').textContent, document.getElementById('stressCategory').textContent);
+      // Initialize share buttons
+      if (typeof initShareButtons === 'function') {
+        initShareButtons('Stress Load Calculator', totalStress + '/100', category);
+      }
       
       setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth' }), 100);
     });
@@ -749,14 +1271,21 @@
       "name": "What is considered a high stress load score?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Scores below about 30 usually indicate a low stress load, 30\u201159 is moderate, and 60+ is considered a high cumulative stress load. High scores mean that stress is coming from multiple directions at once and your current pattern is likely unsustainable without changes or added support."
+        "text": "Scores below about 30 usually indicate a low stress load, 30–59 is moderate, and 60+ is considered a high cumulative stress load. High scores mean that stress is coming from multiple directions at once and your current pattern is likely unsustainable without changes or added support."
       }
     },{
       "@type": "Question",
-      "name": "How is the 0\u2011100 stress load index calculated?",
+      "name": "How is the 0–100 stress load index calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The calculator builds three domain scores (work, lifestyle, and personal), each made of normalized 0\u2011100 sub-scores such as long work hours, short sleep, or financial strain. These domains are then combined with evidence-based weights to produce a single 0\u2011100 total stress load score plus a breakdown by category."
+        "text": "The calculator builds three domain scores (work, lifestyle, and personal), each made of normalized 0–100 sub-scores such as long work hours, short sleep, or financial strain. These domains are then combined with evidence-based weights to produce a single 0–100 total stress load score plus a breakdown by category."
+      }
+    },{
+      "@type": "Question",
+      "name": "Why does work stress have higher weight (40%)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Research consistently shows that work is the primary source of stress for most adults, and work stress has particularly strong spillover effects into other life areas. However, lifestyle and personal stress are still weighted at 30% each and can be the primary concern for some individuals."
       }
     },{
       "@type": "Question",
@@ -770,4 +1299,3 @@
   </script>
 </body>
 </html>
-
