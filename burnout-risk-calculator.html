@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Burnout Risk Calculator - Assess Your Risk & Get Prevention Tips | QuickCalcLabs</title>
-  <meta name="description" content="Free burnout risk calculator. Assess your risk of workplace burnout based on hours worked, stress levels, sleep quality, and recovery. Get personalized prevention strategies.">
-  <meta name="keywords" content="burnout risk calculator, burnout assessment, workplace burnout, stress calculator, burnout prevention, work stress test">
+  <title>Burnout Risk Calculator - Free Workplace Burnout Assessment Tool | QuickCalcLabs</title>
+  <meta name="description" content="Free burnout risk calculator to assess your workplace burnout risk. Evaluate work hours, stress levels, sleep quality, emotional exhaustion, and recovery patterns. Get personalized prevention strategies and actionable recommendations.">
+  <meta name="keywords" content="burnout risk calculator, burnout assessment tool, workplace burnout test, stress calculator, burnout prevention, work stress assessment, emotional exhaustion test, mental health at work">
   <link rel="canonical" href="https://quickcalclabs.com/burnout-risk-calculator.html">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
@@ -14,15 +14,14 @@
      crossorigin="anonymous"></script>
 
   <style>
-    /* Burnout calculator page specific styles */
+    /* Burnout Calculator Page Styles - Matching BMI Calculator */
     .calc-wrapper {
-      max-width: 760px;
+      max-width: 700px;
       margin: 2.5rem auto;
       padding: 2.5rem;
       border-radius: var(--radius-lg, 16px);
       background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
       box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-      text-align: center;
       border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
 
@@ -36,6 +35,7 @@
       font-size: clamp(2rem, 4vw, 2.5rem);
       font-weight: 800;
       margin: 0 0 1rem;
+      text-align: center;
       background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
       -webkit-background-clip: text;
       background-clip: text;
@@ -52,7 +52,8 @@
     .subtitle {
       color: var(--text-weak-light, #64748b);
       font-size: 1.05rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
       line-height: 1.6;
     }
 
@@ -60,33 +61,39 @@
       color: var(--text-weak-dark, #94a3b8);
     }
 
-    .meta-info {
-      font-size: 0.9rem;
-      color: var(--text-weak-light, #64748b);
+    .input-section {
       margin-bottom: 1.5rem;
-      font-style: italic;
     }
 
-    .dark-mode .meta-info {
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    .calc-wrapper label {
+    .input-section label {
       display: block;
-      text-align: left;
-      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
       color: var(--text-strong-light, #0f172a);
-      margin: 1rem 0 0.5rem;
-      font-size: 1rem;
     }
 
-    .dark-mode .calc-wrapper label {
+    .dark-mode .input-section label {
       color: var(--text-strong-dark, #f1f5f9);
     }
 
-    .calc-wrapper input, .calc-wrapper select {
+    .input-hint {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+      padding-left: 0.5rem;
+      border-left: 3px solid var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .input-hint {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    input[type="number"],
+    select {
       width: 100%;
-      padding: 0.9rem 1.2rem;
+      padding: 0.9rem 1rem;
       border-radius: var(--radius-md, 12px);
       border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
       font-size: 1rem;
@@ -95,51 +102,102 @@
       transition: all 0.15s ease;
     }
 
-    .calc-wrapper input:focus, .calc-wrapper select:focus {
+    input[type="number"]:focus,
+    select:focus {
       border-color: var(--primary, #8b5cf6);
       box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
       outline: none;
       background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
     }
 
-    .dark-mode .calc-wrapper input, .dark-mode .calc-wrapper select {
+    .dark-mode input[type="number"],
+    .dark-mode select {
       background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
       border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
       color: var(--text-strong-dark, #f1f5f9);
       color-scheme: dark;
     }
 
-    .dark-mode .calc-wrapper input:focus, .dark-mode .calc-wrapper select:focus {
+    .dark-mode input[type="number"]:focus,
+    .dark-mode select:focus {
       background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
       border-color: var(--primary-light, #a78bfa);
     }
 
-    .range-display {
-      display: inline-block;
-      margin-left: 10px;
+    /* Slider Styles */
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .slider-container input[type="range"] {
+      flex: 1;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      outline: none;
+      -webkit-appearance: none;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .slider-container input[type="range"] {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .slider-container input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .slider-container input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .slider-container input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+    }
+
+    .slider-value {
+      min-width: 45px;
+      padding: 0.5rem 0.8rem;
+      text-align: center;
       font-weight: 700;
-      color: var(--primary, #8b5cf6);
-      min-width: 30px;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border-radius: var(--radius-sm, 8px);
+      box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
     }
 
-    .dark-mode .range-display {
-      color: var(--primary-light, #a78bfa);
-    }
-
-    .help-text {
-      font-size: 0.85rem;
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
       color: var(--text-weak-light, #64748b);
-      margin: -0.3rem 0 0.5rem;
-      font-weight: 400;
-      font-style: italic;
+      margin-top: 0.3rem;
+      padding: 0 5px;
     }
 
-    .dark-mode .help-text {
+    .dark-mode .scale-labels {
       color: var(--text-weak-dark, #94a3b8);
     }
 
     .calc-wrapper button[type="submit"] {
-      display: inline-block;
+      width: 100%;
       padding: 1rem 2rem;
       margin-top: 1.5rem;
       border-radius: 999px;
@@ -159,18 +217,13 @@
       background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
     }
 
-    .calc-wrapper button[type="submit"]:active {
-      transform: translateY(-1px);
-    }
-
     .result-box {
       margin-top: 2rem;
-      padding: 2rem;
+      padding: 1.8rem;
       border-radius: var(--radius-md, 12px);
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
       border: 2px solid rgba(139, 92, 246, 0.3);
       box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
-      text-align: left;
       display: none;
     }
 
@@ -193,16 +246,30 @@
     .result-box h3 {
       margin-top: 0;
       color: var(--primary, #8b5cf6);
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+      text-align: center;
     }
 
     .dark-mode .result-box h3 {
       color: var(--primary-light, #a78bfa);
     }
 
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .result-box p {
+      margin: 0.5rem 0;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .dark-mode .result-box p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
     .risk-score {
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 900;
       text-align: center;
       margin: 1rem 0;
@@ -215,9 +282,29 @@
 
     .risk-category {
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
+    }
+
+    .risk-meter {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: 10px;
+      height: 20px;
+      margin: 1rem 0;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+    }
+
+    .dark-mode .risk-meter {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark);
+    }
+
+    .risk-meter-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 1s ease-out, background-color 0.5s ease;
     }
 
     .recommendations {
@@ -249,30 +336,117 @@
     .recommendations li {
       margin: 0.5rem 0;
       color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
     }
 
     .dark-mode .recommendations li {
       color: var(--text-weak-dark, #94a3b8);
     }
 
-    .calc-meta {
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
-      color: var(--text-weak-light, #64748b);
+    .driver-breakdown {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1rem;
     }
 
-    .calc-meta summary {
-      cursor: pointer;
+    .dark-mode .driver-breakdown {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .driver-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .dark-mode .driver-item {
+      border-bottom-color: var(--border-dark);
+    }
+
+    .driver-item:last-child {
+      border-bottom: none;
+    }
+
+    .driver-bar-container {
+      flex: 1;
+      margin: 0 1rem;
+      background: var(--surface-1-light);
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .dark-mode .driver-bar-container {
+      background: var(--surface-1-dark);
+    }
+
+    .driver-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease-out;
+    }
+
+    /* Quick links after calculator */
+    .quick-links {
+      margin-top: 2rem;
+      padding: 1.2rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .quick-links {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .quick-links h4 {
+      margin: 0 0 0.8rem 0;
+      font-size: 0.95rem;
+      text-align: center;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .quick-links h4 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .quick-link {
+      padding: 0.6rem;
+      text-align: center;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-sm, 8px);
+      font-size: 0.85rem;
       font-weight: 600;
-      color: var(--primary, #8b5cf6);
+      color: var(--text-medium-light, #334155);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
 
-    .dark-mode .calc-meta {
-      color: var(--text-weak-dark, #94a3b8);
+    .quick-link:hover {
+      background: var(--primary, #8b5cf6);
+      color: #fff;
+      transform: translateY(-2px);
     }
 
-    .dark-mode .calc-meta summary {
-      color: var(--primary-light, #a78bfa);
+    .dark-mode .quick-link {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .quick-link:hover {
+      background: var(--primary-light, #a78bfa);
     }
 
     /* SEO Content Section */
@@ -337,10 +511,6 @@
       padding-left: 1.5rem;
     }
 
-    .seo-content li {
-      margin-bottom: 0.8rem;
-    }
-
     .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
       border-left: 4px solid var(--primary, #8b5cf6);
@@ -355,19 +525,206 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .info-box h4 {
-      margin-top: 0;
+    .disclaimer-box {
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .disclaimer-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.15));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box strong {
+      color: #d97706;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
       color: var(--text-strong-light, #0f172a);
     }
 
-    .dark-mode .info-box h4 {
+    .dark-mode .faq-section h2 {
       color: var(--text-strong-dark, #f1f5f9);
     }
 
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-meta {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .calc-meta summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .calc-meta {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .calc-meta summary {
+      color: var(--primary-light, #a78bfa);
+    }
+
     @media (max-width: 820px) {
-      .calc-wrapper, .seo-content {
+      .calc-wrapper, .seo-content, .faq-section {
         padding: 1.8rem;
         margin: 1.5rem auto;
+      }
+
+      .card-grid, .quick-links-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -388,55 +745,104 @@
   <div id="ad-banner-top"></div>
 
   <section class="calc-wrapper">
-    <h1>🔥 Burnout Risk Calculator</h1>
-    <p class="subtitle">Assess your risk of workplace burnout based on work hours, stress levels, sleep quality, and recovery patterns. Get personalized prevention strategies.</p>
-    <p class="meta-info">Last Updated: November 2025</p>
+    <h1>Burnout Risk Calculator</h1>
+    <p class="subtitle">Assess your workplace burnout risk in under 2 minutes. Get personalized insights based on work hours, stress levels, sleep quality, and recovery patterns.</p>
 
     <form id="burnoutForm">
-      <label for="weeklyHours">Weekly work hours:</label>
-      <input type="number" id="weeklyHours" min="0" max="168" value="40" required>
+      <div class="input-section">
+        <label for="weeklyHours">Weekly Work Hours</label>
+        <span class="input-hint">💼 Enter total hours you work per week (including overtime). Standard is 40 hours. Example: 45, 50, or 55 hours.</span>
+        <input type="number" id="weeklyHours" min="0" max="168" value="40" placeholder="e.g., 45" required aria-label="Weekly work hours">
+      </div>
 
-      <label for="feelingOverwhelmed">Feeling overwhelmed (1-10): <span class="range-display" id="overwhelmedVal">5</span></label>
-      <p class="help-text">1 = Rarely stressed, 5 = Sometimes overwhelmed, 10 = Constantly overwhelmed</p>
+      <div class="input-section">
+        <label for="sleepHours">Average Sleep Hours per Night</label>
+        <span class="input-hint">😴 Enter hours of sleep you get on a typical night. Adults need 7-9 hours. Example: 6, 7, or 8 hours.</span>
+        <input type="number" id="sleepHours" step="0.5" min="0" max="14" value="7" placeholder="e.g., 6.5" required aria-label="Average sleep hours">
+      </div>
+
+      <div class="input-section">
+        <label>Feeling Overwhelmed at Work</label>
+        <span class="input-hint">😰 Rate how often you feel overwhelmed by work demands. 1 = Rarely stressed, 10 = Constantly overwhelmed.</span>
+        <div class="slider-container">
       <input type="range" id="feelingOverwhelmed" min="1" max="10" value="5" required>
+          <span class="slider-value" id="overwhelmedVal">5</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - Rarely</span>
+          <span>5 - Sometimes</span>
+          <span>10 - Always</span>
+        </div>
+      </div>
 
-      <label for="sleepHours">Average sleep hours per night:</label>
-      <input type="number" id="sleepHours" step="0.5" min="0" max="12" value="7" required>
+      <div class="input-section">
+        <label>Emotional Exhaustion Level</label>
+        <span class="input-hint">💔 Rate your emotional depletion from work. 1 = Energized & engaged, 10 = Completely drained.</span>
+        <div class="slider-container">
+          <input type="range" id="emotionalExhaustion" min="1" max="10" value="5" required>
+          <span class="slider-value" id="exhaustionVal">5</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - Energized</span>
+          <span>5 - Moderate</span>
+          <span>10 - Depleted</span>
+        </div>
+      </div>
 
-      <label for="weekendRecovery">Weekend recovery quality (1-10): <span class="range-display" id="recoveryVal">7</span></label>
-      <p class="help-text">1 = No recovery, work consumes weekends, 10 = Fully disconnect and recharge</p>
+      <div class="input-section">
+        <label>Weekend/Off-Time Recovery Quality</label>
+        <span class="input-hint">🔋 Rate how well you recharge during time off. 1 = No recovery (work consumes weekends), 10 = Fully disconnect & recharge.</span>
+        <div class="slider-container">
       <input type="range" id="weekendRecovery" min="1" max="10" value="7" required>
+          <span class="slider-value" id="recoveryVal">7</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - No Recovery</span>
+          <span>5 - Partial</span>
+          <span>10 - Fully Recharge</span>
+        </div>
+      </div>
 
-      <label for="emotionalExhaustion">Emotional exhaustion (1-10): <span class="range-display" id="exhaustionVal">5</span></label>
-      <p class="help-text">1 = Energized and engaged, 5 = Sometimes drained, 10 = Completely emotionally depleted</p>
-      <input type="range" id="emotionalExhaustion" min="1" max="10" value="5" required>
-
-      <label for="workLife">Work-life balance satisfaction (1-10): <span class="range-display" id="balanceVal">6</span></label>
-      <p class="help-text">1 = Work dominates life, no personal time, 10 = Perfect balance and boundaries</p>
+      <div class="input-section">
+        <label>Work-Life Balance Satisfaction</label>
+        <span class="input-hint">⚖️ Rate your satisfaction with boundaries between work and personal life. 1 = Work dominates everything, 10 = Perfect balance.</span>
+        <div class="slider-container">
       <input type="range" id="workLife" min="1" max="10" value="6" required>
+          <span class="slider-value" id="balanceVal">6</span>
+        </div>
+        <div class="scale-labels">
+          <span>1 - No Balance</span>
+          <span>5 - Moderate</span>
+          <span>10 - Perfect</span>
+        </div>
+      </div>
 
-      <button type="submit">Calculate Burnout Risk</button>
+      <button type="submit">Calculate My Burnout Risk</button>
     </form>
 
     <div id="results" class="result-box">
       <h3>Your Burnout Risk Assessment</h3>
       <div class="risk-score" id="riskScore">0%</div>
       <div class="risk-category" id="riskCategory"></div>
-      <hr style="border: none; border-top: 1px solid rgba(139, 92, 246, 0.2); margin: 1.5rem 0;">
+      <div class="risk-meter">
+        <div class="risk-meter-fill" id="riskMeter" style="width: 0%"></div>
+      </div>
+      <hr>
       <div id="riskDescription"></div>
+      <div class="driver-breakdown" id="driverBreakdown"></div>
       <div class="recommendations" id="recommendations"></div>
       <details class="calc-meta">
-        <summary>How your burnout risk score is calculated</summary>
-        <p>This tool uses a <strong>normalized 0–100 burnout risk index</strong>, built from six evidence-informed factors. Each input is converted to its own 0–100 sub‑score, then combined using an <strong>evidence-based weighted influence model</strong> so higher‑impact factors (like emotional exhaustion, overwhelm, and sleep) count more toward your final percentage:</p>
+        <summary>ℹ️ How is your burnout risk score calculated?</summary>
+        <p>This tool uses a <strong>normalized 0–100 burnout risk index</strong>, built from six evidence-informed factors. Each input is converted to its own 0–100 sub-score, then combined using an <strong>evidence-based weighted influence model</strong> so higher-impact factors (like emotional exhaustion, overwhelm, and sleep) count more toward your final percentage:</p>
         <ul>
-          <li><strong>Long work hours:</strong> working &gt;40–70+ hours per week increases risk</li>
-          <li><strong>Feeling overwhelmed:</strong> higher 1–10 ratings mean higher chronic stress</li>
-          <li><strong>Sleep amount:</strong> sleep below roughly 7–8 hours raises risk, very short sleep raises it most</li>
-          <li><strong>Weekend recovery:</strong> poor ability to disconnect on weekends strongly increases risk</li>
-          <li><strong>Emotional exhaustion:</strong> one of the strongest predictors of clinical burnout</li>
-          <li><strong>Work–life boundaries:</strong> low boundary control contributes additional risk</li>
+          <li><strong>Long work hours (18%):</strong> Working >40–70+ hours per week increases risk</li>
+          <li><strong>Feeling overwhelmed (20%):</strong> Higher ratings indicate chronic stress</li>
+          <li><strong>Sleep amount (20%):</strong> Sleep below 7–8 hours raises risk significantly</li>
+          <li><strong>Weekend recovery (14%):</strong> Poor ability to disconnect strongly increases risk</li>
+          <li><strong>Emotional exhaustion (18%):</strong> One of the strongest predictors of clinical burnout</li>
+          <li><strong>Work–life boundaries (10%):</strong> Low boundary control contributes additional risk</li>
         </ul>
-        <p>On top of the overall percentage, the calculator identifies your top burnout drivers and surfaces <strong>personalized recommendations by factor drivers</strong> so you know exactly where to focus first. This score is an educational screening tool and not a medical diagnosis.</p>
+        <p>The calculator identifies your top burnout drivers and surfaces <strong>personalized recommendations by factor drivers</strong> so you know exactly where to focus first. This score is an educational screening tool and not a medical diagnosis.</p>
       </details>
       <div id="shareButtonsContainer" style="display:block;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid rgba(139,92,246,0.2);text-align:center;">
         <p style="font-size:0.95rem;font-weight:700;margin:0 0 1rem;color:#334155;">📤 Share Your Results</p>
@@ -450,6 +856,16 @@
           <button type="button" onclick="copyToClipboard()" title="Copy Results" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;border:none;color:white;padding:0;margin:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);background:linear-gradient(135deg,#8b5cf6,#3b82f6);"><span style="line-height:1;">📋</span></button>
         </div>
       </div>
+
+      <div class="quick-links" style="margin-top: 2rem;">
+        <h4>🔗 Related Tools You Might Find Helpful</h4>
+        <div class="quick-links-grid">
+          <a href="stress-load-calculator.html" class="quick-link">🧠 Stress Load</a>
+          <a href="work-life-quality-index.html" class="quick-link">⚖️ Work-Life Index</a>
+          <a href="sleep-debt-calculator.html" class="quick-link">😴 Sleep Debt</a>
+          <a href="productivity-score-calculator.html" class="quick-link">📈 Productivity Score</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -457,105 +873,213 @@
   <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
+    <h3>🔗 Explore More Wellness & Productivity Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="stress-load-calculator.html">🧠 Stress Load Calculator</a></div>
+      <div class="card"><a href="work-life-quality-index.html">⚖️ Work-Life Quality Index</a></div>
+      <div class="card"><a href="distraction-cost-calculator.html">⏰ Distraction Cost Calculator</a></div>
+      <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Calculator</a></div>
+    </div>
+
+    <h3>📝 Related Health & Wellness Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">📖 Work-Life Balance: Ultimate Guide</a></div>
+      <div class="card"><a href="blog/work-life-quality-index-guide.html">💡 Work-Life Quality Index Guide</a></div>
+    </div>
+
     <article>
-      <h2>Understanding Burnout Risk</h2>
-      <p>Burnout is a state of physical, emotional, and mental exhaustion caused by prolonged or excessive stress. It occurs when you feel overwhelmed, emotionally drained, and unable to meet constant demands. As the stress continues, you begin to lose the interest and motivation that led you to take on a certain role in the first place.</p>
+      <h2>What is Burnout? Understanding Workplace Burnout Syndrome</h2>
+      <p>Burnout is officially recognized by the World Health Organization (WHO) as an <strong>occupational phenomenon</strong> resulting from chronic workplace stress that has not been successfully managed. It is characterized by three key dimensions: feelings of energy depletion or exhaustion, increased mental distance from one's job, and reduced professional efficacy.</p>
       
-      <p>Our burnout risk calculator evaluates six critical factors that research has identified as the strongest predictors of workplace burnout: weekly work hours, feelings of being overwhelmed, sleep quality, weekend recovery, emotional exhaustion, and work-life balance satisfaction.</p>
+      <p>Unlike temporary stress that comes and goes, burnout is a gradual accumulation of chronic stress that eventually leads to physical, emotional, and mental exhaustion. It doesn't happen overnight—it develops over weeks, months, or even years of sustained pressure without adequate recovery.</p>
+
+      <p>Our burnout risk calculator evaluates the six most critical factors that research has identified as strong predictors of workplace burnout: weekly work hours, feelings of being overwhelmed, sleep quality, weekend recovery capability, emotional exhaustion levels, and work-life balance satisfaction.</p>
 
       <div class="info-box">
-        <h4>🚨 Warning Signs of Burnout</h4>
+        <p><strong>🚨 Key Burnout Statistics (2024-2025):</strong></p>
         <ul>
-          <li>Feeling tired and drained most of the time</li>
-          <li>Frequent headaches or muscle pain</li>
-          <li>Change in appetite or sleep habits</li>
-          <li>Sense of failure and self-doubt</li>
-          <li>Feeling helpless, trapped, and defeated</li>
-          <li>Decreased satisfaction and sense of accomplishment</li>
-          <li>Detachment and feeling alone in the world</li>
-          <li>Loss of motivation</li>
-          <li>Increasingly cynical and negative outlook</li>
+          <li>76% of employees experience burnout at least sometimes (Gallup)</li>
+          <li>67% of workers say burnout has worsened during the pandemic era</li>
+          <li>Burnout costs employers an estimated $125-190 billion in healthcare spending annually</li>
+          <li>Burned-out employees are 2.6 times more likely to be actively seeking a different job</li>
         </ul>
       </div>
 
-      <h2>How Work Hours Impact Burnout</h2>
-      <p>Research consistently shows that working more than 50 hours per week significantly increases burnout risk. A study of over 10,000 workers found that those working 55+ hours per week had a 35% higher risk of stroke and 17% higher risk of heart disease compared to those working standard hours. Extended work hours leave less time for recovery, sleep, exercise, and social connection—all protective factors against burnout.</p>
+      <h2>How to Use This Burnout Risk Calculator</h2>
+      <p>Our burnout risk assessment tool is designed to be simple, quick, and insightful. Follow these steps to get your personalized burnout risk score:</p>
+      
+      <ol>
+        <li><strong>Enter Your Weekly Work Hours:</strong> Include all work-related time, including overtime, checking emails outside work, and work-related activities. The standard work week is 40 hours, but many professionals work 45-60+ hours.</li>
+        <li><strong>Enter Your Average Sleep Hours:</strong> Be honest about how much sleep you actually get on a typical night. Adults need 7-9 hours for optimal health and cognitive function.</li>
+        <li><strong>Rate Your Overwhelm Level (1-10):</strong> Assess how frequently you feel overwhelmed by work demands. Consider your typical week, not just exceptionally stressful periods.</li>
+        <li><strong>Rate Your Emotional Exhaustion (1-10):</strong> Evaluate how emotionally drained you feel from work. Do you feel depleted at the end of most days?</li>
+        <li><strong>Rate Your Recovery Quality (1-10):</strong> Assess how well you disconnect and recharge during evenings and weekends. Can you truly stop thinking about work?</li>
+        <li><strong>Rate Your Work-Life Balance (1-10):</strong> Evaluate your satisfaction with boundaries between work and personal life.</li>
+        <li><strong>Click Calculate:</strong> Your personalized burnout risk score, category, and tailored recommendations will appear instantly.</li>
+      </ol>
 
-      <h2>The Critical Role of Sleep</h2>
-      <p>Sleep is not optional when it comes to burnout prevention. Adults need 7-9 hours of quality sleep per night. Sleep deprivation impairs judgment, reduces emotional resilience, and compounds the effects of work stress. Chronic sleep deprivation alone can create symptoms that mimic burnout, and when combined with actual work stress, the risk multiplies.</p>
+      <h2>Understanding Burnout Risk Score Categories</h2>
+      <p>Your burnout risk score is calculated on a 0-100% scale and falls into one of four categories:</p>
 
-      <h2>Recovery Time Matters</h2>
-      <p>Your ability to recover during off-work time is just as important as the stress you experience at work. Weekend recovery quality reflects whether you can truly disconnect from work and engage in restorative activities. Poor recovery—checking emails on weekends, working evenings, or inability to stop thinking about work—prevents your nervous system from returning to baseline, leading to chronic stress accumulation.</p>
+      <h3>✅ Low Risk (0-24%)</h3>
+      <p>Congratulations! Your burnout risk is low. You appear to have healthy work patterns, adequate recovery time, and good stress management practices. Continue prioritizing work-life balance and self-care to maintain this healthy state. Even with low risk, regular self-assessment helps catch early warning signs before they escalate.</p>
 
-      <h2>Preventing and Recovering from Burnout</h2>
-      <p>If your risk score is elevated, taking action now can prevent full burnout development. Key strategies include:</p>
+      <h3>⚠️ Moderate Risk (25-49%)</h3>
+      <p>Warning signs are present. Some aspects of your work life are beginning to show stress accumulation. This is the critical intervention window—taking proactive steps now can prevent escalation to high risk. Focus on the specific drivers identified in your results and implement targeted changes before burnout develops fully.</p>
+
+      <h3>🚨 High Risk (50-74%)</h3>
+      <p>Significant concern. Multiple factors are contributing to dangerous stress accumulation. Immediate action is needed to prevent full burnout. At this level, you're likely experiencing noticeable symptoms: persistent fatigue, decreased motivation, difficulty concentrating, and physical symptoms like headaches or sleep problems. Consider speaking with your manager about workload and consulting a healthcare provider.</p>
+
+      <h3>💀 Severe Risk (75-100%)</h3>
+      <p>Critical situation. You have severe burnout risk or may already be experiencing burnout. This is a serious health warning requiring urgent intervention. At this level, burnout is actively affecting your health, relationships, and work performance. Major changes are essential—this is not sustainable. Seek professional help from a mental health provider, discuss immediate workload reduction with HR or your manager, and consider whether medical leave is appropriate.</p>
+
+      <h2>The Six Factors That Drive Workplace Burnout</h2>
+      <p>Our calculator evaluates six evidence-based factors that research has shown to be the strongest predictors of burnout:</p>
+
+      <h3>1. Long Working Hours</h3>
+      <p>Working more than 50 hours per week significantly increases burnout risk. A landmark study of over 600,000 individuals found that working 55+ hours per week was associated with a 35% higher risk of stroke and 17% higher risk of heart disease. Extended work hours leave less time for recovery, sleep, exercise, and social connection—all protective factors against burnout.</p>
+
+      <h3>2. Feeling Overwhelmed</h3>
+      <p>Chronic feelings of being overwhelmed indicate that work demands consistently exceed your capacity to cope. This isn't about occasional busy periods—it's about sustained feelings that you can never catch up, that there's always too much to do, and that you're constantly behind. This chronic overwhelm activates your stress response system continuously.</p>
+
+      <h3>3. Sleep Deprivation</h3>
+      <p>Sleep is non-negotiable for burnout prevention. Adults need 7-9 hours of quality sleep per night. Sleep deprivation impairs judgment, reduces emotional resilience, weakens immune function, and compounds the effects of work stress. Getting less than 6 hours of sleep consistently creates symptoms that mimic burnout even without workplace stress.</p>
+
+      <h3>4. Poor Recovery Quality</h3>
+      <p>Your ability to recover during off-work time is just as important as the stress you experience at work. True recovery means psychologically detaching from work—not checking emails, not thinking about deadlines, genuinely engaging in restorative activities. Poor recovery prevents your nervous system from returning to baseline, leading to chronic stress accumulation.</p>
+
+      <h3>5. Emotional Exhaustion</h3>
+      <p>Emotional exhaustion is considered the core component of burnout by many researchers. It manifests as feeling emotionally drained, depleted of emotional resources, and like you have nothing left to give. This isn't just physical tiredness—it's a deep depletion that sleep alone doesn't fix.</p>
+
+      <h3>6. Weak Work-Life Boundaries</h3>
+      <p>Without clear boundaries between work and personal life, work expands to fill all available time. Technology has made this worse—smartphones mean we're always reachable. Poor boundaries mean you're never truly "off," which prevents the recovery cycles essential for sustainable work.</p>
+
+      <div class="disclaimer-box">
+        <strong>Medical Disclaimer:</strong> This burnout risk calculator is an educational screening tool, not a medical or psychiatric diagnostic test. It cannot diagnose burnout or any mental health condition. If you're experiencing severe symptoms, please consult a qualified healthcare provider or mental health professional. If you're having thoughts of self-harm, contact a crisis helpline immediately.
+      </div>
+
+      <h2>Warning Signs of Burnout: Early Detection Is Key</h2>
+      <p>Recognizing burnout early is crucial because recovery becomes increasingly difficult as burnout progresses. Watch for these warning signs:</p>
+
+      <h3>Physical Warning Signs</h3>
       <ul>
-        <li><strong>Set firm boundaries:</strong> Define clear work hours and protect your personal time</li>
-        <li><strong>Prioritize sleep:</strong> Treat sleep as non-negotiable; aim for 7-9 hours nightly</li>
-        <li><strong>Take all vacation days:</strong> And truly disconnect during time off</li>
-        <li><strong>Practice stress management:</strong> Exercise, meditation, hobbies, or therapy</li>
-        <li><strong>Seek support:</strong> Talk to your manager about workload, or consult a mental health professional</li>
-        <li><strong>Address root causes:</strong> If workload is unsustainable, systemic changes are needed</li>
+        <li>Chronic fatigue that doesn't improve with rest</li>
+        <li>Frequent headaches or muscle tension</li>
+        <li>Changes in appetite or sleep patterns</li>
+        <li>Weakened immune system (frequent illness)</li>
+        <li>Gastrointestinal problems</li>
+      </ul>
+
+      <h3>Emotional Warning Signs</h3>
+      <ul>
+        <li>Feelings of failure and self-doubt</li>
+        <li>Helplessness, feeling trapped or defeated</li>
+        <li>Detachment, feeling alone in the world</li>
+        <li>Loss of motivation and purpose</li>
+        <li>Increasingly cynical and negative outlook</li>
+        <li>Decreased satisfaction and sense of accomplishment</li>
+      </ul>
+
+      <h3>Behavioral Warning Signs</h3>
+      <ul>
+        <li>Withdrawing from responsibilities</li>
+        <li>Isolating from others</li>
+        <li>Procrastinating, taking longer to complete tasks</li>
+        <li>Using food, drugs, or alcohol to cope</li>
+        <li>Skipping work or arriving late/leaving early</li>
+        <li>Taking frustrations out on others</li>
+      </ul>
+
+      <h2>Evidence-Based Burnout Prevention Strategies</h2>
+      <p>If your burnout risk score is elevated, implementing these evidence-based strategies can help prevent or recover from burnout:</p>
+
+      <h3>Immediate Actions (This Week)</h3>
+      <ul>
+        <li><strong>Set strict work hour limits:</strong> Define a "hard stop" time each day and enforce it</li>
+        <li><strong>Prioritize sleep:</strong> Treat 7-8 hours as non-negotiable, not aspirational</li>
+        <li><strong>Take all breaks:</strong> Lunch away from your desk, micro-breaks between tasks</li>
+        <li><strong>Turn off notifications:</strong> Disable work email/Slack notifications after hours</li>
+      </ul>
+
+      <h3>Short-Term Changes (This Month)</h3>
+      <ul>
+        <li><strong>Audit your workload:</strong> Identify tasks that can be delegated, automated, or eliminated</li>
+        <li><strong>Have the conversation:</strong> Talk to your manager about sustainable workload</li>
+        <li><strong>Protect weekends:</strong> Create at least one full day with zero work activities</li>
+        <li><strong>Add recovery activities:</strong> Exercise, hobbies, social time that genuinely recharges you</li>
+      </ul>
+
+      <h3>Long-Term Strategies (Ongoing)</h3>
+      <ul>
+        <li><strong>Develop stress management practices:</strong> Meditation, exercise, therapy, or journaling</li>
+        <li><strong>Build support systems:</strong> Strong relationships at work and outside work</li>
+        <li><strong>Regular self-assessment:</strong> Use this calculator monthly to track trends</li>
+        <li><strong>Career alignment:</strong> Ensure your work aligns with your values and strengths</li>
       </ul>
 
       <div class="info-box">
-        <h4>💡 Remember</h4>
-        <p>Burnout doesn't happen overnight. It develops gradually through chronic workplace stress. The earlier you recognize warning signs and take action, the easier it is to recover. If your burnout risk is high or severe, consider this a serious health warning that requires immediate attention.</p>
+        <p><strong>💡 Remember:</strong> Burnout doesn't happen overnight, and recovery doesn't either. It develops gradually through chronic workplace stress. The earlier you recognize warning signs and take action, the easier it is to recover. If your burnout risk is high or severe, consider this a serious health warning that requires immediate attention and potentially professional support.</p>
       </div>
 
-    </article>
-  </section>
+      <h2>When to Seek Professional Help</h2>
+      <p>While lifestyle changes can help with mild to moderate burnout risk, professional help is recommended if:</p>
+      <ul>
+        <li>Your burnout risk score is consistently in the high or severe range</li>
+        <li>You're experiencing symptoms of depression or anxiety</li>
+        <li>Burnout is affecting your relationships or physical health</li>
+        <li>You've tried self-help strategies without improvement</li>
+        <li>You're using substances to cope</li>
+        <li>You're having thoughts of self-harm</li>
+      </ul>
+      <p>Professional help options include your Employee Assistance Program (EAP), licensed therapists or counselors, your primary care physician, and occupational health services.</p>
 
-  <section class="seo-content">
-    <article>
-      <h2 style="text-align: left;">Explore More Work &amp; Stress Tools</h2>
-      <div class="explore-grid">
-        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
-        <a href="work-life-quality-index.html" class="explore-card">⚖️ Work-Life Quality Index</a>
-        <a href="distraction-cost-calculator.html" class="explore-card">⏰ Distraction Cost Calculator</a>
-        <a href="meeting-load-stress-calculator.html" class="explore-card">📅 Meeting Load Stress Calculator</a>
-      </div>
-
-      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
-      <div class="explore-grid">
-        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
-        <a href="blog/work-life-quality-index-guide.html" class="explore-card">📘 Work-Life Quality Index Guide</a>
-      </div>
     </article>
   </section>
 
   <section class="faq-section">
-    <h2>Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions About Burnout</h2>
     <details>
       <summary>Is this burnout risk calculator a medical diagnosis?</summary>
-      <p>No. This burnout risk calculator is an educational screening tool, not a medical or psychiatric diagnosis. It highlights patterns associated with burnout in research (long hours, high overwhelm, poor sleep, weak recovery, emotional exhaustion, and boundary issues), but only a qualified professional can diagnose burnout or related conditions.</p>
+      <p>No. This burnout risk calculator is an educational screening tool, not a medical or psychiatric diagnosis. It highlights patterns associated with burnout based on research, but only a qualified healthcare professional can diagnose burnout or related conditions. Use this tool to gain awareness of your risk factors and as a starting point for conversations with healthcare providers if needed.</p>
     </details>
     <details>
-      <summary>What is a “normal” burnout risk score?</summary>
-      <p>In this model, scores below about 25% are considered <strong>low risk</strong>, 25–49% is <strong>moderate risk</strong>, 50–74% is <strong>high risk</strong>, and 75%+ is <strong>severe risk</strong>. Many knowledge workers fall somewhere in the moderate band, especially during busy periods. Persistent high or severe scores are a warning sign that your workload, recovery, or support systems need urgent attention.</p>
+      <summary>What is a "normal" or healthy burnout risk score?</summary>
+      <p>In this model, scores below 25% are considered <strong>low risk</strong> and indicate healthy work patterns. Scores between 25-49% are <strong>moderate risk</strong> and suggest some concerning patterns that should be addressed. Scores of 50-74% indicate <strong>high risk</strong> requiring immediate action, and 75%+ is <strong>severe risk</strong> where burnout may already be present. Many knowledge workers score in the moderate range, especially during busy periods—the goal is to maintain low risk as your baseline.</p>
     </details>
     <details>
-      <summary>How is the burnout risk score actually calculated?</summary>
-      <p>Each input is first transformed into its own 0–100 sub‑score (for example, very short sleep or extreme overwhelm map closer to 100, healthy sleep or low overwhelm map closer to 0). These are then combined using an <strong>evidence-based weighting scheme</strong> where emotional exhaustion, overwhelm, and sleep carry slightly higher influence than other factors. Finally, we compute a single normalized percentage and identify your top driver factors for <strong>personalized recommendations</strong>.</p>
+      <summary>How accurate is this burnout risk calculator?</summary>
+      <p>This calculator uses evidence-based factors that research has consistently linked to burnout: work hours, overwhelm, sleep, recovery, emotional exhaustion, and work-life boundaries. However, individual experiences vary, and this tool cannot capture all factors affecting your specific situation. Use it as one data point alongside your own self-awareness and, if needed, professional assessment.</p>
     </details>
     <details>
       <summary>How often should I recalculate my burnout risk?</summary>
-      <p>For most people, checking every 2–4 weeks is enough to see whether changes to your schedule, boundaries, or recovery habits are improving things. If you are actively in a high or severe risk range while making big changes (reducing hours, taking leave, starting therapy, etc.), you might choose to check weekly to track trends—but avoid obsessively re‑calculating multiple times per day.</p>
+      <p>For most people, checking every 2-4 weeks provides useful trend data without becoming obsessive. If you're actively in a high or severe risk range while making changes (reducing hours, improving sleep, setting boundaries), you might check weekly to track progress. Avoid recalculating multiple times per day—your score won't meaningfully change that quickly.</p>
     </details>
     <details>
       <summary>What should I do if my score is high or severe?</summary>
-      <p>High or severe scores suggest that your current pattern is unsustainable. Consider speaking with a healthcare or mental health professional, talking with your manager or HR about workload, taking time off if available, and implementing stress‑reduction basics like sleep, exercise, and stronger boundaries. Use the personalized driver recommendations in your results as a roadmap for which 1–2 changes will likely move the needle most.</p>
+      <p>High or severe scores indicate that your current pattern is unsustainable. Take immediate action: speak with your manager or HR about workload, prioritize sleep above all else, set strict work boundaries, and consider professional support (therapist, counselor, or EAP). The personalized driver recommendations in your results show which factors to address first for maximum impact.</p>
+    </details>
+    <details>
+      <summary>Can burnout be reversed?</summary>
+      <p>Yes, burnout is reversible, but recovery takes time—often weeks to months depending on severity. Early-stage burnout (moderate risk) can often be addressed through lifestyle changes. Severe burnout may require extended time off, professional treatment, and potentially career changes. The key is addressing root causes, not just managing symptoms.</p>
+    </details>
+    <details>
+      <summary>Is burnout the same as depression?</summary>
+      <p>No, burnout and depression are distinct conditions, though they can co-occur and share some symptoms. Burnout is specifically work-related and characterized by exhaustion, cynicism about work, and reduced professional efficacy. Depression is a broader mental health condition affecting all areas of life. However, untreated burnout can lead to depression. If you're unsure which you're experiencing, consult a mental health professional.</p>
+    </details>
+    <details>
+      <summary>Does working from home increase burnout risk?</summary>
+      <p>Research shows mixed results. Remote work can reduce burnout (eliminating commute, more flexibility) but can also increase it (blurred boundaries, isolation, always-on culture). The key factors are how you manage boundaries, maintain social connection, and separate work from personal life—not the location itself. Our calculator assesses these factors regardless of where you work.</p>
     </details>
   </section>
+
+  <a href="index.html" class="floating-cta">See All Calculators</a>
 
   <!-- End Ad Banner (300x250) -->
   <div id="ad-banner-end"></div>
 
-  <a href="index.html" class="floating-cta">See All Calculators</a>
-
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> This burnout risk calculator is for informational purposes only and is not a substitute for professional medical or mental health advice. If you're experiencing severe burnout symptoms, please consult a healthcare provider or mental health professional.</p>
+      <p><strong>Disclaimer:</strong> This burnout risk calculator is provided for informational and educational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. If you're experiencing severe burnout symptoms, thoughts of self-harm, or other mental health concerns, please consult a qualified healthcare provider or mental health professional immediately. In case of emergency, contact your local emergency services or crisis helpline.</p>
     </div>
     <div class="footer-links">
       <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
@@ -566,30 +1090,29 @@
   </footer>
 
   <script>
-    // Range display updates
-    document.getElementById('feelingOverwhelmed').addEventListener('input', (e) => {
-      document.getElementById('overwhelmedVal').textContent = e.target.value;
-    });
-    document.getElementById('weekendRecovery').addEventListener('input', (e) => {
-      document.getElementById('recoveryVal').textContent = e.target.value;
-    });
-    document.getElementById('emotionalExhaustion').addEventListener('input', (e) => {
-      document.getElementById('exhaustionVal').textContent = e.target.value;
-    });
-    document.getElementById('workLife').addEventListener('input', (e) => {
-      document.getElementById('balanceVal').textContent = e.target.value;
+    // Range display updates with visual feedback
+    const sliders = [
+      { id: 'feelingOverwhelmed', display: 'overwhelmedVal' },
+      { id: 'emotionalExhaustion', display: 'exhaustionVal' },
+      { id: 'weekendRecovery', display: 'recoveryVal' },
+      { id: 'workLife', display: 'balanceVal' }
+    ];
+
+    sliders.forEach(slider => {
+      const input = document.getElementById(slider.id);
+      const display = document.getElementById(slider.display);
+      input.addEventListener('input', (e) => {
+        display.textContent = e.target.value;
+      });
     });
 
-    // Simple helpers for scoring
+    // Helper functions for scoring
     const clamp01 = (value) => Math.max(0, Math.min(1, value));
 
     const percentFromRatio = (value, goodMin, badMax, invert = false) => {
-      // Maps a raw value into 0-100 based on a [goodMin, badMax] band.
-      // If invert=false: goodMin = 0, badMax = 100 (higher is worse).
-      // If invert=true: higher values are better, lower values worse (e.g., sleep hours).
       if (invert) {
-        if (value >= badMax) return 0; // fully protective
-        if (value <= goodMin) return 100; // fully risky
+        if (value >= badMax) return 0;
+        if (value <= goodMin) return 100;
         const ratio = (badMax - value) / (badMax - goodMin);
         return Math.round(clamp01(ratio) * 100);
       } else {
@@ -600,7 +1123,7 @@
       }
     };
 
-    // Form submission
+    // Form submission and calculation
     document.getElementById('burnoutForm').addEventListener('submit', (e) => {
       e.preventDefault();
       
@@ -611,79 +1134,82 @@
       const exhaustion = parseFloat(document.getElementById('emotionalExhaustion').value);
       const workLife = parseFloat(document.getElementById('workLife').value);
 
-      // --- Evidence-informed, normalized subscores (0 = low risk, 100 = high risk) ---
-      // Long weekly hours: 40h ~ 0 risk, 70h+ ~ 100 risk
+      // Validate inputs
+      if (isNaN(weeklyHours) || weeklyHours < 0 || weeklyHours > 168) {
+        alert('Please enter valid weekly work hours (0-168).');
+        return;
+      }
+      if (isNaN(sleep) || sleep < 0 || sleep > 14) {
+        alert('Please enter valid sleep hours (0-14).');
+        return;
+      }
+
+      // Evidence-informed, normalized subscores (0 = low risk, 100 = high risk)
       const hoursRisk = percentFromRatio(weeklyHours, 40, 70, false);
-
-      // Feeling overwhelmed: 1 (no overwhelm) -> 0, 10 (constant overwhelm) -> 100
       const overwhelmedRisk = percentFromRatio(overwhelmed, 1, 10, false);
-
-      // Sleep: 7.5–9h protective (0), <=4h very risky (100)
       const sleepRisk = percentFromRatio(sleep, 4, 7.5, true);
-
-      // Weekend recovery: 10 = fully restorative (0), 1 = no recovery (100)
       const recoveryRisk = percentFromRatio(recovery, 1, 10, true);
-
-      // Emotional exhaustion: 1 = energized (0), 10 = depleted (100)
       const exhaustionRisk = percentFromRatio(exhaustion, 1, 10, false);
-
-      // Work-life balance satisfaction: 10 = ideal (0), 1 = work dominates (100)
       const workLifeRisk = percentFromRatio(workLife, 1, 10, true);
 
-      // Evidence-weighted mix: emotional exhaustion, overwhelm & sleep carry more weight
+      // Evidence-weighted factors
       const factors = [
-        { key: 'hours',       label: 'Long work hours',                  weight: 0.18, score: hoursRisk },
-        { key: 'overwhelmed', label: 'Feeling overwhelmed',             weight: 0.20, score: overwhelmedRisk },
-        { key: 'sleep',       label: 'Insufficient sleep',              weight: 0.20, score: sleepRisk },
-        { key: 'recovery',    label: 'Poor weekend recovery',           weight: 0.14, score: recoveryRisk },
-        { key: 'exhaustion',  label: 'Emotional exhaustion',            weight: 0.18, score: exhaustionRisk },
-        { key: 'workLife',    label: 'Weak work-life boundaries',       weight: 0.10, score: workLifeRisk }
+        { key: 'hours', label: 'Long Work Hours', weight: 0.18, score: hoursRisk, icon: '💼' },
+        { key: 'overwhelmed', label: 'Feeling Overwhelmed', weight: 0.20, score: overwhelmedRisk, icon: '😰' },
+        { key: 'sleep', label: 'Insufficient Sleep', weight: 0.20, score: sleepRisk, icon: '😴' },
+        { key: 'recovery', label: 'Poor Recovery Time', weight: 0.14, score: recoveryRisk, icon: '🔋' },
+        { key: 'exhaustion', label: 'Emotional Exhaustion', weight: 0.18, score: exhaustionRisk, icon: '💔' },
+        { key: 'workLife', label: 'Weak Work-Life Balance', weight: 0.10, score: workLifeRisk, icon: '⚖️' }
       ];
 
-      const risk = Math.round(
-        factors.reduce((sum, f) => sum + f.score * f.weight, 0)
-      );
+      const risk = Math.round(factors.reduce((sum, f) => sum + f.score * f.weight, 0));
 
       // Display results
       const scoreEl = document.getElementById('riskScore');
       const categoryEl = document.getElementById('riskCategory');
       const descEl = document.getElementById('riskDescription');
       const recEl = document.getElementById('recommendations');
+      const meterEl = document.getElementById('riskMeter');
+      const driverEl = document.getElementById('driverBreakdown');
 
       scoreEl.textContent = risk + '%';
 
-      let category, description, recommendations, colorClass;
+      let category, description, recommendations, colorClass, meterColor;
 
       if (risk < 25) {
         category = '✅ Low Risk';
         colorClass = 'risk-low';
-        description = '<p><strong>Good news!</strong> Your burnout risk is low. You appear to have healthy work patterns, adequate recovery time, and good stress management. Continue prioritizing work-life balance and self-care.</p>';
-        recommendations = '<h4>Maintain Your Healthy Habits:</h4><ul><li>Keep protecting your sleep and recovery time</li><li>Maintain clear work boundaries</li><li>Continue stress management practices</li></ul>';
+        meterColor = '#10b981';
+        description = '<p><strong>Great news!</strong> Your burnout risk is low. You appear to have healthy work patterns, adequate recovery time, and good stress management. Continue prioritizing work-life balance and self-care to maintain this healthy state.</p>';
+        recommendations = '<h4>🌟 Maintain Your Healthy Habits:</h4><ul><li>Keep protecting your sleep schedule and recovery time</li><li>Maintain clear boundaries between work and personal life</li><li>Continue your current stress management practices</li><li>Reassess monthly to catch any early warning signs</li></ul>';
       } else if (risk < 50) {
         category = '⚠️ Moderate Risk';
         colorClass = 'risk-moderate';
-        description = '<p><strong>Warning signs detected.</strong> You have moderate burnout risk. Some aspects of your work life are beginning to show stress. Take proactive steps now to prevent escalation.</p>';
-        recommendations = '<h4>Recommended Actions:</h4><ul><li>Reduce work hours if possible—aim for under 50 hours/week</li><li>Prioritize 7-9 hours of sleep nightly</li><li>Improve weekend recovery by truly disconnecting from work</li><li>Practice regular stress management (exercise, meditation, hobbies)</li></ul>';
+        meterColor = '#f59e0b';
+        description = '<p><strong>Warning signs detected.</strong> You have moderate burnout risk. Some aspects of your work life are showing stress accumulation. This is the ideal time to take proactive steps—addressing these factors now is much easier than recovering from full burnout.</p>';
+        recommendations = '<h4>🛠️ Recommended Actions:</h4><ul><li>Reduce work hours if possible—aim for under 50 hours/week</li><li>Prioritize 7-9 hours of sleep every night without exception</li><li>Improve weekend recovery by truly disconnecting from work</li><li>Practice regular stress management (exercise, meditation, hobbies)</li><li>Consider talking to your manager about workload sustainability</li></ul>';
       } else if (risk < 75) {
         category = '🚨 High Risk';
         colorClass = 'risk-high';
-        description = '<p><strong>Significant concern.</strong> You have high burnout risk. Multiple factors are contributing to stress accumulation. Immediate action is needed to prevent full burnout.</p>';
-        recommendations = '<h4>Take Action NOW:</h4><ul><li>Speak with your manager about workload immediately</li><li>Set strict work hour limits and enforce them</li><li>Prioritize sleep above all else—it\'s non-negotiable</li><li>Schedule time off if possible; you need recovery</li><li>Consider professional support (counselor or therapist)</li></ul>';
+        meterColor = '#f97316';
+        description = '<p><strong>Significant concern.</strong> You have high burnout risk. Multiple factors are contributing to dangerous stress accumulation. Immediate action is needed to prevent full burnout. At this level, you may already be experiencing symptoms: persistent fatigue, decreased motivation, difficulty concentrating, or physical symptoms.</p>';
+        recommendations = '<h4>⚡ Take Action NOW:</h4><ul><li>Speak with your manager or HR about workload immediately</li><li>Set strict work hour limits and enforce them without exception</li><li>Prioritize sleep above all else—it\'s non-negotiable for recovery</li><li>Schedule time off if possible; you need dedicated recovery</li><li>Consider professional support from a counselor or therapist</li><li>Use your Employee Assistance Program (EAP) if available</li></ul>';
       } else {
         category = '💀 Severe Risk';
         colorClass = 'risk-severe';
-        description = '<p><strong>Critical situation.</strong> You have severe burnout risk or may already be experiencing burnout. This is a serious health warning requiring urgent intervention.</p>';
-        recommendations = '<h4>URGENT: Seek Help Immediately:</h4><ul><li>Consult a mental health professional this week</li><li>Discuss immediate workload reduction with your manager or HR</li><li>Consider medical leave if symptoms are severe</li><li>You cannot continue at this pace—major changes are essential</li><li>Your health must be the #1 priority right now</li></ul>';
+        meterColor = '#ef4444';
+        description = '<p><strong>Critical situation.</strong> You have severe burnout risk or may already be experiencing active burnout. This is a serious health warning requiring urgent intervention. You cannot continue at this pace—major changes are essential for your health, relationships, and career.</p>';
+        recommendations = '<h4>🆘 URGENT: Seek Help Immediately:</h4><ul><li>Consult a mental health professional this week</li><li>Discuss immediate workload reduction with your manager or HR</li><li>Consider medical leave if symptoms are severe</li><li>Talk to your doctor about physical symptoms</li><li>Your health must be the #1 priority right now—everything else can wait</li><li>Reach out to trusted friends or family for support</li></ul>';
       }
 
-      // Personalized recommendations based on strongest drivers
+      // Personalized driver recommendations
       const driverTips = {
-        hours: 'Experiment with reducing weekly hours toward the 40–50 range or removing low-value tasks where possible.',
+        hours: 'Reduce weekly hours toward 40-50 range. Identify low-value tasks to eliminate or delegate.',
         overwhelmed: 'Break work into smaller chunks, reduce multitasking, and negotiate clearer priorities with your manager.',
-        sleep: 'Create a consistent wind-down routine, limit screens before bed, and aim for a stable 7–9 hour sleep window.',
-        recovery: 'Protect weekends and evenings as real off-time: no email, no work calls, and schedule activities that truly recharge you.',
-        exhaustion: 'Watch for emotional exhaustion as a red flag—consider talking to a therapist or coach about coping strategies.',
-        workLife: 'Strengthen boundaries by setting explicit stop times, turning off notifications, and communicating your availability.'
+        sleep: 'Create a consistent sleep schedule, limit screens before bed, and aim for 7-9 hours every night.',
+        recovery: 'Protect weekends as real off-time: no email, no work calls. Schedule activities that genuinely recharge you.',
+        exhaustion: 'Emotional exhaustion is a red flag. Consider talking to a therapist or coach about healthy coping strategies.',
+        workLife: 'Set explicit work stop times, turn off notifications after hours, and communicate your boundaries clearly.'
       };
 
       const driversSorted = [...factors]
@@ -692,31 +1218,57 @@
 
       const topDrivers = driversSorted.slice(0, 2);
 
-      const driverHtml = `
-        <h4>Top burnout drivers for you:</h4>
+      // Driver breakdown HTML
+      let driverHtml = '<p style="margin: 0 0 0.8rem; font-weight: 600; color: var(--text-strong-light);">📊 Your Risk Factor Breakdown:</p>';
+      factors.forEach(f => {
+        const barColor = f.score < 30 ? '#10b981' : f.score < 60 ? '#f59e0b' : '#ef4444';
+        driverHtml += `
+          <div class="driver-item">
+            <span style="min-width: 150px; font-size: 0.85rem;">${f.icon} ${f.label}</span>
+            <div class="driver-bar-container">
+              <div class="driver-bar" style="width: ${f.score}%; background: ${barColor};"></div>
+            </div>
+            <span style="min-width: 40px; text-align: right; font-weight: 700; font-size: 0.85rem; color: ${barColor};">${f.score}%</span>
+          </div>
+        `;
+      });
+
+      // Add top driver recommendations
+      const topDriverHtml = `
+        <h4 style="margin-top: 1.5rem;">🎯 Your Top Burnout Drivers to Address:</h4>
         <ul>
-          ${topDrivers.map(d => `<li><strong>${d.label}:</strong> ${driverTips[d.key]}</li>`).join('')}
+          ${topDrivers.map(d => `<li><strong>${d.icon} ${d.label}:</strong> ${driverTips[d.key]}</li>`).join('')}
         </ul>
       `;
-      recommendations += driverHtml;
+      recommendations += topDriverHtml;
 
       scoreEl.className = 'risk-score ' + colorClass;
       categoryEl.textContent = category;
       categoryEl.className = 'risk-category ' + colorClass;
       descEl.innerHTML = description;
       recEl.innerHTML = recommendations;
+      driverEl.innerHTML = driverHtml;
+
+      // Animate risk meter
+      meterEl.style.width = '0%';
+      meterEl.style.backgroundColor = meterColor;
+      setTimeout(() => {
+        meterEl.style.width = risk + '%';
+      }, 100);
 
       document.getElementById('results').classList.add('show');
       
-      // Initialize share buttons with result
-      initShareButtons('Burnout Risk Calculator', document.getElementById('riskScore').textContent, document.getElementById('riskCategory').textContent);
+      // Initialize share buttons
+      if (typeof initShareButtons === 'function') {
+        initShareButtons('Burnout Risk Calculator', risk + '%', category);
+      }
       
       setTimeout(() => {
         document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     });
 
-    // Dark mode
+    // Dark mode toggle
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById("darkModeToggle");
       const body = document.body;
@@ -784,6 +1336,13 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "High or severe scores suggest that your current pattern is unsustainable. Consider speaking with a healthcare or mental health professional, discussing workload with your manager, taking time off if available, and using the personalized driver recommendations in your results as a roadmap for change."
+      }
+    },{
+      "@type": "Question",
+      "name": "Can burnout be reversed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, burnout is reversible, but recovery takes time—often weeks to months depending on severity. Early-stage burnout can often be addressed through lifestyle changes. Severe burnout may require extended time off, professional treatment, and potentially career changes."
       }
     }]
   }
