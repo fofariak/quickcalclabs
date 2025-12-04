@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Productivity Score Calculator - Measure Your Work Efficiency | QuickCalcLabs</title>
-  <meta name="description" content="Free productivity calculator to measure your work efficiency. Calculate your productivity score based on deep work hours, task completion, and focus time.">
-  <meta name="keywords" content="productivity calculator, work efficiency, productivity score, deep work calculator, task completion, focus time calculator">
+  <title>Productivity Score Calculator - Free Work Efficiency Assessment Tool | QuickCalcLabs</title>
+  <meta name="description" content="Free productivity calculator to measure your work efficiency. Calculate your productivity score based on deep work hours, task completion rate, distraction management, and focus quality. Get personalized recommendations to boost your output.">
+  <meta name="keywords" content="productivity calculator, work efficiency, productivity score, deep work calculator, task completion, focus time calculator, productivity assessment, work performance">
   <link rel="canonical" href="https://quickcalclabs.com/productivity-score-calculator.html">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
@@ -14,14 +14,14 @@
      crossorigin="anonymous"></script>
 
   <style>
+    /* Productivity Calculator Page Styles - Matching BMI/Burnout Calculator */
     .calc-wrapper {
-      max-width: 760px;
+      max-width: 700px;
       margin: 2.5rem auto;
       padding: 2.5rem;
       border-radius: var(--radius-lg, 16px);
       background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
       box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
-      text-align: center;
       border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
     }
 
@@ -35,6 +35,7 @@
       font-size: clamp(2rem, 4vw, 2.5rem);
       font-weight: 800;
       margin: 0 0 1rem;
+      text-align: center;
       background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
       -webkit-background-clip: text;
       background-clip: text;
@@ -51,7 +52,8 @@
     .subtitle {
       color: var(--text-weak-light, #64748b);
       font-size: 1.05rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
       line-height: 1.6;
     }
 
@@ -59,33 +61,38 @@
       color: var(--text-weak-dark, #94a3b8);
     }
 
-    .meta-info {
-      font-size: 0.9rem;
-      color: var(--text-weak-light, #64748b);
+    .input-section {
       margin-bottom: 1.5rem;
-      font-style: italic;
     }
 
-    .dark-mode .meta-info {
-      color: var(--text-weak-dark, #94a3b8);
-    }
-
-    .calc-wrapper label {
+    .input-section label {
       display: block;
-      text-align: left;
-      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
       color: var(--text-strong-light, #0f172a);
-      margin: 1rem 0 0.5rem;
-      font-size: 1rem;
     }
 
-    .dark-mode .calc-wrapper label {
+    .dark-mode .input-section label {
       color: var(--text-strong-dark, #f1f5f9);
     }
 
-    .calc-wrapper input {
+    .input-hint {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+      padding-left: 0.5rem;
+      border-left: 3px solid var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .input-hint {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    input[type="number"] {
       width: 100%;
-      padding: 0.9rem 1.2rem;
+      padding: 0.9rem 1rem;
       border-radius: var(--radius-md, 12px);
       border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
       font-size: 1rem;
@@ -94,27 +101,27 @@
       transition: all 0.15s ease;
     }
 
-    .calc-wrapper input:focus {
+    input[type="number"]:focus {
       border-color: var(--primary, #8b5cf6);
       box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
       outline: none;
       background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
     }
 
-    .dark-mode .calc-wrapper input {
+    .dark-mode input[type="number"] {
       background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
       border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
       color: var(--text-strong-dark, #f1f5f9);
       color-scheme: dark;
     }
 
-    .dark-mode .calc-wrapper input:focus {
+    .dark-mode input[type="number"]:focus {
       background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
       border-color: var(--primary-light, #a78bfa);
     }
 
     .calc-wrapper button[type="submit"] {
-      display: inline-block;
+      width: 100%;
       padding: 1rem 2rem;
       margin-top: 1.5rem;
       border-radius: 999px;
@@ -136,11 +143,11 @@
 
     .result-box {
       margin-top: 2rem;
-      padding: 2rem;
+      padding: 1.8rem;
       border-radius: var(--radius-md, 12px);
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
       border: 2px solid rgba(139, 92, 246, 0.3);
-      text-align: center;
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
       display: none;
     }
 
@@ -157,27 +164,156 @@
     .dark-mode .result-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
       border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .productivity-score {
-      font-size: 4rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      text-align: center;
     }
 
-    .score-label {
-      font-size: 1.2rem;
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .result-box p {
+      margin: 0.5rem 0;
       color: var(--text-weak-light, #64748b);
-      margin: 0.5rem 0 1.5rem;
     }
 
-    .dark-mode .score-label {
+    .dark-mode .result-box p {
       color: var(--text-weak-dark, #94a3b8);
     }
 
+    .productivity-score {
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .score-excellent { color: #10b981; }
+    .score-good { color: #3b82f6; }
+    .score-moderate { color: #f59e0b; }
+    .score-low { color: #ef4444; }
+
+    .score-category {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .score-meter {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: 10px;
+      height: 20px;
+      margin: 1rem 0;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+    }
+
+    .dark-mode .score-meter {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark);
+    }
+
+    .score-meter-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 1s ease-out, background-color 0.5s ease;
+    }
+
+    .recommendations {
+      background: rgba(139, 92, 246, 0.08);
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .recommendations {
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    .recommendations h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .recommendations h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .recommendations ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .recommendations li {
+      margin: 0.5rem 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .recommendations li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .factor-breakdown {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1rem;
+    }
+
+    .dark-mode .factor-breakdown {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .factor-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .dark-mode .factor-item {
+      border-bottom-color: var(--border-dark);
+    }
+
+    .factor-item:last-child {
+      border-bottom: none;
+    }
+
+    .factor-bar-container {
+      flex: 1;
+      margin: 0 1rem;
+      background: var(--surface-1-light);
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .dark-mode .factor-bar-container {
+      background: var(--surface-1-dark);
+    }
+
+    .factor-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease-out;
+    }
+
+    /* SEO Content Section */
     .seo-content {
       max-width: 900px;
       margin: 2rem auto;
@@ -191,6 +327,7 @@
     .dark-mode .seo-content {
       background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
       border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .seo-content h2 {
@@ -211,6 +348,17 @@
       border-bottom-color: var(--primary-light, #a78bfa);
     }
 
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
     .seo-content p, .seo-content li {
       color: var(--text-weak-light, #64748b);
       font-size: 1.05rem;
@@ -222,23 +370,201 @@
       color: var(--text-weak-dark, #94a3b8);
     }
 
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
     .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
       border-left: 4px solid var(--primary, #8b5cf6);
       padding: 1.5rem;
       margin: 2rem 0;
       border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
     }
 
     .dark-mode .info-box {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box {
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .disclaimer-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.15));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box strong {
+      color: #d97706;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
     }
 
     .calc-meta {
       margin-top: 1.5rem;
       font-size: 0.9rem;
       color: var(--text-weak-light, #64748b);
-      text-align: left;
     }
 
     .calc-meta summary {
@@ -254,6 +580,17 @@
     .dark-mode .calc-meta summary {
       color: var(--primary-light, #a78bfa);
     }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -268,53 +605,68 @@
     </nav>
   </header>
 
+  <!-- Top Ad Banner (728x90) -->
   <div id="ad-banner-top"></div>
 
   <section class="calc-wrapper">
-    <h1>📊 Productivity Score Calculator</h1>
-    <p class="subtitle">Measure your work productivity based on deep work hours, task completion rate, and focus quality.</p>
-    <p class="meta-info">Last Updated: November 2025</p>
+    <h1>Productivity Score Calculator</h1>
+    <p class="subtitle">Measure your work productivity in under 2 minutes. Get insights based on deep work hours, task completion rate, and focus quality to optimize your efficiency.</p>
 
     <form id="productivityForm">
-      <label for="totalHours">Total hours worked per day:</label>
-      <p class="help-text">Include your typical workday, excluding long side projects.</p>
-      <input type="number" id="totalHours" step="0.5" min="0" max="24" value="8" required>
+      <div class="input-section">
+        <label for="totalHours">Total Hours Worked Per Day</label>
+        <span class="input-hint">⏰ Enter total hours in your typical workday (excluding lunch breaks). Most full-time workers do 7-9 hours. Example: 8 or 8.5 hours.</span>
+        <input type="number" id="totalHours" step="0.5" min="0" max="24" value="8" placeholder="e.g., 8" required aria-label="Total hours worked per day">
+      </div>
 
-      <label for="deepWork">Deep work/focused hours per day:</label>
-      <p class="help-text">Time spent on distraction-free, high-value work (not email or meetings).</p>
-      <input type="number" id="deepWork" step="0.5" min="0" max="24" value="4" required>
+      <div class="input-section">
+        <label for="deepWork">Deep Work / Focused Hours Per Day</label>
+        <span class="input-hint">🎯 Hours spent on distraction-free, high-value work (NOT email, meetings, or admin tasks). Elite performers average 3-4 hours. Example: 3 or 4 hours.</span>
+        <input type="number" id="deepWork" step="0.5" min="0" max="24" value="4" placeholder="e.g., 4" required aria-label="Deep work hours per day">
+      </div>
 
-      <label for="taskCompletion">Task completion rate (%):</label>
-      <p class="help-text">Of the tasks you planned for today, what percent did you actually finish?</p>
-      <input type="number" id="taskCompletion" min="0" max="100" value="80" required>
+      <div class="input-section">
+        <label for="taskCompletion">Task Completion Rate (%)</label>
+        <span class="input-hint">✅ Of the tasks you planned for today, what percentage did you actually complete? 80-90% is typical; 100% is excellent. Example: 75 or 85.</span>
+        <input type="number" id="taskCompletion" min="0" max="100" value="80" placeholder="e.g., 80" required aria-label="Task completion rate percentage">
+      </div>
 
-      <label for="distractions">Distractions per day:</label>
-      <p class="help-text">Notifications, pings, or interruptions that pulled you off your main work.</p>
-      <input type="number" id="distractions" min="0" max="100" value="10" required>
+      <div class="input-section">
+        <label for="distractions">Distractions Per Day</label>
+        <span class="input-hint">📱 Count notifications, pings, interruptions, or times you got pulled off your main work. Average is 10-15 per day. Example: 8 or 12.</span>
+        <input type="number" id="distractions" min="0" max="100" value="10" placeholder="e.g., 10" required aria-label="Number of distractions per day">
+      </div>
 
-      <label for="context">Context switches (task changes) per day:</label>
-      <p class="help-text">Times you switched to a different type of task or project.</p>
-      <input type="number" id="context" min="0" max="100" value="15" required>
+      <div class="input-section">
+        <label for="context">Context Switches (Task Changes) Per Day</label>
+        <span class="input-hint">🔄 Times you switched between different types of tasks or projects. Each switch costs ~23 minutes of refocus time. Example: 10 or 15.</span>
+        <input type="number" id="context" min="0" max="100" value="15" placeholder="e.g., 15" required aria-label="Context switches per day">
+      </div>
 
-      <button type="submit">Calculate Productivity Score</button>
+      <button type="submit">Calculate My Productivity Score</button>
     </form>
 
     <div id="results" class="result-box">
-      <h3 style="color: var(--primary); margin-bottom: 1rem;">Your Productivity Score</h3>
+      <h3>Your Productivity Score</h3>
       <div class="productivity-score" id="score">0</div>
-      <div class="score-label">out of 100</div>
-      <div style="text-align: left; margin-top: 1.5rem;" id="insights"></div>
-      <div style="background: rgba(139, 92, 246, 0.08); padding: 1.5rem; border-radius: var(--radius-md); margin-top: 1.5rem; border-left: 4px solid var(--primary);" id="tips"></div>
+      <div class="score-category" id="scoreCategory"></div>
+      <div class="score-meter">
+        <div class="score-meter-fill" id="scoreMeter" style="width: 0%"></div>
+      </div>
+      <hr>
+      <div id="scoreDescription"></div>
+      <div class="factor-breakdown" id="factorBreakdown"></div>
+      <div class="recommendations" id="recommendations"></div>
       <details class="calc-meta">
-        <summary>How your productivity score is calculated</summary>
-        <p>Your score is a weighted average of four <strong>normalized subscores</strong> (each 0–100, higher is better) combined using an <strong>evidence-based influence model</strong> where deep work and task completion are the primary drivers:</p>
+        <summary>ℹ️ How is your productivity score calculated?</summary>
+        <p>Your score is a weighted average of four <strong>normalized subscores</strong> (each 0–100, higher is better) combined using an <strong>evidence-based influence model</strong>:</p>
         <ul>
-          <li><strong>Deep work ratio (≈35% weight):</strong> share of your workday spent in focused, distraction‑free work</li>
-          <li><strong>Task completion (≈35% weight):</strong> how many of your planned tasks you actually finish</li>
-          <li><strong>Distraction management (≈15% weight):</strong> fewer daily distractions increase this subscore</li>
-          <li><strong>Context switching (≈15% weight):</strong> fewer task changes per day increase this subscore</li>
+          <li><strong>Deep work ratio (35%):</strong> Share of your workday spent in focused, distraction-free work (60%+ = excellent)</li>
+          <li><strong>Task completion (35%):</strong> How many of your planned tasks you actually finish (90%+ = excellent)</li>
+          <li><strong>Distraction management (15%):</strong> Fewer daily distractions increase this subscore (3 or fewer = excellent)</li>
+          <li><strong>Context switching (15%):</strong> Fewer task changes per day increase this subscore (5 or fewer = excellent)</li>
         </ul>
-        <p>Each input is mapped onto a <strong>0–100 normalized scale</strong> using reasonable “healthy” ranges (for example, 60%+ of your day in deep work and 90–100% task completion score near 100). The calculator also looks at your weakest dimensions and surfaces <strong>personalized recommendations by factor drivers</strong>, so you know whether to focus on deep work time, completion rates, distraction control, or context switching. The final score is meant to highlight patterns, not replace performance reviews or medical advice.</p>
+        <p>The calculator identifies your weakest dimensions and provides <strong>personalized recommendations</strong> so you know exactly where to focus for maximum improvement.</p>
       </details>
       <div id="shareButtonsContainer" style="display:block;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid rgba(139,92,246,0.2);text-align:center;">
         <p style="font-size:0.95rem;font-weight:700;margin:0 0 1rem;color:#334155;">📤 Share Your Results</p>
@@ -331,94 +683,214 @@
     </div>
   </section>
 
+  <!-- Mid Ad Banner (320x50) -->
   <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
+    <h3>🔗 Explore More Productivity & Focus Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="distraction-cost-calculator.html">⏰ Distraction Cost Calculator</a></div>
+      <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Calculator</a></div>
+      <div class="card"><a href="burnout-risk-calculator.html">🔥 Burnout Risk Calculator</a></div>
+      <div class="card"><a href="work-life-quality-index.html">⚖️ Work-Life Quality Index</a></div>
+    </div>
+
+    <h3>📝 Related Productivity & Wellness Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">📖 Work-Life Balance: Ultimate Guide</a></div>
+      <div class="card"><a href="blog/work-life-quality-index-guide.html">💡 Work-Life Quality Index Guide</a></div>
+    </div>
+
     <article>
-      <h2>What is Productivity Score?</h2>
-      <p>Your productivity score measures how effectively you accomplish meaningful work during your work hours. Unlike simply tracking hours worked, this calculator evaluates the quality and efficiency of your work time based on deep work hours, task completion rates, and your ability to maintain focus despite distractions.</p>
+      <h2>What is a Productivity Score?</h2>
+      <p>Your productivity score is a comprehensive measurement of how effectively you accomplish meaningful work during your work hours. Unlike simply tracking hours worked, this calculator evaluates the <strong>quality and efficiency</strong> of your work time based on four critical factors: deep work hours, task completion rates, distraction management, and context switching frequency.</p>
+      
+      <p>The concept draws from research by productivity experts like Cal Newport (author of "Deep Work"), studies on attention residue, and workplace efficiency research. The goal isn't to work more hours—it's to make the hours you work actually count.</p>
 
       <div class="info-box">
-        <h4>The Components of Productivity</h4>
+        <p><strong>📊 Key Productivity Statistics:</strong></p>
         <ul>
-          <li><strong>Deep Work Ratio:</strong> Percentage of work time spent in focused, distraction-free work</li>
-          <li><strong>Task Completion:</strong> The percentage of planned tasks you actually complete</li>
-          <li><strong>Distraction Management:</strong> How well you minimize interruptions and maintain focus</li>
-          <li><strong>Context Switching:</strong> How often you switch between different tasks (kills productivity)</li>
+          <li>The average knowledge worker spends only 2.8 hours per day on productive tasks</li>
+          <li>It takes an average of 23 minutes to refocus after a distraction</li>
+          <li>Multitasking can reduce productivity by up to 40%</li>
+          <li>Top performers spend 4+ hours daily in deep, focused work</li>
         </ul>
       </div>
 
-      <h2>Why Deep Work Matters</h2>
-      <p>Deep work—cognitively demanding tasks performed in a state of distraction-free concentration—is where the most valuable work happens. Research by Cal Newport shows that deep work produces results that are hard to replicate and creates real value. Most knowledge workers spend less than 30% of their time in deep work, with the rest consumed by meetings, emails, and shallow tasks.</p>
+      <h2>How to Use This Productivity Calculator</h2>
+      <p>Our productivity score calculator is designed to give you actionable insights in under 2 minutes. Follow these steps:</p>
+      
+      <ol>
+        <li><strong>Enter Total Work Hours:</strong> Your typical workday length in hours, excluding lunch breaks. Most full-time workers are in the 7-9 hour range.</li>
+        <li><strong>Enter Deep Work Hours:</strong> Time spent on cognitively demanding, distraction-free work. This excludes email, meetings, admin tasks, and shallow work. Be honest—most people overestimate this.</li>
+        <li><strong>Enter Task Completion Rate:</strong> What percentage of the tasks you planned to complete today did you actually finish? This measures execution effectiveness.</li>
+        <li><strong>Enter Distraction Count:</strong> How many times were you interrupted or distracted? Include notifications, colleague interruptions, and self-initiated distractions.</li>
+        <li><strong>Enter Context Switches:</strong> How many times did you switch between fundamentally different types of work or projects?</li>
+        <li><strong>Click Calculate:</strong> Get your score, category, factor breakdown, and personalized recommendations instantly.</li>
+      </ol>
 
-      <h2>The Hidden Cost of Distractions</h2>
-      <p>Every time you're interrupted or switch tasks, your brain needs an average of 23 minutes to regain full focus. If you're getting distracted 10 times per day, you're losing nearly 4 hours of productive potential just to context switching and refocusing.</p>
+      <h2>Understanding Productivity Score Categories</h2>
+      <p>Your productivity score is calculated on a 0-100 scale and falls into one of four categories:</p>
 
-      <h2>Improving Your Productivity Score</h2>
+      <h3>🌟 Excellent (80-100)</h3>
+      <p>Outstanding productivity! You're effectively managing your time, maintaining focus, and completing tasks efficiently. Your deep work ratio is strong and distractions are minimal. You're likely producing high-quality output and making meaningful progress on important projects. Continue protecting your focus time and share your strategies with colleagues.</p>
+
+      <h3>✅ Good (60-79)</h3>
+      <p>Solid productivity. You're getting meaningful work done, but there's room to optimize. You might be losing time to too many meetings, email checking, or context switching. Focus on increasing your deep work time to 50%+ of your day and reducing distractions during focus periods.</p>
+
+      <h3>⚠️ Needs Improvement (40-59)</h3>
+      <p>Productivity challenges detected. Distractions, frequent context switching, or low task completion are significantly hindering your effectiveness. You may feel busy but not productive. This is the zone where targeted interventions can make a dramatic difference—focus on the specific drivers identified in your results.</p>
+
+      <h3>🚨 Low Productivity (0-39)</h3>
+      <p>Significant productivity issues. Your current work patterns are inefficient and likely unsustainable. You probably feel overwhelmed, constantly behind, and frustrated. Major changes are needed: audit where your time actually goes, eliminate low-value activities, and create protected focus time.</p>
+
+      <h2>The Four Pillars of Productivity</h2>
+      <p>Our calculator evaluates four evidence-based factors that research has shown to be the strongest drivers of work effectiveness:</p>
+
+      <h3>1. Deep Work Ratio (35% Weight)</h3>
+      <p>Deep work is cognitively demanding tasks performed in a state of distraction-free concentration. This is where high-value, creative, and strategic work happens. Cal Newport's research shows that the ability to perform deep work is increasingly rare and increasingly valuable in our economy.</p>
+      <p>Elite knowledge workers spend 3-4 hours daily in deep work—which represents 40-50% of a typical workday. Most people average far less, with constant interruptions fragmenting their attention. Increasing your deep work ratio is often the highest-leverage productivity improvement you can make.</p>
+
+      <h3>2. Task Completion Rate (35% Weight)</h3>
+      <p>Starting tasks is easy. Finishing them is what creates value. Your task completion rate measures how effectively you execute on your plans. Low completion rates often indicate over-commitment, poor task estimation, or too many competing priorities.</p>
+      <p>A healthy completion rate is 80-90% of planned tasks. If you're consistently completing 100%, you might be under-challenging yourself. If you're below 70%, you need to either reduce commitments or improve focus.</p>
+
+      <h3>3. Distraction Management (15% Weight)</h3>
+      <p>Every distraction—notification, colleague interruption, or self-initiated check of social media—costs you more than the time spent on the distraction itself. Research shows it takes an average of 23 minutes and 15 seconds to fully regain focus after an interruption.</p>
+      <p>If you're getting distracted 10 times per day, you're losing nearly 4 hours of productive potential just to refocusing. Elite performers protect their attention ruthlessly, using airplane mode, closed doors, and "do not disturb" signals.</p>
+
+      <h3>4. Context Switching (15% Weight)</h3>
+      <p>Context switching—moving between fundamentally different types of tasks—is cognitively expensive. When you switch from writing a report to answering emails to attending a meeting, your brain must completely reload different mental contexts.</p>
+      <p>Research shows that frequent context switching can reduce productivity by up to 40%. The solution is batching similar tasks together: answer all emails in one block, schedule meetings back-to-back, and protect extended periods for deep work.</p>
+
+      <div class="disclaimer-box">
+        <strong>Important Note:</strong> This productivity calculator measures work patterns and behaviors, not business outcomes or job performance. High productivity scores don't automatically mean you're doing the "right" work—that requires alignment with strategic priorities. Use this tool alongside regular reflection on whether you're working on what matters most.
+      </div>
+
+      <h2>Why Deep Work is the Ultimate Productivity Lever</h2>
+      <p>Of all the factors affecting productivity, deep work capability stands out as the most important. Here's why:</p>
+
+      <h3>Deep Work Produces Rare and Valuable Output</h3>
+      <p>In an economy increasingly dominated by knowledge work, the ability to learn complicated things quickly and produce at an elite level—in terms of both quality and speed—becomes extremely valuable. Both of these tasks require deep work.</p>
+
+      <h3>Deep Work is Increasingly Rare</h3>
+      <p>Modern work culture, with its emphasis on constant connectivity, open offices, and immediate responsiveness, has made sustained concentration increasingly difficult. This rarity creates opportunity: those who cultivate deep work capability have a significant competitive advantage.</p>
+
+      <h3>Deep Work is Deeply Satisfying</h3>
+      <p>Research in psychology shows that flow states—which deep work produces—are among the most fulfilling experiences humans can have. People who spend more time in deep concentration report higher job satisfaction and life satisfaction overall.</p>
+
+      <h2>Evidence-Based Strategies to Boost Your Productivity Score</h2>
+      <p>Based on productivity research and the specific factors measured by this calculator, here are proven strategies:</p>
+
+      <h3>Increase Deep Work Time</h3>
       <ul>
-        <li>Block dedicated deep work time in your calendar (2-4 hour chunks)</li>
-        <li>Use the Pomodoro technique: 25 minutes focused, 5 minutes rest</li>
-        <li>Batch similar tasks together to reduce context switching</li>
-        <li>Turn off notifications during focus periods</li>
-        <li>Communicate your "do not disturb" times to colleagues</li>
+        <li><strong>Time blocking:</strong> Schedule 2-4 hour blocks for deep work in your calendar and treat them as non-negotiable appointments</li>
+        <li><strong>Morning protection:</strong> Do your most cognitively demanding work in the morning when willpower is highest</li>
+        <li><strong>Shutdown ritual:</strong> End each day with a clear stopping point so your brain can rest</li>
+        <li><strong>Environment design:</strong> Create a workspace optimized for focus—minimal distractions, proper lighting, necessary tools at hand</li>
       </ul>
+
+      <h3>Improve Task Completion</h3>
+      <ul>
+        <li><strong>MIT method:</strong> Identify your 1-3 "Most Important Tasks" each day and complete them first</li>
+        <li><strong>Two-minute rule:</strong> If a task takes less than 2 minutes, do it immediately rather than adding it to a list</li>
+        <li><strong>Task estimation:</strong> Track how long tasks actually take vs. your estimates, then improve your planning</li>
+        <li><strong>Reduce commitments:</strong> Say "no" more often to protect time for important work</li>
+      </ul>
+
+      <h3>Manage Distractions</h3>
+      <ul>
+        <li><strong>Notification audit:</strong> Turn off all non-essential notifications on phone and computer</li>
+        <li><strong>App blockers:</strong> Use tools like Freedom, Cold Turkey, or Focus to block distracting sites during work</li>
+        <li><strong>Communication batching:</strong> Check email and messages at set times (e.g., 9am, 1pm, 4pm) rather than constantly</li>
+        <li><strong>Physical signals:</strong> Use headphones or "do not disturb" signs to signal you're in focus mode</li>
+      </ul>
+
+      <h3>Reduce Context Switching</h3>
+      <ul>
+        <li><strong>Task batching:</strong> Group similar tasks together (all emails, all calls, all writing)</li>
+        <li><strong>Theme days:</strong> Dedicate different days to different types of work</li>
+        <li><strong>Meeting clustering:</strong> Schedule all meetings on specific days or time blocks rather than scattered throughout the week</li>
+        <li><strong>Finish before switching:</strong> Complete one task before starting another when possible</li>
+      </ul>
+
+      <div class="info-box">
+        <p><strong>💡 Pro Tip:</strong> Start small. Pick one strategy from each category and implement it for two weeks. Then reassess your productivity score to see improvement. Trying to change everything at once usually leads to changing nothing.</p>
+      </div>
+
+      <h2>The Pomodoro Technique: A Practical Framework</h2>
+      <p>One of the most effective and accessible productivity techniques is the Pomodoro method:</p>
+      <ol>
+        <li>Choose a task to work on</li>
+        <li>Set a timer for 25 minutes</li>
+        <li>Work on the task with complete focus until the timer rings</li>
+        <li>Take a 5-minute break</li>
+        <li>After 4 "pomodoros," take a longer 15-30 minute break</li>
+      </ol>
+      <p>This technique works because it makes deep work manageable (anyone can focus for 25 minutes), provides regular recovery, and creates clear boundaries between work and rest.</p>
+
+      <h2>When Productivity Isn't the Problem</h2>
+      <p>Sometimes low productivity isn't about techniques—it's about deeper issues:</p>
+      <ul>
+        <li><strong>Burnout:</strong> If you're exhausted, no productivity system will help. Rest first.</li>
+        <li><strong>Wrong work:</strong> If you're not motivated by what you're doing, address alignment before efficiency.</li>
+        <li><strong>Organizational dysfunction:</strong> If your workplace creates constant interruptions and unrealistic demands, individual productivity hacks won't solve systemic problems.</li>
+        <li><strong>Health issues:</strong> Physical and mental health significantly impact cognitive performance. Address these first.</li>
+      </ul>
+
     </article>
   </section>
 
-  <section class="seo-content">
-    <article>
-      <h2 style="text-align: left;">Explore More Focus &amp; Work-Life Tools</h2>
-      <div class="explore-grid">
-        <a href="distraction-cost-calculator.html" class="explore-card">⏰ Distraction Cost Calculator</a>
-        <a href="meeting-load-stress-calculator.html" class="explore-card">📅 Meeting Load Stress Calculator</a>
-        <a href="burnout-risk-calculator.html" class="explore-card">🔥 Burnout Risk Calculator</a>
-        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
-      </div>
-
-      <h2 style="text-align: left; margin-top: 2.5rem;">Related Blogs</h2>
-      <div class="explore-grid">
-        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
-        <a href="blog/work-life-quality-index-guide.html" class="explore-card">📘 Work-Life Quality Index Guide</a>
-      </div>
-    </article>
-  </section>
-  
   <section class="faq-section">
-    <h2>Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions About Productivity</h2>
     <details>
       <summary>What is a good productivity score?</summary>
-      <p>In this model, scores of <strong>80+</strong> are considered excellent, 60–79 is good, 40–59 suggests meaningful room for improvement, and below 40 indicates that your current work patterns are likely inefficient or unsustainable. Remember that this is a self‑reported, behavior‑focused index, not a performance review.</p>
+      <p>In this model, scores of <strong>80+</strong> are considered excellent, 60–79 is good, 40–59 suggests meaningful room for improvement, and below 40 indicates that your current work patterns are likely inefficient. Remember that this is a self-reported, behavior-focused index. Even top performers rarely score above 90—there's always room for optimization.</p>
     </details>
     <details>
-      <summary>How is the 0–100 productivity score calculated?</summary>
-      <p>The calculator builds four normalized subscores—deep work ratio, task completion rate, distraction management, and context switching—each scaled from 0–100. These are then combined using an <strong>evidence-based weighted influence model</strong> where deep work and task completion have the largest impact, and distractions and context switching fine‑tune the result. The final number is a <strong>0–100 normalized productivity index</strong>.</p>
+      <summary>How is the productivity score calculated?</summary>
+      <p>The calculator builds four normalized subscores—deep work ratio, task completion rate, distraction management, and context switching—each scaled from 0–100. These are combined using an evidence-based weighting model where deep work (35%) and task completion (35%) have the largest influence, while distractions (15%) and context switching (15%) fine-tune the result. The final number is a 0–100 normalized productivity index.</p>
     </details>
     <details>
-      <summary>Can this replace my manager’s performance evaluation?</summary>
-      <p>No. This tool looks at <strong>how</strong> you work—time allocation, focus, and habits—not at business outcomes, team impact, or qualitative feedback. It’s best used as a personal diagnostics tool to identify leverage points (for example, more deep work, fewer distractions), not as a formal performance assessment.</p>
+      <summary>Can this replace my manager's performance evaluation?</summary>
+      <p>No. This tool measures <strong>how</strong> you work—time allocation, focus, and habits—not business outcomes, team impact, or qualitative feedback. High productivity doesn't automatically mean you're doing valuable work. Use this as a personal diagnostic tool alongside reflection on whether you're working on the right things.</p>
     </details>
     <details>
-      <summary>What do the personalized driver recommendations tell me?</summary>
-      <p>After computing your subscores, the calculator identifies which dimensions are dragging your score down the most and then provides <strong>personalized recommendations by those drivers</strong>. For example, if deep work is low but distraction management is fine, it will focus on scheduling deep work blocks instead of generic “avoid distractions” advice.</p>
+      <summary>How much deep work should I aim for?</summary>
+      <p>Elite knowledge workers typically achieve 3-4 hours of deep work per day, which represents 40-50% of an 8-hour workday. Most people average much less—often under 2 hours. Start by tracking your current deep work time, then gradually increase by 30 minutes per week until you reach your optimal level.</p>
+    </details>
+    <details>
+      <summary>Why is context switching so bad for productivity?</summary>
+      <p>When you switch between tasks, your brain doesn't instantly clear the previous task. Residual attention lingers, reducing performance on the new task. Research shows each switch can cost 15-25 minutes of productive time. Over a day with 10+ switches, you could lose 2-4 hours to this "attention residue."</p>
     </details>
     <details>
       <summary>How often should I use this productivity calculator?</summary>
-      <p>Many people use it weekly or bi‑weekly as part of a review ritual. Capture a snapshot of your current habits, run a small experiment (like blocking 2 hours of deep work per day), then re‑check a couple of weeks later to see if your normalized score and driver breakdown have improved.</p>
+      <p>Weekly or bi-weekly assessment works well for most people. Capture a snapshot of your current habits, implement one or two targeted improvements, then re-check after 2 weeks to see if your score and factor breakdown have improved. Avoid daily checking, which can become counterproductive obsession.</p>
+    </details>
+    <details>
+      <summary>Is it possible to be too productive?</summary>
+      <p>Yes. Relentless productivity optimization without adequate rest leads to burnout. Sustainable high performance requires recovery time, social connection, and activities that restore energy. If your productivity score is excellent but you're exhausted, anxious, or unhappy, you may be optimizing the wrong metric.</p>
+    </details>
+    <details>
+      <summary>How do the personalized recommendations work?</summary>
+      <p>After computing your subscores, the calculator identifies which dimensions are pulling your overall score down the most and provides targeted suggestions for those specific drivers. For example, if deep work is low but distraction management is fine, it will focus on scheduling deep work blocks instead of generic "avoid distractions" advice.</p>
     </details>
   </section>
-  
-  <div id="ad-banner-end"></div>
-  
+
   <a href="index.html" class="floating-cta">See All Calculators</a>
-  
+
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
+
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> This productivity calculator is for informational purposes. Results are estimates based on self-reported data.</p>
+      <p><strong>Disclaimer:</strong> This productivity calculator is provided for informational and educational purposes only. Results are based on self-reported data and general productivity research. Individual results may vary based on job type, work environment, and personal factors. This tool measures work patterns, not job performance or business outcomes.</p>
     </div>
     <div class="footer-links">
       <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
       <a href="privacy-policy.html">Privacy Policy</a> | 
-      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
     </div>
   </footer>
 
@@ -434,64 +906,83 @@
       const distractions = parseFloat(document.getElementById('distractions').value);
       const contextSwitches = parseFloat(document.getElementById('context').value);
 
+      // Validate inputs
+      if (isNaN(totalHours) || totalHours <= 0 || totalHours > 24) {
+        alert('Please enter valid total work hours (1-24).');
+        return;
+      }
+      if (isNaN(deepWork) || deepWork < 0 || deepWork > totalHours) {
+        alert('Deep work hours cannot exceed total work hours.');
+        return;
+      }
+
       const safeHours = totalHours > 0 ? totalHours : 1;
 
       // Normalized subscores (0-100, higher = better)
-      const deepWorkRatio = Math.max(0, deepWork) / safeHours; // 0–1
-      const deepWorkScore = Math.round(clamp01(deepWorkRatio / 0.6) * 100); // 60%+ deep work => ~100
+      const deepWorkRatio = Math.max(0, deepWork) / safeHours;
+      const deepWorkScore = Math.round(clamp01(deepWorkRatio / 0.6) * 100);
 
-      const taskScore = Math.round(clamp01((taskCompletion - 50) / 50) * 100); // 50% -> 0, 100% -> 100
+      const taskScore = Math.round(clamp01((taskCompletion - 50) / 50) * 100);
 
       // Fewer distractions is better: <=3 -> ~100, >=20 -> ~0
-      const distractionScore = Math.round(
-        (1 - clamp01((distractions - 3) / 17)) * 100
-      );
+      const distractionScore = Math.round((1 - clamp01((distractions - 3) / 17)) * 100);
 
       // Fewer context switches is better: <=5 -> 100, >=25 -> 0
-      const contextScore = Math.round(
-        (1 - clamp01((contextSwitches - 5) / 20)) * 100
-      );
+      const contextScore = Math.round((1 - clamp01((contextSwitches - 5) / 20)) * 100);
 
       const factors = [
-        { key: 'deepWork', label: 'Deep work time',          weight: 0.35, score: deepWorkScore },
-        { key: 'tasks',    label: 'Task completion',         weight: 0.35, score: taskScore },
-        { key: 'distract', label: 'Distraction management',  weight: 0.15, score: distractionScore },
-        { key: 'context',  label: 'Context switching',       weight: 0.15, score: contextScore }
+        { key: 'deepWork', label: 'Deep Work Time', weight: 0.35, score: deepWorkScore, icon: '🎯' },
+        { key: 'tasks', label: 'Task Completion', weight: 0.35, score: taskScore, icon: '✅' },
+        { key: 'distract', label: 'Distraction Management', weight: 0.15, score: distractionScore, icon: '📱' },
+        { key: 'context', label: 'Context Switching', weight: 0.15, score: contextScore, icon: '🔄' }
       ];
 
-      const score = Math.round(
-        factors.reduce((sum, f) => sum + f.score * f.weight, 0)
-      );
+      const score = Math.round(factors.reduce((sum, f) => sum + f.score * f.weight, 0));
 
       // Display results
-      document.getElementById('score').textContent = score;
+      const scoreEl = document.getElementById('score');
+      const categoryEl = document.getElementById('scoreCategory');
+      const descEl = document.getElementById('scoreDescription');
+      const recEl = document.getElementById('recommendations');
+      const meterEl = document.getElementById('scoreMeter');
+      const factorEl = document.getElementById('factorBreakdown');
 
-      let category, insights, tips;
+      scoreEl.textContent = score;
+
+      let category, description, recommendations, colorClass, meterColor;
       
       if (score >= 80) {
-        category = '🌟 Excellent';
-        insights = '<p><strong>Outstanding productivity!</strong> You\'re effectively managing your time, maintaining focus, and completing tasks efficiently. Your deep work ratio is strong and distractions are minimal.</p>';
-        tips = '<h4>Keep It Up:</h4><ul><li>Document what\'s working for you</li><li>Share your productivity strategies with colleagues</li><li>Guard your deep work time jealously</li></ul>';
+        category = '🌟 Excellent Productivity';
+        colorClass = 'score-excellent';
+        meterColor = '#10b981';
+        description = '<p><strong>Outstanding productivity!</strong> You\'re effectively managing your time, maintaining strong focus, and completing tasks efficiently. Your deep work ratio is excellent and distractions are minimal. You\'re producing high-quality output and making meaningful progress.</p>';
+        recommendations = '<h4>🌟 Keep It Up:</h4><ul><li>Document what\'s working so you can maintain these habits</li><li>Share your productivity strategies with colleagues who might benefit</li><li>Guard your deep work time zealously—it\'s your competitive advantage</li><li>Consider mentoring others on productivity techniques</li></ul>';
       } else if (score >= 60) {
-        category = '✅ Good';
-        insights = '<p><strong>Solid productivity.</strong> You\'re getting meaningful work done, but there\'s room to optimize your focus time and reduce distractions.</p>';
-        tips = '<h4>To Improve:</h4><ul><li>Increase deep work time to 50%+ of your day</li><li>Reduce distractions with "do not disturb" periods</li><li>Batch similar tasks to minimize context switching</li></ul>';
+        category = '✅ Good Productivity';
+        colorClass = 'score-good';
+        meterColor = '#3b82f6';
+        description = '<p><strong>Solid productivity.</strong> You\'re getting meaningful work done, but there\'s room to optimize your focus time and reduce inefficiencies. Small improvements in your weaker areas could significantly boost your output.</p>';
+        recommendations = '<h4>🛠️ To Improve:</h4><ul><li>Increase deep work time to 50%+ of your day using time blocking</li><li>Reduce distractions with "do not disturb" periods and notification audits</li><li>Batch similar tasks together to minimize context switching</li><li>Try the Pomodoro technique for focused 25-minute work sprints</li></ul>';
       } else if (score >= 40) {
         category = '⚠️ Needs Improvement';
-        insights = '<p><strong>Productivity challenges detected.</strong> Distractions, context switching, or low task completion are hindering your effectiveness.</p>';
-        tips = '<h4>Action Items:</h4><ul><li>Block 2-hour deep work sessions daily</li><li>Turn off all notifications during focus time</li><li>Review task list—are you overcommitted?</li><li>Use the Pomodoro technique for focus</li></ul>';
+        colorClass = 'score-moderate';
+        meterColor = '#f59e0b';
+        description = '<p><strong>Productivity challenges detected.</strong> Distractions, context switching, or low task completion are significantly hindering your effectiveness. You may feel busy but not productive—this is common and fixable.</p>';
+        recommendations = '<h4>⚡ Action Items:</h4><ul><li>Block 2-hour deep work sessions daily—treat them as unmovable appointments</li><li>Turn off ALL notifications during focus time (yes, all of them)</li><li>Review your task list—are you overcommitted? Learn to say no</li><li>Use the Pomodoro technique to build focus stamina</li><li>Audit your distractions: what\'s actually interrupting you?</li></ul>';
       } else {
         category = '🚨 Low Productivity';
-        insights = '<p><strong>Significant productivity issues.</strong> Your current work patterns are inefficient. You likely feel busy but not productive.</p>';
-        tips = '<h4>Urgent Changes Needed:</h4><ul><li>Audit your time—where are hours actually going?</li><li>Eliminate or delegate low-value tasks</li><li>Set up distraction-free work environment</li><li>Consider time-blocking methodology</li><li>Speak with manager about unrealistic demands</li></ul>';
+        colorClass = 'score-low';
+        meterColor = '#ef4444';
+        description = '<p><strong>Significant productivity issues.</strong> Your current work patterns are inefficient and likely unsustainable. You probably feel overwhelmed, constantly behind, and frustrated despite working hard.</p>';
+        recommendations = '<h4>🆘 Urgent Changes Needed:</h4><ul><li>Audit your time—track where hours actually go for one week</li><li>Eliminate or delegate low-value tasks ruthlessly</li><li>Set up a distraction-free work environment (different location if needed)</li><li>Implement strict time-blocking for your top 3 priorities</li><li>Talk to your manager about unrealistic demands or constant interruptions</li><li>Consider whether burnout or other issues are affecting your focus</li></ul>';
       }
 
-      // Personalized recs based on weakest drivers (largest performance gaps)
+      // Personalized recommendations based on weakest factors
       const driverTips = {
-        deepWork: 'Protect 2–4 hour blocks for deep work by turning off notifications and batching meetings.',
-        tasks: 'Clarify your top 3 priorities daily and break large tasks into smaller, shippable chunks.',
-        distract: 'Silence non-essential notifications and create clear "no interruption" focus windows.',
-        context: 'Batch similar tasks together and avoid rapid task-switching between unrelated work.'
+        deepWork: 'Protect 2–4 hour blocks for deep work by turning off notifications, closing email, and batching meetings to specific times.',
+        tasks: 'Clarify your top 3 priorities daily, break large tasks into smaller chunks, and track completion honestly.',
+        distract: 'Silence non-essential notifications, use app blockers during focus periods, and create clear "no interruption" signals.',
+        context: 'Batch similar tasks together, avoid rapid task-switching, and complete one thing before starting another.'
       };
 
       const weakest = [...factors]
@@ -499,20 +990,49 @@
         .sort((a, b) => b.gap - a.gap)
         .slice(0, 2);
 
+      // Factor breakdown HTML
+      let factorHtml = '<p style="margin: 0 0 0.8rem; font-weight: 600; color: var(--text-strong-light);">📊 Your Factor Breakdown:</p>';
+      factors.forEach(f => {
+        const barColor = f.score >= 70 ? '#10b981' : f.score >= 50 ? '#f59e0b' : '#ef4444';
+        factorHtml += `
+          <div class="factor-item">
+            <span style="min-width: 150px; font-size: 0.85rem;">${f.icon} ${f.label}</span>
+            <div class="factor-bar-container">
+              <div class="factor-bar" style="width: ${f.score}%; background: ${barColor};"></div>
+            </div>
+            <span style="min-width: 40px; text-align: right; font-weight: 700; font-size: 0.85rem; color: ${barColor};">${f.score}%</span>
+          </div>
+        `;
+      });
+
       const driverHtml = `
-        <h4>Biggest levers to boost your productivity:</h4>
+        <h4 style="margin-top: 1.5rem;">🎯 Biggest Levers to Boost Your Score:</h4>
         <ul>
-          ${weakest.map(d => `<li><strong>${d.label}:</strong> ${driverTips[d.key]}</li>`).join('')}
+          ${weakest.map(d => `<li><strong>${d.icon} ${d.label}:</strong> ${driverTips[d.key]}</li>`).join('')}
         </ul>
       `;
+      recommendations += driverHtml;
 
-      document.getElementById('insights').innerHTML = insights;
-      document.getElementById('tips').innerHTML = tips + driverHtml;
-      
+      scoreEl.className = 'productivity-score ' + colorClass;
+      categoryEl.textContent = category;
+      categoryEl.className = 'score-category ' + colorClass;
+      descEl.innerHTML = description;
+      recEl.innerHTML = recommendations;
+      factorEl.innerHTML = factorHtml;
+
+      // Animate score meter
+      meterEl.style.width = '0%';
+      meterEl.style.backgroundColor = meterColor;
+      setTimeout(() => {
+        meterEl.style.width = score + '%';
+      }, 100);
+
       document.getElementById('results').classList.add('show');
       
-      // Initialize share buttons with result
-      initShareButtons('Productivity Score Calculator', document.getElementById('score').textContent + '/100', 'Productivity Score');
+      // Initialize share buttons
+      if (typeof initShareButtons === 'function') {
+        initShareButtons('Productivity Score Calculator', score + '/100', category);
+      }
       
       setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth' }), 100);
     });
@@ -555,14 +1075,14 @@
       "name": "What is a good productivity score?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "In this model, scores of 80 or higher are considered excellent, 60\u201379 is good, 40\u201359 suggests meaningful room for improvement, and below 40 indicates that your current work patterns are likely inefficient or unsustainable."
+        "text": "In this model, scores of 80 or higher are considered excellent, 60–79 is good, 40–59 suggests meaningful room for improvement, and below 40 indicates that your current work patterns are likely inefficient or unsustainable."
       }
     },{
       "@type": "Question",
       "name": "How is the productivity score calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The calculator builds four normalized subscores (deep work ratio, task completion rate, distraction management, and context switching), each scaled from 0\u2011100. These are combined with an evidence-based weighting model where deep work and task completion have the largest influence, producing a single 0\u2011100 normalized productivity index."
+        "text": "The calculator builds four normalized subscores (deep work ratio, task completion rate, distraction management, and context switching), each scaled from 0–100. These are combined with an evidence-based weighting model where deep work and task completion have the largest influence, producing a single 0–100 normalized productivity index."
       }
     },{
       "@type": "Question",
@@ -573,10 +1093,17 @@
       }
     },{
       "@type": "Question",
-      "name": "How do the personalized recommendations work?",
+      "name": "How much deep work should I aim for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The calculator identifies which subscores are pulling your overall score down the most and then provides targeted suggestions for those specific drivers, such as increasing deep work time, improving task completion, reducing distractions, or minimizing context switching."
+        "text": "Elite knowledge workers typically achieve 3-4 hours of deep work per day, which represents 40-50% of an 8-hour workday. Most people average much less—often under 2 hours. Start by tracking your current deep work time, then gradually increase."
+      }
+    },{
+      "@type": "Question",
+      "name": "Why is context switching bad for productivity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When you switch between tasks, your brain doesn't instantly clear the previous task. Residual attention lingers, reducing performance on the new task. Research shows each switch can cost 15-25 minutes of productive time."
       }
     }]
   }
