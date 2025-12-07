@@ -3,15 +3,587 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sleep Chronotype & Ideal Bedtime Calculator | QuickCalcLabs</title>
-  <meta name="description" content="Find your natural sleep chronotype (early bird or night owl) and get a science-based ideal bedtime window from your wake-up time and age.">
-  <meta name="keywords" content="sleep chronotype calculator,ideal bedtime calculator,early bird or night owl,what time should I go to bed">
+  <title>Sleep Chronotype & Ideal Bedtime Calculator - Free Sleep Schedule Tool | QuickCalcLabs</title>
+  <meta name="description" content="Free sleep chronotype calculator to find your natural sleep type (early bird or night owl) and get a science-based ideal bedtime window based on your wake-up time, age, and preferences.">
+  <meta name="keywords" content="sleep chronotype calculator, ideal bedtime calculator, early bird or night owl, what time should I go to bed, circadian rhythm, sleep schedule, sleep debt, morningness eveningness">
   <link rel="canonical" href="https://quickcalclabs.com/sleep-chronotype-bedtime-calculator.html">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
+
+  <style>
+    /* Sleep Chronotype Calculator Page Styles */
+    .calc-wrapper {
+      max-width: 700px;
+      margin: 2.5rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(1.8rem, 4vw, 2.3rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .dark-mode .subtitle {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .input-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-section label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .input-section label {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .input-hint {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-weak-light, #64748b);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+      padding-left: 0.5rem;
+      border-left: 3px solid var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .input-hint {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    input[type="number"],
+    input[type="time"],
+    select {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      color: var(--text-strong-light, #0f172a);
+      transition: all 0.15s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="time"]:focus,
+    select:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+    }
+
+    .dark-mode input[type="number"],
+    .dark-mode input[type="time"],
+    .dark-mode select {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+
+    .dark-mode input[type="number"]:focus,
+    .dark-mode input[type="time"]:focus,
+    .dark-mode select:focus {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.2rem;
+      padding-right: 2.5rem;
+    }
+
+    .dark-mode select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%9ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    }
+
+    .calc-wrapper button[type="submit"] {
+      width: 100%;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .calc-wrapper button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark, #7c3aed), var(--secondary-dark, #2563eb));
+    }
+
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.8rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dark-mode .result-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      color: var(--primary, #8b5cf6);
+      text-align: center;
+    }
+
+    .dark-mode .result-box h3 {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .result-box hr {
+      border: none;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      margin: 1rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+
+    .dark-mode .stat-card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark);
+    }
+
+    .stat-number {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .dark-mode .stat-number {
+      color: var(--primary-light);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-weak-light);
+      margin-top: 0.3rem;
+    }
+
+    .dark-mode .stat-label {
+      color: var(--text-weak-dark);
+    }
+
+    .chronotype-display {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .dark-mode .chronotype-display {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark);
+    }
+
+    .sleep-debt-low { color: #10b981; }
+    .sleep-debt-moderate { color: #f59e0b; }
+    .sleep-debt-high { color: #ef4444; }
+
+    .recommendations {
+      background: rgba(59, 130, 246, 0.08);
+      padding: 1.5rem;
+      border-radius: var(--radius-md, 12px);
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--secondary, #3b82f6);
+    }
+
+    .dark-mode .recommendations {
+      background: rgba(59, 130, 246, 0.12);
+    }
+
+    .recommendations h4 {
+      margin-top: 0;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .recommendations h4 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .recommendations ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .recommendations li {
+      margin: 0.5rem 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .recommendations li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    /* SEO Content Section */
+    .seo-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seo-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+
+    .seo-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+
+    .seo-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--text-medium-light, #334155);
+    }
+
+    .dark-mode .seo-content h3 {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dark-mode .seo-content p, .dark-mode .seo-content li {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+      border-left: 4px solid var(--primary, #8b5cf6);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .info-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box {
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .disclaimer-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.15));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .disclaimer-box strong {
+      color: #d97706;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+      transition: color 0.15s ease;
+    }
+
+    .card a:hover {
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .card a {
+      color: var(--text-medium-dark, #cbd5e1);
+    }
+
+    .dark-mode .card a:hover {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+    }
+
+    .dark-mode .faq-section {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: var(--text-strong-light, #0f172a);
+    }
+
+    .dark-mode .faq-section h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      border-radius: var(--radius-md, 12px);
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      border-color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section details {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .faq-section details:hover {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--text-strong-light, #0f172a);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      transition: all 0.15s ease;
+    }
+
+    .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .faq-section summary {
+      color: var(--text-strong-dark, #f1f5f9);
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+    }
+
+    .dark-mode .faq-section summary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--primary-light, #a78bfa);
+    }
+
+    .faq-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-section details[open] summary {
+      border-bottom: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+    }
+
+    .dark-mode .faq-section details[open] summary {
+      border-bottom-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+
+    .faq-section details p {
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 0;
+      color: var(--text-weak-light, #64748b);
+      line-height: 1.6;
+    }
+
+    .dark-mode .faq-section details p {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .calc-meta {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-weak-light, #64748b);
+    }
+
+    .calc-meta summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary, #8b5cf6);
+    }
+
+    .dark-mode .calc-meta {
+      color: var(--text-weak-dark, #94a3b8);
+    }
+
+    .dark-mode .calc-meta summary {
+      color: var(--primary-light, #a78bfa);
+    }
+
+    @media (max-width: 820px) {
+      .calc-wrapper, .seo-content, .faq-section {
+        padding: 1.8rem;
+        margin: 1.5rem auto;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -25,71 +597,85 @@
     </nav>
   </header>
 
+  <!-- Top Ad Banner (728x90) -->
   <div id="ad-banner-top"></div>
 
   <section class="calc-wrapper">
-    <h1>😴 Sleep Chronotype & Ideal Bedtime Calculator</h1>
-    <p class="subtitle">Use your age, wake‑up time, and natural preferences to estimate your chronotype and get a realistic ideal bedtime window.</p>
-    <p class="meta-info">Last Updated: November 2025 • Based on general sleep‑duration guidelines from sleep foundations</p>
+    <h1>Sleep Chronotype & Ideal Bedtime Calculator</h1>
+    <p class="subtitle">Discover your natural sleep chronotype (early bird or night owl) and get a science-based ideal bedtime window tailored to your wake-up time, age, and preferences.</p>
 
     <form id="sleepForm">
-      <label for="age">Your age (years):</label>
-      <input type="number" id="age" min="5" max="100" value="30" required>
+      <div class="input-section">
+        <label for="age">Your Age (Years)</label>
+        <span class="input-hint">🎂 Your age determines recommended sleep duration. Children need more sleep; older adults typically need slightly less. Example: 30.</span>
+        <input type="number" id="age" min="5" max="100" value="30" placeholder="e.g., 30" required aria-label="Your age in years">
+      </div>
 
-      <label for="wakeTime">Target wake-up time:</label>
-      <p class="help-text">Time you need to wake up on most days (e.g., 07:00).</p>
-      <input type="time" id="wakeTime" value="07:00" required>
+      <div class="input-section">
+        <label for="wakeTime">Target Wake-Up Time</label>
+        <span class="input-hint">⏰ What time do you need to wake up on most days? This could be for work, school, or other obligations. Example: 07:00.</span>
+        <input type="time" id="wakeTime" value="07:00" required aria-label="Target wake-up time">
+      </div>
 
-      <label for="chronotype">Which description fits you best?</label>
-      <select id="chronotype">
-        <option value="morning">I naturally feel best in the morning / early in the day</option>
-        <option value="intermediate" selected>I can adapt pretty well to either mornings or evenings</option>
-        <option value="evening">I feel best later in the day / at night (night owl)</option>
+      <div class="input-section">
+        <label for="chronotype">Your Natural Sleep Preference</label>
+        <span class="input-hint">🦉 Select which description best matches how you naturally feel when you have no schedule constraints (like on vacation).</span>
+        <select id="chronotype" aria-label="Chronotype preference">
+          <option value="morning">🌅 Morning Person (Lark) - I feel best early in the day</option>
+          <option value="intermediate" selected>🌤️ Flexible - I can adapt to either mornings or evenings</option>
+          <option value="evening">🌙 Night Owl - I feel best later in the day/at night</option>
       </select>
+      </div>
 
-      <label for="bedTimeActual">Optional: your usual bedtime:</label>
-      <p class="help-text">Used to estimate sleep debt compared with your ideal window (e.g., 23:30). Leave blank if unsure.</p>
-      <input type="time" id="bedTimeActual">
+      <div class="input-section">
+        <label for="bedTimeActual">Your Current Bedtime (Optional)</label>
+        <span class="input-hint">🛏️ Enter when you usually go to bed to see if you're accumulating sleep debt. Leave blank if unsure. Example: 23:30.</span>
+        <input type="time" id="bedTimeActual" aria-label="Current usual bedtime">
+      </div>
 
       <button type="submit">Calculate Ideal Bedtime</button>
     </form>
 
-    <div id="results" class="result-box" style="display:none;">
-      <h3 style="color: var(--primary); text-align:center; margin-bottom: 1rem;">Your Ideal Sleep Window</h3>
+    <div id="results" class="result-box">
+      <h3>Your Personalized Sleep Window</h3>
+      
+      <div class="chronotype-display" id="chronotypeLabel"></div>
+      
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-number" id="recommendedSleep">0–0 h</div>
-          <div class="stat-label">recommended nightly sleep</div>
+          <div class="stat-label">Recommended nightly sleep</div>
         </div>
         <div class="stat-card">
           <div class="stat-number" id="idealWindow">--:-- – --:--</div>
-          <div class="stat-label">ideal bedtime window</div>
+          <div class="stat-label">Ideal bedtime window</div>
         </div>
         <div class="stat-card">
           <div class="stat-number" id="midSleep">--:--</div>
-          <div class="stat-label">mid‑sleep (chronotype anchor)</div>
+          <div class="stat-label">Mid-sleep point</div>
         </div>
         <div class="stat-card">
           <div class="stat-number" id="sleepDebtLabel">—</div>
-          <div class="stat-label">sleep debt risk</div>
+          <div class="stat-label">Sleep debt risk</div>
         </div>
       </div>
 
-      <div id="chronotypeLabel" style="text-align:center; font-size:1.3rem; margin-top:1rem;"></div>
-      <div id="interpretation" style="margin-top:1rem;"></div>
-
-      <div style="background: rgba(59,130,246,0.08); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary); margin-top: 1.5rem;" id="recommendations"></div>
+      <hr>
+      <div id="interpretation"></div>
+      <div class="recommendations" id="recommendations"></div>
 
       <details class="calc-meta">
-        <summary>How your chronotype and ideal bedtime are estimated</summary>
-        <p>We combine your <strong>age‑based sleep need range</strong> (for example, 7–9 hours for most adults) with your required wake‑up time and stated chronotype preference (morning‑type, flexible, or evening‑type). We then:</p>
+        <summary>ℹ️ How is your ideal bedtime calculated?</summary>
+        <p>We combine your <strong>age-based sleep need range</strong> (for example, 7–9 hours for most adults) with your required wake-up time and stated chronotype preference. We then:</p>
         <ul>
-          <li>Pick a target sleep duration near the middle of your recommended range.</li>
-          <li>Count backwards from your wake‑up time to get a core bedtime, then shift it slightly earlier for morning‑types or later for evening‑types.</li>
-          <li>Create a realistic <strong>bedtime window</strong> around that core time (±45–60 minutes).</li>
+          <li>Pick a target sleep duration near the middle of your recommended range</li>
+          <li>Count backwards from your wake-up time to get a core bedtime</li>
+          <li>Shift slightly earlier for morning types or later for evening types</li>
+          <li>Create a realistic <strong>bedtime window</strong> around that core time (±45 minutes)</li>
         </ul>
-        <p>If you enter your usual bedtime, we compare it with the ideal midpoint to estimate whether you are likely accumulating <strong>low, moderate, or high sleep debt</strong>. This tool is for education only and does not diagnose sleep disorders—talk to a sleep specialist if you have persistent insomnia, snoring, or daytime sleepiness.</p>
+        <p>If you enter your usual bedtime, we compare it with the ideal midpoint to estimate whether you're likely accumulating <strong>low, moderate, or high sleep debt</strong>.</p>
       </details>
+      
       <div id="shareButtonsContainer" style="display:block;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid rgba(139,92,246,0.2);text-align:center;">
         <p style="font-size:0.95rem;font-weight:700;margin:0 0 1rem;color:#334155;">📤 Share Your Results</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
@@ -105,64 +691,177 @@
     </div>
   </section>
 
+  <!-- Mid Ad Banner (320x50) -->
   <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
+    <h3>🔗 Explore More Sleep & Lifestyle Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blue-light-exposure-calculator.html">📱 Blue Light Exposure Calculator</a></div>
+      <div class="card"><a href="too-much-caffeine-calculator.html">☕ Caffeine Calculator</a></div>
+      <div class="card"><a href="stress-load-calculator.html">🧠 Stress Load Calculator</a></div>
+      <div class="card"><a href="work-life-quality-index.html">⚖️ Work-Life Quality Index</a></div>
+    </div>
+
+    <h3>📝 Related Sleep & Wellness Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/sleep-weight-loss-guide.html">📖 Sleep & Weight Loss Guide</a></div>
+      <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">💡 Work-Life Balance Guide</a></div>
+    </div>
+
     <article>
-      <h2>Understanding Your Chronotype</h2>
-      <p>Your <strong>chronotype</strong> is your natural tendency to feel more alert in the morning or evening. Morning types (“larks”) wake up and get sleepy earlier. Evening types (“owls”) wake later and feel best later at night. Most people fall somewhere in between and can adapt either way with good routines.</p>
-      <p>Social schedules (school, work, family) often clash with our internal clock. When your required wake‑up time doesn’t match your chronotype, you can build up “social jetlag”—a mismatch similar to changing time zones every week.</p>
+      <h2>Understanding Your Sleep Chronotype</h2>
+      <p>Your <strong>chronotype</strong> is your body's natural inclination to sleep and wake at certain times. It's determined largely by genetics and influences when you feel most alert, creative, and energetic throughout the day. Understanding your chronotype can help you optimize your schedule for better productivity, mood, and health.</p>
+      
+      <p>Our sleep chronotype calculator combines your self-reported preferences with your age and required wake-up time to estimate your ideal bedtime window and assess whether your current schedule may be creating sleep debt.</p>
 
       <div class="info-box">
-        <h4>Age and Sleep Needs</h4>
-        <ul>
-          <li>Children 6–12 years: roughly 9–12 hours per night</li>
-          <li>Teens 13–17 years: roughly 8–10 hours</li>
-          <li>Adults 18–64 years: about 7–9 hours</li>
-          <li>Older adults 65+: about 7–8 hours</li>
+        <p><strong>🦉 The Three Main Chronotypes:</strong></p>
+        <ul style="margin-bottom: 0;">
+          <li><strong>Morning Types (Larks):</strong> Naturally wake early, feel most alert in morning hours, and get sleepy earlier in the evening. About 25% of the population.</li>
+          <li><strong>Evening Types (Owls):</strong> Naturally stay up late, feel most alert in the evening/night, and struggle with early mornings. About 25% of the population.</li>
+          <li><strong>Intermediate Types:</strong> Flexible and can adapt to either schedule. The remaining ~50% of people fall here.</li>
         </ul>
-        <p>These are ranges—your personal best may be at the low or high end. The calculator uses the middle of the range as a starting point, then you can adjust based on how you feel.</p>
-      </div>
-    </article>
-  </section>
-
-  <section class="seo-content">
-    <article>
-      <h2 style="text-align:left;">Explore More Sleep &amp; Lifestyle Tools</h2>
-      <div class="explore-grid">
-        <a href="blue-light-exposure-calculator.html" class="explore-card">📱 Blue Light Exposure Calculator</a>
-        <a href="too-much-caffeine-calculator.html" class="explore-card">☕ Am I Drinking Too Much Caffeine?</a>
-        <a href="stress-load-calculator.html" class="explore-card">🧠 Stress Load Calculator</a>
-        <a href="work-life-quality-index.html" class="explore-card">⚖️ Work-Life Quality Index</a>
       </div>
 
-      <h2 style="text-align:left; margin-top:2.5rem;">Related Blogs</h2>
-      <div class="explore-grid">
-        <a href="blog/sleep-weight-loss-guide.html" class="explore-card">📘 Sleep &amp; Weight Loss Guide</a>
-        <a href="blog/work-life-balance-ultimate-guide.html" class="explore-card">✍️ Work-Life Balance: The Ultimate Guide</a>
+      <h2>How to Use This Sleep Calculator</h2>
+      <p>Getting your personalized sleep schedule takes under 1 minute:</p>
+      
+      <ol>
+        <li><strong>Enter Your Age:</strong> Your age determines the recommended sleep duration range (children need more, older adults slightly less).</li>
+        <li><strong>Set Your Wake-Up Time:</strong> Enter the time you need to wake up on most days for work, school, or other obligations.</li>
+        <li><strong>Select Your Chronotype:</strong> Choose whether you're naturally a morning person, night owl, or flexible/intermediate.</li>
+        <li><strong>Enter Current Bedtime (Optional):</strong> If you know your usual bedtime, enter it to see if you're accumulating sleep debt.</li>
+        <li><strong>Click Calculate:</strong> Get your recommended sleep hours, ideal bedtime window, and personalized tips.</li>
+      </ol>
+
+      <h2>Age-Based Sleep Recommendations</h2>
+      <p>Sleep needs vary significantly by age. Here are the current recommendations from sleep foundations:</p>
+      
+      <h3>Children (6-12 Years): 9-12 Hours</h3>
+      <p>School-age children need abundant sleep for growth, learning, and emotional regulation. Consistent bedtimes are especially important at this age to support developing circadian rhythms.</p>
+
+      <h3>Teenagers (13-17 Years): 8-10 Hours</h3>
+      <p>Teens experience a natural shift toward later chronotypes (becoming more "owl-like"), which often conflicts with early school start times. This biological shift, combined with social pressures, makes adequate sleep particularly challenging for teenagers.</p>
+
+      <h3>Adults (18-64 Years): 7-9 Hours</h3>
+      <p>Most adults need 7-9 hours for optimal function. Individual needs vary—some thrive on 7 hours while others need 9. Pay attention to how you feel rather than forcing yourself into someone else's ideal.</p>
+
+      <h3>Older Adults (65+ Years): 7-8 Hours</h3>
+      <p>Sleep needs decrease slightly with age, though sleep quality often declines. Older adults may experience more fragmented sleep and earlier wake times, which is normal.</p>
+
+      <h2>Social Jetlag: When Life Clashes with Biology</h2>
+      <p>Social schedules (work, school, family obligations) often conflict with our internal clocks. When your required wake-up time doesn't match your chronotype, you build up <strong>"social jetlag"</strong>—a chronic mismatch similar to changing time zones every week.</p>
+      
+      <p>A night owl forced to wake at 6 AM for work experiences this daily. Over time, social jetlag is associated with:</p>
+      <ul>
+        <li>Increased risk of obesity and metabolic syndrome</li>
+        <li>Higher rates of depression and anxiety</li>
+        <li>Reduced cognitive performance and productivity</li>
+        <li>Greater cardiovascular risk</li>
+        <li>Weakened immune function</li>
+      </ul>
+      
+      <p>While you can't always change your schedule, understanding this mismatch helps you prioritize compensating strategies like consistent sleep timing, light exposure management, and strategic napping.</p>
+
+      <h2>Understanding Sleep Debt</h2>
+      <p>Sleep debt accumulates when you consistently get less sleep than your body needs. Unlike financial debt, sleep debt can't be fully "repaid" on weekends—sleeping in on Saturday doesn't fully compensate for sleep loss during the week.</p>
+      
+      <h3>Low Sleep Debt (Green)</h3>
+      <p>Your current bedtime is well-aligned with your ideal window. You're likely getting adequate sleep and should maintain your current schedule.</p>
+      
+      <h3>Moderate Sleep Debt (Yellow)</h3>
+      <p>Your bedtime is somewhat off from ideal, suggesting you may be building moderate sleep debt. Consider gradually shifting your bedtime closer to your ideal window.</p>
+      
+      <h3>High Sleep Debt (Red)</h3>
+      <p>Your usual bedtime is significantly different from your ideal window. This level of chronic sleep deprivation affects cognitive function, mood, immune health, and long-term disease risk. Priority attention is needed.</p>
+
+      <div class="disclaimer-box">
+        <strong>Important Note:</strong> This calculator provides estimates based on general guidelines and self-reported preferences. It cannot diagnose sleep disorders. If you experience persistent insomnia, excessive daytime sleepiness, snoring, breathing interruptions during sleep, or other concerning symptoms, please consult a sleep specialist.
       </div>
+
+      <h2>Tips for Aligning Your Schedule with Your Chronotype</h2>
+      
+      <h3>For Morning Types (Larks)</h3>
+      <ul>
+        <li>Schedule important tasks and meetings for morning hours when you're most alert</li>
+        <li>Avoid late-night social activities that push bedtime too late</li>
+        <li>Use evening wind-down routines to maintain your natural early sleep tendency</li>
+        <li>Be aware that you may fade earlier than peers—plan accordingly</li>
+      </ul>
+
+      <h3>For Night Owls</h3>
+      <ul>
+        <li>If possible, negotiate later work start times or shift-flexible schedules</li>
+        <li>Get bright light exposure immediately upon waking to help shift your clock earlier</li>
+        <li>Avoid blue light and stimulation in the 2 hours before your target bedtime</li>
+        <li>Gradually shift bedtime earlier by 15-20 minutes every few days if needed</li>
+        <li>Caffeine cutoff should be at least 8-10 hours before target bedtime</li>
+      </ul>
+
+      <h3>For Intermediate Types</h3>
+      <ul>
+        <li>Leverage your flexibility to match your schedule to current life demands</li>
+        <li>Maintain consistency—your flexibility makes you vulnerable to schedule drift</li>
+        <li>Use light and timing cues to shift slightly toward morning or evening as needed</li>
+      </ul>
+
+      <h2>The Science Behind Chronotypes</h2>
+      <p>Chronotypes are primarily determined by genetics, specifically variations in "clock genes" like PER3, CLOCK, and others that regulate circadian rhythms. These genes influence:</p>
+      <ul>
+        <li><strong>Core body temperature cycles:</strong> Morning types have earlier temperature nadirs (lowest points)</li>
+        <li><strong>Melatonin timing:</strong> Evening types secrete melatonin later in the night</li>
+        <li><strong>Cortisol awakening response:</strong> Morning types have earlier and sharper cortisol peaks</li>
+      </ul>
+      <p>While your core chronotype is largely fixed, external factors like light exposure, meal timing, and social schedules can shift it somewhat. Age also plays a role—teenagers naturally shift toward evening types, while older adults shift toward morning types.</p>
+
     </article>
   </section>
 
   <section class="faq-section">
-    <h2>Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions About Sleep Chronotypes</h2>
     <details>
-      <summary>Can this calculator diagnose insomnia or circadian rhythm disorders?</summary>
-      <p>No. It simply estimates a reasonable bedtime window from general guidelines and your preferences. Persistent insomnia, snoring, or extreme sleepiness should be discussed with a sleep professional.</p>
+      <summary>Can this calculator diagnose insomnia or sleep disorders?</summary>
+      <p>No. This calculator estimates a reasonable bedtime window based on general guidelines and your preferences. It cannot diagnose insomnia, sleep apnea, circadian rhythm disorders, or other conditions. Persistent insomnia, snoring, breathing interruptions, or extreme daytime sleepiness should be discussed with a sleep specialist.</p>
     </details>
     <details>
       <summary>What if my job forces me to wake up much earlier than my chronotype?</summary>
-      <p>That mismatch often creates chronic sleep debt. Use the ideal bedtime window as a goal, then experiment with gradually shifting your schedule earlier, limiting late‑night screens and caffeine, and protecting consistent sleep and wake times—even on weekends.</p>
+      <p>This mismatch (called "social jetlag") often creates chronic sleep debt. Use your ideal bedtime window as a goal, then experiment with gradually shifting your schedule earlier. Helpful strategies include: getting bright light immediately upon waking, limiting late-night screens and caffeine, and keeping sleep/wake times consistent even on weekends.</p>
+    </details>
+    <details>
+      <summary>Can I change my chronotype?</summary>
+      <p>Your core chronotype is largely genetic, but you can shift it somewhat through consistent light exposure, meal timing, and social schedules. Complete transformation (turning a night owl into a morning person) is unlikely, but a 1-2 hour shift is achievable with sustained effort and good sleep hygiene.</p>
+    </details>
+    <details>
+      <summary>Why do teenagers tend to be night owls?</summary>
+      <p>During puberty, biological changes cause a natural shift toward later chronotypes. Melatonin release is delayed, making teens genuinely unable to feel sleepy until later. This biological shift, combined with early school start times, creates widespread sleep deprivation in teenagers. Some schools have responded by starting classes later.</p>
+    </details>
+    <details>
+      <summary>Is it bad to be a night owl?</summary>
+      <p>Not inherently. Night owls can be just as healthy and productive as morning types—if they can align their schedules with their biology. The problem arises when night owls are forced into early-morning schedules, creating chronic social jetlag. If your lifestyle allows later hours, there's nothing wrong with being an owl.</p>
+    </details>
+    <details>
+      <summary>How accurate is the "mid-sleep" time for determining chronotype?</summary>
+      <p>The mid-point of your sleep period is a commonly used research measure for chronotype (called MSFsc in scientific studies). It correlates well with biological markers like melatonin timing. However, it works best when measured on free days without alarm clocks, so our calculation is an estimate based on your target schedule.</p>
+    </details>
+    <details>
+      <summary>Should I maintain the same schedule on weekends?</summary>
+      <p>Ideally, yes. Large differences between weekday and weekend sleep schedules increase social jetlag and make Monday mornings harder. Sleep researchers recommend keeping wake times within 1 hour of your weekday schedule, even on weekends, for optimal circadian rhythm stability.</p>
+    </details>
+    <details>
+      <summary>How does age affect chronotype?</summary>
+      <p>Chronotype shifts across the lifespan. Children are generally morning-leaning, teenagers shift dramatically toward evening types, adults gradually shift back toward morning, and older adults often become strong morning types. This is why grandparents wake at 5 AM while teenagers sleep until noon.</p>
     </details>
   </section>
 
-  <div id="ad-banner-end"></div>
-
   <a href="index.html" class="floating-cta">See All Calculators</a>
+
+  <!-- End Ad Banner (300x250) -->
+  <div id="ad-banner-end"></div>
 
   <footer>
     <div class="disclaimer affiliate-disclosure">
-      <p><strong>Disclaimer:</strong> This sleep calculator is for informational purposes only and is not a substitute for professional medical or sleep‑medicine advice.</p>
+      <p><strong>Disclaimer:</strong> This sleep chronotype and bedtime calculator is for informational and educational purposes only. It is not a substitute for professional medical or sleep-medicine advice. If you experience persistent sleep problems, consult a healthcare provider.</p>
     </div>
     <div class="footer-links">
       <p>© 2025 QuickCalcLabs. All Rights Reserved.</p>
@@ -205,8 +904,17 @@
       const chronotype = document.getElementById('chronotype').value;
       const actualBedStr = document.getElementById('bedTimeActual').value;
 
+      // Validate inputs
+      if (isNaN(age) || age < 5 || age > 100) {
+        alert('Please enter a valid age between 5 and 100.');
+        return;
+      }
+
       const wakeMinutes = timeToMinutes(wakeTimeStr);
-      if (wakeMinutes === null) return;
+      if (wakeMinutes === null) {
+        alert('Please enter a valid wake-up time.');
+        return;
+      }
 
       const [minH, maxH] = getRecommendedRange(age);
       const targetSleep = (minH + maxH) / 2;
@@ -223,22 +931,32 @@
       const windowEnd = coreBedMinutes + 45;   // 45 min after
       const midSleepMinutes = coreBedMinutes + (adjustedSleepHours * 60) / 2;
 
+      // Display results
       document.getElementById('recommendedSleep').textContent = `${minH.toFixed(0)}–${maxH.toFixed(0)} h`;
       document.getElementById('idealWindow').textContent = `${minutesToTime(windowStart)} – ${minutesToTime(windowEnd)}`;
       document.getElementById('midSleep').textContent = minutesToTime(midSleepMinutes);
 
-      let chronoLabel;
-      if (chronotype === 'morning') chronoLabel = '🌅 Morning‑type (lark‑leaning)';
-      else if (chronotype === 'evening') chronoLabel = '🌙 Evening‑type (owl‑leaning)';
-      else chronoLabel = '🌤️ Intermediate / flexible chronotype';
+      let chronoLabel, chronoIcon;
+      if (chronotype === 'morning') {
+        chronoLabel = '🌅 Morning Type (Lark)';
+        chronoIcon = 'lark';
+      } else if (chronotype === 'evening') {
+        chronoLabel = '🌙 Night Owl';
+        chronoIcon = 'owl';
+      } else {
+        chronoLabel = '🌤️ Intermediate / Flexible';
+        chronoIcon = 'flex';
+      }
 
       document.getElementById('chronotypeLabel').textContent = chronoLabel;
 
-      let interp = '<p>Your ideal bedtime window is calculated by taking your target wake‑up time, subtracting your typical sleep need for your age, and then nudging that window earlier or later based on your self‑reported chronotype.</p>';
+      let interp = `<p><strong>Your ideal bedtime window</strong> is calculated by taking your target wake-up time (${wakeTimeStr}), subtracting your recommended sleep duration for your age (${minH}–${maxH} hours), and adjusting based on your ${chronotype === 'morning' ? 'morning-leaning' : chronotype === 'evening' ? 'evening-leaning' : 'flexible'} chronotype preference.</p>`;
+      interp += `<p>Going to bed within this window and waking at ${wakeTimeStr} should give you approximately ${adjustedSleepHours.toFixed(1)} hours of sleep—close to the optimal amount for your age group.</p>`;
       document.getElementById('interpretation').innerHTML = interp;
 
       // Sleep debt estimate if user provided usual bedtime
-      let debtLabel = 'Not provided';
+      let debtLabel = '—';
+      let debtClass = '';
       let recHtml = '';
 
       if (actualBedStr) {
@@ -252,47 +970,62 @@
           const diffHours = Math.abs(diff) / 60;
 
           if (diffHours < 0.75) {
-            debtLabel = 'Low';
+            debtLabel = '✅ Low';
+            debtClass = 'sleep-debt-low';
             recHtml = `
-              <h4>Your schedule is well aligned.</h4>
+              <h4>🌟 Your Schedule Is Well Aligned!</h4>
               <ul>
-                <li>Keep your bedtime and wake time fairly consistent (even on weekends).</li>
-                <li>Protect your wind‑down routine to maintain good sleep quality.</li>
+                <li>Keep your bedtime and wake time fairly consistent (even on weekends)</li>
+                <li>Protect your wind-down routine to maintain good sleep quality</li>
+                <li>Avoid large caffeine or alcohol intake close to bedtime</li>
+                <li>Consider this your baseline—notice how you feel and adjust if needed</li>
               </ul>
             `;
           } else if (diffHours < 2) {
-            debtLabel = 'Moderate';
+            debtLabel = '⚠️ Moderate';
+            debtClass = 'sleep-debt-moderate';
             recHtml = `
-              <h4>You may be carrying some sleep debt.</h4>
+              <h4>🛠️ You May Be Building Some Sleep Debt</h4>
               <ul>
-                <li>Try shifting bedtime toward your ideal window by 15–20 minutes every few nights.</li>
-                <li>Avoid large swings between weekday and weekend schedules.</li>
+                <li>Try shifting your bedtime toward the ideal window by 15–20 minutes every few nights</li>
+                <li>Avoid large swings between weekday and weekend schedules</li>
+                <li>Get bright light exposure in the morning to help anchor your rhythm</li>
+                <li>Limit screens and stimulating activities 1-2 hours before bed</li>
+                <li>Consider a relaxing wind-down routine (reading, stretching, warm bath)</li>
               </ul>
             `;
           } else {
-            debtLabel = 'High';
+            debtLabel = '🚨 High';
+            debtClass = 'sleep-debt-high';
             recHtml = `
-              <h4>Your usual bedtime is far from your ideal window.</h4>
+              <h4>🆘 Your Bedtime Is Far From Ideal</h4>
               <ul>
-                <li>Consider a gradual schedule reset—move bedtime earlier in small steps.</li>
-                <li>Limit late caffeine, heavy meals, and bright screens in the evening.</li>
-                <li>If daytime sleepiness is severe or you suspect a sleep disorder, speak with a sleep specialist.</li>
+                <li>Consider a gradual schedule reset—move bedtime earlier in 15-minute steps</li>
+                <li>Limit caffeine after noon and avoid it entirely in the evening</li>
+                <li>Reduce heavy meals, alcohol, and bright screens before bed</li>
+                <li>Get morning light exposure to help shift your clock earlier</li>
+                <li>Keep wake time consistent, even when tired—this anchors your rhythm</li>
+                <li>If daytime sleepiness is severe or you suspect a sleep disorder, consult a sleep specialist</li>
               </ul>
             `;
           }
         }
       } else {
         recHtml = `
-          <h4>How to use this bedtime window:</h4>
+          <h4>💡 How to Use Your Ideal Bedtime Window</h4>
           <ul>
-            <li>Experiment with going to bed inside the suggested window for 1–2 weeks.</li>
-            <li>Notice daytime alertness, mood, and energy—adjust by 15–30 minutes if needed.</li>
-            <li>Keep wake‑up time consistent; your body clock anchors more to wake time than bedtime.</li>
+            <li>Experiment with going to bed inside the suggested window for 1–2 weeks</li>
+            <li>Notice your daytime alertness, mood, and energy—adjust by 15–30 minutes if needed</li>
+            <li>Keep your wake-up time consistent; your body clock anchors more to wake time than bedtime</li>
+            <li>Limit screen time, caffeine, and heavy meals in the 2-3 hours before bed</li>
+            <li>Create a relaxing wind-down routine to signal to your body that sleep is coming</li>
           </ul>
         `;
       }
 
-      document.getElementById('sleepDebtLabel').textContent = debtLabel;
+      const debtLabelEl = document.getElementById('sleepDebtLabel');
+      debtLabelEl.textContent = debtLabel;
+      debtLabelEl.className = 'stat-number ' + debtClass;
       document.getElementById('recommendations').innerHTML = recHtml;
 
       const resultsBox = document.getElementById('results');
@@ -300,7 +1033,9 @@
       resultsBox.classList.add('show');
       
       // Initialize share buttons
-      initShareButtons('Sleep Chronotype Calculator', document.getElementById('chronotypeLabel').textContent, document.getElementById('idealBedWindow').textContent);
+      if (typeof initShareButtons === 'function') {
+        initShareButtons('Sleep Chronotype Calculator', chronoLabel, `Ideal bedtime: ${minutesToTime(windowStart)} – ${minutesToTime(windowEnd)}`);
+      }
       
       setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     });
@@ -334,7 +1069,47 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Can this calculator diagnose insomnia or sleep disorders?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This calculator estimates a reasonable bedtime window based on general guidelines and your preferences. Persistent insomnia, snoring, breathing interruptions, or extreme daytime sleepiness should be discussed with a sleep specialist."
+      }
+    },{
+      "@type": "Question",
+      "name": "What if my job forces me to wake up much earlier than my chronotype?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This mismatch (called social jetlag) often creates chronic sleep debt. Use your ideal bedtime window as a goal and experiment with gradually shifting your schedule earlier. Get bright light upon waking, limit late-night screens and caffeine, and keep sleep times consistent even on weekends."
+      }
+    },{
+      "@type": "Question",
+      "name": "Can I change my chronotype?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your core chronotype is largely genetic, but you can shift it somewhat through consistent light exposure, meal timing, and social schedules. Complete transformation is unlikely, but a 1-2 hour shift is achievable with sustained effort and good sleep hygiene."
+      }
+    },{
+      "@type": "Question",
+      "name": "Why do teenagers tend to be night owls?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "During puberty, biological changes cause a natural shift toward later chronotypes. Melatonin release is delayed, making teens genuinely unable to feel sleepy until later. This biological shift combined with early school start times creates widespread sleep deprivation in teenagers."
+      }
+    },{
+      "@type": "Question",
+      "name": "Is it bad to be a night owl?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not inherently. Night owls can be just as healthy and productive as morning types if they can align their schedules with their biology. The problem arises when night owls are forced into early-morning schedules, creating chronic social jetlag."
+      }
+    }]
+  }
+  </script>
 </body>
 </html>
-
-
