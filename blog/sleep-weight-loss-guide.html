@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="../css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770" crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -108,17 +108,17 @@
       <div class="method-card">
         <h4>🌙 Sleep Tracking Apps</h4>
         <p>Apps like Sleep Cycle track your sleep patterns, analyze sleep quality, and can wake you during your lightest sleep phase for a gentle start to the day.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Learn More about sleep apps.</a>
+        <a href="javascript:void(0)" data-product="smartring" class="product-link">🛒 Learn More about sleep apps.</a>
       </div>
       <div class="method-card">
         <h4>🧘 Meditation & Mindfulness Apps</h4>
         <p>Apps like Headspace or Calm offer guided meditations and mindfulness exercises designed to reduce stress and improve sleep quality.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore meditation apps.</a>
+        <a href="javascript:void(0)" data-product="stress-diffuser" class="product-link">🛒 Explore meditation apps.</a>
       </div>
       <div class="method-card">
         <h4>😴 Blackout Curtains</h4>
         <p>Creating a completely dark environment can significantly improve your sleep. Blackout curtains are a simple and effective way to block out all light.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Shop for blackout curtains.</a>
+        <a href="javascript:void(0)" data-product="blackout-curtains" class="product-link">🛒 Shop for blackout curtains.</a>
       </div>
     </div>
         <!-- Mid Ad Banner (320x50) -->
@@ -171,5 +171,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

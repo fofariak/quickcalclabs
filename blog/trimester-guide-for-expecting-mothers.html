@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -114,17 +114,17 @@
       <div class="method-card">
         <h4>🌙 Pregnancy Pillow</h4>
         <p>A full-body pillow can be a game-changer for getting comfortable sleep, especially in the second and third trimesters. It provides support for your back, hips, and belly.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find top-rated pregnancy pillows here.</a>
+        <a href="javascript:void(0)" data-product="pregnancy-pillow" class="product-link">🛒 Find top-rated pregnancy pillows here.</a>
       </div>
       <div class="method-card">
         <h4>👚 Comfortable Maternity Clothes</h4>
         <p>Invest in a few key pieces like stretchy leggings, supportive bras, and comfortable tops that will grow with you throughout your pregnancy.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore stylish and comfy maternity wear.</a>
+        <a href="javascript:void(0)" data-product="pregnancy-clothes" class="product-link">🛒 Explore stylish and comfy maternity wear.</a>
       </div>
       <div class="method-card">
         <h4>🧴 Stretch Mark Cream or Oil</h4>
         <p>Keep your growing belly moisturized to help soothe itchy skin and potentially reduce the appearance of stretch marks. Look for products with shea butter or vitamin E.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out popular belly butters and oils.</a>
+        <a href="javascript:void(0)" data-product="stretch-mark" class="product-link">🛒 Check out popular belly butters and oils.</a>
       </div>
     </div>
     <!-- Mid Ad Banner (320x50) -->
@@ -181,5 +181,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

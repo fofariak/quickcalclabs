@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -154,17 +154,17 @@
       <div class="method-card">
         <h4>⚖️ Digital Food Scale</h4>
         <p>The most accurate way to understand and manage portion sizes. It takes the guesswork out of calorie and macro tracking, empowering you with precise data.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 View Top-Rated Food Scales</a>
+        <a href="javascript:void(0)" data-product="digital-food-scale" class="product-link">🛒 View Top-Rated Food Scales</a>
       </div>
       <div class="method-card">
         <h4>🍱 Meal Prep Containers</h4>
         <p>Make meal planning a breeze with these convenient, portion-controlled containers. Prepping meals ahead saves time and ensures you always have a healthy option ready.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Shop for Meal Prep Sets Here</a>
+        <a href="javascript:void(0)" data-product="meal-prep-containers" class="product-link">🛒 Shop for Meal Prep Sets Here</a>
       </div>
       <div class="method-card">
         <h4>📱 Smart Body Weight Scale</h4>
         <p>Track your progress beyond just a single number. A smart scale can sync with your phone to show you trends in your BMI, muscle mass, and body fat percentage over time.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore Best-Selling Smart Scales</a>
+        <a href="javascript:void(0)" data-product="smart-weight-body-scale" class="product-link">🛒 Explore Best-Selling Smart Scales</a>
       </div>
     </div>
     
@@ -223,5 +223,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

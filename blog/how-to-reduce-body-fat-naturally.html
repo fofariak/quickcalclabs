@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -109,17 +109,17 @@
       <div class="method-card">
         <h4>🏋️ Adjustable Dumbbells</h4>
         <p>Perfect for at-home strength training. They save a huge amount of space and allow you to progressively increase the weight as you get stronger.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore adjustable dumbbell sets.</a>
+        <a href="javascript:void(0)" data-product="adjustable-dumbbell" class="product-link">🛒 Explore adjustable dumbbell sets.</a>
       </div>
       <div class="method-card">
         <h4>💪 High-Quality Protein Powder</h4>
         <p>An easy and convenient way to increase your daily protein intake to support muscle preservation and growth, especially useful for a post-workout shake.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find top-rated protein powders here.</a>
+        <a href="javascript:void(0)" data-product="protein-powder" class="product-link">🛒 Find top-rated protein powders here.</a>
       </div>
       <div class="method-card">
         <h4>🤸 Resistance Bands</h4>
         <p>A versatile and affordable tool for adding resistance to your workouts, whether you're at home or traveling. Perfect for a wide variety of exercises.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out these resistance band sets.</a>
+        <a href="javascript:void(0)" data-product="resistance-bands" class="product-link">🛒 Check out these resistance band sets.</a>
       </div>
     </div>
 
@@ -177,6 +177,7 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>
 

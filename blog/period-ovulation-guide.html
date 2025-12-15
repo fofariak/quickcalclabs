@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -107,17 +107,17 @@
       <div class="method-card">
         <h4>🧪 Ovulation Predictor Kits (OPKs)</h4>
         <p>These test strips detect the LH surge in your urine, giving you a clear, positive result 24-36 hours before you ovulate, pinpointing your most fertile days.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find popular OPK brands here.</a>
+        <a href="javascript:void(0)" data-product="opk-kit" class="product-link">🛒 Find popular OPK brands here.</a>
       </div>
       <div class="method-card">
         <h4>🌡️ Basal Body Temperature (BBT) Thermometers</h4>
         <p>Tracking your BBT daily can confirm that ovulation has occurred. A sensitive BBT thermometer is essential for this method, as the temperature change is very slight.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find a reliable BBT thermometer.</a>
+        <a href="javascript:void(0)" data-product="basal-thermometer" class="product-link">🛒 Find a reliable BBT thermometer.</a>
       </div>
       <div class="method-card">
         <h4>💊 Prenatal Vitamins</h4>
         <p>If you're trying to conceive, it's crucial to start taking prenatal vitamins with folic acid even before you're pregnant to support a healthy pregnancy from the very beginning.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore top-rated prenatal vitamins.</a>
+        <a href="javascript:void(0)" data-product="prenatal-vitamin" class="product-link">🛒 Explore top-rated prenatal vitamins.</a>
       </div>
     </div>
 
@@ -175,5 +175,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

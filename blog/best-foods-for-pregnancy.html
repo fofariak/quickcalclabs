@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #f3e5f5, #e3f2fd); border-left: 4px solid var(--accent-pink); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(255,126,179,0.1), rgba(106,130,251,0.1)); }
@@ -203,17 +203,17 @@
       <div class="method-card">
         <h4>💊 High-Quality Prenatal Vitamin</h4>
         <p>This is your daily nutritional insurance policy. Look for one with folic acid, iron, and (especially for vegans/vegetarians) DHA from algae and reliable B12.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore Top-Rated Prenatal Vitamins</a>
+        <a href="javascript:void(0)" data-product="prenatal-vitamin" class="product-link">🛒 Explore Top-Rated Prenatal Vitamins</a>
       </div>
       <div class="method-card">
         <h4>📚 Pregnancy Cookbooks</h4>
         <p>Get inspired with delicious recipes designed for the nutritional needs of expectant mothers, with many books now offering dedicated plant-based sections.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find Delicious Pregnancy Cookbooks</a>
+        <a href="javascript:void(0)" data-product="cookbooks" class="product-link">🛒 Find Delicious Pregnancy Cookbooks</a>
       </div>
       <div class="method-card">
         <h4>💧 Smart Water Bottle</h4>
         <p>Staying hydrated is crucial. A smart water bottle can help you track your intake and send reminders to ensure you're meeting your daily goals.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check Out These Smart Water Bottles</a>
+        <a href="javascript:void(0)" data-product="water-bottle" class="product-link">🛒 Check Out These Smart Water Bottles</a>
       </div>
     </div>
 
@@ -273,5 +273,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

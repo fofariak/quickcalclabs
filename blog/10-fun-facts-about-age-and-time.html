@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -146,17 +146,17 @@
       <div class="method-card">
         <h4>🌌 Personalized Star Map</h4>
         <p>Capture the stars from a specific moment in time. Get a beautiful map of the night sky from the day of a birth, anniversary, or other special event.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 View Custom Star Maps</a>
+        <a href="javascript:void(0)" data-product="star-maps" class="product-link">🛒 View Custom Star Maps</a>
       </div>
       <div class="method-card">
         <h4>📦 DIY Time Capsule Kit</h4>
         <p>Create a collection of memories to be opened on a future birthday. A complete kit makes it easy to preserve letters, photos, and small objects.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find Time Capsule Kits Here</a>
+        <a href="javascript:void(0)" data-product="time-capsule" class="product-link">🛒 Find Time Capsule Kits Here</a>
       </div>
       <div class="method-card">
         <h4>⏳ Elegant Hourglass Sand Timer</h4>
         <p>A beautiful decor piece that serves as a visual reminder of the passage of time, perfect for focus sessions or meditation.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore Decorative Hourglasses</a>
+        <a href="javascript:void(0)" data-product="hourglass" class="product-link">🛒 Explore Decorative Hourglasses</a>
       </div>
     </div>
 
@@ -214,5 +214,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

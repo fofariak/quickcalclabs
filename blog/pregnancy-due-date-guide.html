@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -109,17 +109,17 @@
       <div class="method-card">
         <h4>📚 A Great Pregnancy Book</h4>
         <p>Knowledge is power! A book like "What to Expect When You're Expecting" is a classic for a reason, guiding you through every week of your pregnancy.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find top-rated pregnancy books.</a>
+        <a href="javascript:void(0)" data-product="pregnancy-book" class="product-link">🛒 Find top-rated pregnancy books.</a>
       </div>
       <div class="method-card">
         <h4>🌙 Comfortable Pregnancy Pillow</h4>
         <p>Getting good sleep becomes more challenging as your belly grows. A U-shaped body pillow provides essential support for your back, hips, and growing bump.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore best-selling body pillows.</a>
+        <a href="javascript:void(0)" data-product="pregnancy-pillow" class="product-link">🛒 Explore best-selling body pillows.</a>
       </div>
       <div class="method-card">
         <h4>💊 High-Quality Prenatal Vitamins</h4>
         <p>It's crucial to support your health and your baby's development with a good prenatal vitamin that includes folic acid, iron, and DHA.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out top-rated prenatal vitamins.</a>
+        <a href="javascript:void(0)" data-product="prenatal-vitamin" class="product-link">🛒 Check out top-rated prenatal vitamins.</a>
       </div>
     </div>
 
@@ -176,5 +176,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

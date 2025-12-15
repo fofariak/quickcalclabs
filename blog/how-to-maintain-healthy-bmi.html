@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -116,17 +116,17 @@
       <div class="method-card">
         <h4>⌚ Fitness Trackers</h4>
         <p>Monitor your daily steps, activity levels, heart rate, and sleep patterns to stay motivated and aware of your habits. Seeing your progress can be a powerful motivator.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore popular fitness trackers here.</a>
+        <a href="javascript:void(0)" data-product="fitness-trackers" class="product-link">🛒 Explore popular fitness trackers here.</a>
       </div>
       <div class="method-card">
         <h4>📚 Healthy Cookbooks</h4>
         <p>Get inspired with delicious and nutritious meal ideas that make healthy eating exciting and prevent you from falling into a food rut.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find top-rated healthy cookbooks.</a>
+        <a href="javascript:void(0)" data-product="healthy-cookbook" class="product-link">🛒 Find top-rated healthy cookbooks.</a>
       </div>
       <div class="method-card">
         <h4>💧 Reusable Water Bottles</h4>
         <p>A stylish and eco-friendly water bottle can be a great visual reminder to stay hydrated throughout the day, helping you meet your daily fluid needs.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out these popular options.</a>
+        <a href="javascript:void(0)" data-product="water-bottle" class="product-link">🛒 Check out these popular options.</a>
       </div>
     </div>
 
@@ -184,6 +184,7 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>
 

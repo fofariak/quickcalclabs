@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -144,17 +144,17 @@
       <div class="method-card">
         <h4>📱 Smart Scales</h4>
         <p>Go beyond just weight. A modern smart scale can measure and track your BMI, body fat percentage, muscle mass, and more, syncing all the data to an app on your phone.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 See the best-selling models here.</a>
+        <a href="javascript:void(0)" data-product="smart-weight-body-scale" class="product-link">🛒 See the best-selling models here.</a>
       </div>
       <div class="method-card">
         <h4>⌚ Fitness Trackers</h4>
         <p>Stay motivated and monitor your daily activity levels, heart rate, sleep patterns, and calorie burn with a tracker from brands like Fitbit or Garmin.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find the perfect one for you.</a>
+        <a href="javascript:void(0)" data-product="fitness-trackers" class="product-link">🛒 Find the perfect one for you.</a>
       </div>
       <div class="method-card">
         <h4>🍽️ Portion Control Plates</h4>
         <p>A simple but highly effective tool to help you visually manage food intake and build balanced meals without the need for constant weighing and measuring.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Shop for portion control solutions.</a>
+        <a href="javascript:void(0)" data-product="portion-control" class="product-link">🛒 Shop for portion control solutions.</a>
       </div>
     </div>
 
@@ -216,6 +216,7 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>
 

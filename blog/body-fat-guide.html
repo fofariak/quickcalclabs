@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -186,17 +186,17 @@
       <div class="method-card">
         <h4>📊 Body Fat Calipers</h4>
         <p>Get hands-on with your measurements. A simple caliper set is an inexpensive and effective way to track changes in subcutaneous fat over time.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Get a Caliper Set Here</a>
+        <a href="javascript:void(0)" data-product="fat-clippers" class="product-link">🛒 Get a Caliper Set Here</a>
       </div>
       <div class="method-card">
         <h4>📱 Smart Scales with BIA</h4>
         <p>The most convenient way to track daily. These scales measure body fat, muscle mass, water weight, and more, all from the comfort of your bathroom.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out Top-Rated Smart Scales</a>
+        <a href="javascript:void(0)" data-product="smart-weight-body-scale" class="product-link">🛒 Check out Top-Rated Smart Scales</a>
       </div>
       <div class="method-card">
         <h4>⌚ Advanced Fitness Smartwatches</h4>
         <p>Many high-end smartwatches are now incorporating body composition features, giving you powerful health data right on your wrist.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore Advanced Fitness Watches</a>
+        <a href="javascript:void(0)" data-product="fitness-trackers" class="product-link">🛒 Explore Advanced Fitness Watches</a>
       </div>
     </div>
 
@@ -256,5 +256,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>

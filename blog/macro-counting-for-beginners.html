@@ -9,8 +9,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
      crossorigin="anonymous"></script>
   <style>
-    .affiliate-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .dark-mode .affiliate-link { color: #8ab4f8; }
+    .affiliate-link, .product-link { color: var(--accent-blue); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+    .dark-mode .affiliate-link, .dark-mode .product-link { color: #8ab4f8; }
     .blog-image { width: 100%; max-width: 600px; height: auto; border-radius: var(--radius-lg); margin: 1.5rem auto; display: block; box-shadow: var(--shadow-md); }
     .info-box { background: linear-gradient(135deg, #e3f2fd, #f3e5f5); border-left: 4px solid var(--accent-blue); padding: 1.5rem; margin: 2rem 0; border-radius: var(--radius-md); }
     .dark-mode .info-box { background: linear-gradient(135deg, rgba(106,130,251,0.1), rgba(255,126,179,0.1)); }
@@ -97,17 +97,17 @@
       <div class="method-card">
         <h4>⚖️ High-Precision Digital Food Scale</h4>
         <p>This is non-negotiable for accurate macro counting. Look for one that measures in grams and has a "tare" function to zero out the weight of your plate or bowl.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Find the perfect food scale here.</a>
+        <a href="javascript:void(0)" data-product="digital-food-scale" class="product-link">🛒 Find the perfect food scale here.</a>
       </div>
       <div class="method-card">
         <h4>🍱 Meal Prep Containers</h4>
         <p>Make your week easier by prepping your meals in these convenient, portion-sized containers. This helps you stay on track and avoid last-minute unhealthy choices.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Explore best-selling meal prep sets.</a>
+        <a href="javascript:void(0)" data-product="meal-prep-containers" class="product-link">🛒 Explore best-selling meal prep sets.</a>
       </div>
       <div class="method-card">
         <h4>📖 A Simple Macro Guidebook</h4>
         <p>A handy book can help you learn the macro breakdown of common foods and provide delicious, macro-friendly meal ideas to keep your diet interesting.</p>
-        <a href="#" target="_blank" rel="sponsored" class="affiliate-link">🛒 Check out this beginner's guide to macros.</a>
+        <a href="javascript:void(0)" data-product="macro-guide" class="product-link">🛒 Check out this beginner's guide to macros.</a>
       </div>
     </div>
 
@@ -165,5 +165,6 @@
     renderAdBanner320x50('ad-banner-mid');
     renderAdBanner300x250('ad-banner-end');
   </script>
+  <script src="../js/links.js"></script>
 </body>
 </html>
