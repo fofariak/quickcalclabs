@@ -128,7 +128,11 @@ function getProductUrl(productKey) {
 function openProduct(productKey) {
   const url = getProductUrl(productKey);
   if (url !== '#') {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    const newWin = window.open(url, '_blank', 'noopener,noreferrer');
+    // Some browsers/environments block window.open even on click; fall back to same-tab navigation.
+    if (!newWin) {
+      window.location.href = url;
+    }
   }
 }
 
@@ -140,10 +144,22 @@ function initProductLinks() {
     if (link.dataset.productLinkInitialized === 'true') return;
     link.dataset.productLinkInitialized = 'true';
 
+    // Ensure link works even if the click handler fails / is prevented elsewhere.
+    const productKey = link.getAttribute('data-product');
+    const url = getProductUrl(productKey);
+    if (url !== '#') {
+      // Keep consistent with affiliate requirements while preserving any existing rel values.
+      link.setAttribute('href', url);
+      link.setAttribute('target', '_blank');
+      const existingRel = (link.getAttribute('rel') || '').trim();
+      const relParts = new Set(existingRel.split(/\s+/).filter(Boolean));
+      ['sponsored', 'noopener', 'noreferrer'].forEach(v => relParts.add(v));
+      link.setAttribute('rel', Array.from(relParts).join(' '));
+    }
+
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      const productKey = this.getAttribute('data-product');
-      openProduct(productKey);
+      openProduct(this.getAttribute('data-product'));
     });
   });
 }
