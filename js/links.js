@@ -133,16 +133,27 @@ function openProduct(productKey) {
 }
 
 // Initialize product links on page load
-document.addEventListener('DOMContentLoaded', function() {
+function initProductLinks() {
   // Find all product links and attach click handlers
   document.querySelectorAll('[data-product]').forEach(link => {
+    // Avoid double-binding if init runs multiple times
+    if (link.dataset.productLinkInitialized === 'true') return;
+    link.dataset.productLinkInitialized = 'true';
+
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const productKey = this.getAttribute('data-product');
       openProduct(productKey);
     });
   });
-});
+}
+
+// Run immediately if DOM is already ready, otherwise wait for DOMContentLoaded.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProductLinks);
+} else {
+  initProductLinks();
+}
 
 // Export for use in other scripts if needed
 if (typeof module !== 'undefined' && module.exports) {
