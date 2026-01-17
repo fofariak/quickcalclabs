@@ -7,6 +7,8 @@ let currentWorkerType = 'remote';
 let isTimezoneWork = false;
 let radarChartInstance = null;
 let isTeamMode = false; // New: Track if we're in team assessment mode
+let lastRadarScores = null;
+let radarResizeTimeout = null;
 
 // Proprietary normalization constants (obfuscated)
 const _0x4a2c = [0x2e, 0x3c, 0x4b, 0x5a, 0x69, 0x78, 0x87, 0x96, 0xa5];
@@ -45,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeSocialSharing();
   initializeCollapsibleSections();
   updateConditionalInputs();
+  window.addEventListener('resize', scheduleRadarResize);
 });
 
 // Mode toggle functionality (Individual vs Team)
@@ -263,6 +266,7 @@ function randomVariance(maxVariance) {
 function displayTeamResults(teamAvgScore, scores, memberCount) {
   // Store for sharing
   finalWLQIScore = teamAvgScore;
+  lastRadarScores = scores;
   
   // Update score display
   document.getElementById('wlqiScore').textContent = teamAvgScore;
@@ -1300,6 +1304,7 @@ function _sigmoid(x, steepness = 0.05) {
 function displayResults(finalScore, scores) {
   // Store for sharing
   finalWLQIScore = finalScore;
+  lastRadarScores = scores;
   
   // Get team info if in team mode
   if (isTeamMode) {
@@ -1473,19 +1478,17 @@ function displayBreakdown(scores) {
 // Render radar chart
 function renderRadarChart(scores) {
   const ctx = document.getElementById('radarChart').getContext('2d');
+
+  const isCompact = window.innerWidth <= 520;
+  const labels = getRadarLabels(isCompact);
   
-  const labels = [
-    'Productivity',
-    'Meetings',
-    'Burnout Risk',
-    'Physical Health',
-    'Mental Wellbeing',
-    'Work-Life Balance',
-    'Environment',
-    'Financial/Commute'
-  ];
-  
-  const data = [
+  const pointLabelSize = isCompact ? 10 : (window.innerWidth <= 768 ? 11 : 12);
+  const tickFontSize = isCompact ? 9 : (window.innerWidth <= 768 ? 10 : 11);
+  const chartPadding = isCompact ? 6 : 12;
+  const pointRadius = isCompact ? 3 : 4;
+  const pointHoverRadius = isCompact ? 5 : 6;
+
+  const values = [
     scores.productivity,
     scores.meetings,
     scores.burnout,
@@ -1497,8 +1500,8 @@ function renderRadarChart(scores) {
   ];
   
   if (isTimezoneWork && scores.timezone !== null) {
-    labels.push('Timezone');
-    data.push(scores.timezone);
+    labels.push(isCompact ? ['Time', 'Zone'] : 'Timezone');
+    values.push(scores.timezone);
   }
   
   // Destroy existing chart if it exists
@@ -1517,7 +1520,7 @@ function renderRadarChart(scores) {
       labels: labels,
       datasets: [{
         label: 'Your WLQI Dimensions',
-        data: data,
+        data: values,
         fill: true,
         backgroundColor: 'rgba(139, 92, 246, 0.2)',
         borderColor: 'rgb(139, 92, 246)',
@@ -1525,13 +1528,16 @@ function renderRadarChart(scores) {
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgb(139, 92, 246)',
-        pointRadius: 4,
-        pointHoverRadius: 6
+        pointRadius: pointRadius,
+        pointHoverRadius: pointHoverRadius
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: !isCompact,
+      layout: {
+        padding: chartPadding
+      },
       scales: {
         r: {
           beginAtZero: true,
@@ -1540,7 +1546,10 @@ function renderRadarChart(scores) {
           ticks: {
             stepSize: 20,
             color: textColor,
-            backdropColor: 'transparent'
+            backdropColor: 'transparent',
+            font: {
+              size: tickFontSize
+            }
           },
           grid: {
             color: gridColor
@@ -1548,7 +1557,7 @@ function renderRadarChart(scores) {
           pointLabels: {
             color: textColor,
             font: {
-              size: 12,
+              size: pointLabelSize,
               weight: '600'
             }
           }
@@ -1568,6 +1577,49 @@ function renderRadarChart(scores) {
       }
     }
   });
+}
+
+function getRadarLabels(isCompact) {
+  const baseLabels = [
+    'Productivity',
+    'Meetings',
+    'Burnout Risk',
+    'Physical Health',
+    'Mental Wellbeing',
+    'Work-Life Balance',
+    'Environment',
+    'Financial/Commute'
+  ];
+
+  if (!isCompact) {
+    return baseLabels;
+  }
+
+  return baseLabels.map((label) => {
+    if (label.includes('/')) {
+      return label.split('/');
+    }
+    const parts = label.split(' ');
+    if (parts.length <= 1) {
+      return label;
+    }
+    if (parts.length === 2) {
+      return parts;
+    }
+    return [parts[0], parts.slice(1).join(' ')];
+  });
+}
+
+function scheduleRadarResize() {
+  if (!lastRadarScores) {
+    return;
+  }
+  if (radarResizeTimeout) {
+    clearTimeout(radarResizeTimeout);
+  }
+  radarResizeTimeout = setTimeout(() => {
+    renderRadarChart(lastRadarScores);
+  }, 150);
 }
 
 // Generate personalized recommendations

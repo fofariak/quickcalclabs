@@ -939,10 +939,20 @@ footer .affiliate-disclosure {
   border-radius: var(--radius-md);
   font-weight: 700;
   font-size: 1.15rem;
+  line-height: 1.7;
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
   color: var(--text-strong-light);
   border: 2px solid rgba(139, 92, 246, 0.3);
   box-shadow: var(--shadow-sm);
+}
+
+.result-box h3 {
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+  margin-bottom: 0.6rem;
+}
+
+.result-box p {
+  margin: 0.5rem 0;
 }
 
 .dark-mode .result-box {
@@ -1620,6 +1630,11 @@ footer .affiliate-disclosure {
   .input-row > *,
   .score-input-row > * {
     width: 100% !important;
+  }
+  
+  .result-box {
+    padding: 1.1rem;
+    font-size: 1rem;
   }
 }
 
