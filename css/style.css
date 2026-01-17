@@ -116,6 +116,19 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  max-width: 100%;
+}
+
 /* Dark mode root */
 .dark-mode {
   color: var(--text-strong-dark);
@@ -1534,6 +1547,23 @@ footer .affiliate-disclosure {
 }
 
 /* ------------- Responsive ------------- */
+@media (max-width: 900px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  
+  .header nav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  #darkModeToggle {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 1100px) {
   .calculator-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1555,6 +1585,41 @@ footer .affiliate-disclosure {
   
   .hero {
     padding: clamp(2.5rem, 6vw, 5rem) 1rem 2rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .calc-wrapper {
+    width: min(94vw, 800px);
+    padding: 1.5rem !important;
+    margin: 1.8rem auto !important;
+  }
+  
+  .seo-content,
+  .faq-section,
+  .related-links,
+  .blog-post,
+  .form-section,
+  .team-size-section,
+  .worker-type-section {
+    padding: 1.4rem !important;
+  }
+  
+  .unit-toggle {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .input-row,
+  .score-input-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  .input-row > *,
+  .score-input-row > * {
+    width: 100% !important;
   }
 }
 
@@ -1586,6 +1651,20 @@ footer .affiliate-disclosure {
   #darkModeToggle {
     padding: 0.5rem 0.8rem;
     font-size: 0.85rem;
+  }
+  
+  .calc-wrapper {
+    padding: 1.2rem !important;
+  }
+  
+  .seo-content,
+  .faq-section,
+  .related-links,
+  .blog-post,
+  .form-section,
+  .team-size-section,
+  .worker-type-section {
+    padding: 1.1rem !important;
   }
 }
 
