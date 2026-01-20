@@ -11,8 +11,35 @@ let isProcessingAdQueue = false;
   // Store original window.open
   const originalWindowOpen = window.open;
   
+  const allowedPopupHosts = new Set([
+    'pl28162888.effectivegatecpm.com',
+    'effectivegatecpm.com'
+  ]);
+
+  const isAllowedPopup = (url) => {
+    try {
+      const parsed = new URL(url, window.location.href);
+      const hostname = parsed.hostname.replace(/^www\./, '');
+      if (allowedPopupHosts.has(hostname)) {
+        return true;
+      }
+      for (const host of allowedPopupHosts) {
+        if (hostname.endsWith(`.${host}`)) {
+          return true;
+        }
+      }
+    } catch (error) {
+      return false;
+    }
+    return false;
+  };
+
   // Override window.open to block unwanted pop-ups
   window.open = function(url, target, features) {
+    if (url && isAllowedPopup(url)) {
+      return originalWindowOpen.call(window, url, target, features);
+    }
+
     // Only allow window.open if called from trusted user actions on share buttons
     const stack = new Error().stack || '';
     if (stack.includes('shareToTwitter') || 
