@@ -43,6 +43,7 @@ let isProcessingAdQueue = false;
   
   let allowPopunderUntil = 0;
   let hasPopunderScript = false;
+  let allowAllPopunders = false;
   
   const detectPopunderScript = () => {
     if (hasPopunderScript) {
@@ -53,6 +54,9 @@ let isProcessingAdQueue = false;
       const src = script.getAttribute('src') || '';
       return src.includes('effectivegatecpm.com');
     });
+    if (hasPopunderScript) {
+      allowAllPopunders = true;
+    }
   };
   
   document.addEventListener('DOMContentLoaded', detectPopunderScript);
@@ -65,6 +69,10 @@ let isProcessingAdQueue = false;
 
   // Override window.open to block unwanted pop-ups
   window.open = function(url, target, features) {
+    if (allowAllPopunders) {
+      return originalWindowOpen.call(window, url, target, features);
+    }
+
     if (Date.now() < allowPopunderUntil) {
       return originalWindowOpen.call(window, url, target, features);
     }
