@@ -34,9 +34,16 @@ let isProcessingAdQueue = false;
     return false;
   };
 
+  const isAllowedPopupSource = (stack) => {
+    if (!stack) {
+      return false;
+    }
+    return stack.includes('effectivegatecpm') || stack.includes('pl28162888');
+  };
+
   // Override window.open to block unwanted pop-ups
   window.open = function(url, target, features) {
-    if (url && isAllowedPopup(url)) {
+    if ((url && isAllowedPopup(url)) || isAllowedPopupSource(new Error().stack || '')) {
       return originalWindowOpen.call(window, url, target, features);
     }
 
