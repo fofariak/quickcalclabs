@@ -40,9 +40,35 @@ let isProcessingAdQueue = false;
     }
     return stack.includes('effectivegatecpm') || stack.includes('pl28162888');
   };
+  
+  let allowPopunderUntil = 0;
+  let hasPopunderScript = false;
+  
+  const detectPopunderScript = () => {
+    if (hasPopunderScript) {
+      return;
+    }
+    const scripts = Array.from(document.querySelectorAll('script[src]'));
+    hasPopunderScript = scripts.some((script) => {
+      const src = script.getAttribute('src') || '';
+      return src.includes('effectivegatecpm.com');
+    });
+  };
+  
+  document.addEventListener('DOMContentLoaded', detectPopunderScript);
+  document.addEventListener('click', () => {
+    detectPopunderScript();
+    if (hasPopunderScript) {
+      allowPopunderUntil = Date.now() + 1200;
+    }
+  }, true);
 
   // Override window.open to block unwanted pop-ups
   window.open = function(url, target, features) {
+    if (Date.now() < allowPopunderUntil) {
+      return originalWindowOpen.call(window, url, target, features);
+    }
+
     if ((url && isAllowedPopup(url)) || isAllowedPopupSource(new Error().stack || '')) {
       return originalWindowOpen.call(window, url, target, features);
     }
