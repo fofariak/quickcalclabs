@@ -14,6 +14,24 @@ const blogPosts = [
     featured: true // This post will be highlighted at the top.
   },
   {
+    title: "The Productivity Playbook: 12 High-Impact Habits for Focused Workdays",
+    href: "blog/productivity-playbook-focus-workday.html",
+    excerpt: "Build a focused, high-impact workday with time-blocking, deep work, and energy management strategies. Practical tips plus calculators to measure progress.",
+    category: "Productivity",
+    date: "January 29, 2026",
+    readTime: "11 min read",
+    featured: false
+  },
+  {
+    title: "Meeting Overload & Burnout: How to Protect Focus and Energy",
+    href: "blog/meeting-overload-burnout-guide.html",
+    excerpt: "Reduce meeting overload, protect deep work, and prevent burnout with simple scheduling rules and async-first communication.",
+    category: "Productivity",
+    date: "January 29, 2026",
+    readTime: "10 min read",
+    featured: false
+  },
+  {
     title: "How to Maintain a Healthy BMI: A Practical Guide",
     href: "blog/how-to-maintain-healthy-bmi.html",
     excerpt: "Learn practical, sustainable strategies for maintaining a healthy BMI through balanced nutrition, regular exercise, and positive lifestyle habits.",
