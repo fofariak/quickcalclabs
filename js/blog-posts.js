@@ -59,6 +59,42 @@ const blogPosts = [
     featured: false
   },
   {
+    title: "Sunburn & SPF: A Smart Guide to Safe Sun Time",
+    href: "blog/sunburn-spf-smart-guide.html",
+    excerpt: "Understand SPF, UV index, and reapplication timing with clear, practical sun safety guidance.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "12 min read",
+    featured: false
+  },
+  {
+    title: "UV Skin Cancer Risk: A Practical Guide to Everyday Protection",
+    href: "blog/uv-skin-cancer-risk-guide.html",
+    excerpt: "Learn the biggest UV risk factors and the daily habits that reduce long‑term skin cancer risk.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "12 min read",
+    featured: false
+  },
+  {
+    title: "Melanoma Awareness: Early Signals, Smart Prevention",
+    href: "blog/melanoma-awareness-prevention-guide.html",
+    excerpt: "A practical guide to melanoma warning signs, prevention habits, and routine skin checks.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "12 min read",
+    featured: false
+  },
+  {
+    title: "Heat Stroke Safety: Prevention, Warning Signs, and Recovery",
+    href: "blog/heat-stroke-safety-guide.html",
+    excerpt: "Recognize early warning signs and prevent heat illness with hydration and smart exposure habits.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "12 min read",
+    featured: false
+  },
+  {
     title: "How to Maintain a Healthy BMI: A Practical Guide",
     href: "blog/how-to-maintain-healthy-bmi.html",
     excerpt: "Learn practical, sustainable strategies for maintaining a healthy BMI through balanced nutrition, regular exercise, and positive lifestyle habits.",
