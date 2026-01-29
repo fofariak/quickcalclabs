@@ -95,6 +95,42 @@ const blogPosts = [
     featured: false
   },
   {
+    title: "Dog Training by Age: A Practical, Humane Timeline",
+    href: "blog/dog-training-by-age-guide.html",
+    excerpt: "A realistic training timeline by age that focuses on confidence, socialization, and lasting behavior habits.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "11 min read",
+    featured: false
+  },
+  {
+    title: "Pet Nutrition: Building a Balanced Diet That Lasts",
+    href: "blog/pet-nutrition-balanced-diet-guide.html",
+    excerpt: "Portion sizing, label reading, and feeding routines that keep pets healthy long‑term.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "11 min read",
+    featured: false
+  },
+  {
+    title: "Pet Medication Safety: Dosing, Risks, and Best Practices",
+    href: "blog/pet-medication-safety-guide.html",
+    excerpt: "Avoid common medication mistakes and build safer routines for dogs and cats.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "11 min read",
+    featured: false
+  },
+  {
+    title: "Dog & Cat Weight Checker: Healthy Ranges and Red Flags",
+    href: "blog/pet-weight-checker-guide.html",
+    excerpt: "Understand weight ranges, body condition scoring, and safe adjustment plans.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "10 min read",
+    featured: false
+  },
+  {
     title: "How to Maintain a Healthy BMI: A Practical Guide",
     href: "blog/how-to-maintain-healthy-bmi.html",
     excerpt: "Learn practical, sustainable strategies for maintaining a healthy BMI through balanced nutrition, regular exercise, and positive lifestyle habits.",
