@@ -310,58 +310,274 @@
 
     const nameData = [
       // Girl names
-      { name: 'Charlotte', gender: 'girl', styles: ['classic'], regions: ['us','uk','global'], vibes: ['earth'] },
-      { name: 'Elizabeth', gender: 'girl', styles: ['classic'], regions: ['us','uk','global'], vibes: ['air'] },
-      { name: 'Katherine', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['earth'] },
-      { name: 'Eleanor', gender: 'girl', styles: ['classic'], regions: ['uk','us'], vibes: ['air'] },
-      { name: 'Grace', gender: 'girl', styles: ['classic','short'], regions: ['us','uk'], vibes: ['water'] },
-      { name: 'Ava', gender: 'girl', styles: ['modern','short'], regions: ['us','global'], vibes: ['fire'] },
-      { name: 'Luna', gender: 'girl', styles: ['modern','nature'], regions: ['us','latin','global'], vibes: ['water'] },
-      { name: 'Harper', gender: 'girl', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
-      { name: 'Isla', gender: 'girl', styles: ['modern','short'], regions: ['uk','global'], vibes: ['water'] },
+      { name: 'Aaliyah', gender: 'girl', styles: ['modern'], regions: ['us','global'], vibes: ['air'] },
+      { name: 'Aadhya', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['earth'] },
+      { name: 'Amelia', gender: 'girl', styles: ['classic'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Anaya', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['water'] },
       { name: 'Aria', gender: 'girl', styles: ['modern','short'], regions: ['us','global'], vibes: ['air'] },
-      { name: 'Ivy', gender: 'girl', styles: ['nature','short'], regions: ['uk','global'], vibes: ['earth'] },
+      { name: 'Ava', gender: 'girl', styles: ['modern','short'], regions: ['us','global'], vibes: ['fire'] },
+      { name: 'Camila', gender: 'girl', styles: ['modern'], regions: ['latin'], vibes: ['fire'] },
+      { name: 'Charlotte', gender: 'girl', styles: ['classic'], regions: ['us','uk','global'], vibes: ['earth'] },
+      { name: 'Chloe', gender: 'girl', styles: ['modern','short'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Eleanor', gender: 'girl', styles: ['classic'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Elena', gender: 'girl', styles: ['classic','modern'], regions: ['latin','global'], vibes: ['water'] },
+      { name: 'Elizabeth', gender: 'girl', styles: ['classic'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Esme', gender: 'girl', styles: ['modern','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Freya', gender: 'girl', styles: ['nature','classic'], regions: ['nordic','uk','global'], vibes: ['fire'] },
+      { name: 'Grace', gender: 'girl', styles: ['classic','short'], regions: ['us','uk'], vibes: ['water'] },
       { name: 'Hazel', gender: 'girl', styles: ['nature','classic'], regions: ['us','global'], vibes: ['earth'] },
-      { name: 'Olive', gender: 'girl', styles: ['nature'], regions: ['us','global'], vibes: ['earth'] },
+      { name: 'Ingrid', gender: 'girl', styles: ['classic'], regions: ['nordic','global'], vibes: ['earth'] },
+      { name: 'Iris', gender: 'girl', styles: ['nature','short'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Isla', gender: 'girl', styles: ['modern','short'], regions: ['uk','global'], vibes: ['water'] },
+      { name: 'Ivy', gender: 'girl', styles: ['nature','short'], regions: ['uk','global'], vibes: ['earth'] },
+      { name: 'Jasmine', gender: 'girl', styles: ['nature','classic'], regions: ['us','india','global'], vibes: ['air'] },
+      { name: 'Katherine', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['earth'] },
+      { name: 'Luna', gender: 'girl', styles: ['modern','nature'], regions: ['us','latin','global'], vibes: ['water'] },
+      { name: 'Lucia', gender: 'girl', styles: ['classic'], regions: ['latin','global'], vibes: ['water'] },
+      { name: 'Maya', gender: 'girl', styles: ['modern','short'], regions: ['india','us','global'], vibes: ['earth'] },
       { name: 'Meadow', gender: 'girl', styles: ['nature'], regions: ['us'], vibes: ['earth'] },
       { name: 'Mia', gender: 'girl', styles: ['modern','short'], regions: ['us','latin','global'], vibes: ['water'] },
-      { name: 'Zoe', gender: 'girl', styles: ['modern','short'], regions: ['us','europe','global'], vibes: ['fire'] },
-      { name: 'Anaya', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['water'] },
-      { name: 'Ishita', gender: 'girl', styles: ['classic'], regions: ['india'], vibes: ['fire'] },
-      { name: 'Aadhya', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['earth'] },
+      { name: 'Noa', gender: 'girl', styles: ['short','modern'], regions: ['hebrew','global'], vibes: ['water'] },
+      { name: 'Olive', gender: 'girl', styles: ['nature'], regions: ['us','global'], vibes: ['earth'] },
+      { name: 'Olivia', gender: 'girl', styles: ['classic','modern'], regions: ['us','uk','global'], vibes: ['earth'] },
+      { name: 'Priya', gender: 'girl', styles: ['classic'], regions: ['india'], vibes: ['water'] },
       { name: 'Saanvi', gender: 'girl', styles: ['modern'], regions: ['india'], vibes: ['air'] },
-      { name: 'Sofia', gender: 'girl', styles: ['classic','modern'], regions: ['latin','europe','global'], vibes: ['air'] },
-      { name: 'Camila', gender: 'girl', styles: ['modern'], regions: ['latin'], vibes: ['fire'] },
+      { name: 'Sienna', gender: 'girl', styles: ['modern'], regions: ['us','uk','global'], vibes: ['earth'] },
+      { name: 'Sofia', gender: 'girl', styles: ['classic','modern'], regions: ['latin','global'], vibes: ['air'] },
+      { name: 'Sakura', gender: 'girl', styles: ['nature'], regions: ['global'], vibes: ['earth'] },
+      { name: 'Zara', gender: 'girl', styles: ['modern','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Zoe', gender: 'girl', styles: ['modern','short'], regions: ['us','uk','global'], vibes: ['fire'] },
+      { name: 'Abigail', gender: 'girl', styles: ['classic'], regions: ['us','uk','hebrew'], vibes: ['earth'] },
+      { name: 'Aurora', gender: 'girl', styles: ['modern','nature'], regions: ['us','uk','global'], vibes: ['water'] },
+      { name: 'Bella', gender: 'girl', styles: ['short','modern'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Bianca', gender: 'girl', styles: ['classic'], regions: ['latin','global'], vibes: ['air'] },
+      { name: 'Brielle', gender: 'girl', styles: ['modern'], regions: ['us','global'], vibes: ['air'] },
+      { name: 'Brooke', gender: 'girl', styles: ['modern','nature'], regions: ['us','uk'], vibes: ['water'] },
+      { name: 'Clara', gender: 'girl', styles: ['classic'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Cora', gender: 'girl', styles: ['classic','short'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Daisy', gender: 'girl', styles: ['nature','classic'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Delilah', gender: 'girl', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['water'] },
+      { name: 'Diana', gender: 'girl', styles: ['classic'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Eden', gender: 'girl', styles: ['nature','short'], regions: ['hebrew','us','global'], vibes: ['earth'] },
+      { name: 'Emma', gender: 'girl', styles: ['classic'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Evelyn', gender: 'girl', styles: ['classic'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Faith', gender: 'girl', styles: ['classic','short'], regions: ['us','global'], vibes: ['water'] },
+      { name: 'Fiona', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['water'] },
+      { name: 'Gia', gender: 'girl', styles: ['short','modern'], regions: ['latin','us'], vibes: ['fire'] },
+      { name: 'Gianna', gender: 'girl', styles: ['modern','classic'], regions: ['latin','us'], vibes: ['fire'] },
+      { name: 'Gemma', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Harper', gender: 'girl', styles: ['modern'], regions: ['us','global'], vibes: ['air'] },
+      { name: 'Hannah', gender: 'girl', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['water'] },
+      { name: 'Holly', gender: 'girl', styles: ['nature','classic'], regions: ['uk','us'], vibes: ['earth'] },
+      { name: 'Jade', gender: 'girl', styles: ['short','nature'], regions: ['us','uk','global'], vibes: ['earth'] },
+      { name: 'Julia', gender: 'girl', styles: ['classic'], regions: ['latin','us','global'], vibes: ['air'] },
+      { name: 'Juniper', gender: 'girl', styles: ['nature','modern'], regions: ['us','global'], vibes: ['earth'] },
+      { name: 'Kiara', gender: 'girl', styles: ['modern'], regions: ['latin','global'], vibes: ['air'] },
+      { name: 'Kira', gender: 'girl', styles: ['classic','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Layla', gender: 'girl', styles: ['modern'], regions: ['hebrew','us','global'], vibes: ['water'] },
+      { name: 'Lily', gender: 'girl', styles: ['nature','classic','short'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Lucy', gender: 'girl', styles: ['classic','short'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Matilda', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['earth'] },
+      { name: 'Mila', gender: 'girl', styles: ['modern','short'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Nina', gender: 'girl', styles: ['classic','short'], regions: ['global'], vibes: ['air'] },
+      { name: 'Nora', gender: 'girl', styles: ['classic','short'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Naomi', gender: 'girl', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['water'] },
+      { name: 'Ophelia', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['water'] },
+      { name: 'Penelope', gender: 'girl', styles: ['classic'], regions: ['uk','us','global'], vibes: ['air'] },
+      { name: 'Phoebe', gender: 'girl', styles: ['classic'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Rachel', gender: 'girl', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['water'] },
+      { name: 'Rose', gender: 'girl', styles: ['classic','nature','short'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Ruby', gender: 'girl', styles: ['classic','short'], regions: ['uk','us','global'], vibes: ['fire'] },
+      { name: 'Stella', gender: 'girl', styles: ['classic'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Tessa', gender: 'girl', styles: ['classic'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Thea', gender: 'girl', styles: ['short','classic'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Uma', gender: 'girl', styles: ['short','classic'], regions: ['india','global'], vibes: ['earth'] },
+      { name: 'Violet', gender: 'girl', styles: ['nature','classic'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Wren', gender: 'girl', styles: ['nature','short'], regions: ['us','global'], vibes: ['air'] },
+      { name: 'Willow', gender: 'girl', styles: ['nature'], regions: ['us','uk','global'], vibes: ['water'] },
+      { name: 'Ximena', gender: 'girl', styles: ['modern'], regions: ['latin'], vibes: ['fire'] },
+      { name: 'Yasmin', gender: 'girl', styles: ['classic'], regions: ['global','india'], vibes: ['water'] },
+      { name: 'Yara', gender: 'girl', styles: ['modern','short'], regions: ['global'], vibes: ['water'] },
 
       // Boy names
-      { name: 'William', gender: 'boy', styles: ['classic'], regions: ['us','uk','global'], vibes: ['earth'] },
-      { name: 'James', gender: 'boy', styles: ['classic'], regions: ['us','uk'], vibes: ['air'] },
-      { name: 'Henry', gender: 'boy', styles: ['classic'], regions: ['uk','us'], vibes: ['earth'] },
-      { name: 'Arthur', gender: 'boy', styles: ['classic'], regions: ['uk'], vibes: ['water'] },
-      { name: 'Samuel', gender: 'boy', styles: ['classic'], regions: ['hebrew','global'], vibes: ['water'] },
-      { name: 'Benjamin', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
-      { name: 'Liam', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['fire'] },
-      { name: 'Noah', gender: 'boy', styles: ['modern'], regions: ['hebrew','us','global'], vibes: ['water'] },
-      { name: 'Logan', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
-      { name: 'Levi', gender: 'boy', styles: ['modern'], regions: ['hebrew','us'], vibes: ['fire'] },
+      { name: 'Aarav', gender: 'boy', styles: ['modern'], regions: ['india'], vibes: ['air'] },
       { name: 'Arjun', gender: 'boy', styles: ['classic'], regions: ['india'], vibes: ['fire'] },
-      { name: 'Vihaan', gender: 'boy', styles: ['modern'], regions: ['india'], vibes: ['air'] },
-      { name: 'Krish', gender: 'boy', styles: ['short'], regions: ['india'], vibes: ['fire'] },
+      { name: 'Arthur', gender: 'boy', styles: ['classic'], regions: ['uk'], vibes: ['water'] },
+      { name: 'Benjamin', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
+      { name: 'Caleb', gender: 'boy', styles: ['classic'], regions: ['hebrew','us'], vibes: ['earth'] },
+      { name: 'Daniel', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
       { name: 'Diego', gender: 'boy', styles: ['modern'], regions: ['latin'], vibes: ['earth'] },
+      { name: 'Elias', gender: 'boy', styles: ['classic'], regions: ['hebrew','global'], vibes: ['air'] },
+      { name: 'Ethan', gender: 'boy', styles: ['modern','classic'], regions: ['hebrew','us','global'], vibes: ['fire'] },
+      { name: 'Felix', gender: 'boy', styles: ['modern','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Henry', gender: 'boy', styles: ['classic'], regions: ['uk','us'], vibes: ['earth'] },
+      { name: 'Hugo', gender: 'boy', styles: ['classic','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Isaac', gender: 'boy', styles: ['classic'], regions: ['hebrew','global'], vibes: ['earth'] },
+      { name: 'James', gender: 'boy', styles: ['classic'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Kai', gender: 'boy', styles: ['short','modern','nature'], regions: ['us','global'], vibes: ['water'] },
+      { name: 'Krish', gender: 'boy', styles: ['short'], regions: ['india'], vibes: ['fire'] },
+      { name: 'Leo', gender: 'boy', styles: ['short','classic'], regions: ['us','global'], vibes: ['fire'] },
+      { name: 'Levi', gender: 'boy', styles: ['modern'], regions: ['hebrew','us'], vibes: ['fire'] },
+      { name: 'Liam', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['fire'] },
+      { name: 'Logan', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Lucas', gender: 'boy', styles: ['classic','modern'], regions: ['us','latin','global'], vibes: ['air'] },
       { name: 'Mateo', gender: 'boy', styles: ['modern'], regions: ['latin'], vibes: ['water'] },
+      { name: 'Milo', gender: 'boy', styles: ['modern','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Noah', gender: 'boy', styles: ['modern'], regions: ['hebrew','us','global'], vibes: ['water'] },
+      { name: 'Owen', gender: 'boy', styles: ['classic','modern'], regions: ['uk','us'], vibes: ['water'] },
+      { name: 'Rafael', gender: 'boy', styles: ['classic'], regions: ['latin'], vibes: ['fire'] },
+      { name: 'Samuel', gender: 'boy', styles: ['classic'], regions: ['hebrew','global'], vibes: ['water'] },
+      { name: 'Soren', gender: 'boy', styles: ['classic'], regions: ['nordic','global'], vibes: ['air'] },
+      { name: 'Theo', gender: 'boy', styles: ['modern','short'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Vihaan', gender: 'boy', styles: ['modern'], regions: ['india'], vibes: ['air'] },
+      { name: 'William', gender: 'boy', styles: ['classic'], regions: ['us','uk','global'], vibes: ['earth'] },
+      { name: 'Adam', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
+      { name: 'Adrian', gender: 'boy', styles: ['classic','modern'], regions: ['latin','us','global'], vibes: ['air'] },
+      { name: 'Aiden', gender: 'boy', styles: ['modern'], regions: ['us','uk','global'], vibes: ['fire'] },
+      { name: 'Asher', gender: 'boy', styles: ['modern'], regions: ['hebrew','us','global'], vibes: ['fire'] },
+      { name: 'Andrew', gender: 'boy', styles: ['classic'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Beckett', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Bennett', gender: 'boy', styles: ['classic','modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Carter', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Charles', gender: 'boy', styles: ['classic'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Colin', gender: 'boy', styles: ['classic'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Cooper', gender: 'boy', styles: ['modern'], regions: ['us','global'], vibes: ['air'] },
+      { name: 'Damian', gender: 'boy', styles: ['classic'], regions: ['latin','global'], vibes: ['fire'] },
+      { name: 'David', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
+      { name: 'Declan', gender: 'boy', styles: ['classic'], regions: ['uk','global'], vibes: ['fire'] },
+      { name: 'Dylan', gender: 'boy', styles: ['modern'], regions: ['uk','us','global'], vibes: ['water'] },
+      { name: 'Eli', gender: 'boy', styles: ['classic','short'], regions: ['hebrew','us','global'], vibes: ['air'] },
+      { name: 'Emmett', gender: 'boy', styles: ['modern','classic'], regions: ['us'], vibes: ['earth'] },
+      { name: 'Ezra', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
+      { name: 'Finn', gender: 'boy', styles: ['modern','short'], regions: ['uk','nordic','global'], vibes: ['air'] },
+      { name: 'Gabriel', gender: 'boy', styles: ['classic'], regions: ['hebrew','latin','global'], vibes: ['air'] },
+      { name: 'George', gender: 'boy', styles: ['classic'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Grant', gender: 'boy', styles: ['classic'], regions: ['us','uk'], vibes: ['earth'] },
+      { name: 'Grayson', gender: 'boy', styles: ['modern'], regions: ['us'], vibes: ['air'] },
+      { name: 'Hudson', gender: 'boy', styles: ['modern'], regions: ['us'], vibes: ['water'] },
+      { name: 'Ian', gender: 'boy', styles: ['classic','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Jaxon', gender: 'boy', styles: ['modern'], regions: ['us'], vibes: ['fire'] },
+      { name: 'John', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','uk','global'], vibes: ['air'] },
+      { name: 'Joseph', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','uk','global'], vibes: ['earth'] },
+      { name: 'Julian', gender: 'boy', styles: ['classic'], regions: ['latin','us','global'], vibes: ['air'] },
+      { name: 'Jude', gender: 'boy', styles: ['classic','short'], regions: ['hebrew','uk','global'], vibes: ['water'] },
+      { name: 'Kian', gender: 'boy', styles: ['modern','short'], regions: ['india','uk','global'], vibes: ['air'] },
+      { name: 'Luke', gender: 'boy', styles: ['classic'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Miles', gender: 'boy', styles: ['classic','modern'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Nathan', gender: 'boy', styles: ['classic'], regions: ['hebrew','us','global'], vibes: ['air'] },
+      { name: 'Nolan', gender: 'boy', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Oliver', gender: 'boy', styles: ['classic'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Oscar', gender: 'boy', styles: ['classic'], regions: ['uk','nordic','global'], vibes: ['earth'] },
+      { name: 'Ryan', gender: 'boy', styles: ['classic'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Rohan', gender: 'boy', styles: ['classic'], regions: ['india','global'], vibes: ['air'] },
+      { name: 'Sebastian', gender: 'boy', styles: ['classic'], regions: ['latin','us','global'], vibes: ['water'] },
+      { name: 'Simon', gender: 'boy', styles: ['classic'], regions: ['hebrew','uk','global'], vibes: ['air'] },
+      { name: 'Thomas', gender: 'boy', styles: ['classic'], regions: ['uk','us','global'], vibes: ['earth'] },
+      { name: 'Tobias', gender: 'boy', styles: ['classic'], regions: ['hebrew','uk','global'], vibes: ['air'] },
+      { name: 'Tristan', gender: 'boy', styles: ['classic'], regions: ['uk','global'], vibes: ['water'] },
+      { name: 'Victor', gender: 'boy', styles: ['classic'], regions: ['latin','global'], vibes: ['fire'] },
+      { name: 'Wesley', gender: 'boy', styles: ['classic'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Wyatt', gender: 'boy', styles: ['modern'], regions: ['us'], vibes: ['fire'] },
+      { name: 'Xavier', gender: 'boy', styles: ['modern'], regions: ['latin','global'], vibes: ['fire'] },
+      { name: 'Zane', gender: 'boy', styles: ['modern','short'], regions: ['us','global'], vibes: ['fire'] },
 
       // Unisex
       { name: 'Alex', gender: 'unisex', styles: ['classic','short'], regions: ['us','uk','global'], vibes: ['air'] },
-      { name: 'Jordan', gender: 'unisex', styles: ['modern'], regions: ['us','global'], vibes: ['water'] },
-      { name: 'Taylor', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
       { name: 'Avery', gender: 'unisex', styles: ['modern'], regions: ['us'], vibes: ['air'] },
+      { name: 'Blake', gender: 'unisex', styles: ['modern','short'], regions: ['us','uk'], vibes: ['fire'] },
+      { name: 'Dakota', gender: 'unisex', styles: ['modern'], regions: ['us'], vibes: ['earth'] },
+      { name: 'Emerson', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Finley', gender: 'unisex', styles: ['modern'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Harley', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['fire'] },
+      { name: 'Indigo', gender: 'unisex', styles: ['modern','nature'], regions: ['global'], vibes: ['water'] },
+      { name: 'Jordan', gender: 'unisex', styles: ['modern'], regions: ['us','global'], vibes: ['water'] },
+      { name: 'Kai', gender: 'unisex', styles: ['short','modern','nature'], regions: ['global'], vibes: ['water'] },
+      { name: 'Morgan', gender: 'unisex', styles: ['classic'], regions: ['uk','us'], vibes: ['water'] },
+      { name: 'Parker', gender: 'unisex', styles: ['modern'], regions: ['us'], vibes: ['air'] },
+      { name: 'Quinn', gender: 'unisex', styles: ['modern','short'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Reese', gender: 'unisex', styles: ['short','modern'], regions: ['us','uk'], vibes: ['fire'] },
+      { name: 'Riley', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['fire'] },
+      { name: 'River', gender: 'unisex', styles: ['nature','modern'], regions: ['us','global'], vibes: ['water'] },
       { name: 'Rowan', gender: 'unisex', styles: ['modern','nature'], regions: ['uk','us'], vibes: ['earth'] },
       { name: 'Sage', gender: 'unisex', styles: ['nature','short'], regions: ['us','global'], vibes: ['earth'] },
-      { name: 'River', gender: 'unisex', styles: ['nature','modern'], regions: ['us','global'], vibes: ['water'] },
       { name: 'Sky', gender: 'unisex', styles: ['nature','short'], regions: ['us','global'], vibes: ['air'] },
-      { name: 'Riley', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['fire'] },
-      { name: 'Arya', gender: 'unisex', styles: ['modern'], regions: ['india','us'], vibes: ['fire'] }
+      { name: 'Taylor', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Ariel', gender: 'unisex', styles: ['classic'], regions: ['hebrew','global'], vibes: ['water'] },
+      { name: 'Blair', gender: 'unisex', styles: ['classic','short'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Casey', gender: 'unisex', styles: ['classic'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Charlie', gender: 'unisex', styles: ['classic','short'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Drew', gender: 'unisex', styles: ['short'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Ellis', gender: 'unisex', styles: ['classic'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Frankie', gender: 'unisex', styles: ['short','modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Jamie', gender: 'unisex', styles: ['classic','short'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Jessie', gender: 'unisex', styles: ['short'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Kendall', gender: 'unisex', styles: ['modern'], regions: ['us'], vibes: ['air'] },
+      { name: 'Lennon', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Marley', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['water'] },
+      { name: 'Noel', gender: 'unisex', styles: ['classic'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Peyton', gender: 'unisex', styles: ['modern'], regions: ['us'], vibes: ['air'] },
+      { name: 'Remy', gender: 'unisex', styles: ['modern','short'], regions: ['uk','global'], vibes: ['air'] },
+      { name: 'Robin', gender: 'unisex', styles: ['classic'], regions: ['uk','us'], vibes: ['air'] },
+      { name: 'Sam', gender: 'unisex', styles: ['short','classic'], regions: ['us','uk','global'], vibes: ['air'] },
+      { name: 'Teagan', gender: 'unisex', styles: ['modern'], regions: ['us','uk'], vibes: ['air'] },
+      { name: 'Luca', gender: 'unisex', styles: ['modern','short'], regions: ['latin','global'], vibes: ['air'] }
     ];
+
+    const fallbackNamesByLetter = {
+      A: ['Aaliyah','Aarav','Abigail','Ada','Adaline','Adrian','Aiden','Aisha','Akira','Alana','Alessia','Alex','Alexa','Alexis','Aliya','Amara','Amelia','Amir','Anaya','Anand','Andrea','Andrew','Angel','Anita','Anjali','Aria','Ariana','Ariel','Arjun','Arya','Asher','Athena','Atlas','Aurora','Ava','Avery','Ayana','Ayla','Azaria','Aziz','Amina','Anika','Asha','Ashton','August','Axel','Alina','Alonzo','Avni','Ares'],
+      B: ['Brielle','Bella','Bianca','Brooke','Blair','Beatrice','Bea','Bethany','Brittany','Bridget','Bryn','Blaise','Bodhi','Boris','Bruno','Bryan','Bryce','Bennett','Beckett','Benjamin','Barrett','Basil','Bastian','Brady','Brandon','Blaire','Beverly','Bonnie','Bailey','Billie','Bobby','Brock','Bowen','Blake','Braxton','Brennan','Bernard','Bela','Bruna','Bindi','Bader','Bilal','Bhavin','Bhumi','Bina','Brij','Bhaskar','Bhuvan','Benoit','Bartosz','Bjarne','Birgit'],
+      C: ['Charlotte','Chloe','Clara','Cora','Camila','Celia','Celine','Carmen','Carla','Caroline','Cassia','Catalina','Cecilia','Clementine','Claudia','Colette','Cynthia','Claire','Ciara','Callie','Cameron','Casey','Carter','Caleb','Connor','Colin','Cole','Cooper','Charlie','Christopher','Christian','Cedric','Cyrus','Caspian','Cruz','Carlos','Cristian','Cian','Cormac','Conrad','Clayton','Chance','Corey','Craig','Cillian','Chiara','Chandra','Chaitanya','Charan','Chirag','Chloe-Ann'],
+      D: ['Daisy','Diana','Delilah','Daphne','Danielle','Dahlia','Daria','Demi','Drew','Dorothy','Dora','Dina','Divya','Devi','Deepa','Damian','Daniel','David','Dylan','Declan','Dominic','Donovan','Douglas','Derek','Dean','Damon','Darius','Dexter','Diego','Dante','Dario','Darwin','Devan','Devin','Dustin','Duke','Dorian','Desmond','Dimitri','Dash','Dax','Drake','Dario','Dilan','Dario-Jean','Dhruv','Dhruv','Dev','Dhanush','Darshan'],
+      E: ['Emma','Evelyn','Eleanor','Elena','Eliza','Ella','Elsa','Esme','Esther','Eden','Eva','Emilia','Emery','Erin','Elodie','Eloise','Eileen','Everly','Etta','Edith','Elliot','Elias','Ethan','Ezra','Evan','Eric','Eli','Emmett','Enzo','Edward','Edwin','Ezekiel','Elian','Emanuel','Eamon','Eero','Esben','Eamon','Eryk','Eros','Ewan','Ezekiel','Elvin','Esha','Eshaana','Ekta','Eshaun','Ekam','Elliott','Eamon'],
+      F: ['Faith','Fiona','Freya','Faye','Fara','Farah','Fatima','Fern','Flora','Florence','Frances','Frida','Felicity','Fleur','Fabia','Fabiola','Fairuza','Farida','Fariha','Fay','Finley','Finn','Felix','Fletcher','Flynn','Forrest','Frank','Franco','Frederick','Fergus','Fraser','Fabian','Faris','Fahim','Fadi','Farouk','Fritz','Frode','Fynn','Fisher','Fionn','Fahad','Feroz','Fardeen','Furkan','Fahad','Fidel','Fadil','Femi','Farahna'],
+      G: ['Grace','Gia','Gianna','Gemma','Gloria','Giselle','Greta','Gwen','Gwendolyn','Genevieve','Georgia','Gabriella','Gaia','Gita','Goldie','Gauri','Gayatri','Ghazal','Galia','Gita','George','Gabriel','Gavin','Grant','Grayson','Gideon','Graham','Gregory','Giovanni','Gonzalo','Gus','Gunnar','Gage','Garrett','Geoffrey','Gerard','Gilbert','Gian','Goran','Gautam','Gaurav','Girish','Gopal','Gagan','Giorgio','Giles','Glen','Giles','Galina','Gisella'],
+      H: ['Hannah','Hazel','Harper','Holly','Helena','Heidi','Hope','Hana','Hala','Hina','Hiroko','Hilda','Harriet','Harmony','Halle','Hayley','Hadley','Huda','Haniya','Hafsah','Henry','Hugo','Harrison','Harold','Harvey','Hamza','Hassan','Hector','Hugh','Holden','Hayden','Hudson','Harlan','Hollis','Heath','Howard','Hugo','Hale','Haris','Hakeem','Hadi','Hitesh','Hemanth','Harish','Hridhaan','Hridya','Hughie','Hassan','Halim','Herschel'],
+      I: ['Iris','Isla','Ivy','Ingrid','Imogen','Ishani','Indira','Iliana','Ivana','Irene','Isabel','Ilaria','Isha','Ishika','Ishaan','Indigo','India','Ioana','Ines','Irina','Isaac','Ivan','Ian','Ibrahim','Idris','Imran','Ilya','Ismail','Iker','Ivo','Irvin','Ignacio','Ishan','Irfan','Ira','Ilenia','Isadora','Isolde','Irene','Iona','Ibrahim','Izzie','Izzy','Ishita','Inaya','Ila','Izzat','Iskander','Itzel','Isaiah'],
+      J: ['Jasmine','Jade','Julia','Jocelyn','Juliet','Josephine','Jolene','Joanna','Jenna','Janelle','Jillian','Jasmin','Jaya','Jyoti','Janvi','Jia','Jisoo','Juniper','Justine','Jean','James','Jacob','Jackson','Jaxon','Joshua','Jordan','Julian','Jude','Jonah','John','Joseph','Jason','Jasper','Jett','Joel','Justin','Jared','Jeremy','Jorge','Joaquin','Jose','Jamal','Jabari','Jai','Jatin','Jaden','Jair','Jaleel','Jovan','Jens','Jiro','Johan'],
+      K: ['Katherine','Kira','Kiara','Kylie','Kayla','Keira','Kendall','Kara','Kavya','Khadija','Kenza','Kiana','Karis','Kori','Kim','Koko','Kinsley','Kira','Kiana','Katia','Kai','Kaden','Kian','Kevin','Kendrick','Kingston','Kobe','Khalid','Karim','Kareem','Kasper','Kellan','Keaton','Kobe','Kairo','Kellan','Kellen','Kristian','Kieran','Konrad','Klaus','Kurt','Kian','Kartik','Karan','Kabir','Kunal','Keshav','Kishan','Kusum','Kamal'],
+      L: ['Luna','Layla','Lily','Lucy','Lena','Leah','Lana','Laura','Leila','Lara','Lia','Liliana','Lillian','Lucia','Livia','Louisa','Lorelei','Lottie','Lyra','Luz','Liam','Lucas','Leo','Levi','Luke','Logan','Landon','Lincoln','Luca','Lorenzo','Luis','Leon','Lawrence','Lyle','Lennon','Lachlan','Luca','Luka','Lambert','Lloyd','Lucian','Luciano','Laksh','Lakshmi','Leena','Leela','Lalit','Luka','Loren','Lynette','Lisbeth','Lior','Lukael'],
+      M: ['Mia','Maya','Mila','Mira','Molly','Megan','Maria','Marina','Matilda','Maeve','Madison','Margot','Melina','Meera','Minna','Mina','Mariam','Mahira','Maia','Monica','Mateo','Mason','Miles','Micah','Michael','Max','Maxwell','Malik','Marco','Marcus','Milo','Maddox','Martin','Matteo','Mohammed','Muhammad','Musa','Mikhail','Manny','Marvin','Morgan','Monty','Marek','Mikkel','Morten','Madhav','Mahir','Manav','Mohan','Murad','Mustafa','Moses'],
+      N: ['Nora','Naomi','Nina','Nova','Noelle','Nadia','Natalie','Nicole','Neha','Nisha','Nia','Noa','Nyla','Neriah','Neve','Nola','Nyla','Nuri','Nessa','Nadine','Noah','Nathan','Nolan','Nicholas','Nico','Neil','Nate','Nikhil','Naveen','Nirav','Niles','Nash','Nikolai','Nico','Niall','Nabil','Nasser','Nasir','Naveed','Neron','Niels','Nordin','Natan','Nataniel','Nico','Nikol','Niranjan','Neeraj','Naman','Nimish','Nitin'],
+      O: ['Olivia','Olive','Ophelia','Odette','Orla','Orchid','Oona','Odelia','Oriana','Octavia','Oksana','Omni','Olympia','Ora','Oriel','Olga','Oline','Orlaith','Onora','Oakley','Oliver','Owen','Oscar','Orion','Otto','Omar','Odin','Omarion','Ozzy','Oskar','Oak','Oren','Orhan','Oleg','Omar','Osman','Ossian','Ovie','Ozan','Oreste','Ozzie','Omri','Onyx','Oban','Ollie','Orville','Oren','Owen','Omar','Odal','Oswaldo','Ojas'],
+      P: ['Penelope','Phoebe','Paige','Piper','Paisley','Pearl','Prisha','Priya','Pooja','Pari','Paloma','Paulina','Petra','Phaedra','Pernille','Philippa','Pia','Poppy','Pranita','Pallavi','Peter','Paul','Patrick','Parker','Preston','Pierce','Phoenix','Prince','Pablo','Pedro','Paxton','Philip','Pranav','Parth','Prithvi','Pratik','Puneet','Priyank','Pradeep','Pradeep','Piers','Percy','Perry','Pascal','Pavel','Pietro','Poul','Pavel','Porter','Presley','Palmer','Piersen'],
+      Q: ['Quinn','Quincy','Quinton','Queenie','Quinlan','Quiana','Quinley','Qamar','Qasim','Qadir','Qais','Qiana','Quella','Queta','Quin','Quirina','Quorra','Quinby','Quill','Quillan','Quorra','Quaid','Quasim','Qadeer','Qurat','Qudsia','Qaiser','Qamar','Qian','Qi','Qiang','Qiang','Qira','Qistina','Qisma','Qiu','Qiuan','Qurratul','Quetzal','Queta','Quincy','Quinlan','Quon','Quorra','Quella','Qasim','Quddus','Qamar','Qaisar','Qaiser','Quinella','Quincy'],
+      R: ['Ruby','Rose','Rachel','Reese','Riley','Ruth','Rosie','Reina','Rina','Rhea','Riya','Rina','Rani','Renata','Roxana','Rowan','Riley','Roxie','Ramona','Regina','Ryan','Rafael','Ronan','Roman','Reid','Remy','Rhys','Ryder','Rocco','Rhett','Rohan','Rahul','Rakesh','Raj','Ravi','Rashid','Ramesh','Ricardo','Roberto','Roy','Ross','Russell','Ray','Rene','Rory','Rami','Rehan','Rami','Rico','Raman','Rishi'],
+      S: ['Sofia','Stella','Sienna','Sage','Scarlett','Sophia','Sabrina','Selena','Serena','Sadie','Saanvi','Sakura','Savannah','Sasha','Shreya','Simran','Sana','Siya','Sonya','Sylvia','Samuel','Sebastian','Simon','Soren','Sean','Seth','Scott','Spencer','Shane','Shawn','Sergio','Santiago','Sidney','Saul','Sahil','Sanjay','Sameer','Sumeet','Soren','Suleiman','Sultan','Shrey','Skyler','Solomon','Silas','Stanley','Stefan','Sven','Shiv','Siddharth','Sagar'],
+      T: ['Tessa','Thea','Tara','Talia','Tanya','Tiana','Trinity','Tabitha','Tori','Taliah','Tess','Tasha','Tara','Tamsin','Tina','Talia','Tanvi','Trisha','Thalia','Talia','Theo','Thomas','Tristan','Tyler','Tobias','Troy','Tate','Tucker','Tony','Trevor','Trent','Tariq','Tahir','Talha','Tanish','Tanay','Tejas','Thane','Thiago','Timothy','Tim','Tommy','Tyson','Tomas','Turan','Tobin','Torin','Tomasz','Tariq','Tamer','Taher','Tanveer','Tenzin','Tarak'],
+      U: ['Uma','Usha','Ursula','Unity','Una','Ulani','Umi','Udita','Ujjwala','Usha','Ursula','Umi','Udaya','Uditi','Ujala','Ulla','Ulka','Ulfhild','Ullika','Uriah','Umar','Usman','Umar','Ulysses','Ulrich','Uday','Ujjwal','Udit','Umesh','Upendra','Uriah','Umut','Uwe','Ugo','Ulisses','Ubaid','Uzair','Udayan','Uddhav','Ulf','Ulfred','Umarion','Uriah','Uros','Ulan','Ulmar','Ulfar','Umaru','Uman','Urs','Ugo'],
+      V: ['Violet','Vera','Vivian','Valentina','Valerie','Veronica','Veda','Vanya','Veera','Viola','Vita','Vicky','Vanessa','Vikki','Vani','Varsha','Vibhuti','Vishwa','Vida','Vienna','Victor','Vincent','Vikram','Vivek','Vishal','Vaughn','Vance','Vernon','Vito','Vladimir','Valentin','Vasco','Viggo','Vishnu','Vihan','Vihaan','Vimal','Viren','Virat','Vijay','Vasant','Vedant','Vardan','Vikas','Veysel','Vito','Vlad','Vito','Vaughan','Vega','Viren','Vartan'],
+      W: ['Willow','Wren','Winter','Willa','Wendy','Winona','Winnie','Waverly','Whitley','Whitney','Wynne','Wafa','Wajiha','Widad','Waniya','Wafa','Willa','Wilma','Wanda','Wrenna','William','Wyatt','Wesley','Waylon','Walker','Wade','Warren','Will','Wilder','Wilson','Winston','Wolf','Weston','Woodrow','Walt','Wilbur','Wynn','Wylie','Waleed','Waqas','Wael','Wajid','Wahid','Waris','Wassim','Waseem','Wasim','Wendel','Ward','Wren','Willis','West','Wouter','Wojtek'],
+      X: ['Ximena','Xenia','Xiomara','Xia','Xinyi','Xiana','Xara','Xyla','Xena','Xanthe','Xandra','Xiaomei','Xiaoling','Xiaoyu','Xanthea','Xylia','Xavia','Xyla','Xaria','Xyla','Xander','Xavier','Xavion','Xeno','Xenon','Xeno','Xian','Xiang','Xiangyu','Xinyi','Xuan','Xander','Xion','Xaviar','Xylon','Xyler','Xylo','Xen','Xayden','Xal','Xenon','Xavier','Xerxes','Xenophon','Xaid','Xylan','Xerox','Xylan','Xachary','Xavi','Xaylen'],
+      Y: ['Yara','Yasmin','Yasmine','Yvette','Yvonne','Yuna','Yuki','Yoko','Yael','Yana','Yulia','Yuliana','Yasmina','Yesenia','Yvette','Yulissa','Yasna','Yelena','Yalena','Ynez','Yuri','Yusuf','Yasin','Yasir','Yosef','Yahir','Yash','Yashvi','Yuvan','Yuvraj','Yusuf','Yuki','Yu','Yago','Yanni','Yousef','Yazan','Yamir','Yates','Yanis','Yaron','Yunus','Yusuf','Yamir','Yahya','Yoav','Yair','Yasuo','Yuto','Yadav','Yasir','Yosef'],
+      Z: ['Zara','Zoe','Zuri','Zia','Zarae','Zelda','Zaria','Zayna','Zoe','Zoya','Zelie','Zina','Zena','Zora','Zahara','Zinaida','Zinnia','Zita','Zelda','Zuri','Zane','Zion','Zayn','Zachary','Zach','Zeke','Zander','Zavier','Zaire','Zahid','Zahir','Zakir','Zubair','Zulfiqar','Zoran','Zoran','Zeno','Zev','Zorion','Zeke','Zico','Zephyr','Zoltan','Zul','Zac','Zoran','Zhen','Zhi','Zhong','Zahir','Zubair','Zulekha','Zamiel']
+    };
+
+    const fallbackStyles = ['classic','modern','nature','short'];
+    const fallbackRegions = ['us','uk','india','latin','nordic','hebrew','global'];
+    const fallbackVibes = ['fire','earth','air','water'];
+
+    function buildFallbackEntries(letter) {
+      const names = fallbackNamesByLetter[letter] || [];
+      return names.map((name) => ({
+        name,
+        gender: 'unisex',
+        styles: fallbackStyles,
+        regions: fallbackRegions,
+        vibes: fallbackVibes
+      }));
+    }
+
+    function mergeUniqueByName(list, extras) {
+      const seen = new Set(list.map(item => item.name.toUpperCase()));
+      extras.forEach((item) => {
+        const key = item.name.toUpperCase();
+        if (!seen.has(key)) {
+          seen.add(key);
+          list.push(item);
+        }
+      });
+      return list;
+    }
 
     function zodiacToVibe(sign) {
       if (!sign || sign === 'any') return null;
@@ -389,13 +605,37 @@
       const country = document.getElementById('country').value;
       const zodiac = document.getElementById('zodiac').value;
       const letterRaw = document.getElementById('startingLetter').value.trim().toUpperCase();
+      const startingLetter = letterRaw.replace(/[^A-Z]/g, '').charAt(0);
 
       const vibe = zodiacToVibe(zodiac);
 
-      let pool = nameData.filter(n => n.gender === gender);
+      let pool = gender === 'unisex'
+        ? nameData.filter(n => n.gender === 'unisex')
+        : nameData.filter(n => n.gender === gender || n.gender === 'unisex');
+      let letterPool = pool;
+
+      if (startingLetter) {
+        letterPool = pool.filter(n => n.name.toUpperCase().startsWith(startingLetter));
+        if (!letterPool.length) {
+          const nameList = document.getElementById('nameList');
+          nameList.innerHTML = `<span style="display:inline-block; margin:0.2rem 0.5rem; padding:0.4rem 0.8rem; border-radius:999px; background:rgba(239,68,68,0.1); color:#b91c1c;">No ${gender} names found starting with "${startingLetter}". Try another letter.</span>`;
+          const resultsBox = document.getElementById('results');
+          resultsBox.style.display = 'block';
+          resultsBox.classList.add('show');
+          setTimeout(() => resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+          return;
+        }
+      }
+
+      pool = letterPool;
+
+      if (startingLetter) {
+        pool = mergeUniqueByName(pool, buildFallbackEntries(startingLetter));
+      }
 
       if (style) {
-        pool = pool.filter(n => n.styles.includes(style));
+        const styled = pool.filter(n => n.styles.includes(style));
+        if (styled.length) pool = styled;
       }
 
       if (country && country !== 'any') {
@@ -408,15 +648,8 @@
         if (vibed.length) pool = vibed;
       }
 
-      if (letterRaw) {
-        const letterFiltered = pool.filter(n => n.name.toUpperCase().startsWith(letterRaw));
-        if (letterFiltered.length) {
-          pool = letterFiltered;
-        }
-      }
-
       if (!pool.length) {
-        pool = nameData.filter(n => n.gender === gender);
+        pool = startingLetter ? letterPool : nameData.filter(n => n.gender === gender);
       }
 
       const picks = pickNames(pool, 8);
