@@ -32,6 +32,33 @@ const blogPosts = [
     featured: false
   },
   {
+    title: "Sleep Architecture Explained: A Clear Path to Restorative Nights",
+    href: "blog/sleep-architecture-restorative-nights.html",
+    excerpt: "Understand sleep stages, circadian rhythm, and the habits that improve deep sleep and recovery.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "12 min read",
+    featured: false
+  },
+  {
+    title: "The Caffeine Strategy: Stay Alert Without the Crash",
+    href: "blog/caffeine-strategy-alert-calm.html",
+    excerpt: "Master caffeine timing, dose, and habits to protect sleep and avoid energy crashes.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "11 min read",
+    featured: false
+  },
+  {
+    title: "Screen Time & Focus: How to Reduce Digital Fatigue",
+    href: "blog/screen-time-focus-fatigue.html",
+    excerpt: "Reduce eye strain and digital fatigue with practical screen-time strategies and workspace upgrades.",
+    category: "Health",
+    date: "January 29, 2026",
+    readTime: "12 min read",
+    featured: false
+  },
+  {
     title: "How to Maintain a Healthy BMI: A Practical Guide",
     href: "blog/how-to-maintain-healthy-bmi.html",
     excerpt: "Learn practical, sustainable strategies for maintaining a healthy BMI through balanced nutrition, regular exercise, and positive lifestyle habits.",
