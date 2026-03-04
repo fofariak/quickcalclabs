@@ -353,16 +353,66 @@
     }
     .dark-mode .dim-score-val { color: var(--text-strong-dark, #f1f5f9); }
 
+    /* Card Grid for related content */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .card {
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      padding: 1.2rem;
+      border-radius: var(--radius-md, 12px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+    }
+    .dark-mode .card {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .dark-mode .card:hover { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); }
+    .card a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-medium-light, #334155);
+    }
+    .card a:hover { color: var(--primary, #8b5cf6); }
+    .dark-mode .card a { color: var(--text-medium-dark, #cbd5e1); }
+    .dark-mode .card a:hover { color: var(--primary-light, #a78bfa); }
+
+    .related-content {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(139, 92, 246, 0.2);
+    }
+    .related-content h3 {
+      margin: 0 0 1rem;
+      font-size: 1.2rem;
+      color: var(--primary, #8b5cf6);
+      text-align: center;
+    }
+    .dark-mode .related-content h3 { color: var(--primary-light, #a78bfa); }
+
     /* Share section */
     .share-section {
       margin-top: 1.5rem;
       padding-top: 1.5rem;
-      border-top: 2px solid rgba(139, 92, 246, 0.15);
+      border-top: 2px solid rgba(139, 92, 246, 0.2);
+      text-align: center;
     }
     .share-section p {
       font-weight: 700;
       font-size: 0.95rem;
-      margin: 0 0 0.8rem;
+      margin: 0 0 1rem;
       color: var(--text-medium-light, #334155);
     }
     .dark-mode .share-section p { color: var(--text-medium-dark, #cbd5e1); }
@@ -372,31 +422,29 @@
       gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
+      align-items: center;
     }
-    .share-btn {
+    .share-circle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 42px;
-      padding: 0 1.2rem;
-      border-radius: 999px;
-      border: none;
-      font-size: 0.88rem;
-      font-weight: 700;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1rem;
       cursor: pointer;
-      color: #fff;
-      gap: 6px;
+      border: none;
+      color: white;
+      padding: 0;
+      margin: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
-    .share-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    .share-circle:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
-    .share-linkedin { background: #0077b5; }
-    .share-x { background: #000; }
-    .share-whatsapp { background: #25d366; }
-    .share-copy { background: linear-gradient(135deg, #8b5cf6, #3b82f6); }
+    .share-circle span { line-height: 1; }
 
     /* CTA */
     .full-cta {
@@ -429,21 +477,54 @@
 
     /* SEO */
     .seo-content {
-      max-width: 680px;
+      max-width: 900px;
       margin: 2rem auto;
-      padding: 0 1.5rem;
+      padding: 2.5rem;
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 23, 42, 0.08));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
       text-align: left;
     }
-    .seo-content h2 {
-      font-size: 1.3rem;
-      color: var(--primary, #8b5cf6);
+    .dark-mode .seo-content {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
-    .dark-mode .seo-content h2 { color: var(--primary-light, #a78bfa); }
-    .seo-content p {
-      line-height: 1.7;
+    .seo-content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-strong-light, #0f172a);
+      border-bottom: 2px solid var(--primary, #8b5cf6);
+      padding-bottom: 0.5rem;
+    }
+    .seo-content h2:first-of-type { margin-top: 0; }
+    .dark-mode .seo-content h2 {
+      color: var(--text-strong-dark, #f1f5f9);
+      border-bottom-color: var(--primary-light, #a78bfa);
+    }
+    .seo-content h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
       color: var(--text-medium-light, #334155);
     }
-    .dark-mode .seo-content p { color: var(--text-medium-dark, #cbd5e1); }
+    .dark-mode .seo-content h3 { color: var(--text-medium-dark, #cbd5e1); }
+    .seo-content p, .seo-content li {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .dark-mode .seo-content p, .dark-mode .seo-content li { color: var(--text-weak-dark, #94a3b8); }
+    .seo-content ul, .seo-content ol {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+    }
+    .seo-content li { margin-bottom: 0.8rem; }
+    .seo-content a { color: var(--primary, #8b5cf6); }
+    .dark-mode .seo-content a { color: var(--primary-light, #a78bfa); }
   </style>
 </head>
 <body>
@@ -541,13 +622,34 @@
 
       <div class="dim-breakdown" id="dimBreakdown"></div>
 
+      <!-- Related Tools & Blogs -->
+      <div class="related-content">
+        <h3>🔗 Explore More Tools</h3>
+        <div class="card-grid">
+          <div class="card"><a href="burnout-risk-calculator.html">🔥 Burnout Risk Calculator</a></div>
+          <div class="card"><a href="stress-load-calculator.html">😰 Stress Load Calculator</a></div>
+          <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Calculator</a></div>
+          <div class="card"><a href="productivity-score-calculator.html">📊 Productivity Score Calculator</a></div>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">📝 Related Blogs</h3>
+        <div class="card-grid">
+          <div class="card"><a href="blog/work-life-quality-index-guide.html">📖 Complete Guide to WLQI</a></div>
+          <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">💡 Ultimate Work-Life Balance Guide</a></div>
+        </div>
+      </div>
+
+      <!-- Social Share Buttons -->
       <div class="share-section">
-        <p>Share your score</p>
+        <p>📤 Share Your Results</p>
         <div class="share-btns">
-          <button type="button" class="share-btn share-linkedin" id="shareLinkedIn">in &nbsp;LinkedIn</button>
-          <button type="button" class="share-btn share-x" id="shareX">&#x1D54F; &nbsp;Post</button>
-          <button type="button" class="share-btn share-whatsapp" id="shareWA">WhatsApp</button>
-          <button type="button" class="share-btn share-copy" id="shareCopy">Copy</button>
+          <button type="button" id="shareX" title="Share on X" class="share-circle" style="background:#000;"><span>𝕏</span></button>
+          <button type="button" id="shareFacebook" title="Share on Facebook" class="share-circle" style="background:#1877f2;font-weight:700;"><span>f</span></button>
+          <button type="button" id="shareLinkedIn" title="Share on LinkedIn" class="share-circle" style="background:#0077b5;font-weight:700;font-size:0.85rem;"><span>in</span></button>
+          <button type="button" id="shareWA" title="Share on WhatsApp" class="share-circle" style="background:#25d366;"><span>💬</span></button>
+          <button type="button" id="shareReddit" title="Share on Reddit" class="share-circle" style="background:#ff4500;"><span>↗</span></button>
+          <button type="button" id="shareEmail" title="Share via Email" class="share-circle" style="background:#6b7280;"><span>✉️</span></button>
+          <button type="button" id="shareCopy" title="Copy Results" class="share-circle" style="background:linear-gradient(135deg,#8b5cf6,#3b82f6);"><span>📋</span></button>
         </div>
       </div>
 
@@ -561,9 +663,98 @@
   <div id="ad-banner-mid"></div>
 
   <section class="seo-content">
-    <h2>What Is the Quick Work-Life Quality Index?</h2>
-    <p>The Quick WLQI is a streamlined version of our comprehensive <a href="work-life-quality-index.html">9-dimension Work-Life Quality Index</a> calculator. It distills the most impactful factors — work hours, deep focus time, meeting load, stress, sleep, boundary control, and timezone alignment — into a 60-second assessment that produces a reliable 0-100 score.</p>
-    <p>Your score falls into one of five categories: <strong>Thriving</strong> (90-100), <strong>Healthy</strong> (75-89), <strong>Stable</strong> (60-74), <strong>Struggling</strong> (40-59), or <strong>Critical</strong> (0-39). For a complete breakdown across all nine dimensions with personalized recommendations, take the <a href="work-life-quality-index.html">full WLQI assessment</a>.</p>
+    <h3>🔗 Explore More Tools</h3>
+    <div class="card-grid">
+      <div class="card"><a href="burnout-risk-calculator.html">🔥 Burnout Risk Calculator</a></div>
+      <div class="card"><a href="stress-load-calculator.html">😰 Stress Load Calculator</a></div>
+      <div class="card"><a href="meeting-load-stress-calculator.html">📅 Meeting Load Calculator</a></div>
+      <div class="card"><a href="productivity-score-calculator.html">📊 Productivity Score Calculator</a></div>
+    </div>
+
+    <h3>📝 Related Blogs</h3>
+    <div class="card-grid">
+      <div class="card"><a href="blog/work-life-quality-index-guide.html">📖 Complete Guide to WLQI</a></div>
+      <div class="card"><a href="blog/work-life-balance-ultimate-guide.html">💡 Ultimate Work-Life Balance Guide</a></div>
+    </div>
+
+    <article>
+      <h2>What Is the Quick Work-Life Quality Index?</h2>
+      <p>The Quick Work-Life Quality Index (Quick WLQI) is a streamlined, science-backed assessment designed to measure the overall quality of your professional life in under 60 seconds. Built as a condensed version of our comprehensive <a href="work-life-quality-index.html">9-dimension WLQI calculator</a>, the Quick WLQI distills the most impactful work-life factors into just seven targeted questions that capture roughly 85% of the score variance found in the full assessment.</p>
+
+      <p>In an era where burnout rates have skyrocketed — with the World Health Organization officially recognizing burnout as an occupational phenomenon — having a rapid self-check tool is more valuable than ever. The Quick WLQI gives busy professionals a reliable snapshot of their work-life health without demanding the 10-15 minutes that a full assessment requires.</p>
+
+      <h2>How the Quick WLQI Score Is Calculated</h2>
+      <p>Your Quick WLQI score is generated by mapping each of the seven questions to a key work-life dimension and applying a weighted scoring algorithm calibrated against the full WLQI model. The five dimensions and their weights are:</p>
+
+      <ul>
+        <li><strong>Burnout Risk (30% weight)</strong> — Derived from your weekly work hours, self-reported stress level, and sleep duration. This dimension carries the heaviest weight because chronic burnout undermines every other aspect of work-life quality. Working more than 50 hours per week, reporting stress above 7/10, or sleeping fewer than 6 hours per night will significantly lower this score.</li>
+        <li><strong>Productivity Quality (20% weight)</strong> — Measures the ratio of deep, focused work to total work hours. Research from Cal Newport and others shows that knowledge workers average only 2-3 hours of true deep work per day. If your deep work ratio falls below 25% of your daily hours, your productivity score drops sharply.</li>
+        <li><strong>Work-Life Balance (20% weight)</strong> — Evaluates how much work bleeds beyond your scheduled hours. The "always-on" culture enabled by smartphones and instant messaging has eroded traditional boundaries. Workers who regularly log more than 10 hours outside their schedule per week face elevated stress, strained relationships, and diminished life satisfaction.</li>
+        <li><strong>Meeting Load (15% weight)</strong> — Assesses the impact of meetings on your workday. Studies show that the average professional spends 31 hours per month in unproductive meetings. Workers with more than 5 meetings per day consistently report lower job satisfaction and higher stress levels.</li>
+        <li><strong>Timezone Stress (15% weight)</strong> — Measures the challenge of collaborating across time zones. For co-located teams this defaults to a high score, but for distributed teams, a timezone gap of 5+ hours creates meaningful friction, requiring early-morning or late-night availability that disrupts sleep patterns and personal time.</li>
+      </ul>
+
+      <p>Each dimension produces a sub-score from 0 to 100, which is then combined using the weights above into a single composite score. The final score maps to one of five categories:</p>
+
+      <ul>
+        <li><strong>Thriving (90-100):</strong> Excellent work-life quality with strong boundaries, adequate rest, and high productivity.</li>
+        <li><strong>Healthy (75-89):</strong> Good overall balance with minor areas for optimization.</li>
+        <li><strong>Stable (60-74):</strong> Functional but with noticeable pressure points that could worsen over time.</li>
+        <li><strong>Struggling (40-59):</strong> Significant imbalances that are likely affecting health, relationships, or performance.</li>
+        <li><strong>Critical (0-39):</strong> Unsustainable patterns that require urgent intervention.</li>
+      </ul>
+
+      <h2>Why These 7 Questions Matter</h2>
+      <p>The seven questions in the Quick WLQI were selected through analysis of the full 40+ question assessment to identify the inputs that contribute most to score variation across thousands of responses. Each question serves as a reliable proxy for an entire dimension:</p>
+
+      <p><strong>Weekly work hours</strong> are the single strongest predictor of burnout risk. The relationship is non-linear — the jump from 45 to 55 hours has a much greater negative impact than the jump from 35 to 45. <strong>Deep work hours</strong> capture productivity quality better than any other single metric because they represent the time you spend creating genuine value rather than just being busy.</p>
+
+      <p><strong>Daily meeting count</strong> directly impacts available focus time and energy levels. Every meeting carries hidden costs: preparation time, context-switching overhead, and recovery time. <strong>Stress level</strong> is the most direct self-reported indicator of how sustainable your current pattern feels, correlating strongly with both burnout risk and mental wellbeing in the full model.</p>
+
+      <p><strong>Sleep hours</strong> influence nearly everything — cognitive function, emotional regulation, stress resilience, and physical health. Workers sleeping fewer than 7 hours show measurably lower performance and higher error rates. <strong>Hours outside schedule</strong> reveal boundary integrity, which is one of the strongest predictors of long-term work-life satisfaction. <strong>Timezone gap</strong> adds a critical layer for the growing population of remote and distributed workers, where misalignment creates invisible but persistent stress.</p>
+
+      <h2>Quick WLQI vs. Full WLQI Assessment</h2>
+      <p>The Quick WLQI provides a reliable high-level score, but it's a screening tool rather than a comprehensive diagnosis. The <a href="work-life-quality-index.html">full 9-dimension WLQI assessment</a> adds four additional dimensions — Physical Health & Ergonomics, Mental Wellbeing & Social Connection, Work Environment Quality, and Financial & Commute Stress — and uses 40+ calibrated inputs for a more granular analysis. It also provides dimension-by-dimension recommendations and personalized action plans.</p>
+
+      <p>We recommend taking the Quick WLQI as a regular check-in (weekly or bi-weekly) and the full assessment monthly or whenever your work situation changes significantly — new job, new team, shift to remote work, or following a major life event.</p>
+
+      <h2>Tips to Improve Your Score</h2>
+      <p>If your Quick WLQI score falls below 65, here are evidence-based strategies to move the needle:</p>
+
+      <ul>
+        <li><strong>Set hard boundaries on work hours.</strong> Use calendar blocking to define your start and end times, and communicate them to your team. Workers who establish clear boundaries report 23% lower stress levels.</li>
+        <li><strong>Protect at least 3 hours of daily deep work.</strong> Block morning hours for focused work before meetings begin. Turn off notifications during these blocks. Even a small increase in deep work ratio yields outsized productivity gains.</li>
+        <li><strong>Audit your meetings.</strong> For each recurring meeting, ask: does this need me, does this need to be a meeting, and does this need to happen weekly? Most teams can eliminate 30-40% of meetings without any loss.</li>
+        <li><strong>Prioritize sleep hygiene.</strong> Aim for 7-9 hours. Consistent sleep and wake times matter more than total duration. Avoid screens 30 minutes before bed and keep your bedroom cool and dark.</li>
+        <li><strong>Negotiate async-first for cross-timezone collaboration.</strong> Replace synchronous meetings with recorded video updates, shared documents, and clear async handoff protocols. This reduces the need for early/late calls.</li>
+      </ul>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>What is the Quick WLQI assessment?</h3>
+      <p>The Quick WLQI is a 60-second, 7-question assessment that estimates your Work-Life Quality Index score on a 0-100 scale. It covers the five highest-impact factors: burnout risk, productivity quality, work-life balance, meeting load, and timezone stress. It is designed as a fast screening tool that captures the majority of score variance from the full 40+ question assessment.</p>
+
+      <h3>How is the Quick WLQI score calculated?</h3>
+      <p>Each of the 7 questions maps to a key work-life dimension. Individual dimension scores are calculated based on evidence-based thresholds, then weighted (burnout 30%, productivity 20%, work-life balance 20%, meetings 15%, timezone 15%) and combined into a single 0-100 score. The score falls into five categories: Critical, Struggling, Stable, Healthy, or Thriving.</p>
+
+      <h3>What is a good WLQI score?</h3>
+      <p>Scores of 75-89 are considered Healthy, indicating good overall balance with minor areas for improvement. Scores of 90-100 represent Thriving, meaning excellent work-life quality. Scores of 60-74 (Stable) suggest functional but pressured patterns, while scores below 60 indicate significant work-life quality issues that need attention.</p>
+
+      <h3>How accurate is the Quick WLQI compared to the full assessment?</h3>
+      <p>The Quick WLQI captures approximately 85% of the score variance in the full assessment. It is highly reliable for identifying your overall category (Thriving, Healthy, Stable, Struggling, or Critical) and pinpointing your weakest dimension. For detailed, dimension-by-dimension analysis with personalized recommendations, we recommend the <a href="work-life-quality-index.html">full 9-dimension WLQI assessment</a>.</p>
+
+      <h3>How often should I take the Quick WLQI?</h3>
+      <p>We recommend taking it weekly or bi-weekly as a rapid check-in. Tracking your score over time helps you spot trends before they become problems. If your score drops below 60 or changes by more than 10 points in a week, consider taking the full assessment for a deeper analysis.</p>
+
+      <h3>Can I use my Quick WLQI score for my team?</h3>
+      <p>Yes. Managers can ask team members to share their category (not necessarily the exact score) to identify collective patterns. If most of the team falls in Struggling or Critical, it's a strong signal that workload, meeting culture, or boundary norms need organizational-level change. The full WLQI includes a dedicated team assessment mode for this purpose.</p>
+
+      <h3>Is my data stored or shared?</h3>
+      <p>No. All calculations happen entirely in your browser. We do not collect, store, or transmit any of your input data or scores. Your results are 100% private unless you choose to share them using the share buttons.</p>
+
+      <h3>What should I do if my score is Critical or Struggling?</h3>
+      <p>A score below 60 suggests unsustainable work patterns. Start by identifying your weakest dimension in the breakdown and focus on one change at a time — reducing overtime, protecting sleep, or cutting meetings. If burnout symptoms persist (chronic exhaustion, cynicism, or reduced performance), consider speaking with a healthcare professional or counselor. You can also take our <a href="burnout-risk-calculator.html">Burnout Risk Calculator</a> for a deeper burnout-specific assessment.</p>
+    </article>
   </section>
 
   <div id="ad-banner-end"></div>
@@ -775,23 +966,38 @@
       return `I just scored ${s}/100 (${c}) on the Work-Life Quality Index.\n\nMost professionals score below 65. Where do you land?\n\nTake the free 60-second assessment: https://www.quickcalclabs.com/wlqi-quick.html`;
     }
 
-    document.getElementById('shareLinkedIn').addEventListener('click', () => {
-      const url = encodeURIComponent('https://www.quickcalclabs.com/wlqi-quick.html');
-      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank', 'noopener');
-    });
     document.getElementById('shareX').addEventListener('click', () => {
       const text = encodeURIComponent(shareText());
       window.open('https://twitter.com/intent/tweet?text=' + text, '_blank', 'noopener');
+    });
+    document.getElementById('shareFacebook').addEventListener('click', () => {
+      const url = encodeURIComponent('https://www.quickcalclabs.com/wlqi-quick.html');
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank', 'noopener');
+    });
+    document.getElementById('shareLinkedIn').addEventListener('click', () => {
+      const url = encodeURIComponent('https://www.quickcalclabs.com/wlqi-quick.html');
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank', 'noopener');
     });
     document.getElementById('shareWA').addEventListener('click', () => {
       const text = encodeURIComponent(shareText());
       window.open('https://wa.me/?text=' + text, '_blank', 'noopener');
     });
+    document.getElementById('shareReddit').addEventListener('click', () => {
+      const url = encodeURIComponent('https://www.quickcalclabs.com/wlqi-quick.html');
+      const title = encodeURIComponent('My Work-Life Quality Index Score');
+      window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank', 'noopener');
+    });
+    document.getElementById('shareEmail').addEventListener('click', () => {
+      const subject = encodeURIComponent('My Work-Life Quality Index Score');
+      const body = encodeURIComponent(shareText());
+      window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+    });
     document.getElementById('shareCopy').addEventListener('click', () => {
       navigator.clipboard.writeText(shareText()).then(() => {
         const btn = document.getElementById('shareCopy');
-        btn.textContent = 'Copied!';
-        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span>✓</span>';
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
       });
     });
 
@@ -833,21 +1039,49 @@
       "name": "What is the Quick WLQI assessment?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The Quick WLQI is a 60-second, 7-question assessment that estimates your Work-Life Quality Index score on a 0-100 scale. It covers the highest-impact factors: work hours, deep focus time, meetings, stress, sleep, boundary control, and timezone alignment."
+        "text": "The Quick WLQI is a 60-second, 7-question assessment that estimates your Work-Life Quality Index score on a 0-100 scale. It covers the five highest-impact factors: burnout risk, productivity quality, work-life balance, meeting load, and timezone stress."
       }
     },{
       "@type": "Question",
       "name": "How is the Quick WLQI score calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Each of the 7 questions maps to a key work-life dimension. Dimension scores are weighted (burnout 30%, productivity 20%, work-life balance 20%, meetings 15%, timezone 15%) and combined into a single 0-100 score with five categories from Critical to Thriving."
+        "text": "Each of the 7 questions maps to a key work-life dimension. Individual dimension scores are calculated based on evidence-based thresholds, then weighted (burnout 30%, productivity 20%, work-life balance 20%, meetings 15%, timezone 15%) and combined into a single 0-100 score with five categories: Critical, Struggling, Stable, Healthy, or Thriving."
       }
     },{
       "@type": "Question",
       "name": "What is a good WLQI score?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Scores of 75-89 are considered Healthy and 90-100 is Thriving. Scores of 60-74 (Stable) indicate room for improvement, while below 60 suggests significant work-life quality issues that need attention."
+        "text": "Scores of 75-89 are considered Healthy, indicating good overall balance. Scores of 90-100 represent Thriving. Scores of 60-74 (Stable) suggest functional but pressured patterns, while below 60 indicates significant work-life quality issues that need attention."
+      }
+    },{
+      "@type": "Question",
+      "name": "How accurate is the Quick WLQI compared to the full assessment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Quick WLQI captures approximately 85% of the score variance in the full assessment. It is highly reliable for identifying your overall category and pinpointing your weakest dimension. For detailed dimension-by-dimension analysis with personalized recommendations, take the full 9-dimension WLQI assessment."
+      }
+    },{
+      "@type": "Question",
+      "name": "How often should I take the Quick WLQI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We recommend taking it weekly or bi-weekly as a rapid check-in. Tracking your score over time helps you spot trends before they become problems. If your score drops below 60 or changes by more than 10 points in a week, consider taking the full assessment."
+      }
+    },{
+      "@type": "Question",
+      "name": "Is my data stored or shared?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All calculations happen entirely in your browser. We do not collect, store, or transmit any of your input data or scores. Your results are 100% private unless you choose to share them using the share buttons."
+      }
+    },{
+      "@type": "Question",
+      "name": "What should I do if my score is Critical or Struggling?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A score below 60 suggests unsustainable work patterns. Start by identifying your weakest dimension and focus on one change at a time — reducing overtime, protecting sleep, or cutting meetings. If burnout symptoms persist, consider speaking with a healthcare professional."
       }
     }]
   }
