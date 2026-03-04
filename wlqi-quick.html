@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work-Life Quality Index - 60 Second Assessment | QuickCalcLabs</title>
+  <meta name="description" content="Get your Work-Life Quality Index score in 60 seconds. 7 quick questions, instant results, science-backed scoring. Most professionals score below 65 — where do you land?">
+  <meta name="keywords" content="work life balance score, quick work life assessment, WLQI quick test, work life quality, burnout quick check, remote work score, work stress assessment">
+  <link rel="canonical" href="https://www.quickcalclabs.com/wlqi-quick.html">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Work-Life Quality Index — 60 Second Assessment">
+  <meta property="og:description" content="7 questions. 60 seconds. Find out if your work-life balance is thriving or struggling. Most professionals score below 65.">
+  <meta property="og:url" content="https://www.quickcalclabs.com/wlqi-quick.html">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360231242892770"
+     crossorigin="anonymous"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9FXHT6FHWQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9FXHT6FHWQ');
+  </script>
+
+  <style>
+    .calc-wrapper {
+      max-width: 680px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-1-light, rgba(255, 255, 255, 0.95));
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.12));
+      border: 1px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      text-align: center;
+    }
+    .dark-mode .calc-wrapper {
+      background: var(--surface-1-dark, rgba(30, 41, 59, 0.95));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-wrapper h1 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      margin: 0 0 0.5rem;
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6), var(--accent-pink, #ec4899));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradShift 8s ease infinite;
+      background-size: 200% 200%;
+    }
+    @keyframes gradShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-weak-light, #64748b);
+      font-size: 1.05rem;
+      margin: 0 0 0.3rem;
+      line-height: 1.5;
+    }
+    .dark-mode .subtitle { color: var(--text-weak-dark, #94a3b8); }
+
+    .hook {
+      font-size: 0.92rem;
+      color: var(--accent-pink, #ec4899);
+      font-weight: 600;
+      margin: 0 0 1.8rem;
+    }
+
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary, #8b5cf6);
+      margin-bottom: 1.5rem;
+    }
+    .dark-mode .timer-badge {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+      color: var(--primary-light, #a78bfa);
+    }
+
+    /* Form */
+    #quickForm { text-align: left; }
+
+    .q-group {
+      margin-bottom: 1.4rem;
+      position: relative;
+    }
+    .q-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-strong-light, #0f172a);
+      margin-bottom: 0.4rem;
+    }
+    .dark-mode .q-group label { color: var(--text-strong-dark, #f1f5f9); }
+
+    .q-group .q-hint {
+      font-size: 0.82rem;
+      color: var(--text-weak-light, #64748b);
+      margin: 0.2rem 0 0;
+      font-style: italic;
+    }
+    .dark-mode .q-group .q-hint { color: var(--text-weak-dark, #94a3b8); }
+
+    .q-group input[type="number"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md, 12px);
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      font-size: 1rem;
+      background: var(--surface-1-light, #fff);
+      color: var(--text-strong-light, #0f172a);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .q-group input[type="number"]:focus {
+      border-color: var(--primary, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+      outline: none;
+    }
+    .dark-mode .q-group input[type="number"] {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+      color: var(--text-strong-dark, #f1f5f9);
+      color-scheme: dark;
+    }
+    .dark-mode .q-group input[type="number"]:focus {
+      border-color: var(--primary-light, #a78bfa);
+    }
+
+    /* Slider */
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .slider-row input[type="range"] {
+      flex: 1;
+      height: 8px;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #10b981, #eab308, #ef4444);
+      outline: none;
+      cursor: pointer;
+    }
+    .slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--primary, #8b5cf6);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
+    .slider-val {
+      min-width: 32px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary, #8b5cf6);
+      text-align: center;
+    }
+    .dark-mode .slider-val { color: var(--primary-light, #a78bfa); }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-weak-light, #64748b);
+      margin-top: 2px;
+    }
+    .dark-mode .slider-labels { color: var(--text-weak-dark, #94a3b8); }
+
+    /* Submit */
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, var(--primary, #8b5cf6), var(--secondary, #3b82f6));
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.35);
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(139, 92, 246, 0.45);
+    }
+
+    /* Results */
+    .result-box {
+      display: none;
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: var(--radius-lg, 16px);
+      background: var(--surface-2-light, rgba(248, 250, 252, 0.8));
+      border: 2px solid var(--border-light, rgba(226, 232, 240, 0.8));
+      text-align: center;
+      animation: fadeUp 0.5s ease;
+    }
+    .dark-mode .result-box {
+      background: var(--surface-2-dark, rgba(51, 65, 85, 0.7));
+      border-color: var(--border-dark, rgba(71, 85, 105, 0.5));
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .score-ring {
+      width: 160px; height: 160px;
+      margin: 0 auto 1rem;
+      position: relative;
+    }
+    .score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .score-ring .bg { fill: none; stroke: #e2e8f0; stroke-width: 10; }
+    .dark-mode .score-ring .bg { stroke: #334155; }
+    .score-ring .fg {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.2s ease, stroke 0.5s;
+    }
+    .score-number {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--text-strong-light, #0f172a);
+    }
+    .dark-mode .score-number { color: var(--text-strong-dark, #f1f5f9); }
+    .score-label {
+      font-size: 0.85rem;
+      position: absolute;
+      bottom: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-weak-light, #64748b);
+      font-weight: 600;
+    }
+    .dark-mode .score-label { color: var(--text-weak-dark, #94a3b8); }
+
+    .category-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .cat-thriving   { background: linear-gradient(135deg, #10b981, #059669); }
+    .cat-healthy    { background: linear-gradient(135deg, #22c55e, #16a34a); }
+    .cat-stable     { background: linear-gradient(135deg, #eab308, #ca8a04); }
+    .cat-struggling { background: linear-gradient(135deg, #f97316, #ea580c); }
+    .cat-critical   { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+    .insight-text {
+      font-size: 0.95rem;
+      color: var(--text-medium-light, #334155);
+      margin: 0.5rem 0 1.5rem;
+      line-height: 1.6;
+    }
+    .dark-mode .insight-text { color: var(--text-medium-dark, #cbd5e1); }
+
+    /* Score bar */
+    .score-bar-wrap {
+      margin: 1.5rem 0;
+    }
+    .score-bar-track {
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e, #10b981);
+      position: relative;
+    }
+    .score-bar-marker {
+      position: absolute;
+      top: -6px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--primary, #8b5cf6);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transform: translateX(-50%);
+      transition: left 1.2s ease;
+    }
+    .score-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-weak-light, #64748b);
+      margin-top: 8px;
+    }
+    .dark-mode .score-bar-labels { color: var(--text-weak-dark, #94a3b8); }
+
+    /* Dimension mini bars */
+    .dim-breakdown {
+      text-align: left;
+      margin: 1.5rem 0;
+    }
+    .dim-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.6rem;
+    }
+    .dim-label {
+      min-width: 120px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-medium-light, #334155);
+    }
+    .dark-mode .dim-label { color: var(--text-medium-dark, #cbd5e1); }
+    .dim-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--border-light, #e2e8f0);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .dark-mode .dim-bar-track { background: #334155; }
+    .dim-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+    .dim-score-val {
+      min-width: 36px;
+      text-align: right;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-strong-light, #0f172a);
+    }
+    .dark-mode .dim-score-val { color: var(--text-strong-dark, #f1f5f9); }
+
+    /* Share section */
+    .share-section {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid rgba(139, 92, 246, 0.15);
+    }
+    .share-section p {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin: 0 0 0.8rem;
+      color: var(--text-medium-light, #334155);
+    }
+    .dark-mode .share-section p { color: var(--text-medium-dark, #cbd5e1); }
+
+    .share-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      padding: 0 1.2rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      gap: 6px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .share-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .share-linkedin { background: #0077b5; }
+    .share-x { background: #000; }
+    .share-whatsapp { background: #25d366; }
+    .share-copy { background: linear-gradient(135deg, #8b5cf6, #3b82f6); }
+
+    /* CTA */
+    .full-cta {
+      display: block;
+      margin: 1.8rem auto 0;
+      padding: 1rem 2rem;
+      border-radius: var(--radius-md, 12px);
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-align: center;
+      max-width: 460px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+    }
+    .full-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(16, 185, 129, 0.45);
+      color: #fff;
+    }
+    .full-cta small {
+      display: block;
+      font-weight: 500;
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+
+    /* SEO */
+    .seo-content {
+      max-width: 680px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      text-align: left;
+    }
+    .seo-content h2 {
+      font-size: 1.3rem;
+      color: var(--primary, #8b5cf6);
+    }
+    .dark-mode .seo-content h2 { color: var(--primary-light, #a78bfa); }
+    .seo-content p {
+      line-height: 1.7;
+      color: var(--text-medium-light, #334155);
+    }
+    .dark-mode .seo-content p { color: var(--text-medium-dark, #cbd5e1); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">QuickCalcLabs</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <div id="ad-banner-top"></div>
+
+  <section class="calc-wrapper">
+    <h1>Your Work-Life Score in 60 Seconds</h1>
+    <p class="subtitle">7 questions. Instant results. Science-backed.</p>
+    <p class="hook">Most professionals score below 65. Where do you land?</p>
+    <div class="timer-badge">&#9201; Takes under 60 seconds</div>
+
+    <form id="quickForm">
+      <div class="q-group">
+        <label for="weeklyHours">1. How many hours do you work per week? (include overtime)</label>
+        <input type="number" id="weeklyHours" min="0" max="168" value="42" required>
+        <p class="q-hint">Include after-hours emails, weekend catch-ups, etc.</p>
+      </div>
+
+      <div class="q-group">
+        <label for="deepWork">2. Hours of uninterrupted deep work per day?</label>
+        <input type="number" id="deepWork" min="0" max="24" step="0.5" value="3" required>
+        <p class="q-hint">Focused time without meetings or Slack notifications</p>
+      </div>
+
+      <div class="q-group">
+        <label for="meetings">3. How many meetings do you have per day?</label>
+        <input type="number" id="meetings" min="0" max="20" value="4" required>
+        <p class="q-hint">All calls: stand-ups, 1:1s, team syncs, etc.</p>
+      </div>
+
+      <div class="q-group">
+        <label for="stress">4. Your current stress level</label>
+        <div class="slider-row">
+          <input type="range" id="stress" min="1" max="10" value="5">
+          <span class="slider-val" id="stressVal">5</span>
+        </div>
+        <div class="slider-labels"><span>1 — Calm</span><span>10 — Burned out</span></div>
+      </div>
+
+      <div class="q-group">
+        <label for="sleep">5. Average sleep hours per night?</label>
+        <input type="number" id="sleep" min="0" max="14" step="0.5" value="7" required>
+        <p class="q-hint">Actual sleep, not time spent in bed</p>
+      </div>
+
+      <div class="q-group">
+        <label for="outsideHours">6. Hours worked outside your schedule per week?</label>
+        <input type="number" id="outsideHours" min="0" max="80" value="5" required>
+        <p class="q-hint">Early mornings, late nights, weekends</p>
+      </div>
+
+      <div class="q-group">
+        <label for="tzGap">7. Timezone gap with your team (hours)?</label>
+        <input type="number" id="tzGap" min="0" max="12" value="0" required>
+        <p class="q-hint">Enter 0 if your team is in the same timezone</p>
+      </div>
+
+      <button type="submit" class="submit-btn">Get My Score</button>
+    </form>
+
+    <div class="result-box" id="results">
+      <div class="score-ring" id="scoreRing">
+        <svg viewBox="0 0 120 120">
+          <circle class="bg" cx="60" cy="60" r="52"/>
+          <circle class="fg" id="scoreFg" cx="60" cy="60" r="52"
+            stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+        </svg>
+        <div class="score-number" id="scoreNum">0</div>
+        <div class="score-label">out of 100</div>
+      </div>
+
+      <div class="category-badge" id="catBadge">—</div>
+
+      <p class="insight-text" id="insightText"></p>
+
+      <div class="score-bar-wrap">
+        <div class="score-bar-track">
+          <div class="score-bar-marker" id="scoreMarker" style="left:0%"></div>
+        </div>
+        <div class="score-bar-labels">
+          <span>Critical</span><span>Struggling</span><span>Stable</span><span>Healthy</span><span>Thriving</span>
+        </div>
+      </div>
+
+      <div class="dim-breakdown" id="dimBreakdown"></div>
+
+      <div class="share-section">
+        <p>Share your score</p>
+        <div class="share-btns">
+          <button type="button" class="share-btn share-linkedin" id="shareLinkedIn">in &nbsp;LinkedIn</button>
+          <button type="button" class="share-btn share-x" id="shareX">&#x1D54F; &nbsp;Post</button>
+          <button type="button" class="share-btn share-whatsapp" id="shareWA">WhatsApp</button>
+          <button type="button" class="share-btn share-copy" id="shareCopy">Copy</button>
+        </div>
+      </div>
+
+      <a href="work-life-quality-index.html" class="full-cta">
+        Want the full picture? Take the 9-Dimension WLQI Assessment
+        <small>Detailed breakdown across productivity, burnout, physical health, and more</small>
+      </a>
+    </div>
+  </section>
+
+  <div id="ad-banner-mid"></div>
+
+  <section class="seo-content">
+    <h2>What Is the Quick Work-Life Quality Index?</h2>
+    <p>The Quick WLQI is a streamlined version of our comprehensive <a href="work-life-quality-index.html">9-dimension Work-Life Quality Index</a> calculator. It distills the most impactful factors — work hours, deep focus time, meeting load, stress, sleep, boundary control, and timezone alignment — into a 60-second assessment that produces a reliable 0-100 score.</p>
+    <p>Your score falls into one of five categories: <strong>Thriving</strong> (90-100), <strong>Healthy</strong> (75-89), <strong>Stable</strong> (60-74), <strong>Struggling</strong> (40-59), or <strong>Critical</strong> (0-39). For a complete breakdown across all nine dimensions with personalized recommendations, take the <a href="work-life-quality-index.html">full WLQI assessment</a>.</p>
+  </section>
+
+  <div id="ad-banner-end"></div>
+
+  <footer>
+    <div class="disclaimer affiliate-disclosure">
+      <p><strong>Disclaimer:</strong> This quick assessment is for informational and educational purposes only. It is not a substitute for professional advice. If you are experiencing severe stress or burnout, please consult a qualified healthcare professional.</p>
+    </div>
+    <div class="footer-links">
+      <p>&copy; 2025 QuickCalcLabs. All Rights Reserved.</p>
+      <a href="privacy-policy.html">Privacy Policy</a> |
+      <a href="terms-of-service.html">Terms of Service</a> |
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </footer>
+
+  <script>
+    // Slider display
+    const stressSlider = document.getElementById('stress');
+    const stressVal = document.getElementById('stressVal');
+    stressSlider.addEventListener('input', () => { stressVal.textContent = stressSlider.value; });
+
+    // Scoring
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    function scoreBurnout(weeklyHours, stress, sleep) {
+      let s = 70;
+      if (weeklyHours <= 40) s += 15;
+      else if (weeklyHours <= 45) s += 8;
+      else if (weeklyHours <= 50) s -= 5;
+      else if (weeklyHours <= 60) s -= 15;
+      else s -= 25;
+
+      s -= (stress - 5) * 4;
+
+      if (sleep >= 8) s += 10;
+      else if (sleep >= 7) s += 5;
+      else if (sleep < 6) s -= 15;
+      else if (sleep < 7) s -= 5;
+
+      return clamp(s, 0, 100);
+    }
+
+    function scoreProductivity(deepWork, weeklyHours) {
+      const dailyHours = weeklyHours / 5;
+      let s = 65;
+      const ratio = dailyHours > 0 ? deepWork / dailyHours : 0;
+
+      if (ratio >= 0.6) s += 20;
+      else if (ratio >= 0.5) s += 15;
+      else if (ratio >= 0.4) s += 8;
+      else if (ratio < 0.25) s -= 15;
+
+      if (deepWork >= 4) s += 5;
+      else if (deepWork < 2) s -= 10;
+
+      return clamp(s, 0, 100);
+    }
+
+    function scoreMeetings(meetings) {
+      let s = 75;
+      if (meetings <= 2) s += 15;
+      else if (meetings <= 3) s += 8;
+      else if (meetings <= 5) s -= 5;
+      else if (meetings <= 7) s -= 15;
+      else s -= 30;
+      return clamp(s, 0, 100);
+    }
+
+    function scoreWorkLife(outsideHours) {
+      let s = 75;
+      if (outsideHours <= 2) s += 15;
+      else if (outsideHours <= 5) s += 5;
+      else if (outsideHours <= 10) s -= 10;
+      else if (outsideHours <= 15) s -= 20;
+      else s -= 35;
+      return clamp(s, 0, 100);
+    }
+
+    function scoreTimezone(tzGap) {
+      if (tzGap === 0) return 90;
+      let s = 80;
+      if (tzGap <= 2) s += 5;
+      else if (tzGap <= 4) s -= 5;
+      else if (tzGap <= 6) s -= 15;
+      else if (tzGap <= 9) s -= 25;
+      else s -= 40;
+      return clamp(s, 0, 100);
+    }
+
+    function getCategory(score) {
+      if (score >= 90) return { label: 'Thriving', css: 'cat-thriving', color: '#10b981' };
+      if (score >= 75) return { label: 'Healthy', css: 'cat-healthy', color: '#22c55e' };
+      if (score >= 60) return { label: 'Stable', css: 'cat-stable', color: '#eab308' };
+      if (score >= 40) return { label: 'Struggling', css: 'cat-struggling', color: '#f97316' };
+      return { label: 'Critical', css: 'cat-critical', color: '#ef4444' };
+    }
+
+    function getInsight(dims) {
+      let weakest = null, weakVal = 101;
+      for (const [key, val] of Object.entries(dims)) {
+        if (val < weakVal) { weakVal = val; weakest = key; }
+      }
+      const insights = {
+        burnout: 'Your biggest risk factor is burnout — high hours and stress are taking a toll. Prioritize recovery and boundaries.',
+        productivity: 'Your deep work time is limited. Protecting focus blocks could significantly lift your score.',
+        meetings: 'Meeting overload is dragging your score down. Consider auditing which meetings are truly essential.',
+        workLife: 'Work is bleeding into personal time. Setting clearer boundaries would improve your balance.',
+        timezone: 'Cross-timezone work is impacting your score. Negotiate async-first communication where possible.'
+      };
+      return insights[weakest] || 'Your score reflects a balanced profile. Check individual dimensions for fine-tuning.';
+    }
+
+    function dimColor(score) {
+      if (score >= 75) return '#10b981';
+      if (score >= 60) return '#eab308';
+      if (score >= 40) return '#f97316';
+      return '#ef4444';
+    }
+
+    // Form handler
+    document.getElementById('quickForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const weeklyHours = parseFloat(document.getElementById('weeklyHours').value) || 40;
+      const deepWork    = parseFloat(document.getElementById('deepWork').value) || 3;
+      const meetings    = parseFloat(document.getElementById('meetings').value) || 3;
+      const stress      = parseFloat(document.getElementById('stress').value) || 5;
+      const sleep       = parseFloat(document.getElementById('sleep').value) || 7;
+      const outsideHrs  = parseFloat(document.getElementById('outsideHours').value) || 5;
+      const tzGap       = parseFloat(document.getElementById('tzGap').value) || 0;
+
+      const dims = {
+        burnout:      scoreBurnout(weeklyHours, stress, sleep),
+        productivity: scoreProductivity(deepWork, weeklyHours),
+        meetings:     scoreMeetings(meetings),
+        workLife:     scoreWorkLife(outsideHrs),
+        timezone:     scoreTimezone(tzGap)
+      };
+
+      const weights = { burnout: 0.30, productivity: 0.20, meetings: 0.15, workLife: 0.20, timezone: 0.15 };
+      let final = 0;
+      for (const k of Object.keys(dims)) { final += dims[k] * weights[k]; }
+      final = Math.round(clamp(final, 0, 100));
+
+      const cat = getCategory(final);
+
+      // Animate score ring
+      const circumference = 2 * Math.PI * 52; // ~326.73
+      const offset = circumference - (final / 100) * circumference;
+      const fg = document.getElementById('scoreFg');
+      fg.style.stroke = cat.color;
+      fg.style.strokeDashoffset = offset;
+
+      // Number count-up
+      const numEl = document.getElementById('scoreNum');
+      let current = 0;
+      const step = Math.max(1, Math.round(final / 40));
+      const counter = setInterval(() => {
+        current += step;
+        if (current >= final) { current = final; clearInterval(counter); }
+        numEl.textContent = current;
+      }, 25);
+
+      // Category badge
+      const badge = document.getElementById('catBadge');
+      badge.textContent = cat.label;
+      badge.className = 'category-badge ' + cat.css;
+
+      // Insight
+      document.getElementById('insightText').textContent = getInsight(dims);
+
+      // Score bar marker
+      document.getElementById('scoreMarker').style.left = final + '%';
+
+      // Dimension breakdown
+      const dimNames = {
+        burnout: 'Burnout Risk',
+        productivity: 'Productivity',
+        meetings: 'Meeting Load',
+        workLife: 'Work-Life Balance',
+        timezone: 'Timezone Stress'
+      };
+      let html = '';
+      for (const [k, v] of Object.entries(dims)) {
+        html += `<div class="dim-row">
+          <span class="dim-label">${dimNames[k]}</span>
+          <div class="dim-bar-track"><div class="dim-bar-fill" style="width:${v}%;background:${dimColor(v)}"></div></div>
+          <span class="dim-score-val">${v}</span>
+        </div>`;
+      }
+      document.getElementById('dimBreakdown').innerHTML = html;
+
+      // Show results
+      document.getElementById('results').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+
+      // Store for sharing
+      window._wlqiQuickScore = final;
+      window._wlqiQuickCat = cat.label;
+    });
+
+    // Share handlers
+    function shareText() {
+      const s = window._wlqiQuickScore || 0;
+      const c = window._wlqiQuickCat || '';
+      return `I just scored ${s}/100 (${c}) on the Work-Life Quality Index.\n\nMost professionals score below 65. Where do you land?\n\nTake the free 60-second assessment: https://www.quickcalclabs.com/wlqi-quick.html`;
+    }
+
+    document.getElementById('shareLinkedIn').addEventListener('click', () => {
+      const url = encodeURIComponent('https://www.quickcalclabs.com/wlqi-quick.html');
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank', 'noopener');
+    });
+    document.getElementById('shareX').addEventListener('click', () => {
+      const text = encodeURIComponent(shareText());
+      window.open('https://twitter.com/intent/tweet?text=' + text, '_blank', 'noopener');
+    });
+    document.getElementById('shareWA').addEventListener('click', () => {
+      const text = encodeURIComponent(shareText());
+      window.open('https://wa.me/?text=' + text, '_blank', 'noopener');
+    });
+    document.getElementById('shareCopy').addEventListener('click', () => {
+      navigator.clipboard.writeText(shareText()).then(() => {
+        const btn = document.getElementById('shareCopy');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('darkModeToggle');
+      const body = document.body;
+      const applyTheme = (theme) => {
+        if (theme === 'dark') {
+          body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.textContent = '🌙';
+        }
+      };
+      toggle.addEventListener('click', () => {
+        const next = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        applyTheme(next);
+      });
+      applyTheme(localStorage.getItem('theme') || 'light');
+    });
+  </script>
+
+  <script src="js/ads.js"></script>
+  <script>
+    renderAdBanner728x90('ad-banner-top');
+    renderAdBanner320x50('ad-banner-mid');
+    renderAdBanner300x250('ad-banner-end');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is the Quick WLQI assessment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Quick WLQI is a 60-second, 7-question assessment that estimates your Work-Life Quality Index score on a 0-100 scale. It covers the highest-impact factors: work hours, deep focus time, meetings, stress, sleep, boundary control, and timezone alignment."
+      }
+    },{
+      "@type": "Question",
+      "name": "How is the Quick WLQI score calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each of the 7 questions maps to a key work-life dimension. Dimension scores are weighted (burnout 30%, productivity 20%, work-life balance 20%, meetings 15%, timezone 15%) and combined into a single 0-100 score with five categories from Critical to Thriving."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is a good WLQI score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scores of 75-89 are considered Healthy and 90-100 is Thriving. Scores of 60-74 (Stable) indicate room for improvement, while below 60 suggests significant work-life quality issues that need attention."
+      }
+    }]
+  }
+  </script>
+</body>
+</html>
